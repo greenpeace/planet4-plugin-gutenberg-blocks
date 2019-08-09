@@ -89,6 +89,34 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 require_once __DIR__ . '/classes/class-loader.php';
 require_once ABSPATH . 'wp-admin/includes/plugin.php';
 
+/*
+==========================
+	F I L T E R
+==========================
+*/
+
+const post_block_types = [
+	'planet4-blocks/counter',
+	'planet4-blocks/gallery',
+	'planet4-blocks/timeline',
+];
+
+//pages allow all block types
+const page_block_types = true;
+
+//campaigns allow all block types
+const campaign_block_types = true;
+
+function my_plugin_allowed_block_types( $allowed_block_types, $post ) {
+	$allowed_block_types = array(
+		'post'     => post_block_types,
+		'page'     => page_block_types,
+		'campaing' => campaign_block_types,
+	);
+	return $allowed_block_types[$post->post_type];
+}
+
+add_filter( 'allowed_block_types', 'my_plugin_allowed_block_types', 10, 2);
 
 /*
 ==========================
