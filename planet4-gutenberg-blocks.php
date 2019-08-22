@@ -96,7 +96,7 @@ require_once ABSPATH . 'wp-admin/includes/plugin.php';
 */
 
 const post_block_types = [
-	'planet4-blocks/counter',
+	'planet4-blocks/covers',
 	'planet4-blocks/gallery',
 	'planet4-blocks/timeline',
 ];
