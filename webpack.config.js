@@ -95,5 +95,11 @@ module.exports = {
       // enable the css minification plugin
       new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})
     ]
+  },
+  node: {
+    fs: 'empty',
+    child_process: 'empty',
+    net: 'empty',
+    tls: 'empty',
   }
 };

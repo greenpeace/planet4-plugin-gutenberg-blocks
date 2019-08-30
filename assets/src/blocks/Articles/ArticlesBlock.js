@@ -5,7 +5,7 @@ export class ArticlesBlock {
     const {registerBlockType} = wp.blocks;
     const {withSelect} = wp.data;
 
-    registerBlockType('planet4-blocks/articles', {
+    registerBlockType(gutenbergTag, {
       title: 'Articles',
       icon: 'excerpt-view',
       category: 'planet4-blocks',

@@ -1,0 +1,5 @@
+{
+  "planet4_blocks_category": "planet4-blocks",
+  "wordpress_path": "~/dev/greenpeace/planet4-docker-compose/persistence/app/public/",
+  "wordpress_url": "https://www.planet4.test"
+}
