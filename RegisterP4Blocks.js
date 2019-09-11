@@ -2,20 +2,17 @@ const articlesConfig = require('./react-blocks/src/blocks/Articles/ArticlesConfi
 const coversConfig = require('./react-blocks/src/blocks/Covers/CoversConfig.js');
 
 const blockDefinitions = [
-  coversConfig,
-  articlesConfig
+  articlesConfig,
+  coversConfig
 ];
 
 function registerP4Blocks(wpblocks) {
   blockDefinitions.forEach(blockDefinition => {
-    console.log("REGISTERING:___________")
-    console.log(blockDefinition.gutenbergTag);
-    console.log(blockDefinition.shortCodeTag);
-    console.log("____________\n\n");
+    console.log(`Registering ${blockDefinition.shortCodeTag}...`)
 
     wpblocks.registerBlockType(blockDefinition.gutenbergTag, {
-      title: 'Foo', // Title and icon are mandatory
-      icon: 'bar',  // but not really needed
+      title: blockDefinition.gutenbergTag + ' Block', // Title and icon are mandatory
+      icon: blockDefinition.shortCodeTag + '-icon',  // but not really needed
       category: 'planet4-blocks',
 
       // Transform the shortcode into a Gutenberg block

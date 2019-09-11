@@ -5,7 +5,7 @@ const TerserJSPlugin = require('terser-webpack-plugin');
 const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
 const RemovePlugin = require('remove-files-webpack-plugin');
 
-module.exports = {
+const wordpressTarget = {
   ...defaultConfig,
   entry: {
     editorIndex: './assets/src/editorIndex.js',
@@ -95,11 +95,19 @@ module.exports = {
       // enable the css minification plugin
       new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})
     ]
-  },
-  node: {
-    fs: 'empty',
-    child_process: 'empty',
-    net: 'empty',
-    tls: 'empty',
   }
 };
+
+const nodeTarget = {
+  ...defaultConfig,
+  target: 'node',
+  entry: {
+    commandsIndex: './react-blocks/src/commandsIndex.js',
+  },
+  output: {
+    filename: '[name].js',
+    path: __dirname + '/react-blocks/build'
+  },
+};
+
+module.exports = [ wordpressTarget, nodeTarget ];

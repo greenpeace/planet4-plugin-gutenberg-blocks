@@ -3,12 +3,14 @@
 const config = require('./config.json');
 
 //-----------Load External dependencies-------------
-const fs = require('fs').promises;
+const fs = require('fs');
+const fsPromises = fs.promises;
 const path = require('path');
 const pixelmatch = require('pixelmatch');
 const PNG = require('pngjs').PNG;
 const puppeteer = require('puppeteer');
 const Window = require('window');
+const exec = require('child_process').exec;
 
 async function setupGlobals() {
   // const wpCli = require('wpcli').default;
@@ -58,28 +60,18 @@ async function setupGlobals() {
   };
   global.Mousetrap = Mousetrap;
 
-  return;
+  return true;
 }
-
-//
-
-console.log("Here");
-
-console.log("Here 2");
 
 //-----------------END define fake functions/objects-------------------------------------------
 
 async function setupBlocks() {
-  console.log("Here 4");
-
   //-------------Load WordPress dependencies-----------------------------
   const wpblocks = require('@wordpress/blocks');
   const block_library = require('@wordpress/block-library');
 
   // Register gutenberg core blocks.
   block_library.registerCoreBlocks();
-
-  console.log("Here 5");
 
   // Get blocks categories.
   // Register planet4 category.
@@ -97,56 +89,36 @@ async function setupBlocks() {
   return wpblocks;
 }
 
-async function saveScreenshot({ url, width, height, path }) {
+async function saveScreenshot({ url, width, height, relativePath }) {
   // Create new page.
   // Navigate to post.
   // Take a screenshot of the post.
+  console.log("Saving screenshot...");
   let page = await browser.newPage();
-  await page.goto(url);
-  await page.setViewport({ width, height });  // may need to adjust that for posts with much content.
-  await page.screenshot({ path: path.resolve(path) });
+  if (page) {
+    await page.goto(url);
+    await page.setViewport({ width, height });  // may need to adjust that for posts with much content.
+    await page.screenshot({ path: path.resolve(relativePath) });
+  }
+  console.log("Screenshot saved", relativePath);
+  return;
 }
 
 //-------------Script start--------------------
 
-// Initiliaze puppeteer instance.
-let browser;
-(async () => {
-  // const browser = await puppeteer.launch();
-  browser = await puppeteer.launch(
-    {
-      ignoreHTTPSErrors: true,
-      headless: true
-    }
-  );
-})();
-
-
-// Get registered blocks.
-//wpblocks.getBlockTypes().forEach((block) => {console.log(block.name)});
-
-const exec = require('child_process').exec;
-
-// Get one page using wp cli wrapper and process post.
-// { cwd: config.wordpress_path }
-exec('/bin/zsh /usr/local/bin/wpAlias post list --post_type=page --posts_per_page=1 --format=json --fields=ID,post_title,post_name,post_status,url,post_content', process_posts);
-
-//-------------Script end--------------------
-
-//-----------START functions------------------//
-async function process_posts(error, stdout) {
-  await setupGlobals();
+async function processAllPosts(error, stdout) {
   const wpBlocks = await setupBlocks();
-  console.log(stdout);
   let posts = JSON.parse(stdout);
+
   posts.forEach(async (post) => {
-    process_post(post, wpBlocks)
+    console.log(`Processing post: ${post.ID} - ${post.post_title}`);
+
+    await processSinglePost(post, wpBlocks)
   });
 
-  process.exit();
+  // process.exit();
   return;
 }
-
 
 /**
  * Process each post
@@ -159,34 +131,24 @@ async function process_posts(error, stdout) {
  *
  * @param post
  */
-async function process_post(post, wpblocks) {
-
-  console.log("____POST____:");
-  console.log(post);
-  console.log("-- END POST\n\n");
-
+async function processSinglePost(post, wpblocks) {
   // Grab post content.
   let HTML = post.post_content;
 
-  // console.log(HTML);
-
   if (HTML.indexOf('wp:') > -1) {
-    console.log("Saliendo....");
-    console.log("\n\n\n");
+    console.log("Already a Gutenberg post, skipping...");
     return;
   }
 
-  // await saveScreenshot({
-  // 	url:`${config.wordpress_url}/?p=${post.ID}`,
-  // 	width: 1366,
-  // 	height: 1400,
-  // 	path: `./screenshots/before/${post.post_name}.png`
-  // });
-
-  // console.log("page -> ALL DONE");
+  await saveScreenshot({
+    url:`${config.wordpress_url}/?p=${post.ID}`,
+    width: 1366,
+    height: 1400,
+    relativePath: `./screenshots/before/${post.post_name}.png`
+  });
 
   // Force post_content into a core/freeform block.
-  let temp = '<!-- wp:core/freeform --> \n' + HTML + '\n <!-- /wp:core/freeform -->';
+  let temp = '<!-- wp:core/freeform -->' + HTML + '<!-- /wp:core/freeform -->';
 
   // Convert post content enclosed in `freeform` block to blocks.
   // This is happening to emulate the wordpress gutenberg editor that converts the whole post content to a single freeform block.
@@ -198,55 +160,40 @@ async function process_post(post, wpblocks) {
   // and transform our shortcodes to gutenberg blocks.
   blocks = wpblocks.rawHandler({HTML: wpblocks.getBlockContent(blocks[0])});
 
-  // Debug blocks object.
-  // blocks.forEach((block) => {
-  //     if (block.name.includes('planet4-blocks')) {
-  //         console.log(block);
-  //         block1 = block;
-  //     }
-  // });
-
-  // Serialize blocks to html output.
-  // wpblocks.serialize(blocks);
-
-  console.log(wpblocks.serialize(blocks));
-
-  /*
-  await fs.writeFile("temp_converted_" + post.ID, wpblocks.serialize(blocks))
+  await fsPromises.writeFile("temp_converted_" + post.ID, wpblocks.serialize(blocks))
     .then(async () => {
       console.log("Successfully Written to File: " + post.ID);
 
       // Save converted post content to temp file.
-      var absolutePath = path.resolve(config.wordpress_path + "/temp_converted_" + post.ID);
+      var absolutePath = config.wordpress_deployed_path + "temp_converted_" + post.ID;
 
       async function takeAfterScreenshot(error, stdout) {
         // Navigate to post and take screenshot after the update of post content.
         console.log("Successfully updated post content: " + post.ID);
-        console.log("Error:", error);
-        console.log("STDOUT:", stdout);
+        console.log("Error: ", error);
+        console.log("STDOUT: ", stdout);
 
-        await page.goto('https://www.planet4.test/?p='+ post.ID);
-        await page.screenshot({path: path.resolve(`./screenshots/after/${post.post_name}.png`)});
+        await saveScreenshot({
+          url: 'https://www.planet4.test/?p='+ post.ID,
+          width: 1366,
+          height: 1400,
+          relativePath: `./screenshots/after/${post.post_name}.png`,
+        })
 
         // Compare before/after post screenshots.
         const diffPixels = await compareScreenshots(post.post_name);
         console.log("Pixel diff: " + diffPixels);
-        resolve(diffPixels);
+        // reutnr diffPixels;
       }
 
       // Use temp file to update the post content using wp cli wrapper.
       await exec('/bin/zsh /usr/local/bin/wpAlias post update ' + post.ID + ' ' + absolutePath, takeAfterScreenshot);
-
     })
     .catch(er => {
       console.log(er);
     });
-    */
-
-  console.log("After write");
   return;
 }
-
 
 /**
  * Compare screenshots on pixel level.
@@ -276,4 +223,31 @@ function compareScreenshots(fileName) {
     }
   });
 }
-//-----------END functions------------------//
+
+// Initiliaze puppeteer instance.
+let browser;
+(async () => {
+    // const browser = await puppeteer.launch();
+    browser = await puppeteer.launch(
+        {
+            ignoreHTTPSErrors: true,
+            headless: true
+        }
+    );
+})();
+
+async function runConversion() {
+  // Initiliaze puppeteer instance.
+
+  const globalsSet = await setupGlobals();
+  console.info("Globals set?", window && window.wp ? 'OK' : 'error');
+
+  // Get one page using wp cli and process post.
+  exec('/bin/zsh /usr/local/bin/wpAlias post list --post_type=page --posts_per_page=1 --format=json --fields=ID,post_title,post_name,post_status,url,post_content', processAllPosts);
+
+  return;
+}
+
+runConversion();
+return;
+

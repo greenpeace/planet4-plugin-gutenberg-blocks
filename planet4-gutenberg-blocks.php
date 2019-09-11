@@ -210,6 +210,7 @@ function set_allowed_block_types( $allowed_block_types, $post ) {
 		// 'core-embed/wordpress-tv', removed, not needed.
 	];
 
+<<<<<<< HEAD
 	$allowed_p4_block_types = [
 		'post'     => POST_BLOCK_TYPES,
 		'page'     => PAGE_BLOCK_TYPES,
@@ -219,6 +220,16 @@ function set_allowed_block_types( $allowed_block_types, $post ) {
 	$allowed_block_types = array_merge( $wordpress_blocks, $allowed_p4_block_types[ $post->post_type ] );
 
 	return $allowed_block_types;
+=======
+	$postBlockTypes = array_merge(POST_BLOCK_TYPES, $wordpress_blocks);
+
+	$allowed_block_types = [
+		'post'     => $postBlockTypes,
+		'page'     => PAGE_BLOCK_TYPES,
+		'campaign' => CAMPAIGN_BLOCK_TYPES,
+	];
+	return $allowed_block_types[ $post->post_type ];
+>>>>>>> Separate config for more blocks to test. Clean script.
 }
 
 add_filter( 'allowed_block_types', 'set_allowed_block_types', 10, 2 );

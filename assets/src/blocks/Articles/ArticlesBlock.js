@@ -1,8 +1,4 @@
 import {Articles} from './Articles.js';
-<<<<<<< HEAD:assets/src/blocks/Articles/ArticlesBlock.js
-=======
-import {articlesConfig} from './ArticlesConfig.js';
->>>>>>> Add covers config:react-blocks/src/blocks/Articles/ArticlesBlock.js
 
 export class ArticlesBlock {
   constructor() {
@@ -22,7 +18,6 @@ export class ArticlesBlock {
           {
             type: 'shortcode',
             // Shortcode tag can also be an array of shortcode aliases
-<<<<<<< HEAD:assets/src/blocks/Articles/ArticlesBlock.js
             tag: 'shortcake_articles',
             attributes: {
               article_heading: {
@@ -92,15 +87,10 @@ export class ArticlesBlock {
                 }
               },
             },
-=======
-            tag: articlesConfig.shortCodeTag,
-            attributes: articlesConfig.shortcodeAttributes,
->>>>>>> Add covers config:react-blocks/src/blocks/Articles/ArticlesBlock.js
           },
         ]
       },
       // This attributes definition mimics the one in the PHP side.
-<<<<<<< HEAD:assets/src/blocks/Articles/ArticlesBlock.js
       attributes: {
         article_heading: {
           type: 'string',
@@ -140,9 +130,6 @@ export class ArticlesBlock {
           default: ''
         },
       },
-=======
-      attributes: articlesConfig.gutenbergAttributes,
->>>>>>> Add covers config:react-blocks/src/blocks/Articles/ArticlesBlock.js
       // withSelect is a "Higher Order Component", it works as
       // a Decorator, it will provide some basic API functionality
       // through `select`.

@@ -1,6 +1,5 @@
 import { CoversIcon } from './CoversIcon.js';
 import { Covers } from './Covers.js';
-import { coversConfig } from './CoversConfig.js';
 
 export class CoversBlock {
     constructor() {

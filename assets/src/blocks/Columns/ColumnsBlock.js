@@ -6,7 +6,7 @@ export class ColumnsBlock {
     constructor() {
       const {registerBlockType} = wp.blocks;
 
-      registerBlockType('planet4-blocks/columns', {
+      registerBlockType(columnsConfig.gutenbergTag, {
         title: __('Columns', 'p4ge'),
         icon: "grid-view",
         category: 'planet4-blocks',
