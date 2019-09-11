@@ -5,9 +5,7 @@ const gutenbergTag = 'planet4-blocks/articles';
 const shortCodeAttributes = {
   article_heading: {
     type: 'string',
-    shortcode: function (attributes) {
-      return attributes.named.article_heading;
-    }
+    shortcode: ({named: {article_heading = null}}) => article_heading,
   },
   articles_description: {
     type: 'string',
@@ -54,13 +52,13 @@ const shortCodeAttributes = {
   post_types: {
     type: 'string',
     shortcode: function (attributes) {
-      return attributes.named.tags ? attributes.named.post_types.split(',') : [];
+      return attributes.named.post_types ? attributes.named.post_types.split(',') : [];
     }
   },
   posts: {
     type: 'string',
     shortcode: function (attributes) {
-      return attributes.named.tags ? attributes.named.posts.split(',') : [];
+      return attributes.named.posts ? attributes.named.posts.split(',') : [];
     }
   },
 };

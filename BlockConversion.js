@@ -129,7 +129,7 @@ const exec = require('child_process').exec;
 
 // Get one page using wp cli wrapper and process post.
 // { cwd: config.wordpress_path }
-exec('/bin/zsh /usr/local/bin/wpAlias post list --post_type=page --posts_per_page=5 --format=json --fields=ID,post_title,post_name,post_status,url,post_content', process_posts);
+exec('/bin/zsh /usr/local/bin/wpAlias post list --post_type=page --posts_per_page=1 --format=json --fields=ID,post_title,post_name,post_status,url,post_content', process_posts);
 
 //-------------Script end--------------------
 
@@ -142,6 +142,8 @@ async function process_posts(error, stdout) {
   posts.forEach(async (post) => {
     process_post(post, wpBlocks)
   });
+
+  process.exit();
   return;
 }
 
@@ -161,6 +163,7 @@ async function process_post(post, wpblocks) {
 
   console.log("____POST____:");
   console.log(post);
+  console.log("-- END POST\n\n");
 
   // Grab post content.
   let HTML = post.post_content;
