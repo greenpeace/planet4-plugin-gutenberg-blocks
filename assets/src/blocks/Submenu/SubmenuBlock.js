@@ -5,7 +5,7 @@ export class SubmenuBlock {
     const {registerBlockType} = wp.blocks;
     const {withSelect} = wp.data;
 
-    registerBlockType('planet4-blocks/submenu', {
+    registerBlockType(submenuConfig.gutenbergTag, {
       title: 'Submenu',
       icon: 'welcome-widgets-menus',
       category: 'planet4-blocks',
@@ -86,19 +86,7 @@ export class SubmenuBlock {
           },
         ]
       },
-      attributes: {
-        submenu_style: {
-          type: 'integer',
-          default: 1
-        },
-        title: {
-          type: 'string',
-        },
-        levels: {
-          type: 'array',
-          default: [ {heading: 0, link: false, style: 'none'}]
-        },
-      },
+      attributes: submenuConfig.gutenbergAttributes,
       edit: withSelect((select) => {
 
       })(({

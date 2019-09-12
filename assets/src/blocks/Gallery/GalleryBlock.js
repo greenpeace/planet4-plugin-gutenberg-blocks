@@ -8,7 +8,7 @@ export class GalleryBlock {
       const {__} = wp.i18n;
       const { withSelect } = wp.data;
 
-      registerBlockType( 'planet4-blocks/gallery', {
+      registerBlockType( galleryConfig.gutenbergTag, {
         title: __('Gallery', 'p4ge'),
         icon: 'format-gallery',
         category: 'planet4-blocks',
@@ -57,28 +57,7 @@ export class GalleryBlock {
             },
           ]
         },
-        attributes: {
-          gallery_block_style: {
-            type: 'number',
-            default: 1
-          },
-          gallery_block_title: {
-            type: 'string',
-          },
-          gallery_block_description: {
-            type: 'string',
-          },
-          multiple_image: {
-            type: 'string',
-          },
-          gallery_block_focus_points: {
-            type: 'string',
-          },
-          image_data: {
-            type: 'object',
-            default: []
-          },
-        },
+        attributes: galleryConfig.gutenbergAttributes,
         edit: withSelect( ( select, props ) => {
 
           const { attributes } = props;

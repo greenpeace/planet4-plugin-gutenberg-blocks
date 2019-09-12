@@ -1,9 +1,11 @@
 const articlesConfig = require('./react-blocks/src/blocks/Articles/ArticlesConfig.js');
-const coversConfig = require('./react-blocks/src/blocks/Covers/CoversConfig.js');
+const coversConfig = require('./react-blocks/src/blocks/Columns/CoversConfig.js');
+const columnsConfig = require('./react-blocks/src/blocks/Columns/ColumnsConfig.js');
 
 const blockDefinitions = [
   articlesConfig,
-  coversConfig
+  coversConfig,
+  columnsConfig
 ];
 
 function registerP4Blocks(wpblocks) {

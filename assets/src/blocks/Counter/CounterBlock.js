@@ -5,7 +5,7 @@ export class CounterBlock {
     const { registerBlockType } = wp.blocks;
     const { withSelect } = wp.data;
 
-    registerBlockType( 'planet4-blocks/counter', {
+    registerBlockType(counterConfig.gutenbergTag, {
       title: 'Counter',
       icon: 'dashboard',
       category: 'planet4-blocks',
@@ -52,30 +52,7 @@ export class CounterBlock {
           },
         ]
       },
-      attributes: {
-        title: {
-          type: 'string',
-        },
-        description: {
-          type: 'string',
-        },
-        style: {
-          type: 'string',
-          default: 'plain'
-        },
-        completed: {
-          type: 'integer',
-        },
-        completed_api: {
-          type: 'string',
-        },
-        target: {
-          type: 'integer',
-        },
-        text: {
-          type: 'string',
-        }
-      },
+      attributes: counterConfig.gutenbergAttributes,
       // withSelect is a "Higher Order Component", it works as
       // a Decorator, it will provide some basic API functionality
       // through `select`.

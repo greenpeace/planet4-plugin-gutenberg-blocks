@@ -12,6 +12,18 @@ const puppeteer = require('puppeteer');
 const Window = require('window');
 const exec = require('child_process').exec;
 
+// Initiliaze puppeteer instance.
+let browser;
+(async () => {
+    // const browser = await puppeteer.launch();
+    browser = await puppeteer.launch(
+        {
+            ignoreHTTPSErrors: true,
+            headless: true
+        }
+    );
+})();
+
 async function setupGlobals() {
   // const wpCli = require('wpcli').default;
   const window = new Window();
@@ -113,7 +125,7 @@ async function processAllPosts(error, stdout) {
   posts.forEach(async (post) => {
     console.log(`Processing post: ${post.ID} - ${post.post_title}`);
 
-    await processSinglePost(post, wpBlocks)
+    await processSinglePost(post, wpBlocks);
   });
 
   // process.exit();
@@ -165,7 +177,7 @@ async function processSinglePost(post, wpblocks) {
       console.log("Successfully Written to File: " + post.ID);
 
       // Save converted post content to temp file.
-      var absolutePath = config.wordpress_deployed_path + "temp_converted_" + post.ID;
+      var absolutePath = config.wordpress_container_path + "temp_converted_" + post.ID;
 
       async function takeAfterScreenshot(error, stdout) {
         // Navigate to post and take screenshot after the update of post content.
@@ -223,18 +235,6 @@ function compareScreenshots(fileName) {
     }
   });
 }
-
-// Initiliaze puppeteer instance.
-let browser;
-(async () => {
-    // const browser = await puppeteer.launch();
-    browser = await puppeteer.launch(
-        {
-            ignoreHTTPSErrors: true,
-            headless: true
-        }
-    );
-})();
 
 async function runConversion() {
   // Initiliaze puppeteer instance.

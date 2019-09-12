@@ -6,7 +6,7 @@ export class MediaBlock {
     constructor() {
       const {registerBlockType} = wp.blocks;
 
-      registerBlockType('planet4-blocks/media-video', {
+      registerBlockType(mediaConfig.gutenbergTag, {
         title: __('Media block', 'p4ge'),
         icon: 'format-video',
         category: 'planet4-blocks',
@@ -29,42 +29,12 @@ export class MediaBlock {
             {
               type: 'shortcode',
               // Shortcode tag can also be an array of shortcode aliases
-              tag: 'shortcake_media_video',
-              attributes: {
-                video_title: {
-                  type: 'string',
-                  shortcode: ({named: {video_title = ''}}) => video_title,
-                },
-                description: {
-                  type: 'string',
-                  shortcode: ({named: {description = ''}}) => description,
-                },
-                youtube_id: {
-                  type: 'string',
-                  shortcode: ({named: {youtube_id = ''}}) => youtube_id,
-                },
-                video_poster_img: {
-                  type: 'integer',
-                  shortcode: ({named: {video_poster_img = ''}}) => video_poster_img,
-                }
-              },
+              tag: mediaConfig.shortCodeTag,
+              attributes: mediaConfig.shortCodeAttributes,
             },
           ]
         },
-        attributes: {
-          video_title: {
-            type: 'string'
-          },
-          description: {
-            type: 'string'
-          },
-          youtube_id: {
-            type: 'string'
-          },
-          video_poster_img: {
-            type: 'integer'
-          }
-        },
+        attributes: mediaConfig.gutenbergAttributes,
         edit: ({isSelected, attributes, setAttributes}) => {
           function onTitleChange(value) {
             setAttributes({video_title: value});

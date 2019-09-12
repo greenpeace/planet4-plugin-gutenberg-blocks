@@ -8,7 +8,7 @@ export class SplittwocolumnsBlock {
       const {__} = wp.i18n;
       const { withSelect } = wp.data;
 
-      registerBlockType( 'planet4-blocks/split-two-columns', {
+      registerBlockType( splitTwoColumnsConfig.gutenbergTag, {
         title: __('Split Two Columns', 'p4ge'),
         icon: 'editor-table',
         category: 'planet4-blocks',
@@ -88,49 +88,7 @@ export class SplittwocolumnsBlock {
             },
           ]
         },
-        attributes: {
-          select_issue: {
-            type: 'number',
-            default: 0,
-          },
-          title: {
-            type: 'string',
-          },
-          issue_description: {
-            type: 'string',
-          },
-          issue_link_text: {
-            type: 'string',
-          },
-          issue_link_path: {
-            type: 'string',
-          },
-          issue_image: {
-            type: 'number',
-          },
-          focus_issue_image: {
-            type: 'string',
-          },
-          select_tag: {
-            type: 'number',
-            default: 0,
-          },
-          tag_description: {
-            type: 'string',
-          },
-          button_text: {
-            type: 'string',
-          },
-          button_link: {
-            type: 'string',
-          },
-          tag_image: {
-            type: 'number',
-          },
-          focus_tag_image: {
-            type: 'string',
-          },
-        },
+        attributes: splitTwoColumnsConfig.gutenbergAttributes,
         edit: withSelect((select,props) => {
           const tagsTaxonomy = 'post_tag';
           const issuePage    = 'page';

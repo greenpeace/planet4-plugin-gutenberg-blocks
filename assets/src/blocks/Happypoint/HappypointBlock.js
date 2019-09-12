@@ -6,7 +6,7 @@ export class HappypointBlock {
       const {__} = wp.i18n;
       const { withSelect } = wp.data;
 
-      registerBlockType( 'planet4-blocks/happypoint', {
+      registerBlockType( happypointConfig.gutenbergTag, {
         title: __('Happypoint', 'p4ge'),
         icon: 'format-image',
         category: 'planet4-blocks',
@@ -51,28 +51,7 @@ export class HappypointBlock {
             },
           ]
         },
-        attributes: {
-          focus_image: {
-            type: 'string',
-          },
-          opacity: {
-            type: 'number',
-            default: 60
-          },
-          mailing_list_iframe: {
-            type: 'boolean',
-          },
-          iframe_url: {
-            type: 'string',
-          },
-          id: {
-            type: 'number',
-          },
-          load_iframe: {
-            type: 'boolean',
-            default: false
-          }
-        },
+        attributes: happypointConfig.gutenbergAttributes,
         edit: withSelect( ( select, props ) => {
           const { attributes } = props;
           const { id } = attributes;

@@ -4,7 +4,7 @@ export class CookiesBlock {
   constructor() {
     const {registerBlockType} = wp.blocks;
 
-    registerBlockType('planet4-blocks/cookies', {
+    registerBlockType(cookiesConfig.gutenbergTag, {
       title: 'Cookies',
       icon: 'welcome-view-site',
       category: 'planet4-blocks',
@@ -20,68 +20,12 @@ export class CookiesBlock {
           {
             type: 'shortcode',
             // Shortcode tag can also be an array of shortcode aliases
-            tag: 'shortcake_cookies',
-            attributes: {
-              title: {
-                type: 'string',
-                shortcode: function (attributes) {
-                  return attributes.named.title;
-                }
-              },
-              description: {
-                type: 'string',
-                shortcode: function (attributes) {
-                  return attributes.named.description;
-                }
-              },
-              necessary_cookies_name: {
-                type: 'string',
-                shortcode: function (attributes) {
-                  return attributes.named.necessary_cookies_name;
-                }
-              },
-              necessary_cookies_description: {
-                type: 'string',
-                shortcode: function (attributes) {
-                  return attributes.named.necessary_cookies_description;
-                }
-              },
-              all_cookies_name: {
-                type: 'string',
-                shortcode: function (attributes) {
-                  return attributes.named.all_cookies_name;
-                }
-              },
-              all_cookies_description: {
-                type: 'string',
-                shortcode: function (attributes) {
-                  return attributes.named.all_cookies_description;
-                }
-              }
-            },
+            tag: cookiesConfig.shortCodeTag,
+            attributes: cookiesConfig.shortCodeAttributes,
           },
         ]
       },
-      attributes: {
-        title: {
-          type: 'string',
-        },
-        description: {
-          type: 'string',
-        },
-        necessary_cookies_name: {
-          type: 'string',
-        },
-        necessary_cookies_description: {
-          type: 'string',
-        },
-        all_cookies_name: {
-          type: 'string',
-        },
-        all_cookies_description: {
-          type: 'string',
-        },
-      },
+      attributes: cookiesConfig.gutenbergAttributes,
       edit: ({ isSelected, attributes, setAttributes }) => {
         function onTitleChange(value) {
           setAttributes({title: value});
