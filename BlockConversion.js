@@ -1,4 +1,3 @@
-
 //-----------Load config----------------------------
 const config = require('./config.json');
 
@@ -11,6 +10,8 @@ const PNG = require('pngjs').PNG;
 const puppeteer = require('puppeteer');
 const Window = require('window');
 const exec = require('child_process').exec;
+
+const debugMode = (process.argv[2] && process.argv[2] == '--debug');
 
 // Initiliaze puppeteer instance.
 let browser;
@@ -147,17 +148,25 @@ async function processSinglePost(post, wpblocks) {
   // Grab post content.
   let HTML = post.post_content;
 
+  console.log("\n-------------------------------------------------------");
+  console.log("Converting: ", post.post_title)
+  console.log("\n");
+  console.log(post.post_content);
+  console.log("\n");
+
   if (HTML.indexOf('wp:') > -1) {
     console.log("Already a Gutenberg post, skipping...");
     return;
   }
 
-  await saveScreenshot({
-    url:`${config.wordpress_url}/?p=${post.ID}`,
-    width: 1366,
-    height: 1400,
-    relativePath: `./screenshots/before/${post.post_name}.png`
-  });
+  if (!debugMode) {
+    await saveScreenshot({
+      url:`${config.wordpress_url}/?p=${post.ID}`,
+      width: 1366,
+      height: 1400,
+      relativePath: `./screenshots/before/${post.post_name}.png`
+    });
+  }
 
   // Force post_content into a core/freeform block.
   let temp = '<!-- wp:core/freeform -->' + HTML + '<!-- /wp:core/freeform -->';
@@ -168,11 +177,17 @@ async function processSinglePost(post, wpblocks) {
   // this will output a single core/freeform block.
   let blocks = wpblocks.rawHandler({HTML: temp});
 
-  // Then pass the freeform block content to rawHandler again to convert the content to individual blocks
-  // and transform our shortcodes to gutenberg blocks.
-  blocks = wpblocks.rawHandler({HTML: wpblocks.getBlockContent(blocks[0])});
+  if (blocks[0]) {
+    // Then pass the freeform block content to rawHandler again to convert the content to individual blocks
+    // and transform our shortcodes to gutenberg blocks.
+    blocks = wpblocks.rawHandler({HTML: wpblocks.getBlockContent(blocks[0])});
 
-  await fsPromises.writeFile("temp_converted_" + post.ID, wpblocks.serialize(blocks))
+    if (debugMode) {
+      console.log("Converted:\n", wpblocks.serialize(blocks));
+      return;
+    }
+
+    await fsPromises.writeFile("temp_converted_" + post.ID, wpblocks.serialize(blocks))
     .then(async () => {
       console.log("Successfully Written to File: " + post.ID);
 
@@ -204,6 +219,7 @@ async function processSinglePost(post, wpblocks) {
     .catch(er => {
       console.log(er);
     });
+  }
   return;
 }
 
@@ -243,7 +259,7 @@ async function runConversion() {
   console.info("Globals set?", window && window.wp ? 'OK' : 'error');
 
   // Get one page using wp cli and process post.
-  exec('/bin/zsh /usr/local/bin/wpAlias post list --post_type=page --posts_per_page=1 --format=json --fields=ID,post_title,post_name,post_status,url,post_content', processAllPosts);
+  exec('/bin/zsh /usr/local/bin/wpAlias post list --post_type=page --posts_per_page=20 --format=json --fields=ID,post_title,post_name,post_status,url,post_content', processAllPosts);
 
   return;
 }
