@@ -129,12 +129,8 @@ class SplitTwoColumns extends Base_Block {
 		$campaign_image_id = $fields['tag_image'] ? $fields['tag_image'] : get_term_meta( $tag_id, 'tag_attachment_id', true );
 		$issue_image_id    = $fields['issue_image'] ? $fields['issue_image'] : get_post_thumbnail_id( $issue_id );
 
-		$issue_title       = $fields['title']
-			? $fields['title']
-			: ( $issue_meta_data['p4_title'][0] ?? get_the_title( $issue_id ) );
-		$issue_description = $fields['issue_description']
-			? $fields['issue_description']
-		  : ( $issue_meta_data['p4_description'][0] ?? '' );
+		$issue_title       = $fields['title'] ? $fields['title'] : ( $issue_meta_data['p4_title'][0] ?? get_the_title( $issue_id ) );
+		$issue_description = $fields['issue_description'] ? $fields['issue_description'] : ( $issue_meta_data['p4_description'][0] ?? '' );
 		$issue_link_text   = $fields['issue_link_text'] ? $fields['issue_link_text'] : __( 'Learn more about this issue', 'planet4-blocks' );
 		$issue_link_path   = $fields['issue_link_path'] ? $fields['issue_link_path'] : get_permalink( $issue_id );
 
