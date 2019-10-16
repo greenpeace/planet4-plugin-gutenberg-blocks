@@ -1,6 +1,6 @@
 /* global submenu */
 
-$(document).ready(function () {
+jQuery(function ($) {
   'use strict';
 
   // Parse submenu object passed to a variable from server-side.
