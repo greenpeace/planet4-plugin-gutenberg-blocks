@@ -65,15 +65,18 @@ export class CounterBlock {
         },
         completed: {
           type: 'integer',
+          default: 0
         },
         completed_api: {
           type: 'string',
         },
         target: {
           type: 'integer',
+          default: 0
         },
         text: {
           type: 'string',
+          default: ''
         }
       },
       // withSelect is a "Higher Order Component", it works as
