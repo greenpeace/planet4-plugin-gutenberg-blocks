@@ -1,0 +1,86 @@
+.social-share-block-wrap {
+  height: 100%;
+  display: block;
+  align-self: auto;
+
+  margin: 100px 0;
+
+  body.wp-admin & {
+    width: 100%;
+  }
+
+  .social-share-img-contanier:hover .share-strip{
+    bottom: 0;
+    opacity: 1;
+  }
+  .social-share-img-contanier{
+    position: relative;
+    text-align: center;
+    width: 212px;
+    height: 212px;
+
+    img {
+      object-fit: cover;
+      height: 100%;
+    }
+  
+
+    .share-strip {
+      width: 100%;
+      display: flex;
+      position: absolute;
+      bottom: -60px;
+      left: 0;
+      padding: 14px 10px;
+      background: #FFCC00;
+      opacity: 0;
+      transition: all .3s ease-in-out; 
+
+      a{
+       height: 100%;
+       width: 12%;
+       margin: 0 11%;
+      img{
+        min-height: 22px;
+      }
+    }
+    }
+  }
+
+}
+
+    /* the slides */
+    .slick-slide {
+      margin: 0 10px;
+    }
+    /* the parent */
+    .slick-list {
+      margin: 0 -10px;
+    }
+    .slider-con{
+      width: 80%;
+      margin: 30px auto;
+    }
+    .slick-next,
+    .slick-prev{
+      display: inline-block;
+      position: absolute;
+      top: 50%;
+      background: transparent;
+      border: none;
+    }
+
+    .slick-next{
+      left: -60px;
+    }
+
+    .slick-prev{
+      right: -60px;
+    }
+    .slick-next::after{
+      content: '←';
+    }
+
+    .slick-prev::after{
+      content: '→';
+    }
