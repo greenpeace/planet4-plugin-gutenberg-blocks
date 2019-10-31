@@ -1,32 +1,34 @@
 {% block social_share %}
 {% if ( images ) %}
-		<section class="social-share-block-wrap">
-		<div>
-			<h1>{{fields.title}}</h1>
-			<p>{{fields.subtitle}}</p>
+<section class="social-share-block-wrap">
+	<div>
+		<h1>{{fields.title}}</h1>
+		<p>{{fields.subtitle}}</p>
+	</div>
+	<div class="social-slides">
+		{% for key,single_image in images %}
+
+		<div class="social-share-img-contanier">
+
+			<img src="{{ single_image.image_src }}" data-background-position="{{ single_image.focus_image }}"
+				srcset="{{ single_image.image_srcset }}" sizes="{{ single_image.image_sizes }}"
+				alt="{{ single_image.alt_text }}">
+
+			<div class="share-strip">
+				<a href="https://www.facebook.com/sharer/sharer.php?u={{single_image.social_url}}"
+					class="facebook-share"><img
+						src="/wp-content/plugins/planet4-plugin-gutenberg-blocks/public/images/icon-facebook-black.svg" /></a>
+				<a href="https://twitter.com/intent/tweet?text={{single_image.message}}" class="twitter-share"><img
+						src="/wp-content/plugins/planet4-plugin-gutenberg-blocks/public/images/icon-twitter-black.svg" /></a>
+				<a href="{{single_image.image_src}}" download class="downlaod-share"><img
+						src="/wp-content/plugins/planet4-plugin-gutenberg-blocks/public/images/icon-download-black.svg" /></a>
+			</div>
+
 		</div>
-					<div class="social-slides">
-			{% for key,single_image in images %}
+		{% endfor %}
 
-				<div class="social-share-img-contanier">
-			
-				<img src="{{ single_image.image_src }}"
-									 data-background-position="{{ single_image.focus_image }}"
-									 srcset="{{ single_image.image_srcset }}"
-									 sizes="{{ single_image.image_sizes }}"
-									 alt="{{ single_image.alt_text }}">
+	</div>
 
-				<div class="share-strip">
-				<a href="https://www.facebook.com/sharer/sharer.php?u={{single_image.social_url}}" class="facebook-share"><img src="/wp-content/plugins/planet4-plugin-gutenberg-blocks/public/images/icon-facebook-black.svg"/></a>
-				<a href="https://twitter.com/intent/tweet?text={{single_image.message}}" class="twitter-share"><img src="/wp-content/plugins/planet4-plugin-gutenberg-blocks/public/images/icon-twitter-black.svg"/></a>
-				<a href="{{single_image.image_src}}" download class="downlaod-share"><img src="/wp-content/plugins/planet4-plugin-gutenberg-blocks/public/images/icon-download-black.svg"/></a>
-				</div>		
-
-			</div>
-			{% endfor %}
-
-			</div>
-		
-		</section>
-	{% endif %}
+</section>
+{% endif %}
 {% endblock %}

@@ -1,9 +1,9 @@
 jQuery(function ($) {
-    'use strict';
+  'use strict';
 
-$('.social-slides').slick({
+  $('.social-slides').slick({
     dots: false,
-    arrows:true,
+    arrows: true,
     infinite: true,
     speed: 300,
     nextArrow: '<button class="slick-next"></button>',
@@ -16,7 +16,7 @@ $('.social-slides').slick({
         settings: {
           slidesToShow: 3,
           dots: false,
-          arrows:true,
+          arrows: true,
           infinite: true,
           speed: 300,
           nextArrow: '<button class="slick-next"></button>',
@@ -29,7 +29,7 @@ $('.social-slides').slick({
         settings: {
           slidesToShow: 2,
           dots: false,
-          arrows:true,
+          arrows: true,
           infinite: true,
           speed: 300,
           nextArrow: '<button class="slick-next"></button>',
@@ -42,7 +42,7 @@ $('.social-slides').slick({
         settings: {
           slidesToShow: 1,
           dots: false,
-          arrows:true,
+          arrows: true,
           infinite: true,
           speed: 300,
           nextArrow: '<button class="slick-next"></button>',

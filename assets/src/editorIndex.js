@@ -14,8 +14,7 @@ import { TakeactionboxoutBlock } from './blocks/Takeactionboxout/Takeactionboxou
 import { TimelineBlock } from './blocks/Timeline/TimelineBlock';
 import { addSubAndSuperscript } from './RichTextEnhancements';
 import { setupImageBlockExtension } from './ImageBlockExtension';
-import { SocialshareBlock } from './blocks/Socialshare/SocailshareBlock'
-
+import { SocialshareBlock } from './blocks/Socialshare/SocialshareBlock';
 
 const articlesBlock = new ArticlesBlock();
 const carouselHeaderBlock = new CarouselHeaderBlock();
@@ -32,7 +31,6 @@ const submenuBlock = new SubmenuBlock();
 const takeActionBoxoutBlock = new TakeactionboxoutBlock();
 const timelineBlock = new TimelineBlock();
 const socailshareBlock = new SocialshareBlock();
-
 
 addSubAndSuperscript(window.wp);
 setupImageBlockExtension();
