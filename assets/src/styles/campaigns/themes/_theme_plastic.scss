@@ -8,6 +8,9 @@ body.theme-plastic {
   $plastics-blue-mid: #00748f;
   $plastics-blue-light: #1a9db8;
 
+  font-family: $roboto;
+  background: white;
+
   @mixin plastics-button($background: $plastics-peach-darker, $foreground: white) {
     //todo: check letter spacing
     //todo: sort out transition
@@ -15,9 +18,6 @@ body.theme-plastic {
     font-weight: $extra-bold;
     border-radius: 25px;
   }
-
-  font-family: $roboto;
-  background: white;
 
   .btn-primary {
     @include plastics-button;
@@ -30,10 +30,10 @@ body.theme-plastic {
 
   .btn-secondary {
     &:not(#hidecookie) {
-      @include plastics-button($plastics-blue-light);
+      @include plastics-button($plastics-peach-darker);
 
       &:hover {
-        background: $plastics-blue-mid;
+        background: $plastics-peach;
         color: white;
       }
     }
@@ -41,6 +41,8 @@ body.theme-plastic {
 
   .page-section-header {
     @include page-section-header($montserrat, $plastics-blue, $extra-bold, 3.75rem);
+
+    text-transform: none;
   }
 
   a {
@@ -160,7 +162,7 @@ body.theme-plastic {
   }
   // end .article-listing
   .carousel-wrap {
-    @include campaign_carousel(false, $plastics-blue-light, white, white, $plastics-blue, url("images/plastic/carousel-arrow.svg"), 50px, 10px);
+    @include campaign_carousel(false, $plastics-blue-light, white, white, $plastics-blue, url("public/images/plastic/carousel-arrow.svg"), 50px, 10px);
 
     .carousel-indicators li {
       border-radius: 50%;
@@ -181,7 +183,7 @@ body.theme-plastic {
         left: 0;
         width: 100%;
         height: 200px;
-        background: url("images/plastic/happy-point-mobile.svg") no-repeat;
+        background: url("public/images/plastic/happy-point-mobile.svg") no-repeat;
       }
     }
 
@@ -207,7 +209,7 @@ body.theme-plastic {
           max-height: 500px;
         }
         width: 250px;
-        background: url("images/plastic/happy-point-desktop.svg") no-repeat;
+        background: url("public/images/plastic/happy-point-desktop.svg") no-repeat;
       }
     }
   }
@@ -227,7 +229,7 @@ body.theme-plastic {
 
         &:after {
           @include overlay(0, 0, -1px) {
-            background: url("images/plastic/split-column-mobile.svg") no-repeat;
+            background: url("public/images/plastic/split-column-mobile.svg") no-repeat;
             background-position: bottom;
           }
         }
@@ -244,7 +246,7 @@ body.theme-plastic {
 
         &:after {
           @include overlay(0, -1px, 0, auto) {
-            background: url("images/plastic/split-column-desktop.svg") no-repeat;
+            background: url("public/images/plastic/split-column-desktop.svg") no-repeat;
             background-position: right;
             max-width: 150px;
           }
@@ -280,10 +282,10 @@ body.theme-plastic {
 
   .columns-block.block-style-icons {
     @include campaign_columns_style_icons(
-      $plastics-blue-mid url("images/plastic/four-column-header.svg") no-repeat,
+      $plastics-blue-mid url("public/images/plastic/four-column-header.svg") no-repeat,
       brightness(0) invert(100%),
-      $montserrat, $semi-bold,
-      $montserrat, $extra-bold, url("images/plastic/arrow.svg"), url("images/plastic/arrow-light.svg")
+      $montserrat, $semi-bold, $montserrat, $extra-bold,
+      url("public/images/plastic/arrow.svg"), url("public/images/plastic/arrow-light.svg"), none
     );
 
     .attachment-container {
@@ -297,7 +299,7 @@ body.theme-plastic {
       mix($plastics-peach, white, 50%),
       $montserrat, $plastics-blue, 3.125rem, 3.75rem, $extra-bold,
       $roboto, $plastics-blue,
-      url("images/plastic/arrow-dark.svg"), url("images/plastic/arrow-light.svg")
+      url("public/images/plastic/arrow-dark.svg"), url("public/images/plastic/arrow-light.svg")
     );
 
     h2 {
@@ -322,7 +324,7 @@ body.theme-plastic {
         margin-bottom: 20px;
 
         .step-number-inner {
-          background-image: url("images/plastic/take-action.png");
+          background-image: url("public/images/plastic/take-action.png");
           color: $plastics-peach-darker;
           font-family: $montserrat;
           font-weight: $semi-bold;
@@ -331,9 +333,10 @@ body.theme-plastic {
 
       .step-info {
         h5 {
-          color: $plastics-peach-darker;
+          color: $plastics-blue;
           font-family: $montserrat;
           font-weight: $semi-bold;
+          text-transform: none;
         }
       }
     }
@@ -347,7 +350,7 @@ body.theme-plastic {
 
         .step-number {
           background-color: white;
-          background-image: url("images/plastic/take-action.png");
+          background-image: url("public/images/plastic/take-action.png");
           border: 2px solid white;
           border-radius: 0 50% 50% 0;
           color: $plastics-peach-darker;
@@ -375,14 +378,10 @@ body.theme-plastic {
         margin-bottom: 30px;
       }
     }
-
-    .three-column-images {
-      @include campaign_content_three_column_images;
-    }
   }
 
   .columns-block.block-style-no_image {
-    @include campaign_columns_style_no_image($montserrat, $plastics-blue, 400);
+    @include campaign_columns_style_no_image($montserrat, $plastics-blue, 400, none);
 
     font-size: 1.875rem;
     line-height: 2.25rem;
@@ -401,7 +400,12 @@ body.theme-plastic {
   }
 
   .columns-block.block-style-image {
-    @include campaign_columns_style_no_image($montserrat, $plastics-blue, 400);
+    @include campaign_columns_style_no_image($montserrat, $plastics-blue, 400, none);
+
+    h2 {
+      text-transform: none;
+      font-size: 2.2rem;
+    }
 
     .column-wrap {
       text-align: center;
@@ -417,6 +421,11 @@ body.theme-plastic {
 
       @include large-and-up {
         margin-bottom: $space-xl;
+      }
+
+      h3 {
+        line-height: 2.1rem;
+        font-size: 1.5rem;
       }
 
       a.call-to-action-link {
