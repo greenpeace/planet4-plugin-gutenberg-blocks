@@ -54,6 +54,11 @@ export class Columns extends Component {
           return (
             <div className='column-img-btn-container'>
               <div className='column-img-label'>{__('Column %s: Image', 'p4ge').replace('%s', index+1)}</div>
+              {columns_block_style === 'icons' &&
+               <div>
+                <b> {__( 'You have selected columns style "Icons", please only select images types that support transparency, such as png.', 'p4ge' )}</b>
+               </div>
+              }
               <Button
                 onClick={ openEvent }
                 className='button'>
