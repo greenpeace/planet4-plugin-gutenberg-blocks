@@ -224,6 +224,36 @@ function set_allowed_block_types( $allowed_block_types, $post ) {
 
 add_filter( 'allowed_block_types', 'set_allowed_block_types', 10, 2 );
 
+/**
+ * @param $block
+ * For the "link_new_tab" field the type was initially incorrectly set to
+ * string instead of boolean. As a result we need to catch all empty strings here and
+ * turn them into false.
+ *
+ * Note that this DOES NOT get called when a block is rendered using the REST API column rendered *sigh*.
+ * Even better, there is no hook that allows to modify the request before the parameters are validated.
+ * As this is only for the block renderer of columns, a good option would be to replace the invalid argument
+ * on the frontend before the API is called.
+ * This should be sufficient as we can fix the data after this fix hsa been applied, after which we can remove the workaround.
+ *
+ * @return array
+ */
+function empty_string_to_false_in_link_new_tab_in_columns_blocks( $block ): array
+{
+	// Yes, that's right, Wordpress doesn't follow its own rules here so we have a camel among snakes.
+	if ( 'planet4-blocks/columns' === $block['blockName'] ?? null ) {
+		foreach ( $block['attrs']['columns'] ?? [] as $key => $column ) {
+			if ( $column['link_new_tab'] !== true ) {
+                $block['attrs']['columns'][$key]['link_new_tab'] = false;
+			}
+        }
+	}
+
+	return $block;
+}
+
+add_filter( 'render_block_data', 'empty_string_to_false_in_link_new_tab_in_columns_blocks' );
+
 /*
 ==========================
 	L O A D  P L U G I N
