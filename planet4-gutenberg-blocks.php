@@ -225,7 +225,7 @@ function set_allowed_block_types( $allowed_block_types, $post ) {
 add_filter( 'allowed_block_types', 'set_allowed_block_types', 10, 2 );
 
 /**
- * @param $block
+ * @param array $block the block being rendered.
  * For the "link_new_tab" field the type was initially incorrectly set to
  * string instead of boolean. As a result we need to catch all empty strings here and
  * turn them into false.
@@ -238,15 +238,14 @@ add_filter( 'allowed_block_types', 'set_allowed_block_types', 10, 2 );
  *
  * @return array
  */
-function empty_string_to_false_in_link_new_tab_in_columns_blocks( $block ): array
-{
-	// Yes, that's right, Wordpress doesn't follow its own rules here so we have a camel among snakes.
+function empty_string_to_false_in_link_new_tab_in_columns_blocks( $block ): array {
+	// Yes, that's right, WordPress doesn't follow its own rules here so we have a camel among snakes.
 	if ( 'planet4-blocks/columns' === $block['blockName'] ?? null ) {
 		foreach ( $block['attrs']['columns'] ?? [] as $key => $column ) {
-			if ( $column['link_new_tab'] !== true ) {
-                $block['attrs']['columns'][$key]['link_new_tab'] = false;
+			if ( true !== $column['link_new_tab'] ) {
+				$block['attrs']['columns'][ $key ]['link_new_tab'] = false;
 			}
-        }
+		}
 	}
 
 	return $block;

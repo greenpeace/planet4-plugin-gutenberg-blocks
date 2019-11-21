@@ -143,11 +143,11 @@ class Columns extends Base_Block {
 			'columns_description' => $attributes['columns_description'] ?? '',
 		];
 
-		// only show columns that have a title or a description
+		// Only show columns that have a title or a description.
 		$columns = array_filter(
 			$attributes['columns'],
 			static function ( array $column ) {
-				return !empty($column['title']) || !empty($column['description']);
+				return ! empty( $column['title'] ) || ! empty( $column['description'] );
 			}
 		);
 
@@ -168,6 +168,7 @@ class Columns extends Base_Block {
 					continue;
 				}
 				[ $img_src ] = wp_get_attachment_image_src( $column['attachment'], $image_size );
+
 				$columns[ $key ]['attachment'] = $img_src;
 			}
 		}
@@ -190,12 +191,12 @@ class Columns extends Base_Block {
 	/**
 	 * Which image size should be used for a combination of layout style and number of columns?
 	 *
-	 * @param string $columns_block_style
-	 * @param int $number_columns
-	 * @return string
+	 * @param string $columns_block_style The columns style that was picked for the block.
+	 * @param int    $number_columns The total number of columns in the block.
+	 * @return string The image size.
 	 */
 	private static function get_image_size( string $columns_block_style, int $number_columns ): string {
-		if ( in_array($columns_block_style, [self::LAYOUT_TASKS, self::LAYOUT_IMAGES], true)) {
+		if ( in_array( $columns_block_style, [ self::LAYOUT_TASKS, self::LAYOUT_IMAGES ], true ) ) {
 			if ( $number_columns >= 2 ) {
 				return 'articles-medium-large';
 			}
@@ -203,6 +204,6 @@ class Columns extends Base_Block {
 			return 'large';
 		}
 
-        return 'thumbnail';
+		return 'thumbnail';
 	}
 }
