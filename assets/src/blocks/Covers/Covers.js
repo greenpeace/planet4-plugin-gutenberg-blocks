@@ -22,6 +22,40 @@ export class Covers extends Component {
       // Populate post types tokens for saved post types.
       let postTypeTokens = props.postTypesList.filter(post_type => props.post_types.includes(post_type.id)).map(post_type => post_type.name);
 
+      const { __ } = wp.i18n;
+
+      this.options = [{
+        label: __('Take Action Covers', 'p4ge'),
+        image: window.p4ge_vars.home + 'images/take_action_covers.png',
+        value: '1',
+        help: __('Take action covers pull the featured image, tags, have a 25 character excerpt and have a call to action button')
+      },
+        {
+          label: __('Campaign Covers', 'p4ge'),
+          image: window.p4ge_vars.home + 'images/campaign_covers.png',
+          value: '2',
+          help: __('Campaign covers pull the associated image and hashtag from the system tag definitions.'),
+        },
+        {
+          label: __('Content Covers', 'p4ge'),
+          image: window.p4ge_vars.home + 'images/content_covers.png',
+          value: '3',
+          help: __('Content covers pull the image from the post.')
+        }];
+
+      let cptt = wp.data.select('core/editor').getCurrentPostType();
+
+      if ('campaign' === cptt)
+      {
+        this.options = [
+          {
+            label: __('Content Covers', 'p4ge'),
+            image: window.p4ge_vars.home + 'images/content_covers.png',
+            value: '3',
+            help: __('Content covers pull the image from the post.')
+          }];
+      }
+
       // Populate component state with block's saved tags tokens and post type tokens
       this.state = {
         tagTokens: tagTokens,
@@ -187,26 +221,7 @@ export class Covers extends Component {
             <LayoutSelector
               selectedOption={ this.props.cover_type }
               onSelectedLayoutChange={ this.props.onSelectedLayoutChange }
-              options={[
-                {
-                  label: __('Take Action Covers', 'p4ge'),
-                  image: window.p4ge_vars.home + 'images/take_action_covers.png',
-                  value: '1',
-                  help: __('Take action covers pull the featured image, tags, have a 25 character excerpt and have a call to action button')
-                },
-                {
-                  label: __('Campaign Covers', 'p4ge'),
-                  image: window.p4ge_vars.home + 'images/campaign_covers.png',
-                  value: '2',
-                  help: __('Campaign covers pull the associated image and hashtag from the system tag definitions.'),
-                },
-                {
-                  label: __('Content Covers', 'p4ge'),
-                  image: window.p4ge_vars.home + 'images/content_covers.png',
-                  value: '3',
-                  help: __('Content covers pull the image from the post.')
-                },
-              ]}
+              options={this.options}
             />
           </div>
 
