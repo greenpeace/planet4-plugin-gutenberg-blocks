@@ -43,9 +43,10 @@ export class Covers extends Component {
           help: __('Content covers pull the image from the post.')
         }];
 
-      let cptt = wp.data.select('core/editor').getCurrentPostType();
+      // Get current post type to filter LayoutSelector options in the case of "campaigns" post type.
+      let currentPostType = wp.data.select('core/editor').getCurrentPostType();
 
-      if ('campaign' === cptt)
+      if ('campaign' === currentPostType)
       {
         this.options = [
           {
