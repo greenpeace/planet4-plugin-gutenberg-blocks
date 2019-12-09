@@ -1,0 +1,38 @@
+.spreadsheet-table {
+	color: #fff;
+	margin: 20px 0;
+	.table-row {
+		background-color: #407ea2;
+		&:hover {
+			background-color: #074365;
+		}
+	}
+	.item {
+		padding: 5px 20px;
+		font-size: 13px;
+	}
+	.table-row:nth-child(odd) {
+		background-color: #336582;
+	}
+	.table-row:first-child {
+		background-color: #074365;
+		.item {
+			font-size: 15px;
+		}
+	}
+	input {
+		width: 350px;
+		margin: 10px 0;
+		padding: 5px;
+	}
+	@include mobile-only {
+		margin-left: -15px;
+		margin-right: -15px;
+	}
+}
+.spreadsheet-table-search {
+	width: 350px;
+	max-width: 100%;
+	padding: 3px;
+	border: 1px solid #407ea2;
+}
