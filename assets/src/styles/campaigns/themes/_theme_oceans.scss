@@ -393,4 +393,6 @@ body.theme-oceans {
   .video-block {
     @include campaign_video($oceans-aqua);
   }
+
+  @import "blocks/SpreadsheetTable";
 }

@@ -109,6 +109,7 @@ final class Loader {
 			new Blocks\TakeActionBoxout(),
 			new Blocks\Timeline(),
 			new Blocks\Socialshare(),
+			new Blocks\SpreadsheetTable(),
 		];
 	}
 
