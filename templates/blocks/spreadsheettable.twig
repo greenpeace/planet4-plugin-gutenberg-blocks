@@ -1,31 +1,33 @@
 {% block spreadsheettable %}
 
-	<input class="spreadsheet-table-search" type="text" placeholder="Search by Name, Position or Country" />
-	<div class="spreadsheet-table">
-		{% for key, item in fields.spreadsheet_data %}
+	{% if ( fields.spreadsheet_data ) %}
+		<input class="spreadsheet-table-search" type="text" placeholder="Search by Name, Position or Country" />
+		<div class="spreadsheet-table">
+			{% for key, item in fields.spreadsheet_data %}
 
-			<div class="table-row">
-				<div class="row">
+				<div class="table-row">
+					<div class="row">
 
-					{% for keyField, itemField in item %}
+						{% for keyField, itemField in item %}
 
-						{% if ( keyField == 1 ) %}
-							<div class="col-6 pr-0 pl-0">
-						{% else %}
-							<div class="col-3 pr-0 pl-0">
-						{% endif %}
+							{% if ( keyField == 1 ) %}
+								<div class="col-6 pr-0 pl-0">
+							{% else %}
+								<div class="col-3 pr-0 pl-0">
+							{% endif %}
 
-							<div class="item">
-								{{itemField}}
+								<div class="item">
+									{{itemField}}
+								</div>
 							</div>
-						</div>
 
-					{% endfor %}
+						{% endfor %}
 
+					</div>
 				</div>
-			</div>
 
-		{% endfor %}
-	</div>
+			{% endfor %}
+		</div>
+	{% endif %}
 
 {% endblock %}

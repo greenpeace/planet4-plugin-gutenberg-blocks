@@ -18,31 +18,11 @@ class SpreadsheetTable extends Base_Block {
 	 *
 	 * @const string BLOCK_NAME.
 	 */
-	const BLOCK_NAME = 'spreadsheettable';
-	/**
-	 * Register shortcake shortcode.
-	 *
-	 * @param array  $attributes Shortcode attributes.
-	 * @param string $content   Content.
-	 *
-	 * @return mixed
-	 */
-	public function add_block_shortcode( $attributes, $content ) {
-		$attributes['id'] = $attributes['background'];
-		$attributes = shortcode_atts(
-			[
-				'url'                      => '',
-			],
-			$attributes,
-			'shortcake_spreadsheet_table'
-		);
-		return $this->render( $attributes );
-	}
+	public const BLOCK_NAME = 'spreadsheettable';
 	/**
 	 * SpreadsheetTable constructor.
 	 */
 	public function __construct() {
-		add_shortcode( 'shortcake_spreadsheet_table', [ $this, 'add_block_shortcode' ] );
 		register_block_type(
 			'planet4-blocks/spreadsheettable',
 			[
@@ -65,27 +45,24 @@ class SpreadsheetTable extends Base_Block {
 	 * @return array The data to be passed in the View.
 	 */
 	public function prepare_data( $fields ): array {
-		$fields['url']       = '' !== $fields['url'] ? $fields['url'] : '';
 
 		// Enqueue script for table filter
 		wp_enqueue_script( 'spreadsheet-table', P4GBKS_PLUGIN_URL . 'public/js/filter_spreadsheet_table.js', [ 'jquery' ], '0.2', true );
 
-		$spreadsheet_data = [];
+		$rows = [];
 		// Firstly check if url is correct
-		if (strpos($fields['url'], 'output=csv') !== false) {
-			if (($handle = fopen($fields['url'], "r")) !== FALSE) {
-				while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-					$spreadsheet_data[] = $data;
+		if (filter_var($fields['url'], FILTER_VALIDATE_URL) !== false) {
+			if (strpos($fields['url'], 'output=csv') !== false) {
+				if (($handle = fopen($fields['url'], "r")) !== false) {
+					while (($data = fgetcsv($handle, 1000, ",")) !== false) {
+						$rows[] = $data;
+					}
+					fclose($handle);
 				}
-				fclose($handle);
 			}
 		}
-		$fields['spreadsheet_data'] = $spreadsheet_data;
+		$fields['spreadsheet_data'] = $rows;
 
-		$data = [
-			'fields' => $fields,
-		];
-
-		return $data;
+		return ['fields' => $fields];
 	}
 }

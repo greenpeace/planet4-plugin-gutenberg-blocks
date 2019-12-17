@@ -7,7 +7,7 @@ import {
   ServerSideRender,
 } from '@wordpress/components';
 
-export class Spreadsheettable extends Component {
+export class SpreadsheetTable extends Component {
   constructor(props) {
     super(props);
   }
@@ -21,7 +21,7 @@ export class Spreadsheettable extends Component {
           <TextControl
             label={__('Spreadsheet URL', 'planet4-blocks-backend')}
             placeholder={__('Enter Google Spreadsheet URL', 'planet4-blocks-backend')}
-            help={__('Optional', 'planet4-blocks-backend')}
+            help={__('From Your Google Spreadsheet Table choose File -> Publish on web and choose Sheet to load and CSV format. Next click on Publish button.', 'planet4-blocks-backend')}
             value={this.props.url}
             onChange={this.props.onUrlChange}
           />

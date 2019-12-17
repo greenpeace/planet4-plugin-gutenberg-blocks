@@ -1,4 +1,4 @@
-import { Spreadsheettable } from './Spreadsheettable';
+import { SpreadsheetTable } from './Spreadsheettable';
 
 export class SpreadsheettableBlock {
   constructor() {
@@ -10,27 +10,6 @@ export class SpreadsheettableBlock {
       title: __('Spreadsheet Table', 'p4ge'),
       icon: 'editor-table',
       category: 'planet4-blocks',
-
-      /**
-       * Transforms old 'shortcake' shortcode to new gutenberg block.
-       */
-      transforms: {
-        from: [
-          {
-            type: 'shortcode',
-            // Shortcode tag can also be an array of shortcode aliases
-            tag: 'shortcake_declaration_table',
-            attributes: {
-              title: {
-                type: 'string',
-                shortcode: function (attributes) {
-                  return attributes.named.title;
-                }
-              },
-            },
-          },
-        ]
-      },
       attributes: {
         url: {
           type: 'string',
@@ -42,10 +21,7 @@ export class SpreadsheettableBlock {
           setAttributes( { url: value } );
         }
 
-        // We pass down all the attributes to Covers as props using
-        // the spread operator. Then we selectively add more
-        // props.
-        return <Spreadsheettable
+        return <SpreadsheetTable
           { ...attributes }
           isSelected={ isSelected }
           onUrlChange={ onUrlChange } />

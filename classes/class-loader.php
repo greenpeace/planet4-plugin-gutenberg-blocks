@@ -108,12 +108,8 @@ final class Loader {
 			new Blocks\SubMenu(),
 			new Blocks\TakeActionBoxout(),
 			new Blocks\Timeline(),
-<<<<<<< HEAD
-			new Blocks\Socialshare(),
 			new Blocks\SpreadsheetTable(),
-=======
 			new Blocks\SocialMediaCards(),
->>>>>>> c35cd55eefb5704b98cb99929ecd54ca7b80efef
 		];
 	}
 
