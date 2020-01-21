@@ -312,4 +312,32 @@ body.theme-arctic {
   .video-block {
     @include campaign_video($arctic-light-blue);
   }
+
+  .page-template table.spreadsheet-table {
+    color: #fff;
+
+    tr {
+      background-color: #8D9C9E;
+      color: #FFFFFF;
+
+      &:nth-child(odd) {
+        background-color: #D2DDE4;
+        color: #1A1A1A;
+      }
+
+      &:hover {
+        background-color: #074365;
+      }
+
+      &:first-child {
+        background-color: #035880;
+        color: #FFFFFF;
+        border-bottom-color: #fff;
+      }
+    }
+
+    .spreadsheet-table-search {
+      border-color: #407ea2;
+    }
+  }
 }

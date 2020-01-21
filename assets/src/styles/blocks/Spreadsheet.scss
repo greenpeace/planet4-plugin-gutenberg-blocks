@@ -27,9 +27,18 @@
 .spreadsheet-search {
   width: 350px;
   max-width: 100%;
-  margin: 10px 0;
-  padding: 3px 8px;
+  margin: 10px 10px 10px 0;
+  padding: 0 8px;
+  height: 40px;
   border: 1px solid;
+}
+
+.spreadsheet-default-sort {
+  height: 40px !important;
+  box-sizing: border-box;
+  line-height: 1rem !important;
+  width: auto;
+  margin-bottom: 0;
 }
 
 .spreadsheet-sorted-by {
@@ -40,14 +49,6 @@
   &[data-sort-dir="desc"]:after {
     content: "\25B2";
   }
-}
-
-.spreadsheet-default-sort {
-  display: none;
-  border: 1px solid;
-  letter-spacing: .06rem;
-  line-height: 38px;
-  margin-left: 5px;
 }
 
 .spreadsheet-empty-message {

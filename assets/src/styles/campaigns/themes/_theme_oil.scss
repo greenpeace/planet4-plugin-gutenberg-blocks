@@ -485,6 +485,34 @@ body.theme-oil {
     @include campaign_video($oil-gradient-standard);
   }
 
+  .page-template table.spreadsheet-table {
+    color: #fff;
+
+    tr {
+      background: #76EEEC;
+      color: #1A1A1A;
+
+      &:nth-child(odd) {
+        background: #65D17D;
+        color: #1A1A1A;
+      }
+
+      &:hover {
+        background-color: #074365;
+        color: white;
+      }
+
+      &:first-child {
+        background: #23E587;
+        color: #FFFFFF;
+      }
+    }
+
+    .spreadsheet-table-search {
+      border-color: #407ea2;
+    }
+  }
+
   /** IE/Edge only **/
   _:-ms-lang(x), .page-header { /* stylelint-disable-line */
     background: mix($bg-gradient-start, $bg-gradient-end, 50%);

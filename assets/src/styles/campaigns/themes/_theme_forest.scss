@@ -519,4 +519,32 @@ body.theme-forest {
   .video-block {
     @include campaign_video($forest-dark-green);
   }
+
+  .page-template table.spreadsheet-table {
+    color: #fff;
+
+    tr {
+      background: #A0D654;
+      color: #1A1A1A;
+
+      &:nth-child(odd) {
+        background: #B6ED5F;
+        color: #1A1A1A;
+      }
+
+      &:hover {
+        background-color: #074365;
+        color: white;
+      }
+
+      &:first-child {
+        background: #2CAF4E;
+        color: #FFFFFF;
+      }
+    }
+
+    .spreadsheet-table-search {
+      border-color: #407ea2;
+    }
+  }
 }

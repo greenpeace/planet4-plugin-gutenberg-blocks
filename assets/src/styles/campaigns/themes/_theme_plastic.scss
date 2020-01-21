@@ -478,4 +478,32 @@ body.theme-plastic {
   .social-media-cards {
     @include campaign-social-media-cards($plastics-peach-darker, $white);
   }
+
+  .page-template table.spreadsheet-table {
+    color: #fff;
+
+    tr {
+      background: #F98667;
+      color: #1A1A1A;
+
+      &:nth-child(odd) {
+        background: #F7AEA9;
+        color: #1A1A1A;
+      }
+
+      &:hover {
+        background-color: #074365;
+        color: white;
+      }
+
+      &:first-child {
+        background: #C44BC4;
+        color: #FFFFFF;
+      }
+    }
+
+    .spreadsheet-table-search {
+      border-color: #407ea2;
+    }
+  }
 }

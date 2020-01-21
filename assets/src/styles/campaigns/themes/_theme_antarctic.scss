@@ -266,4 +266,31 @@ body.theme-antarctic {
   .video-block {
     @include campaign_video($antarctic-gradient);
   }
+
+  .page-template table.spreadsheet-table {
+    color: #fff;
+
+    tr {
+      background: #0A4461;
+      color: #FFFFFF;
+
+      &:nth-child(odd) {
+        background: #52C9F4;
+        color: #0A4461;
+      }
+
+      &:hover {
+        background-color: #074365;
+      }
+
+      &:first-child {
+        background: #06293a;
+        color: #FFFFFF;
+      }
+    }
+
+    .spreadsheet-table-search {
+      border-color: #407ea2;
+    }
+  }
 }
