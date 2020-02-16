@@ -84,8 +84,26 @@
       display: none;
     }
 
+    // TODO: This rule collides with the `.cover-card-btn` rule below
+		.btn-action.cover-card-btn {
+			background: rgba(255, 255, 255, .75) !important;
+			border: 1px solid --campaigns-secondary-color !important;
+      color: --campaigns-secondary-color !important;
+
+      &:hover {
+        background: --campaigns-secondary-color !important;
+        border: 1px solid --campaigns-secondary-color !important;
+        color: white !important;
+      }
+		}
+
     &:hover {
       box-shadow: none;
+
+      .cover-card-btn {
+        background: --campaigns-primary-color !important;
+        border-color: --campaigns-primary-color !important;
+      }
     }
 
     @include mobile-only {
