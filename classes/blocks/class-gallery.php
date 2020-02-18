@@ -23,13 +23,6 @@ class Gallery extends Base_Block {
 	 */
 	const BLOCK_NAME = 'gallery';
 
-	/**
-	 * Allowed Post types.
-	 *
-	 * @const array BLOCK_ALLOWED_POST_TYPES.
-	 */
-	const BLOCK_ALLOWED_POST_TYPES = [ 'page', 'campaign', 'post' ];
-
 	const LAYOUT_SLIDER        = 1;
 	const LAYOUT_THREE_COLUMNS = 2;
 	const LAYOUT_GRID          = 3;

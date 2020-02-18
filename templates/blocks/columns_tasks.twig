@@ -1,6 +1,6 @@
 {% block tasks %}
 
-	{% set is_campaign = ( 'campaign' == fn( 'get_post_type' ) ) %}
+	{% set is_campaign = ( constant('\P4_Post_Campaign_Page::POST_TYPE') == fn( 'get_post_type' ) ) %}
 
 	{% if ( fields ) %}
 

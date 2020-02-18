@@ -380,7 +380,7 @@ final class Loader {
 		// campaign-theme assets.
 		$post_type = get_post_type();
 
-		if ( 'campaign' === $post_type ) {
+		if ( \P4_Post_Campaign_Page::POST_TYPE === $post_type ) {
 
 			$post = get_post();
 

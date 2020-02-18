@@ -20,7 +20,7 @@
 	{% endif %}
 
 	<div class="article-list-item-body">
-		{% set is_campaign = ( 'campaign' == fn( 'get_post_type' ) ) %}
+		{% set is_campaign = ( constant('\P4_Post_Campaign_Page::POST_TYPE') == fn( 'get_post_type' ) ) %}
 
 		{% if ( recent_post.tags or recent_post.page_type or recent_post.page_types ) %}
 			<div class="article-list-item-tags top-page-tags">

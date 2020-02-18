@@ -79,8 +79,10 @@ if ( ! defined( 'P4GBKS_LANGUAGES' ) ) {
 	);
 }
 
+require_once ABSPATH . '/wp-content/themes/planet4-master-theme/classes/class-p4-post-campaign-page.php';
+
 if ( ! defined( 'P4GBKS_ALLOWED_PAGETYPE' ) ) {
-	define( 'P4GBKS_ALLOWED_PAGETYPE', [ 'page', 'campaign' ] );
+	define( 'P4GBKS_ALLOWED_PAGETYPE', [ 'page', P4_Post_Campaign_Page::POST_TYPE ] );
 }
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	define( 'WP_UNINSTALL_PLUGIN', P4GBKS_PLUGIN_BASENAME );
@@ -214,9 +216,9 @@ function set_allowed_block_types( $allowed_block_types, $post ) {
 	];
 
 	$allowed_p4_block_types = [
-		'post'     => POST_BLOCK_TYPES,
-		'page'     => PAGE_BLOCK_TYPES,
-		'campaign' => CAMPAIGN_BLOCK_TYPES,
+		'post'                           => POST_BLOCK_TYPES,
+		'page'                           => PAGE_BLOCK_TYPES,
+		P4_Post_Campaign_Page::POST_TYPE => CAMPAIGN_BLOCK_TYPES,
 	];
 
 	$allowed_block_types = array_merge( $wordpress_blocks, $allowed_p4_block_types[ $post->post_type ] );
