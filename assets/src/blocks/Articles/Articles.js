@@ -8,6 +8,7 @@ import {
   ServerSideRender
 } from '@wordpress/components';
 import withCharacterCounter from '../../components/withCharacterCounter/withCharacterCounter';
+import { BaseBlock } from '../BaseBlock';
 
 
 const {apiFetch} = wp;
@@ -15,7 +16,7 @@ const {addQueryArgs} = wp.url;
 const TextControl = withCharacterCounter( BaseTextControl );
 const TextareaControl = withCharacterCounter( BaseTextareaControl );
 
-export class Articles extends Component {
+export class Articles extends BaseBlock {
   constructor(props) {
     super(props);
 
@@ -122,8 +123,9 @@ export class Articles extends Component {
   }
 
   onSelectedPostTypesChange(tokens) {
+    const { postTypesList } = this.props;
     const postTypeIds = tokens.map(token => {
-      return this.props.postTypesList.filter(postType => postType.name === token)[0].id;
+      return postTypesList.filter(postType => postType.name === token)[0].id;
     });
     this.props.setAttributes({post_types: postTypeIds});
 
@@ -229,7 +231,7 @@ export class Articles extends Component {
                   suggestions={tagSuggestions}
                   label={__('Select Tags', 'p4ge')}
                   value={this.state.tagTokens}
-                  onChange={this.onSelectedTagsChange.bind(this)}
+                  onChange={this.onSelectedTagsChange}
                 />
                 <p className='FieldHelp'>Associate this block with Actions that have specific Tags</p>
               </div>
@@ -238,7 +240,7 @@ export class Articles extends Component {
                   suggestions={postTypeSuggestions}
                   label={__('Post Types', 'p4ge')}
                   value={this.state.postTypeTokens}
-                  onChange={this.onSelectedPostTypesChange.bind(this)}
+                  onChange={this.onSelectedPostTypesChange}
                 />
               </div>
               <div className="ignore-categories-wrapper">
@@ -265,8 +267,8 @@ export class Articles extends Component {
               value={ this.state.postsTokens }
               suggestions={ this.state.postsSuggestions }
               label={ __( 'CAUTION: Adding articles individually will override the automatic functionality of this block. For good user experience, please include at least three articles so that spacing and alignment of the design remains in tact.', 'p4ge' ) }
-              onFocus={ this.getSuggestionsOnFirstFocus.bind(this) }
-              onChange={ this.onSelectedPostsChange.bind(this) }
+              onFocus={ this.getSuggestionsOnFirstFocus }
+              onChange={ this.onSelectedPostsChange }
               placeholder="Select Posts"
               maxLength="10"
               maxSuggestions="20"
