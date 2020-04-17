@@ -14,6 +14,28 @@ const getValuePropName = ( Component ) => {
 
 const { apiFetch } = wp;
 
+const getValueFromProps = ( props ) => {
+  const { metaKey, postMeta } = props;
+
+  const metaValue = postMeta[ metaKey ];
+
+  let value;
+  // Use the default value if what is stored in the post meta is empty, or if it isn't one of the listed options.
+  if (
+    props.defaultValue
+    && (
+      !metaValue
+      || !props.options.some( option => option.value === metaValue )
+    )
+  ) {
+    value = props.defaultValue;
+  } else {
+    value = metaValue;
+  }
+
+  return value;
+}
+
 export function withPostMeta( WrappedComponent ) {
 
   class WrappingComponent extends Component {
@@ -21,6 +43,9 @@ export function withPostMeta( WrappedComponent ) {
       super( props );
       this.handleChange = this.handleChange.bind( this );
       this.valuePropName = getValuePropName( WrappedComponent );
+      this.state = {
+        value: getValueFromProps( props )
+      };
     }
 
     handleChange( metaKey, value ) {
@@ -42,29 +67,28 @@ export function withPostMeta( WrappedComponent ) {
       }
     }
 
+    static getDerivedStateFromProps(props, state) {
+      const value = getValueFromProps( props );
+      return {
+        value
+      }
+    }
+
+    componentDidUpdate() {
+      const { metaKey, postMeta, writeMeta, onChange, ...ownProps } = this.props;
+      const metaValue = postMeta[ metaKey ];
+
+      if (metaValue != this.state.value) {
+        this.handleChange( metaKey, this.state.value );
+      }
+    }
+
     render() {
       const { metaKey, postMeta, writeMeta, onChange, ...ownProps } = this.props;
 
-      const metaValue = postMeta[ metaKey ];
-
-      let value;
-      // Use the default value if what is stored in the post meta is empty, or if it isn't one of the listed options.
-      if (
-        this.props.defaultValue
-        && (
-          !metaValue
-          || !this.props.options.some( option => option.value === metaValue )
-        )
-      ) {
-        value = this.props.defaultValue;
-        this.handleChange( metaKey, value );
-      } else {
-        value = metaValue;
-      }
-
       return <WrappedComponent
         { ...{
-          [ this.valuePropName ]: value,
+          [ this.valuePropName ]: this.state.value,
           onChange: ( value ) => {
             this.handleChange( metaKey, value || '' );
             if ( onChange ) {
