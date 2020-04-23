@@ -44,27 +44,12 @@ export function withPostMeta( WrappedComponent ) {
       this.handleChange = this.handleChange.bind( this );
       this.valuePropName = getValuePropName( WrappedComponent );
       this.state = {
-        value: getValueFromProps( props )
+        value: null
       };
     }
 
     handleChange( metaKey, value ) {
-      const { getEditedPostAttribute, getCurrentPostId } = wp.data.select( 'core/editor' );
       this.props.writeMeta( metaKey, value );
-
-      if ( !['draft', 'auto-draft'].includes( getEditedPostAttribute( 'status' ) ) ) {
-        apiFetch( {
-          path: `/planet4/v1/save-preview-meta`,
-          method: 'POST',
-          data: {
-            post_id: getCurrentPostId(),
-            meta: {
-              ...this.props.postMeta,
-              [metaKey]: value,
-            }
-          },
-        } );
-      }
     }
 
     static getDerivedStateFromProps(props, state) {

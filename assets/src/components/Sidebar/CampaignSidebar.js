@@ -8,6 +8,7 @@ import { withDefaultLabel } from '../withDefaultLabel/withDefaultLabel';
 import { __ } from '@wordpress/i18n';
 import { fromThemeOptions } from '../fromThemeOptions/fromThemeOptions';
 import isShallowEqual from '@wordpress/is-shallow-equal';
+import { savePreviewMeta } from '../../saveMetaToPreview';
 
 const themeOptions = [
   {
@@ -98,6 +99,7 @@ export class CampaignSidebar extends Component {
         }
         if ( !isShallowEqual( this.state.meta, meta ) ) {
           this.setState( { meta: meta } );
+          savePreviewMeta();
           if (
             this.state.theme === null || theme !== this.state.theme.id
           ) {
