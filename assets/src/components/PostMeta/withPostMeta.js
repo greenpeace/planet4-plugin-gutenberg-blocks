@@ -60,10 +60,10 @@ export function withPostMeta( WrappedComponent ) {
     }
 
     componentDidUpdate() {
-      const { metaKey, postMeta, writeMeta, onChange, ...ownProps } = this.props;
+      const { metaKey, postMeta } = this.props;
       const metaValue = postMeta[ metaKey ];
 
-      if (metaValue != this.state.value) {
+      if (metaValue !== this.state.value) {
         this.handleChange( metaKey, this.state.value );
       }
     }
