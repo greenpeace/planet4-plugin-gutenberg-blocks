@@ -372,6 +372,24 @@ final class Loader {
 			$css_blocks_creation
 		);
 
+		// Include React in the Frontend
+		wp_enqueue_script(
+			'planet4-blocks-frontend',
+			P4GBKS_PLUGIN_URL . 'assets/build/frontendIndex.js',
+			[
+				// WP React wrapper
+				'wp-element',
+				// Exports the __() function
+				'wp-i18n',
+				// Tools to get data from the REST API
+				'wp-api-fetch',
+				// URL helpers (as addQueryArgs)
+				'wp-url',
+			],
+			'0.1.7',
+			true
+		);
+
 		wp_enqueue_script( 'post_action', P4GBKS_PLUGIN_URL . 'public/js/post_action.js', [ 'jquery' ], '0.1', true );
 	}
 

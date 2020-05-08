@@ -31,6 +31,28 @@ table.spreadsheet-table {
     font-size: $font-size-sm;
     position: sticky;
     top: 0;
+
+    svg {
+      width: $space-md;
+      margin-left: $space-xs;
+      // Compensate for a small baseline misalignment
+      margin-top: -2px;
+      // Use opacity instead of `display: none` to avoid jumpyness on headers
+      opacity: 0;
+      transition: opacity .3s, transform .4s;
+    }
+
+    &.spreadsheet-sorted-by {
+      svg {
+        opacity: 1;
+      }
+
+      &.sort-desc {
+        svg {
+          transform: rotate(180deg);
+        }
+      }
+    }
   }
 
   tr {
@@ -55,6 +77,12 @@ table.spreadsheet-table {
   }
 }
 
+.spreadsheet-loading {
+  padding: $space-xl;
+  text-align: center;
+  border: 1px solid $grey-40;
+}
+
 .spreadsheet-search {
   width: 350px;
   max-width: 100%;
@@ -63,16 +91,6 @@ table.spreadsheet-table {
   padding: 0 8px;
   border-color: var(--spreadsheet-header-background, #45494c);
   border: 1px solid;
-}
-
-.spreadsheet-sorted-by {
-  &:after {
-    content: "\25BC";
-  }
-
-  &[data-sort-dir="desc"]:after {
-    content: "\25B2";
-  }
 }
 
 .spreadsheet-empty-message {

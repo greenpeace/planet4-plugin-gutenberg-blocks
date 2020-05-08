@@ -1,5 +1,6 @@
 import { Spreadsheet } from './Spreadsheet';
 import { CSS_VARIABLES_ATTRIBUTE } from '../CssVariablesAttribute';
+import { SpreadsheetFrontend } from './SpreadsheetFrontend';
 
 export class SpreadsheetBlock {
   constructor() {

@@ -1,13 +1,13 @@
 import { Component, Fragment } from '@wordpress/element';
-import { Preview } from '../../components/Preview';
 import { InspectorControls } from '@wordpress/editor';
 import ColorPaletteControl from '../../components/ColorPaletteControl/ColorPaletteControl';
 
 import {
   TextControl,
-  ServerSideRender,
   PanelBody
 } from '@wordpress/components';
+
+import { SpreadsheetFrontend } from './SpreadsheetFrontend';
 
 const colors = [
   { name: 'blue', color: '#c9e7fa' },
@@ -34,7 +34,7 @@ const colors_variables_map = {
     'spreadsheet-even-row-background': '#e7f5fe',
     'spreadsheet-odd-row-background': '#c9e7fa'
   }
-}
+};
 
 export class Spreadsheet extends Component {
   constructor(props) {
@@ -42,7 +42,7 @@ export class Spreadsheet extends Component {
   }
 
   renderEdit() {
-    const { __ } = wp.i18n;
+    const {__} = wp.i18n;
 
     const { attributes, setAttributes } = this.props;
 
@@ -89,20 +89,18 @@ export class Spreadsheet extends Component {
     );
   }
 
+  renderView() {
+    return <SpreadsheetFrontend url={ this.props.attributes.url } />
+  }
+
   render() {
     return (
       <div>
         {
           this.props.isSelected
             ? this.renderEdit()
-            : null
+            : this.renderView()
         }
-        <Preview showBar={this.props.isSelected}>
-          <ServerSideRender
-            block={ 'planet4-blocks/spreadsheet' }
-            attributes={ this.props.attributes }>
-          </ServerSideRender>
-        </Preview>
       </div>
     );
   }

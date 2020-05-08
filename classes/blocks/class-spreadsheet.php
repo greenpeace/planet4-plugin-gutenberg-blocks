@@ -29,7 +29,11 @@ class Spreadsheet extends Base_Block {
 			'planet4-blocks/spreadsheet',
 			[
 				'editor_script'   => 'planet4-blocks',
-				'render_callback' => [ $this, 'render' ],
+				'render_callback' => function( $attributes ) {
+					$block_name = self::BLOCK_NAME;
+					$url = $attributes[ 'url' ];
+					return "<div class='wp-block-planet4-blocks-{$block_name}' data-url='{$url}'></div>";
+				},
 				'attributes'      => [
 					'url'           => [
 						'type'    => 'string',
@@ -49,9 +53,6 @@ class Spreadsheet extends Base_Block {
 	 * @return array The data to be passed in the View.
 	 */
 	public function prepare_data( $fields ): array {
-		// Enqueue script for table filter.
-		wp_enqueue_script( 'spreadsheet-table', P4GBKS_PLUGIN_URL . 'public/js/spreadsheet.js', [ 'jquery' ], '0.2', true );
-
 		try {
 			$id = self::extract_sheet_id( $fields['url'] );
 
@@ -60,10 +61,7 @@ class Spreadsheet extends Base_Block {
 			$sheet = null;
 		}
 
-		return [
-			'sheet'         => $sheet,
-			'css_variables' => $fields['css_variables'] ?? null,
-		];
+		return [ 'sheet' => $sheet ];
 	}
 
 	/**
@@ -94,7 +92,7 @@ class Spreadsheet extends Base_Block {
 	 * @param bool        $skip_cache Should the sheet be fetched from cache.
 	 * @return array|null The sheet or null if nothing was found.
 	 */
-	private function get_sheet( ?string $sheet_id, bool $skip_cache ): ?array {
+	public static function get_sheet( ?string $sheet_id, bool $skip_cache ): ?array {
 		if ( ! $sheet_id ) {
 			return null;
 		}
