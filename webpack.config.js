@@ -4,6 +4,7 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const TerserJSPlugin = require('terser-webpack-plugin');
 const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
 const RemovePlugin = require('remove-files-webpack-plugin');
+const postcssCustomProperties = require('postcss-custom-properties');
 
 module.exports = {
   ...defaultConfig,
@@ -43,9 +44,12 @@ module.exports = {
             loader: 'postcss-loader',
             options: {
               ident: 'postcss',
-              plugins: function() {
-                return require('autoprefixer');
-              },
+              plugins: () => [
+                require('autoprefixer'),
+                postcssCustomProperties({
+                  exportTo: __dirname + '/css_vars.json'
+                })
+              ],
               sourceMap: true
             }
           },
@@ -54,7 +58,7 @@ module.exports = {
             options: {
               sourceMap: true
             }
-          }
+          },
         ]
       },
       {
