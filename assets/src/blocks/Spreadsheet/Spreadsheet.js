@@ -90,7 +90,7 @@ export class Spreadsheet extends Component {
   }
 
   renderView() {
-    return <SpreadsheetFrontend url={ this.props.attributes.url } />
+    return <SpreadsheetFrontend { ...this.props.attributes } />
   }
 
   render() {

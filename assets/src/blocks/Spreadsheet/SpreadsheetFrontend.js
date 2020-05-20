@@ -131,9 +131,15 @@ export class SpreadsheetFrontend extends Component {
   }
 
   render() {
+    const cssVariablesText = this.props.css_variables
+      ? Object.entries(this.props.css_variables)
+          .map( cssVariable => `--${cssVariable[0]}: ${cssVariable[1]}` )
+          .join(';') // React does not like an ending semicolon
+      : '';
+
     return (
       <Fragment>
-        <div className="block-spreadsheet">
+        <div className="block-spreadsheet" style={{ cssText: cssVariablesText }}>
           <div className="form-inline">
             <input className="spreadsheet-search form-control"
               type="text"
