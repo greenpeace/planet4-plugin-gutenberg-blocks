@@ -327,14 +327,14 @@ final class Loader {
 
 		// Enqueue editor script for all Blocks in this Plugin.
 		wp_enqueue_script(
-			'planet4-blocks-script',                       // - Script handler
-			P4GBKS_PLUGIN_URL . 'assets/build/editorIndex.js',                                     // - Bundled JS for the editor
+			'planet4-blocks-script',
+			P4GBKS_PLUGIN_URL . 'assets/build/editorIndex.js',
 			[
-				'wp-blocks',      // - Helpers for registering blocks
-				'wp-components',  // - Wordpress components
-				'wp-element',     // - WP React wrapper
-				'wp-data',        // - WP data helpers
-				'wp-i18n',        // - Exports the __() function
+				'wp-blocks',      // Helpers for registering blocks.
+				'wp-components',  // Wordpress components.
+				'wp-element',     // WP React wrapper.
+				'wp-data',        // WP data helpers.
+				'wp-i18n',        // Exports the __() function.
 				'wp-editor',
 				'wp-edit-post',
 			],
@@ -342,8 +342,7 @@ final class Loader {
 			true
 		);
 
-		// Variables exposed from PHP to JS,
-		// WP calls this "localizing a script"...
+		// Variables reflected from PHP to JS.
 		$option_values = get_option( 'planet4_options' );
 
 		$reflection_vars = [
@@ -372,18 +371,18 @@ final class Loader {
 			$css_blocks_creation
 		);
 
-		// Include React in the Frontend
+		// Include React in the Frontend.
 		wp_enqueue_script(
 			'planet4-blocks-frontend',
 			P4GBKS_PLUGIN_URL . 'assets/build/frontendIndex.js',
 			[
-				// WP React wrapper
+				// WP React wrapper.
 				'wp-element',
-				// Exports the __() function
+				// Exports the __() function.
 				'wp-i18n',
-				// Tools to get data from the REST API
+				// Tools to get data from the REST API.
 				'wp-api-fetch',
-				// URL helpers (as addQueryArgs)
+				// URL helpers (as addQueryArgs).
 				'wp-url',
 			],
 			'0.1.7',

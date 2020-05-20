@@ -28,8 +28,8 @@ class Spreadsheet extends Base_Block {
 		register_block_type(
 			'planet4-blocks/spreadsheet',
 			[
-				'editor_script'   => 'planet4-blocks',
-				'attributes'      => [
+				'editor_script' => 'planet4-blocks',
+				'attributes'    => [
 					'url'           => [
 						'type'    => 'string',
 						'default' => '',
