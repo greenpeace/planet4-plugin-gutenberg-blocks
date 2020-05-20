@@ -1,23 +1,32 @@
 import { Spreadsheet } from './Spreadsheet';
+import { FrontendBlockNode } from '../../components/FrontendBlockNode/FrontendBlockNode';
 import { CSS_VARIABLES_ATTRIBUTE } from '../CssVariablesAttribute';
-import { SpreadsheetFrontend } from './SpreadsheetFrontend';
 
 export class SpreadsheetBlock {
   constructor() {
     const { registerBlockType } = wp.blocks;
     const { __ } = wp.i18n;
+    const attributes = {
+      url: {
+        type: 'string',
+        default: '',
+      },
+      css_variables: CSS_VARIABLES_ATTRIBUTE,
+    };
 
     registerBlockType( 'planet4-blocks/spreadsheet', {
       title: __( 'Spreadsheet', 'planet4-blocks-backend' ),
       icon: 'editor-table',
       category: 'planet4-blocks-beta',
-      attributes: {
-        url: {
-          type: 'string',
-          default: '',
-        },
-        css_variables: CSS_VARIABLES_ATTRIBUTE,
-      },
+      attributes,
+      deprecated: [
+        {
+          attributes,
+          save() {
+            return null;
+          },
+        }
+      ],
       edit: ( { isSelected, attributes, setAttributes } ) => {
         return <Spreadsheet
           attributes={attributes}
@@ -25,8 +34,10 @@ export class SpreadsheetBlock {
           isSelected={ isSelected }
         />
       },
-      save() {
-        return null;
+      save( attributes, className ) {
+        return <FrontendBlockNode
+          attributes={ attributes }
+          className={ className } />;
       }
     } );
   };

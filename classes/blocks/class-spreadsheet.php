@@ -29,11 +29,11 @@ class Spreadsheet extends Base_Block {
 			'planet4-blocks/spreadsheet',
 			[
 				'editor_script'   => 'planet4-blocks',
-				'render_callback' => function( $attributes ) {
-					$block_name = self::BLOCK_NAME;
-					$url = $attributes[ 'url' ];
-					return "<div class='wp-block-planet4-blocks-{$block_name}' data-url='{$url}'></div>";
-				},
+				// 'render_callback' => function( $attributes ) {
+				// 	$block_name = self::BLOCK_NAME;
+				// 	$url = $attributes[ 'url' ];
+				// 	return "<div class='wp-block-planet4-blocks-{$block_name}' data-url='{$url}'></div>";
+				// },
 				'attributes'      => [
 					'url'           => [
 						'type'    => 'string',
