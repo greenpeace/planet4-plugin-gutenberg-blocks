@@ -5,19 +5,30 @@ const {apiFetch} = wp;
 const {addQueryArgs} = wp.url;
 const {__} = wp.i18n;
 
+const placeholderData = {
+  header: [ 'Lorem', 'Ipsum', 'Dolor' ],
+  rows: [
+    [ 'Lorem', 'Ipsum', 'Dolor' ],
+    [ 'Sit', 'Amet', 'Lorem' ],
+    [ 'Amet', 'Ipsum', 'Sit' ],
+  ]
+};
+
 export class SpreadsheetFrontend extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: true,
+      loading: null,
       sheet_data: null,
       invalidSheetId: false,
       searchText: '',
       sortDirection: 'asc',
       sortColumnIndex: 0,
+      noURL: !!props.url,
     };
 
     this.onHeaderClick = this.onHeaderClick.bind(this);
+    // this.getRows = this.getRows.bind(this);
   }
 
   onHeaderClick( index ) {
@@ -34,7 +45,7 @@ export class SpreadsheetFrontend extends Component {
     }
   }
 
-  componentDidMount() {
+  fetchSheetData() {
     const sheetID = this.extractSheetID( this.props.url );
 
     if (sheetID) {
@@ -46,8 +57,21 @@ export class SpreadsheetFrontend extends Component {
 
       apiFetch( queryArgs )
         .then( sheet_data => {
-          this.setState( { loading: false, sheet_data } );
+          this.setState( {
+            loading: false,
+            noURL: false,
+            sheet_data
+          } );
       } );
+    }
+  }
+
+  componentDidMount() {
+    if ( this.props.url !== '' ) {
+      this.setState({ loading: true });
+      this.fetchSheetData();
+    } else {
+      this.setState({ noURL: true });
     }
   }
 
@@ -102,13 +126,23 @@ export class SpreadsheetFrontend extends Component {
     return <Fragment>{ parts }</Fragment>
   }
 
-  renderRows() {
-    const rows = this.filterMatchingRows( this.sortRows( this.state.sheet_data.rows, this.state.sortColumnIndex ) );
+  getRows() {
+    if ( this.state.noURL === true ) {
+      return placeholderData.rows;
+    } else if ( this.state.loading === true || this.state.loading === null ) {
+      return [];
+    } else {
+      return this.state.sheet_data.rows;
+    }
+  }
 
-    return rows.length < 1
+  renderRows() {
+    const rows = this.sortRows( this.filterMatchingRows( this.getRows() ), this.state.sortColumnIndex );
+
+    return this.state.searchText.length > 1 && rows.length === 0
       ? <tr>
           <td colSpan="99999">
-            <div>
+            <div className='spreadsheet-empty-message'>
               { __('No data matching your search.', 'planet4-blocks') }
             </div>
           </td>
@@ -137,6 +171,10 @@ export class SpreadsheetFrontend extends Component {
           .join(';') // React does not like an ending semicolon
       : '';
 
+    const headers = this.state.sheet_data
+      ? this.state.sheet_data.header
+      : placeholderData.header;
+
     return (
       <Fragment>
         <div className="block-spreadsheet" style={{ cssText: cssVariablesText }}>
@@ -148,36 +186,40 @@ export class SpreadsheetFrontend extends Component {
               placeholder={ __('Search data', 'planet4-blocks') } />
           </div>
           <div className="table-wrapper">
-            {
-              this.state.loading
-              ? <div className="spreadsheet-loading">{ __('Loading spreadsheet data...', 'planet4-blocks') }</div>
-              : <table className="spreadsheet-table">
-                  <thead>
-                    <tr>
-                      {
-                        this.state.sheet_data.header.map( (cell, index) => (
-                          <th
-                            className={
-                              (
-                                index == this.state.sortColumnIndex
-                                  ? `spreadsheet-sorted-by sort-${this.state.sortDirection}`
-                                  : ''
-                              )
-                            }
-                            onClick={ () => { this.onHeaderClick( index ) } }
-                            key={ index } title={ __('Sort by', 'planet4-blocks') }>
-                            { cell }
-                            <ArrowIcon />
-                          </th>
-                        ))
-                      }
+            <table className="spreadsheet-table">
+              <thead>
+                <tr>
+                  {
+                    headers.map( (cell, index) => (
+                      <th
+                        className={
+                          (
+                            index == this.state.sortColumnIndex
+                              ? `spreadsheet-sorted-by sort-${this.state.sortDirection}`
+                              : ''
+                          )
+                        }
+                        onClick={ () => { this.onHeaderClick( index ) } }
+                        key={ index } title={ __('Sort by', 'planet4-blocks') }>
+                        { cell }
+                        <ArrowIcon />
+                      </th>
+                    ))
+                  }
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  this.state.loading === true
+                  ? <tr>
+                      <td colSpan="99999">
+                        <div className="spreadsheet-loading">{ __('Loading spreadsheet data...', 'planet4-blocks') }</div>
+                      </td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    { this.renderRows() }
-                  </tbody>
-                </table>
-            }
+                  : this.renderRows()
+                }
+              </tbody>
+            </table>
           </div>
         </div>
       </Fragment>

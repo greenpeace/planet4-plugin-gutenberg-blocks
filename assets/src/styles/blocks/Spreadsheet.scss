@@ -94,8 +94,7 @@ table.spreadsheet-table {
 }
 
 .spreadsheet-empty-message {
-  display: none;
-  margin: 0 0 16px 0;
+  padding: $space-md;
   font-size: 1.12rem;
   line-height: 1.375rem;
 

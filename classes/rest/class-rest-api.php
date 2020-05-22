@@ -123,7 +123,17 @@ class Rest_Api {
 				[
 					'methods'  => WP_REST_Server::READABLE,
 					'callback' => static function () {
-						$sheet_id   = filter_input( INPUT_GET, 'sheet_id', FILTER_VALIDATE_INT );
+						$sheet_id = filter_input(
+							INPUT_GET,
+							'sheet_id',
+							FILTER_VALIDATE_REGEXP,
+							[
+								'options' => [
+									'regexp' => '/[\w\d\-]+/'
+								]
+							]
+						);
+
 						$sheet_data = Spreadsheet::get_sheet( $sheet_id, false );
 
 						return rest_ensure_response( $sheet_data );
