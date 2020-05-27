@@ -1,6 +1,7 @@
 import { Spreadsheet } from './Spreadsheet';
 import { FrontendBlockNode } from '../../components/FrontendBlockNode/FrontendBlockNode';
 import { CSS_VARIABLES_ATTRIBUTE } from '../CssVariablesAttribute';
+import { frontendRendered } from '../frontendRendered';
 
 export class SpreadsheetBlock {
   constructor() {
@@ -34,11 +35,7 @@ export class SpreadsheetBlock {
           isSelected={ isSelected }
         />
       },
-      save( attributes, className ) {
-        return <FrontendBlockNode
-          attributes={ attributes }
-          className={ className } />;
-      }
+      save: frontendRendered('spreadsheet')
     } );
   };
 }
