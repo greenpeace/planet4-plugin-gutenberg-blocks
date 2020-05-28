@@ -1,4 +1,15 @@
 {% block take_action_boxout %}
+    <script>
+        const onBoxoutClick = function(link, new_tab) {
+            if (link) {
+                return window.open(link, new_tab ? '_blank' : '_self');
+            }
+        }
+
+        const onTagClick = function(event) {
+            event.stopPropagation();
+        }
+    </script>
 
     {% if ( boxout ) %}
 
@@ -7,10 +18,10 @@
         {% else %}
             {% set bg_image = '' %}
         {% endif %}
-        <section id="action-card" class="cover-card single-cover dark-card-bg action-card" {{ bg_image|raw }}>
+        <section onclick="onBoxoutClick('{{ boxout.link }}', '{{ boxout.new_tab }}')" id="action-card" class="cover-card single-cover dark-card-bg action-card" {{ bg_image|raw }}>
             {% if ( boxout.campaigns ) %}
                 {% for campaign in boxout.campaigns %}
-                    <a href="{{ campaign.link|default('#') }}" class="cover-card-tag">#{{ campaign.name|e('wp_kses_post')|raw }}</a>
+                    <a href="{{ campaign.link|default('#') }}" onclick="onTagClick(event)" class="cover-card-tag">#{{ campaign.name|e('wp_kses_post')|raw }}</a>
                 {% endfor %}
             {% endif %}
             {% if ( boxout.title ) %}
@@ -20,7 +31,7 @@
                 <p>{{ boxout.excerpt|e('wp_kses_post')|excerpt(25)|raw }}</p>
             {% endif %}
             {% if ( boxout.link ) %}
-                <a class="btn btn-action btn-block cover-card-btn" {{  'true' == boxout.new_tab ? 'target="_blank"' }} href="{{ boxout.link }}">{{ boxout.link_text }}</a>
+                <button class="btn btn-action btn-block cover-card-btn">{{ boxout.link_text }}</button>
             {% endif %}
         </section>
     {% endif %}
