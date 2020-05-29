@@ -25,7 +25,7 @@
                 {% endfor %}
             {% endif %}
             {% if ( boxout.title ) %}
-                <h2 class="cover-card-heading">{{ boxout.title|e('wp_kses_post')|raw }}</h2>
+                <h2 class="cover-card-heading {{ boxout.link ? 'clickable' : '' }}">{{ boxout.title|e('wp_kses_post')|raw }}</h2>
             {% endif %}
             {% if ( boxout.excerpt ) %}
                 <p>{{ boxout.excerpt|e('wp_kses_post')|excerpt(25)|raw }}</p>
