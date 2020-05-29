@@ -11,12 +11,36 @@ import TagSelector from '../../components/TagSelector/TagSelector';
 import PostSelector from '../../components/PostSelector/PostSelector';
 import PostTypeSelector from '../../components/PostTypeSelector/PostTypeSelector';
 import {URLInput} from "../../components/URLInput/URLInput";
-
+import { v4 as uuidv4 } from 'uuid';
 
 const TextControl = withCharacterCounter( BaseTextControl );
 const TextareaControl = withCharacterCounter( BaseTextareaControl );
 
 export class Articles extends Component {
+  constructor(props) {
+    super(props);
+    this.instanceName = `planet4-blocks-articles-${ uuidv4() }`;
+  }
+
+  componentDidMount() {
+    this.lazyLoadInterval = setInterval(() => {
+      if (document.querySelector(`.${this.instanceName} section.articles-block`)) {
+        this.updateLazyLoad();
+        clearInterval(this.lazyLoadInterval);
+      }
+    }, 250);
+  }
+
+  componentDidUpdate() {
+    this.updateLazyLoad();
+  }
+
+  updateLazyLoad() {
+    if (window.lazyLoad) {
+      window.lazyLoad.update();
+    }
+  }
+
   renderEdit() {
     const {__} = wp.i18n;
 
@@ -147,6 +171,7 @@ export class Articles extends Component {
         }
         <Preview showBar={ this.props.isSelected }>
           <ServerSideRender
+            className={ this.instanceName }
             block={ 'planet4-blocks/articles' }
             attributes={ this.props.attributes }>
           </ServerSideRender>
