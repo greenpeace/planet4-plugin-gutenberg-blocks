@@ -74,6 +74,11 @@
   background-size: cover;
   background-position: top;
   color: $grey-80;
+  display: block;
+
+  .external-icon {
+    display: none;
+  }
 
   @include medium-and-up {
     flex-basis: 48%;
@@ -120,6 +125,7 @@
   }
 
   &:hover {
+    text-decoration: none;
     @include background-before-opacity(linear-gradient(180deg, rgba(51, 51, 51, 0.6), rgba(250, 247, 236, 0.9), rgba(255, 255, 255, 0.8)), 1);
     box-shadow: 0 0 10px transparentize($black, .5);
 
@@ -130,7 +136,7 @@
       }
     }
 
-    .btn {
+    .cover-card-btn {
       display: block;
       background-color: $orange;
       border-color: $orange;
@@ -178,6 +184,7 @@
     transition: color 100ms linear;
     color: $white;
     text-shadow: 1px 1px 3px $black;
+    display: table;
 
     @include large-and-up {
       font-size: 1.5rem;
@@ -214,13 +221,12 @@
   color: $yellow;
   display: inline-block;
   margin-bottom: 8px;
-  text-decoration: none;
   text-shadow: 1.5px 1.5px 1.5px $black;
   font-weight: 800;
   font-family: $roboto;
 
   &:hover {
-    color: $yellow;
+    text-decoration: underline;
   }
 
   @include large-and-up {
