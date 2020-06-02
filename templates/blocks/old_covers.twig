@@ -1,11 +1,4 @@
 {% block covers %}
-	<script>
-		const onCardClick = function(link) {
-			if (link) {
-				return window.open(link, '_self');
-			}
-		}
-	</script>
 
 	{% if ( covers ) %}
 
@@ -32,18 +25,20 @@
 				<div class="row limit-visibility">
 					{% for cover in covers %}
 						<div class="col-lg-4 col-md-6 cover-card-column">
-							<div onclick="onCardClick('{{ cover.button_link }}')" class="cover-card card-one" style="background-image: url({{ cover.image }});">
+							<div class="cover-card card-one" style="background-image: url({{ cover.image }});">
+								<a href="{{ cover.button_link|default('#') }}" class="cover-card-overlay" />
 								<div class="cover-card-content">
 									{% if ( cover.tags ) %}
 										{% for tag in cover.tags %}
-											<a class="cover-card-tag"
-											   href="{{ tag.href|e('esc_url') }}">#{{ tag.name|e('wp_kses_post')|raw }}</a>
+											<a class="cover-card-tag" href="{{ tag.href }}">#{{ tag.name|e('wp_kses_post')|raw }}</a>
 										{% endfor %}
 									{% endif %}
-									<h2 class="cover-card-heading {{ cover.button_link ? 'clickable' : '' }}">{{ cover.title|e('wp_kses_post')|raw }}</h2>
+									<a href="{{ cover.button_link|default('#') }}" class="cover-card-heading">{{ cover.title|e('wp_kses_post')|raw }}</a>
 									<p>{{ cover.excerpt|truncate(20)|e('wp_kses_post')|raw }}</p>
 								</div>
-								<button class="btn btn-action btn-block cover-card-btn">{{ cover.button_text }}</button>
+								<a href="{{ cover.button_link|default('#') }}" class="btn btn-action btn-block cover-card-btn">
+									{{ cover.button_text }}
+								</a>
 							</div>
 						</div>
 					{% endfor %}
