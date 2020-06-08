@@ -111,6 +111,7 @@ final class Loader {
 			new Blocks\TakeActionBoxout(),
 			new Blocks\Timeline(),
 			new Blocks\SocialMediaCards(),
+			new Blocks\ENForm( $this ),
 		];
 	}
 

@@ -85,6 +85,10 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	define( 'WP_UNINSTALL_PLUGIN', P4GBKS_PLUGIN_BASENAME );
 }
 
+if ( ! defined( 'P4GBKS_EN_SLUG_NAME' ) ) {
+	define( 'P4GBKS_EN_SLUG_NAME', 'engagingnetworks' );
+}
+
 require_once __DIR__ . '/classes/class-loader.php';
 require_once ABSPATH . 'wp-admin/includes/plugin.php';
 
@@ -119,6 +123,7 @@ const PAGE_BLOCK_TYPES = [
 	'planet4-blocks/submenu',
 	'planet4-blocks/take-action-boxout',
 	'planet4-blocks/timeline',
+	'planet4-blocks/enform',
 ];
 
 // campaigns allow all block types.
@@ -137,6 +142,7 @@ const CAMPAIGN_BLOCK_TYPES = [
 	'planet4-blocks/spreadsheet',
 	'planet4-blocks/sub-pages',
 	'planet4-blocks/timeline',
+	'planet4-blocks/enform',
 ];
 
 /**
@@ -313,6 +319,10 @@ P4GBKS\Loader::get_instance(
 		\P4GBKS\Controllers\Menu\Reusable_Blocks_Controller::class,
 		\P4GBKS\Controllers\Menu\Archive_Import::class,
 		\P4GBKS\Controllers\Menu\Postmeta_Check_Controller::class,
+
+		\P4GBKS\Controllers\Menu\Enform_Post_Controller::class,
+		\P4GBKS\Controllers\Menu\En_Settings_Controller::class,
+		\P4GBKS\Controllers\Api\Rest_Controller::class,
 	],
 	\P4GBKS\Views\View::class
 );
