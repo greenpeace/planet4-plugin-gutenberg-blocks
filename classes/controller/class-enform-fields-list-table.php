@@ -80,7 +80,7 @@ class Enform_Fields_List_Table extends \WP_List_Table {
 	 *
 	 * @return array Columns array.
 	 */
-	public function get_columns() {
+	public function get_columns(): array {
 		$columns = [
 			'id'       => __( 'Id', 'planet4-engagingnetworks-backend' ),
 			'name'     => __( 'Name', 'planet4-engagingnetworks-backend' ),
@@ -100,7 +100,7 @@ class Enform_Fields_List_Table extends \WP_List_Table {
 	 *
 	 * @return string Content for column.
 	 */
-	protected function column_default( $item, $column_name ) {
+	protected function column_default( $item, $column_name ): string {
 		switch ( $column_name ) {
 			case 'id':
 			case 'name':
@@ -117,7 +117,7 @@ class Enform_Fields_List_Table extends \WP_List_Table {
 	 *
 	 * @return string Content for actions column.
 	 */
-	public function column_actions( $item ) {
+	public function column_actions( $item ): string {
 		$data_attributes = [
 			'id'       => $item['id'],
 			'name'     => $item['name'],

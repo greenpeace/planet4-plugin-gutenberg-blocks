@@ -82,7 +82,7 @@ class Fields_Controller {
 	 *
 	 * @return \WP_REST_Response
 	 */
-	public function add_field( \WP_REST_Request $request ) {
+	public function add_field( \WP_REST_Request $request ): \WP_REST_Response {
 
 		// Get field data.
 		$field_data = $request->get_json_params();
@@ -130,7 +130,7 @@ class Fields_Controller {
 	 *
 	 * @return \WP_Error| \WP_REST_Response
 	 */
-	public function get_field( \WP_REST_Request $request ) {
+	public function get_field( \WP_REST_Request $request ): \WP_REST_Response {
 
 		// Get field id.
 		$id            = $request['id'];
@@ -149,7 +149,7 @@ class Fields_Controller {
 	 *
 	 * @return \WP_Error| \WP_REST_Response
 	 */
-	public function get_fields( \WP_REST_Request $request ) {
+	public function get_fields( \WP_REST_Request $request ): \WP_REST_Response {
 		$fields        = $this->model->get_fields();
 		$response_data = $fields;
 		$response      = new \WP_REST_Response( $response_data );
@@ -165,7 +165,7 @@ class Fields_Controller {
 	 *
 	 * @return \WP_REST_Response
 	 */
-	public function delete_field( \WP_REST_Request $request ) {
+	public function delete_field( \WP_REST_Request $request ): \WP_REST_Response {
 
 		// Get field id.
 		$id = $request['id'];
@@ -199,7 +199,7 @@ class Fields_Controller {
 	 *
 	 * @return \WP_REST_Response
 	 */
-	public function update_field( \WP_REST_Request $request ) {
+	public function update_field( \WP_REST_Request $request ): \WP_REST_Response {
 
 		// Get field data.
 		$field_data = $request->get_json_params();

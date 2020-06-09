@@ -89,6 +89,10 @@ if ( ! defined( 'P4GBKS_EN_SLUG_NAME' ) ) {
 	define( 'P4GBKS_EN_SLUG_NAME', 'engagingnetworks' );
 }
 
+if ( ! defined( 'P4_REST_SLUG' ) ) {
+	define( 'P4_REST_SLUG', 'planet4-engaging-networks' );
+}
+
 require_once __DIR__ . '/classes/class-loader.php';
 require_once ABSPATH . 'wp-admin/includes/plugin.php';
 
@@ -302,6 +306,32 @@ if ( class_exists( Elasticpress\Indexables::class ) ) {
 		10,
 		2
 	);
+}
+
+add_filter( 'timber/twig', 'p4_blocks_en_forms_twig_filters' );
+
+/**
+ * Adds functionality to Twig.
+ *
+ * @param \Twig\Environment $twig The Twig environment.
+ * @return \Twig\Environment
+ */
+function p4_blocks_en_forms_twig_filters( $twig ) {
+	// Adding functions as filters.
+	$twig->addFilter(
+		new Twig_SimpleFilter(
+			'object_to_array',
+			function ( $std_class_object ) {
+				$response = [];
+				foreach ( $std_class_object as $key => $value ) {
+					$response[ $key ] = $value;
+				}
+				return $response;
+			}
+		)
+	);
+
+	return $twig;
 }
 
 /*

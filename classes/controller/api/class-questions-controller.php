@@ -75,7 +75,7 @@ class Questions_Controller {
 	 *
 	 * @return \WP_REST_Response
 	 */
-	public function add_question( \WP_REST_Request $request ) {
+	public function add_question( \WP_REST_Request $request ): \WP_REST_Response {
 
 		// Get question data.
 		$question_data = $request->get_json_params();
@@ -167,7 +167,7 @@ class Questions_Controller {
 	 *
 	 * @return \WP_REST_Response
 	 */
-	public function get_questions( \WP_REST_Request $request ) {
+	public function get_questions( \WP_REST_Request $request ): \WP_REST_Response {
 		$questions = $this->model->get_questions();
 		$response  = new \WP_REST_Response( $questions );
 		$response->set_status( 200 );
@@ -182,7 +182,7 @@ class Questions_Controller {
 	 *
 	 * @return \WP_REST_Response
 	 */
-	public function delete_question( \WP_REST_Request $request ) {
+	public function delete_question( \WP_REST_Request $request ): \WP_REST_Response {
 
 		// Get question id.
 		$id = $request['id'];
@@ -216,7 +216,7 @@ class Questions_Controller {
 	 *
 	 * @return \WP_REST_Response
 	 */
-	public function update_question( \WP_REST_Request $request ) {
+	public function update_question( \WP_REST_Request $request ): \WP_REST_Response {
 
 		// Get question data.
 		$question_data = $request->get_json_params();

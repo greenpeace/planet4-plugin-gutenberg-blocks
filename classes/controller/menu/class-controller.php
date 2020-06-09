@@ -19,10 +19,10 @@ if ( ! class_exists( 'Controller' ) ) {
 	 */
 	abstract class Controller {
 
-		const ERROR   = 0;
-		const WARNING = 1;
-		const NOTICE  = 2;
-		const SUCCESS = 3;
+		private const ERROR   = 0;
+		private const WARNING = 1;
+		private const NOTICE  = 2;
+		private const SUCCESS = 3;
 
 		/**
 		 * View object
@@ -69,7 +69,7 @@ if ( ! class_exists( 'Controller' ) ) {
 		 *
 		 * @return mixed Array if validation is ok, false if validation fails.
 		 */
-		public function valitize( $settings ) {
+		public function valitize( $settings ): array {
 			if ( $this->validate( $settings ) ) {
 				$this->sanitize( $settings );
 				return $settings;

@@ -18,26 +18,19 @@ use P4GBKS\Controllers\Ensapi_Controller as Ensapi;
 class ENForm extends Base_Block {
 
 	/** @const string BLOCK_NAME */
-	const BLOCK_NAME = 'enform';
+	protected const BLOCK_NAME = 'enform';
 
 	/**
 	 * Page types for EN forms
 	 *
 	 * @const array ENFORM_PAGE_TYPES
 	 */
-	const ENFORM_PAGE_TYPES = [ 'PET', 'EMS' ];
-
-	/**
-	 * ENSAPI Object
-	 *
-	 * @var Ensapi $ensapi
-	 */
-	private $ens_api = null;
+	public const ENFORM_PAGE_TYPES = [ 'PET', 'EMS' ];
 
 	/**
 	 * Custom meta field where fields configuration is saved to.
 	 */
-	const FIELDS_META = 'p4enform_fields';
+	private const FIELDS_META = 'p4enform_fields';
 
 	/**
 	 * Class Loader reference
@@ -153,7 +146,7 @@ class ENForm extends Base_Block {
 
 
 	/**
-	 * Register old shortcode for backwarsd compatibility.
+	 * Register old shortcode for backward compatibility.
 	 *
 	 * @param array $attributes This is the array of fields of this block.
 	 *
@@ -320,6 +313,11 @@ class ENForm extends Base_Block {
 			]
 		);
 
+		// Enqueue js for the frontend.
+		if ( ! $this->is_rest_request() ) {
+			$this->enqueue_public_assets();
+		}
+
 		return $data;
 	}
 
@@ -333,11 +331,73 @@ class ENForm extends Base_Block {
 			$response          = [];
 			$main_settings     = get_option( 'p4en_main_settings' );
 			$ens_private_token = $main_settings['p4en_frontend_private_api'];
-			$this->ens_api     = new Ensapi( $ens_private_token, false );
-			$token             = $this->ens_api->get_public_session_token();
+			$ens_api           = new Ensapi( $ens_private_token, false );
+			$token             = $ens_api->get_public_session_token();
 			$response['token'] = $token;
 
 			wp_send_json( $response );
 		}
+	}
+
+	/**
+	 * Load assets for the EN block frontend.
+	 */
+	public function enqueue_public_assets() {
+		// EN-blocks assets.
+		$js_blocks_creation  = filectime( P4GBKS_PLUGIN_DIR . '/public/js/enform_side_style.js' );
+
+		wp_register_script(
+			'engagingnetworks-submit',
+			plugins_url( P4GBKS_PLUGIN_DIRNAME ) . '/public/js/enform_submit.js',
+			[
+				'jquery',
+				'main',
+			],
+			$js_blocks_creation,
+			true
+		);
+
+		wp_register_script(
+			'engagingnetworks-dependency',
+			plugins_url( P4GBKS_PLUGIN_DIRNAME ) . '/public/js/enform_dependency.js',
+			[
+				'jquery',
+				'main',
+			],
+			$js_blocks_creation,
+			true
+		);
+
+		wp_register_script(
+			'engagingnetworks-side-style',
+			plugins_url( P4GBKS_PLUGIN_DIRNAME ) . '/public/js/enform_side_style.js',
+			[
+				'jquery',
+				'main',
+			],
+			$js_blocks_creation,
+			true
+		);
+
+		wp_localize_script(
+			'plugin-engagingnetworks',
+			'p4_vars',
+			[
+				'ajaxurl' => admin_url( 'admin-ajax.php' ),
+			]
+		);
+
+		wp_localize_script(
+			'engagingnetworks-submit',
+			'en_vars',
+			[
+				'ajaxurl' => admin_url( 'admin-ajax.php' ),
+			]
+		);
+
+		wp_enqueue_script( 'engagingnetworks-submit' );
+		wp_enqueue_script( 'engagingnetworks-dependency' );
+		wp_enqueue_script( 'engagingnetworks-side-style' );
+		wp_enqueue_script( 'engagingnetworks' );
 	}
 }
