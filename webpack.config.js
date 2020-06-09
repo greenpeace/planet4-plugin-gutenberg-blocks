@@ -4,6 +4,10 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const TerserJSPlugin = require('terser-webpack-plugin');
 const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
 const RemovePlugin = require('remove-files-webpack-plugin');
+const cssVariables = require( 'postcss-css-variables' );
+const fs = require( 'fs' );
+
+const allVars = {};
 
 module.exports = {
   ...defaultConfig,
@@ -44,9 +48,10 @@ module.exports = {
             loader: 'postcss-loader',
             options: {
               ident: 'postcss',
-              plugins: function() {
-                return require('autoprefixer');
-              },
+              plugins: () => [
+                require('autoprefixer'),
+                cssVariables( { preserve: true, exportVarUsagesTo: allVars } ),
+              ],
               sourceMap: true
             }
           },
@@ -104,7 +109,19 @@ module.exports = {
           }
         ]
       }
-    })
+    }),
+    {
+      apply: ( compiler ) => {
+        compiler.hooks.done.tap( 'DoneWriteCssVars', ( ) => {
+          fs.writeFile(
+            './assets/build/css_vars.json',
+            JSON.stringify( allVars, null, 2 ),
+            err => console.log( err )
+          );
+        } );
+      }
+    }
+
   ],
   optimization: {
     ...defaultConfig.optimization,
