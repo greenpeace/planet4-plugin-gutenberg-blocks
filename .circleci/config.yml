@@ -107,19 +107,21 @@ jobs:
           command: |
             echo "Plugin gutenberg blocks branch is ${CIRCLE_BRANCH}"
             sleep 10
-            PLUGIN_GUTENBERG_BLOCKS_BRANCH=dev-${CIRCLE_BRANCH} MERGE_SOURCE=git@github.com:greenpeace/planet4-base-fork.git MERGE_REF=develop make
+            PLUGIN_GUTENBERG_BLOCKS_BRANCH=dev-${CIRCLE_BRANCH} MERGE_SOURCE=git@github.com:greenpeace/planet4-base-fork.git MERGE_REF=planet-5077 make
       - run:
           name: Test - Clone planet4-docker-compose
           command: |
-            git clone https://github.com/greenpeace/planet4-docker-compose
+            git clone -b planet-5077 https://github.com/greenpeace/planet4-docker-compose
       - run:
-          name: Test - Run tests
+          name: Test - Run Codeception tests
           command: |
             export BUILD_TAG="build-$(cat /tmp/workspace/var/circle-build-num)"
             export APP_IMAGE=gcr.io/planet-4-151612/planet4-base-app:${BUILD_TAG}
             export OPENRESTY_IMAGE=gcr.io/planet-4-151612/planet4-base-openresty:${BUILD_TAG}
-            make -C planet4-docker-compose ci test
-
+            make -C planet4-docker-compose ci
+      - run:
+          name: Test - Run E2E Jest/Puppeteer tests
+          command: make -C planet4-docker-compose jstests
       - run:
           name: Test - Extract test artifacts
           when: always
