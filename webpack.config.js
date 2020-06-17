@@ -4,10 +4,12 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const TerserJSPlugin = require('terser-webpack-plugin');
 const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
 const RemovePlugin = require('remove-files-webpack-plugin');
-const cssVariables = require( 'postcss-css-variables' );
+const cssVariables = require( 'postcss-css-variables-extract' );
 const fs = require( 'fs' );
+const collectVarUsages = require( 'postcss-css-variables-extract/lib/scss-var-usages' );
+const mergeVarUsages = require( 'postcss-css-variables-extract/lib/merge-var-usages' );
 
-const allVars = {};
+const allCssVars = {};
 
 module.exports = {
   ...defaultConfig,
@@ -50,7 +52,7 @@ module.exports = {
               ident: 'postcss',
               plugins: () => [
                 require('autoprefixer'),
-                cssVariables( { preserve: true, exportVarUsagesTo: allVars } ),
+                cssVariables( { preserve: true, exportVarUsagesTo: allCssVars } ),
               ],
               sourceMap: true
             }
@@ -113,9 +115,13 @@ module.exports = {
     {
       apply: ( compiler ) => {
         compiler.hooks.done.tap( 'DoneWriteCssVars', ( ) => {
+          // We use postcss to get the selector and resolved default value. For the original file and line number
+          // we use a separate scripts which loops through all scss files. Only variables that are in the final css
+          // are included.
+          const mergedUsages = mergeVarUsages( allCssVars, collectVarUsages( './assets/src' ) );
           fs.writeFile(
-            './assets/build/css_vars.json',
-            JSON.stringify( allVars, null, 2 ),
+            './assets/build/css_vars_merged.json',
+            JSON.stringify( mergedUsages, null, 2 ),
             err => console.log( err )
           );
         } );
