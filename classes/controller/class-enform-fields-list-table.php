@@ -2,22 +2,22 @@
 /**
  * Contains Enform_Fields_List_Table class declaration.
  *
- * @package P4GEN\Controllers
+ * @package P4GBKS\Controllers
  */
 
-namespace P4GEN\Controllers;
+namespace P4GBKS\Controllers;
 
 if ( ! class_exists( '\WP_List_Table' ) ) {
 	require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
 }
 
-use P4GEN\Controllers\Ensapi_Controller as Ensapi;
+use P4GBKS\Controllers\Ensapi_Controller as Ensapi;
 
 /**
  * Class Enform_Fields_List_Table.
  * Creates a list table for available en fields overriding WordPress List Table.
  *
- * @package P4GEN\Controllers
+ * @package P4GBKS\Controllers
  * @since 1.8.0
  *
  * @see \WP_List_Table
@@ -80,7 +80,7 @@ class Enform_Fields_List_Table extends \WP_List_Table {
 	 *
 	 * @return array Columns array.
 	 */
-	public function get_columns() {
+	public function get_columns(): array {
 		$columns = [
 			'id'       => __( 'Id', 'planet4-engagingnetworks-backend' ),
 			'name'     => __( 'Name', 'planet4-engagingnetworks-backend' ),
@@ -100,7 +100,7 @@ class Enform_Fields_List_Table extends \WP_List_Table {
 	 *
 	 * @return string Content for column.
 	 */
-	protected function column_default( $item, $column_name ) {
+	protected function column_default( $item, $column_name ): string {
 		switch ( $column_name ) {
 			case 'id':
 			case 'name':
@@ -117,7 +117,7 @@ class Enform_Fields_List_Table extends \WP_List_Table {
 	 *
 	 * @return string Content for actions column.
 	 */
-	public function column_actions( $item ) {
+	public function column_actions( $item ): string {
 		$data_attributes = [
 			'id'       => $item['id'],
 			'name'     => $item['name'],

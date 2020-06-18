@@ -8,7 +8,6 @@
 
 namespace P4GBKS;
 
-use P4GEN\Blocks\ENForm;
 use WP_CLI;
 use P4GBKS\Controllers\Ensapi_Controller as Ensapi;
 use P4GBKS\Controllers\Menu\Enform_Post_Controller;
@@ -618,7 +617,7 @@ final class Loader {
 			return [];
 		}
 
-		$pages = [];
+		$pages         = [];
 		$main_settings = get_option( 'p4en_main_settings' );
 
 		if ( isset( $main_settings['p4en_private_api'] ) ) {

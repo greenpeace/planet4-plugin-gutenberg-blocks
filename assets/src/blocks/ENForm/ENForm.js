@@ -1,9 +1,9 @@
 import {Component} from '@wordpress/element';
-import {Preview} from '../../components/Preview';
-import {LayoutSelector} from '../../components/LayoutSelector/LayoutSelector';
-import {FormSectionTitle} from '../../components/FormSectionTitle/FormSectionTitle';
-import {FormHelp} from '../../components/FormHelp/FormHelp';
-import {InlineFormFeedback} from '../../components/InlineFormFeedback/InlineFormFeedback';
+import {Preview} from '../../components/enform/Preview';
+import {LayoutSelector} from '../../components/enform/LayoutSelector/LayoutSelector';
+import {FormSectionTitle} from '../../components/enform/FormSectionTitle/FormSectionTitle';
+import {FormHelp} from '../../components/enform/FormHelp/FormHelp';
+import {InlineFormFeedback} from '../../components/enform/InlineFormFeedback/InlineFormFeedback';
 import {
   TextControl,
   TextareaControl,
@@ -12,7 +12,7 @@ import {
   ServerSideRender
 } from '@wordpress/components';
 import {MediaPlaceholder} from "@wordpress/editor";
-import {ValidationMessage} from "../../components/ValidationMessage/ValidationMessage";
+import {ValidationMessage} from "../../components/enform/ValidationMessage/ValidationMessage";
 
 const {__} = wp.i18n;
 

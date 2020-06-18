@@ -50,6 +50,7 @@ class View {
 	 * @param array|string $template_name The file name of the template to render.
 	 * @param array        $data The data to pass to the template.
 	 * @param string       $relevant_dir The path to a subdirectory where the template is located (relative to $template_dir).
+	 * @param boolean      $compile A boolean to compile the template.
 	 */
 	public function view_template( $template_name, $data, $relevant_dir = '', $compile = false ) {
 		Timber::$locations = $this->get_template_dir( $template_name, $relevant_dir );

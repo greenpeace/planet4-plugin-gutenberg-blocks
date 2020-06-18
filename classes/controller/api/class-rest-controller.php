@@ -2,10 +2,12 @@
 /**
  * REST Controller Class
  *
- * @package P4GEN\Controllers
+ * @package P4GBKS\Controllers
  */
 
-namespace P4GEN\Controllers\Api;
+namespace P4GBKS\Controllers\Api;
+
+use phpDocumentor\Reflection\Types\Boolean;
 
 /**
  * WP REST API interface.
@@ -188,7 +190,7 @@ class Rest_Controller {
 	 *
 	 * @return bool
 	 */
-	public function is_allowed() {
+	public function is_allowed() : bool {
 		return current_user_can( 'manage_options' );
 	}
 }
