@@ -27,16 +27,16 @@ export class SpreadsheetBlock {
           save() {
             return null;
           },
-        }
+        },
       ],
       edit: ( { isSelected, attributes, setAttributes } ) => {
         return <SpreadsheetEditor
           attributes={attributes}
           setAttributes={setAttributes}
           isSelected={ isSelected }
-        />
+        />;
       },
-      save: frontendRendered( BLOCK_NAME )
+      save: frontendRendered( BLOCK_NAME ),
     } );
-  };
+  }
 }

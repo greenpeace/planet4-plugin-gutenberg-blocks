@@ -14,7 +14,7 @@ import {
  */
 import { __, _x, sprintf } from '@wordpress/i18n';
 import { Component } from '@wordpress/element';
-import { FormTokenField} from '@wordpress/components';
+import { FormTokenField } from '@wordpress/components';
 import { withSelect, withDispatch } from '@wordpress/data';
 import { compose } from '@wordpress/compose';
 import apiFetch from '@wordpress/api-fetch';
@@ -30,7 +30,8 @@ const DEFAULT_QUERY = {
   _fields: 'id,name',
 };
 const MAX_TERMS_SUGGESTIONS = 20;
-const isSameTermName = ( termA, termB ) => termA.toLowerCase() === termB.toLowerCase();
+const isSameTermName = ( termA, termB ) =>
+  termA.toLowerCase() === termB.toLowerCase();
 
 /**
  * Returns a term object with name unescaped.
@@ -80,7 +81,7 @@ class AssignOnlyFlatTermSelector extends Component {
 
   componentDidMount() {
     if ( isEmpty( this.props.terms ) ) {
-      return
+      return;
     }
 
     this.initRequest = this.fetchTerms( {
@@ -89,7 +90,7 @@ class AssignOnlyFlatTermSelector extends Component {
     } );
     this.initRequest.then(
       () => {
-        this.setState( {loading: false} );
+        this.setState( { loading: false } );
       },
       ( xhr ) => {
         if ( xhr.statusText === 'abort' ) {
@@ -98,7 +99,7 @@ class AssignOnlyFlatTermSelector extends Component {
         this.setState( {
           loading: false,
         } );
-      }
+      },
     );
   }
 
@@ -115,7 +116,7 @@ class AssignOnlyFlatTermSelector extends Component {
 
   fetchTerms( params = {} ) {
     const { taxonomy } = this.props;
-    const query = Object.assign({}, DEFAULT_QUERY, params);
+    const query = Object.assign( {}, DEFAULT_QUERY, params );
 
     const request = apiFetch( {
       path: addQueryArgs( `/wp/v2/${ taxonomy.rest_base }`, query ),
@@ -123,7 +124,13 @@ class AssignOnlyFlatTermSelector extends Component {
     request.then( unescapeTerms ).then( ( terms ) => {
       this.setState( ( state ) => ( {
         availableTerms: state.availableTerms.concat(
-          terms.filter( ( term ) => ! find( state.availableTerms, ( availableTerm ) => availableTerm.id === term.id ) )
+          terms.filter(
+            ( term ) =>
+              ! find(
+                state.availableTerms,
+                ( availableTerm ) => availableTerm.id === term.id,
+              ),
+          ),
         ),
       } ) );
       this.updateSelectedTerms( this.props.terms );
@@ -134,7 +141,10 @@ class AssignOnlyFlatTermSelector extends Component {
 
   updateSelectedTerms( terms = [] ) {
     const selectedTerms = terms.reduce( ( accumulator, termId ) => {
-      const termObject = find( this.state.availableTerms, ( term ) => term.id === termId );
+      const termObject = find(
+        this.state.availableTerms,
+        ( term ) => term.id === termId,
+      );
       if ( termObject ) {
         accumulator.push( termObject.name );
       }
@@ -149,19 +159,23 @@ class AssignOnlyFlatTermSelector extends Component {
   onChange( termNames ) {
     const uniqueTerms = uniqBy( termNames, ( term ) => term.toLowerCase() );
     const allowedTerms = uniqueTerms.filter( ( termName ) =>
-      find( this.state.availableTerms, ( term ) => isSameTermName( term.name, termName ) )
+      find( this.state.availableTerms, ( term ) =>
+        isSameTermName( term.name, termName ),
+      ),
     );
     this.setState( { selectedTerms: allowedTerms } );
     const termNamesToIds = ( names, availableTerms ) => {
-      return names
-        .map( ( termName ) =>
-          find( availableTerms, ( term ) => isSameTermName( term.name, termName ) ).id
-        );
+      return names.map(
+        ( termName ) =>
+          find( availableTerms, ( term ) =>
+            isSameTermName( term.name, termName ),
+          ).id,
+      );
     };
 
     return this.props.onUpdateTerms(
       termNamesToIds( allowedTerms, this.state.availableTerms ),
-      this.props.taxonomy.rest_base
+      this.props.taxonomy.rest_base,
     );
   }
 
@@ -182,15 +196,18 @@ class AssignOnlyFlatTermSelector extends Component {
     const newTermLabel = get(
       taxonomy,
       [ 'labels', 'add_new_item' ],
-      slug === 'post_tag' ? __( 'Add New Tag' ) : __( 'Add New Term' )
+      slug === 'post_tag' ? __( 'Add New Tag' ) : __( 'Add New Term' ),
     );
     const singularName = get(
       taxonomy,
       [ 'labels', 'singular_name' ],
-      slug === 'post_tag' ? __( 'Tag' ) : __( 'Term' )
+      slug === 'post_tag' ? __( 'Tag' ) : __( 'Term' ),
     );
     const termAddedLabel = sprintf( _x( '%s added', 'term' ), singularName );
-    const termRemovedLabel = sprintf( _x( '%s removed', 'term' ), singularName );
+    const termRemovedLabel = sprintf(
+      _x( '%s removed', 'term' ),
+      singularName,
+    );
     const removeTermLabel = sprintf( _x( 'Remove %s', 'term' ), singularName );
 
     return (
@@ -218,9 +235,23 @@ export default compose(
     const { getTaxonomy } = select( 'core' );
     const taxonomy = getTaxonomy( slug );
     return {
-      hasCreateAction: taxonomy ? get( getCurrentPost(), [ '_links', 'wp:action-create-' + taxonomy.rest_base ], false ) : false,
-      hasAssignAction: taxonomy ? get( getCurrentPost(), [ '_links', 'wp:action-assign-' + taxonomy.rest_base ], false ) : false,
-      terms: taxonomy ? select( 'core/editor' ).getEditedPostAttribute( taxonomy.rest_base ) : [],
+      hasCreateAction: taxonomy
+        ? get(
+          getCurrentPost(),
+          [ '_links', 'wp:action-create-' + taxonomy.rest_base ],
+          false,
+        )
+        : false,
+      hasAssignAction: taxonomy
+        ? get(
+          getCurrentPost(),
+          [ '_links', 'wp:action-assign-' + taxonomy.rest_base ],
+          false,
+        )
+        : false,
+      terms: taxonomy
+        ? select( 'core/editor' ).getEditedPostAttribute( taxonomy.rest_base )
+        : [],
       taxonomy,
     };
   } ),

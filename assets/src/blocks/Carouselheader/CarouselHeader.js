@@ -1,17 +1,17 @@
-import {Component, Fragment} from '@wordpress/element';
+import { Component, Fragment } from '@wordpress/element';
 import {
   Button,
   CheckboxControl,
-  ServerSideRender
+  ServerSideRender,
 } from '@wordpress/components';
-import {LayoutSelector} from '../../components/LayoutSelector/LayoutSelector';
-import {Preview} from '../../components/Preview';
-import {CarouselHeaderSlide} from "./CarouselHeaderSlide";
-import {initializeCarouselHeader} from "./CarouselHeaderFront";
+import { LayoutSelector } from '../../components/LayoutSelector/LayoutSelector';
+import { Preview } from '../../components/Preview';
+import { CarouselHeaderSlide } from './CarouselHeaderSlide';
+import { initializeCarouselHeader } from './CarouselHeaderFront';
 
 export class CarouselHeader extends Component {
-  constructor(props) {
-    super(props);
+  constructor( props ) {
+    super( props );
     this.references = [];
     this.firstRender = true;
   }
@@ -19,12 +19,12 @@ export class CarouselHeader extends Component {
   setDOMListener() {
     const carouselInterval = window.setInterval(
       () => {
-        if (document.getElementById('carousel-wrapper-header')) {
-          window.clearInterval(carouselInterval);
+        if ( document.getElementById( 'carousel-wrapper-header' ) ) {
+          window.clearInterval( carouselInterval );
           initializeCarouselHeader();
         }
       },
-      500
+      500,
     );
   }
 
@@ -34,14 +34,14 @@ export class CarouselHeader extends Component {
   }
 
   componentDidUpdate() {
-    if (this.firstRender) {
+    if ( this.firstRender ) {
       this.collapseSlides();
       this.firstRender = false;
     }
     this.setDOMListener();
   }
 
-  getSnapshotBeforeUpdate(prevProps, prevState) {
+  getSnapshotBeforeUpdate( prevProps, prevState ) {
     this.setDOMListener();
 
     return null;
@@ -51,12 +51,12 @@ export class CarouselHeader extends Component {
    * Collapse all active slides.
    */
   collapseSlides() {
-    let refs = this.references;
-    Object.keys(this.references).forEach(function (index) {
-      if (null !== refs[index]) {
-        refs[index].collapseSlide();
+    const refs = this.references;
+    Object.keys( this.references ).forEach( function( index ) {
+      if ( null !== refs[ index ] ) {
+        refs[ index ].collapseSlide();
       }
-    }.bind(refs));
+    }.bind( refs ) );
   }
 
   /**
@@ -75,12 +75,12 @@ export class CarouselHeader extends Component {
   }
 
   renderEdit() {
-    const {__} = wp.i18n;
+    const { __ } = wp.i18n;
 
     return (
 
       <div>
-        <h3>{__('What style of carousel do you need?', 'p4ge')}</h3>
+        <h3>{__( 'What style of carousel do you need?', 'p4ge' )}</h3>
 
         <div>
           <LayoutSelector
@@ -88,15 +88,15 @@ export class CarouselHeader extends Component {
             onSelectedLayoutChange={this.props.onBlockStyleChange}
             options={[
               {
-                label: __('Zoom and slide to gray', 'p4ge'),
+                label: __( 'Zoom and slide to gray', 'p4ge' ),
                 image: window.p4ge_vars.home + 'images/carousel-with-preview.png',
                 value: 'zoom-and-slide-to-gray',
-                help: __('This carousel provides a fancy transition, and a preview for the next slide in an oblique shape.')
+                help: __( 'This carousel provides a fancy transition, and a preview for the next slide in an oblique shape.' ),
               }, {
-                label: __('Full width classic', 'p4ge'),
+                label: __( 'Full width classic', 'p4ge' ),
                 image: window.p4ge_vars.home + 'images/carousel-classic.png',
                 value: 'full-width-classic',
-                help: __('This is a full width slider with a classic look: big slides, fade transition, and no subheaders.'),
+                help: __( 'This is a full width slider with a classic look: big slides, fade transition, and no subheaders.' ),
               },
             ]}
           />
@@ -104,15 +104,15 @@ export class CarouselHeader extends Component {
 
         <div>
           <CheckboxControl
-            label={__('Carousel Autoplay', 'p4ge')}
-            help={__('Select to trigger images autoslide', 'p4ge')}
+            label={__( 'Carousel Autoplay', 'p4ge' )}
+            help={__( 'Select to trigger images autoslide', 'p4ge' )}
             value={this.props.carousel_autoplay}
             checked={this.props.carousel_autoplay === true}
-            onChange={(e) => this.props.onCarouselAutoplayChange(e)}
+            onChange={( e ) => this.props.onCarouselAutoplayChange( e )}
           />
         </div>
 
-        {this.props.slides.map((slide, i) => {
+        {this.props.slides.map( ( slide, i ) => {
           return (
             <Fragment key={i}>
               <CarouselHeaderSlide
@@ -130,23 +130,23 @@ export class CarouselHeader extends Component {
                 hasSubheader={this.props.block_style !== 'full-width-classic'}
                 index={i}
                 key={i}
-                ref={(instance) => {
-                  this.references[i] = instance
+                ref={( instance ) => {
+                  this.references[ i ] = instance;
                 }}
               />
             </Fragment>
           );
-        })}
+        } )}
 
         <div className='carousel-header-add-remove-slide'>
           <Button isPrimary
-                  onClick={this.addNewSlide.bind(this)}
-                  disabled={this.props.slides.length >= 4}
+            onClick={this.addNewSlide.bind( this )}
+            disabled={this.props.slides.length >= 4}
           >
             Add Slide
           </Button>
           <Button isDefault
-                  onClick={this.removeSlide.bind(this)} disabled={this.props.slides.length <= 1}
+            onClick={this.removeSlide.bind( this )} disabled={this.props.slides.length <= 1}
           >
             Remove Slide
           </Button>
@@ -165,8 +165,8 @@ export class CarouselHeader extends Component {
         }
         <Preview showBar={this.props.isSelected}>
           {
-            this.props.slides.length && this.props.slides[0].image > 0
-            ? <ServerSideRender
+            this.props.slides.length && this.props.slides[ 0 ].image > 0
+              ? <ServerSideRender
                 block={'planet4-blocks/carousel-header'}
                 attributes={{
                   block_style: this.props.block_style,
@@ -175,11 +175,11 @@ export class CarouselHeader extends Component {
                 }}
               >
               </ServerSideRender>
-            : <div>Not enough data available to render the block yet.</div>
+              : <div>Not enough data available to render the block yet.</div>
           }
 
         </Preview>
       </Fragment>
     );
-  };
+  }
 }

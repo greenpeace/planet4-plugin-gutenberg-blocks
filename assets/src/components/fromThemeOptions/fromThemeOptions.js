@@ -1,17 +1,17 @@
 import { Component } from '@wordpress/element';
 
-function getDisplayName(WrappedComponent) {
+function getDisplayName( WrappedComponent ) {
   return WrappedComponent.displayName || WrappedComponent.name || 'Component';
 }
 
 export const getFieldFromTheme = ( theme, fieldName, meta ) => {
-  if ( !theme ) {
+  if ( ! theme ) {
     return null;
   }
 
-  const field = theme.fields.find( field => field.id === fieldName );
+  const field = theme.fields.find( ( field ) => field.id === fieldName );
 
-  if ( !field ) {
+  if ( ! field ) {
     return null;
   }
 
@@ -23,19 +23,23 @@ export const getFieldFromTheme = ( theme, fieldName, meta ) => {
 };
 
 const resolveDependency = ( theme, field, meta ) => {
-  const dependencyField = theme.fields.find( field2 => field2.id === field.dependsOn );
+  const dependencyField = theme.fields.find(
+    ( field2 ) => field2.id === field.dependsOn,
+  );
 
-  if ( !dependencyField ) {
+  if ( ! dependencyField ) {
     return null;
   }
 
-  if ( !meta ) {
+  if ( ! meta ) {
     return null;
   }
 
-  const dependencyConfiguration = dependencyField.dependsOn ? resolveDependency( theme, dependencyField, meta ) : dependencyField;
+  const dependencyConfiguration = dependencyField.dependsOn
+    ? resolveDependency( theme, dependencyField, meta )
+    : dependencyField;
 
-  if ( !dependencyConfiguration ) {
+  if ( ! dependencyConfiguration ) {
     return null;
   }
 
@@ -43,14 +47,17 @@ const resolveDependency = ( theme, field, meta ) => {
 
   // The field has a dependency and the current value of the post is not in the list of options, so use default value of the dependency.
   if ( dependencyConfiguration ) {
-    const dependencyValueIsAllowed = dependencyConfiguration.options && dependencyConfiguration.options.find( option => option.value === dependencyValue );
-    if ( !dependencyValueIsAllowed ) {
+    const dependencyValueIsAllowed =
+      dependencyConfiguration.options &&
+      dependencyConfiguration.options.find(
+        ( option ) => option.value === dependencyValue,
+      );
+    if ( ! dependencyValueIsAllowed ) {
       dependencyValue = dependencyConfiguration.default;
     }
   }
 
-
-  if ( !dependencyValue ) {
+  if ( ! dependencyValue ) {
     return null;
   }
 
@@ -61,59 +68,72 @@ const resolveDependency = ( theme, field, meta ) => {
 };
 
 const getDependencyUpdates = ( theme, fieldName, value, meta ) => {
-  const allChildren = theme.fields.filter( field => field.dependsOn === fieldName );
-  const needUpdate = allChildren.filter(
-    field => {
-      const configuration = field.configurations[ value ];
-
-      if ( !configuration ) {
-        return typeof meta[ field.id  ] !== 'undefined'
-      }
-
-      return !(configuration.options.some(option => option.value === meta[ field.id ] ));
-    }
+  const allChildren = theme.fields.filter(
+    ( field ) => field.dependsOn === fieldName,
   );
+  const needUpdate = allChildren.filter( ( field ) => {
+    const configuration = field.configurations[ value ];
+
+    if ( ! configuration ) {
+      return typeof meta[ field.id ] !== 'undefined';
+    }
+
+    return ! configuration.options.some(
+      ( option ) => option.value === meta[ field.id ],
+    );
+  } );
 
   // Return object with meta keys to be updated. Unset if there is no configuration for the new value or no default for
   // that configuration.
   return needUpdate.reduce( ( updates, field ) => {
     const configuration = field.configurations[ value ];
 
-    return Object.assign(
-      updates,
-      {[ field.id ]: configuration && configuration.default ? configuration.default : null}
-    );
+    return Object.assign( updates, {
+      [ field.id ]:
+        configuration && configuration.default ? configuration.default : null,
+    } );
   }, {} );
 };
 
 export function fromThemeOptions( WrappedComponent ) {
-
   class FromThemeOptionsHOC extends Component {
     render() {
       const { theme, ...ownProps } = this.props;
 
-      if ( !theme ) {
-        return <WrappedComponent { ...ownProps }/>
+      if ( ! theme ) {
+        return <WrappedComponent { ...ownProps } />;
       }
 
-      const meta = wp.data.select( 'core/editor' ).getEditedPostAttribute( 'meta' );
+      const meta = wp.data
+        .select( 'core/editor' )
+        .getEditedPostAttribute( 'meta' );
 
       const field = getFieldFromTheme( theme, ownProps.metaKey, meta );
 
-      if ( !field || !field.options ) {
+      if ( ! field || ! field.options ) {
         return null;
       }
 
-      const provideNewMeta = ( metaKey, value, meta ) => Object.assign(
-        { [ metaKey ]: value },
-        getDependencyUpdates( theme, metaKey, value, meta )
+      const provideNewMeta = ( metaKey, value, meta ) =>
+        Object.assign(
+          { [ metaKey ]: value },
+          getDependencyUpdates( theme, metaKey, value, meta ),
+        );
+
+      return (
+        <WrappedComponent
+          getNewMeta={ provideNewMeta }
+          defaultValue={ field.default }
+          options={ field.options }
+          { ...ownProps }
+        />
       );
-
-      return <WrappedComponent getNewMeta={ provideNewMeta } defaultValue={ field.default } options={ field.options } { ...ownProps } />;
     }
-  };
+  }
 
-  FromThemeOptionsHOC.displayName = `FromThemeOptionsHOC(${getDisplayName(WrappedComponent)})`;
+  FromThemeOptionsHOC.displayName = `FromThemeOptionsHOC(${ getDisplayName(
+    WrappedComponent,
+  ) })`;
 
   return FromThemeOptionsHOC;
 }

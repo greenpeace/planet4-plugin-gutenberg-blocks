@@ -1,26 +1,26 @@
-import {Component, Fragment} from '@wordpress/element';
-import {Preview} from '../../components/Preview';
+import { Component, Fragment } from '@wordpress/element';
+import { Preview } from '../../components/Preview';
 import {
   TextControl,
   TextareaControl,
-  ServerSideRender
+  ServerSideRender,
 } from '@wordpress/components';
 
 export class Cookies extends Component {
-  constructor(props) {
-    super(props);
+  constructor( props ) {
+    super( props );
   }
 
   renderEdit() {
-    const {__} = wp.i18n;
+    const { __ } = wp.i18n;
 
     return (
       <Fragment>
         <div>
-          <h2>{__('Cookies options', 'p4ge')}</h2>
+          <h2>{__( 'Cookies options', 'p4ge' )}</h2>
           <p><i>{__(
             'Display opt-in options for cookies',
-            'p4ge'
+            'p4ge',
           )}</i></p>
 
           <div>
@@ -105,11 +105,11 @@ export class Cookies extends Component {
               all_cookies_name: this.props.all_cookies_name,
               all_cookies_description: this.props.all_cookies_description,
             }}
-            urlQueryArgs={{post_id: document.querySelector('#post_ID').value}}
+            urlQueryArgs={{ post_id: document.querySelector( '#post_ID' ).value }}
           >
           </ServerSideRender>
         </Preview>
       </div>
     );
-  };
+  }
 }

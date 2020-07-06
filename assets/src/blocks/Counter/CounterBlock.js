@@ -34,7 +34,7 @@ export class CounterBlock {
               },
               completed: {
                 type: 'integer',
-                shortcode: ( { named: { completed = 0 } } ) => Number(completed),
+                shortcode: ( { named: { completed = 0 } } ) => Number( completed ),
               },
               completed_api: {
                 type: 'string',
@@ -42,15 +42,15 @@ export class CounterBlock {
               },
               target: {
                 type: 'integer',
-                shortcode: ( { named: { target = 0 } } ) => Number(target),
+                shortcode: ( { named: { target = 0 } } ) => Number( target ),
               },
               text: {
                 type: 'string',
                 shortcode: ( { named: { text = '' } } ) => text,
-              }
+              },
             },
           },
-        ]
+        ],
       },
       attributes: {
         title: {
@@ -61,7 +61,7 @@ export class CounterBlock {
         },
         style: {
           type: 'string',
-          default: 'plain'
+          default: 'plain',
         },
         completed: {
           type: 'integer',
@@ -74,12 +74,12 @@ export class CounterBlock {
         },
         text: {
           type: 'string',
-        }
+        },
       },
       // withSelect is a "Higher Order Component", it works as
       // a Decorator, it will provide some basic API functionality
       // through `select`.
-      edit: ({ isSelected, attributes, setAttributes }) => {
+      edit: ( { isSelected, attributes, setAttributes } ) => {
         function onTitleChange( value ) {
           setAttributes( { title: value } );
         }
@@ -93,7 +93,7 @@ export class CounterBlock {
         }
 
         function onCompletedChange( value ) {
-          setAttributes( { completed: Number(value) } );
+          setAttributes( { completed: Number( value ) } );
         }
 
         function onCompletedAPIChange( value ) {
@@ -101,7 +101,7 @@ export class CounterBlock {
         }
 
         function onTargetChange( value ) {
-          setAttributes( { target: Number(value) } );
+          setAttributes( { target: Number( value ) } );
         }
 
         function onTextChange( value ) {
@@ -120,12 +120,12 @@ export class CounterBlock {
           onCompletedChange={ onCompletedChange }
           onCompletedAPIChange={ onCompletedAPIChange }
           onTargetChange={ onTargetChange }
-          onTextChange={ onTextChange }   />
+          onTextChange={ onTextChange } />;
       },
       save() {
         return null;
-      }
+      },
     } );
-  };
+  }
 }
 

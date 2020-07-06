@@ -15,11 +15,11 @@ import { TakeactionboxoutBlock } from './blocks/Takeactionboxout/Takeactionboxou
 import { TimelineBlock } from './blocks/Timeline/TimelineBlock';
 import { addBlockFilters } from './BlockFilters';
 import { setupImageBlockExtension } from './ImageBlockExtension';
-import { replaceTaxonomyTermSelectors } from "./replaceTaxonomyTermSelectors";
+import { replaceTaxonomyTermSelectors } from './replaceTaxonomyTermSelectors';
 import { addSubAndSuperscript } from './RichTextEnhancements';
-import { SpreadsheetBlock } from "./blocks/Spreadsheet/SpreadsheetBlock"
+import { SpreadsheetBlock } from './blocks/Spreadsheet/SpreadsheetBlock';
 import { addButtonLinkPasteWarning } from './addButtonLinkPasteWarning';
-import { setupCustomSidebar } from "./setupCustomSidebar";
+import { setupCustomSidebar } from './setupCustomSidebar';
 import { setUpCssVariables } from './connectCssVariables';
 import { SubPagesBlock } from './blocks/SubPages/SubPagesBlock';
 import { blockEditorValidation } from './BlockEditorValidation';
@@ -36,7 +36,7 @@ new MediaBlock();
 new SocialmediaBlock();
 new SocialMediaCardsBlock();
 new SplittwocolumnsBlock();
-new SpreadsheetBlock()
+new SpreadsheetBlock();
 new SubmenuBlock();
 new SubPagesBlock();
 new TakeactionboxoutBlock();

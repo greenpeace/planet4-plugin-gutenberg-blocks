@@ -1,10 +1,10 @@
-import {CarouselHeader} from './CarouselHeader.js';
+import { CarouselHeader } from './CarouselHeader.js';
 
 export class CarouselHeaderBlock {
   constructor() {
-    const {registerBlockType} = wp.blocks;
+    const { registerBlockType } = wp.blocks;
 
-    registerBlockType('planet4-blocks/carousel-header', {
+    registerBlockType( 'planet4-blocks/carousel-header', {
       title: 'Carousel Header',
       icon: 'welcome-widgets-menus',
       category: 'planet4-blocks',
@@ -41,107 +41,104 @@ export class CarouselHeaderBlock {
             attributes: {
               block_style: {
                 type: 'string',
-                shortcode: function (attributes) {
-                  return Number(attributes.named.block_style);
-                }
+                shortcode( attributes ) {
+                  return Number( attributes.named.block_style );
+                },
               },
               carousel_autoplay: {
                 type: 'boolean',
-                shortcode: function (attributes) {
+                shortcode( attributes ) {
                   return attributes.named.carousel_autoplay;
-                }
+                },
               },
               slides: {
                 type: 'array',
-                shortcode: function (attributes) {
-
-                  const convert_position = function(position) {
-                    switch (position) {
+                shortcode( attributes ) {
+                  const convert_position = function( position ) {
+                    switch ( position ) {
                     case 'left top':
-                      return {x: 0, y: 0};
+                      return { x: 0, y: 0 };
                     case 'center top':
-                      return {x: 0.5, y: 0};
+                      return { x: 0.5, y: 0 };
                     case 'right top':
-                      return {x: 1, y: 0};
+                      return { x: 1, y: 0 };
                     case 'left center':
-                      return {x: 0, y: 0.5};
+                      return { x: 0, y: 0.5 };
                     case 'center center':
-                      return {x: 0.5, y: 0.5};
+                      return { x: 0.5, y: 0.5 };
                     case 'right center':
-                      return {x: 1, y: 0.5};
+                      return { x: 1, y: 0.5 };
                     case 'left bottom':
-                      return {x: 0, y: 1};
+                      return { x: 0, y: 1 };
                     case 'center bottom':
-                      return {x: 0.5, y: 1};
+                      return { x: 0.5, y: 1 };
                     case 'right bottom':
-                      return {x: 1, y: 1};
+                      return { x: 1, y: 1 };
                     }
                   };
 
-
-                  let slides = [];
-                  if (attributes.named.image_1) {
-                    let slide = {
-                      image: Number(attributes.named.image_1),
+                  const slides = [];
+                  if ( attributes.named.image_1 ) {
+                    const slide = {
+                      image: Number( attributes.named.image_1 ),
                       header: attributes.named.header_1,
                       header_size: attributes.named.header_size_1,
                       subheader: attributes.named.subheader_1,
                       description: attributes.named.description_1,
                       link_text: attributes.named.link_text_1,
                       link_url: attributes.named.link_url_1,
-                      focal_points: convert_position(attributes.named.focus_image_1)
+                      focal_points: convert_position( attributes.named.focus_image_1 ),
                     };
-                    slides.push(Object.assign({}, slide));
+                    slides.push( Object.assign( {}, slide ) );
 
-                    if (attributes.named.image_2) {
-                      let slide = {
-                        image: Number(attributes.named.image_2),
+                    if ( attributes.named.image_2 ) {
+                      const slide = {
+                        image: Number( attributes.named.image_2 ),
                         header: attributes.named.header_2,
                         header_size: attributes.named.header_size_2,
                         subheader: attributes.named.subheader_2,
                         description: attributes.named.description_2,
                         link_text: attributes.named.link_text_2,
                         link_url: attributes.named.link_url_2,
-                        focal_points: convert_position(attributes.named.focus_image_2)
+                        focal_points: convert_position( attributes.named.focus_image_2 ),
                       };
-                      slides.push(Object.assign({}, slide));
+                      slides.push( Object.assign( {}, slide ) );
 
-                      if (attributes.named.image_3) {
-                        let slide = {
-                          image: Number(attributes.named.image_3),
+                      if ( attributes.named.image_3 ) {
+                        const slide = {
+                          image: Number( attributes.named.image_3 ),
                           header: attributes.named.header_3,
                           header_size: attributes.named.header_size_3,
                           subheader: attributes.named.subheader_3,
                           description: attributes.named.description_3,
                           link_text: attributes.named.link_text_3,
                           link_url: attributes.named.link_url_3,
-                          focal_points: convert_position(attributes.named.focus_image_3)
+                          focal_points: convert_position( attributes.named.focus_image_3 ),
                         };
-                        slides.push(Object.assign({}, slide));
+                        slides.push( Object.assign( {}, slide ) );
 
-                        if (attributes.named.image_4) {
-                          let slide = {
-                            image: Number(attributes.named.image_4),
+                        if ( attributes.named.image_4 ) {
+                          const slide = {
+                            image: Number( attributes.named.image_4 ),
                             header: attributes.named.header_4,
                             header_size: attributes.named.header_size_4,
                             subheader: attributes.named.subheader_4,
                             description: attributes.named.description_4,
                             link_text: attributes.named.link_text_4,
                             link_url: attributes.named.link_url_4,
-                            focal_points: convert_position(attributes.named.focus_image_4)
+                            focal_points: convert_position( attributes.named.focus_image_4 ),
                           };
-                          slides.push(Object.assign({}, slide));
-
+                          slides.push( Object.assign( {}, slide ) );
                         }
                       }
                     }
                   }
                   return slides;
-                }
-              }
-            }
-          }
-        ]
+                },
+              },
+            },
+          },
+        ],
       },
       attributes: {
         block_style: {
@@ -163,15 +160,14 @@ export class CarouselHeaderBlock {
               link_text: '',
               link_url: '',
               link_url_new_tab: false,
-            }
-          ]
+            },
+          ],
         },
       },
-      edit: ({isSelected, attributes, setAttributes}) => {
-
+      edit: ( { isSelected, attributes, setAttributes } ) => {
         function addSlide() {
-          setAttributes({
-            slides: attributes.slides.concat({
+          setAttributes( {
+            slides: attributes.slides.concat( {
               image: null,
               focal_points: {},
               header: '',
@@ -181,87 +177,87 @@ export class CarouselHeaderBlock {
               link_text: '',
               link_url: '',
               link_url_new_tab: false,
-            })
-          });
+            } ),
+          } );
         }
 
-        function onCarouselAutoplayChange(value) {
-          setAttributes({carousel_autoplay: value});
+        function onCarouselAutoplayChange( value ) {
+          setAttributes( { carousel_autoplay: value } );
         }
 
-        function onTitleChange(value) {
-          setAttributes({title: value});
+        function onTitleChange( value ) {
+          setAttributes( { title: value } );
         }
 
-        function onImageChange(index, value) {
-          let slides = JSON.parse(JSON.stringify(attributes.slides));
-          if (null !== value) {
-            slides[index].image = value;
+        function onImageChange( index, value ) {
+          const slides = JSON.parse( JSON.stringify( attributes.slides ) );
+          if ( null !== value ) {
+            slides[ index ].image = value;
           } else {
-            slides[index].image = null;
+            slides[ index ].image = null;
           }
-          setAttributes({slides: slides});
+          setAttributes( { slides } );
         }
 
-        function onFocalPointsChange(index, value) {
-          let slides = JSON.parse(JSON.stringify(attributes.slides));
-          if (null !== value) {
-            const fo = JSON.parse(JSON.stringify(value));
-            slides[index].focal_points = fo;
+        function onFocalPointsChange( index, value ) {
+          const slides = JSON.parse( JSON.stringify( attributes.slides ) );
+          if ( null !== value ) {
+            const fo = JSON.parse( JSON.stringify( value ) );
+            slides[ index ].focal_points = fo;
           } else {
-            slides[index].focal_points = null;
+            slides[ index ].focal_points = null;
           }
-          setAttributes({slides: slides});
+          setAttributes( { slides } );
         }
 
-        function onHeaderChange(index, value) {
-          let slides = JSON.parse(JSON.stringify(attributes.slides));
-          slides[index].header = value;
-          setAttributes({slides: slides});
+        function onHeaderChange( index, value ) {
+          const slides = JSON.parse( JSON.stringify( attributes.slides ) );
+          slides[ index ].header = value;
+          setAttributes( { slides } );
         }
 
-        function onHeaderSizeChange(index, value) {
-          let slides = JSON.parse(JSON.stringify(attributes.slides));
-          slides[index].header_size = value;
-          setAttributes({slides: slides});
+        function onHeaderSizeChange( index, value ) {
+          const slides = JSON.parse( JSON.stringify( attributes.slides ) );
+          slides[ index ].header_size = value;
+          setAttributes( { slides } );
         }
 
-        function onSubheaderChange(index, value) {
-          let slides = JSON.parse(JSON.stringify(attributes.slides));
-          slides[index].subheader = value;
-          setAttributes({slides: slides});
+        function onSubheaderChange( index, value ) {
+          const slides = JSON.parse( JSON.stringify( attributes.slides ) );
+          slides[ index ].subheader = value;
+          setAttributes( { slides } );
         }
 
-        function onDescriptionChange(index, value) {
-          let slides = JSON.parse(JSON.stringify(attributes.slides));
-          slides[index].description = value;
-          setAttributes({slides: slides});
+        function onDescriptionChange( index, value ) {
+          const slides = JSON.parse( JSON.stringify( attributes.slides ) );
+          slides[ index ].description = value;
+          setAttributes( { slides } );
         }
 
-        function onLinkUrlChange(index, value) {
-          let slides = JSON.parse(JSON.stringify(attributes.slides));
-          slides[index].link_url = value;
-          setAttributes({slides: slides});
+        function onLinkUrlChange( index, value ) {
+          const slides = JSON.parse( JSON.stringify( attributes.slides ) );
+          slides[ index ].link_url = value;
+          setAttributes( { slides } );
         }
 
-        function onLinkTextChange(index, value) {
-          let slides = JSON.parse(JSON.stringify(attributes.slides));
-          slides[index].link_text = value;
-          setAttributes({slides: slides});
+        function onLinkTextChange( index, value ) {
+          const slides = JSON.parse( JSON.stringify( attributes.slides ) );
+          slides[ index ].link_text = value;
+          setAttributes( { slides } );
         }
 
-        function onLinkNewTabChange(index, value) {
-          let slides = JSON.parse(JSON.stringify(attributes.slides));
-          slides[index].link_url_new_tab = value;
-          setAttributes({slides: slides});
+        function onLinkNewTabChange( index, value ) {
+          const slides = JSON.parse( JSON.stringify( attributes.slides ) );
+          slides[ index ].link_url_new_tab = value;
+          setAttributes( { slides } );
         }
 
-        function onBlockStyleChange(value) {
-          setAttributes({block_style: value});
+        function onBlockStyleChange( value ) {
+          setAttributes( { block_style: value } );
         }
 
         function removeSlide() {
-          setAttributes({slides: attributes.slides.slice(0, -1)});
+          setAttributes( { slides: attributes.slides.slice( 0, -1 ) } );
         }
 
         return <CarouselHeader
@@ -285,8 +281,8 @@ export class CarouselHeaderBlock {
       },
       save() {
         return null;
-      }
-    });
-  };
+      },
+    } );
+  }
 }
 

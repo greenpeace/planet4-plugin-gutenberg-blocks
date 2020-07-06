@@ -10,25 +10,26 @@ export const addBlockFilters = () => {
 };
 
 const addFileBlockFilter = () => {
-  const setDownloadButtonToggleDefualtFalse = (settings, name) => {
-
-    if ('core/file' !== name) {
+  const setDownloadButtonToggleDefualtFalse = ( settings, name ) => {
+    if ( 'core/file' !== name ) {
       return settings;
     }
 
-    settings.attributes['showDownloadButton']['default'] = false;
+    settings.attributes.showDownloadButton.default = false;
 
     return settings;
   };
 
-  addFilter('blocks.registerBlockType', 'planet4-blocks/filters/file', setDownloadButtonToggleDefualtFalse);
+  addFilter(
+    'blocks.registerBlockType',
+    'planet4-blocks/filters/file',
+    setDownloadButtonToggleDefualtFalse,
+  );
 };
 
 const addButtonBlockFilter = () => {
-
-  const updateButtonBlockEditMethod = (settings, name) => {
-
-    if ('core/button' !== name) {
+  const updateButtonBlockEditMethod = ( settings, name ) => {
+    if ( 'core/button' !== name ) {
       return settings;
     }
 
@@ -41,14 +42,16 @@ const addButtonBlockFilter = () => {
     return settings;
   };
 
-  addFilter('blocks.registerBlockType', 'planet4-blocks/filters/button', updateButtonBlockEditMethod);
+  addFilter(
+    'blocks.registerBlockType',
+    'planet4-blocks/filters/button',
+    updateButtonBlockEditMethod,
+  );
 };
 
 const addTableBlockFilter = () => {
-
-  const updateTableBlockEditMethod = (settings, name) => {
-
-    if ('core/table' !== name) {
+  const updateTableBlockEditMethod = ( settings, name ) => {
+    if ( 'core/table' !== name ) {
       return settings;
     }
 
@@ -61,5 +64,9 @@ const addTableBlockFilter = () => {
     return settings;
   };
 
-  addFilter('blocks.registerBlockType', 'planet4-blocks/filters/table', updateTableBlockEditMethod);
+  addFilter(
+    'blocks.registerBlockType',
+    'planet4-blocks/filters/table',
+    updateTableBlockEditMethod,
+  );
 };

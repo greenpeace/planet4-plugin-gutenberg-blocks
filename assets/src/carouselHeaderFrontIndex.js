@@ -1,7 +1,7 @@
 import { initializeCarouselHeader } from './blocks/Carouselheader/CarouselHeaderFront';
 
-jQuery(function () {
+jQuery( function() {
   'use strict';
 
   initializeCarouselHeader();
-});
+} );
