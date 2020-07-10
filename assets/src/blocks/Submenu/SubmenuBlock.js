@@ -1,11 +1,11 @@
-import {Submenu} from './Submenu.js';
+import { Submenu } from './Submenu.js';
 
 export class SubmenuBlock {
   constructor() {
-    const {registerBlockType} = wp.blocks;
-    const {withSelect} = wp.data;
+    const { registerBlockType } = wp.blocks;
+    const { withSelect } = wp.data;
 
-    registerBlockType('planet4-blocks/submenu', {
+    registerBlockType( 'planet4-blocks/submenu', {
       title: 'Submenu',
       icon: 'welcome-widgets-menus',
       category: 'planet4-blocks',
@@ -39,106 +39,105 @@ export class SubmenuBlock {
             attributes: {
               submenu_style: {
                 type: 'integer',
-                shortcode: function (attributes) {
-                  return Number(attributes.named.submenu_style);
-                }
+                shortcode( attributes ) {
+                  return Number( attributes.named.submenu_style );
+                },
               },
               title: {
                 type: 'string',
-                shortcode: function (attributes) {
+                shortcode( attributes ) {
                   return attributes.named.title;
-                }
+                },
               },
               levels: {
                 type: 'array',
-                shortcode: function (attributes) {
-                  let levels = [];
-                  if (attributes.named.heading1 > 0) {
-                    let level = {
-                      heading: Number(attributes.named.heading1),
-                      link: Boolean(attributes.named.link1) || false,
-                      style: attributes.named.style1 || 'none'
+                shortcode( attributes ) {
+                  const levels = [];
+                  if ( attributes.named.heading1 > 0 ) {
+                    const level = {
+                      heading: Number( attributes.named.heading1 ),
+                      link: Boolean( attributes.named.link1 ) || false,
+                      style: attributes.named.style1 || 'none',
                     };
-                    levels.push(Object.assign({}, level));
+                    levels.push( Object.assign( {}, level ) );
 
-                    if (attributes.named.heading2 > 0) {
-                      let level = {
-                        heading: Number(attributes.named.heading2),
-                        link: Boolean(attributes.named.link2) || false,
-                        style: attributes.named.style2 || 'none'
+                    if ( attributes.named.heading2 > 0 ) {
+                      const level = {
+                        heading: Number( attributes.named.heading2 ),
+                        link: Boolean( attributes.named.link2 ) || false,
+                        style: attributes.named.style2 || 'none',
                       };
-                      levels.push(Object.assign({}, level));
+                      levels.push( Object.assign( {}, level ) );
 
-                      if (attributes.named.heading3 > 0) {
-                        let level = {
-                          heading: Number(attributes.named.heading3),
-                          link: Boolean(attributes.named.link3) || false,
-                          style: attributes.named.style3 || 'none'
+                      if ( attributes.named.heading3 > 0 ) {
+                        const level = {
+                          heading: Number( attributes.named.heading3 ),
+                          link: Boolean( attributes.named.link3 ) || false,
+                          style: attributes.named.style3 || 'none',
                         };
-                        levels.push(Object.assign({}, level));
+                        levels.push( Object.assign( {}, level ) );
                       }
                     }
                   }
                   return levels;
                 },
-              }
+              },
             },
           },
-        ]
+        ],
       },
       attributes: {
         submenu_style: {
           type: 'integer',
-          default: 1
+          default: 1,
         },
         title: {
           type: 'string',
         },
         levels: {
           type: 'array',
-          default: [ {heading: 0, link: false, style: 'none'}]
+          default: [ { heading: 0, link: false, style: 'none' } ],
         },
       },
-      edit: withSelect((select) => {
+      edit: withSelect( ( select ) => {
 
-      })(({
-            isSelected,
-            attributes,
-            setAttributes
-          }) => {
-
+      } )( ( {
+        isSelected,
+        attributes,
+        setAttributes,
+      } ) => {
         function addLevel() {
-          setAttributes({levels: attributes.levels.concat({heading: 0, link: false, style: 'none'})});
+          setAttributes( { levels: attributes.levels.concat( { heading: 0, link: false, style: 'none' } ) } );
         }
 
-        function onTitleChange(value) {
-          setAttributes({title: value});
+        function onTitleChange( value ) {
+          setAttributes( { title: value } );
         }
 
-        function onHeadingChange(index, value) {
-          let levels = JSON.parse(JSON.stringify(attributes.levels));
-          levels[index].heading = Number(value);
-          setAttributes({levels: levels});
+        function onHeadingChange( index, value ) {
+          const levels = JSON.parse( JSON.stringify( attributes.levels ) );
+          levels[ index ].heading = Number( value );
+          setAttributes( { levels } );
         }
 
-        function onLayoutChange(value) {
-          setAttributes({submenu_style: Number(value)});
+        function onLayoutChange( value ) {
+          setAttributes( { submenu_style: Number( value ) } );
         }
 
-        function onLinkChange(index, value) {
-          let levels = JSON.parse(JSON.stringify(attributes.levels));
-          levels[index].link = value;
-          setAttributes({levels: levels});
+        function onLinkChange( index, value ) {
+          const levels = JSON.parse( JSON.stringify( attributes.levels ) );
+          levels[ index ].link = value;
+          setAttributes( { levels } );
         }
 
-        function onStyleChange(index, value) {
-          let levels = JSON.parse(JSON.stringify(attributes.levels));
-          levels[index].style = value;
-          setAttributes({levels: levels});
+        function onStyleChange( index, value ) {
+          const levels = JSON.parse( JSON.stringify( attributes.levels ) );
+          levels[ index ].style = value;
+          setAttributes( { levels } );
         }
 
         function removeLevel() {
-          setAttributes({levels: attributes.levels.slice(0, -1)});
+          setAttributes( { levels: attributes.levels.slice( 0, -1 ) } );
         }
 
         return <Submenu
@@ -151,12 +150,12 @@ export class SubmenuBlock {
           onStyleChange={onStyleChange}
           addLevel={addLevel}
           removeLevel={removeLevel}
-        />
-      }),
+        />;
+      } ),
       save() {
         return null;
-      }
-    });
-  };
+      },
+    } );
+  }
 }
 

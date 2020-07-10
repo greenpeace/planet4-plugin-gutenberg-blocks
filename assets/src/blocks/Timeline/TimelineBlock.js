@@ -1,13 +1,13 @@
-import {Timeline} from './Timeline.js';
+import { Timeline } from './Timeline.js';
 
-const {__} = wp.i18n;
+const { __ } = wp.i18n;
 
 export class TimelineBlock {
   constructor() {
-    const {registerBlockType} = wp.blocks;
+    const { registerBlockType } = wp.blocks;
 
-    registerBlockType('planet4-blocks/timeline', {
-      title: __('Timeline', 'p4ge'),
+    registerBlockType( 'planet4-blocks/timeline', {
+      title: __( 'Timeline', 'p4ge' ),
       icon: 'clock',
       category: 'planet4-blocks',
 
@@ -23,43 +23,43 @@ export class TimelineBlock {
             attributes: {
               timeline_title: {
                 type: 'string',
-                shortcode: function (attributes) {
+                shortcode( attributes ) {
                   return attributes.named.timeline_title;
-                }
+                },
               },
               description: {
                 type: 'string',
-                shortcode: function (attributes) {
+                shortcode( attributes ) {
                   return attributes.named.description;
-                }
+                },
               },
               google_sheets_url: {
                 type: 'string',
-                shortcode: function (attributes) {
+                shortcode( attributes ) {
                   return attributes.named.google_sheets_url;
-                }
+                },
               },
               language: {
                 type: 'array',
-                shortcode: function (attributes) {
+                shortcode( attributes ) {
                   return attributes.named.language;
-                }
+                },
               },
               timenav_position: {
                 type: 'array',
-                shortcode: function (attributes) {
+                shortcode( attributes ) {
                   return attributes.named.timenav_position;
-                }
+                },
               },
               start_at_end: {
                 type: 'boolean',
-                shortcode: function (attributes) {
+                shortcode( attributes ) {
                   return attributes.named.start_at_end;
-                }
-              }
+                },
+              },
             },
           },
-        ]
+        ],
       },
       attributes: {
         timeline_title: {
@@ -82,29 +82,29 @@ export class TimelineBlock {
           type: 'boolean',
         },
       },
-      edit: ({ isSelected, attributes, setAttributes }) => {
-        function onTimelineTitleChange(value) {
-          setAttributes({timeline_title: value});
+      edit: ( { isSelected, attributes, setAttributes } ) => {
+        function onTimelineTitleChange( value ) {
+          setAttributes( { timeline_title: value } );
         }
 
-        function onDescriptionChange(value) {
-          setAttributes({description: value});
+        function onDescriptionChange( value ) {
+          setAttributes( { description: value } );
         }
 
-        function onGoogleSheetsUrlChange(value) {
-          setAttributes({google_sheets_url: value});
+        function onGoogleSheetsUrlChange( value ) {
+          setAttributes( { google_sheets_url: value } );
         }
 
-        function onLanguageChange(value) {
-          setAttributes({language: value});
+        function onLanguageChange( value ) {
+          setAttributes( { language: value } );
         }
 
-        function onTimenavPositionChange(value) {
-          setAttributes({timenav_position: value});
+        function onTimenavPositionChange( value ) {
+          setAttributes( { timenav_position: value } );
         }
 
-        function onStartAtEndChange(value) {
-          setAttributes({start_at_end: value});
+        function onStartAtEndChange( value ) {
+          setAttributes( { start_at_end: value } );
         }
 
         return <Timeline
@@ -116,11 +116,11 @@ export class TimelineBlock {
           onLanguageChange={onLanguageChange}
           onTimenavPositionChange={onTimenavPositionChange}
           onStartAtEndChange={onStartAtEndChange}
-        />
+        />;
       },
       save() {
         return null;
-      }
-    });
-  };
+      },
+    } );
+  }
 }

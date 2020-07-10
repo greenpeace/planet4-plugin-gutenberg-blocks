@@ -15,4 +15,4 @@ export const frontendRendered = ( block ) => ( attributes, className ) => {
     className={ className }
     blockName={ block }
   />;
-}
+};

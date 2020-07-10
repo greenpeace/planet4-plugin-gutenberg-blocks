@@ -4,7 +4,11 @@
         "es6": true,
         "jquery": true
     },
-    "extends": "eslint:recommended",
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:@wordpress/eslint-plugin/esnext"
+    ],
     "rules": {
         "indent": [
             "error",
@@ -31,14 +35,18 @@
             "always"
         ],
         "new-cap": "error",
-        "no-var": 1
+        "no-var": 1,
+        "react/react-in-jsx-scope": 0
     },
     "parserOptions": {
-      "ecmaVersion": 6,
-      "ecmaFeatures": {
-        "jsx": true,
-        "modules": true
-      },
-      "sourceType": "module"
+        "ecmaVersion": 9,
+        "ecmaFeatures": {
+            "jsx": true,
+            "modules": true
+        },
+        "sourceType": "module"
+    },
+    "globals": {
+        "wp": "readonly"
     }
 }

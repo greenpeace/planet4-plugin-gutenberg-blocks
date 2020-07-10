@@ -28,9 +28,12 @@ const withCharacterCounter = ( WrappedComponent ) => {
     }
 
     shouldShowWarning() {
-      return this.props.characterLimit
-        && !this.exceededLimit()
-        && this.props.characterLimit - this.state.charactersUsed < this.warningThreshold();
+      return (
+        this.props.characterLimit &&
+        ! this.exceededLimit() &&
+        this.props.characterLimit - this.state.charactersUsed <
+          this.warningThreshold()
+      );
     }
 
     warningThreshold() {
@@ -43,24 +46,30 @@ const withCharacterCounter = ( WrappedComponent ) => {
     }
 
     exceededLimit() {
-      return this.props.characterLimit && this.state.charactersUsed > this.props.characterLimit;
+      return (
+        this.props.characterLimit &&
+        this.state.charactersUsed > this.props.characterLimit
+      );
     }
 
     showCounter() {
       // Force to return only boolean with `!!` or it will get rendered.
-      return !!this.props.characterLimit;
+      return !! this.props.characterLimit;
     }
 
     render() {
-      const { characterLimit, warningThreshold, onChange, ...passThroughProps } = this.props;
+      const {
+        characterLimit,
+        warningThreshold,
+        onChange,
+        ...passThroughProps
+      } = this.props;
 
-      const getClassnames = () => classNames(
-        'character-counter',
-        {
+      const getClassnames = () =>
+        classNames( 'character-counter', {
           'character-limit-exceeded': this.exceededLimit(),
           'character-limit-warning': this.shouldShowWarning(),
-        }
-      );
+        } );
 
       return (
         <div className="counted-field-wrapper">
@@ -68,12 +77,12 @@ const withCharacterCounter = ( WrappedComponent ) => {
             onChange={ this.handleChange }
             { ...passThroughProps }
           />
-          { this.showCounter() &&
-          <div className={ getClassnames() }>
-            <span>{ this.state.charactersUsed }</span>
-            <span>/{ characterLimit }</span>
-          </div>
-          }
+          { this.showCounter() && (
+            <div className={ getClassnames() }>
+              <span>{ this.state.charactersUsed }</span>
+              <span>/{ characterLimit }</span>
+            </div>
+          ) }
         </div>
       );
     }

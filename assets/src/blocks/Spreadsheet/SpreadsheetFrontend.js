@@ -13,12 +13,12 @@ const placeholderData = {
     [ 'Lorem', 'Ipsum', 'Dolor' ],
     [ 'Sit', 'Amet', 'Lorem' ],
     [ 'Amet', 'Ipsum', 'Sit' ],
-  ]
+  ],
 };
 
 export class SpreadsheetFrontend extends Component {
-  constructor(props) {
-    super(props);
+  constructor( props ) {
+    super( props );
     this.state = {
       loading: null,
       spreadSheetData: null,
@@ -27,97 +27,95 @@ export class SpreadsheetFrontend extends Component {
       sortColumnIndex: null,
     };
 
-    this.onHeaderClick = this.onHeaderClick.bind(this);
+    this.onHeaderClick = this.onHeaderClick.bind( this );
   }
 
   onHeaderClick( index ) {
     if ( index == this.state.sortColumnIndex ) {
       const newDirection = this.state.sortDirection == 'asc' ? 'desc' : 'asc';
-      this.setState({
-        sortDirection: newDirection
-      });
+      this.setState( {
+        sortDirection: newDirection,
+      } );
     } else {
-      this.setState({
+      this.setState( {
         sortColumnIndex: index,
         sortDirection: 'asc',
-      });
+      } );
     }
   }
 
   fetchSheetData( url ) {
     const sheetID = this.extractSheetID( url );
 
-    if (sheetID !== false) {
+    if ( sheetID !== false ) {
       if ( this.props.handleErrors ) {
-        this.props.handleErrors({ invalidSheetId: false })
+        this.props.handleErrors( { invalidSheetId: false } );
       }
-      this.setState({ loading: true });
+      this.setState( { loading: true } );
 
       const queryArgs = {
-        path: addQueryArgs('/planet4/v1/get-spreadsheet-data', {
+        path: addQueryArgs( '/planet4/v1/get-spreadsheet-data', {
           sheet_id: sheetID,
-        })
+        } ),
       };
 
       apiFetch( queryArgs )
-        .then( spreadSheetData => {
+        .then( ( spreadSheetData ) => {
           this.setState( {
             loading: false,
-            spreadSheetData
+            spreadSheetData,
           } );
-      } );
+        } );
     } else {
       if ( this.props.handleErrors ) {
         this.props.handleErrors( { invalidSheetId: true } );
       }
-      this.setState({ loading: false, spreadSheetData: null });
+      this.setState( { loading: false, spreadSheetData: null } );
     }
   }
 
   componentDidMount() {
     if ( this.props.url != '' ) {
-      this.fetchSheetData(this.props.url);
+      this.fetchSheetData( this.props.url );
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.url !== this.props.url) {
-      this.fetchSheetData(nextProps.url);
+  componentWillReceiveProps( nextProps ) {
+    if ( nextProps.url !== this.props.url ) {
+      this.fetchSheetData( nextProps.url );
     }
   }
 
   extractSheetID( url ) {
     const googleSheetsPattern = /https:\/\/docs\.google\.com\/spreadsheets\/d\/e\/([\w-]+)/;
-    const matches = url.match(googleSheetsPattern);
-    if (matches !== null) {
-      return matches[1];
-    } else {
-      return false;
+    const matches = url.match( googleSheetsPattern );
+    if ( matches !== null ) {
+      return matches[ 1 ];
     }
+    return false;
   }
 
   sortRows( rows, columnIndex ) {
-    if (columnIndex === null) {
+    if ( columnIndex === null ) {
       return rows;
     }
 
     const sortedRows = rows.sort( ( rowA, rowB ) => {
-      const textCompare = rowA[columnIndex].localeCompare( rowB[columnIndex] );
+      const textCompare = rowA[ columnIndex ].localeCompare( rowB[ columnIndex ] );
       if ( textCompare !== 0 ) {
         return textCompare;
       }
     } );
-    if (this.state.sortDirection === 'desc') {
+    if ( this.state.sortDirection === 'desc' ) {
       return sortedRows.reverse();
-    } else {
-      return sortedRows;
     }
-  };
+    return sortedRows;
+  }
 
   filterMatchingRows( rows ) {
-    const filteredRows = rows.filter( row => {
-      return row.some( cell => cell.toLowerCase().includes( this.state.searchText.toLowerCase() ) );
-    })
+    const filteredRows = rows.filter( ( row ) => {
+      return row.some( ( cell ) => cell.toLowerCase().includes( this.state.searchText.toLowerCase() ) );
+    } );
     return filteredRows;
   }
 
@@ -126,9 +124,8 @@ export class SpreadsheetFrontend extends Component {
       return placeholderData.rows;
     } else if ( this.state.loading === true || this.state.loading === null ) {
       return [];
-    } else {
-      return this.state.spreadSheetData.rows;
     }
+    return this.state.spreadSheetData.rows;
   }
 
   renderRows() {
@@ -136,27 +133,27 @@ export class SpreadsheetFrontend extends Component {
 
     return this.state.searchText.length > 1 && rows.length === 0
       ? <tr>
-          <td colSpan="99999">
-            <div className='spreadsheet-empty-message'>
-              { __('No data matching your search.', 'planet4-blocks') }
-            </div>
-          </td>
-        </tr>
-      : rows.map((row, rowNumber) => (
-          <tr key={ rowNumber } data-order={ rowNumber }>
-            {
-              row.map((cell, cellIndex) => (
-                <td key={ cellIndex }>
-                  {
-                    this.state.searchText.length > 0
+        <td colSpan="99999">
+          <div className='spreadsheet-empty-message'>
+            { __( 'No data matching your search.', 'planet4-blocks' ) }
+          </div>
+        </td>
+      </tr>
+      : rows.map( ( row, rowNumber ) => (
+        <tr key={ rowNumber } data-order={ rowNumber }>
+          {
+            row.map( ( cell, cellIndex ) => (
+              <td key={ cellIndex }>
+                {
+                  this.state.searchText.length > 0
                     ? HighlightMatches( cell, this.state.searchText )
                     : cell
-                  }
-                </td>
-              ))
-            }
-          </tr>
-        ));
+                }
+              </td>
+            ) )
+          }
+        </tr>
+      ) );
   }
 
   render() {
@@ -171,47 +168,49 @@ export class SpreadsheetFrontend extends Component {
             <input className="spreadsheet-search form-control"
               type="text"
               value={ this.state.searchText }
-              onChange={ event => this.setState({ searchText: event.target.value }) }
-              placeholder={ __('Search data', 'planet4-blocks') } />
+              onChange={ ( event ) => this.setState( { searchText: event.target.value } ) }
+              placeholder={ __( 'Search data', 'planet4-blocks' ) } />
           </div>
           <div className="table-wrapper">
             <table className="spreadsheet-table">
               <thead>
                 <tr>
                   {
-                    headers.map( (cell, index) => (
+                    headers.map( ( cell, index ) => (
                       <th
                         className={
                           (
                             index == this.state.sortColumnIndex
-                              ? `spreadsheet-sorted-by sort-${this.state.sortDirection}`
+                              ? `spreadsheet-sorted-by sort-${ this.state.sortDirection }`
                               : ''
                           )
                         }
-                        onClick={ () => { this.onHeaderClick( index ) } }
-                        key={ index } title={ __('Sort by', 'planet4-blocks') }>
+                        onClick={ () => {
+                          this.onHeaderClick( index );
+                        } }
+                        key={ index } title={ __( 'Sort by', 'planet4-blocks' ) }>
                         { cell }
                         <ArrowIcon />
                       </th>
-                    ))
+                    ) )
                   }
                 </tr>
               </thead>
               <tbody>
                 {
                   this.state.loading === true
-                  ? <tr>
+                    ? <tr>
                       <td colSpan="99999">
-                        <div className="spreadsheet-loading">{ __('Loading spreadsheet data...', 'planet4-blocks') }</div>
+                        <div className="spreadsheet-loading">{ __( 'Loading spreadsheet data...', 'planet4-blocks' ) }</div>
                       </td>
                     </tr>
-                  : this.renderRows()
+                    : this.renderRows()
                 }
               </tbody>
             </table>
           </div>
         </section>
       </Fragment>
-    )
+    );
   }
 }

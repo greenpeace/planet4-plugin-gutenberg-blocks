@@ -1,38 +1,42 @@
 import { Component } from '@wordpress/element';
 
-function getDisplayName(WrappedComponent) {
+function getDisplayName( WrappedComponent ) {
   return WrappedComponent.displayName || WrappedComponent.name || 'Component';
 }
 
 export function withDefaultLabel( WrappedComponent ) {
-  const {__} = wp.i18n;
+  const { __ } = wp.i18n;
 
   class WithDefaultLabelHOC extends Component {
     constructor( props ) {
       super( props );
 
-      this.defaultLabel = __('(default)');
+      this.defaultLabel = __( '(default)' );
     }
 
     render() {
       const { options, ...ownProps } = this.props;
 
-      const enhancedOptions = !options ? [] : options.map( option => {
-        const label = option.value === this.props.defaultValue ? option.label + ' ' + this.defaultLabel : option.label
-        return {
+      const enhancedOptions = ! options
+        ? []
+        : options.map( ( option ) => {
+          const label =
+              option.value === this.props.defaultValue
+                ? option.label + ' ' + this.defaultLabel
+                : option.label;
+          return {
             ...option,
-           label: label,
-        }
-      });
+            label,
+          };
+        } );
 
-      return <WrappedComponent
-        options={ enhancedOptions }
-        { ...ownProps }
-      />;
+      return <WrappedComponent options={ enhancedOptions } { ...ownProps } />;
     }
   }
 
-  WithDefaultLabelHOC.displayName = `WithDefaultLabelHOC(${getDisplayName(WrappedComponent)})`;
+  WithDefaultLabelHOC.displayName = `WithDefaultLabelHOC(${ getDisplayName(
+    WrappedComponent,
+  ) })`;
 
   return WithDefaultLabelHOC;
 }

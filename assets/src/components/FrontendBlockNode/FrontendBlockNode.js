@@ -8,9 +8,13 @@ import { Component } from '@wordpress/element';
  * function could potentially cause block validation errors in Gutenberg.
  */
 export class FrontendBlockNode extends Component {
-	render() {
-		return <div className={ this.props.className }
-			data-render={ this.props.blockName }
-			data-attributes={ JSON.stringify( this.props.attributes ) }></div>
-	}
+  render() {
+    return (
+      <div
+        className={ this.props.className }
+        data-render={ this.props.blockName }
+        data-attributes={ JSON.stringify( this.props.attributes ) }
+      ></div>
+    );
+  }
 }

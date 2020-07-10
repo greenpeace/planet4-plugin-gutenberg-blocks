@@ -19,14 +19,14 @@ const INHERITED_COLUMN_ATTRIBUTES = [ 'align' ];
  * @return {Object} New table state.
  */
 export function createTable( { rowCount, columnCount } ) {
-	return {
-		body: times( rowCount, () => ( {
-			cells: times( columnCount, () => ( {
-				content: '',
-				tag: 'td',
-			} ) ),
-		} ) ),
-	};
+  return {
+    body: times( rowCount, () => ( {
+      cells: times( columnCount, () => ( {
+        content: '',
+        tag: 'td',
+      } ) ),
+    } ) ),
+  };
 }
 
 /**
@@ -37,15 +37,15 @@ export function createTable( { rowCount, columnCount } ) {
  * @return {Object} The first table row.
  */
 export function getFirstRow( state ) {
-	if ( ! isEmptyTableSection( state.head ) ) {
-		return state.head[ 0 ];
-	}
-	if ( ! isEmptyTableSection( state.body ) ) {
-		return state.body[ 0 ];
-	}
-	if ( ! isEmptyTableSection( state.foot ) ) {
-		return state.foot[ 0 ];
-	}
+  if ( ! isEmptyTableSection( state.head ) ) {
+    return state.head[ 0 ];
+  }
+  if ( ! isEmptyTableSection( state.body ) ) {
+    return state.body[ 0 ];
+  }
+  if ( ! isEmptyTableSection( state.foot ) ) {
+    return state.foot[ 0 ];
+  }
 }
 
 /**
@@ -58,14 +58,14 @@ export function getFirstRow( state ) {
  * @return {*} The attribute value.
  */
 export function getCellAttribute( state, cellLocation, attributeName ) {
-	const { sectionName, rowIndex, columnIndex } = cellLocation;
-	return get( state, [
-		sectionName,
-		rowIndex,
-		'cells',
-		columnIndex,
-		attributeName,
-	] );
+  const { sectionName, rowIndex, columnIndex } = cellLocation;
+  return get( state, [
+    sectionName,
+    rowIndex,
+    'cells',
+    columnIndex,
+    attributeName,
+  ] );
 }
 
 /**
@@ -78,43 +78,43 @@ export function getCellAttribute( state, cellLocation, attributeName ) {
  * @return {Object} New table state including the updated cells.
  */
 export function updateSelectedCell( state, selection, updateCell ) {
-	if ( ! selection ) {
-		return state;
-	}
+  if ( ! selection ) {
+    return state;
+  }
 
-	const tableSections = pick( state, [ 'head', 'body', 'foot' ] );
-	const {
-		sectionName: selectionSectionName,
-		rowIndex: selectionRowIndex,
-	} = selection;
+  const tableSections = pick( state, [ 'head', 'body', 'foot' ] );
+  const {
+    sectionName: selectionSectionName,
+    rowIndex: selectionRowIndex,
+  } = selection;
 
-	return mapValues( tableSections, ( section, sectionName ) => {
-		if ( selectionSectionName && selectionSectionName !== sectionName ) {
-			return section;
-		}
+  return mapValues( tableSections, ( section, sectionName ) => {
+    if ( selectionSectionName && selectionSectionName !== sectionName ) {
+      return section;
+    }
 
-		return section.map( ( row, rowIndex ) => {
-			if ( selectionRowIndex && selectionRowIndex !== rowIndex ) {
-				return row;
-			}
+    return section.map( ( row, rowIndex ) => {
+      if ( selectionRowIndex && selectionRowIndex !== rowIndex ) {
+        return row;
+      }
 
-			return {
-				cells: row.cells.map( ( cellAttributes, columnIndex ) => {
-					const cellLocation = {
-						sectionName,
-						columnIndex,
-						rowIndex,
-					};
+      return {
+        cells: row.cells.map( ( cellAttributes, columnIndex ) => {
+          const cellLocation = {
+            sectionName,
+            columnIndex,
+            rowIndex,
+          };
 
-					if ( ! isCellSelected( cellLocation, selection ) ) {
-						return cellAttributes;
-					}
+          if ( ! isCellSelected( cellLocation, selection ) ) {
+            return cellAttributes;
+          }
 
-					return updateCell( cellAttributes );
-				} ),
-			};
-		} );
-	} );
+          return updateCell( cellAttributes );
+        } ),
+      };
+    } );
+  } );
 }
 
 /**
@@ -126,24 +126,24 @@ export function updateSelectedCell( state, selection, updateCell ) {
  * @return {boolean} True if the cell is selected, false otherwise.
  */
 export function isCellSelected( cellLocation, selection ) {
-	if ( ! cellLocation || ! selection ) {
-		return false;
-	}
+  if ( ! cellLocation || ! selection ) {
+    return false;
+  }
 
-	switch ( selection.type ) {
-		case 'column':
-			return (
-				selection.type === 'column' &&
-				cellLocation.columnIndex === selection.columnIndex
-			);
-		case 'cell':
-			return (
-				selection.type === 'cell' &&
-				cellLocation.sectionName === selection.sectionName &&
-				cellLocation.columnIndex === selection.columnIndex &&
-				cellLocation.rowIndex === selection.rowIndex
-			);
-	}
+  switch ( selection.type ) {
+  case 'column':
+    return (
+      selection.type === 'column' &&
+        cellLocation.columnIndex === selection.columnIndex
+    );
+  case 'cell':
+    return (
+      selection.type === 'cell' &&
+        cellLocation.sectionName === selection.sectionName &&
+        cellLocation.columnIndex === selection.columnIndex &&
+        cellLocation.rowIndex === selection.rowIndex
+    );
+  }
 }
 
 /**
@@ -153,46 +153,42 @@ export function isCellSelected( cellLocation, selection ) {
  * @param {Object} options
  * @param {string} options.sectionName Section in which to insert the row.
  * @param {number} options.rowIndex    Row index at which to insert the row.
- *
+ * @param options.columnCount
  * @return {Object} New table state.
  */
 export function insertRow( state, { sectionName, rowIndex, columnCount } ) {
-	const firstRow = getFirstRow( state );
-	const cellCount =
-		columnCount === undefined
-			? get( firstRow, [ 'cells', 'length' ] )
-			: columnCount;
+  const firstRow = getFirstRow( state );
+  const cellCount =
+    columnCount === undefined
+      ? get( firstRow, [ 'cells', 'length' ] )
+      : columnCount;
 
-	// Bail early if the function cannot determine how many cells to add.
-	if ( ! cellCount ) {
-		return state;
-	}
+  // Bail early if the function cannot determine how many cells to add.
+  if ( ! cellCount ) {
+    return state;
+  }
 
-	return {
-		[ sectionName ]: [
-			...state[ sectionName ].slice( 0, rowIndex ),
-			{
-				cells: times( cellCount, ( index ) => {
-					const firstCellInColumn = get(
-						firstRow,
-						[ 'cells', index ],
-						{}
-					);
-					const inheritedAttributes = pick(
-						firstCellInColumn,
-						INHERITED_COLUMN_ATTRIBUTES
-					);
+  return {
+    [ sectionName ]: [
+      ...state[ sectionName ].slice( 0, rowIndex ),
+      {
+        cells: times( cellCount, ( index ) => {
+          const firstCellInColumn = get( firstRow, [ 'cells', index ], {} );
+          const inheritedAttributes = pick(
+            firstCellInColumn,
+            INHERITED_COLUMN_ATTRIBUTES,
+          );
 
-					return {
-						...inheritedAttributes,
-						content: '',
-						tag: sectionName === 'head' ? 'th' : 'td',
-					};
-				} ),
-			},
-			...state[ sectionName ].slice( rowIndex ),
-		],
-	};
+          return {
+            ...inheritedAttributes,
+            content: '',
+            tag: sectionName === 'head' ? 'th' : 'td',
+          };
+        } ),
+      },
+      ...state[ sectionName ].slice( rowIndex ),
+    ],
+  };
 }
 
 /**
@@ -206,11 +202,11 @@ export function insertRow( state, { sectionName, rowIndex, columnCount } ) {
  * @return {Object} New table state.
  */
 export function deleteRow( state, { sectionName, rowIndex } ) {
-	return {
-		[ sectionName ]: state[ sectionName ].filter(
-			( row, index ) => index !== rowIndex
-		),
-	};
+  return {
+    [ sectionName ]: state[ sectionName ].filter(
+      ( row, index ) => index !== rowIndex,
+    ),
+  };
 }
 
 /**
@@ -223,33 +219,33 @@ export function deleteRow( state, { sectionName, rowIndex } ) {
  * @return {Object} New table state.
  */
 export function insertColumn( state, { columnIndex } ) {
-	const tableSections = pick( state, [ 'head', 'body', 'foot' ] );
+  const tableSections = pick( state, [ 'head', 'body', 'foot' ] );
 
-	return mapValues( tableSections, ( section, sectionName ) => {
-		// Bail early if the table section is empty.
-		if ( isEmptyTableSection( section ) ) {
-			return section;
-		}
+  return mapValues( tableSections, ( section, sectionName ) => {
+    // Bail early if the table section is empty.
+    if ( isEmptyTableSection( section ) ) {
+      return section;
+    }
 
-		return section.map( ( row ) => {
-			// Bail early if the row is empty or it's an attempt to insert past
-			// the last possible index of the array.
-			if ( isEmptyRow( row ) || row.cells.length < columnIndex ) {
-				return row;
-			}
+    return section.map( ( row ) => {
+      // Bail early if the row is empty or it's an attempt to insert past
+      // the last possible index of the array.
+      if ( isEmptyRow( row ) || row.cells.length < columnIndex ) {
+        return row;
+      }
 
-			return {
-				cells: [
-					...row.cells.slice( 0, columnIndex ),
-					{
-						content: '',
-						tag: sectionName === 'head' ? 'th' : 'td',
-					},
-					...row.cells.slice( columnIndex ),
-				],
-			};
-		} );
-	} );
+      return {
+        cells: [
+          ...row.cells.slice( 0, columnIndex ),
+          {
+            content: '',
+            tag: sectionName === 'head' ? 'th' : 'td',
+          },
+          ...row.cells.slice( columnIndex ),
+        ],
+      };
+    } );
+  } );
 }
 
 /**
@@ -262,25 +258,23 @@ export function insertColumn( state, { columnIndex } ) {
  * @return {Object} New table state.
  */
 export function deleteColumn( state, { columnIndex } ) {
-	const tableSections = pick( state, [ 'head', 'body', 'foot' ] );
+  const tableSections = pick( state, [ 'head', 'body', 'foot' ] );
 
-	return mapValues( tableSections, ( section ) => {
-		// Bail early if the table section is empty.
-		if ( isEmptyTableSection( section ) ) {
-			return section;
-		}
+  return mapValues( tableSections, ( section ) => {
+    // Bail early if the table section is empty.
+    if ( isEmptyTableSection( section ) ) {
+      return section;
+    }
 
-		return section
-			.map( ( row ) => ( {
-				cells:
-					row.cells.length >= columnIndex
-						? row.cells.filter(
-								( cell, index ) => index !== columnIndex
-						  )
-						: row.cells,
-			} ) )
-			.filter( ( row ) => row.cells.length );
-	} );
+    return section
+      .map( ( row ) => ( {
+        cells:
+          row.cells.length >= columnIndex
+            ? row.cells.filter( ( cell, index ) => index !== columnIndex )
+            : row.cells,
+      } ) )
+      .filter( ( row ) => row.cells.length );
+  } );
 }
 
 /**
@@ -292,16 +286,16 @@ export function deleteColumn( state, { columnIndex } ) {
  * @return {Object} New table state.
  */
 export function toggleSection( state, sectionName ) {
-	// Section exists, replace it with an empty row to remove it.
-	if ( ! isEmptyTableSection( state[ sectionName ] ) ) {
-		return { [ sectionName ]: [] };
-	}
+  // Section exists, replace it with an empty row to remove it.
+  if ( ! isEmptyTableSection( state[ sectionName ] ) ) {
+    return { [ sectionName ]: [] };
+  }
 
-	// Get the length of the first row of the body to use when creating the header.
-	const columnCount = get( state, [ 'body', 0, 'cells', 'length' ], 1 );
+  // Get the length of the first row of the body to use when creating the header.
+  const columnCount = get( state, [ 'body', 0, 'cells', 'length' ], 1 );
 
-	// Section doesn't exist, insert an empty row to create the section.
-	return insertRow( state, { sectionName, rowIndex: 0, columnCount } );
+  // Section doesn't exist, insert an empty row to create the section.
+  return insertRow( state, { sectionName, rowIndex: 0, columnCount } );
 }
 
 /**
@@ -312,7 +306,7 @@ export function toggleSection( state, sectionName ) {
  * @return {boolean} True if the table section is empty, false otherwise.
  */
 export function isEmptyTableSection( section ) {
-	return ! section || ! section.length || every( section, isEmptyRow );
+  return ! section || ! section.length || every( section, isEmptyRow );
 }
 
 /**
@@ -323,5 +317,5 @@ export function isEmptyTableSection( section ) {
  * @return {boolean} True if the table section is empty, false otherwise.
  */
 export function isEmptyRow( row ) {
-	return ! ( row.cells && row.cells.length );
+  return ! ( row.cells && row.cells.length );
 }

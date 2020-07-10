@@ -2,7 +2,7 @@ import { Component, Fragment } from '@wordpress/element';
 import { Preview } from '../../components/Preview';
 import {
   MediaUpload,
-  MediaUploadCheck
+  MediaUploadCheck,
 } from '@wordpress/editor';
 
 import {
@@ -10,7 +10,7 @@ import {
   TextareaControl,
   ServerSideRender,
   Button,
-  Tooltip
+  Tooltip,
 } from '@wordpress/components';
 
 export class SocialMediaCards extends Component {
@@ -25,24 +25,23 @@ export class SocialMediaCards extends Component {
 
     const getImageOrButton = ( openEvent ) => {
       if ( cards.length > 0 ) {
-
         return cards.map( ( card, index ) => (
           <span className="img-wrap">
-                <Tooltip text={ __( 'Remove Image', 'planet4-blocks-backend' ) }>
-                  <span className="close" onClick={ ev => {
-                    onDeleteImage( card.image_id );
-                    ev.stopPropagation();
-                  } }>&times;</span>
-                </Tooltip>
-                <img
-                  src={ card.image_url }
-                  onClick={ openEvent }
-                  className="gallery__imgs"
-                  key={ index }
-                  width='150 px'
-                  style={ { padding: '10px 10px' } }
-                />
-              </span>
+            <Tooltip text={ __( 'Remove Image', 'planet4-blocks-backend' ) }>
+              <span className="close" onClick={ ( ev ) => {
+                onDeleteImage( card.image_id );
+                ev.stopPropagation();
+              } }>&times;</span>
+            </Tooltip>
+            <img
+              src={ card.image_url }
+              onClick={ openEvent }
+              className="gallery__imgs"
+              key={ index }
+              width='150 px'
+              style={ { padding: '10px 10px' } }
+            />
+          </span>
         ) );
       }
 
@@ -84,8 +83,8 @@ export class SocialMediaCards extends Component {
               title={ __( 'Select Images', 'planet4-blocks-backend' ) }
               type="image"
               onSelect={ this.props.onSelectImages }
-              value={ cards.map( card => card.image_id ) }
-              allowedTypes={ ["image"] }
+              value={ cards.map( ( card ) => card.image_id ) }
+              allowedTypes={ [ 'image' ] }
               multiple="true"
               render={ ( { open } ) => getImageOrButton( open ) }
             />
