@@ -1,14 +1,35 @@
-import {Submenu} from './Submenu.js';
+import { SubmenuEditor } from './SubmenuEditor.js';
+import { frontendRendered } from '../frontendRendered';
+
+const BLOCK_NAME = 'planet4-blocks/submenu';
 
 export class SubmenuBlock {
   constructor() {
-    const {registerBlockType} = wp.blocks;
-    const {withSelect} = wp.data;
+    const { registerBlockType } = wp.blocks;
 
-    registerBlockType('planet4-blocks/submenu', {
+    const attributes = {
+      title: {
+        type: 'string',
+      },
+      levels: {
+        type: 'array',
+        default: [{ heading: 0, link: false, style: 'none' }]
+      },
+    };
+
+    registerBlockType(BLOCK_NAME, {
       title: 'Submenu',
       icon: 'welcome-widgets-menus',
       category: 'planet4-blocks',
+      attributes,
+      deprecated: [
+        {
+          attributes,
+          save() {
+            return null;
+          },
+        }
+      ],
       supports: {
         multiple: false, // Use the block just once per post.
       },
@@ -86,63 +107,48 @@ export class SubmenuBlock {
           },
         ]
       },
-      attributes: {
-        submenu_style: {
-          type: 'integer',
-          default: 1
-        },
-        title: {
-          type: 'string',
-        },
-        levels: {
-          type: 'array',
-          default: [ {heading: 0, link: false, style: 'none'}]
-        },
-      },
-      edit: withSelect((select) => {
-
-      })(({
-            isSelected,
-            attributes,
-            setAttributes
-          }) => {
+      edit: (({
+        isSelected,
+        attributes,
+        setAttributes
+      }) => {
 
         function addLevel() {
-          setAttributes({levels: attributes.levels.concat({heading: 0, link: false, style: 'none'})});
+          setAttributes({ levels: attributes.levels.concat({ heading: 0, link: false, style: 'none' }) });
         }
 
         function onTitleChange(value) {
-          setAttributes({title: value});
+          setAttributes({ title: value });
         }
 
         function onHeadingChange(index, value) {
           let levels = JSON.parse(JSON.stringify(attributes.levels));
           levels[index].heading = Number(value);
-          setAttributes({levels: levels});
+          setAttributes({ levels });
         }
 
         function onLayoutChange(value) {
-          setAttributes({submenu_style: Number(value)});
+          setAttributes({ submenu_style: Number(value) });
         }
 
         function onLinkChange(index, value) {
           let levels = JSON.parse(JSON.stringify(attributes.levels));
           levels[index].link = value;
-          setAttributes({levels: levels});
+          setAttributes({ levels });
         }
 
         function onStyleChange(index, value) {
           let levels = JSON.parse(JSON.stringify(attributes.levels));
           levels[index].style = value;
-          setAttributes({levels: levels});
+          setAttributes({ levels });
         }
 
         function removeLevel() {
-          setAttributes({levels: attributes.levels.slice(0, -1)});
+          setAttributes({ levels: attributes.levels.slice(0, -1) });
         }
 
-        return <Submenu
-          {...attributes}
+        return <SubmenuEditor
+          attributes={attributes}
           isSelected={isSelected}
           onSelectedLayoutChange={onLayoutChange}
           onTitleChange={onTitleChange}
@@ -153,9 +159,7 @@ export class SubmenuBlock {
           removeLevel={removeLevel}
         />
       }),
-      save() {
-        return null;
-      }
+      save: frontendRendered(BLOCK_NAME)
     });
   };
 }

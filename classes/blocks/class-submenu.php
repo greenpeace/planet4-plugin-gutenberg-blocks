@@ -78,14 +78,9 @@ class Submenu extends Base_Block {
 		register_block_type(
 			'planet4-blocks/submenu',
 			[
-				'editor_script'   => 'planet4-blocks',
-				'render_callback' => [ $this, 'render' ],
-				'attributes'      => [
-					'submenu_style' => [
-						'type'    => 'integer',
-						'default' => 1,
-					],
-					'title'         => [
+				'editor_script' => 'planet4-blocks',
+				'attributes'    => [
+					'title'  => [
 						'type'    => 'string',
 						'default' => '',
 					],
@@ -122,43 +117,12 @@ class Submenu extends Base_Block {
 	}
 
 	/**
-	 * Get all the data that will be needed to render the block correctly.
+	 * Required by the `Base_Block` class.
 	 *
-	 * @param array $attributes This is the array of fields of this block.
-	 *
-	 * @return array The data to be passed in the View.
+	 * @param array $fields Unused, required by the abstract function.
 	 */
-	public function prepare_data( $attributes ): array {
-
-		// If request is coming from backend rendering.
-		if ( $this->is_rest_request() ) {
-			$post_id = filter_input( INPUT_GET, 'post_id', FILTER_VALIDATE_INT );
-			if ( $post_id > 0 ) {
-				$post = get_post( $post_id );
-			}
-		} else {
-			$post = get_queried_object();
-		}
-
-		$menu = [];
-		if ( ! is_null( $post ) && isset( $attributes['levels'] ) ) {
-			$content = $post->post_content;
-			$menu    = $this->parse_post_content( $content, $attributes['levels'] );
-		}
-
-		// Enqueue js for the frontend.
-		if ( ! $this->is_rest_request() ) {
-			\P4GBKS\Loader::enqueue_local_script( 'submenu', 'public/js/submenu.js', [ 'jquery' ] );
-			wp_localize_script( 'submenu', 'submenu', $menu );
-		}
-
-		$block_data = [
-			'title' => $attributes['title'] ?? '',
-			'menu'  => $menu,
-			'style' => $attributes['submenu_style'] ?? '1',
-		];
-
-		return $block_data;
+	public function prepare_data( $fields ): array {
+		return [];
 	}
 
 	/**
