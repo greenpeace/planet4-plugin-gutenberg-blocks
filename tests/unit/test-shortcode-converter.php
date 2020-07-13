@@ -40,7 +40,6 @@ class P4_ShortcodeConverterTest extends P4_UnitTestCase {
 	 * @dataProvider media_shortcodes_provider
 	 * @dataProvider social_media_shortcodes_provider
 	 * @dataProvider split_two_columns_shortcodes_provider
-	 * @dataProvider submenu_shortcodes_provider
 	 * @dataProvider timeline_shortcodes_provider
 	 * @dataProvider take_action_boxout_shortcodes_provider
 	 */
@@ -599,66 +598,6 @@ class P4_ShortcodeConverterTest extends P4_UnitTestCase {
 					'<!-- wp:planet4-blocks/split-two-columns {"select_issue":69,"title":"La r\u00e9volution \u00e9nerg\u00e9tique","issue_description":"Il est temps d\'\u00e9voluer au-del\u00e0 des \u00e9nergies sales et dangereuses telles que le p\u00e9trole, le charbon et le nucl\u00e9aire et d\'adopter des \u00e9nergies renouvelables propres, \u00e0 bas prix et \u00e9ternelles.","issue_link_text":"En savoir plus sur ce probl\u00e8me","issue_link_path":"https://www.greenpeace.org/mena/fr/explorer/la-revolution-energetique/","issue_image":2912,"focus_issue_image":"center center","select_tag":78,"tag_description":"L\'\u00e9nergie renouvelable n\u2019est pas ch\u00e8re, elle est durable et fait d\u00e9j\u00e0 en sorte que notre plan\u00e8te soit plus verte et plus s\u00fbre. Nous connaissons l\'avenir que nous souhaitons et les \u00e9nergies renouvelables sont la fa\u00e7on dont nous\u2026","button_text":"Agissez Maintenant!","button_link":"https://www.greenpeace.org/mena/en/tag/%D8%A7%D9%84%D8%B7%D8%A7%D9%82%D8%A9_%D8%A7%D9%84%D9%85%D8%AA%D8%AC%D8%AF%D8%AF%D8%A9-en/","tag_image":2914,"focus_tag_image":"left top"} /-->',
 				],
 
-		];
-	}
-
-	/**
-	 * Planet4 blocks shortocodes provider.
-	 *
-	 * @return array
-	 */
-	public function submenu_shortcodes_provider(): array {
-		return [
-			// 1-5
-
-			'submenu with title and language' =>
-				[
-					'[shortcake_submenu submenu_style="1" title="On this page" heading1="2" link1="true" heading2="3" link2="true" /]',
-
-					'<!-- wp:planet4-blocks/submenu {"submenu_style":1,"title":"On this page","levels":[{"heading":2,"link":true},{"heading":3,"link":true}]} /-->',
-				],
-
-			'submenu 1 level with invalid 2nd and 3rd link attribute' =>
-				[
-					'[shortcake_submenu submenu_style="1" title="Submenu - Full-width style" heading1="2" link1="true" link2="false" link3="false" /]',
-
-					'<!-- wp:planet4-blocks/submenu {"submenu_style":1,"title":"Submenu - Full-width style","levels":[{"heading":2,"link":true}]} /-->',
-				],
-
-			'submenu 3 levels' =>
-				[
-					'[shortcake_submenu submenu_style="1" title="This is the Submenu\'s title" heading1="1" link1="true" heading2="2" link2="true" heading3="3" link3="true" /]',
-
-					'<!-- wp:planet4-blocks/submenu {"submenu_style":1,"title":"This is the Submenu\'s title","levels":[{"heading":1,"link":true},{"heading":2,"link":true},{"heading":3,"link":true}]} /-->',
-				],
-
-			'submenu 2 levels' =>
-				[
-					'[shortcake_submenu submenu_style="3" heading1="3" link1="true" heading2="4" link2="true" /]',
-
-					'<!-- wp:planet4-blocks/submenu {"submenu_style":3,"levels":[{"heading":3,"link":true},{"heading":4,"link":true}]} /-->',
-				],
-
-			'submenu 1 level with style' =>
-				[
-					'[shortcake_submenu submenu_style="2" heading1="4" link1="true" style1="bullet" link2="false" link3="false" /]',
-
-					'<!-- wp:planet4-blocks/submenu {"submenu_style":2,"levels":[{"heading":4,"link":true,"style":"bullet"}]} /-->',
-				],
-
-			'submenu invalid 2nd level' =>
-				[
-					'[shortcake_submenu submenu_style="3" title="Submenu - sidebar style" heading1="2" link1="true" heading2="0" link2="false" link3="false" /]',
-
-					'<!-- wp:planet4-blocks/submenu {"submenu_style":3,"title":"Submenu - sidebar style","levels":[{"heading":2,"link":true}]} /-->',
-				],
-
-			'submenu invalid 2nd level invalid heading' =>
-				[
-					'[shortcake_submenu submenu_style="3" heading1="2" link1="true" heading2="0" /]',
-
-					'<!-- wp:planet4-blocks/submenu {"submenu_style":3,"levels":[{"heading":2,"link":true}]} /-->',
-				],
 		];
 	}
 
