@@ -12,7 +12,6 @@ const { __ } = wp.i18n;
 
 export class SubmenuFrontend extends Component {
   render() {
-    console.log('HEHEHE', this.props)
     return (
       <Fragment>
         <div>TODO</div>

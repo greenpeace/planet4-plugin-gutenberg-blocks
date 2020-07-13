@@ -1,11 +1,13 @@
 import { SubmenuEditor } from './SubmenuEditor.js';
 import { frontendRendered } from '../frontendRendered';
 
+const { __ } = wp.i18n;
+
 const BLOCK_NAME = 'planet4-blocks/submenu';
 
 export class SubmenuBlock {
   constructor() {
-    const { registerBlockType } = wp.blocks;
+    const { registerBlockType, registerBlockStyle } = wp.blocks;
 
     const attributes = {
       title: {
@@ -87,6 +89,28 @@ export class SubmenuBlock {
       }),
       save: frontendRendered(BLOCK_NAME)
     });
+
+    registerBlockStyle(
+      BLOCK_NAME,
+      [
+        {
+          name: 'long',
+          label: __( 'Long full-width', 'planet4-blocks' ),
+          // help: __('Use: on long pages (more than 5 screens) when list items are long (+ 10 words)<br>No max items<br>recommended.')
+          isDefault: true
+        },
+        {
+          name: 'short',
+          label: __( 'Short full-width', 'planet4-blocks' )
+          // help: __('Use: on long pages (more than 5 screens) when list items are short (up to 5 words)<br>No max items<br>recommended.'),
+        },
+        {
+          name: 'sidebar',
+          label: __( 'Short sidebar', 'planet4-blocks' )
+          // help: __('Use: on long pages (more than 5 screens) when list items are short (up to 10 words)<br>Max items<br>recommended: 9')
+        }
+      ]
+    );
   };
 }
 
