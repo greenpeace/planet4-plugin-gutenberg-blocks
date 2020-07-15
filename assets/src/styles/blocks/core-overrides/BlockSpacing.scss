@@ -21,9 +21,9 @@
 .wp-block-file,
 .wp-block-button,
 .page-template > h2,
-.page-template > ul,
+.page-template > ul:not(.skip-links),
 .post-details > h2,
-.post-details > ul {
+.post-details > ul:not(.skip-links) {
   display: inline-block;
 }
 
