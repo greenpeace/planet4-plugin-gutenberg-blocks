@@ -25,13 +25,6 @@
 .post-details > h2,
 .post-details > ul {
   display: inline-block;
-  margin-top: $space-xs;
-  margin-bottom: $space-md;
-
-  @include large-and-up {
-    margin-top: $space-md;
-    margin-bottom: $space-lg;
-  }
 }
 
 .page-template > ul,
