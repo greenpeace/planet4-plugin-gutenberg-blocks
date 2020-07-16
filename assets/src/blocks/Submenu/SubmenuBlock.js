@@ -1,9 +1,21 @@
 import { SubmenuEditor } from './SubmenuEditor.js';
 import { frontendRendered } from '../frontendRendered';
+import { Tooltip } from '@wordpress/components';
 
 const { __ } = wp.i18n;
 
 const BLOCK_NAME = 'planet4-blocks/submenu';
+
+const getStyleLabel = (label, help) => {
+  if (help) {
+    return (
+      <Tooltip text={__(help, 'planet4-blocks')}>
+        <span>{__(label, 'planet4-blocks')}</span>
+      </Tooltip>
+    );
+  }
+  return label;
+}
 
 export class SubmenuBlock {
   constructor() {
@@ -90,19 +102,25 @@ export class SubmenuBlock {
       [
         {
           name: 'long',
-          label: __( 'Long full-width', 'planet4-blocks' ),
-          // help: __('Use: on long pages (more than 5 screens) when list items are long (+ 10 words)<br>No max items<br>recommended.')
+          label: getStyleLabel(
+            'Long full-width',
+            'Use: on long pages (more than 5 screens) when list items are long (+ 10 words). No max items recommended.'
+          ),
           isDefault: true
         },
         {
           name: 'short',
-          label: __( 'Short full-width', 'planet4-blocks' )
-          // help: __('Use: on long pages (more than 5 screens) when list items are short (up to 5 words)<br>No max items<br>recommended.'),
+          label: getStyleLabel(
+            'Short full-width',
+            'Use: on long pages (more than 5 screens) when list items are short (up to 5 words). No max items recommended.'
+          )
         },
         {
           name: 'sidebar',
-          label: __( 'Short sidebar', 'planet4-blocks' )
-          // help: __('Use: on long pages (more than 5 screens) when list items are short (up to 10 words)<br>Max items<br>recommended: 9')
+          label: getStyleLabel(
+            'Short sidebar',
+            'Use: on long pages (more than 5 screens) when list items are short (up to 10 words). Max items recommended: 9'
+          )
         }
       ]
     );

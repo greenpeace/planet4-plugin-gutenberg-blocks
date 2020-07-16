@@ -1,8 +1,5 @@
 import { Component, Fragment } from '@wordpress/element';
-import {
-  Button,
-  PanelBody
-} from '@wordpress/components';
+import { Button, PanelBody } from '@wordpress/components';
 import { SubmenuLevel } from "./SubmenuLevel";
 import { SubmenuFrontend } from './SubmenuFrontend';
 import { InspectorControls } from '@wordpress/block-editor';
@@ -29,18 +26,17 @@ export class SubmenuEditor extends Component {
       <Fragment>
         <InspectorControls>
           <PanelBody title={__('Setting', 'p4ge')}>
-            {attributes.levels.map((heading, i) => {
-              return (
-                <SubmenuLevel
-                  {...heading}
-                  onHeadingChange={onHeadingChange}
-                  onLinkChange={onLinkChange}
-                  onStyleChange={onStyleChange}
-                  index={i}
-                  key={i}
-                />
-              );
-            })}
+            {attributes.levels.map((heading, i) => (
+              <SubmenuLevel
+                {...heading}
+                onHeadingChange={onHeadingChange}
+                onLinkChange={onLinkChange}
+                onStyleChange={onStyleChange}
+                index={i}
+                key={i}
+              />
+            )
+            )}
             <Button
               isPrimary
               onClick={addLevel}
