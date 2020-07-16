@@ -59,20 +59,26 @@ export class SubmenuEditor extends Component {
   }
 
   renderView() {
-    const { attributes, onTitleChange } = this.props;
+    const { attributes, onTitleChange, className } = this.props;
+    let style = 'long';
+    if (className) {
+      style = className.split('is-style-')[1];
+    }
     return (
       <Fragment>
-        <RichText
-          tagName="h2"
-          placeholder={__('Enter title', 'p4ge')}
-          value={attributes.title}
-          onChange={onTitleChange}
-          keepPlaceholderOnFocus={true}
-          withoutInteractiveFormatting
-          characterLimit={60}
-          multiline="false"
-        />
-        <SubmenuFrontend isEditing {...attributes} />
+        <section className={`block submenu-block submenu-${style}`}>
+          <RichText
+            tagName="h2"
+            placeholder={__('Enter title', 'p4ge')}
+            value={attributes.title}
+            onChange={onTitleChange}
+            keepPlaceholderOnFocus={true}
+            withoutInteractiveFormatting
+            characterLimit={60}
+            multiline="false"
+          />
+          <SubmenuFrontend isEditing {...attributes} />
+        </section>
       </Fragment>
     );
   }

@@ -44,7 +44,7 @@ class Submenu extends Base_Block {
 					 *   style: 'string'
 					 * }
 					 */
-					'levels'        => [
+					'levels' => [
 						'type'  => 'array',
 						'items' => [
 							'type'       => 'object',
