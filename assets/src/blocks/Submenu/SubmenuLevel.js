@@ -37,7 +37,7 @@ export class SubmenuLevel extends Component {
         />
 
         <CheckboxControl
-          heading={__('Link', 'planet4-blocks')}
+          label={__('Link', 'planet4-blocks')}
           value={link}
           checked={link}
           onChange={e => onLinkChange(index, e)}
