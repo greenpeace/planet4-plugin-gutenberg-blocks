@@ -55,10 +55,6 @@ export class SubmenuBlock {
           setAttributes({ levels });
         }
 
-        function onLayoutChange(value) {
-          setAttributes({ submenu_style: Number(value) });
-        }
-
         function onLinkChange(index, value) {
           let levels = JSON.parse(JSON.stringify(attributes.levels));
           levels[index].link = value;
@@ -78,7 +74,6 @@ export class SubmenuBlock {
         return <SubmenuEditor
           attributes={attributes}
           isSelected={isSelected}
-          onSelectedLayoutChange={onLayoutChange}
           onTitleChange={onTitleChange}
           onHeadingChange={onHeadingChange}
           onLinkChange={onLinkChange}
