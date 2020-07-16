@@ -3,7 +3,7 @@ import {
   Button,
   PanelBody
 } from '@wordpress/components';
-import { MenuLevel } from "./MenuLevel";
+import { SubmenuLevel } from "./SubmenuLevel";
 import { SubmenuFrontend } from './SubmenuFrontend';
 import { InspectorControls } from '@wordpress/block-editor';
 
@@ -31,7 +31,7 @@ export class SubmenuEditor extends Component {
           <PanelBody title={__('Setting', 'p4ge')}>
             {attributes.levels.map((heading, i) => {
               return (
-                <MenuLevel
+                <SubmenuLevel
                   {...heading}
                   onHeadingChange={onHeadingChange}
                   onLinkChange={onLinkChange}
@@ -41,13 +41,16 @@ export class SubmenuEditor extends Component {
                 />
               );
             })}
-            <Button isPrimary
+            <Button
+              isPrimary
               onClick={addLevel}
               disabled={attributes.levels.length >= 3 || attributes.levels.slice(-1)[0].heading === 0}
+              style={{ marginRight: 5 }}
             >
               Add level
           </Button>
-            <Button isDefault
+            <Button
+              isDefault
               onClick={removeLevel} disabled={attributes.levels.length <= 1}
             >
               Remove level
