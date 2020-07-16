@@ -63,7 +63,7 @@ export class SubmenuBlock {
 
         function onStyleChange(index, value) {
           let levels = JSON.parse(JSON.stringify(attributes.levels));
-          levels[index].style = value;
+          levels[index].style = value; // Possible values: "none", "bullet", "number"
           setAttributes({ levels });
         }
 
