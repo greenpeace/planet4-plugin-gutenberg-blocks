@@ -1,5 +1,7 @@
 import { Component, Fragment } from '@wordpress/element';
 const { __ } = wp.i18n;
+const { apiFetch } = wp;
+const { addQueryArgs } = wp.url;
 
 const placeholderData = [
   { text: 'Lorem', style: 'none' },
@@ -13,7 +15,40 @@ export class SubmenuFrontend extends Component {
     this.state = {
       menuItems: placeholderData
     }
+
+    this.loadMenuItems = this.loadMenuItems.bind(this);
   };
+
+  componentDidMount() {
+    this.loadMenuItems();
+  }
+
+  componentDidUpdate({ levels: prevLevels }) {
+    const { levels } = this.props;
+    if (JSON.stringify(levels) !== JSON.stringify(prevLevels)) {
+      this.loadMenuItems();
+    }
+  }
+
+  async loadMenuItems() {
+    const { levels, postId } = this.props;
+    const queryArgs = {
+      path: addQueryArgs('/planet4/v1/get-submenu-items', {
+        levels,
+        post_id: postId
+      })
+    };
+
+    try {
+      const menuItems = await apiFetch(queryArgs);
+      if (menuItems && menuItems.length > 0) {
+        this.setState({ menuItems });
+      }
+    } catch (e) {
+      console.log(e);
+      this.setState({ menuItems: [] });
+    }
+  }
 
   render() {
     const { title, className, isEditing } = this.props;
@@ -38,7 +73,7 @@ export class SubmenuFrontend extends Component {
                     :
                     <span className="submenu-heading">{item.text}</span>
                   }
-                  {item.children &&
+                  {item.children && item.children.length > 0 &&
                     <span>TODO</span>
                   }
                 </li>

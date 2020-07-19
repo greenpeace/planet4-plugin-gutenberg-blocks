@@ -77,6 +77,28 @@ class Submenu extends Base_Block {
 	}
 
 	/**
+	 * Get the menu items from the post data.
+	 *
+	 * @param array $fields The fields entered in the editor.
+	 *
+	 * @return array The menu items to be passed in the View.
+	 */
+	public static function get_menu_items( $fields ): array {
+
+		if ( isset( $fields['post_id'] ) ) {
+			$post = get_post( $fields['post_id'] );
+		}
+
+		$menu = [];
+		if ( ! is_null( $post ) && isset( $fields['levels'] ) ) {
+			$content = $post->post_content;
+			$menu    = self::parse_post_content( $content, $fields['levels'] );
+		}
+
+		return $menu;
+	}
+
+	/**
 	 * Parse post's content to extract headings and build menu
 	 *
 	 * @param string $content Post content.
@@ -95,7 +117,7 @@ class Submenu extends Base_Block {
 		$heading_meta = [];
 		$index        = 1;
 		foreach ( $levels as $level ) {
-			$heading = $this->heading_attributes( $level );
+			$heading = self::heading_attributes( $level );
 			if ( ! $heading ) {
 				break;
 			}
@@ -115,7 +137,7 @@ class Submenu extends Base_Block {
 		$nodes            = iterator_to_array( $node_list );
 
 		// process nodes array recursively to build menu.
-		return $this->build_menu( 1, $nodes, $heading_meta );
+		return self::build_menu( 1, $nodes, $heading_meta );
 	}
 
 	/**
@@ -159,11 +181,11 @@ class Submenu extends Base_Block {
 					// we're skipping over a heading level so create an empty node.
 					$menu[] = new \stdClass();
 				}
-				$menu[ count( $menu ) - 1 ]->children = $this->build_menu( $current_level + 1, $nodes, $heading_meta );
+				$menu[ count( $menu ) - 1 ]->children = self::build_menu( $current_level + 1, $nodes, $heading_meta );
 			} elseif ( $heading['level'] < $current_level ) {
 				return $menu;
 			} else {
-				$menu[] = $this->create_menu_item( $node->nodeValue, $heading['tag'], $heading['link'], $heading['style'] );
+				$menu[] = self::create_menu_item( $node->nodeValue, $heading['tag'], $heading['link'], $heading['style'] );
 
 				// remove node from list only once it has been added to the menu.
 				array_shift( $nodes );

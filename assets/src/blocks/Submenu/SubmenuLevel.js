@@ -25,13 +25,13 @@ export class SubmenuLevel extends Component {
           label={__('Submenu item', 'planet4-blocks')}
           value={heading}
           options={[
-            { label: __('None', 'planet4-blocks'), value: '0' },
-            { label: __('Heading 1', 'planet4-blocks'), value: '1' },
-            { label: __('Heading 2', 'planet4-blocks'), value: '2' },
-            { label: __('Heading 3', 'planet4-blocks'), value: '3' },
-            { label: __('Heading 4', 'planet4-blocks'), value: '4' },
-            { label: __('Heading 5', 'planet4-blocks'), value: '5' },
-            { label: __('Heading 6', 'planet4-blocks'), value: '6' },
+            { label: __('None', 'planet4-blocks'), value: 0 },
+            { label: __('Heading 1', 'planet4-blocks'), value: 1 },
+            { label: __('Heading 2', 'planet4-blocks'), value: 2 },
+            { label: __('Heading 3', 'planet4-blocks'), value: 3 },
+            { label: __('Heading 4', 'planet4-blocks'), value: 4 },
+            { label: __('Heading 5', 'planet4-blocks'), value: 5 },
+            { label: __('Heading 6', 'planet4-blocks'), value: 6 },
           ]}
           onChange={e => onHeadingChange(index, e)}
         />
