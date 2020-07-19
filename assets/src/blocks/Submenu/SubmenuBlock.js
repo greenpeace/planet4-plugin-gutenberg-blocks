@@ -1,6 +1,7 @@
 import { SubmenuEditor } from './SubmenuEditor.js';
 import { frontendRendered } from '../frontendRendered';
 import { Tooltip } from '@wordpress/components';
+import { withSelect } from '@wordpress/data';
 
 const { __ } = wp.i18n;
 
@@ -47,18 +48,22 @@ export class SubmenuBlock {
       supports: {
         multiple: false, // Use the block just once per post.
       },
-      edit: (({
+      edit: withSelect(select => {
+        const postId = select('core/editor').getCurrentPostId();
+        return { postId };
+      })(({
         isSelected,
         attributes,
-        setAttributes
+        setAttributes,
+        postId
       }) => {
 
         function addLevel() {
           setAttributes({ levels: attributes.levels.concat({ heading: 0, link: false, style: 'none' }) });
         }
 
-        function onTitleChange(value) {
-          setAttributes({ title: value });
+        function onTitleChange(title) {
+          setAttributes({ title });
         }
 
         function onHeadingChange(index, value) {
@@ -92,6 +97,7 @@ export class SubmenuBlock {
           onStyleChange={onStyleChange}
           addLevel={addLevel}
           removeLevel={removeLevel}
+          postId={postId}
         />
       }),
       save: frontendRendered(BLOCK_NAME)

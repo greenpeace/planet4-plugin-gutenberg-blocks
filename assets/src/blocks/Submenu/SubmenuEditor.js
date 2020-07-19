@@ -26,9 +26,9 @@ export class SubmenuEditor extends Component {
       <Fragment>
         <InspectorControls>
           <PanelBody title={__('Setting', 'p4ge')}>
-            {attributes.levels.map((heading, i) => (
+            {attributes.levels.map((level, i) => (
               <SubmenuLevel
-                {...heading}
+                {...level}
                 onHeadingChange={onHeadingChange}
                 onLinkChange={onLinkChange}
                 onStyleChange={onStyleChange}
@@ -46,7 +46,7 @@ export class SubmenuEditor extends Component {
               Add level
           </Button>
             <Button
-              isDefault
+              isSecondary
               onClick={removeLevel} disabled={attributes.levels.length <= 1}
             >
               Remove level
@@ -58,11 +58,13 @@ export class SubmenuEditor extends Component {
   }
 
   renderView() {
-    const { attributes, onTitleChange, className } = this.props;
+    const { attributes, onTitleChange, className, postId } = this.props;
+
     let style = 'long';
     if (className) {
       style = className.split('is-style-')[1];
     }
+
     return (
       <Fragment>
         <section className={`block submenu-block submenu-${style}`}>
@@ -76,7 +78,7 @@ export class SubmenuEditor extends Component {
             characterLimit={60}
             multiline="false"
           />
-          <SubmenuFrontend isEditing {...attributes} />
+          <SubmenuFrontend isEditing postId={postId} {...attributes} />
         </section>
       </Fragment>
     );
