@@ -14,12 +14,14 @@ export class SubmenuFrontend extends Component {
   };
 
   componentDidMount() {
-    this.loadMenuItems();
+    if (this.props.postId) {
+      this.loadMenuItems();
+    }
   }
 
-  componentDidUpdate({ levels: prevLevels }) {
-    const { levels } = this.props;
-    if (JSON.stringify(levels) !== JSON.stringify(prevLevels)) {
+  componentDidUpdate({ levels: prevLevels, postId: prevPostId }) {
+    const { levels, postId } = this.props;
+    if (JSON.stringify(levels) !== JSON.stringify(prevLevels) || postId !== prevPostId) {
       this.loadMenuItems();
     }
   }
@@ -54,36 +56,39 @@ export class SubmenuFrontend extends Component {
     if (className) {
       style = className.split('is-style-')[1];
     }
+
     return (
       <Fragment>
-        <section className={isEditing ? '' : `block submenu-block submenu-${style}`}>
-          {title && !isEditing &&
-            <h2>{title}</h2>
-          }
-          {menuItems.length > 0 &&
-            <div className="submenu-menu">
-              <ul className="submenu-item">
-                {menuItems.map(item => (
-                  <li key={item.text} className={`list-style-${item.style || 'none'} ${item.link ? "list-link" : "list-heading"}"`}>
-                    {item.link ?
-                      <a href={`#${item.id}`} className="icon-link submenu-link" data-hash={item.hash}>{item.text}</a>
-                      :
-                      <span className="submenu-heading">{item.text}</span>
-                    }
-                    {item.children && item.children.length > 0 &&
-                      <span>TODO</span>
-                    }
-                  </li>
-                ))
-                }
-              </ul>
-            </div>
-          }
-          {isEditing && menuItems.length === 0 &&
-            <div className='EmptyMessage'>{__('The submenu block produces no output on the editor.', 'p4ge')}</div>
-          }
-          {!isEditing && <a href="#" className="back-top">&nbsp;</a>}
-        </section>
+        {(isEditing || menuItems.length > 0) && (
+          <section className={isEditing ? '' : `block submenu-block submenu-${style}`}>
+            {title && !isEditing &&
+              <h2>{title}</h2>
+            }
+            {menuItems.length > 0 &&
+              <div className="submenu-menu">
+                <ul className="submenu-item">
+                  {menuItems.map(item => (
+                    <li key={item.text} className={`list-style-${item.style || 'none'} ${item.link ? "list-link" : "list-heading"}"`}>
+                      {item.link ?
+                        <a href={`#${item.id}`} className="icon-link submenu-link" data-hash={item.hash}>{item.text}</a>
+                        :
+                        <span className="submenu-heading">{item.text}</span>
+                      }
+                      {item.children && item.children.length > 0 &&
+                        <span>TODO</span>
+                      }
+                    </li>
+                  ))
+                  }
+                </ul>
+              </div>
+            }
+            {isEditing && menuItems.length === 0 &&
+              <div className='EmptyMessage'>{__('The submenu block produces no output on the editor.', 'p4ge')}</div>
+            }
+            {!isEditing && <a href="#" className="back-top">&nbsp;</a>}
+          </section>
+        )}
       </Fragment>
     );
   }
