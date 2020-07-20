@@ -12,15 +12,41 @@ export class SubmenuEditor extends Component {
     super(props);
   }
 
+  componentDidMount() {
+    const { postId, attributes, setAttributes } = this.props;
+    if (!attributes.postId) {
+      setAttributes({ postId });
+    }
+  }
+
   renderEdit() {
-    const {
-      attributes,
-      onHeadingChange,
-      onLinkChange,
-      addLevel,
-      onStyleChange,
-      removeLevel
-    } = this.props;
+    const { attributes, setAttributes } = this.props;
+
+    function addLevel() {
+      setAttributes({ levels: attributes.levels.concat({ heading: 0, link: false, style: 'none' }) });
+    }
+
+    function onHeadingChange(index, value) {
+      let levels = JSON.parse(JSON.stringify(attributes.levels));
+      levels[index].heading = Number(value);
+      setAttributes({ levels });
+    }
+
+    function onLinkChange(index, value) {
+      let levels = JSON.parse(JSON.stringify(attributes.levels));
+      levels[index].link = value;
+      setAttributes({ levels });
+    }
+
+    function onStyleChange(index, value) {
+      let levels = JSON.parse(JSON.stringify(attributes.levels));
+      levels[index].style = value; // Possible values: "none", "bullet", "number"
+      setAttributes({ levels });
+    }
+
+    function removeLevel() {
+      setAttributes({ levels: attributes.levels.slice(0, -1) });
+    }
 
     return (
       <Fragment>
@@ -58,7 +84,7 @@ export class SubmenuEditor extends Component {
   }
 
   renderView() {
-    const { attributes, onTitleChange, className, postId } = this.props;
+    const { attributes, setAttributes, className } = this.props;
 
     let style = 'long';
     if (className) {
@@ -72,13 +98,13 @@ export class SubmenuEditor extends Component {
             tagName="h2"
             placeholder={__('Enter title', 'p4ge')}
             value={attributes.title}
-            onChange={onTitleChange}
+            onChange={title => setAttributes({ title })}
             keepPlaceholderOnFocus={true}
             withoutInteractiveFormatting
             characterLimit={60}
             multiline="false"
           />
-          <SubmenuFrontend isEditing postId={postId} {...attributes} />
+          <SubmenuFrontend isEditing {...attributes} />
         </section>
       </Fragment>
     );

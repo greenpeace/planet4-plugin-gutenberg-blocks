@@ -58,48 +58,12 @@ export class SubmenuBlock {
         postId,
         className
       }) => {
-
-        function addLevel() {
-          setAttributes({ levels: attributes.levels.concat({ heading: 0, link: false, style: 'none' }) });
-        }
-
-        function onTitleChange(title) {
-          setAttributes({ title });
-        }
-
-        function onHeadingChange(index, value) {
-          let levels = JSON.parse(JSON.stringify(attributes.levels));
-          levels[index].heading = Number(value);
-          setAttributes({ levels });
-        }
-
-        function onLinkChange(index, value) {
-          let levels = JSON.parse(JSON.stringify(attributes.levels));
-          levels[index].link = value;
-          setAttributes({ levels });
-        }
-
-        function onStyleChange(index, value) {
-          let levels = JSON.parse(JSON.stringify(attributes.levels));
-          levels[index].style = value; // Possible values: "none", "bullet", "number"
-          setAttributes({ levels });
-        }
-
-        function removeLevel() {
-          setAttributes({ levels: attributes.levels.slice(0, -1) });
-        }
-
         return <SubmenuEditor
           attributes={attributes}
           isSelected={isSelected}
-          onTitleChange={onTitleChange}
-          onHeadingChange={onHeadingChange}
-          onLinkChange={onLinkChange}
-          onStyleChange={onStyleChange}
-          addLevel={addLevel}
-          removeLevel={removeLevel}
           postId={postId}
           className={className}
+          setAttributes={setAttributes}
         />
       }),
       save: frontendRendered(BLOCK_NAME)
