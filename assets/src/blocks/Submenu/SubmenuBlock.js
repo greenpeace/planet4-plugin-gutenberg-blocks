@@ -55,7 +55,8 @@ export class SubmenuBlock {
         isSelected,
         attributes,
         setAttributes,
-        postId
+        postId,
+        className
       }) => {
 
         function addLevel() {
@@ -98,6 +99,7 @@ export class SubmenuBlock {
           addLevel={addLevel}
           removeLevel={removeLevel}
           postId={postId}
+          className={className}
         />
       }),
       save: frontendRendered(BLOCK_NAME)
