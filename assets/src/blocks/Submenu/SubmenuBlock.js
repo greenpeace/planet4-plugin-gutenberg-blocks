@@ -25,6 +25,7 @@ export class SubmenuBlock {
     const attributes = {
       title: {
         type: 'string',
+        default: ''
       },
       levels: {
         type: 'array',
@@ -57,15 +58,15 @@ export class SubmenuBlock {
         setAttributes,
         postId,
         className
-      }) => {
-        return <SubmenuEditor
+      }) => (
+        <SubmenuEditor
           attributes={attributes}
           isSelected={isSelected}
           postId={postId}
           className={className}
           setAttributes={setAttributes}
         />
-      }),
+      )),
       save: frontendRendered(BLOCK_NAME)
     });
 
