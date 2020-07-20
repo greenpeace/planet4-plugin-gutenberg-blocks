@@ -3,17 +3,11 @@ const { __ } = wp.i18n;
 const { apiFetch } = wp;
 const { addQueryArgs } = wp.url;
 
-const placeholderData = [
-  { text: 'Lorem', style: 'none' },
-  { text: 'Ipsum', style: 'none' },
-  { text: 'Dolor', style: 'none' }
-];
-
 export class SubmenuFrontend extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      menuItems: placeholderData
+      menuItems: []
     }
 
     this.loadMenuItems = this.loadMenuItems.bind(this);
@@ -43,6 +37,8 @@ export class SubmenuFrontend extends Component {
       const menuItems = await apiFetch(queryArgs);
       if (menuItems && menuItems.length > 0) {
         this.setState({ menuItems });
+      } else {
+        this.setState({ menuItems: [] });
       }
     } catch (e) {
       console.log(e);
@@ -64,23 +60,28 @@ export class SubmenuFrontend extends Component {
           {title && !isEditing &&
             <h2>{title}</h2>
           }
-          <div className="submenu-menu">
-            <ul className="submenu-item">
-              {menuItems.map(item => (
-                <li key={item.text} className={`list-style-${item.style || 'none'} ${item.link ? "list-link" : "list-heading"}"`}>
-                  {item.link ?
-                    <a href={`#${item.id}`} className="icon-link submenu-link" data-hash={item.hash}>{item.text}</a>
-                    :
-                    <span className="submenu-heading">{item.text}</span>
-                  }
-                  {item.children && item.children.length > 0 &&
-                    <span>TODO</span>
-                  }
-                </li>
-              ))
-              }
-            </ul>
-          </div>
+          {menuItems.length > 0 &&
+            <div className="submenu-menu">
+              <ul className="submenu-item">
+                {menuItems.map(item => (
+                  <li key={item.text} className={`list-style-${item.style || 'none'} ${item.link ? "list-link" : "list-heading"}"`}>
+                    {item.link ?
+                      <a href={`#${item.id}`} className="icon-link submenu-link" data-hash={item.hash}>{item.text}</a>
+                      :
+                      <span className="submenu-heading">{item.text}</span>
+                    }
+                    {item.children && item.children.length > 0 &&
+                      <span>TODO</span>
+                    }
+                  </li>
+                ))
+                }
+              </ul>
+            </div>
+          }
+          {isEditing && menuItems.length === 0 &&
+            <div className='EmptyMessage'>{__('The submenu block produces no output on the editor.', 'p4ge')}</div>
+          }
           {!isEditing && <a href="#" className="back-top">&nbsp;</a>}
         </section>
       </Fragment>
