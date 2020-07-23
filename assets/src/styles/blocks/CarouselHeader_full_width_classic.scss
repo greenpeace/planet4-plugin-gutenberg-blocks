@@ -401,7 +401,6 @@ $medium-image-height: 600px;
 
         h1, h2, h3 {
           width: 100%;
-          font-weight: bold;
           color: $grey-80;
           padding-left: 0;
           transition: unset;
@@ -409,21 +408,14 @@ $medium-image-height: 600px;
         }
 
         h1 {
-          font-size: 1.62rem;
           margin-bottom: 18px;
-          line-height: 1.2;
 
           html[dir="rtl"] & {
             text-align: right;
             padding-right: 0;
           }
 
-          @include small-and-up {
-            font-size: $font-size-xl;
-          }
-
           @include medium-and-up {
-            font-size: 2.25rem;
             margin-bottom: 24px;
           }
 
@@ -432,22 +424,16 @@ $medium-image-height: 600px;
             width: 100%;
             color: $white;
             margin-bottom: 32px;
-            line-height: 1.2;
-            font-size: $font-size-xxl;
           }
 
           @include x-large-and-up {
-            font-size: $font-size-xxxl;
-            line-height: 1.1;
             max-width: 100%;
             width: 100%;
           }
         }
 
         h2 {
-          font-size: $font-size-lg;
           margin-bottom: 10px;
-          line-height: 1.2;
           transform: translateX($text-slide-offset);
 
           html[dir="rtl"] & {
@@ -456,27 +442,22 @@ $medium-image-height: 600px;
           }
 
           @include medium-and-up {
-            font-size: $font-size-xl;
             margin-bottom: 18px;
           }
 
           @include large-and-up {
-            line-height: 1.2;
             color: $white;
             max-width: 100%;
             width: 100%;
           }
 
           @include x-large-and-up {
-            font-size: $font-size-xxl;
             margin-bottom: 24px;
           }
         }
 
         h3 {
-          font-size: $font-size-md;
           margin-bottom: 8px;
-          line-height: 1.2;
 
           html[dir="rtl"] & {
             text-align: right;
@@ -484,19 +465,16 @@ $medium-image-height: 600px;
           }
 
           @include medium-and-up {
-            font-size: $font-size-lg;
             margin-bottom: 12px;
           }
 
           @include large-and-up {
-            line-height: 1.2;
             color: $white;
             max-width: 100%;
             width: 100%;
           }
 
           @include x-large-and-up {
-            font-size: $font-size-xl;
             margin-bottom: 18px;
           }
         }

@@ -189,11 +189,8 @@ $slide-transition-speed: 1s;
     }
 
     h1 {
-      font-size: $font-size-xl;
       margin-bottom: 10px;
       width: 70%;
-      line-height: 1.2;
-      font-weight: bold;
       color: $grey-80;
       padding-left: 15px;
 
@@ -202,27 +199,17 @@ $slide-transition-speed: 1s;
         padding-right: 15px;
       }
 
-      @include medium-and-up {
-        font-size: $font-size-xxl;
-      }
-
       @include large-and-up {
         margin-bottom: 20px;
-        line-height: 1.2;
         width: 50%;
       }
 
       @include x-large-and-up {
-        font-size: 3.5rem;
-        line-height: 1.1;
         width: 60%;
       }
     }
 
     h2 {
-      font-size: $font-size-md;
-      line-height: 1.3;
-      font-weight: 400;
       width: 55%;
       color: $grey-80;
       margin-bottom: 0;
@@ -234,20 +221,15 @@ $slide-transition-speed: 1s;
       }
 
       @include medium-and-up {
-        font-size: 1.5rem;
         margin-bottom: 34px;
-        font-weight: 300;
       }
 
       @include large-and-up {
-        line-height: 1.2;
         width: 50%;
       }
 
       @include x-large-and-up {
-        font-size: 2.25rem;
         margin-bottom: 30px;
-        font-weight: 300;
       }
     }
 
