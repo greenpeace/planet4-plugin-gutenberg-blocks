@@ -3,6 +3,7 @@ import { Button, PanelBody } from '@wordpress/components';
 import { SubmenuLevel } from "./SubmenuLevel";
 import { SubmenuFrontend } from './SubmenuFrontend';
 import { InspectorControls } from '@wordpress/block-editor';
+import { getSubmenuStyle } from './getSubmenuStyle';
 
 const { __ } = wp.i18n;
 const { RichText } = wp.editor;
@@ -84,12 +85,9 @@ export class SubmenuEditor extends Component {
   }
 
   renderView() {
-    const { attributes, setAttributes, className } = this.props;
+    const { attributes, setAttributes, className, submenu_style } = this.props;
 
-    let style = 'long';
-    if (className) {
-      style = className.split('is-style-')[1];
-    }
+    const style = getSubmenuStyle(className, submenu_style);
 
     return (
       <Fragment>

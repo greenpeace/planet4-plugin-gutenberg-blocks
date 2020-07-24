@@ -31,9 +31,13 @@ class Submenu extends Base_Block {
 			[
 				'editor_script' => 'planet4-blocks',
 				'attributes'    => [
-					'title'  => [
+					'title'         => [
 						'type'    => 'string',
 						'default' => '',
+					],
+					'submenu_style' => [ // Needed for conversion of existing blocks.
+						'type'    => 'integer',
+						'default' => 0,
 					],
 					/**
 					 * Levels is an array of objects.
@@ -44,7 +48,7 @@ class Submenu extends Base_Block {
 					 *   style: 'string'
 					 * }
 					 */
-					'levels' => [
+					'levels'        => [
 						'type'  => 'array',
 						'items' => [
 							'type'       => 'object',
