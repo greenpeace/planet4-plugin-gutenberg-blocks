@@ -1,7 +1,6 @@
 import { SubmenuEditor } from './SubmenuEditor.js';
 import { frontendRendered } from '../frontendRendered';
 import { Tooltip } from '@wordpress/components';
-import { withSelect } from '@wordpress/data';
 
 const { __ } = wp.i18n;
 
@@ -53,24 +52,7 @@ export class SubmenuBlock {
       supports: {
         multiple: false, // Use the block just once per post.
       },
-      edit: withSelect(select => {
-        const postId = select('core/editor').getCurrentPostId();
-        return { postId };
-      })(({
-        isSelected,
-        attributes,
-        setAttributes,
-        postId,
-        className
-      }) => (
-        <SubmenuEditor
-          attributes={attributes}
-          isSelected={isSelected}
-          postId={postId}
-          className={className}
-          setAttributes={setAttributes}
-        />
-      )),
+      edit: SubmenuEditor,
       save: frontendRendered(BLOCK_NAME)
     });
 

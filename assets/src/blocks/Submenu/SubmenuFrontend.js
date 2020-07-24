@@ -11,24 +11,33 @@ export class SubmenuFrontend extends Component {
       menuItems: []
     }
 
+    this.postId = null;
     this.loadMenuItems = this.loadMenuItems.bind(this);
   };
 
   componentDidMount() {
-    if (this.props.postId) {
-      this.loadMenuItems();
+    // Set the post id and load the menu items
+    // If in the editor, the post id will be in the props
+    // Otherwise, we need to retrieve it from the body classnames
+    let postId = this.props.postId || null;
+    if (!postId) {
+      const bodyClassNames = [...document.body.classList];
+      const idClassName = bodyClassNames.find(c => c.match(/page-id-/));
+      postId = Number(idClassName.replace('page-id-', ''));
+    }
+    this.postId = postId;
+    this.loadMenuItems(postId);
+  }
+
+  componentDidUpdate({ levels: prevLevels }) {
+    const { levels } = this.props;
+    if (JSON.stringify(levels) !== JSON.stringify(prevLevels)) {
+      this.loadMenuItems(this.postId);
     }
   }
 
-  componentDidUpdate({ levels: prevLevels, postId: prevPostId }) {
-    const { levels, postId } = this.props;
-    if (JSON.stringify(levels) !== JSON.stringify(prevLevels) || postId !== prevPostId) {
-      this.loadMenuItems();
-    }
-  }
-
-  async loadMenuItems() {
-    const { levels, postId } = this.props;
+  async loadMenuItems(postId) {
+    const { levels } = this.props;
     const queryArgs = {
       path: addQueryArgs('/planet4/v1/get-submenu-items', {
         levels,
