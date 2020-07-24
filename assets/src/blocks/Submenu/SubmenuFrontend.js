@@ -1,4 +1,5 @@
 import { Component, Fragment } from '@wordpress/element';
+import { getSubmenuStyle } from './getSubmenuStyle';
 const { __ } = wp.i18n;
 const { apiFetch } = wp;
 const { addQueryArgs } = wp.url;
@@ -49,13 +50,10 @@ export class SubmenuFrontend extends Component {
   }
 
   render() {
-    const { title, className, isEditing } = this.props;
+    const { title, className, isEditing, submenu_style } = this.props;
     const { menuItems } = this.state;
 
-    let style = 'long';
-    if (className) {
-      style = className.split('is-style-')[1];
-    }
+    const style = getSubmenuStyle(className, submenu_style);
 
     return (
       <Fragment>

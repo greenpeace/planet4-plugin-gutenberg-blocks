@@ -27,6 +27,10 @@ export class SubmenuBlock {
         type: 'string',
         default: ''
       },
+      submenu_style: { // Needed for conversion of existing blocks
+        type: 'integer',
+        default: 0
+      },
       levels: {
         type: 'array',
         default: [{ heading: 0, link: false, style: 'none' }]
