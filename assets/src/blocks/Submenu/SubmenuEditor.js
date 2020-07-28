@@ -39,7 +39,7 @@ const renderEdit = (attributes, setAttributes) => {
   return (
     <Fragment>
       <InspectorControls>
-        <PanelBody title={__('Setting', 'p4ge')}>
+        <PanelBody title={__('Setting', 'planet4-blocks-backend')}>
           {attributes.levels.map((level, i) => (
             <SubmenuLevel
               {...level}
@@ -49,21 +49,21 @@ const renderEdit = (attributes, setAttributes) => {
               index={i}
               key={i}
             />
-          )
-          )}
+          ))}
           <Button
             isPrimary
             onClick={addLevel}
             disabled={attributes.levels.length >= 3 || attributes.levels.slice(-1)[0].heading === 0}
             style={{ marginRight: 5 }}
           >
-            Add level
+            {__('Add level', 'planet4-blocks-backend')}
         </Button>
           <Button
             isSecondary
-            onClick={removeLevel} disabled={attributes.levels.length <= 1}
+            onClick={removeLevel}
+            disabled={attributes.levels.length <= 1}
           >
-            Remove level
+            {__('Remove level', 'planet4-blocks-backend')}
         </Button>
         </PanelBody>
       </InspectorControls>

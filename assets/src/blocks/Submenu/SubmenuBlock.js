@@ -9,8 +9,8 @@ const BLOCK_NAME = 'planet4-blocks/submenu';
 const getStyleLabel = (label, help) => {
   if (help) {
     return (
-      <Tooltip text={__(help, 'planet4-blocks')}>
-        <span>{__(label, 'planet4-blocks')}</span>
+      <Tooltip text={__(help, 'planet4-blocks-backend')}>
+        <span>{__(label, 'planet4-blocks-backend')}</span>
       </Tooltip>
     );
   }
