@@ -32,7 +32,6 @@ class Shortcode_To_Gutenberg {
 				'shortcake_columns',
 				'shortcake_carousel_header',
 				'shortcake_cookies',
-				'shortcake_counter',
 				'shortcake_enblock',
 				'shortcake_gallery',
 				'shortcake_happy_point',
@@ -40,7 +39,6 @@ class Shortcode_To_Gutenberg {
 				'shortcake_newcovers',
 				'shortcake_social_media',
 				'shortcake_split_two_columns',
-				'shortcake_submenu',
 				'shortcake_timeline',
 				'shortcake_take_action_boxout',
 			];
