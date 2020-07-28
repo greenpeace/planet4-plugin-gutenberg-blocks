@@ -91,7 +91,7 @@ export class SubmenuFrontend extends Component {
               </div>
             }
             {isEditing && menuItems.length === 0 &&
-              <div className='EmptyMessage'>{__('The submenu block produces no output on the editor.', 'p4ge')}</div>
+              <div className='EmptyMessage'>{__('The submenu block produces no output on the editor.', 'planet4-blocks-backend')}</div>
             }
             {!isEditing && <a href="#" className="back-top">&nbsp;</a>}
           </section>
