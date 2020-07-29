@@ -1,5 +1,6 @@
 import { Component, Fragment } from '@wordpress/element';
 import { getSubmenuStyle } from './getSubmenuStyle';
+import { addSubmenuActions } from './addSubmenuActions';
 const { __ } = wp.i18n;
 const { apiFetch } = wp;
 const { addQueryArgs } = wp.url;
@@ -37,7 +38,7 @@ export class SubmenuFrontend extends Component {
   }
 
   async loadMenuItems(postId) {
-    const { levels } = this.props;
+    const { levels, isEditing } = this.props;
     const queryArgs = {
       path: addQueryArgs('/planet4/v1/get-submenu-items', {
         levels,
@@ -49,6 +50,11 @@ export class SubmenuFrontend extends Component {
       const menuItems = await apiFetch(queryArgs);
       if (menuItems && menuItems.length > 0) {
         this.setState({ menuItems });
+        // This takes care of adding the "back to top" button,
+        // and also the submenu links behavior if needed
+        if (!isEditing) {
+          addSubmenuActions(menuItems);
+        }
       } else {
         this.setState({ menuItems: [] });
       }
@@ -60,7 +66,7 @@ export class SubmenuFrontend extends Component {
 
   getMenuItems(items) {
     return items.map(item => (
-      <li key={item.text} className={`list-style-${item.style || 'none'} ${item.link ? "list-link" : "list-heading"}"`}>
+      <li key={item.text} className={`list-style-${item.style || 'none'} ${item.link ? "list-link" : "list-heading"}`}>
         {item.link ?
           <a href={`#${item.id}`} className="icon-link submenu-link" data-hash={item.hash}>{item.text}</a>
           :
