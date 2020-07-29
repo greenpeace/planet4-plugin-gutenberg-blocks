@@ -84,7 +84,7 @@ const renderView = (attributes, setAttributes) => {
       <section className={`block submenu-block submenu-${style}`}>
         <RichText
           tagName="h2"
-          placeholder={__('Enter title', 'p4ge')}
+          placeholder={__('Enter title', 'planet4-blocks-backend')}
           value={attributes.title}
           onChange={title => setAttributes({ title })}
           keepPlaceholderOnFocus={true}
