@@ -5,3 +5,9 @@
 [data-type="planet4-blocks/submenu"] {
   clear: both;
 }
+
+.editor-styles-wrapper .submenu-block h2 {
+  padding-left: 16px;
+  color: $grey-60;
+  font-family: $roboto;
+}

@@ -7,7 +7,7 @@ const SUBMENU_STYLES = {
 
 export const getSubmenuStyle = (className, submenu_style) => {
   let style = submenu_style ? SUBMENU_STYLES[submenu_style] : 'long';
-  if (className) {
+  if (className && className.includes('is-style-')) {
     style = className.split('is-style-')[1];
   }
   return style;
