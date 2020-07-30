@@ -1,4 +1,4 @@
-import { Component, Fragment } from '@wordpress/element';
+import { Fragment } from '@wordpress/element';
 import { Button, PanelBody } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
 import { SubmenuLevel } from "./SubmenuLevel";
