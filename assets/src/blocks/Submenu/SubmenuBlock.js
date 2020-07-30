@@ -1,5 +1,4 @@
 import { SubmenuEditor } from './SubmenuEditor.js';
-import { frontendRendered } from '../frontendRendered';
 import { Tooltip } from '@wordpress/components';
 
 const { __ } = wp.i18n;
@@ -30,6 +29,10 @@ export class SubmenuBlock {
           type: 'string',
           default: ''
         },
+        submenu_style: { // Needed for old blocks conversion
+          type: 'integer',
+          default: 0
+        },
         levels: {
           type: 'array',
           default: [{ heading: 0, link: false, style: 'none' }]
@@ -39,25 +42,9 @@ export class SubmenuBlock {
         multiple: false, // Use the block just once per post.
       },
       edit: SubmenuEditor,
-      save: frontendRendered(BLOCK_NAME),
-      deprecated: [
-        {
-          attributes: {
-            title: {
-              type: 'string'
-            },
-            submenu_style: {
-              type: 'integer'
-            },
-            levels: {
-              type: 'array'
-            },
-          },
-          save() {
-            return null;
-          },
-        }
-      ],
+      save() {
+        return null;
+      }
     });
 
     registerBlockStyle(

@@ -29,13 +29,18 @@ class Submenu extends Base_Block {
 		register_block_type(
 			'planet4-blocks/submenu',
 			[
-				'editor_script' => 'planet4-blocks',
-				'attributes'    => [
+				'editor_script'   => 'planet4-blocks',
+				// todo: Remove when all content is migrated.
+				'render_callback' => static function ( $attributes ) {
+					$json = wp_json_encode( [ 'attributes' => $attributes ] );
+					return '<div data-render="planet4-blocks/submenu" data-attributes="' . htmlspecialchars( $json ) . '"></div>';
+				},
+				'attributes'      => [
 					'title'         => [
 						'type'    => 'string',
 						'default' => '',
 					],
-					'submenu_style' => [ // Needed for conversion of existing blocks.
+					'submenu_style' => [ // Needed for old blocks conversion.
 						'type'    => 'integer',
 						'default' => 0,
 					],
