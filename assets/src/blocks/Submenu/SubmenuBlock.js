@@ -21,39 +21,43 @@ export class SubmenuBlock {
   constructor() {
     const { registerBlockType, registerBlockStyle } = wp.blocks;
 
-    const attributes = {
-      title: {
-        type: 'string',
-        default: ''
-      },
-      submenu_style: { // Needed for conversion of existing blocks
-        type: 'integer',
-        default: 0
-      },
-      levels: {
-        type: 'array',
-        default: [{ heading: 0, link: false, style: 'none' }]
-      },
-    };
-
     registerBlockType(BLOCK_NAME, {
       title: 'Submenu',
       icon: 'welcome-widgets-menus',
       category: 'planet4-blocks',
-      attributes,
+      attributes: {
+        title: {
+          type: 'string',
+          default: ''
+        },
+        levels: {
+          type: 'array',
+          default: [{ heading: 0, link: false, style: 'none' }]
+        },
+      },
+      supports: {
+        multiple: false, // Use the block just once per post.
+      },
+      edit: SubmenuEditor,
+      save: frontendRendered(BLOCK_NAME),
       deprecated: [
         {
-          attributes,
+          attributes: {
+            title: {
+              type: 'string'
+            },
+            submenu_style: {
+              type: 'integer'
+            },
+            levels: {
+              type: 'array'
+            },
+          },
           save() {
             return null;
           },
         }
       ],
-      supports: {
-        multiple: false, // Use the block just once per post.
-      },
-      edit: SubmenuEditor,
-      save: frontendRendered(BLOCK_NAME)
     });
 
     registerBlockStyle(
