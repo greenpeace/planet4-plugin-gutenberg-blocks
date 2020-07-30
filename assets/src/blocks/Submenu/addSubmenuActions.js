@@ -74,14 +74,14 @@ function addChildrenLinks(menu) {
  * @param item Submenu menu item
  */
 function addTargetLinks(item) {
-  let $headings = $('body ' + item.type);
-
-  for (let l = 0; l < $headings.length; l++) {
-
-    let $heading = $($headings[l]);
-    if ($heading.text().replace(/\u2010|\u2011|\u2013/, '') === item.text.replace('-', '')) {
-      $heading.prepend('<a id="' + item.id + '" data-hash-target="' + item.hash + '"></a>');
-      break;
+  if (item.link) {
+    let $headings = $('body ' + item.type);
+    for (let l = 0; l < $headings.length; l++) {
+      let $heading = $($headings[l]);
+      if ($heading.text().replace(/\u2010|\u2011|\u2013/, '') === item.text.replace('-', '')) {
+        $heading.prepend('<a id="' + item.id + '" data-hash-target="' + item.hash + '"></a>');
+        break;
+      }
     }
   }
 }
