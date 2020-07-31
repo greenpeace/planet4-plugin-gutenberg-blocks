@@ -18,7 +18,7 @@ const getStyleLabel = (label, help) => {
 
 export class SubmenuBlock {
   constructor() {
-    const { registerBlockType, registerBlockStyle } = wp.blocks;
+    const { registerBlockType } = wp.blocks;
 
     registerBlockType(BLOCK_NAME, {
       title: 'Submenu',
@@ -41,15 +41,7 @@ export class SubmenuBlock {
       supports: {
         multiple: false, // Use the block just once per post.
       },
-      edit: SubmenuEditor,
-      save() {
-        return null;
-      }
-    });
-
-    registerBlockStyle(
-      BLOCK_NAME,
-      [
+      styles: [
         {
           name: 'long',
           label: getStyleLabel(
@@ -72,8 +64,12 @@ export class SubmenuBlock {
             'Use: on long pages (more than 5 screens) when list items are short (up to 10 words). Max items recommended: 9'
           )
         }
-      ]
-    );
+      ],
+      edit: SubmenuEditor,
+      save() {
+        return null;
+      }
+    });
   };
 }
 
