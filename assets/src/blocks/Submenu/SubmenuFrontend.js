@@ -64,17 +64,37 @@ export class SubmenuFrontend extends Component {
     }
   }
 
+  onSubmenuLinkClick(hash, link) {
+    const target = document.querySelectorAll(`[data-hash-target='${hash}']`)[0];
+    if (target) {
+      document.body.animate({
+        scrollTop: target.offsetTop - 100
+      }, 2000, () => {
+        const position = window.pageYOffset;
+        window.location.hash = link;
+        window.scrollTop(position);
+      });
+    }
+  }
+
   getMenuItems(items) {
-    return items.map(item => (
-      <li key={item.text} className={`list-style-${item.style || 'none'} ${item.link ? "list-link" : "list-heading"}`}>
-        {item.link ?
-          <a href={`#${item.id}`} className="icon-link submenu-link" data-hash={item.hash}>{item.text}</a>
+    return items.map(({ text, style, link, id, hash, children }) => (
+      <li key={text} className={`list-style-${style || 'none'} ${link ? "list-link" : "list-heading"}`}>
+        {link ?
+          <a
+            href={`#${id}`}
+            className="icon-link submenu-link"
+            data-hash={hash}
+            onClick={() => this.onSubmenuLinkClick(hash, `#${id}`)}
+          >
+            {text}
+          </a>
           :
-          <span className="submenu-heading">{item.text}</span>
+          <span className="submenu-heading">{text}</span>
         }
-        {item.children && item.children.length > 0 &&
+        {children && children.length > 0 &&
           <ul>
-            {this.getMenuItems(item.children)}
+            {this.getMenuItems(children)}
           </ul>
         }
       </li>
