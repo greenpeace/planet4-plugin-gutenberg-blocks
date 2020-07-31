@@ -6,49 +6,24 @@ export const addSubmenuActions = submenu => {
       addChildrenLinks(menu);
     }
 
-    // Add click event for submenu links.
-    $('.submenu-link').click(function (event) {
-      event.preventDefault();
-      const link = $.attr(this, 'href');
-      let h = $(this).data('hash');
-      let $target = $('*[data-hash-target="' + h + '"]');
-      if ($target) {
-        $('html, body').animate({
-          scrollTop: $target.offset().top - 100
-        }, 2000, function () {
-          const position = $(window).scrollTop();
-          window.location.hash = link;
-          $(window).scrollTop(position);
-        });
-      }
-
-      return false;
-    });
-
     // Add "back to top" button behavior
-    const $backtop = $('.back-top');
-    const $submenu = $('.submenu-block');
+    const backtop = document.getElementsByClassName('back-top')[0];
+    const submenuBlock = document.getElementsByClassName('submenu-block')[0];
+    const cookiesBlock = document.getElementById('set-cookie');
 
-    if ($submenu.length > 0) {
-      $(window).scroll(function () {
-        if ($(this).scrollTop() > 400) {
-          $backtop.fadeIn();
-          if ($('.cookie-block:visible').length > 0) {
-            $backtop.css('bottom', '120px');
+    if (submenuBlock) {
+      window.onscroll = () => {
+        if (window.pageYOffset > 400) {
+          backtop.style.display = 'block';
+          if (cookiesBlock && cookiesBlock.style.display !== 'none') {
+            backtop.style.bottom = '120px';
           } else {
-            $backtop.css('bottom', '50px');
+            backtop.style.bottom = '50px';
           }
         } else {
-          $backtop.fadeOut();
+          backtop.style.display = 'none';
         }
-      });
-
-      $backtop.click(function () {
-        $('body, html').animate({
-          scrollTop: 0
-        }, 800);
-        return false;
-      });
+      };
     }
   }
 };
@@ -75,12 +50,14 @@ function addChildrenLinks(menu) {
  */
 function addTargetLinks(item) {
   if (item.link) {
-    let $headings = $('body ' + item.type);
-    for (let l = 0; l < $headings.length; l++) {
-      let $heading = $($headings[l]);
-      if ($heading.text().replace(/\u2010|\u2011|\u2013/, '') === item.text.replace('-', '')) {
-        $heading.prepend('<a id="' + item.id + '" data-hash-target="' + item.hash + '"></a>');
-        break;
+    const headings = [...document.getElementsByTagName(item.type)];
+    for (let l = 0; l < headings.length; l++) {
+      const heading = headings[l];
+      if (heading.innerText.replace(/\u2010|\u2011|\u2013/, '') === item.text.replace('-', '')) {
+        let targetLink = document.createElement('a');
+        targetLink.id = item.id;
+        targetLink.setAttribute('data-hash-target', item.hash);
+        heading.appendChild(targetLink);
       }
     }
   }
