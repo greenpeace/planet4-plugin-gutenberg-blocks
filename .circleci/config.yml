@@ -80,7 +80,7 @@ jobs:
 
   acceptance-tests:
     docker:
-      - image: greenpeaceinternational/p4-builder:latest
+      - image: greenpeaceinternational/p4-builder:planet-5221
     working_directory: /home/circleci/
     environment:
       APP_HOSTNAME: www.planet4.test
@@ -94,6 +94,8 @@ jobs:
       WP_TITLE: Greenpeace Base Development
     steps:
       - setup_remote_docker
+      - checkout:
+          path: /home/circleci/checkout/planet4-plugin-gutenberg-blocks
       - run:
           name: Build - Configure
           command: |
@@ -106,8 +108,15 @@ jobs:
           working_directory: /home/circleci
           command: |
             echo "Plugin gutenberg blocks branch is ${CIRCLE_BRANCH}"
-            sleep 10
-            PLUGIN_GUTENBERG_BLOCKS_BRANCH=dev-${CIRCLE_BRANCH} MERGE_SOURCE=git@github.com:greenpeace/planet4-base-fork.git MERGE_REF=develop make
+            if [ -n "$CIRCLE_PR_NUMBER" ]; then
+              BRANCH="$(./get-fork-pr-branch.sh)"
+            else
+              BRANCH="${CIRCLE_BRANCH}"
+            fi
+            PLUGIN_GUTENBERG_BLOCKS_BRANCH=dev-${BRANCH}#${CIRCLE_SHA1} \
+            MERGE_SOURCE=git@github.com:greenpeace/planet4-base-fork.git \
+            MERGE_REF=develop \
+            make ci
       - run:
           name: Test - Clone planet4-docker-compose
           command: |
