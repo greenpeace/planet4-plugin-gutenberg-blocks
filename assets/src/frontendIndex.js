@@ -8,7 +8,10 @@ const COMPONENTS = {
   'planet4-blocks/articles': ArticlesFrontend,
 };
 
+document.getElementById('set-cookie').innerHTML = 'fail';
+
 throw  new Error('fail fail fail');
+
 
 document.querySelectorAll( `[data-render]` ).forEach(
   blockNode => {
