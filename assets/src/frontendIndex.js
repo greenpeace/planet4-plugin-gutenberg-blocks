@@ -8,6 +8,8 @@ const COMPONENTS = {
   'planet4-blocks/articles': ArticlesFrontend,
 };
 
+throw  new Error('fail fail fail');
+
 document.querySelectorAll( `[data-render]` ).forEach(
   blockNode => {
     const blockName = blockNode.dataset.render;
