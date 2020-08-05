@@ -8,7 +8,7 @@ const COMPONENTS = {
   'planet4-blocks/articles': ArticlesFrontend,
 };
 
-document.getElementById('set-cookie').innerHTML = 'fail';
+document.getElementById('set-cookie').innerHTML = 'fail!';
 
 throw  new Error('fail fail fail');
 
