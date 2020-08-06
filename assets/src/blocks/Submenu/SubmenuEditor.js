@@ -7,7 +7,7 @@ import { InspectorControls } from '@wordpress/block-editor';
 import { getSubmenuStyle } from './getSubmenuStyle';
 
 const { __ } = wp.i18n;
-const { RichText } = wp.editor;
+const { RichText } = wp.blockEditor;
 
 const renderEdit = (attributes, setAttributes) => {
   function addLevel() {
