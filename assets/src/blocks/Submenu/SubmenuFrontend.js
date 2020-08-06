@@ -1,6 +1,5 @@
 import { Component, Fragment } from '@wordpress/element';
-import { getSubmenuStyle } from './getSubmenuStyle';
-import { addSubmenuActions } from './addSubmenuActions';
+import { getSubmenuStyle, addSubmenuActions } from './submenuFunctions';
 const { __ } = wp.i18n;
 const { apiFetch } = wp;
 const { addQueryArgs } = wp.url;
