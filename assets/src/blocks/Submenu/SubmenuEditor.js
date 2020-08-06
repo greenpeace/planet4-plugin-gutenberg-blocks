@@ -1,10 +1,10 @@
 import { Fragment } from '@wordpress/element';
 import { Button, PanelBody } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
-import { SubmenuLevel } from "./SubmenuLevel";
+import { SubmenuLevel } from './SubmenuLevel';
 import { SubmenuFrontend } from './SubmenuFrontend';
 import { InspectorControls } from '@wordpress/block-editor';
-import { getSubmenuStyle } from './getSubmenuStyle';
+import { getSubmenuStyle } from './submenuFunctions';
 
 const { __ } = wp.i18n;
 const { RichText } = wp.blockEditor;
