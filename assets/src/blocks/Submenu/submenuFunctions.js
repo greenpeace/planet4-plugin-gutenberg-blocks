@@ -1,3 +1,5 @@
+import md5 from 'md5';
+
 // Map for old attribute 'submenu_style'
 const SUBMENU_STYLES = {
   1: 'long',
@@ -47,7 +49,7 @@ export const addSubmenuActions = submenu => {
  *
  * @param menu Submenu entry
  */
-function addChildrenLinks(menu) {
+const addChildrenLinks = menu => {
   if (menu.children && Array.isArray(menu.children)) {
     for (let k = 0; k < menu.children.length; k++) {
       const child = menu.children[k];
@@ -55,24 +57,55 @@ function addChildrenLinks(menu) {
       addChildrenLinks(child);
     }
   }
-}
+};
 
 /**
  * Append html links the given item.
  *
  * @param item Submenu menu item
  */
-function addTargetLinks(item) {
+const addTargetLinks = item => {
   if (item.link) {
-    const headings = [...document.getElementsByTagName(item.type)];
-    for (let l = 0; l < headings.length; l++) {
-      const heading = headings[l];
-      if (heading.innerText.replace(/\u2010|\u2011|\u2013/, '') === item.text.replace('-', '')) {
-        let targetLink = document.createElement('a');
-        targetLink.id = item.id;
-        targetLink.setAttribute('data-hash-target', item.hash);
-        heading.appendChild(targetLink);
-      }
+    const headings = getTags(item.type);
+    if (headings) {
+      headings.forEach(heading => {
+        if (heading.innerText === item.text) {
+          let targetLink = document.createElement('a');
+          targetLink.id = item.id;
+          targetLink.setAttribute('data-hash-target', item.hash);
+          heading.appendChild(targetLink);
+        }
+      });
     }
   }
+};
+
+export const loadMenuItems = levels => {
+  const menuItems = [];
+  levels.forEach(({ heading, link, style }) => {
+    const tagElements = getTags(`h${heading}`);
+    if (tagElements) {
+      tagElements.forEach(({ innerText }) => {
+        menuItems.push({
+          text: innerText,
+          id: innerText.toLowerCase().replace(/ /g,'-').replace(/[^\w-]+/g,''), // equivalent of WP sanitize_title function
+          style,
+          link,
+          hash: md5(innerText),
+          type: `h${heading}`,
+          children: [] // TODO
+        });
+      });
+    }
+  });
+  return menuItems;
+};
+
+const getTags = tagName => {
+  // We need to get the div and not the body, since they both have this class
+  const page = [...document.getElementsByClassName('page-template')].find(element => element.tagName === 'DIV');
+  if (page) {
+    return [...page.getElementsByTagName(tagName)];
+  }
+  return null;
 }

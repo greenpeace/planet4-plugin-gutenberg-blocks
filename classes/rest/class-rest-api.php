@@ -9,7 +9,6 @@ use WP_REST_Request;
 use WP_REST_Server;
 use P4GBKS\Blocks\Spreadsheet;
 use P4GBKS\Blocks\Articles;
-use P4GBKS\Blocks\Submenu;
 
 /**
  * This class is just a place for add_endpoints to live.
@@ -156,23 +155,6 @@ class Rest_Api {
 					'callback' => static function ( $fields ) {
 						$to_return = Articles::get_posts( $fields );
 						return rest_ensure_response( $to_return );
-					},
-				],
-			]
-		);
-
-		/**
-		 * Endpoint to get Submenu block items from a post data
-		 */
-		register_rest_route(
-			self::REST_NAMESPACE,
-			'/get-submenu-items',
-			[
-				[
-					'methods'  => WP_REST_Server::READABLE,
-					'callback' => static function ( $fields ) {
-						$menu_items = Submenu::get_menu_items( $fields );
-						return rest_ensure_response( $menu_items );
 					},
 				],
 			]
