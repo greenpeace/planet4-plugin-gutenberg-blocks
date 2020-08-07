@@ -42,28 +42,28 @@ export class SubmenuFrontend extends Component {
     }
   }
 
-  onSubmenuLinkClick(hash, link) {
+  onSubmenuLinkClick(id, hash) {
     const target = document.querySelectorAll(`[data-hash-target='${hash}']`)[0];
     if (target) {
       document.body.animate({
         scrollTop: target.offsetTop - 100
       }, 2000, () => {
         const position = window.pageYOffset;
-        window.location.hash = link;
+        window.location.hash = `#${id}`;
         window.scrollTop(position);
       });
     }
   }
 
   getMenuItems(items) {
-    return items.map(({ text, style, link, id, hash, children }) => (
+    return items.map(({ text, style, link, id, children, hash }) => (
       <li key={text} className={`list-style-${style || 'none'} ${link ? "list-link" : "list-heading"}`}>
         {link ?
           <a
             href={`#${id}`}
             className="icon-link submenu-link"
             data-hash={hash}
-            onClick={() => this.onSubmenuLinkClick(hash, `#${id}`)}
+            onClick={() => this.onSubmenuLinkClick(id, hash)}
           >
             {text}
           </a>

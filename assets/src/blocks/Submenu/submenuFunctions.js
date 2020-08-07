@@ -1,5 +1,3 @@
-import md5 from 'md5';
-
 // Map for old attribute 'submenu_style'
 const SUBMENU_STYLES = {
   1: 'long',
@@ -85,14 +83,15 @@ export const loadMenuItems = levels => {
   levels.forEach(({ heading, link, style }) => {
     const tagElements = getTags(`h${heading}`);
     if (tagElements) {
-      tagElements.forEach(({ innerText }) => {
+      tagElements.forEach(({ innerText }, index) => {
+        const id = innerText.toLowerCase().replace(/ /g,'-').replace(/[^\w-]+/g,''); // equivalent of WP sanitize_title function
         menuItems.push({
           text: innerText,
-          id: innerText.toLowerCase().replace(/ /g,'-').replace(/[^\w-]+/g,''), // equivalent of WP sanitize_title function
+          id,
           style,
           link,
-          hash: md5(innerText),
           type: `h${heading}`,
+          hash: `${id}-h${heading}-${index}`,
           children: [] // TODO
         });
       });
