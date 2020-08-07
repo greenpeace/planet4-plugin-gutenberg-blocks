@@ -64,14 +64,11 @@ const addChildrenLinks = menu => {
  */
 const addTargetLinks = item => {
   if (item.link) {
-    const headings = getTags(item.type);
+    const headings = getHeadings(item.type);
     if (headings) {
       headings.forEach(heading => {
-        if (heading.textContent === item.text) {
-          let targetLink = document.createElement('a');
-          targetLink.id = item.id;
-          targetLink.setAttribute('data-hash-target', item.hash);
-          heading.appendChild(targetLink);
+        if (heading.textContent === item.text && !heading.id) {
+          heading.id = item.id;
         }
       });
     }
@@ -79,48 +76,44 @@ const addTargetLinks = item => {
 };
 
 export const loadMenuItems = (levels, isEditing) => {
-  const menuItems = [];
   // Get all heading tags that we need to query
   const headings = levels.map(level => `h${level.heading}`);
-  const tagElements = getTags(headings, isEditing ? 'editor-styles-wrapper' : 'page-template');
-  if (tagElements) {
-    tagElements.forEach((tagElement, tagIndex) => {
-      const headingNumber = getTagElementHeadingNumber(tagElement);
-      let previousHeadingNumber = 0;
-      if (tagIndex > 0) {
-        previousHeadingNumber = getTagElementHeadingNumber(tagElements[tagIndex - 1]);
-      }
-      // Get the properties that we need to create the new menu item
-      const correspondingLevel = levels.find(level => level.heading === headingNumber);
-      const id = tagElement.textContent.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, ''); // equivalent of WP sanitize_title function
-      const menuItem = {
-        text: tagElement.textContent,
-        id,
-        style: correspondingLevel.style,
-        link: correspondingLevel.link,
-        type: `h${correspondingLevel.heading}`,
-        hash: `${id}-h${correspondingLevel.heading}-${tagIndex}`,
-        children: []
-      };
-      if (previousHeadingNumber && headingNumber > previousHeadingNumber) {
-        // In this case we need to add this menuItem to the children of the previous one
-        menuItems[menuItems.length - 1].children.push(menuItem);
-      } else {
-        menuItems.push(menuItem);
-      }
-    });
+  const tags = getHeadings(headings, isEditing ? 'editor-styles-wrapper' : 'page-template');
+  if (!tags) {
+    return [];
   }
-  return menuItems;
+  return tags.reduce((menuItems, tag, index) => {
+    const headingNumber = getHeadingNumber(tag);
+    let previousHeadingNumber = 0;
+    if (index > 0) {
+      previousHeadingNumber = getHeadingNumber(tags[index - 1]);
+    }
+    // Get the properties that we need to create the new menu item
+    const correspondingLevel = levels.find(level => level.heading === headingNumber);
+    const id = tag.id || tag.textContent.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, ''); // equivalent of WP sanitize_title function
+    const menuItem = {
+      text: tag.textContent,
+      id,
+      style: correspondingLevel.style,
+      link: correspondingLevel.link,
+      type: `h${correspondingLevel.heading}`,
+      children: []
+    };
+    if (previousHeadingNumber && headingNumber > previousHeadingNumber) {
+      // In this case we need to add this menuItem to the children of the previous one
+      menuItems[menuItems.length - 1].children.push(menuItem);
+    } else {
+      menuItems.push(menuItem);
+    }
+    return menuItems;
+  }, []);
 };
 
-const getTags = (headings, className = 'page-template') => {
+const getHeadings = (headings, className = 'page-template') => {
   // We need to make sure it's a div element,
   // since for 'page-template' className we have it on the body too
-  const page = [...document.getElementsByClassName(className)].find(element => element.tagName === 'DIV');
-  if (page) {
-    return [...page.querySelectorAll(headings)];
-  }
-  return null;
+  const page = document.querySelector(`div.${className}`);
+  return page ? [...page.querySelectorAll(headings)] : null;
 };
 
-const getTagElementHeadingNumber = tagElement => Number(tagElement.tagName.replace('H', ''));
+const getHeadingNumber = tag => Number(tag.tagName.replace('H', ''));

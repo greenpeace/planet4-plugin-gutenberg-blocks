@@ -28,21 +28,17 @@ export class SubmenuFrontend extends Component {
   loadMenuItems() {
     const { levels, isEditing } = this.props;
     const menuItems = loadMenuItems(levels, isEditing);
-    if (menuItems && menuItems.length > 0) {
-      this.setState({ menuItems }, () => {
-        // This takes care of adding the "back to top" button,
-        // and also the submenu links behaviour if needed
-        if (!isEditing) {
-          addSubmenuActions(menuItems);
-        }
-      });
-    } else {
-      this.setState({ menuItems: [] });
-    }
+    this.setState({ menuItems }, () => {
+      // This takes care of adding the "back to top" button,
+      // and also the submenu links behaviour if needed
+      if (!isEditing && menuItems.length > 0) {
+        addSubmenuActions(menuItems);
+      }
+    });
   }
 
-  onSubmenuLinkClick(id, hash) {
-    const target = document.querySelectorAll(`[data-hash-target='${hash}']`)[0];
+  onSubmenuLinkClick(id) {
+    const target = document.getElementById(id);
     if (target) {
       document.body.animate({
         scrollTop: target.offsetTop - 100
@@ -55,14 +51,13 @@ export class SubmenuFrontend extends Component {
   }
 
   getMenuItems(items) {
-    return items.map(({ text, style, link, id, children, hash }) => (
+    return items.map(({ text, style, link, id, children }) => (
       <li key={text} className={`list-style-${style || 'none'} ${link ? "list-link" : "list-heading"}`}>
         {link ?
           <a
             href={`#${id}`}
             className="icon-link submenu-link"
-            data-hash={hash}
-            onClick={() => this.onSubmenuLinkClick(id, hash)}
+            onClick={() => this.onSubmenuLinkClick(id)}
           >
             {text}
           </a>
