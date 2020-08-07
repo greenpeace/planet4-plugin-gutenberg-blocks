@@ -13,10 +13,9 @@ export class SubmenuFrontend extends Component {
   };
 
   componentDidMount() {
-    // Set the post id and load the menu items
-    // If in the editor, the post id will be in the props
-    // Otherwise, we need to retrieve it from the body classnames
-    this.loadMenuItems();
+    // We need to add a small timeout for the editor,
+    // otherwise the RichText elements appear empty
+    setTimeout(this.loadMenuItems, 100);
   }
 
   componentDidUpdate({ levels: prevLevels }) {
@@ -28,11 +27,11 @@ export class SubmenuFrontend extends Component {
 
   loadMenuItems() {
     const { levels, isEditing } = this.props;
-    const menuItems = loadMenuItems(levels);
+    const menuItems = loadMenuItems(levels, isEditing);
     if (menuItems && menuItems.length > 0) {
       this.setState({ menuItems }, () => {
         // This takes care of adding the "back to top" button,
-        // and also the submenu links behavior if needed
+        // and also the submenu links behaviour if needed
         if (!isEditing) {
           addSubmenuActions(menuItems);
         }
