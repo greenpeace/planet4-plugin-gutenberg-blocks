@@ -36,7 +36,6 @@
   },
   "dependencies": {
     "classnames": "^2.2.6",
-    "jest-environment-node": "^26.0.1",
-    "md5": "^2.3.0"
+    "jest-environment-node": "^26.0.1"
   }
 }
