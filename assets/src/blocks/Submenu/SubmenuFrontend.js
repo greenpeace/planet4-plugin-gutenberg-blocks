@@ -1,4 +1,4 @@
-import { useEffect } from '@wordpress/element';
+import { Fragment, useEffect } from '@wordpress/element';
 import { getSubmenuStyle, addSubmenuActions } from './submenuFunctions';
 import { SubmenuItems } from './SubmenuItems';
 import { useSubmenuItemsLoad } from './useSubmenuItemsLoad';
@@ -15,7 +15,6 @@ export const SubmenuFrontend = ({ title, className, levels, submenu_style }) => 
     <section className={`block submenu-block submenu-${style}`}>
       <h2>{title}</h2>
       <SubmenuItems menuItems={menuItems} />
-      <a href="#" className="back-top">&nbsp;</a>
     </section>
   );
 }
