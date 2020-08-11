@@ -16,53 +16,68 @@ export const addSubmenuActions = submenu => {
   if (submenu && Array.isArray(submenu)) {
     for (let i = 0; i < submenu.length; i++) {
       const menu = submenu[i];
-      addTargetLinks(menu);
-      addChildrenLinks(menu);
+      addTargetIds(menu);
+      formatChildren(menu);
     }
 
     // Add "back to top" button behaviour
-    const backtop = document.getElementsByClassName('back-top')[0];
-    const submenuBlock = document.getElementsByClassName('submenu-block')[0];
-    const cookiesBlock = document.getElementById('set-cookie');
+    let backtop = document.querySelector('a.back-top');
+    const submenuBlock = document.querySelector('section.submenu-block');
 
     if (submenuBlock) {
-      window.onscroll = () => {
-        if (window.pageYOffset > 400) {
-          backtop.style.display = 'block';
-          if (cookiesBlock && cookiesBlock.style.display !== 'none') {
-            backtop.style.bottom = '120px';
-          } else {
-            backtop.style.bottom = '50px';
-          }
-        } else {
-          backtop.style.display = 'none';
-        }
-      };
+      // If back to top button doesn't exist yet, we need to create it
+      if (!backtop) {
+        backtop = document.createElement('a');
+        backtop.href = '#';
+        backtop.className = 'back-top';
+        document.body.appendChild(backtop);
+      }
+      addBackToTopBehaviour(backtop);
     }
   }
 };
 
+// Add onscroll function and proper positioning for back to top behaviour
+const addBackToTopBehaviour = backtop => {
+  const cookies = document.getElementById('set-cookie');
+  window.onscroll = () => {
+    if (window.pageYOffset > 400 && backtop.style.display !== 'block') {
+      backtop.style.display = 'block';
+      if (cookies) {
+        const cookiesStyles = window.getComputedStyle(cookies);
+        if (cookiesStyles && cookiesStyles.display !== 'none') {
+          backtop.style.bottom = '120px';
+        } else {
+          backtop.style.bottom = '50px';
+        }
+      }
+    } else if (window.pageYOffset <= 400 && backtop.style.display !== 'none') {
+      backtop.style.display = 'none';
+    }
+  };
+};
+
 /**
- * Append html links for a submenu entry children.
+ * Format submenu entry children.
  *
  * @param menu Submenu entry
  */
-const addChildrenLinks = menu => {
+const formatChildren = menu => {
   if (menu.children && Array.isArray(menu.children)) {
     for (let k = 0; k < menu.children.length; k++) {
       const child = menu.children[k];
-      addTargetLinks(child);
-      addChildrenLinks(child);
+      addTargetIds(child);
+      formatChildren(child);
     }
   }
 };
 
 /**
- * Append html links the given item.
+ * Add ids to the items, to be able to scroll to them.
  *
  * @param item Submenu menu item
  */
-const addTargetLinks = item => {
+const addTargetIds = item => {
   if (item.link) {
     const headings = getHeadings(item.type);
     if (headings) {
