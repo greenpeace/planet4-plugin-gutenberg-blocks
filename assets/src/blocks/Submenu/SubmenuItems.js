@@ -3,12 +3,12 @@ export const SubmenuItems = ({ menuItems }) => {
   const onSubmenuLinkClick = id => {
     const target = document.getElementById(id);
     if (target) {
-      document.body.animate({
+      $('html, body').animate({
         scrollTop: target.offsetTop - 100
       }, 2000, () => {
         const position = window.pageYOffset;
-        window.location.hash = `#${id}`;
-        window.scrollTop(position);
+        window.location.hash = id;
+        window.scrollTo(0, position);
       });
     }
   }
@@ -20,7 +20,10 @@ export const SubmenuItems = ({ menuItems }) => {
           <a
             href={`#${id}`}
             className="icon-link submenu-link"
-            onClick={() => onSubmenuLinkClick(id)}
+            onClick={event => {
+              event.preventDefault();
+              onSubmenuLinkClick(id);
+            }}
           >
             {text}
           </a>
