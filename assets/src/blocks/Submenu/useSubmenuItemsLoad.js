@@ -25,10 +25,10 @@ export const useSubmenuItemsLoad = (levels, isEditing) => {
       const id = tag.id || tag.textContent.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, ''); // equivalent of WP sanitize_title function
       const menuItem = {
         text: tag.textContent,
-        id,
+        id: `${id}-h${headingNumber}-${index}`,
         style: correspondingLevel.style,
         link: correspondingLevel.link,
-        type: `h${correspondingLevel.heading}`,
+        type: `h${headingNumber}`,
         children: []
       };
       if (previousHeadingNumber && headingNumber > previousHeadingNumber) {
