@@ -1,10 +1,33 @@
 import {CarouselHeader} from './CarouselHeader.js';
+import { frontendRendered } from '../frontendRendered';
+
+const BLOCK_NAME = 'planet4-blocks/carousel-header';
 
 export class CarouselHeaderBlock {
   constructor() {
     const {registerBlockType} = wp.blocks;
+    const attributes = {
+      carousel_autoplay: {
+        type: 'boolean',
+      },
+      slides: {
+        type: 'array',
+        default: [
+          {
+            image: null,
+            focal_points: {},
+            header: '',
+            header_size: 'h1',
+            description: '',
+            link_text: '',
+            link_url: '',
+            link_url_new_tab: false,
+          }
+        ]
+      },
+    };
 
-    registerBlockType('planet4-blocks/carousel-header', {
+    registerBlockType( BLOCK_NAME, {
       title: 'Carousel Header',
       icon: 'welcome-widgets-menus',
       category: 'planet4-blocks',
@@ -133,26 +156,15 @@ export class CarouselHeaderBlock {
           }
         ]
       },
-      attributes: {
-        carousel_autoplay: {
-          type: 'boolean',
-        },
-        slides: {
-          type: 'array',
-          default: [
-            {
-              image: null,
-              focal_points: {},
-              header: '',
-              header_size: 'h1',
-              description: '',
-              link_text: '',
-              link_url: '',
-              link_url_new_tab: false,
-            }
-          ]
-        },
-      },
+      attributes,
+      deprecated: [
+        {
+          attributes,
+          save() {
+            return null;
+          },
+        }
+      ],
       edit: ({isSelected, attributes, setAttributes}) => {
 
         function addSlide() {
@@ -256,9 +268,7 @@ export class CarouselHeaderBlock {
           removeSlide={removeSlide}
         />;
       },
-      save() {
-        return null;
-      }
+      save: frontendRendered( BLOCK_NAME )
     });
   };
 }
