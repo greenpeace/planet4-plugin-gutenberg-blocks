@@ -3,13 +3,15 @@ import { CounterFrontend } from './blocks/Counter/CounterFrontend';
 import { ArticlesFrontend } from './blocks/Articles/ArticlesFrontend';
 import { CookiesFrontend } from './blocks/Cookies/CookiesFrontend';
 import { SplittwocolumnsFrontend } from "./blocks/Splittwocolumns/SplittwocolumnsFrontend";
+import { GalleryFrontend } from './blocks/Gallery/GalleryFrontend';
 
 const COMPONENTS = {
   'planet4-blocks/spreadsheet': SpreadsheetFrontend,
   'planet4-blocks/counter': CounterFrontend,
   'planet4-blocks/articles': ArticlesFrontend,
   'planet4-blocks/cookies': CookiesFrontend,
-  'planet4-blocks/split-two-columns': SplittwocolumnsFrontend
+  'planet4-blocks/split-two-columns': SplittwocolumnsFrontend,
+  'planet4-blocks/gallery': GalleryFrontend,
 };
 
 document.querySelectorAll( `[data-render]` ).forEach(
