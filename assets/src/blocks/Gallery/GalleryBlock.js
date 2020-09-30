@@ -28,15 +28,19 @@ export class GalleryBlock {
       },
       gallery_block_title: {
         type: 'string',
+        default: '',
       },
       gallery_block_description: {
         type: 'string',
+        default: '',
       },
       multiple_image: {
         type: 'string',
+        default: '',
       },
       gallery_block_focus_points: {
         type: 'string',
+        default: '',
       },
       image_data: {
         type: 'array',
