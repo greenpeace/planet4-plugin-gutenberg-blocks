@@ -38,6 +38,8 @@
   },
   "dependencies": {
     "classnames": "^2.2.6",
-    "jest-environment-node": "^26.0.1"
+    "firebase": "^7.23.0",
+    "jest-environment-node": "^26.0.1",
+    "react-firebase-hooks": "^2.2.0"
   }
 }

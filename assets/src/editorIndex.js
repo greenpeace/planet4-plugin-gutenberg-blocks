@@ -25,6 +25,8 @@ import { SubPagesBlock } from './blocks/SubPages/SubPagesBlock';
 import { blockEditorValidation } from './BlockEditorValidation';
 import { ENFormBlock } from './blocks/ENForm/ENFormBlock';
 
+import { ControlShiftBlock } from './blocks/ControlShift/ControlShiftBlock';
+
 blockEditorValidation();
 new ArticlesBlock();
 new CarouselHeaderBlock();
@@ -43,7 +45,8 @@ new SubmenuBlock();
 new SubPagesBlock();
 new TakeactionboxoutBlock();
 new TimelineBlock();
-new ENFormBlock()
+new ENFormBlock();
+ControlShiftBlock();
 
 addBlockFilters();
 addSubAndSuperscript( window.wp );

@@ -118,6 +118,7 @@ final class Loader {
 			new Blocks\Timeline(),
 			new Blocks\SocialMediaCards(),
 			new Blocks\ENForm(),
+			new Blocks\ControlShiftDemo(),
 		];
 	}
 
