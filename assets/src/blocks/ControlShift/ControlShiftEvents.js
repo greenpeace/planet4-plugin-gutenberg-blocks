@@ -1,10 +1,10 @@
 import { useState } from '@wordpress/element';
 import { useCollection } from 'react-firebase-hooks/firestore';
-import firebase from './firebase';
+import { db } from './firebase';
 
 export const ControlShiftEvents = () => {
   const [eventsCollection, loading, error] = useCollection(
-    firebase.firestore().collection('p4-test-event'), {}
+    db.collection('p4-test-event'), {}
   );
 
   const events = eventsCollection ? eventsCollection.docs.map((e) => {

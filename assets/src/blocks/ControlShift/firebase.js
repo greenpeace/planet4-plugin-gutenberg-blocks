@@ -16,4 +16,12 @@ const devConfig = {
 firebase.initializeApp(devConfig);
 firebase.analytics();
 
+export const db = firebase.firestore();
+if (location.host === 'www.planet4.test') {
+  db.settings({
+    host: "localhost:8081",
+    ssl: false
+  });
+};
+
 export default firebase;
