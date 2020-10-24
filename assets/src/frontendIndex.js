@@ -10,6 +10,11 @@ import { SubmenuFrontend } from './blocks/Submenu/SubmenuFrontend';
 import { MediaFrontend } from './blocks/Media/MediaFrontend';
 import { setupMediaElementJS } from './blocks/Media/setupMediaElementJS';
 
+import ReactDOM from 'react-dom';
+
+// Hydratable components
+import { CarouselHeaderFrontend } from './blocks/Carouselheader/CarouselHeaderFrontend';
+
 // Render React components
 const COMPONENTS = {
   'planet4-blocks/spreadsheet': SpreadsheetFrontend,
@@ -33,4 +38,19 @@ document.querySelectorAll( `[data-render]` ).forEach(
   }
 );
 
+// Hydratable React components
+const HYDRATABLE_COMPONENTS = {
+  'planet4-blocks/carousel-header': CarouselHeaderFrontend,
+}
+
+document.querySelectorAll( `[data-hydrate]` ).forEach(
+  blockNode => {
+    const blockName = blockNode.dataset.hydrate;
+    const HydratableBlock = HYDRATABLE_COMPONENTS[ blockName ];
+    const attributes = JSON.parse( blockNode.dataset.attributes );
+    ReactDOM.hydrate( <HydratableBlock attributes={ attributes.attributes } />, blockNode );
+  }
+);
+
+// Vanilla startup scripts
 setupMediaElementJS();

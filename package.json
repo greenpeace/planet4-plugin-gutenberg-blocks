@@ -9,6 +9,7 @@
   "scripts": {
     "start": "wp-scripts start",
     "build": "wp-scripts build --mode production",
+    "buildserver": "wp-scripts build --config webpack.server.config.js --mode development --webpack-no-externals",
     "lint:css": "wp-scripts lint-style",
     "setupgithooks": "bin/copy-git-hooks.sh",
     "test": "env JEST_TIMEOUT=15000 WP_USERNAME=admin WP_PASSWORD=admin WP_BASE_URL=https://www.planet4.test wp-scripts test-e2e",

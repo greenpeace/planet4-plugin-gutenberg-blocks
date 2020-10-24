@@ -2,6 +2,20 @@
   Overrides for carousel header
  */
 
+ .wp-block[data-type="planet4-blocks/carousel-header"] {
+  max-width: none !important;
+  margin-left: -41px !important;
+  margin-right: -41px !important;
+
+  .block-wide {
+    // Take the left border into account
+    left: -17px;
+    top: -14px;
+    width: calc(100% + 28px);
+  }
+ }
+
+ 
 .Preview {
   // pointer-events: none;
   position: relative;

@@ -43,9 +43,7 @@ class Media extends Base_Block {
 						unset( $attributes['youtube_id'] );
 					}
 
-					$json = wp_json_encode(
-						[ 'attributes' => $attributes ]
-					);
+					$json = wp_json_encode($attributes);
 
 					return '<div data-render="planet4-blocks/media-video" data-attributes="' . htmlspecialchars( $json ) . '"></div>';
 				},

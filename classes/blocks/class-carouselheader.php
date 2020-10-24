@@ -22,17 +22,26 @@ class CarouselHeader extends Base_Block {
 	 *
 	 * @const string BLOCK_NAME.
 	 */
-	const BLOCK_NAME = 'carousel_header';
+	const BLOCK_NAME = 'planet4-blocks/carousel-header';
 
 	/**
 	 * Gallery constructor.
 	 */
 	public function __construct() {
 		register_block_type(
-			'planet4-blocks/carousel-header',
+			self::BLOCK_NAME,
 			[
 				'editor_script'   => 'planet4-blocks',
-				'render_callback' => [ $this, 'render' ],
+				'render_callback' => static function ( $attributes, $content ) {
+
+					$json = wp_json_encode(
+						[ 'attributes' => $attributes ]
+					);
+
+					return "<div data-hydrate='" . self::BLOCK_NAME . "' data-attributes='$json'>"
+						. trim($content)
+						. '</div>';
+				},
 				'attributes'      => [
 					'carousel_autoplay' => [
 						'type'    => 'boolean',
