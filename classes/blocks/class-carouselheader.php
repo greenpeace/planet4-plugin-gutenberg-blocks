@@ -126,6 +126,8 @@ class CarouselHeader extends Base_Block {
 
 		// Enqueue js for the frontend.
 		if ( ! $this->is_rest_request() ) {
+			wp_enqueue_style( 'slick', 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css', [], '1.9.0' );
+			wp_enqueue_script( 'slick', 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js', [], '1.9.0', true );
 			wp_enqueue_script( 'hammer', 'https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js', [], '2.0.8', true );
 			\P4GBKS\Loader::enqueue_local_script(
 				'carousel-header',
