@@ -2,10 +2,7 @@ import { Component, Fragment } from '@wordpress/element';
 import { ArrowIcon } from './ArrowIcon';
 import { toDeclarations } from '../toDeclarations';
 import { HighlightMatches } from '../HighlightMatches';
-import { fetchJson } from '../../functions/fetchJson';
 
-const { apiFetch } = wp;
-const { addQueryArgs } = wp.url;
 const { __ } = wp.i18n;
 
 const placeholderData = {
@@ -15,6 +12,34 @@ const placeholderData = {
     [ 'Sit', 'Amet', 'Lorem' ],
     [ 'Amet', 'Ipsum', 'Sit' ],
   ]
+};
+
+const getSheetData = async (id) => {
+  const url = `https://docs.google.com/spreadsheets/d/e/${ id }/pub?output=html`;
+
+  const response = await fetch(url);
+
+  const blob = await response.blob();
+
+  const text = await blob.text();
+
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(text, 'text/html');
+  const rowsElements = doc.querySelectorAll('tbody tr');
+
+  return [...rowsElements].reduce((data, rowElement, index) => {
+    const cellElements = rowElement.querySelectorAll('td');
+
+    const cells = [...cellElements].map(cellElement => cellElement.textContent);
+
+    if (index === 0) {
+      data.header = cells;
+    } else {
+      data.rows.push(cells);
+    }
+
+    return data;
+  }, {rows:[]});
 };
 
 export class SpreadsheetFrontend extends Component {
@@ -54,15 +79,7 @@ export class SpreadsheetFrontend extends Component {
       }
       this.setState({ loading: true });
 
-      const args = {
-        sheet_id: sheetID,
-      };
-
-      const baseUrl = document.body.dataset.nro;
-
-      const spreadSheetData = baseUrl
-        ? await fetchJson(`${ baseUrl }/wp-json/${ addQueryArgs('planet4/v1/get-spreadsheet-data', args) }`)
-        : await apiFetch({ path: addQueryArgs('planet4/v1/get-spreadsheet-data', args) });
+      const spreadSheetData = await getSheetData(sheetID);
 
       this.setState({loading:false, spreadSheetData})
     } else {
