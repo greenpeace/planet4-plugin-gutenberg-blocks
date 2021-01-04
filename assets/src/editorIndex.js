@@ -16,7 +16,6 @@ import { registerTimelineBlock } from './blocks/Timeline/TimelineBlock';
 import { addBlockFilters } from './BlockFilters';
 import { setupImageBlockExtension } from './ImageBlockExtension';
 import { replaceTaxonomyTermSelectors } from "./replaceTaxonomyTermSelectors";
-import { addSubAndSuperscript } from './RichTextEnhancements';
 import { SpreadsheetBlock } from "./blocks/Spreadsheet/SpreadsheetBlock"
 import { addButtonLinkPasteWarning } from './addButtonLinkPasteWarning';
 import { setupCustomSidebar } from "./setupCustomSidebar";
@@ -46,7 +45,6 @@ new ENFormBlock()
 registerTimelineBlock();
 
 addBlockFilters();
-addSubAndSuperscript( window.wp );
 setupImageBlockExtension();
 addButtonLinkPasteWarning();
 replaceTaxonomyTermSelectors();
