@@ -94,4 +94,14 @@ abstract class Base_Block {
 	public static function update_data( array $fields ) {
 		throw new NotImplemented( 'Method update_data is not implemented for ' . static::class );
 	}
+
+	public static function as_hydratable_block( $block_name, $attributes, $content ) {
+		$json = wp_json_encode(
+			[ 'attributes' => $attributes ]
+		);
+
+		return "<div data-hydrate='" . $block_name . "' data-attributes='$json'>"
+			. trim($content)
+			. '</div>';
+	}
 }

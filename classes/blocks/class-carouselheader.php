@@ -33,14 +33,11 @@ class CarouselHeader extends Base_Block {
 			[
 				'editor_script'   => 'planet4-blocks',
 				'render_callback' => static function ( $attributes, $content ) {
+					if ( trim($content) === '' ) {
+						$content = self::convert_to_static_block( $attributes );
+					}
 
-					$json = wp_json_encode(
-						[ 'attributes' => $attributes ]
-					);
-
-					return "<div data-hydrate='" . self::BLOCK_NAME . "' data-attributes='$json'>"
-						. trim($content)
-						. '</div>';
+					return self::as_hydratable_block( self::BLOCK_NAME, $attributes, $content );
 				},
 				'attributes'      => [
 					'carousel_autoplay' => [
@@ -89,6 +86,15 @@ class CarouselHeader extends Base_Block {
 		);
 
 		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_editor_scripts' ] );
+	}
+
+	public static function convert_to_static_block( $attributes ) {
+		$node_script = 'assets/build/CarouselHeaderMigrate-server.js';
+		$blocks_dir = P4GBKS_PLUGIN_DIR;
+		$attributes_json = json_encode( $attributes );
+		exec("cd ${blocks_dir} && node ${node_script} '${attributes_json}' 2>&1", $out, $err);
+
+		return $out;
 	}
 
 	/**
