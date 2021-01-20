@@ -166,4 +166,13 @@ abstract class Base_Block {
 		}		
 	}
 
+	public static function as_hydratable_block( $attributes, $content ) {
+		$json = wp_json_encode(
+			[ 'attributes' => $attributes ]
+		);
+
+		return "<div data-hydrate='" . static::BLOCK_NAMESPACE_PREFIX . '/' . static::BLOCK_NAME . "' data-attributes='$json'>"
+			. trim($content)
+			. '</div>';
+	}	
 }
