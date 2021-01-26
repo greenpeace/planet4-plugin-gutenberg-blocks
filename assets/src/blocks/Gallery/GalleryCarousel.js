@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from '@wordpress/element';
+import { useState, useEffect, useRef } from 'preact/hooks';
 
 const { __ } = wp.i18n;
 

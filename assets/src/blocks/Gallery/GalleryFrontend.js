@@ -17,7 +17,7 @@ export const GalleryFrontend = ({
     <section className={`block ${GALLERY_BLOCK_CLASSES[layout]}`}>
       {gallery_block_title &&
         <header>
-          <h2 className="page-section-header" dangerouslySetInnerHTML={{ __html: gallery_block_title }} />
+          <h2 className="page-section-header" dangerouslySetInnerHTML={ gallery_block_title } />
         </header>
       }
 

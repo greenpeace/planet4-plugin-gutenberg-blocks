@@ -12,7 +12,7 @@
 				"scopeVariable": "h",
 				"scopeVariableFrag": "Fragment",
 				"source": "preact",
-				"isDefault": true
+				"isDefault": false
 			},
 		],
         [
