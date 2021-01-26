@@ -1,4 +1,4 @@
-import { Component, Fragment } from '@wordpress/element';
+import { Component, Fragment } from 'preact';
 
 export class CounterFrontend extends Component {
   constructor(props) {
@@ -26,7 +26,7 @@ export class CounterFrontend extends Component {
     var enFormHeader = document.querySelector('.enform-extra-header-placeholder');
     if ( counterBar !== null && enFormHeader !== null ) {
       enFormHeader.append(counterBar);
-    } 
+    }
   }
 
   componentWillUnmount() {

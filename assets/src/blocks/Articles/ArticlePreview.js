@@ -1,4 +1,4 @@
-import { Component } from '@wordpress/element';
+import { Component } from 'preact';
 import { unescape } from '../../functions/unescape';
 
 export class ArticlePreview extends Component {

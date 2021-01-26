@@ -1,4 +1,4 @@
-import { Fragment } from '@wordpress/element';
+import { Fragment } from 'preact';
 import { Timeline } from './Timeline';
 
 export const TimelineFrontend = (props) => {

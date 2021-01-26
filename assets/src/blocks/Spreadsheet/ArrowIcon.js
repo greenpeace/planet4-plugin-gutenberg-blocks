@@ -1,4 +1,4 @@
-import { Component } from '@wordpress/element';
+import { Component } from 'preact';
 
 export class ArrowIcon extends Component {
 	render() {

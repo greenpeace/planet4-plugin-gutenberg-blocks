@@ -1,4 +1,4 @@
-import { useEffect } from '@wordpress/element';
+import { useEffect } from 'preact/hooks';
 import { getSubmenuStyle } from './getSubmenuStyle';
 import { SubmenuItems } from './SubmenuItems';
 import { makeHierarchical } from './makeHierarchical';

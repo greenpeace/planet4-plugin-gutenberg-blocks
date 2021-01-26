@@ -1,3 +1,5 @@
+import { render } from 'preact';
+
 import { SpreadsheetFrontend } from './blocks/Spreadsheet/SpreadsheetFrontend';
 import { CounterFrontend } from './blocks/Counter/CounterFrontend';
 import { ArticlesFrontend } from './blocks/Articles/ArticlesFrontend';
@@ -29,7 +31,7 @@ document.querySelectorAll( `[data-render]` ).forEach(
     const blockName = blockNode.dataset.render;
     const BlockFrontend = COMPONENTS[ blockName ];
     const attributes = JSON.parse( blockNode.dataset.attributes );
-    wp.element.render( <BlockFrontend { ...attributes.attributes } />, blockNode );
+    render( <BlockFrontend { ...attributes.attributes } />, blockNode );
   }
 );
 

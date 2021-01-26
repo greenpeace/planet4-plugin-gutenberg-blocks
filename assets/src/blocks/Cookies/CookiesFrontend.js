@@ -1,4 +1,4 @@
-import { Component, Fragment } from '@wordpress/element';
+import { Component, Fragment } from 'preact';
 import { FrontendRichText } from '../../components/FrontendRichText/FrontendRichText';
 
 const { __ } = wp.i18n;
