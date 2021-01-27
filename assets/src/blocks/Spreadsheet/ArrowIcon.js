@@ -1,4 +1,4 @@
-import { Component } from 'preact';
+import { Component } from '@render';
 
 export class ArrowIcon extends Component {
 	render() {

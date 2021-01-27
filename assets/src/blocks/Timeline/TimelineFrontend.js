@@ -1,4 +1,4 @@
-import { Fragment } from 'preact';
+import { Fragment } from '@render';
 import { Timeline } from './Timeline';
 
 export const TimelineFrontend = (props) => {

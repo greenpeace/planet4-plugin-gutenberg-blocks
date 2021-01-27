@@ -123,5 +123,11 @@ module.exports = {
         }
       })
     ]
+  },
+  resolve: {
+    alias: {
+      '@hooks': '@wordpress/element',
+      '@render': '@wordpress/element',
+    }
   }
 };

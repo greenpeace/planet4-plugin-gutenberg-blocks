@@ -1,4 +1,4 @@
-import { render } from 'preact';
+import { render } from '@render';
 
 import { SpreadsheetFrontend } from './blocks/Spreadsheet/SpreadsheetFrontend';
 import { CounterFrontend } from './blocks/Counter/CounterFrontend';

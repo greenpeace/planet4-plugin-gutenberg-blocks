@@ -1,4 +1,4 @@
-import { Component } from 'preact';
+import { Component } from '@render';
 import { unescape } from '../../functions/unescape';
 
 export class ArticlePreview extends Component {

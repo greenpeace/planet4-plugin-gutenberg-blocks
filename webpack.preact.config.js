@@ -68,5 +68,11 @@ module.exports = {
       // enable the css minification plugin
       new TerserJSPlugin({}),
     ]
+  },
+  resolve: {
+    alias: {
+      '@hooks': 'preact/hooks',
+      '@render': 'preact',
+    }
   }
 };

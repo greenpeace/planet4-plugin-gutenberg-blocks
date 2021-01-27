@@ -1,4 +1,4 @@
-import { Component, Fragment } from 'preact';
+import { Component, Fragment } from '@render';
 import { ArrowIcon } from './ArrowIcon';
 import { toDeclarations } from '../toDeclarations';
 import { HighlightMatches } from '../HighlightMatches';

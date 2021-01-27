@@ -1,4 +1,4 @@
-import { Component, Fragment } from 'preact';
+import { Component, Fragment } from '@render';
 
 export class CounterFrontend extends Component {
   constructor(props) {

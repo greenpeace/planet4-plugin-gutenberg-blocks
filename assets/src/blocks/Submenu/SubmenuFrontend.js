@@ -1,4 +1,4 @@
-import { useEffect } from 'preact/hooks';
+import { useEffect } from '@hooks';
 import { getSubmenuStyle } from './getSubmenuStyle';
 import { SubmenuItems } from './SubmenuItems';
 import { makeHierarchical } from './makeHierarchical';

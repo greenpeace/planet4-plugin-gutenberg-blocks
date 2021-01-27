@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'preact/hooks';
+import { useState, useEffect } from '@hooks';
 import { fetchJson } from '../../functions/fetchJson';
 import { addQueryArgs } from '../../functions/addQueryArgs';
 
