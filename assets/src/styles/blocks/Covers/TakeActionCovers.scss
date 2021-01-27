@@ -2,65 +2,15 @@
   .row {
     display: flex;
     flex-wrap: wrap;
-  }
-
-  .limit-visibility {
     margin-top: -$space-md;
 
     @include large-and-up {
       margin-top: -$space-lg;
     }
   }
-}
 
-// Visibility  of covers in different screens
-// S,M should have 4 covers
-// L & XL should have all sent from backend
-// L & XL with show-3-covers class should show first 3 covers
-// L & XL with show-6-covers class should show first 6 covers
-// L & XL with show-all-covers class should show all covers
-// remove limit visibility class on load more button click
-.show-3-covers .limit-visibility {
-  .cover-card-column:nth-child(n+3) {
+  .cover-card-column.hidden {
     display: none;
-  }
-
-  @include large-and-up {
-    .cover-card-column:nth-child(-n+4) {
-      display: block;
-    }
-
-    .cover-card-column:nth-child(n+4) {
-      display: none;
-    }
-  }
-}
-
-.show-6-covers .limit-visibility {
-  .cover-card-column:nth-child(n+5) {
-    display: none;
-  }
-
-  @include large-and-up {
-    .cover-card-column:nth-child(-n+7) {
-      display: block;
-    }
-
-    .cover-card-column:nth-child(n+7) {
-      display: none;
-    }
-  }
-}
-
-.show-all-covers .limit-visibility {
-  .cover-card-column:nth-child(n+5) {
-    display: none;
-  }
-
-  @include large-and-up {
-    .cover-card-column:nth-child(n+5) {
-      display: block;
-    }
   }
 }
 
@@ -250,7 +200,7 @@
   font-family: $roboto;
   pointer-events: all;
   position: relative;
-  margin-inline-end: 8px;
+  margin-inline-end: 4px;
 
   &:hover {
     text-decoration: underline;
@@ -263,7 +213,6 @@
   @include large-and-up {
     margin-bottom: 0;
     font-size: 0.875rem;
-    margin-right: 4px;
   }
 }
 
@@ -281,4 +230,8 @@
 
 .load-more-covers-button-div {
   margin-top: $space-lg;
+
+  @include large-and-up {
+    margin-top: $space-xl;
+  }
 }

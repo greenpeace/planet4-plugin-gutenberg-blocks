@@ -56,6 +56,10 @@
 }
 
 .campaign-covers-block {
+  .campaign-card-column.hidden {
+    display: none;
+  }
+
   .thumbnail-largeview-container {
     @supports (display: grid) {
       display: grid;
@@ -130,33 +134,5 @@
         }
       }
     }
-  }
-}
-
-// Visibility  of campaigns in different screens
-// remove limit visibility class on load more button click
-.show-3-covers .limit-visibility {
-  .campaign-card-column:nth-child(-n+4) {
-    display: inline-block;
-  }
-
-  .campaign-card-column:nth-child(n+4) {
-    display: none;
-  }
-}
-
-.show-6-covers .limit-visibility {
-  .campaign-card-column:nth-child(-n+7) {
-    display: inline-block;
-  }
-
-  .campaign-card-column:nth-child(n+7) {
-    display: none;
-  }
-}
-
-.show-all-covers .limit-visibility {
-  .campaign-card-column:nth-child(n+5) {
-    display: inline-block;
   }
 }
