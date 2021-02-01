@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from '@wordpress/element';
+import { useDrag } from 'react-use-gesture';
 
 const { __ } = wp.i18n;
 
@@ -65,8 +66,20 @@ export const GalleryCarousel = ({ images }) => {
     }
   }, [currentSlide, images]);
 
+  const swipeListeners = useDrag(({ swipe: [swipeX], last }) => {
+    if(last && swipeX === -1) {
+      goToPrevSlide();
+    } else if (last && swipeX === 1) {
+      goToNextSlide();
+    }
+  },
+  {
+    swipeDistance: [10, 0],
+    swipeVelocity: 1,
+  });
+
   return (
-    <div className="carousel slide">
+    <div className="carousel slide" {...swipeListeners()}>
       {images.length > 1 &&
         <ol className="carousel-indicators">
           {images.map((image, index) =>
@@ -96,7 +109,7 @@ export const GalleryCarousel = ({ images }) => {
               src={image.image_src}
               srcSet={image.image_srcset}
               sizes={image.image_sizes || 'false'}
-              style={{ objectPosition: image.focus_image }}
+              style={{ objectPosition: image.focus_image, pointerEvents: 'none' }}
               alt={image.alt_text}
             />
 
