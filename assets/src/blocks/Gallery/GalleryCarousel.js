@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from '@wordpress/element';
+import { useHorizontalSwipe } from '../../components/useSwipe/useSwipe';
 
 const { __ } = wp.i18n;
 
@@ -9,6 +10,7 @@ const reflow = element => element.offsetHeight;
 export const GalleryCarousel = ({ images }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [sliding, setSliding] = useState(false);
+  const [setSwipeDirection, swipeDirection, swipeListeners] = useHorizontalSwipe();
 
   const lastSlide = images.length - 1;
 
@@ -65,8 +67,14 @@ export const GalleryCarousel = ({ images }) => {
     }
   }, [currentSlide, images]);
 
+  useEffect(() => {
+    if (swipeDirection == 1) goToNextSlide();
+    if (swipeDirection === -1) goToPrevSlide();
+    if (swipeDirection != 0) setSwipeDirection(0);
+  }, [swipeDirection]);
+
   return (
-    <div className="carousel slide">
+    <div className="carousel slide" {...swipeListeners}>
       {images.length > 1 &&
         <ol className="carousel-indicators">
           {images.map((image, index) =>
@@ -96,7 +104,7 @@ export const GalleryCarousel = ({ images }) => {
               src={image.image_src}
               srcSet={image.image_srcset}
               sizes={image.image_sizes || 'false'}
-              style={{ objectPosition: image.focus_image }}
+              style={{ objectPosition: image.focus_image, pointerEvents: 'none' }}
               alt={image.alt_text}
             />
 
