@@ -2,7 +2,10 @@
   color: $grey-80;
 
   .post-column.hidden {
-    display: none;
+    // On mobile because of the carousel layout we want to show all covers
+    @include small-and-up {
+      display: none;
+    }
   }
 
   .load-more-posts-button-div {
@@ -16,7 +19,6 @@
       flex-wrap: nowrap;
       -ms-overflow-style: none;
       scrollbar-width: none;
-      margin-top: -$space-lg;
     }
 
     @media (max-width: 768px) {
