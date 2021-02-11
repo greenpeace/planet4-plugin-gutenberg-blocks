@@ -1,10 +1,12 @@
 .content-covers-block {
   color: $grey-80;
 
-  .post-column.hidden {
-    // On mobile because of the carousel layout we want to show all covers
-    @include small-and-up {
-      display: none;
+  .col-md-4 {
+    outline: none;
+    width: 45%;
+
+    @include medium-and-up {
+      width: 157px;
     }
   }
 

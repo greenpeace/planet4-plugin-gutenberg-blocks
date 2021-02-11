@@ -56,10 +56,6 @@
 }
 
 .campaign-covers-block {
-  .campaign-card-column.hidden {
-    display: none;
-  }
-
   .thumbnail-largeview-container {
     @supports (display: grid) {
       display: grid;
