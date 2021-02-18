@@ -1,15 +1,6 @@
 .content-covers-block {
   color: $grey-80;
 
-  .col-md-4 {
-    outline: none;
-    width: 45%;
-
-    @include medium-and-up {
-      width: 157px;
-    }
-  }
-
   .load-more-posts-button-div {
     margin-top: $space-lg;
   }
