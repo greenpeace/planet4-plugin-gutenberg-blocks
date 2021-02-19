@@ -6,6 +6,15 @@ const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
 const RemovePlugin = require('remove-files-webpack-plugin');
 const dashDash = require('@greenpeace/dashdash');
 
+const entryPoints = blockName => {
+  return {
+    [`${blockName}EditorScript`]: `./assets/src/blocks/${blockName}/${blockName}EditorScript.js`,
+    [`${blockName}EditorStyle`]: `./assets/src/styles/blocks/${blockName}/${blockName}EditorStyle.scss`,
+    [`${blockName}Script`]: `./assets/src/blocks/${blockName}/${blockName}Script.js`,
+    [`${blockName}Style`]: `./assets/src/styles/blocks/${blockName}/${blockName}Style.scss`,
+  }
+};
+
 module.exports = {
   ...defaultConfig,
   entry: {
@@ -22,6 +31,7 @@ module.exports = {
     theme_oceans: './assets/src/styles/theme_oceans.scss',
     theme_oil: './assets/src/styles/theme_oil.scss',
     theme_plastic: './assets/src/styles/theme_plastic.scss',
+    ...entryPoints('Accordion'),
   },
   output: {
     filename: '[name].js',

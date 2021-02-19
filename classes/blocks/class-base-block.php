@@ -19,7 +19,7 @@ abstract class Base_Block {
 		'default' => [],
 	];
 
-	const BLOCK_NAMESPACE_PREFIX = 'planet4-blocks';
+	public const BLOCK_NAMESPACE_PREFIX = 'planet4-blocks';
 
 	/**
 	 * Get all the data that will be needed to render the block correctly.
@@ -96,4 +96,74 @@ abstract class Base_Block {
 	public static function update_data( array $fields ) {
 		throw new NotImplemented( 'Method update_data is not implemented for ' . static::class );
 	}
+
+	/**
+	 * Register scripts and styles for a block
+	 * 
+	 * @param array $editor_script_dependencies Dependencies for the Editor script.
+	 * @param array $script_dependencies Dependencies for the Frontend script.
+	 */
+	public static function enqueue_editor_assets() {
+		$camelized_block_name = str_replace("-", "", ucwords(static::BLOCK_NAME, "-"));
+
+		// Editor Script
+		$file_url = trailingslashit( P4GBKS_PLUGIN_URL ) . 'assets/build/' . $camelized_block_name . 'EditorScript.js';
+		$file_path = trailingslashit( P4GBKS_PLUGIN_DIR ) . 'assets/build/' . $camelized_block_name . 'EditorScript.js';
+		wp_enqueue_script(
+			static::BLOCK_NAMESPACE_PREFIX . '/' . static::BLOCK_NAME . '-editor-script',
+			$file_url,
+			'planet4-blocks-editor-script',
+			\P4GBKS\Loader::file_ver($file_path),
+			true
+		);
+		
+		// Editor Style
+		$file_url = trailingslashit( P4GBKS_PLUGIN_URL ) . 'assets/build/' . $camelized_block_name . 'EditorStyle.min.css';
+		$file_path = trailingslashit( P4GBKS_PLUGIN_DIR ) . 'assets/build/' . $camelized_block_name . 'EditorStyle.min.css';
+		wp_enqueue_style(
+			static::BLOCK_NAMESPACE_PREFIX . '/' . static::BLOCK_NAME . '-editor-style',
+			$file_url,
+			[],
+			\P4GBKS\Loader::file_ver($file_path),
+		);
+			
+		// Frontend Style (aka: style)
+		$file_url = trailingslashit( P4GBKS_PLUGIN_URL ) . 'assets/build/' . $camelized_block_name . 'Style.min.css';
+		$file_path = trailingslashit( P4GBKS_PLUGIN_DIR ) . 'assets/build/' . $camelized_block_name . 'Style.min.css';
+		wp_enqueue_style(
+			static::BLOCK_NAMESPACE_PREFIX . '/' . static::BLOCK_NAME . '-style',
+			$file_url,
+			[],
+			\P4GBKS\Loader::file_ver($file_path),
+		);
+	}
+
+	public static function enqueue_frontend_assets() {
+		if ( has_block( static::BLOCK_NAMESPACE_PREFIX . '/' . static::BLOCK_NAME ) ) {
+			$camelized_block_name = str_replace("-", "", ucwords(static::BLOCK_NAME, "-"));
+
+			// Frontend Script (aka: script)
+			$file_url = trailingslashit( P4GBKS_PLUGIN_URL ) . 'assets/build/' . $camelized_block_name . 'Script.js';
+			$file_path = trailingslashit( P4GBKS_PLUGIN_DIR ) . 'assets/build/' . $camelized_block_name . 'Script.js';
+	
+			wp_enqueue_script(
+				static::BLOCK_NAMESPACE_PREFIX . '/' . static::BLOCK_NAME . '-script',
+				$file_url,
+				'planet4-blocks-script',
+				\P4GBKS\Loader::file_ver($file_path),
+				true
+			);
+	
+			// Frontend Style (aka: style)
+			$file_url = trailingslashit( P4GBKS_PLUGIN_URL ) . 'assets/build/' . $camelized_block_name . 'Style.min.css';
+			$file_path = trailingslashit( P4GBKS_PLUGIN_DIR ) . 'assets/build/' . $camelized_block_name . 'Style.min.css';
+			wp_enqueue_style(
+				static::BLOCK_NAMESPACE_PREFIX . '/' . static::BLOCK_NAME . '-style',
+				$file_url,
+				[],
+				\P4GBKS\Loader::file_ver($file_path),
+			);
+		}		
+	}
+
 }
