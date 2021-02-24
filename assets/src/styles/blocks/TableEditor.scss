@@ -1,3 +1,7 @@
 .edit-post-visual-editor {
   @include table;
 }
+
+.components-circular-option-picker .components-circular-option-picker__swatches .components-circular-option-picker__option-wrapper:nth-child(4) {
+  display: none;
+}

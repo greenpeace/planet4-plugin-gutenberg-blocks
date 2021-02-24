@@ -16,7 +16,7 @@
     }
 
     // Green background
-    &.has-green-background-color {
+    &.has-subtle-pale-green-background-color {
       th {
         background-color: $table-header-green;
       }
@@ -31,7 +31,7 @@
     }
 
     // Blue background
-    &.has-blue-background-color {
+    &.has-subtle-pale-blue-background-color {
       th {
         background-color: $table-header-blue;
       }
@@ -53,12 +53,12 @@
     }
 
     // Green background
-    &.has-green-background-color tr:nth-child(odd) {
+    &.has-subtle-pale-green-background-color tr:nth-child(odd) {
       background-color: $table-odd-row-green;
     }
 
     // Blue background
-    &.has-blue-background-color tr:nth-child(odd) {
+    &.has-subtle-pale-blue-background-color tr:nth-child(odd) {
       background-color: $table-odd-row-blue;
     }
   }
