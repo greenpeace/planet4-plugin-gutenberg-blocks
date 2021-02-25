@@ -2,6 +2,12 @@
   @include table;
 }
 
-.components-circular-option-picker .components-circular-option-picker__swatches .components-circular-option-picker__option-wrapper:nth-child(4) {
-  display: none;
+button[style*="background-color: rgb(252, 240, 239); color: rgb(252, 240, 239);"] {
+  background-color: white !important;
+  color: white !important;
+  pointer-events: none;
+
+  &::after {
+    display: none;
+  }
 }
