@@ -140,6 +140,7 @@ module.exports = {
     alias: {
       '@hooks': '@wordpress/element',
       '@render': '@wordpress/element',
+      '@compat': '@wordpress/element',
     }
   }
 };

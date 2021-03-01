@@ -1,12 +1,20 @@
 const defaultConfig = require("./node_modules/@wordpress/scripts/config/webpack.config");    // Require default Webpack config
 const TerserJSPlugin = require('terser-webpack-plugin');
 
+const entryPoints = blockName => {
+  return {
+    [`${blockName}Script`]: `./assets/src/blocks/${blockName}/${blockName}Script.js`,
+  }
+};
+
 module.exports = {
   ...defaultConfig,
   entry: {
     // editorIndex: './assets/src/editorIndex.js',
     frontendIndex: './assets/src/frontendIndex.js',
-    carouselHeaderFrontIndex: './assets/src/carouselHeaderFrontIndex.js',
+    // carouselHeaderFrontIndex: './assets/src/carouselHeaderFrontIndex.js',
+    ...entryPoints('Accordion'),
+    ...entryPoints('CarouselHeader'),
   },
   output: {
     filename: '[name].js',
@@ -73,6 +81,7 @@ module.exports = {
     alias: {
       '@hooks': 'preact/hooks',
       '@render': 'preact',
+      '@compat': 'preact/compat',
     }
   }
 };

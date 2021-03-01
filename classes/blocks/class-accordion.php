@@ -43,7 +43,6 @@ class Accordion extends Base_Block {
 		register_block_type(
 			self::BLOCK_NAMESPACE_PREFIX . '/' . self::BLOCK_NAME,
 			[
-				'render_callback' => [ $this, 'render' ],
 				'attributes'    => [
 					'title'       => [
 						'type'    => 'string',

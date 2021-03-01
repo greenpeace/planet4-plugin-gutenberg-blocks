@@ -35,7 +35,11 @@ abstract class Base_Block {
 	 *
 	 * @return mixed
 	 */
-	public function render( $attributes ) {
+	public function render( $attributes, $content ) {
+
+		var_dump($attributes);
+		var_dump(htmlentities($content));
+		die;
 
 		$data = $this->prepare_data( $attributes );
 

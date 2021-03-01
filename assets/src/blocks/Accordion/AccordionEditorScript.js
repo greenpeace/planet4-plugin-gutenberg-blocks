@@ -3,7 +3,7 @@ import { AccordionFrontend } from './AccordionFrontend';
 const { registerBlockType, registerBlockStyle } = wp.blocks;
 const { __ } = wp.i18n;
 
-const BLOCK_NAME = 'planet4-blocks/accordion';
+const BLOCK_NAME = 'planet4-blocks-beta/accordion';
 
 const attributes = {
   title: {

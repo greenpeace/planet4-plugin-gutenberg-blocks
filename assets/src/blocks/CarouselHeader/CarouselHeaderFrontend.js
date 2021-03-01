@@ -1,4 +1,4 @@
-import { useRef, useEffect } from '@wordpress/element';
+import { useRef, useEffect } from '@hooks';
 import { useSlides } from './useSlides';
 import { CarouselHeaderStaticContent } from './CarouselHeaderStaticContent';
 

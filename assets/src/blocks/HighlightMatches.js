@@ -1,6 +1,7 @@
-import { Fragment } from '@wordpress/element';
+import { Fragment } from '@render';
 
 export const HighlightMatches = ( cellValue, searchText, className = 'highlighted-text' ) => {
+	console.log("Highlighting");
 	let reg = new RegExp('(' + searchText.trim() + ')', 'gi')
 	let parts = cellValue.split(reg)
 
