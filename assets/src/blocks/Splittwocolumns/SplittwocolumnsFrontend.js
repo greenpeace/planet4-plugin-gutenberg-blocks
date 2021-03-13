@@ -91,8 +91,12 @@ export const SplittwocolumnsFrontend = ({
             />
           }
           {button_text && button_link &&
-            <a className="btn btn-primary btn-block split-two-column-item-button"
-                href={button_link}
+            <button className="btn btn-primary btn-block split-two-column-item-button"
+                onClick={(e) => {
+                    e.preventDefault();
+                    window.location.href = button_link;
+                  }
+                }
                 {...analytics('Call to Action')}
                 dangerouslySetInnerHTML={{__html: button_text}}
             />
