@@ -20,22 +20,27 @@ abstract class Base_Block {
 	];
 
 	/**
+	 * Register the block.
+	 */
+	abstract public static function register(): void;
+
+	/**
 	 * Get all the data that will be needed to render the block correctly.
 	 *
 	 * @param array $fields This is the array of fields of this block.
 	 *
 	 * @return array The data to be passed in the View.
 	 */
-	abstract public function prepare_data( $fields ): array;
+	abstract public static function prepare_data( $fields ): array ;
 
 	/**
 	 * @param array $attributes Block attributes.
 	 *
 	 * @return mixed
 	 */
-	public function render( $attributes ) {
+	public static function render( $attributes ) {
 
-		$data = $this->prepare_data( $attributes );
+		$data = static::prepare_data( $attributes );
 
 		\Timber::$locations = P4GBKS_PLUGIN_DIR . '/templates/blocks';
 
@@ -46,27 +51,9 @@ abstract class Base_Block {
 
 		// Return empty string if rendered output contains only whitespace or new lines.
 		// If it is a rest request from editor/admin area, return a message that block has no content.
-		$empty_content = $this->is_rest_request() ? '<div class="EmptyMessage">' . $empty_message . '</div>' : '';
+		$empty_content = self::_rest_request() ? '<div class="EmptyMessage">' . $empty_message . '</div>' : '';
 
 		return ctype_space( $block_output ) ? $empty_content : $block_output;
-	}
-
-	/**
-	 * Outputs an error message.
-	 *
-	 * @param string $message Error message.
-	 */
-	public function render_error_message( $message ) {
-		// Ensure only editors see the error, not visitors to the website.
-		if ( current_user_can( 'edit_posts' ) ) {
-			\Timber::render(
-				P4GBKS_PLUGIN_DIR . 'templates/block-error-message.twig',
-				[
-					'category' => __( 'Error', 'planet4-blocks' ),
-					'message'  => $message,
-				]
-			);
-		}
 	}
 
 	/**
@@ -74,11 +61,8 @@ abstract class Base_Block {
 	 *
 	 * @return bool
 	 */
-	protected function is_rest_request() {
-		if ( defined( 'REST_REQUEST' ) && REST_REQUEST ) {
-			return true;
-		}
-		return false;
+	protected static function is_rest_request() {
+		return defined( 'REST_REQUEST' ) && REST_REQUEST;
 	}
 
 	/**

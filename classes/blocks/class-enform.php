@@ -34,18 +34,14 @@ class ENForm extends Base_Block {
 	private const FIELDS_META = 'p4enform_fields';
 
 	/**
-	 * ENForm constructor.
+	 * Register the block.
 	 */
-	public function __construct() {
-		if ( WP_Block_Type_Registry::get_instance()->is_registered( 'planet4-blocks/enform' ) ) {
-			return;
-		}
-
-		add_shortcode( 'shortcake_enblock', [ $this, 'add_block_shortcode' ] );
+	public static function register(): void {
+		add_shortcode( 'shortcake_enblock', [ self::class, 'add_block_shortcode' ] );
 		register_block_type(
 			'planet4-blocks/enform',
 			[
-				'render_callback' => [ $this, 'render' ],
+				'render_callback' => [ self::class, 'render' ],
 				'attributes'      => [
 					'en_page_id'                    => [
 						'type'    => 'integer',
@@ -133,8 +129,8 @@ class ENForm extends Base_Block {
 			]
 		);
 
-		add_action( 'wp_ajax_get_en_session_token', [ $this, 'get_session_token' ] );
-		add_action( 'wp_ajax_nopriv_get_en_session_token', [ $this, 'get_session_token' ] );
+		add_action( 'wp_ajax_get_en_session_token', [ self::class, 'get_session_token' ] );
+		add_action( 'wp_ajax_nopriv_get_en_session_token', [ self::class, 'get_session_token' ] );
 	}
 
 
@@ -171,7 +167,7 @@ class ENForm extends Base_Block {
 			'shortcake_enform'
 		);
 
-		return $this->render( $attributes );
+		return Base_Block::render( $attributes );
 	}
 
 	/**
@@ -181,7 +177,7 @@ class ENForm extends Base_Block {
 	 *
 	 * @return array The data to be passed in the View.
 	 */
-	public function prepare_data( $attributes ): array {
+	public static function prepare_data( $attributes ): array {
 
 		global $post;
 
@@ -302,8 +298,8 @@ class ENForm extends Base_Block {
 		);
 
 		// Enqueue js for the frontend.
-		if ( ! $this->is_rest_request() ) {
-			$this->enqueue_public_assets();
+		if ( ! self::_rest_request() ) {
+			self::enqueue_public_assets();
 		}
 
 		return $data;
@@ -312,7 +308,7 @@ class ENForm extends Base_Block {
 	/**
 	 * Get en session token for frontend api calls.
 	 */
-	public function get_session_token() {
+	public static function get_session_token() {
 		// If this is an ajax call.
 		if ( wp_doing_ajax() ) {
 
@@ -330,7 +326,7 @@ class ENForm extends Base_Block {
 	/**
 	 * Load assets for the EN block frontend.
 	 */
-	public function enqueue_public_assets() {
+	public static function enqueue_public_assets() {
 		// EN-blocks assets.
 		\P4GBKS\Loader::enqueue_local_script(
 			'engagingnetworks-submit',

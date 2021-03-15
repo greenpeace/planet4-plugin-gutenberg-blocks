@@ -26,7 +26,7 @@ class Media extends Base_Block {
 	/**
 	 * Media constructor.
 	 */
-	public function __construct() {
+	public static function register(): void {
 		register_block_type(
 			'planet4-blocks/media-video',
 			[
@@ -78,7 +78,7 @@ class Media extends Base_Block {
 	 *
 	 * @param array $fields Unused, required by the abstract function.
 	 */
-	public function prepare_data( $fields ): array {
+	public static function prepare_data( $fields ): array {
 		return [];
 	}
 

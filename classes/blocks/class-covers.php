@@ -43,20 +43,20 @@ class Covers extends Base_Block {
 			'shortcake_newcovers'
 		);
 
-		return $this->render( $attributes );
+		return Base_Block::render( $attributes );
 	}
 
 	/**
-	 * Covers constructor.
+	 * Register the block.
 	 */
-	public function __construct() {
-		add_shortcode( 'shortcake_newcovers', [ $this, 'add_block_shortcode' ] );
+	public static function register(): void {
+		add_shortcode( 'shortcake_newcovers', [ self::class, 'add_block_shortcode' ] );
 
 		register_block_type(
 			'planet4-blocks/covers',
 			[  // - Register the block for the editor
 				'editor_script'   => 'planet4-blocks',           // in the PHP side.
-				'render_callback' => [ $this, 'render' ],                     // - This render callback will be exposed
+				'render_callback' => [ self::class, 'render' ],                     // - This render callback will be exposed
 																			// to render the block.
 
 				// These attributes match the current fields.
@@ -106,22 +106,22 @@ class Covers extends Base_Block {
 	 *
 	 * @return array The data to be passed in the View.
 	 */
-	public function prepare_data( $fields ): array {
+	public static function prepare_data( $fields ): array {
 		$cover_type = $fields['cover_type'] ?? '';
 		$covers     = false;
 
 		if ( '1' === $cover_type ) {
-			$covers = $this->populate_posts_for_act_pages( $fields );
+			$covers = self::populate_posts_for_act_pages( $fields );
 		} elseif ( '2' === $cover_type ) {
-			$covers = $this->populate_posts_for_campaigns( $fields );
+			$covers = self::populate_posts_for_campaigns( $fields );
 		} elseif ( '3' === $cover_type ) {
-			$covers = $this->populate_posts_for_cfc( $fields );
+			$covers = self::populate_posts_for_cfc( $fields );
 		}
 
 		$covers_view = isset( $fields['covers_view'] ) ? intval( $fields['covers_view'] ) : 1;
 
 		// Enqueue js for the frontend.
-		if ( ! $this->is_rest_request() ) {
+		if ( ! self::_rest_request() ) {
 			\P4GBKS\Loader::enqueue_local_script( 'covers', 'public/js/load_more.js', [ 'jquery' ] );
 		}
 
@@ -142,7 +142,7 @@ class Covers extends Base_Block {
 	 *
 	 * @return \WP_Post[]
 	 */
-	private function filter_posts_for_act_pages( $fields ) {
+	private static function filter_posts_for_act_pages( $fields ) {
 		$tag_ids       = $fields['tags'] ?? [];
 		$options       = get_option( 'planet4_options' );
 		$parent_act_id = $options['act_page'];
@@ -180,7 +180,7 @@ class Covers extends Base_Block {
 	 *
 	 * @return \WP_Post[]
 	 */
-	private function filter_posts_by_ids( $fields ) {
+	private static function filter_posts_by_ids( $fields ) {
 		$post_ids = $fields['posts'] ?? [];
 
 		if ( ! empty( $post_ids ) ) {
@@ -214,7 +214,7 @@ class Covers extends Base_Block {
 	 *
 	 * @return \WP_Post[]
 	 */
-	private function filter_posts_for_cfc( $fields ) {
+	private static function filter_posts_for_cfc( $fields ) {
 
 		$tag_ids    = $fields['tags'] ?? [];
 		$post_types = $fields['post_types'] ?? [];
@@ -286,7 +286,7 @@ class Covers extends Base_Block {
 	 *
 	 * @return array
 	 */
-	private function populate_posts_for_campaigns( &$fields ) {
+	private static function populate_posts_for_campaigns( &$fields ) {
 
 		// Get user defined tags from backend.
 		$tag_ids = $fields['tags'] ?? [];
@@ -329,14 +329,14 @@ class Covers extends Base_Block {
 	 *
 	 * @return array
 	 */
-	private function populate_posts_for_act_pages( &$fields ) {
+	private static function populate_posts_for_act_pages( &$fields ) {
 		$post_ids = $fields['posts'] ?? [];
 		$options  = get_option( 'planet4_options' );
 
 		if ( ! empty( $post_ids ) ) {
-			$actions = $this->filter_posts_by_ids( $fields );
+			$actions = self::filter_posts_by_ids( $fields );
 		} else {
-			$actions = $this->filter_posts_for_act_pages( $fields );
+			$actions = self::filter_posts_for_act_pages( $fields );
 		}
 
 		$covers = [];
@@ -378,14 +378,14 @@ class Covers extends Base_Block {
 	 *
 	 * @return array
 	 */
-	private function populate_posts_for_cfc( &$fields ) {
+	private static function populate_posts_for_cfc( &$fields ) {
 
 		$post_ids = $fields['posts'] ?? [];
 
 		if ( ! empty( $post_ids ) ) {
-			$posts = $this->filter_posts_by_ids( $fields );
+			$posts = self::filter_posts_by_ids( $fields );
 		} else {
-			$posts = $this->filter_posts_for_cfc( $fields );
+			$posts = self::filter_posts_for_cfc( $fields );
 		}
 
 		$posts_array = [];

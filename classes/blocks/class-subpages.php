@@ -21,12 +21,12 @@ class SubPages extends Base_Block {
 	/**
 	 * Submenu constructor.
 	 */
-	public function __construct() {
+	public static function register(): void {
 		register_block_type(
 			'planet4-blocks/sub-pages',
 			[
 				'editor_script'   => 'planet4-blocks',
-				'render_callback' => [ $this, 'render' ],
+				'render_callback' => [ self::class, 'render' ],
 				'attributes'      => [],
 			]
 		);
@@ -39,11 +39,11 @@ class SubPages extends Base_Block {
 	 *
 	 * @return array The data to be passed in the View.
 	 */
-	public function prepare_data( $attributes ): array {
+	public static function prepare_data( $attributes ): array {
 		global $post;
 
 		// If request is coming from backend rendering.
-		if ( $this->is_rest_request() ) {
+		if ( self::_rest_request() ) {
 			$post_id = filter_input( INPUT_GET, 'post_id', FILTER_VALIDATE_INT );
 		} else {
 			$post_id = $post->ID;

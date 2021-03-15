@@ -37,7 +37,7 @@ class Gallery extends Base_Block {
 	/**
 	 * Gallery constructor.
 	 */
-	public function __construct() {
+	public static function register(): void {
 		register_block_type(
 			'planet4-blocks/gallery',
 			[
@@ -99,7 +99,7 @@ class Gallery extends Base_Block {
 	 *
 	 * @param array $fields Unused, required by the abstract function.
 	 */
-	public function prepare_data( $fields ): array {
+	public static function prepare_data( $fields ): array {
 		return [];
 	}
 

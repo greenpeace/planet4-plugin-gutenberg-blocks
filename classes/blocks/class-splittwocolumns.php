@@ -62,7 +62,7 @@ class SplitTwoColumns extends Base_Block {
 	/**
 	 * SplitTwoColumns constructor.
 	 */
-	public function __construct() {
+	public static function register(): void {
 		// Registering meta field to make it appear in REST API.
 		\register_meta(
 			'term',
@@ -98,7 +98,7 @@ class SplitTwoColumns extends Base_Block {
 	 *
 	 * @param array $fields Unused, required by the abstract function.
 	 */
-	public function prepare_data( $fields ): array {
+	public static function prepare_data( $fields ): array {
 		return [];
 	}
 

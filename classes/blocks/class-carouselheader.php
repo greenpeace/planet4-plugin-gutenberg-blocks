@@ -25,14 +25,14 @@ class CarouselHeader extends Base_Block {
 	const BLOCK_NAME = 'carousel_header';
 
 	/**
-	 * Gallery constructor.
+	 * Register the block.
 	 */
-	public function __construct() {
+	public static function register(): void {
 		register_block_type(
 			'planet4-blocks/carousel-header',
 			[
 				'editor_script'   => 'planet4-blocks',
-				'render_callback' => [ $this, 'render' ],
+				'render_callback' => [ self::class, 'render' ],
 				'attributes'      => [
 					'carousel_autoplay' => [
 						'type'    => 'boolean',
@@ -79,7 +79,7 @@ class CarouselHeader extends Base_Block {
 			]
 		);
 
-		add_action( 'enqueue_block_editor_assets', [ $this, 'enqueue_editor_scripts' ] );
+		add_action( 'enqueue_block_editor_assets', [ self::class, 'enqueue_editor_scripts' ] );
 	}
 
 	/**
@@ -96,7 +96,7 @@ class CarouselHeader extends Base_Block {
 	 *
 	 * @return array The data to be passed in the View.
 	 */
-	public function prepare_data( $fields ): array {
+	public static function prepare_data( $fields ): array {
 		$total_images = 0;
 		if ( ! empty( $fields['slides'] ) ) {
 			foreach ( $fields['slides'] as &$slide ) {
@@ -124,7 +124,7 @@ class CarouselHeader extends Base_Block {
 		$fields['total_images'] = $total_images;
 
 		// Enqueue js for the frontend.
-		if ( ! $this->is_rest_request() ) {
+		if ( ! self::is_rest_request() ) {
 			wp_enqueue_script( 'hammer', 'https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js', [], '2.0.8', true );
 			\P4GBKS\Loader::enqueue_local_script(
 				'carousel-header',

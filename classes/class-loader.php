@@ -59,27 +59,32 @@ final class Loader {
 		$this->load_services();
 		$this->load_commands();
 		$this->check_requirements();
+		self::register_blocks();
+	}
 
-		// Load Blocks.
-		new Blocks\Accordion();
-		new Blocks\Articles();
-		new Blocks\CarouselHeader();
-		new Blocks\Columns();
-		new Blocks\Cookies();
-		new Blocks\Counter();
-		new Blocks\Covers();
-		new Blocks\Gallery();
-		new Blocks\Happypoint();
-		new Blocks\Media();
-		new Blocks\SocialMedia();
-		new Blocks\SplitTwoColumns();
-		new Blocks\Spreadsheet();
-		new Blocks\SubMenu();
-		new Blocks\SubPages();
-		new Blocks\TakeActionBoxout();
-		new Blocks\Timeline();
-		new Blocks\SocialMediaCards();
-		new Blocks\ENForm();
+	/**
+	 * Register some blocks.
+	 */
+	private static function register_blocks(): void {
+		Blocks\Accordion::register();
+		Blocks\Articles::register();
+		Blocks\CarouselHeader::register();
+		Blocks\Columns::register();
+		Blocks\Cookies::register();
+		Blocks\Counter::register();
+		Blocks\Covers::register();
+		Blocks\Gallery::register();
+		Blocks\Happypoint::register();
+		Blocks\Media::register();
+		Blocks\SocialMedia::register();
+		Blocks\SplitTwoColumns::register();
+		Blocks\Spreadsheet::register();
+		Blocks\SubMenu::register();
+		Blocks\SubPages::register();
+		Blocks\TakeActionBoxout::register();
+		Blocks\Timeline::register();
+		Blocks\SocialMediaCards::register();
+		Blocks\ENForm::register();
 	}
 
 	/**

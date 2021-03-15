@@ -69,20 +69,20 @@ class Columns extends Base_Block {
 			'shortcake_columns'
 		);
 
-		return $this->render( $attributes );
+		return Base_Block::render( $attributes );
 	}
 
 	/**
-	 * Columns constructor.
+	 * Register the block.
 	 */
-	public function __construct() {
-		add_shortcode( 'shortcake_columns', [ $this, 'add_block_shortcode' ] );
+	public static function register(): void {
+		add_shortcode( 'shortcake_columns', [ self::class, 'add_block_shortcode' ] );
 
 		register_block_type(
 			'planet4-blocks/columns',
 			[
 				'editor_script'   => 'planet4-blocks',
-				'render_callback' => [ $this, 'render' ],
+				'render_callback' => [ self::class, 'render' ],
 				'attributes'      => [
 					'columns_block_style' => [
 						'type' => 'string',
@@ -133,7 +133,7 @@ class Columns extends Base_Block {
 	 *
 	 * @return array The data to be passed in the View.
 	 */
-	public function prepare_data( $attributes ): array {
+	public static function prepare_data( $attributes ): array {
 		// Fallback to avoid notices when block doesn't have this.
 		$columns_block_style = $attributes['columns_block_style'] ?? static::LAYOUT_NO_IMAGE;
 
@@ -176,7 +176,7 @@ class Columns extends Base_Block {
 		$fields['columns'] = $columns;
 
 		// enqueue script that equalizes the heights of the titles of the blocks.
-		if ( ! $this->is_rest_request() ) {
+		if ( ! self::_rest_request() ) {
 			\P4GBKS\Loader::enqueue_local_script( 'column-headers', 'public/js/columns.js', [ 'jquery' ] );
 		}
 

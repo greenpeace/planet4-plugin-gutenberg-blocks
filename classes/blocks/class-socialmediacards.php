@@ -23,12 +23,12 @@ class SocialMediaCards extends Base_Block {
 	/**
 	 * SocialMediaCards constructor.
 	 */
-	public function __construct() {
+	public static function register(): void {
 		register_block_type(
 			'planet4-blocks/social-media-cards',
 			[
 				'editor_script'   => 'planet4-blocks',
-				'render_callback' => [ $this, 'render' ],
+				'render_callback' => [ self::class, 'render' ],
 				'attributes'      => [
 					'title'       => [
 						'type'    => 'string',
@@ -71,9 +71,9 @@ class SocialMediaCards extends Base_Block {
 	 *
 	 * @return array The data to be passed in the View.
 	 */
-	public function prepare_data( $fields ): array {
+	public static function prepare_data( $fields ): array {
 		// Enqueue js for the frontend.
-		if ( ! $this->is_rest_request() ) {
+		if ( ! self::_rest_request() ) {
 			\P4GBKS\Loader::enqueue_local_script( 'social-media-cards', 'public/js/social_media_cards.js' );
 		}
 		$image_size = 'retina-large';

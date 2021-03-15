@@ -26,7 +26,7 @@ class Happypoint extends Base_Block {
 	/**
 	 * Happypoint constructor.
 	 */
-	public function __construct() {
+	public static function register(): void {
 		register_block_type(
 			'planet4-blocks/happypoint',
 			[
@@ -68,7 +68,7 @@ class Happypoint extends Base_Block {
 	 *
 	 * @param array $fields Unused, required by the abstract function.
 	 */
-	public function prepare_data( $fields ): array {
+	public static function prepare_data( $fields ): array {
 		return [];
 	}
 

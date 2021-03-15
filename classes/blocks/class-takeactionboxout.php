@@ -45,20 +45,20 @@ class TakeActionBoxout extends Base_Block {
 			'shortcake_take-action-boxout'
 		);
 
-		return $this->render( $attributes );
+		return Base_Block::render( $attributes );
 	}
 
 	/**
 	 * TakeActionBoxout constructor.
 	 */
-	public function __construct() {
-		add_shortcode( 'shortcake_take-action-boxout', [ $this, 'add_block_shortcode' ] );
+	public static function register(): void {
+		add_shortcode( 'shortcake_take-action-boxout', [ self::class, 'add_block_shortcode' ] );
 
 		register_block_type(
 			'planet4-blocks/take-action-boxout',
 			[
 				'editor_script'   => 'planet4-blocks',
-				'render_callback' => [ $this, 'render' ],
+				'render_callback' => [ self::class, 'render' ],
 				'attributes'      => [
 					'take_action_page'    => [
 						'type' => 'integer',
@@ -100,7 +100,7 @@ class TakeActionBoxout extends Base_Block {
 	 *
 	 * @return array The data to be passed in the View.
 	 */
-	public function prepare_data( $fields ): array {
+	public static function prepare_data( $fields ): array {
 
 		$page_id = $fields['take_action_page'] ?? '';
 

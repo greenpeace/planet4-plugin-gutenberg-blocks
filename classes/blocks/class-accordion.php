@@ -23,9 +23,9 @@ class Accordion extends Base_Block {
 	const BLOCK_NAME = 'accordion';
 
 	/**
-	 * Accordion constructor.
+	 * Register the block.
 	 */
-	public function __construct() {
+	public static function register(): void {
 		register_block_type(
 			'planet4-blocks-beta/accordion',
 			[
@@ -84,7 +84,7 @@ class Accordion extends Base_Block {
 	 *
 	 * @param array $fields Unused, required by the abstract function.
 	 */
-	public function prepare_data( $fields ): array {
+	public static function prepare_data( $fields ): array {
 		return [];
 	}
 }

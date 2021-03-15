@@ -23,9 +23,9 @@ class Counter extends Base_Block {
 	const BLOCK_NAME = 'counter';
 
 	/**
-	 * Counter constructor.
+	 * Register the block.
 	 */
-	public function __construct() {
+	public static function register(): void {
 		register_block_type(
 			'planet4-blocks/counter',
 			[  // - Register the block for the editor
@@ -68,7 +68,7 @@ class Counter extends Base_Block {
 	 *
 	 * @param array $fields Unused, required by the abstract function.
 	 */
-	public function prepare_data( $fields ): array {
+	public static function prepare_data( $fields ): array {
 		return [];
 	}
 }

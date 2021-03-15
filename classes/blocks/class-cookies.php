@@ -18,9 +18,9 @@ class Cookies extends Base_Block {
 	const BLOCK_NAME = 'cookies';
 
 	/**
-	 * Cookies constructor.
+	 * Register the block.
 	 */
-	public function __construct() {
+	public static function register(): void {
 		// - Register the block for the editor
 		// in the PHP side.
 		register_block_type(
@@ -68,7 +68,7 @@ class Cookies extends Base_Block {
 	 * @param array $attributes This is the array of fields of this block.
 	 * @return array The data to be passed in the View.
 	 */
-	public function prepare_data( $attributes ): array {
+	public static function prepare_data( $attributes ): array {
 		return [];
 	}
 }
