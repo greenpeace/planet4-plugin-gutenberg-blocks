@@ -18,6 +18,7 @@
       font-weight: 700;
       color: $grey-80;
       margin-bottom: .5rem;
+      text-transform: none;
 
       @include medium-and-up {
         font-size: 1.5rem;
