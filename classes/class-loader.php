@@ -68,6 +68,7 @@ final class Loader {
 		new Blocks\Cookies();
 		new Blocks\Counter();
 		new Blocks\Covers();
+		new Blocks\CoversWYSIWYG();
 		new Blocks\Gallery();
 		new Blocks\Happypoint();
 		new Blocks\Media();

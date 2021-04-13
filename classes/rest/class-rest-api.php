@@ -15,7 +15,7 @@ use P4GBKS\Blocks\Articles;
 use P4GBKS\Blocks\SplitTwoColumns;
 use P4GBKS\Blocks\Happypoint;
 use P4GBKS\Blocks\Gallery;
-use P4GBKS\Blocks\Covers;
+use P4GBKS\Blocks\CoversWYSIWYG;
 
 /**
  * This class is just a place for add_endpoints to live.
@@ -267,7 +267,7 @@ class Rest_Api {
 					},
 					'methods'             => WP_REST_Server::READABLE,
 					'callback'            => static function ( $fields ) {
-						$covers = Covers::get_covers( $fields );
+						$covers = CoversWYSIWYG::get_covers( $fields );
 						return rest_ensure_response( $covers );
 					},
 				],

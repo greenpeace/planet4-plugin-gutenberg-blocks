@@ -9,7 +9,7 @@ wp.domReady(() => {
   // Remove Take Action and Campaign covers styles for Covers block in campaigns
   const postType = wp.data.select('core/editor').getCurrentPostType();
   if (postType === 'campaign') {
-    unregisterBlockStyle('planet4-blocks/covers', 'take-action');
-    unregisterBlockStyle('planet4-blocks/covers', 'campaign');
+    unregisterBlockStyle('planet4-blocks/covers-wysiwyg', 'take-action');
+    unregisterBlockStyle('planet4-blocks/covers-wysiwyg', 'campaign');
   }
 });

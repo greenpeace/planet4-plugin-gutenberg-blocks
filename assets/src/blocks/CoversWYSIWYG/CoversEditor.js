@@ -77,7 +77,9 @@ const renderView = (attributes, toAttribute) => {
     covers,
     initialRowsLimit,
     row,
-    loadMoreCovers: () => {},
+    loadMoreCovers: () => {
+      // In the editor we don't want the load more button to be functional.
+    },
     cover_type,
   };
 
