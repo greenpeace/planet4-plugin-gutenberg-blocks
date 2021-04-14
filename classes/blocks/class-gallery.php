@@ -132,7 +132,7 @@ class Gallery extends Base_Block {
 
 		foreach ( $exploded_images as $image_id ) {
 			$image_size = $fields['gallery_image_size'] ?? (
-				$fields['gallery_block_style'] ? $image_sizes[ $fields['gallery_block_style'] ] : null
+				$fields['gallery_block_style'] ? $image_sizes[ $fields['gallery_block_style'] ] : 'large'
 			);
 
 			$image_data = [];
