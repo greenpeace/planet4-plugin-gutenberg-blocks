@@ -13,11 +13,11 @@ const getMeta = () => {
 const metaToVariableMapping = [
   {
     metaKey: 'campaign_body_font',
-    cssVariable: '--body-font',
+    cssVariable: '--body--font-family',
   },
   {
     metaKey: 'campaign_header_primary',
-    cssVariable: '--header-primary-font',
+    cssVariable: '--headings--font-family',
     transform( value ) {
       if ( value === 'Montserrat_Light' ) {
         return 'Montserrat';
@@ -44,33 +44,30 @@ const metaToVariableMapping = [
 ];
 
 export const setUpCssVariables = () => {
-  document.addEventListener( 'DOMContentLoaded', ( event ) => {
-    const postType = wp.data.select( 'core/editor' ).getCurrentPostType();
+  metaToVariableMapping.forEach(mapping => {
+    wp.data.subscribe(() => {
+      const postType = wp.data.select('core/editor').getCurrentPostType();
 
-    if ( postType !== 'campaign' ) {
-      return;
-    }
+      if (postType !== 'campaign') {
+        return;
+      }
+      const postMeta = getMeta();
 
-    metaToVariableMapping.forEach( mapping => {
-      wp.data.subscribe( () => {
-        const postMeta = getMeta();
+      // wp.data starts dispatching before meta is available.
+      if (!postMeta) {
+        return;
+      }
 
-        // wp.data starts dispatching before meta is available.
-        if ( !postMeta ) {
-          return;
-        }
+      const transform = mapping.transform || (value => value);
 
-        const transform = mapping.transform || (value => value);
+      const metaValue = transform(postMeta[mapping.metaKey]);
 
-        const metaValue = transform( postMeta[ mapping.metaKey ] );
+      const currentValue = readCssVariable(mapping.cssVariable);
 
-        const currentValue = readCssVariable( mapping.cssVariable );
-
-        if ( currentValue !== metaValue ) {
-          setCssVariable( mapping.cssVariable, metaValue );
-          console.log( `Set css variable "${ mapping.cssVariable }" to "${ metaValue }"` );
-        }
-      } );
-    } );
-  } );
+      if (currentValue !== metaValue) {
+        setCssVariable(mapping.cssVariable, metaValue);
+        console.log(`Set css variable "${ mapping.cssVariable }" to "${ metaValue }"`);
+      }
+    });
+  });
 };
