@@ -19,7 +19,7 @@ export class CarouselHeader extends Component {
   setDOMListener() {
     const carouselInterval = window.setInterval(
       () => {
-        if (document.getElementById('carousel-wrapper-header')) {
+        if (document.getElementById('old-carousel-wrapper-header')) {
           window.clearInterval(carouselInterval);
           initializeCarouselHeader();
         }

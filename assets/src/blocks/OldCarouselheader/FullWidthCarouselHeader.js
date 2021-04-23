@@ -36,7 +36,7 @@ export const FullWidthCarouselHeader = {
 
     me.isRTL = $('html').attr('dir') == 'rtl';
 
-    me.$CarouselHeaderWrapper = $('#carousel-wrapper-header');
+    me.$CarouselHeaderWrapper = $('#old-carousel-wrapper-header');
     me.$Slides = me.$CarouselHeaderWrapper.find('.carousel-item');
 
     me.$CarouselHeaderWrapper.find('img').on('load', function () {
@@ -56,7 +56,7 @@ export const FullWidthCarouselHeader = {
 
       // Populate carousel indicators list
       $('<li>')
-        .attr('data-bs-target', '#carousel-wrapper-header')
+        .attr('data-bs-target', '#old-carousel-wrapper-header')
         .attr('data-bs-slide-to', i)
         .toggleClass('active', i === 0)
         .appendTo(me.$CarouselIndicators);
