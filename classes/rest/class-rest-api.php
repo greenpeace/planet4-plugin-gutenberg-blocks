@@ -172,8 +172,16 @@ class Rest_Api {
 					},
 					'methods'             => WP_REST_Server::READABLE,
 					'callback'            => static function ( $fields ) {
-						$to_return = Articles::get_posts( $fields );
-						return rest_ensure_response( $to_return );
+						$posts = Articles::get_posts( $fields );
+						$is_first_page = empty( $fields['after'] ) || $fields['after'] === 'null';
+
+						$cache_header = $is_first_page
+							? 'public, max-age=1800'
+							: 'public, max-age=25920,s-max-age=2592000';
+
+						return new \WP_REST_Response($posts, 200, [
+							'Cache-Control' => $cache_header,
+						]);
 					},
 				],
 			]

@@ -27,7 +27,10 @@ class Articles extends Base_Block {
 	const MAX_ARTICLES = 100;
 
 	const DEFAULT_POST_ARGS = [
-		'orderby'          => 'date',
+		'orderby'          => [
+			'date' => 'DESC',
+			'id'   => 'DESC',
+		],
 		'post_status'      => 'publish',
 		'has_password'     => false,
 		'suppress_filters' => false,
@@ -154,7 +157,30 @@ class Articles extends Base_Block {
 		// Ignore rule, arguments contain suppress_filters.
 		// phpcs:ignore$fields['article_count']
 		$all_posts    = wp_get_recent_posts( $args );
-		$sliced_posts = $offset ? $all_posts : array_slice( $all_posts, 0, $fields['article_count'] );
+
+		// We can currently do this because we fetch all posts from the db. Handling this in a single query seems
+		// possible, but tricky. The order is by date but we know which ID it is, which probably involves a subquery.
+		if ( $fields['after'] ) {
+			$sliced_posts  = [];
+			$is_first_page = empty( $fields['after'] ) || $fields['after'] === 'null';
+			$saw_it        = $is_first_page;
+
+			foreach ( $all_posts as $all_post ) {
+				if ( ! $saw_it ) {
+					if ( (int) $all_post['ID'] === (int) $fields['after'] ) {
+						$saw_it = true;
+					}
+					continue;
+				}
+
+				$sliced_posts[] = $all_post;
+				if ( count( $sliced_posts ) === (int) $fields['article_count'] ) {
+					break;
+				}
+			}
+		} else {
+			$sliced_posts = $offset ? $all_posts : array_slice( $all_posts, 0, $fields['article_count'] );
+		}
 		$recent_posts = [];
 
 		// Populate posts array for frontend template if results have been returned.

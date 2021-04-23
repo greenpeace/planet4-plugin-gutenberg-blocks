@@ -20,13 +20,21 @@ export const useArticlesFetch = (attributes, postType, postId, baseUrl = null, p
 
     const prevPosts = reset ? [] : displayedPosts;
 
+    const getLastID = posts => {
+      if (posts.length === 0) {
+        return null;
+      }
+      const last = posts.slice(-1)[0];
+      return last.ID;
+    }
+
     const args = {
       article_count,
       post_types,
       posts,
       tags,
       ignore_categories,
-      offset: prevPosts.length,
+      after: getLastID(prevPosts),
     };
 
     if (postType === 'post') {
