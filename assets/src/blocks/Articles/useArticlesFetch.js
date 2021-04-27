@@ -1,21 +1,26 @@
 import { useState, useEffect } from '@wordpress/element';
 import { fetchJson } from '../../functions/fetchJson';
 import { addQueryArgs } from '../../functions/addQueryArgs';
+import { getQueryParam } from '../../functions/useQueryString';
 
 const { apiFetch } = wp;
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 export const useArticlesFetch = (attributes, postType, postId, baseUrl = null, postCategories = []) => {
   const { article_count, post_types, posts, tags, ignore_categories } = attributes;
 
   const [totalPosts, setTotalPosts] = useState(null);
   const [displayedPosts, setDisplayedPosts] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const loadPage = async (reset = false) => {
-    if (loading) {
+    if (loading && !reset) {
       return;
     }
+    await sleep(getQueryParam('more_delay', 0));
     setLoading(true);
 
     const prevPosts = reset ? [] : displayedPosts;
