@@ -9,6 +9,7 @@ export const useArticlesFetch = (attributes, postType, postId, baseUrl = null, p
 
   const [totalPosts, setTotalPosts] = useState(null);
   const [displayedPosts, setDisplayedPosts] = useState([]);
+  const [initialized, setInitialized] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -44,6 +45,7 @@ export const useArticlesFetch = (attributes, postType, postId, baseUrl = null, p
       const newPosts = [...prevPosts, ...response.recent_posts];
 
       setDisplayedPosts(newPosts);
+      setInitialized(true);
 
       if (response.total_posts !== undefined && response.total_posts !== totalPosts) {
         setTotalPosts(response.total_posts);
@@ -65,6 +67,7 @@ export const useArticlesFetch = (attributes, postType, postId, baseUrl = null, p
   return {
     posts: displayedPosts,
     totalPosts,
+    initialized,
     loading,
     error,
     hasMorePages: totalPosts > displayedPosts.length,

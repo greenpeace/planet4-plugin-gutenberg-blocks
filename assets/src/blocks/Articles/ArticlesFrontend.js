@@ -1,3 +1,4 @@
+import { useEffect } from '@wordpress/element';
 import { ArticlesList } from './ArticlesList';
 import { useArticlesFetch } from './useArticlesFetch';
 
@@ -20,7 +21,16 @@ export const ArticlesFrontend = (props) => {
 
   const postCategories = props.post_categories || [];
 
-  const { posts, loadNextPage, hasMorePages, loading } = useArticlesFetch(props, postType, postId, document.body.dataset.nro, postCategories);
+  const { posts, loadNextPage, hasMorePages, initialized, loading } = useArticlesFetch(props, postType, postId, document.body.dataset.nro, postCategories);
+
+  useEffect(() => {
+    if ( initialized) {
+      const time = performance.now();
+      const event = {event: 'blocksRendered', time };
+      window.dataLayer && window.dataLayer.push(event);
+      console.log(event);
+    }
+  }, [initialized]);
 
   if (!posts.length) {
     return null;

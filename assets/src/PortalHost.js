@@ -31,9 +31,12 @@ export const PortalHost = ({blocks}) => {
   useEffect(() => {
     const time = performance.now();
     const event = {event: 'blocksRendered', time };
-    dataLayer.push(event)
     console.log(event);
-  }, []);
+
+    if (!blocks.some(b => b.dataset.render === 'planet4-blocks/articles')) {
+      dataLayer.push(event)
+    }
+  }, [blocks]);
 
   return <Fragment>
     {blocks.map(block=> {
