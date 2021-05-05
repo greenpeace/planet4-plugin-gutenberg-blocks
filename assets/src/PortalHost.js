@@ -28,7 +28,10 @@ const COMPONENTS = {
 
 export const PortalHost = ({blocks}) => {
   useEffect(() => {
-    dataLayer in window && dataLayer.push({event: 'blocksRendered', time: performance.now()})
+    const time = performance.now();
+    const event = {event: 'blocksRendered', time };
+    dataLayer in window && dataLayer.push(event)
+    console.log(event);
   }, []);
 
   return <Fragment>
