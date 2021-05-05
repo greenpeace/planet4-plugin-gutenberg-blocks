@@ -10,6 +10,7 @@ import { TimelineFrontend } from './blocks/Timeline/TimelineFrontend';
 import { SubmenuFrontend } from './blocks/Submenu/SubmenuFrontend';
 import { MediaFrontend } from './blocks/Media/MediaFrontend';
 import { ColumnsFrontend } from './blocks/Columns/ColumnsFrontend';
+const dataLayer = window.dataLayer || [];
 
 // Render React components
 const COMPONENTS = {
@@ -30,7 +31,7 @@ export const PortalHost = ({blocks}) => {
   useEffect(() => {
     const time = performance.now();
     const event = {event: 'blocksRendered', time };
-    dataLayer in window && dataLayer.push(event)
+    dataLayer.push(event)
     console.log(event);
   }, []);
 

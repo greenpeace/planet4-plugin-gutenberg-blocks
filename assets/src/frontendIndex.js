@@ -5,6 +5,7 @@ import { PortalHost } from './PortalHost';
 const dataLayer = window.dataLayer || [];
 
 dataLayer.push({ event: 'frontendIndexStart', time: performance.now()});
+
 // Render React components
 // Empty react root so we can do a single render with portals to all the blocks.
 const reactRoot = document.createElement('div');
