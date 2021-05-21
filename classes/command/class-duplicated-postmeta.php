@@ -36,11 +36,11 @@ class Duplicated_Postmeta {
 		global $wpdb;
 
 		// phpcs:disable
-		$sql = "DELETE t1 FROM wp_postmeta t1 
-				INNER JOIN wp_postmeta t2  
-				WHERE  t1.meta_id < t2.meta_id 
-				AND  t1.meta_key = t2.meta_key 
-				AND t1.post_id = t2.post_id 
+		$sql = "DELETE t1 FROM wp_postmeta t1
+				INNER JOIN wp_postmeta t2
+				WHERE  t1.meta_id < t2.meta_id
+				AND  t1.meta_key = t2.meta_key
+				AND t1.post_id = t2.post_id
 				AND t1.meta_key IN (" . self::generate_placeholders( self::META_KEY_LIST, 1 ) . ")";
 
 		$prepared_sql = $wpdb->prepare( $sql, self::META_KEY_LIST );

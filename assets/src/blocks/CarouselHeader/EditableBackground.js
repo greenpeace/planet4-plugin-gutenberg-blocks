@@ -1,6 +1,7 @@
 import { MediaUpload } from '@wordpress/block-editor';
 import { ImagePlaceholder } from './ImagePlaceholder';
 import { EditorControls } from './EditorControls';
+import { Fragment } from '@render';
 
 export const EditableBackground = ({
   image_url,
@@ -17,7 +18,7 @@ export const EditableBackground = ({
     allowedTypes={['image']}
     value={image_id}
     render={mediaUploadInstance => (
-      <>
+      <Fragment>
         <div className='background-holder'>
           {!image_url ?
             <ImagePlaceholder /> :
@@ -36,7 +37,7 @@ export const EditableBackground = ({
           removeSlide={removeSlide}
           slides={slides}
         />
-      </>
+      </Fragment>
     )}
   />
 );

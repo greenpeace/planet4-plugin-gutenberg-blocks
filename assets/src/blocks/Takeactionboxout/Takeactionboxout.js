@@ -1,4 +1,4 @@
-import {Component,Fragment} from "@wordpress/element";
+import { Component, Fragment } from '@render';
 import {BlockControls,MediaUpload,MediaUploadCheck} from "@wordpress/editor";
 import {Preview} from '../../components/Preview';
 import {URLInput} from '../../components/URLInput/URLInput';

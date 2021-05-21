@@ -2,7 +2,8 @@ import {
   SelectControl,
   PanelBody
 } from '@wordpress/components';
-import { useEffect } from '@wordpress/element';
+import { Fragment } from '@render';
+import { useEffect } from '@hooks';
 
 import { InspectorControls } from '@wordpress/block-editor';
 import TagSelector from '../../components/TagSelector/TagSelector';
@@ -136,10 +137,10 @@ export const CoversEditor = ({ attributes, setAttributes, isSelected }) => {
   const toAttribute = attributeName => value => setAttributes({ [attributeName]: value });
 
   return (
-    <>
+    <Fragment>
       {isSelected && renderEdit(attributes, toAttribute)}
       {renderView(attributes, toAttribute)}
-    </>
+    </Fragment>
   );
 }
 

@@ -1,4 +1,4 @@
-import {Component} from '@wordpress/element';
+import {Component} from '@render';
 
 export class EmptyMessage extends Component {
   render() {

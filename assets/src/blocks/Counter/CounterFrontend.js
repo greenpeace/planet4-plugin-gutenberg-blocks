@@ -1,4 +1,4 @@
-import { Component, Fragment } from '@wordpress/element';
+import { Component, Fragment } from '@render';
 import { getStyleFromClassName } from '../getStyleFromClassName';
 
 export class CounterFrontend extends Component {

@@ -1,4 +1,4 @@
-import { Component } from '@wordpress/element';
+import { Component } from '@render';
 import { unescape } from '../../functions/unescape';
 import { IMAGE_SIZES } from './imageSizes';
 

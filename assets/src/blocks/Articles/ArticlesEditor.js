@@ -1,4 +1,3 @@
-import { Fragment } from '@wordpress/element';
 import {
   CheckboxControl,
   TextControl as BaseTextControl,
@@ -14,6 +13,7 @@ import { URLInput } from "../../components/URLInput/URLInput";
 import { ArticlesList } from "./ArticlesList";
 import { useArticlesFetch } from './useArticlesFetch';
 import { useSelect } from '@wordpress/data';
+import { Fragment } from '@render';
 
 const { RichText } = wp.blockEditor;
 const { __ } = wp.i18n;

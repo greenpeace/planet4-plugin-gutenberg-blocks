@@ -1,4 +1,4 @@
-import {Component} from '@wordpress/element';
+import {Component} from '@render';
 import {RadioControl} from '@wordpress/components';
 
 export class LayoutSelector extends Component {

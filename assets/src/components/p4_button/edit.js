@@ -15,7 +15,8 @@ import classnames from 'classnames';
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { useCallback, useState } from '@wordpress/element';
+import { useCallback, useState } from '@hooks';
+import { Fragment } from '@render';
 import {
 	KeyboardShortcuts,
 	PanelBody,
@@ -92,7 +93,7 @@ function URLPicker( {
 		</Popover>
 	);
 	return (
-		<>
+		<Fragment>
 			<BlockControls>
 				<ToolbarGroup>
 					{ ! urlIsSet && (
@@ -126,7 +127,7 @@ function URLPicker( {
 				/>
 			) }
 			{ linkControl }
-		</>
+		</Fragment>
 	);
 }
 
@@ -179,7 +180,7 @@ function ButtonEdit( props ) {
 	const blockProps = useBlockProps();
 
 	return (
-		<>
+		<Fragment>
 			<ColorEdit { ...props } />
 			<div
 				{ ...blockProps }
@@ -240,7 +241,7 @@ function ButtonEdit( props ) {
 					/>
 				</PanelBody>
 			</InspectorControls>
-		</>
+		</Fragment>
 	);
 }
 

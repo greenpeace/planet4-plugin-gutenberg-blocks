@@ -1,4 +1,4 @@
-import { Component, Fragment } from '@wordpress/element';
+import { Component, Fragment } from '@render';
 import { Preview } from '../../components/Preview';
 import {
   MediaUpload,

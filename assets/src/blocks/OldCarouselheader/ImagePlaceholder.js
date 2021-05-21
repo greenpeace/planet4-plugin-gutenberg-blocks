@@ -1,4 +1,4 @@
-import {Component, Fragment} from '@wordpress/element';
+import { Component } from '@render';
 
 export default class ImagePlaceholder extends Component {
   render() {

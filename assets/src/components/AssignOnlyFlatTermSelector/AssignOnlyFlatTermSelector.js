@@ -13,7 +13,7 @@ import {
  * WordPress dependencies
  */
 import { __, _x, sprintf } from '@wordpress/i18n';
-import { Component } from '@wordpress/element';
+import { Component } from '@render';
 import { FormTokenField} from '@wordpress/components';
 import { withSelect, withDispatch } from '@wordpress/data';
 import { compose } from '@wordpress/compose';

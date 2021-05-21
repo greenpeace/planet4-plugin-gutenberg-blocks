@@ -1,4 +1,4 @@
-import { Fragment } from '@wordpress/element';
+import { Fragment } from '@render';
 
 const RichText = wp.blockEditor ? wp.blockEditor.RichText : null;
 

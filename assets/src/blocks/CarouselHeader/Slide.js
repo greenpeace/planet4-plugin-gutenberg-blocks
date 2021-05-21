@@ -1,6 +1,6 @@
 import {
   forwardRef,
-} from '@wordpress/element';
+} from '@compat';
 
 export const SlideWithRef = ({
   children,

@@ -1,4 +1,4 @@
-import { Component } from '@wordpress/element';
+import { Component } from '@render';
 import { compose } from '@wordpress/compose';
 const { apiFetch } = wp;
 const { addQueryArgs } = wp.url;

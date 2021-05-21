@@ -2,6 +2,7 @@ import { LAYOUT_NO_IMAGE, LAYOUT_ICONS, LAYOUT_TASKS, LAYOUT_IMAGES } from './Co
 import { MediaUpload, MediaUploadCheck } from '@wordpress/block-editor';
 import { Button } from '@wordpress/components';
 import { ColumnsImagePlaceholder } from './ColumnsImagePlaceholder';
+import { Fragment } from '@render';
 
 const { __ } = wp.i18n;
 const { RichText } = wp.blockEditor;
@@ -16,7 +17,7 @@ export const EditableColumns = ({
   const getImageOrButton = (openEvent, index) => {
     if (columns[index] && columns[index].attachment && (0 < columns[index].attachment)) {
       return (
-        <>
+        <Fragment>
           <div className='columns-image-container'>
             <div className='buttons-overlay'>
               <Button
@@ -38,7 +39,7 @@ export const EditableColumns = ({
               onClick={openEvent}
             />
           </div>
-        </>
+        </Fragment>
 
       );
     }

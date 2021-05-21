@@ -1,5 +1,5 @@
 import { Button, Dashicon } from '@wordpress/components';
-import { useState, useEffect, useRef } from '@wordpress/element';
+import { useState, useEffect, useRef } from '@hooks';
 const { __ } = wp.i18n;
 
 export const EditorControls = ({

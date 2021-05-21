@@ -1,4 +1,4 @@
-import { useState } from '@wordpress/element';
+import { useState } from '@hooks';
 
 export const useLightbox = () => {
   const [isOpen, setIsOpen] = useState(false);

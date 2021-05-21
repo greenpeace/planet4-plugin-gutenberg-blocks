@@ -1,3 +1,5 @@
+import { Fragment } from '@render';
+
 const { useSelect } = wp.data;
 
 /**
@@ -24,7 +26,7 @@ export const ImageBlockEdit = (BlockEdit) => {
     const block_id = clientId ? `block-${clientId}` : null;
 
     return (
-      <>
+      <Fragment>
         <BlockEdit { ...props } />
         { block_id && image_credits &&
           <style dangerouslySetInnerHTML={{__html:
@@ -32,7 +34,7 @@ export const ImageBlockEdit = (BlockEdit) => {
           }}>
           </style>
         }
-      </>
+      </Fragment>
     );
   }
 }

@@ -1,5 +1,5 @@
 import { PluginSidebar, PluginSidebarMoreMenuItem } from "@wordpress/edit-post";
-import { Component } from '@wordpress/element';
+import { Component, Fragment } from '@render';
 import { __ } from '@wordpress/i18n';
 import { resolveField } from '../fromThemeOptions/fromThemeOptions';
 import isShallowEqual from '@wordpress/is-shallow-equal';
@@ -115,7 +115,7 @@ export class CampaignSidebar extends Component {
     const { parent, theme } = this.state;
 
     return (
-      <>
+      <Fragment>
         <PluginSidebarMoreMenuItem
           target={ CampaignSidebar.getId() }
           icon={ CampaignSidebar.getIcon() }>
@@ -132,7 +132,7 @@ export class CampaignSidebar extends Component {
             />
           }
         </PluginSidebar>
-      </>
+      </Fragment>
     );
   }
 }

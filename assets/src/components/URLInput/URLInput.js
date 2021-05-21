@@ -1,4 +1,4 @@
-import {Component} from '@wordpress/element';
+import {Component} from '@render';
 import {TextControl} from '@wordpress/components';
 import {URLValidationMessage} from "../../components/URLValidationMessage/URLValidationMessage";
 
