@@ -1,4 +1,4 @@
-import { Component } from '@wordpress/element';
+import { Component } from '@render';
 
 /**
  * This component is used in the `save()` method of `registerBlock`,

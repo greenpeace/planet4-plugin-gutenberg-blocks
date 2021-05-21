@@ -1,4 +1,4 @@
-import { useEffect } from '@wordpress/element';
+import { useEffect } from '@hooks';
 import { LAYOUT_TASKS } from './ColumnConstants';
 import { Columns } from './Columns';
 

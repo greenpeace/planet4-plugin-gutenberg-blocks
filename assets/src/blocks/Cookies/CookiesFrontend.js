@@ -1,4 +1,4 @@
-import { Fragment } from '@wordpress/element';
+import { Component, Fragment } from '@render';
 import { FrontendRichText } from '../../components/FrontendRichText/FrontendRichText';
 import { removeCookie, useCookie, writeCookie } from './useCookie';
 import { useState, useEffect } from 'react';

@@ -3,6 +3,7 @@ import {
   FocalPointPicker,
   CheckboxControl,
 } from '@wordpress/components';
+import { Fragment } from '@render';
 import { URLInput } from '../../components/URLInput/URLInput';
 const { __ } = wp.i18n;
 
@@ -24,7 +25,7 @@ export const SidebarSlide = ({
   }
 
   return (
-    <>
+    <Fragment>
       <div className='carousel-header-slide-container'>
         <div className='carousel-header-slide-options-wrapper'>
           <div className='row'>
@@ -62,6 +63,6 @@ export const SidebarSlide = ({
           )}
         </div>
       </div>
-    </>
+    </Fragment>
   );
 }

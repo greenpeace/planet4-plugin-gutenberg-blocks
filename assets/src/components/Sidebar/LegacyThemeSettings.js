@@ -1,4 +1,5 @@
 import { compose } from '@wordpress/compose';
+import { Fragment } from '@render';
 import { PanelBody, RadioControl, SelectControl } from '@wordpress/components';
 import { withPostMeta } from '../PostMeta/withPostMeta';
 import { fromThemeOptions } from '../fromThemeOptions/fromThemeOptions';
@@ -71,7 +72,7 @@ export const LegacyThemeSettings = props => {
     theme,
   } = props;
 
-  return <>
+  return <Fragment>
     <div className="components-panel__body is-opened">
       <ThemeSelect
         metaKey='theme'
@@ -146,5 +147,5 @@ export const LegacyThemeSettings = props => {
         theme={ theme }
       />
     </PanelBody>
-  </>
+  </Fragment>
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from '@hooks';
 
 import PhotoSwipe from '../../../../node_modules/photoswipe/dist/photoswipe.js';
 import PhotoSwipeUI_Default from '../../../../node_modules/photoswipe/dist/photoswipe-ui-default.js';

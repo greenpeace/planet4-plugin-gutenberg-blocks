@@ -1,4 +1,4 @@
-import { Component } from '@wordpress/element';
+import { Component } from '@render';
 import classNames from 'classnames';
 
 const withCharacterCounter = ( WrappedComponent ) => {

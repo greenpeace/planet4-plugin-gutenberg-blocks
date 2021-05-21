@@ -1,5 +1,7 @@
+import { Fragment } from '@render';
+
 export const ColumnsTasks = ({ isCampaign, columns, no_of_columns }) => (
-  <>
+  <Fragment>
     <div className='tasks-wrap can-do-steps d-none d-lg-block'>
       <div className='row'>
         {columns.map((column, index) => {
@@ -140,5 +142,5 @@ export const ColumnsTasks = ({ isCampaign, columns, no_of_columns }) => (
         })}
       </div>
     </div>
-  </>
+  </Fragment>
 );

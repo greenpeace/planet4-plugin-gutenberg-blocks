@@ -1,4 +1,3 @@
-import { Fragment } from "@wordpress/element";
 import { FocalPointPicker, PanelBody } from '@wordpress/components';
 import { getGalleryLayout, GALLERY_BLOCK_CLASSES } from './getGalleryLayout';
 import { useSelect } from '@wordpress/data';
@@ -7,6 +6,7 @@ import { GalleryThreeColumns } from './GalleryThreeColumns';
 import { GalleryGrid } from './GalleryGrid';
 import { useGalleryImages } from './useGalleryImages';
 import { InspectorControls } from '@wordpress/block-editor';
+import { Fragment } from '@render';
 
 import { MediaPlaceholder, MediaUploadCheck } from "@wordpress/blockEditor";
 
@@ -98,7 +98,7 @@ const renderEdit = (attributes, setAttributes) => {
           </PanelBody>
         </InspectorControls>
       )}
-    </Fragment >
+    </Fragment>
   );
 }
 
