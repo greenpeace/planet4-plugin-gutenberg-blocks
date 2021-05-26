@@ -61,6 +61,12 @@ table.spreadsheet-table {
       transition: opacity .3s, transform .4s;
     }
 
+    .spreadsheet-sort-button {
+      background-color: inherit;
+      color: inherit;
+      border: none;
+    }
+
     &.spreadsheet-sorted-by {
       svg {
         opacity: 1;

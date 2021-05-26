@@ -187,9 +187,15 @@ export class SpreadsheetFrontend extends Component {
                           )
                         }
                         onClick={ () => { this.onHeaderClick( index ) } }
-                        key={ index } title={ __('Sort by', 'planet4-blocks') }>
-                        { cell }
-                        <ArrowIcon />
+                        key={ index }
+                        scope='col'
+                        title={ cell }>
+                        <button
+                          className='spreadsheet-sort-button'
+                          onClick={ () => { this.onHeaderClick( index ) } }>
+                          { cell }
+                          <ArrowIcon />
+                        </button>
                       </th>
                     ))
                   }
