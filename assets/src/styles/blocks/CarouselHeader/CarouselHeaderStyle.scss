@@ -312,6 +312,7 @@ $medium-image-height: 600px;
       position: relative;
       top: 0;
       left: 0;
+      right: 0;
       padding-top: 24px;
       padding-bottom: 24px;
       padding-left: 24px;
@@ -384,7 +385,7 @@ $medium-image-height: 600px;
 
         @include x-large-and-up {
           padding-bottom: 54px;
-          padding-inline-start: 110px;
+          padding-inline-start: 0;
         }
 
         h1 {
@@ -607,7 +608,7 @@ $medium-image-height: 600px;
         width: auto;
 
         html[dir="rtl"] & {
-          right: auto;
+          text-align: right;
         }
       }
 
@@ -617,6 +618,7 @@ $medium-image-height: 600px;
         padding-right: 0;
         width: auto;
         display: block;
+        padding-inline-start: 80px;
       }
 
       @include x-large-and-up {

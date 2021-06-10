@@ -11,24 +11,21 @@ import { useState, useEffect } from '@wordpress/element';
  * @param {Array} slidesRef
  * @param {Object} options
  */
-export const useSlides = (slidesRef, lastSlide, containerRef, options = {
-  // Following Bootstrap's approach for RTL:
-  // https://getbootstrap.com/docs/5.0/getting-started/rtl/#approach
-  // Note: in non-directional transitions (e.g.: fade out),
-  // these could have the same class for both directions.
-  enterTransitionClasses: {
-    next: 'enter-from-end',
-    prev: 'enter-from-start'
-  },
-  exitTransitionClasses: {
-    next: 'exit-to-start',
-    prev: 'exit-to-end'
-  }
-}) => {
+export const useSlides = (slidesRef, lastSlide, containerRef) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [autoplayPaused, setAutoplayPaused] = useState(false);
   const [autoplayCancelled, setAutoplayCancelled] = useState(false);
   const [sliding, setSliding] = useState(false);
+  const [options, setOptions] = useState({
+    enterTransitionClasses: {
+      next: 'enter-from-end',
+      prev: 'enter-from-start'
+    },
+    exitTransitionClasses: {
+      next: 'exit-to-start',
+      prev: 'exit-to-end'
+    }
+  });
 
   const goToNextSlide = (autoplay = false) => {
     goToSlide(currentSlide === lastSlide ? 0 : currentSlide + 1);
@@ -37,9 +34,11 @@ export const useSlides = (slidesRef, lastSlide, containerRef, options = {
     }
   };
 
-  const goToPrevSlide = () => {
+  const goToPrevSlide = (autoplay = false) => {
     goToSlide(currentSlide === 0 ? lastSlide : currentSlide - 1);
-    setAutoplayCancelled(true);
+    if (!autoplay) {
+      setAutoplayCancelled(true);
+    }
   };
 
   const getOrder = (currentSlide, newSlide, lastSlide) => {
@@ -84,7 +83,6 @@ export const useSlides = (slidesRef, lastSlide, containerRef, options = {
     if (newSlide !== currentSlide && nextElement && activeElement && !sliding) {
       setSliding(true);
 
-      const isRTL = false;
       const order = getOrder(currentSlide, newSlide, lastSlide);
       const enterTransitionClass = options.enterTransitionClasses[order];
       const exitTransitionClass = options.exitTransitionClasses[order];
@@ -116,6 +114,20 @@ export const useSlides = (slidesRef, lastSlide, containerRef, options = {
   useEffect(() => {
     if (!containerRef || !containerRef.current) {
       return;
+    }
+
+    const isRTL = document.querySelector('html').dir === 'rtl';
+    if (isRTL) {
+      setOptions({
+        enterTransitionClasses: {
+          prev: 'enter-from-end',
+          next: 'enter-from-start'
+        },
+        exitTransitionClasses: {
+          prev: 'exit-to-start',
+          next: 'exit-to-end'
+        }
+      });
     }
 
     containerRef.current.addEventListener('mouseenter', () => setAutoplayPaused(true));

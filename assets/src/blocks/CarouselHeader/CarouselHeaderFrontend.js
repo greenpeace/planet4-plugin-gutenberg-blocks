@@ -2,6 +2,8 @@ import { useRef, useEffect } from '@wordpress/element';
 import { useSlides } from './useSlides';
 import { CarouselHeaderStaticContent } from './CarouselHeaderStaticContent';
 
+const isRTL = document.querySelector('html').dir === 'rtl';
+
 const { __ } = wp.i18n;
 
 export const CarouselHeaderFrontend = ({ slides, carousel_autoplay }) => {
@@ -17,6 +19,15 @@ export const CarouselHeaderFrontend = ({ slides, carousel_autoplay }) => {
     autoplayCancelled
   } = useSlides(slidesRef, slides.length - 1, containerRef);
 
+  const changeSlideHandlers = [
+    () => goToNextSlide(),
+    () => goToPrevSlide(),
+  ];
+
+  if (isRTL) {
+    changeSlideHandlers.reverse();
+  }
+
   useEffect(() => {
     if (!containerRef.current) {
       return;
@@ -30,21 +41,12 @@ export const CarouselHeaderFrontend = ({ slides, carousel_autoplay }) => {
     swipe.set({ direction: Hammer.DIRECTION_HORIZONTAL });
     hammer.add(swipe);
 
-    const swipeListeners = [
-      goToNextSlide,
-      goToPrevSlide
-    ];
-
-    // if (isRTL) {
-    //   swipeListeners.reverse();
-    // }
-
-    hammer.on('swipeleft', swipeListeners[0]);
-    hammer.on('swiperight', swipeListeners[1]);
+    hammer.on('swipeleft', changeSlideHandlers[0]);
+    hammer.on('swiperight', changeSlideHandlers[1]);
 
     return () => {
-      hammer.off('swipeleft', swipeListeners[0]);
-      hammer.off('swiperight', swipeListeners[1]);
+      hammer.off('swipeleft', changeSlideHandlers[0]);
+      hammer.off('swiperight', changeSlideHandlers[1]);
     }
   }, [currentSlide]);
 
@@ -70,7 +72,7 @@ export const CarouselHeaderFrontend = ({ slides, carousel_autoplay }) => {
       if (timerRef.current) {
         clearTimeout(timerRef.current);
       }
-      timerRef.current = setTimeout(() => goToNextSlide(true), 10000);
+      timerRef.current = setTimeout(() => changeSlideHandlers[0](true), 10000);
       return () => clearTimeout(timerRef.current);
     } else if (timerRef.current) {
       clearTimeout(timerRef.current);
@@ -82,8 +84,8 @@ export const CarouselHeaderFrontend = ({ slides, carousel_autoplay }) => {
       slides={slides}
       slidesRef={slidesRef}
       containerRef={containerRef}
-      goToNextSlide={goToNextSlide}
-      goToPrevSlide={goToPrevSlide}
+      goToNextSlide={changeSlideHandlers[0]}
+      goToPrevSlide={changeSlideHandlers[1]}
       goToSlide={goToSlide}
       currentSlide={currentSlide}
     />
