@@ -3,7 +3,7 @@
 @import "../../master-theme/assets/src/scss/base/colors";
 @import "../../master-theme/assets/src/scss/base/fonts";
 
-// $slide-transition-speed should match SLIDE_TRANSITION_SPEED in carousel-header.js
+// $slide-transition-speed should match SLIDE_TRANSITION_SPEED in useSlides.js
 $slide-transition-speed: .2s;
 $text-slide-offset: 50px;
 
@@ -81,7 +81,7 @@ $medium-image-height: 600px;
 
   .carousel-inner {
     position: relative;
-    overflow: visible;
+    overflow: hidden;
     height: 580px;
     padding-bottom: 0;
 
@@ -111,7 +111,6 @@ $medium-image-height: 600px;
     position: absolute;
     top: 0;
     opacity: 0;
-    z-index: 3500;
 
     @include medium-and-up {
       height: $medium-image-height;
@@ -127,10 +126,6 @@ $medium-image-height: 600px;
       z-index: 1;
       opacity: 1;
       transition: unset;
-
-      .carousel-item-mask {
-        width: 100%;
-      }
 
       .carousel-caption .main-header {
         h1 {
@@ -156,25 +151,11 @@ $medium-image-height: 600px;
       }
     }
 
-    .carousel-item-mask {
-      position: relative;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-    }
-
-    .background-holder {
+    img {
+      object-fit: cover;
       width: 100vw;
       height: $mobile-image-height;
       z-index: -1;
-
-      img {
-        height: 100%;
-        object-fit: cover;
-        width: 100vw;
-      }
 
       @include medium-and-up {
         height: $medium-image-height;
@@ -182,17 +163,6 @@ $medium-image-height: 600px;
 
       @include large-and-up {
         height: 100%;
-      }
-
-      // Darken background
-      &::after {
-        @include fill-container;
-        content: "";
-        background: none;
-
-        @include large-and-up {
-          background: rgba(30, 30, 30, 0.45);
-        }
       }
     }
 
@@ -204,10 +174,6 @@ $medium-image-height: 600px;
       transition: unset;
       pointer-events: all;
 
-      .carousel-item-mask {
-        width: 100%;
-      }
-
       .carousel-caption .main-header {
         h1, p {
           transform: translateX(0);
@@ -216,52 +182,6 @@ $medium-image-height: 600px;
 
         .action-button {
           opacity: 1;
-        }
-      }
-    }
-
-    &.exit-to-start {
-      .carousel-item-mask {
-        width: 0;
-        transition: width $slide-transition-speed;
-
-        html[dir="rtl"] & {
-          direction: ltr;
-
-          .background-holder {
-            direction: rtl;
-          }
-        }
-      }
-
-      html[dir="rtl"] & {
-        direction: ltr;
-      }
-    }
-
-    &.exit-to-end {
-      .carousel-item-mask {
-        width: 0;
-        margin-left: auto;
-        right: 0;
-
-        transition: width $slide-transition-speed;
-
-        // This "width + overflow: hidden" reveal trick depends on
-        // the direction property to allow masking content from the left, see:
-        // https://stackoverflow.com/questions/22126759/how-to-cut-off-overflow-on-the-left-side?rq=1
-        //
-        // It exists as a workaround for `clip-path` which is not yet well supported on Safari & Firefox.
-        // TODO: Remove in favor of `clip-path` when supported in all major browsers
-        // Check for compatibility: https://caniuse.com/#feat=css-clip-path
-        direction: rtl;
-
-        .background-holder {
-          direction: ltr;
-
-          html[dir="rtl"] & {
-            direction: rtl;
-          }
         }
       }
     }

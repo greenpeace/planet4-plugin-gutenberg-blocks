@@ -10,9 +10,7 @@ export const SlideWithRef = ({
     className={`carousel-item ${active ? 'active' : ''}`}
     ref={ref}
   >
-    <div className='carousel-item-mask'>
-      {children}
-    </div>
+    {children}
   </div>
 );
 

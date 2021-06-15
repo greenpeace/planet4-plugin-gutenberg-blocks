@@ -1,5 +1,7 @@
 import { useState, useEffect } from '@wordpress/element';
 
+const SLIDE_TRANSITION_SPEED = 200;
+
 /**
  * Takes an array of refs to the slides
  * and performs the following transition:
@@ -52,7 +54,7 @@ export const useSlides = (slidesRef, lastSlide, containerRef) => {
   };
 
   const getSlideHeight = slideRef => {
-    return `${slideRef.querySelector('.carousel-item-mask .background-holder').offsetHeight + slideRef.querySelector('.carousel-caption').offsetHeight}px`;
+    return `${slideRef.querySelector('img').offsetHeight + slideRef.querySelector('.carousel-caption').offsetHeight}px`;
   };
 
   const setCarouselHeight = slideRef => {
@@ -62,11 +64,11 @@ export const useSlides = (slidesRef, lastSlide, containerRef) => {
 
     const carouselElement = containerRef.current;
     if (window.matchMedia('(max-width: 991px)').matches) {
-      carouselElement.querySelectorAll('.carousel-inner, .carousel-item-mask').forEach(container =>
+      carouselElement.querySelectorAll('.carousel-inner').forEach(container =>
         container.style.height = getSlideHeight(slideRef)
       );
     } else {
-      carouselElement.querySelectorAll('.carousel-inner, .carousel-item-mask').forEach(container =>
+      carouselElement.querySelectorAll('.carousel-inner').forEach(container =>
         container.style.height = null
       );
     }
@@ -95,12 +97,11 @@ export const useSlides = (slidesRef, lastSlide, containerRef) => {
       const unsetTransitionClasses = () => {
         activeElement.classList.remove(exitTransitionClass);
         nextElement.classList.remove(enterTransitionClass);
-        activeElement.removeEventListener('transitionend', unsetTransitionClasses);
         setSliding(false);
         setCurrentSlide(newSlide);
       };
 
-      activeElement.addEventListener('transitionend', unsetTransitionClasses);
+      setTimeout(unsetTransitionClasses, SLIDE_TRANSITION_SPEED);
 
       // This hack is used to force what happens
       // on transitionEnd when the active slide was removed in the editor

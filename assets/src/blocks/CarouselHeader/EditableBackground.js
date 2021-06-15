@@ -18,15 +18,13 @@ export const EditableBackground = ({
     value={image_id}
     render={mediaUploadInstance => (
       <>
-        <div className='background-holder'>
-          {!image_url ?
-            <ImagePlaceholder /> :
-            <img
-              src={image_url}
-              style={{ objectPosition: `${focalPoints?.x * 100}% ${focalPoints?.y * 100}%` }}
-            />
-          }
-        </div>
+        {!image_url ?
+          <ImagePlaceholder /> :
+          <img
+            src={image_url}
+            style={{ objectPosition: `${focalPoints?.x * 100}% ${focalPoints?.y * 100}%` }}
+          />
+        }
 
         <EditorControls
           image_url={image_url}
