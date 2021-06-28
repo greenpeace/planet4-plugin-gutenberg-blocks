@@ -1,11 +1,11 @@
 .article-list-item {
   display: flex;
-  flex-direction: column;
+  flex-direction: var(--flex-direction, row);
   justify-content: space-between;
   margin-top: $space-lg;
 
   --block-articles--article-- {
-    background-color: transparentize($white, .2);
+    background-color: red;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 
     @include large-and-up {
