@@ -8,7 +8,7 @@
 namespace P4GBKS\Blocks;
 
 /**
- * Class Socialmedia
+ * Class SocialMedia
  *
  * @package P4GBKS\Blocks
  */
@@ -35,14 +35,26 @@ class SocialMedia extends Base_Block {
 	 * SocialMedia constructor.
 	 */
 	public function __construct() {
+		add_action( 'init', [ $this, 'register_socialmedia_block' ] );
+	}
+
+	/**
+	 * SocialMedia constructor.
+	 */
+	public function register_socialmedia_block() {
 		// - Register the block for the editor
 		register_block_type(
 			self::get_full_block_name(),
 			[
 				'editor_script'   => 'planet4-blocks',
-				'render_callback' => [ $this, 'render' ],
+				'render_callback' => static function ( $attributes, $content ) {
+					if ( '' !== trim( $content ) ) {
+						return $content;
+					}
 
-				// These attributes match the current fields.
+					$attributes = array_merge( $attributes, self::get_data( $attributes ) );
+					return self::render_frontend( $attributes );
+				},
 				'attributes'      => [
 					'title'             => [
 						'type'    => 'string',
@@ -68,9 +80,25 @@ class SocialMedia extends Base_Block {
 						'type'    => 'string',
 						'default' => '',
 					],
+					'embed_code'        => [
+						'type'    => 'string',
+						'default' => '',
+					],
 				],
 			]
 		);
+
+		add_action( 'enqueue_block_editor_assets', [ self::class, 'enqueue_editor_assets' ] );
+		add_action( 'wp_enqueue_scripts', [ self::class, 'enqueue_frontend_assets' ] );
+	}
+
+	/**
+	 * Required by the `Base_Block` class.
+	 *
+	 * @param array $fields Unused, required by the abstract function.
+	 */
+	public function prepare_data( $fields ): array {
+		return [];
 	}
 
 	/**
@@ -80,7 +108,7 @@ class SocialMedia extends Base_Block {
 	 *
 	 * @return array The data to be passed in the View.
 	 */
-	public function prepare_data( $fields ): array {
+	private static function get_data( $fields ): array {
 		$title             = $fields['title'] ?? '';
 		$description       = $fields['description'] ?? '';
 		$url               = $fields['social_media_url'] ?? '';
@@ -99,21 +127,14 @@ class SocialMedia extends Base_Block {
 				// need to remove . so instagr.am becomes instagram.
 				$provider = preg_replace( '#(^www\.)|(\.com$)|(\.)#', '', strtolower( wp_parse_url( $url, PHP_URL_HOST ) ) );
 
-				// Fix for backend preview, do not include embed script in response.
-				if ( $this->is_rest_request() && 'twitter' === $provider ) {
-					$url = add_query_arg( [ 'omit_script' => true ], $url );
-				}
 				if ( in_array( $provider, self::ALLOWED_OEMBED_PROVIDERS, true ) ) {
 
 					if ( 'twitter' === $provider ) {
 						$data['embed_code'] = wp_oembed_get( $url );
 					} else {
-						$data['embed_code'] = $this->get_fb_oembed_html( rawurlencode( $url ), $provider );
+						$data['embed_code'] = self::get_fb_oembed_html( rawurlencode( $url ), $provider );
 					}
 				}
-			} elseif ( 'facebook_page' === $embed_type ) {
-				$data['facebook_page_url'] = $url;
-				$data['facebook_page_tab'] = $facebook_page_tab;
 			}
 		}
 
@@ -128,13 +149,13 @@ class SocialMedia extends Base_Block {
 	 *
 	 * @return String The oembed html or a message if something goes wrong.
 	 */
-	public function get_fb_oembed_html( $url, $provider ): string {
+	private static function get_fb_oembed_html( $url, $provider ): string {
 		$from_cache = get_transient( 'fb_oembed_response_' . $url );
 		if ( $from_cache ) {
 			return $from_cache;
 		}
 
-		$fb_oembed_url = $this->get_fb_oembed_url( $url, $provider );
+		$fb_oembed_url = self::get_fb_oembed_url( $url, $provider );
 
 		// With the safe version of wp_safe_remote_{VERB) functions, the URL is validated to avoid redirection and request forgery attacks.
 		$response = wp_safe_remote_get(
@@ -169,7 +190,7 @@ class SocialMedia extends Base_Block {
 	 *
 	 * @return string A facebook oembed API url.
 	 */
-	public function get_fb_oembed_url( $url, $provider ): string {
+	private static function get_fb_oembed_url( $url, $provider ): string {
 		$options             = get_option( 'planet4_options' );
 		$fb_app_access_token = $options['fb_app_access_token'] ?? '';
 
