@@ -43,7 +43,7 @@ export const registerSocialMediaBlock = () => registerBlockType(BLOCK_NAME, {
     },
   },
   edit: SocialMediaEditor,
-  save: SocialMediaFrontend,
+  save: ({ attributes }) => <SocialMediaFrontend {...attributes} />,
   deprecated: [
     socialMediaV1,
   ],

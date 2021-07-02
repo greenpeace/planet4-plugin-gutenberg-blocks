@@ -227,7 +227,7 @@ export const SocialMediaEditor = ({
   );
 
   return (
-    <section className={`block social-media-block ${className || ''}`}>
+    <section className={`block social-media-block ${className ?? ''}`}>
       {isSelected && renderSidebar()}
       {renderEditInPlace()}
       <SocialMediaEmbed
