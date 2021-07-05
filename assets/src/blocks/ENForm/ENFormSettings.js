@@ -171,7 +171,7 @@ const getPageListByType = () => {
 
   let flattenedPages = [];
   for (var i in pages) {
-    pagesByType = pages[i].map(page => {
+    let pagesByType = pages[i].map(page => {
       return { label: page.name, value: page.id };
     });
     flattenedPages = flattenedPages.concat(
