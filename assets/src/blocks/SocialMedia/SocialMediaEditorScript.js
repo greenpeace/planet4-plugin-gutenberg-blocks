@@ -102,7 +102,7 @@ export const SocialMediaEditor = ({
    */
   const checkProviderScript = provider => {
     const providerData = PROVIDER_SCRIPT_DATA[provider];
-    const script = document.querySelector(`script[src="${providerData.script}"]`);
+    const script = document.querySelector(`body > script[src="${providerData.script}"]`);
     if (script === null) {
       const scriptLoaded = loadScriptAsync(providerData.script);
       scriptLoaded.then(providerData.initFunction);
@@ -112,6 +112,10 @@ export const SocialMediaEditor = ({
   }
 
   const updateEmbed = async url => {
+    if (!url) {
+      setAttributes({ embed_code: '', social_media_url: '' });
+      return;
+    }
     let embedCode;
     try {
       const embedPreview = await apiFetch({

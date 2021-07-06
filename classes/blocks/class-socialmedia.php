@@ -116,11 +116,7 @@ class SocialMedia extends Base_Block {
 		$alignment_class   = $fields['alignment_class'];
 		$facebook_page_tab = $fields['facebook_page_tab'];
 
-		$data = [
-			'title'           => $title,
-			'description'     => $description,
-			'alignment_class' => $alignment_class,
-		];
+		$data = [];
 
 		if ( $url ) {
 			if ( 'oembed' === $embed_type ) {
@@ -128,7 +124,6 @@ class SocialMedia extends Base_Block {
 				$provider = preg_replace( '#(^www\.)|(\.com$)|(\.)#', '', strtolower( wp_parse_url( $url, PHP_URL_HOST ) ) );
 
 				if ( in_array( $provider, self::ALLOWED_OEMBED_PROVIDERS, true ) ) {
-
 					if ( 'twitter' === $provider ) {
 						$data['embed_code'] = wp_oembed_get( $url );
 					} else {
