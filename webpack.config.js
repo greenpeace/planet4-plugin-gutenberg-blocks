@@ -48,6 +48,7 @@ module.exports = {
     ...entryPoints('Covers'),
     ...entryPoints('CarouselHeader'),
     ...entryPoints('Spreadsheet'),
+    ...entryPoints('ENForm'),
     ...entryPoints('Timeline'),
   },
   output: {
