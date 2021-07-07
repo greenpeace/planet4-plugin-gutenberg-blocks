@@ -146,14 +146,18 @@ export const SocialMediaEditor = ({
     ALLOWED_OEMBED_PROVIDERS.forEach(provider => {
       if (social_media_url.includes(provider)) {
         checkProviderScript(provider);
+        // For existing blocks, we need to add the embed code to the attributes
+        if (social_media_url && !embed_code && provider !== 'facebook') {
+          updateEmbed(social_media_url);
+        }
       }
-    })
+    });
   }, [social_media_url]);
 
   const embed_type_help = __('Select oEmbed for the following types of social media<br>- Twitter: tweet, profile, list, collection, likes, moment<br>- Facebook: post, activity, photo, video, media, question, note<br>- Instagram: image', 'planet4-blocks-backend');
 
   const renderEditInPlace = () => (
-    <section className='block social-media-block'>
+    <>
       <header>
         <RichText
           tagName='h2'
@@ -177,7 +181,7 @@ export const SocialMediaEditor = ({
         withoutInteractiveFormatting
         allowedFormats={['core/bold', 'core/italic']}
       />
-    </section>
+    </>
   );
 
   const renderSidebar = () => (
