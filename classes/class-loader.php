@@ -389,8 +389,6 @@ final class Loader {
 			'planet4-blocks-script',
 			'assets/build/frontendIndex.js',
 			[
-				// WP React wrapper.
-				'wp-element',
 				// Exports the __() function.
 				'wp-i18n',
 			],
