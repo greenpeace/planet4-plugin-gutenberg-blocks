@@ -1,5 +1,4 @@
-import { useEffect, useState } from '@wordpress/element';
-import { debounce } from 'lodash';
+import { useEffect } from '@wordpress/element';
 import { InspectorControls } from '@wordpress/block-editor';
 import {
   RadioControl,
@@ -9,6 +8,7 @@ import {
 import { SocialMediaEmbed } from './SocialMediaEmbed';
 import { URLInput } from '../../components/URLInput/URLInput';
 import { HTMLSidebarHelp } from '../../components/HTMLSidebarHelp/HTMLSidebarHelp';
+import { fetchJson } from '../../functions/fetchJson';
 import {
   OEMBED_EMBED_TYPE,
   FACEBOOK_EMBED_TYPE,
@@ -17,6 +17,10 @@ import {
   FACEBOOK_PAGE_TAB_MESSAGES,
   ALLOWED_OEMBED_PROVIDERS,
 } from './SocialMediaConstants.js';
+
+const FB_API_BASE_URL  = 'https://graph.facebook.com/v9.0';
+const INSTAGRAM_OEMBED = `${FB_API_BASE_URL}/instagram_oembed`;
+const FB_ACCESS_TOKEN = window.p4ge_vars.planet4_options.fb_app_access_token;
 
 const { RichText } = wp.blockEditor;
 const { __ } = wp.i18n;
@@ -90,7 +94,6 @@ export const SocialMediaEditor = ({
     embed_code,
     className,
   } = attributes;
-  const [socialMediaUrl, setSocialMediaUrl] = useState('');
 
   const toAttribute = attributeName => value => setAttributes({
     [attributeName]: value
@@ -111,45 +114,36 @@ export const SocialMediaEditor = ({
     }
   }
 
-  const updateEmbed = async url => {
-    if (!url) {
-      setAttributes({ embed_code: '', social_media_url: '' });
+  const updateEmbed = async (url, provider) => {
+    if (!url || provider === 'facebook') {
+      setAttributes({ embed_code: '' });
       return;
     }
     let embedCode;
     try {
-      const embedPreview = await apiFetch({
-        path: addQueryArgs('/oembed/1.0/proxy', { url }),
-      });
-      embedCode = embedPreview ? embedPreview.html : '';
+      if (provider === 'twitter') {
+        const twitterEmbedData = await apiFetch({ path: addQueryArgs('/oembed/1.0/proxy', { url }) });
+        embedCode = twitterEmbedData ? twitterEmbedData.html : '';
+      } else if (provider === 'instagram') {
+        const instagramEmbedData = await fetchJson(`${INSTAGRAM_OEMBED}?url=${url}&access_token=${FB_ACCESS_TOKEN}`);
+        embedCode = instagramEmbedData ? instagramEmbedData.html : '';
+      }
     } catch (error) {
       embedCode = '';
     }
-    setAttributes({ embed_code: embedCode, social_media_url: url });
+    setAttributes({ embed_code: embedCode });
   };
-
-  const debounceSocialMediaUrl = debounce(url => {
-    setAttributes({ social_media_url: url });
-  }, 300);
-  const debounceSocialMediaUrlAndEmbed = debounce(updateEmbed, 300);
-
-  const updateSocialMediaUrl = url => {
-    setSocialMediaUrl(url);
-    if (embed_type === FACEBOOK_EMBED_TYPE) {
-      debounceSocialMediaUrl(url);
-    } else {
-      debounceSocialMediaUrlAndEmbed(url);
-    }
-  }
 
   useEffect(() => {
     ALLOWED_OEMBED_PROVIDERS.forEach(provider => {
       if (social_media_url.includes(provider)) {
         checkProviderScript(provider);
-        // For existing blocks, we need to add the embed code to the attributes
-        if (social_media_url && !embed_code && provider !== 'facebook') {
-          updateEmbed(social_media_url);
+        // For Facebook we don't need the embed HTML code since we use an iframe
+        if (provider !== 'facebook') {
+          updateEmbed(social_media_url, provider);
         }
+      } else {
+        setAttributes({ embed_code: '' });
       }
     });
   }, [social_media_url]);
@@ -216,8 +210,8 @@ export const SocialMediaEditor = ({
         <URLInput
           label={__('URL', 'planet4-blocks-backend')}
           placeholder={__('Enter URL', 'planet4-blocks-backend')}
-          value={socialMediaUrl || social_media_url}
-          onChange={updateSocialMediaUrl}
+          value={social_media_url}
+          onChange={toAttribute('social_media_url')}
         />
         <SelectControl
           label={__('Alignment', 'planet4-blocks-backend')}
