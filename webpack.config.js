@@ -43,6 +43,7 @@ const publicJsConfig = {
     CarouselHeaderScript: './assets/src/blocks/CarouselHeader/CarouselHeaderScript.js',
     SpreadsheetScript: './assets/src/blocks/Spreadsheet/SpreadsheetScript.js',
     TimelineScript: './assets/src/blocks/Timeline/TimelineScript.js',
+    SocialMediaScript: './assets/src/blocks/SocialMedia/SocialMediaScript.js',
   },
 };
 const adminJsConfig = {
@@ -62,6 +63,7 @@ const adminJsConfig = {
     CarouselHeaderEditorScript: './assets/src/blocks/CarouselHeader/CarouselHeaderEditorScript.js',
     SpreadsheetEditorScript: './assets/src/blocks/Spreadsheet/SpreadsheetEditorScript.js',
     TimelineEditorScript: './assets/src/blocks/Timeline/TimelineEditorScript.js',
+    SocialMediaEditorScript: './assets/src/blocks/SocialMedia/SocialMediaEditorScript.js',
   },
 };
 const cssConfig = {
@@ -85,6 +87,7 @@ const cssConfig = {
     SpreadsheetStyle: './assets/src/styles/blocks/Spreadsheet/SpreadsheetStyle.scss',
     TimelineStyle: './assets/src/styles/blocks/Timeline/TimelineStyle.scss',
     TimelineEditorStyle: './assets/src/styles/blocks/Timeline/TimelineEditorStyle.scss',
+    SocialMediaStyle: './assets/src/styles/blocks/SocialMedia/SocialMediaStyle.scss',
   },
   output: {
     filename: '[name].js',
