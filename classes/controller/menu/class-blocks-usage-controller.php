@@ -10,6 +10,11 @@ namespace P4GBKS\Controllers\Menu;
 
 use P4\MasterTheme\Exception\SqlInIsEmpty;
 use P4\MasterTheme\SqlParameters;
+use P4GBKS\Search\BlockSearch;
+use P4GBKS\Search\Block\BlockUsage;
+use P4GBKS\Search\Block\BlockUsageTable;
+use P4GBKS\Search\Block\Sql\SqlQuery;
+use WP_Block_Parser;
 use WP_Block_Type_Registry;
 
 if ( ! class_exists( 'Blocks_Usage_Controller' ) ) {
@@ -96,7 +101,71 @@ if ( ! class_exists( 'Blocks_Usage_Controller' ) ) {
 					'plugin_blocks_report',
 					[ $this, 'plugin_blocks_report' ]
 				);
+
+				// Experimental block usage page, hidden from menu.
+				add_submenu_page(
+					null,
+					__( 'Usage', 'planet4-blocks-backend' ),
+					__( 'Usage', 'planet4-blocks-backend' ),
+					'manage_options',
+					'plugin_blocks_report_beta',
+					[ $this, 'plugin_blocks_report_beta' ]
+				);
 			}
+		}
+
+		/**
+		 * Beta block usage report page.
+		 *
+		 * @todo before replacing current one:
+		 * - review json report / keep or replace with new search
+		 */
+		public function plugin_blocks_report_beta() {
+			global $wpdb;
+
+			$default_values = [
+				'ns'    => 'planet4-blocks',
+				'group' => 'block_type',
+			];
+
+			// Prepare data.
+			$search = new BlockSearch( new SqlQuery( $wpdb ) );
+			$parser = new WP_Block_Parser();
+			$table  = new BlockUsageTable(
+				[
+					'block_usage'    => new BlockUsage( $search, $parser ),
+					'block_registry' => WP_Block_Type_Registry::get_instance(),
+				]
+			);
+
+			$table->prepare_items(
+				[
+					'block_ns'    => $_REQUEST['ns'] ?? $default_values['ns'],
+					'block_type'  => $_REQUEST['type'] ?? null,
+					'text_search' => $_REQUEST['s'] ?? null,
+				],
+				$_REQUEST['group'] ?? $default_values['group']
+			);
+
+			// Display data.
+			echo '<div class="wrap">
+				<h1 class="wp-heading-inline">Block usage</h1>
+				<hr class="wp-header-end">';
+
+			echo '<form id="blocks-search" method="post">';
+			$table->views();
+			$table->search_box( 'Search in blocks', 'block-search' );
+			$table->display();
+			echo '</form>';
+
+			$p = $table->get_search_params();
+			echo "<script>
+			const url = new URL(window.location);
+			url.searchParams.set('ns', '" . esc_js( $p['block_ns'] ) . "');
+			url.searchParams.set('type', '" . esc_js( $p['block_type'] ) . "');
+			window.history.pushState({}, '', url);
+			</script>";
+			echo '</div>';
 		}
 
 		/**
