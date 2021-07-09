@@ -20,9 +20,9 @@ import {
 	useEffect,
 	useRef,
 	useMemo,
-	Platform,
-} from '@wordpress/element';
-
+} from '@hooks';
+import { Platform } from '@wordpress/element';
+ 
 /**
  * Internal dependencies
  */

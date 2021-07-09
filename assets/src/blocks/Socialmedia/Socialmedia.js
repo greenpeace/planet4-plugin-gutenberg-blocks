@@ -1,4 +1,4 @@
-import {Component, RawHTML, Fragment} from '@wordpress/element';
+import { Component, Fragment } from '@render';
 import {Preview} from '../../components/Preview';
 import {
   RadioControl,
@@ -133,7 +133,17 @@ export class Socialmedia extends Component {
   renderEdit() {
     const {__} = wp.i18n;
 
-    const embed_type_help = __('Select oEmbed for the following types of social media<br>- Twitter: tweet, profile, list, collection, likes, moment<br>- Facebook: post, activity, photo, video, media, question, note<br>- Instagram: image', 'planet4-blocks-backend');
+    const embed_type_help = (
+      <Fragment>
+        {__('Select oEmbed for the following types of social media:', 'planet4-blocks-backend')}
+        <br/>
+        {__('- Twitter: tweet, profile, list, collection, likes, moment', 'planet4-blocks-backend')}
+        <br/>
+        {__('- Facebook: post, activity, photo, video, media, question, note', 'planet4-blocks-backend')}
+        <br/>
+        {__('- Instagram: image', 'planet4-blocks-backend')}
+      </Fragment>
+    );
 
     return (
       <Fragment>
@@ -162,9 +172,7 @@ export class Socialmedia extends Component {
         <div>
           <RadioControl
             label={__('Embed type', 'planet4-blocks-backend')}
-            help={
-              <RawHTML>{embed_type_help}</RawHTML>
-            }
+            help={embed_type_help}
             options={[
               {label: 'oEmbed', value: 'oembed'},
               {label: 'Facebook page', value: 'facebook_page'},

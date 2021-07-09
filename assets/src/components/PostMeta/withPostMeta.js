@@ -1,7 +1,7 @@
 import { withSelect, withDispatch } from "@wordpress/data";
 import { RadioControl } from "@wordpress/components";
 import { compose } from '@wordpress/compose';
-import { Component } from '@wordpress/element';
+import { Component } from '@render';
 
 const getValuePropName = ( Component ) => {
   switch ( Component ) {

@@ -1,4 +1,5 @@
-import { Fragment, useState } from '@wordpress/element';
+import { useState } from '@hooks';
+import { Fragment } from '@render';
 import { InspectorControls } from '@wordpress/block-editor';
 import { URLInput } from '../../components/URLInput/URLInput';
 import {

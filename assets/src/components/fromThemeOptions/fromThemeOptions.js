@@ -1,4 +1,4 @@
-import { Component } from '@wordpress/element';
+import { Component } from '@render';
 
 function getDisplayName(WrappedComponent) {
   return WrappedComponent.displayName || WrappedComponent.name || 'Component';

@@ -13,7 +13,7 @@ import classnames from 'classnames';
 /**
  * WordPress dependencies
  */
-import { useEffect, useState } from '@wordpress/element';
+import { useEffect, useState } from '@hooks';
 import {
 	InspectorControls,
 	BlockControls,

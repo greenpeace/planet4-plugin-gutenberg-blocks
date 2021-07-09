@@ -1,4 +1,4 @@
-import {Component} from '@wordpress/element';
+import {Component} from '@render';
 import {Preview} from '../../components/enform/Preview';
 import {LayoutSelector} from '../../components/enform/LayoutSelector/LayoutSelector';
 import {FormSectionTitle} from '../../components/enform/FormSectionTitle/FormSectionTitle';

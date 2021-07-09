@@ -1,4 +1,4 @@
-import { useState, useEffect } from '@wordpress/element';
+import { useState, useEffect } from '@hooks';
 
 /**
  * Takes an array of refs to the slides

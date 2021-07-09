@@ -1,4 +1,4 @@
-import { useRef } from '@wordpress/element';
+import { useRef } from '@hooks';
 
 // Carousel Header
 import { Slide } from './Slide';

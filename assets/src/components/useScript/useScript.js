@@ -1,5 +1,5 @@
 // useScript implementation from: https://usehooks.com/useScript/
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from '@hooks';
 import { addScriptTag } from './addScriptTag';
 
 export const useScript = (src, onScriptLoaded) => {

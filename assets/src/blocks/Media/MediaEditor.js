@@ -1,4 +1,5 @@
-import { Fragment, useCallback } from "@wordpress/element";
+import { useCallback } from "@hooks";
+import { Fragment } from '@render';
 import { PanelBody } from '@wordpress/components';
 import { MediaPlaceholder, InspectorControls } from '@wordpress/block-editor';
 import { TextControl } from '@wordpress/components';

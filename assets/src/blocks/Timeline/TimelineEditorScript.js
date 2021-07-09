@@ -1,4 +1,5 @@
-import {useCallback, useState} from '@wordpress/element';
+import { useCallback, useState } from '@hooks';
+import { Fragment } from '@render';
 import {
   PanelBody,
   SelectControl,
@@ -145,11 +146,11 @@ export const TimelineEditor = ({ isSelected, attributes, setAttributes }) => {
 
 
   return (
-    <>
+    <Fragment>
       {renderView(attributes, toAttribute, scriptLoaded, stylesLoaded)}
       {isSelected &&
         renderEdit(attributes, toAttribute, sheetURL, setSheetURL, debounceSheetURLUpdate)
       }
-    </>
+    </Fragment>
   );
 }

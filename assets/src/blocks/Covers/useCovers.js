@@ -1,4 +1,4 @@
-import { useState, useEffect } from '@wordpress/element';
+import { useState, useEffect } from '@hooks';
 import { addQueryArgs } from '../../functions/addQueryArgs';
 
 const { apiFetch } = wp;
