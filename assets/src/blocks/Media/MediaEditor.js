@@ -4,7 +4,7 @@ import { MediaPlaceholder, InspectorControls } from '@wordpress/block-editor';
 import { TextControl } from '@wordpress/components';
 import { debounce } from 'lodash';
 
-import { MediaEmbedPreview } from "./MediaEmbedPreview";
+import { MediaEmbedPreview } from "../../components/MediaEmbedPreview/MediaEmbedPreview";
 import { MediaElementVideo } from './MediaElementVideo';
 import { useSelect } from '@wordpress/data';
 import { lacksAttributes } from './MediaBlock';

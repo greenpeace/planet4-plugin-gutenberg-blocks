@@ -1,4 +1,4 @@
-import { MediaEmbedPreview } from './MediaEmbedPreview';
+import { MediaEmbedPreview } from '../../components/MediaEmbedPreview/MediaEmbedPreview';
 import { MediaElementVideo } from './MediaElementVideo';
 
 const wrapEmbedHTML = embed_html => {
