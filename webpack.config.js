@@ -44,6 +44,55 @@ const publicJsConfig = {
     SpreadsheetScript: './assets/src/blocks/Spreadsheet/SpreadsheetScript.js',
     TimelineScript: './assets/src/blocks/Timeline/TimelineScript.js',
   },
+  module: {
+    rules: [
+      // ...defaultConfig.module.rules,
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        options: {
+          presets: [
+            '@babel/preset-env',
+            'preact',
+          ],
+          plugins: [
+            "@babel/plugin-proposal-nullish-coalescing-operator",
+            "@babel/plugin-proposal-optional-chaining",
+            [
+              "@wordpress/babel-plugin-import-jsx-pragma",
+              {
+                "scopeVariable": "h",
+                "scopeVariableFrag": "Fragment",
+                "source": "preact",
+                "isDefault": false
+              },
+            ],
+            [
+              "@babel/plugin-transform-react-jsx", {
+              "pragma": "h",
+              "runtime": "automatic",
+              "importSource": "preact",
+              "pragmaFrag": "Fragment"
+            }
+            ]
+          ]
+        }
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/,
+        use:
+          [
+            {
+              loader: 'file-loader',
+              options: {
+                publicPath: __dirname + '/public'
+              }
+            }
+          ]
+      }
+    ]
+  }
 };
 const adminJsConfig = {
   ...jsConfig,
@@ -161,4 +210,8 @@ const cssConfig = {
     ]
   },
 };
-module.exports = [publicJsConfig, adminJsConfig, cssConfig];
+module.exports = [
+  publicJsConfig,
+  adminJsConfig,
+  cssConfig
+];
