@@ -1,3 +1,4 @@
+import { render } from '@render';
 import { Lightbox } from './Lightbox';
 
 const setupImageAndCaption = (lightBoxNode, imageSelector = 'img', captionSelector = null) => {
@@ -20,7 +21,7 @@ const setupImageAndCaption = (lightBoxNode, imageSelector = 'img', captionSelect
       item.title = caption.innerHTML;
     }
 
-    imageBlock.querySelector('img').addEventListener('click', () => wp.element.render(
+    imageBlock.querySelector('img').addEventListener('click', () => render(
         <Lightbox isOpen={true} index={index} items={[item]} />,
         lightBoxNode
       )

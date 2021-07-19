@@ -1,3 +1,5 @@
+import { Fragment } from '@render';
+
 const { __ } = wp.i18n;
 
 export const CarouselControls = ({
@@ -7,7 +9,7 @@ export const CarouselControls = ({
   currentSlide = null,
   slides = null,
 }) => slides.length > 1 && (
-  <>
+  <Fragment>
     {/* Arrows */}
     <button className='carousel-control-prev' role='button' onClick={goToPrevSlide}>
       <span className='carousel-control-prev-icon' aria-hidden='true'><i></i></span>
@@ -37,5 +39,5 @@ export const CarouselControls = ({
         </div>
       </div>
     </div>
-  </>
+  </Fragment>
 );

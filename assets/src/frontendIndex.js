@@ -1,3 +1,4 @@
+import { render } from '@render';
 import { CounterFrontend } from './blocks/Counter/CounterFrontend';
 import { ArticlesFrontend } from './blocks/Articles/ArticlesFrontend';
 import { CookiesFrontend } from './blocks/Cookies/CookiesFrontend';
@@ -37,7 +38,7 @@ document.querySelectorAll( `[data-render]` ).forEach(
       return;
     }
     const attributes = JSON.parse( blockNode.dataset.attributes );
-    wp.element.render( <BlockFrontend { ...attributes.attributes } />, blockNode );
+    render( <BlockFrontend { ...attributes.attributes } />, blockNode );
   }
 );
 

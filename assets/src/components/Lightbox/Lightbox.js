@@ -1,3 +1,4 @@
+import {createPortal} from '@compat';
 import React, { useEffect, useRef, useState } from '@hooks';
 
 import PhotoSwipe from '../../../../node_modules/photoswipe/dist/photoswipe.js';
@@ -56,7 +57,7 @@ export const Lightbox = ({ index, isOpen, items, onClose = () => {} }) => {
 
   }, [items]);
 
-  return wp.element.createPortal(
+  return createPortal(
     <div
       className="pswp"
       tabIndex="-1"
@@ -72,7 +73,7 @@ export const Lightbox = ({ index, isOpen, items, onClose = () => {} }) => {
           <div className="pswp__item" />
           <div className="pswp__item" />
           <div className="pswp__item" />
-        </div>      
+        </div>
 
         <div className="pswp__ui pswp__ui--hidden">
           <div className="pswp__top-bar">
@@ -101,7 +102,7 @@ export const Lightbox = ({ index, isOpen, items, onClose = () => {} }) => {
           <div className="p4-caption-and-indicators">
             <div className="p4-photoswipe-indicators-wrapper">
               {
-                items.length > 1 && items.map((item, index) => 
+                items.length > 1 && items.map((item, index) =>
                   <span className={ `p4-photoswipe-indicator-click-area ${ index == currentIndex ? 'active' : ''}` } key={ index }>
                     <span className="p4-photoswipe-indicator-bar" />
                   </span>

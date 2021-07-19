@@ -1,3 +1,4 @@
+import { render } from '@render';
 import { SpreadsheetFrontend } from './SpreadsheetFrontend';
 
 document.addEventListener( 'DOMContentLoaded', () => {
@@ -5,6 +6,6 @@ document.addEventListener( 'DOMContentLoaded', () => {
 
   spreadsheetBlocks.forEach(blockNode => {
     const attributes = JSON.parse( blockNode.dataset.attributes );
-    wp.element.render( <SpreadsheetFrontend { ...attributes.attributes } />, blockNode );
+    render( <SpreadsheetFrontend { ...attributes.attributes } />, blockNode );
   });
 });

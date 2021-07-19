@@ -1,3 +1,4 @@
+import { render } from '@render';
 import { TimelineFrontend } from './TimelineFrontend';
 
 document.addEventListener( 'DOMContentLoaded', () => {
@@ -5,6 +6,6 @@ document.addEventListener( 'DOMContentLoaded', () => {
 
   timelineBlocks.forEach(blockNode => {
     const attributes = JSON.parse( blockNode.dataset.attributes );
-    wp.element.render( <TimelineFrontend { ...attributes.attributes } />, blockNode );
+    render( <TimelineFrontend { ...attributes.attributes } />, blockNode );
   });
 });
