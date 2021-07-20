@@ -388,23 +388,11 @@ final class Loader {
 		self::enqueue_local_script(
 			'planet4-blocks-script',
 			'assets/build/frontendIndex.js',
-			[
-				// Exports the __() function.
-				'wp-i18n',
-			],
+			[],
 			true
 		);
 
 		self::enqueue_local_script( 'post_action', 'public/js/post_action.js', [ 'jquery' ] );
-
-		// Variables reflected from PHP to JS.
-		$reflection_vars = [
-			'dateFormat' => get_option( 'date_format' ),
-		];
-		wp_localize_script( 'planet4-blocks-script', 'p4bk_vars', $reflection_vars );
-
-		// Sets translated strings for a JS script.
-		wp_set_script_translations( 'planet4-blocks-script', 'planet4-blocks', P4GBKS_PLUGIN_DIR . '/languages' );
 
 		if ( self::can_include_theme_editor() ) {
 			wp_enqueue_style(
