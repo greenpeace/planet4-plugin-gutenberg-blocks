@@ -27,7 +27,7 @@ export const ColumnsTasks = ({ isCampaign, columns, no_of_columns }) => (
                 </span>
               </span>
               {title &&
-                <h5>
+                <h3>
                   {cta_link ?
                     <a
                       href={cta_link}
@@ -40,7 +40,7 @@ export const ColumnsTasks = ({ isCampaign, columns, no_of_columns }) => (
                     </a> :
                     title
                   }
-                </h5>
+                </h3>
               }
               {description &&
                 <p dangerouslySetInnerHTML={{ __html: description }} />
