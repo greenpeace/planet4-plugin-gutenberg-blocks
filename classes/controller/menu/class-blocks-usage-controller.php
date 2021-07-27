@@ -153,8 +153,9 @@ if ( ! class_exists( 'Blocks_Usage_Controller' ) ) {
 					</tr>';
 					foreach ( $results as $result ) {
 						$title = empty($result->post_title) ? self::NO_TITLE : $result->post_title;
-						echo  '<tr><td><a href="post.php?post=' . $result->ID . '&action=edit" >' . $result->ID . '</a></td>';
-						echo  '<td><a href="' . get_permalink( $result->ID ) . '" target="_blank">' . $title . '</a></td></tr>';
+						echo '<tr><td><a href="post.php?post=' . $result->ID . '&action=edit" >' . $result->ID . '</a>';
+						echo ' <a href="post.php?post=' . $result->ID . '&action=edit#focus-block=' . $block_type . '" target="_blank">focus block</a></td>';
+						echo '<td><a href="' . get_permalink( $result->ID ) . '" target="_blank">' . $title . '</a></td></tr>';
 					}
 					echo '</table>';
 				} else {
