@@ -31,95 +31,95 @@
     }
   }
 
-  .content-covers-block-wrap {
-    margin-top: $space-lg;
-
-    .content-covers-block-symbol {
-      position: relative;
-      margin: 0 0 24px 0;
-      box-shadow: 0 5px 20px 0 rgba(114, 114, 114, 0.5);
-      height: 180px;
-
-      @include small-and-up {
-        margin: $n20 0;
-      }
-
-      @include medium-and-up {
-        margin: 0 0 $n20 0;
-        max-width: 210px;
-        height: 300px;
-      }
-
-      @include large-and-up {
-        margin: 0 0 $n20 0;
-      }
-
-      @include x-large-and-up {
-        max-width: 255px;
-        height: 360px;
-      }
-
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: 50% 50%;
-      }
-
-      &.dark-img {
-        a {
-          color: $white;
-        }
-      }
-    }
-
-    .content-covers-block-info {
-      .four-column-hover {
-        text-decoration: underline;
-      }
-
-      h5 {
-        padding: 0;
-        margin: 0;
-
-        > a {
-          color: $grey-80;
-        }
-      }
-
-      p {
-        margin-bottom: 0;
-
-        @include x-large-and-up {
-          font-size: $font-size-sm;
-        }
-
-        &.publication-date {
-          font-family: $roboto;
-          font-size: $font-size-xxs;
-          line-height: 1.6;
-          font-style: italic;
-          font-weight: 300;
-          color: $grey-60;
-
-          @include large-and-up {
-            font-size: $font-size-xxs;
-          }
-
-          @include x-large-and-up {
-            font-size: $font-size-xs;
-          }
-        }
-      }
-    }
-  }
-
   .btn {
     display: none;
 
     @include small-and-up {
       display: block;
       width: 50%;
+    }
+  }
+}
+
+.content-covers-block-wrap {
+  margin-top: $space-lg;
+
+  .content-covers-block-symbol {
+    position: relative;
+    margin: 0 0 24px 0;
+    box-shadow: 0 5px 20px 0 rgba(114, 114, 114, 0.5);
+    height: 180px;
+
+    @include small-and-up {
+      margin: $n20 0;
+    }
+
+    @include medium-and-up {
+      margin: 0 0 $n20 0;
+      max-width: 210px;
+      height: 300px;
+    }
+
+    @include large-and-up {
+      margin: 0 0 $n20 0;
+    }
+
+    @include x-large-and-up {
+      max-width: 255px;
+      height: 360px;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 50%;
+    }
+
+    &.dark-img {
+      a {
+        color: $white;
+      }
+    }
+  }
+}
+
+.content-covers-block-info {
+  .four-column-hover {
+    text-decoration: underline;
+  }
+
+  h5 {
+    padding: 0;
+    margin: 0;
+
+    > a {
+      color: $grey-80;
+    }
+  }
+
+  p {
+    margin-bottom: 0;
+
+    @include x-large-and-up {
+      font-size: $font-size-sm;
+    }
+
+    &.publication-date {
+      font-family: $roboto;
+      font-size: $font-size-xxs;
+      line-height: 1.6;
+      font-style: italic;
+      font-weight: 300;
+      color: $grey-60;
+
+      @include large-and-up {
+        font-size: $font-size-xxs;
+      }
+
+      @include x-large-and-up {
+        font-size: $font-size-xs;
+      }
     }
   }
 }
