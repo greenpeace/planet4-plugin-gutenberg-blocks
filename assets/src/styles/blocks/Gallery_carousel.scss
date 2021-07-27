@@ -1,29 +1,7 @@
 .carousel-wrap {
   overflow: hidden;
 
-  h1 {
-    font-size: $font-size-lg;
-    color: $grey-80;
-    margin-bottom: 22px;
-    margin-left: 0;
-
-    html[dir="rtl"] & {
-      text-align: right;
-    }
-
-    @include large-and-up {
-      font-size: $font-size-xl;
-      margin-bottom: 20px;
-    }
-
-    @include x-large-and-up {
-      font-size: 1.875rem;
-      margin-bottom: 22px;
-    }
-  }
-
   .carousel-item {
-
     @include mobile-only {
       height: 265px;
     }
