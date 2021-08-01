@@ -25,7 +25,8 @@ const TSComponentFrontend: Component<IProps> = ({ title, subtitle, message }) =>
 //   message?: string;
 // }
 
-export const TSComponentEditor = ({ isSelected, title, message }) => {
+export const TSComponentEditor = ({ isSelected, title, subtitle, message }) => {
+
   return (
     <div>
       <div>
@@ -37,8 +38,7 @@ export const TSComponentEditor = ({ isSelected, title, message }) => {
           onChange={value => {}}
         />
       </div>
-      {`Is selected: ${isSelected}`}
-      Subtitle.
+      <h2>{ subtitle }</h2>
       <p>{ message }</p>
     </div>
   )
