@@ -135,6 +135,7 @@ const PAGE_BLOCK_TYPES = [
 	'planet4-blocks/timeline',
 	'planet4-blocks/enform',
 	'planet4-blocks/guestbook',
+	'planet4-blocks/ts-component',
 ];
 
 const BETA_PAGE_BLOCK_TYPES = [
@@ -161,6 +162,7 @@ const CAMPAIGN_BLOCK_TYPES = [
 	'planet4-blocks/timeline',
 	'planet4-blocks/enform',
 	'planet4-blocks/guestbook',
+	'planet4-blocks/ts-component',
 ];
 
 const BETA_CAMPAIGN_BLOCK_TYPES = [

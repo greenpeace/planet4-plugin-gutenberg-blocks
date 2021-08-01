@@ -23,6 +23,7 @@ import { setUpCssVariables } from './connectCssVariables';
 import { SubPagesBlock } from './blocks/SubPages/SubPagesBlock';
 import { blockEditorValidation } from './BlockEditorValidation';
 import { ENFormBlock } from './blocks/OldENForm/ENFormBlock';
+import { TSComponentBlock } from './blocks/TSComponent/TSComponentBlock';
 import { registerGuestBookBlock } from './blocks/GuestBook/GuestBookBlock';
 
 blockEditorValidation();
@@ -43,6 +44,7 @@ registerSubmenuBlock();
 new SubPagesBlock();
 new TakeactionboxoutBlock();
 new ENFormBlock();
+new TSComponentBlock();
 registerTimelineBlock();
 registerGuestBookBlock();
 
