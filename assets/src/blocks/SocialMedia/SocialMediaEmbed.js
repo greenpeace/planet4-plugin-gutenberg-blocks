@@ -1,4 +1,3 @@
-import { MediaEmbedPreview } from '../../components/MediaEmbedPreview/MediaEmbedPreview';
 import { OEMBED_EMBED_TYPE, FACEBOOK_EMBED_TYPE } from './SocialMediaConstants.js';
 
 export const SocialMediaEmbed = ({
@@ -18,7 +17,7 @@ export const SocialMediaEmbed = ({
   return (
     <div className={`social-media-embed ${alignmentClass ?? ''}`}>
       {(embedType === OEMBED_EMBED_TYPE && embedCode) ?
-        <MediaEmbedPreview html={embedCode} /> :
+        <div dangerouslySetInnerHTML={{ __html: embedCode }} /> :
         <>
           <iframe
             className="social-media-embed-facebook social-media-embed-facebook--small"

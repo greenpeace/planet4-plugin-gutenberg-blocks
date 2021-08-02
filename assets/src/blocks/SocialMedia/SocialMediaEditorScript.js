@@ -115,10 +115,11 @@ export const SocialMediaEditor = ({
   }
 
   const updateEmbed = async (url, provider) => {
-    if (!url || provider === 'facebook') {
+    if (!url) {
       setAttributes({ embed_code: '' });
       return;
     }
+
     let embedCode;
     try {
       if (provider === 'twitter') {
@@ -135,17 +136,19 @@ export const SocialMediaEditor = ({
   };
 
   useEffect(() => {
-    ALLOWED_OEMBED_PROVIDERS.forEach(provider => {
-      if (social_media_url.includes(provider)) {
-        checkProviderScript(provider);
-        // For Facebook we don't need the embed HTML code since we use an iframe
-        if (provider !== 'facebook') {
-          updateEmbed(social_media_url, provider);
-        }
-      } else {
-        setAttributes({ embed_code: '' });
-      }
-    });
+    const provider = ALLOWED_OEMBED_PROVIDERS.find(allowedProvider => social_media_url.includes(allowedProvider));
+
+    if (!provider) {
+      setAttributes({ embed_code: '' });
+      return;
+    }
+
+    checkProviderScript(provider);
+
+    // For Facebook we don't need the embed HTML code since we use an iframe
+    if (provider !== 'facebook') {
+      updateEmbed(social_media_url, provider);
+    }
   }, [social_media_url]);
 
   const embed_type_help = __('Select oEmbed for the following types of social media<br>- Twitter: tweet, profile, list, collection, likes, moment<br>- Facebook: post, activity, photo, video, media, question, note<br>- Instagram: image', 'planet4-blocks-backend');
