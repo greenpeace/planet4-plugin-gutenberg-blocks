@@ -144,7 +144,7 @@ class SocialMedia extends Base_Block {
 	 *
 	 * @return String The oembed html or a message if something goes wrong.
 	 */
-	private static function get_fb_oembed_html( $url, $provider ): string {
+	public static function get_fb_oembed_html( $url, $provider ): string {
 		$from_cache = get_transient( 'fb_oembed_response_' . $url );
 		if ( $from_cache ) {
 			return $from_cache;

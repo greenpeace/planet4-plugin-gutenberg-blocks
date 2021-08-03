@@ -8,7 +8,6 @@ import {
 import { SocialMediaEmbed } from './SocialMediaEmbed';
 import { URLInput } from '../../components/URLInput/URLInput';
 import { HTMLSidebarHelp } from '../../components/HTMLSidebarHelp/HTMLSidebarHelp';
-import { fetchJson } from '../../functions/fetchJson';
 import {
   OEMBED_EMBED_TYPE,
   FACEBOOK_EMBED_TYPE,
@@ -17,10 +16,6 @@ import {
   FACEBOOK_PAGE_TAB_MESSAGES,
   ALLOWED_OEMBED_PROVIDERS,
 } from './SocialMediaConstants.js';
-
-const FB_API_BASE_URL  = 'https://graph.facebook.com/v9.0';
-const INSTAGRAM_OEMBED = `${FB_API_BASE_URL}/instagram_oembed`;
-const FB_ACCESS_TOKEN = window.p4ge_vars.planet4_options.fb_app_access_token;
 
 const { RichText } = wp.blockEditor;
 const { __ } = wp.i18n;
@@ -126,8 +121,11 @@ export const SocialMediaEditor = ({
         const twitterEmbedData = await apiFetch({ path: addQueryArgs('/oembed/1.0/proxy', { url }) });
         embedCode = twitterEmbedData ? twitterEmbedData.html : '';
       } else if (provider === 'instagram') {
-        const instagramEmbedData = await fetchJson(`${INSTAGRAM_OEMBED}?url=${url}&access_token=${FB_ACCESS_TOKEN}`);
-        embedCode = instagramEmbedData ? instagramEmbedData.html : '';
+        const instagramEmbedData = await apiFetch({ path: addQueryArgs('planet4/v1/get-instagram-embed', { url }) });
+
+        if (instagramEmbedData) {
+          embedCode = instagramEmbedData;
+        }
       }
     } catch (error) {
       embedCode = '';
