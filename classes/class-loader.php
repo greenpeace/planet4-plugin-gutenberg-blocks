@@ -84,6 +84,7 @@ final class Loader {
 		new Blocks\OldENForm();
 		new Blocks\ENForm();
 		new Blocks\GuestBook();
+		new Blocks\HubspotForm();
 	}
 
 	/**

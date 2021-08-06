@@ -43,7 +43,6 @@ new TakeactionboxoutBlock();
 new ENFormBlock();
 registerTimelineBlock();
 registerGuestBookBlock();
-
 addBlockFilters();
 setupImageBlockExtension();
 addButtonLinkPasteWarning();

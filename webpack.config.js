@@ -43,8 +43,10 @@ const publicJsConfig = {
     ENFormScript: './assets/src/blocks/ENForm/ENFormScript.js',
     SpreadsheetScript: './assets/src/blocks/Spreadsheet/SpreadsheetScript.js',
     TimelineScript: './assets/src/blocks/Timeline/TimelineScript.js',
+    HubspotFormScript: './assets/src/blocks/HubspotForm/HubspotFormScript.js',
   },
 };
+
 const adminJsConfig = {
   ...jsConfig,
   resolve: {
@@ -64,6 +66,7 @@ const adminJsConfig = {
     SpreadsheetEditorScript: './assets/src/blocks/Spreadsheet/SpreadsheetEditorScript.js',
     TimelineEditorScript: './assets/src/blocks/Timeline/TimelineEditorScript.js',
     SocialMediaEditorScript: './assets/src/blocks/SocialMedia/SocialMediaEditorScript.js',
+    HubspotFormEditorScript: './assets/src/blocks/HubspotForm/HubspotFormEditorScript.js',
   },
 };
 const cssConfig = {
