@@ -1,0 +1,217 @@
+@mixin background-image {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.hubspot-form {
+  position: relative;
+  margin-bottom: 32px;
+  font-family: $roboto;
+
+  &--image-full-width {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &__wrapper {
+    @include background-image;
+
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: $grey-80;
+
+    @media (max-width: #{$large-width}) {
+      padding-bottom: 32px 0 0 0;
+      background-image: none !important;
+    }
+
+    @include large-and-up {
+      padding-top: 156px;
+      padding-bottom: 156px;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+
+    @media (max-width: #{$large-width}) {
+      max-width: 100% !important;
+      padding: 0 !important;
+    }
+
+    @include large-and-up {
+      flex-direction: row;
+    }
+  }
+
+  &__inner-content {
+    &--heading {
+      @include background-image;
+      padding: 32px 26px;
+
+      @include large-and-up {
+        background-image: none !important;
+        margin-right: 20px;
+        width: 100%;
+      }
+    }
+
+    &--form {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      flex: 0 0 auto;
+      width: 100%;
+      height: fit-content;
+      background-color: $white;
+      border-radius: 0;
+      overflow: hidden;
+      padding: 32px 26px;
+
+      @include large-and-up {
+        padding-right: 32px;
+        padding-left: 32px;
+        width: 450px;
+        min-height: 400px;
+        border-radius: 4px;
+      }
+    }
+  }
+
+  &__title {
+    font-size: 28px;
+    line-height: 32px;
+    text-align: left;
+    color: $white !important;
+    margin: 0 !important;
+    word-break: break-word !important;
+
+    @include large-and-up {
+      font-size: 40px;
+      line-height: 46px;
+    }
+  }
+
+  &__text {
+    font-size: 16px;
+    font-family: $lora;
+    font-weight: 400;
+    color: $white;
+    line-height: 26px;
+    text-align: left;
+    margin-top: 24px;
+    margin-bottom: 32px;
+
+    @include large-and-up {
+      font-size: 20px;
+      line-height: 28px;
+    }
+  }
+
+  &__button {
+    border: solid 1px $white;
+    background: transparent;
+    padding: 13px 61px;
+    border-radius: 4px;
+    color: $white;
+    line-height: 19px;
+    font-size: 16px;
+    font-weight: 700;
+    width: fit-content;
+
+    &.external-link {
+      &::after {
+        display: none;
+      }
+    }
+
+    &:hover {
+      background-color: $white;
+      color: $grey-80;
+      text-decoration: none;
+    }
+  }
+
+  &__form-title {
+    color: $grey-80;
+    font-size: 20px !important;
+    margin: 0 0 16px 0 !important;
+  }
+
+  &__form-description {
+    color: $grey-80;
+    font-family: $roboto;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 26px;
+  }
+
+  &__form-wrapper {
+    display: flex;
+    flex: 1 0 auto;
+    width: 100%;
+
+    &--editor {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: $grey-10;
+      padding: 10px;
+    }
+
+    &--signed {
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  &__shortcode-label {
+    font-weight: bold;
+  }
+
+  &__shortcode-editor {
+    margin: 0 !important;
+    background-color: white;
+    padding: 10px;
+    font-size: 15px !important;
+  }
+
+  &__submitted-message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    font-family: $roboto;
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  &__api-form {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    &--submitted {
+      align-items: center;
+    }
+
+    &--hide-custom-message {
+      display: none;
+    }
+  }
+
+  &__spinner {
+    display: flex;
+    justify-content: center;
+    padding: 30px 0;
+    width: 100%;
+    font-size: 16px;
+    color: $grey-40;
+  }
+}
