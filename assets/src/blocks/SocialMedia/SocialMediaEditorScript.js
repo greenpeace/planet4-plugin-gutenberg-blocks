@@ -98,12 +98,12 @@ export const SocialMediaEditor = ({
    * Check if social media corresponding embeds script is loaded and initiliaze it.
    * Can be used for Facebook, Twitter and Instagram depending on the parameter.
    */
-  const checkProviderScript = provider => {
+  const checkProviderScript = async provider => {
     const providerData = PROVIDER_SCRIPT_DATA[provider];
     const script = document.querySelector(`body > script[src="${providerData.script}"]`);
     if (script === null) {
-      const scriptLoaded = loadScriptAsync(providerData.script);
-      scriptLoaded.then(providerData.initFunction);
+      await loadScriptAsync(providerData.script);
+      providerData.initFunction();
     } else {
       providerData.initFunction();
     }
@@ -141,12 +141,14 @@ export const SocialMediaEditor = ({
       return;
     }
 
-    checkProviderScript(provider);
+    (async () => {
+      await checkProviderScript(provider);
 
-    // For Facebook we don't need the embed HTML code since we use an iframe
-    if (provider !== 'facebook') {
-      updateEmbed(social_media_url, provider);
-    }
+      // For Facebook we don't need the embed HTML code since we use an iframe
+      if (provider !== 'facebook') {
+        updateEmbed(social_media_url, provider);
+      }
+    })();
   }, [social_media_url]);
 
   const embed_type_help = __('Select oEmbed for the following types of social media<br>- Twitter: tweet, profile, list, collection, likes, moment<br>- Facebook: post, activity, photo, video, media, question, note<br>- Instagram: image', 'planet4-blocks-backend');
