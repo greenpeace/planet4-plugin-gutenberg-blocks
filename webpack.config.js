@@ -43,7 +43,6 @@ const publicJsConfig = {
     CarouselHeaderScript: './assets/src/blocks/CarouselHeader/CarouselHeaderScript.js',
     SpreadsheetScript: './assets/src/blocks/Spreadsheet/SpreadsheetScript.js',
     TimelineScript: './assets/src/blocks/Timeline/TimelineScript.js',
-    SocialMediaScript: './assets/src/blocks/SocialMedia/SocialMediaScript.js',
   },
 };
 const adminJsConfig = {
