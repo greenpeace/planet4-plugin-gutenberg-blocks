@@ -347,19 +347,6 @@ if ( class_exists( Elasticpress\Indexables::class ) ) {
 add_filter( 'timber/twig', 'p4_blocks_en_forms_twig_filters' );
 
 /**
- * WordPress automatically adds rel="noopener" to links that have _blank target.
- * This function removes that functionality since it breaks SocialMedia WYSIWYG blocks with Instagram embeds.
- *
- * @param string $rel The link rel.
- * @param string $link The link.
- * @return boolean
- */
-function remove_automatic_link_rel( $rel, $link ) {
-	return false;
-}
-add_filter( 'wp_targeted_link_rel', 'remove_automatic_link_rel', 10, 2 );
-
-/**
  * Adds functionality to Twig.
  *
  * @param \Twig\Environment $twig The Twig environment.

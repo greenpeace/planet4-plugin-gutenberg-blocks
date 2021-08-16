@@ -124,7 +124,10 @@ export const SocialMediaEditor = ({
         const instagramEmbedData = await apiFetch({ path: addQueryArgs('planet4/v1/get-instagram-embed', { url }) });
 
         if (instagramEmbedData) {
-          embedCode = instagramEmbedData;
+
+          // WordPress automatically adds rel="noopener" to links that have _blank target.
+          // The Instagram embed HTML doesn't, so in order to avoid block validation errors we need to add it ourselves.
+          embedCode = instagramEmbedData.replaceAll(`target="_blank"`, `target="_blank" rel="noopener noreferrer"`);
         }
       }
     } catch (error) {
