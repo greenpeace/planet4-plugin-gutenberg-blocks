@@ -52,8 +52,7 @@ class SocialMedia extends Base_Block {
 						return $content;
 					}
 
-					$attributes = array_merge( $attributes, self::get_data( $attributes ) );
-					return self::render_frontend( $attributes );
+					return ( new SocialMedia() )->render( $attributes );
 				},
 				'attributes'      => [
 					'title'             => [
@@ -98,7 +97,43 @@ class SocialMedia extends Base_Block {
 	 * @param array $fields Unused, required by the abstract function.
 	 */
 	public function prepare_data( $fields ): array {
-		return [];
+		$title             = $fields['title'] ?? '';
+		$description       = $fields['description'] ?? '';
+		$url               = $fields['social_media_url'] ?? '';
+		$embed_type        = $fields['embed_type'];
+		$alignment_class   = $fields['alignment_class'];
+		$facebook_page_tab = $fields['facebook_page_tab'];
+
+		$data = [
+			'title'           => $title,
+			'description'     => $description,
+			'alignment_class' => $alignment_class,
+		];
+
+		if ( $url ) {
+			if ( 'oembed' === $embed_type ) {
+				// need to remove . so instagr.am becomes instagram.
+				$provider = preg_replace( '#(^www\.)|(\.com$)|(\.)#', '', strtolower( wp_parse_url( $url, PHP_URL_HOST ) ) );
+
+				// Fix for backend preview, do not include embed script in response.
+				if ( $this->is_rest_request() && 'twitter' === $provider ) {
+					$url = add_query_arg( [ 'omit_script' => true ], $url );
+				}
+				if ( in_array( $provider, self::ALLOWED_OEMBED_PROVIDERS, true ) ) {
+
+					if ( 'twitter' === $provider ) {
+						$data['embed_code'] = wp_oembed_get( $url );
+					} else {
+						$data['embed_code'] = $this->get_fb_oembed_html( rawurlencode( $url ), $provider );
+					}
+				}
+			} elseif ( 'facebook_page' === $embed_type ) {
+				$data['facebook_page_url'] = $url;
+				$data['facebook_page_tab'] = $facebook_page_tab;
+			}
+		}
+
+		return $data;
 	}
 
 	/**
@@ -116,7 +151,11 @@ class SocialMedia extends Base_Block {
 		$alignment_class   = $fields['alignment_class'];
 		$facebook_page_tab = $fields['facebook_page_tab'];
 
-		$data = [];
+		$data = [
+			'title'           => $title,
+			'description'     => $description,
+			'alignment_class' => $alignment_class,
+		];
 
 		if ( $url ) {
 			if ( 'oembed' === $embed_type ) {
