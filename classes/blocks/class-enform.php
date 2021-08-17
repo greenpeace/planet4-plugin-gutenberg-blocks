@@ -156,13 +156,13 @@ class ENForm extends Base_Block {
 		parent::enqueue_frontend_assets();
 
 		wp_localize_script(
-			'plugin-engagingnetworks',
+			'plugin-en',
 			'p4_vars',
 			[ 'ajaxurl' => admin_url( 'admin-ajax.php' ) ]
 		);
 
 		wp_localize_script(
-			'engagingnetworks-submit',
+			'plugin-en',
 			'en_vars',
 			[ 'ajaxurl' => admin_url( 'admin-ajax.php' ) ]
 		);
