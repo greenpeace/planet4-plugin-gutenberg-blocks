@@ -1,6 +1,7 @@
 import { SubmenuEditor } from './SubmenuEditor.js';
 import { Tooltip } from '@wordpress/components';
 import {example} from './example';
+import { SubmenuFrontend } from './SubmenuFrontend';
 
 const { __ } = wp.i18n;
 
@@ -40,9 +41,10 @@ export const registerSubmenuBlock = () => {
         type: 'boolean',
         default: false,
       },
-      exampleMenuItems: { // Used for the block's preview, which can't extract items from anything.
+      menuItems: { // Used for the block's preview, which can't extract items from anything.
         type: 'array',
-      }
+        default: [],
+      },
     },
     supports: {
       multiple: false, // Use the block just once per post.
@@ -73,9 +75,40 @@ export const registerSubmenuBlock = () => {
       }
     ],
     edit: SubmenuEditor,
-    save() {
-      return null;
+    save: ({attributes}) => {
+      if (!attributes.menuItems) {
+        return null;
+      }
+      return <SubmenuFrontend { ...attributes }/>;
     },
     example,
+    deprecated: [
+      {
+        attributes: {
+          title: {
+            type: 'string',
+            default: ''
+          },
+          submenu_style: { // Needed for old blocks conversion
+            type: 'integer',
+            default: 0
+          },
+          levels: {
+            type: 'array',
+            default: [{ heading: 2, link: false, style: 'none' }]
+          },
+          isExample: {
+            type: 'boolean',
+            default: false,
+          },
+          exampleMenuItems: { // Used for the block's preview, which can't extract items from anything.
+            type: 'array',
+          },
+        },
+        save: () => {
+          return null;
+        }
+      }
+    ],
   });
 }

@@ -1,10 +1,8 @@
 export const makeHierarchical = headings => {
   let previousMenuItem;
 
-  return headings.reduce((menuItems, heading) => {
+  const withParents = headings.reduce((menuItems, heading) => {
     const { level, shouldLink, anchor, content, style } = heading;
-
-    // const parent = deeperThanPrevious ? previousHeading.children : menuItems;
     let possibleParent = previousMenuItem || menuItems;
 
     while (possibleParent.level && possibleParent.level >= level) {
@@ -30,4 +28,14 @@ export const makeHierarchical = headings => {
 
     return menuItems;
   }, []);
+  return removeParentsRef(withParents);
 };
+
+const removeParentsRef = items => {
+  return items.map(({parent, children, ...rest}) => {
+    return {
+      ...rest,
+      children: removeParentsRef(children),
+    };
+  })
+}

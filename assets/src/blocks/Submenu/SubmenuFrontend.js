@@ -3,10 +3,8 @@ import { SubmenuItems } from './SubmenuItems';
 import { makeHierarchical } from './makeHierarchical';
 import { getHeadingsFromDom } from './getHeadingsFromDom';
 
-export const SubmenuFrontend = ({ title, className, levels, submenu_style }) => {
+export const SubmenuFrontend = ({ title, className, submenu_style, menuItems }) => {
 
-  const headings = getHeadingsFromDom(levels);
-  const menuItems = makeHierarchical(headings);
   const style = getSubmenuStyle(className, submenu_style);
 
   return (

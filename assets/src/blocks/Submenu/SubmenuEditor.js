@@ -1,4 +1,4 @@
-import { Fragment } from '@wordpress/element';
+import { Fragment, useEffect} from '@wordpress/element';
 import { Button, PanelBody } from '@wordpress/components';
 import { SubmenuLevel } from './SubmenuLevel';
 import { SubmenuItems } from './SubmenuItems';
@@ -6,7 +6,6 @@ import { InspectorControls } from '@wordpress/block-editor';
 import { getSubmenuStyle } from './getSubmenuStyle';
 import { makeHierarchical } from './makeHierarchical';
 import { getHeadingsFromBlocks} from './getHeadingsFromBlocks';
-import { useSelect } from '@wordpress/data';
 import { deepClone } from '../../functions/deepClone';
 
 const { __ } = wp.i18n;
@@ -86,17 +85,9 @@ const renderEdit = (attributes, setAttributes) => {
 const renderView = (attributes, setAttributes, className) => {
   const {
     title,
-    levels,
     submenu_style,
-    isExample,
-    exampleMenuItems,
+    menuItems,
   } = attributes;
-
-  const blocks = useSelect(select => select('core/block-editor').getBlocks(), null);
-
-  const flatHeadings = getHeadingsFromBlocks(blocks, levels);
-
-  const menuItems = isExample ? exampleMenuItems : makeHierarchical(flatHeadings);
 
   const style = getSubmenuStyle(className, submenu_style);
 
@@ -113,19 +104,47 @@ const renderView = (attributes, setAttributes, className) => {
         multiline="false"
         allowedFormats={[]}
       />
-      {menuItems.length > 0 ?
+      {!!menuItems && menuItems.length > 0 ?
         <SubmenuItems menuItems={menuItems} /> :
         <div className='EmptyMessage'>
-          {__('The submenu block produces no output on the editor.', 'planet4-blocks-backend')}
+          {__('No items match the current configuration.', 'planet4-blocks-backend')}
         </div>
       }
     </section>
   );
 }
 
-export const SubmenuEditor = ({ attributes, setAttributes, isSelected, className }) => (
-  <Fragment>
-    {isSelected && renderEdit(attributes, setAttributes)}
-    {renderView(attributes, setAttributes, className)}
-  </Fragment>
-);
+let lastHeadings = '';
+export const SubmenuEditor = ({ attributes, setAttributes, isSelected, className }) => {
+  const dep = JSON.stringify(attributes.levels);
+  useEffect(() => {
+    if (attributes.isExample) {
+      // When the block is rendered as a preview in the sidebar.
+      return;
+    }
+    const unsub = wp.data.subscribe(() => {
+      const blocks = wp.data.select( 'core/block-editor' ).getBlocks();
+      const headings = getHeadingsFromBlocks(blocks, attributes.levels);
+      const json = JSON.stringify(headings);
+      if (json !== (lastHeadings)) {
+        const menuItems = makeHierarchical(headings);
+        if (JSON.stringify(menuItems) === attributes.menuItems) {
+          return;
+        }
+        lastHeadings = json;
+        setAttributes({ menuItems});
+      }
+    });
+
+    return () => {
+      console.log(`Unsub ${ n }`, dep)
+      unsub();
+    };
+  }, [dep]);
+  return (
+    <Fragment>
+      { isSelected && renderEdit(attributes, setAttributes) }
+      { renderView(attributes, setAttributes, className) }
+    </Fragment>
+  );
+};

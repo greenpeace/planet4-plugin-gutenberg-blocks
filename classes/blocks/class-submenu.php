@@ -30,8 +30,6 @@ class Submenu extends Base_Block {
 			self::get_full_block_name(),
 			[
 				'editor_script'   => 'planet4-blocks',
-				// todo: Remove when all content is migrated.
-				'render_callback' => [ self::class, 'render_frontend' ],
 				'attributes'      => [
 					'title'         => [
 						'type'    => 'string',

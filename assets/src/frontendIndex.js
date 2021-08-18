@@ -20,7 +20,6 @@ const COMPONENTS = {
   'planet4-blocks/split-two-columns': SplittwocolumnsFrontend,
   'planet4-blocks/happypoint': HappypointFrontend,
   'planet4-blocks/gallery': GalleryFrontend,
-  'planet4-blocks/submenu': SubmenuFrontend,
   'planet4-blocks/media-video': MediaFrontend,
   'planet4-blocks/columns': ColumnsFrontend,
   'planet4-blocks/guestbook': GuestBookFrontend,
