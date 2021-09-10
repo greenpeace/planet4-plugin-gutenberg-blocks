@@ -8,6 +8,7 @@ export const Sidebar = ({
   cta_link,
   cta_new_tab,
   enable_custom_hubspot_thankyou_message,
+  use_custom_styles,
   setAttributes,
 }) => (
   <InspectorControls>
@@ -37,6 +38,14 @@ export const Sidebar = ({
           value={enable_custom_hubspot_thankyou_message}
           checked={enable_custom_hubspot_thankyou_message}
           onChange={value => setAttributes({ enable_custom_hubspot_thankyou_message: value })}
+        />
+      </PanelRow>
+      <PanelRow>
+        <CheckboxControl
+          label={__('Use custom styles', 'planet4-blocks-backend')}
+          value={use_custom_styles}
+          checked={use_custom_styles}
+          onChange={value => setAttributes({ use_custom_styles: value })}
         />
       </PanelRow>
     </PanelBody>

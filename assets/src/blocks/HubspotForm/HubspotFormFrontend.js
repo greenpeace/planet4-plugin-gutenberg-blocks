@@ -73,7 +73,7 @@ const Component = () => {
               <div
                 className={`
                   hubspot-form__form-wrapper 
-                  ${use_custom_style ? 'hubspot-form__form-wrapper--with-custom-style' : ''}
+                  ${use_custom_styles ? 'hubspot-form__form-wrapper--with-custom-style' : ''}
                 `}
               >
                 <div
