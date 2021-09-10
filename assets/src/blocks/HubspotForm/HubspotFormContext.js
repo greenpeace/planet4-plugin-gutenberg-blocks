@@ -16,6 +16,7 @@ const ContextProvider = ({
   hubspot_shortcode,
   hubspot_thankyou_message,
   enable_custom_hubspot_thankyou_message,
+  use_custom_style,
   children,
 }) => (
   <Provider
@@ -31,6 +32,7 @@ const ContextProvider = ({
       hubspot_shortcode,
       hubspot_thankyou_message,
       enable_custom_hubspot_thankyou_message,
+      use_custom_style,
     }}>
     {children}
   </Provider>

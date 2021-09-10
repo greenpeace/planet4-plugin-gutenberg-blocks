@@ -65,6 +65,10 @@ export const registerHubspotFormBlock = () => {
         type: 'boolean',
         default: true,
       },
+      use_custom_style: {
+        type: 'boolean',
+        default: false,
+      },
       version: {
         type: 'integer',
         default: 1,

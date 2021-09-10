@@ -1,3 +1,5 @@
+@import "./HubspotFormOverrides.scss";
+
 @mixin background-image {
   background-size: cover;
   background-repeat: no-repeat;
@@ -169,6 +171,10 @@
       align-items: center;
       justify-content: center;
     }
+
+    &--with-custom-style {
+      @include custom-hubsport-form-style;
+     }
   }
 
   &__shortcode-label {

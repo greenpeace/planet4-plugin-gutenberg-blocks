@@ -78,6 +78,10 @@ class HubspotForm extends Base_Block {
 						'type' => 'boolean',
 						'default' => true,
 					],
+					'use_custom_style' => [
+						'type' => 'boolean',
+						'default' => false,
+					],
 				],
 			]
 		);

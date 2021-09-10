@@ -70,7 +70,12 @@ const Component = () => {
                   </Fragment>
                 ) : null} 
               </header>
-              <div className='hubspot-form__form-wrapper'>
+              <div
+                className={`
+                  hubspot-form__form-wrapper 
+                  ${use_custom_style ? 'hubspot-form__form-wrapper--with-custom-style' : ''}
+                `}
+              >
                 <div
                   ref={hubspotFormRef}
                   id='hubspot-api-form'
