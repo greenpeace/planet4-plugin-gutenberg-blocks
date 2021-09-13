@@ -420,21 +420,25 @@ class Covers extends Base_Block {
 
 		if ( ! empty( $posts ) ) {
 
-			foreach ( $posts as $post ) {
+			foreach ( $posts as $post_data ) {
+				$post = new \stdClass();
 
 				$post->alt_text  = '';
 				$post->thumbnail = '';
 				$post->srcset    = '';
 
-				if ( has_post_thumbnail( $post ) ) {
-					$post->thumbnail = get_the_post_thumbnail_url( $post, 'medium' );
-					$img_id          = get_post_thumbnail_id( $post );
+				$post->post_title   = $post_data->post_title;
+				$post->post_excerpt = $post_data->post_excerpt;
+
+				if ( has_post_thumbnail( $post_data ) ) {
+					$post->thumbnail = get_the_post_thumbnail_url( $post_data, 'medium' );
+					$img_id          = get_post_thumbnail_id( $post_data );
 					$post->srcset    = wp_get_attachment_image_srcset( $img_id, 'full', wp_get_attachment_metadata( $img_id ) );
 					$post->alt_text  = get_post_meta( $img_id, '_wp_attachment_image_alt', true );
 				}
 
-				$post->link           = get_permalink( $post );
-				$post->date_formatted = get_the_date( '', $post->ID );
+				$post->link           = get_permalink( $post_data );
+				$post->date_formatted = get_the_date( '', $post_data->ID );
 				$posts_array[]        = $post;
 			}
 		}
