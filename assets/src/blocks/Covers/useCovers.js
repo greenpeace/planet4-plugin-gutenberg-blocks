@@ -1,7 +1,7 @@
 import { useState, useEffect } from '@wordpress/element';
 import { addQueryArgs } from '../../functions/addQueryArgs';
 
-const { apiFetch } = wp;
+const { apiFetch } = typeof wp === 'undefined' ? {} : wp;
 
 export const useCovers = ({ post_types, tags, cover_type, initialRowsLimit, posts }, noLoading) => {
   const [covers, setCovers] = useState([]);

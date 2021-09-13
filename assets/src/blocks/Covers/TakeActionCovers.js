@@ -1,6 +1,7 @@
+const window = window || {addEventListener: () =>{}, innerWidth: 1000};
 import { useState, useEffect } from '@wordpress/element';
 
-const { __ } = wp.i18n;
+const { __ } = typeof wp === 'undefined' ? {__:s=>s} : wp.i18n;
 
 const isSmallWindow = () => window.innerWidth < 992;
 

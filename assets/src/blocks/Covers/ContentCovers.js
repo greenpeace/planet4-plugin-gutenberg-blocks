@@ -1,7 +1,8 @@
-import { useState, useEffect } from '@wordpress/element';
+const window = window || {addEventListener: () =>{}, innerWidth: 1000};
+import { useState, useEffect } from 'react';
 import { IMAGE_SIZES } from './imageSizes';
 
-const { __ } = wp.i18n;
+const { __ } = typeof wp === 'undefined' ? {__:s=>s} : wp.i18n;
 
 const isMediumWindow = () => window.innerWidth > 576 && window.innerWidth < 992;
 

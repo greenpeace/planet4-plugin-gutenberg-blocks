@@ -1,5 +1,5 @@
 import { IMAGE_SIZES } from './imageSizes';
-const { __ } = wp.i18n;
+const { __ } = typeof wp === 'undefined' ? {__:s=>s} : wp.i18n;
 
 export const CampaignCovers = ({ covers, initialRowsLimit, row, loadMoreCovers }) => {
   const amountPerRow = 3;
