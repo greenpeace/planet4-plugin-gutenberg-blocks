@@ -160,4 +160,20 @@ const cssConfig = {
     ]
   },
 };
-module.exports = [publicJsConfig, adminJsConfig, cssConfig];
+const workerConfig = {
+  target: 'node',
+  entry: './worker/index.js',
+  output: {
+    filename: 'index.js',
+    path: __dirname + '/worker/dist',
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        use: "babel-loader",
+      },
+    ],
+  },
+}
+module.exports = [publicJsConfig, adminJsConfig, cssConfig, workerConfig];
