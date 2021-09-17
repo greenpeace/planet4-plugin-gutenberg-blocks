@@ -268,7 +268,7 @@ function set_allowed_block_types_new( $allowed_block_types, $context ) {
 
 global $wp_version;
 if ( version_compare( $wp_version, '5.8', '>=' ) ) {
-	add_filter( 'allowed_block_types_all', 'set_allowed_block_types_new', 10, 2 );
+//	add_filter( 'allowed_block_types_all', 'set_allowed_block_types_new', 10, 2 );
 } else {
 	add_filter( 'allowed_block_types', 'set_allowed_block_types', 10, 2 );
 }
