@@ -21,7 +21,11 @@ export const ArticlesFrontend = (props) => {
 
   const postCategories = props.post_categories || [];
 
-  const { posts, loadNextPage, hasMorePages, loading } = useArticlesFetch(props, postType, postId, document.body.dataset.nro, postCategories);
+  // Quick workaround to get the base URL working with custom templates that don't have our added body attribute.
+  // It requires adding a <div id='base-url' data-url='[[url]]'> to the custom template.
+  const baseUrl = document.body.dataset.nro || document.getElementById('base-url')?.dataset.url;
+
+  const { posts, loadNextPage, hasMorePages, loading } = useArticlesFetch(props, postType, postId, baseUrl, postCategories);
 
   if (!posts.length) {
     return null;
