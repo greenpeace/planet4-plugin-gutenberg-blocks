@@ -57,7 +57,6 @@ const addButtonBlockFilter = () => {
       newAttributes.className = Object.assign({ default: "is-style-secondary" }, newAttributes.className);
 
       lodash.assign( settings, {
-        edit: P4ButtonEdit,
         attributes: newAttributes,
         styles: p4ButtonStyle,
       } );
