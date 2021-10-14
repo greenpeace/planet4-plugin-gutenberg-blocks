@@ -92,10 +92,10 @@
 
 .form-description p:first-child --block-enform--caption--paragraph--first-- {
   font-weight: inherit;
-  font-size: 1rem;
+  font-size: 1.25rem;
   text-transform: none;
   font-family: $roboto;
-  margin-bottom: auto;
+  margin-bottom: revert;
 }
 
 .enform {
