@@ -1,19 +1,19 @@
-.action-card-bottom.cover-card {
-  background: white !important;
+.boxout {
+  background: white;
   padding: 0;
   width: 100%;
-  display: none;
   height: 120px;
   position: relative;
-  margin-top: 80px !important;
   box-shadow: 0 4px 3px rgba(0, 0, 0, 0.16);
   transition: box-shadow 0.2s;
   border-radius: 4px;
-  margin-right: 0;
-  margin-left: 0;
 
   &:hover {
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
+  }
+
+  .not-now {
+    display: none;
   }
 
   img {
@@ -36,35 +36,18 @@
     }
   }
 
-  .cover-card-content {
+  .boxout-content {
     position: unset;
     padding: 16px;
   }
 
-  .cover-card-more {
-    display: block;
-    font-weight: 700;
-    font-family: $roboto;
-    color: $grey-80;
-    font-size: 28px;
-    line-height: 1;
-    bottom: 140px;
-    position: absolute;
-    left: 0;
-
-    html[dir="rtl"] & {
-      right: 0;
-      left: auto;
-    }
-  }
-
-  .cover-card-tag,
   &::before,
   &::after {
     display: none;
   }
 
-  .cover-card-heading {
+  .boxout-heading {
+    font-family: $roboto;
     color: $grey-80;
     text-shadow: none;
     font-size: 16px;
@@ -109,22 +92,25 @@
     }
   }
 
+  .boxout-excerpt {
+    display: none;
+  }
+
   @include medium-and-up {
     min-height: 200px;
-    margin-top: 100px !important;
     float: none;
 
     html[dir="rtl"] & {
       float: none;
     }
 
-    .cover-card-heading {
+    .boxout-heading {
       margin-bottom: 10px;
       font-size: 20px;
       margin-top: 0;
     }
 
-    .cover-card-content {
+    .boxout-content {
       padding: 20px;
     }
 
@@ -133,7 +119,7 @@
       width: 45%;
     }
 
-    .cover-card-excerpt {
+    .boxout-excerpt {
       color: $grey;
       line-height: 1.5;
       font-size: 14px;
@@ -151,15 +137,9 @@
     .btn {
       font-size: 14px;
     }
-
-    .cover-card-more {
-      font-size: 40px;
-      bottom: 230px;
-    }
   }
 
   @include large-and-up {
     min-height: 210px;
-    max-width: 65%;
   }
 }

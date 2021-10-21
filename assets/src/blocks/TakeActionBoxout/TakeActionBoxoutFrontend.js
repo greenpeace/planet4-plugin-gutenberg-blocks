@@ -12,7 +12,7 @@ export const TakeActionBoxoutFrontend = ({
   className,
 }) => (
   <section
-    className={`cover-card action-card ${className || ''}`}
+    className={`boxout ${className || ''}`}
     style={{
       backgroundImage: `linear-gradient(180deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0)), url(${imageUrl})`
     }}
@@ -26,8 +26,7 @@ export const TakeActionBoxoutFrontend = ({
       {...newTab && link && { target: "_blank" }}
     />
     <img src={imageUrl} alt={imageAlt} />
-    <div className="cover-card-more">{__('Want to do more?', 'planet4-blocks')}</div>
-    <div className="cover-card-content">
+    <div className="boxout-content">
       {tags && tags.map(tag => (
         <a
           key={tag.name}
@@ -42,7 +41,7 @@ export const TakeActionBoxoutFrontend = ({
       ))}
       {title &&
         <a
-          className="cover-card-heading"
+          className="boxout-heading"
           data-ga-category="Take Action Boxout"
           data-ga-action="Title"
           data-ga-label="n/a"
@@ -53,7 +52,7 @@ export const TakeActionBoxoutFrontend = ({
         </a>
       }
       {excerpt &&
-        <p className="cover-card-excerpt">{excerpt}</p>
+        <p className="boxout-excerpt">{excerpt}</p>
       }
     </div>
     {link && linkText &&
