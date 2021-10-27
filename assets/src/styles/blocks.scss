@@ -1,9 +1,6 @@
 // P4 Blocks
 @import "blocks/Articles";
 @import "blocks/Columns";
-@import "blocks/OldCovers/TakeActionCovers";
-@import "blocks/OldCovers/CampaignCovers";
-@import "blocks/OldCovers/ContentCovers";
 @import "blocks/Counter";
 @import "blocks/Gallery_carousel";
 @import "blocks/Gallery_content_three_column";
@@ -15,10 +12,6 @@
 @import "blocks/SplitTwoColumns";
 @import "blocks/Submenu";
 @import "blocks/Cookies";
-
-// A/B test for Take Action Boxout
-@import "blocks/OldCovers/TakeActionBoxoutScroll";
-@import "blocks/OldCovers/TakeActionBoxoutBottom";
 
 // EN Blocks
 @import "blocks/OldENForm/components/enform";
