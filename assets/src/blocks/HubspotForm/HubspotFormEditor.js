@@ -93,7 +93,6 @@ export const HubspotFormEditor = ({
                 placeholder={__('Enter description', 'planet4-blocks-backend')}
                 value={block_title}
                 onChange={toAttribute('block_title')}
-                keepPlaceholderOnFocus={true}
                 withoutInteractiveFormatting={true}
                 allowedFormats={[]}
               />
@@ -103,7 +102,6 @@ export const HubspotFormEditor = ({
                 placeholder={__('Enter description', 'planet4-blocks-backend')}
                 value={block_text}
                 onChange={toAttribute('block_text')}
-                keepPlaceholderOnFocus={true}
                 withoutInteractiveFormatting={true}
                 allowedFormats={['core/bold', 'core/italic']}
               />
@@ -125,7 +123,6 @@ export const HubspotFormEditor = ({
                   placeholder={__('Form title goes here', 'planet4-blocks-backend')}
                   value={form_title}
                   onChange={toAttribute('form_title')}
-                  keepPlaceholderOnFocus={true}
                   withoutInteractiveFormatting={true}
                   allowedFormats={[]}
                 />
@@ -135,7 +132,6 @@ export const HubspotFormEditor = ({
                   placeholder={__('Enter text', 'planet4-blocks-backend')}
                   value={form_description}
                   onChange={toAttribute('form_description')}
-                  keepPlaceholderOnFocus={true}
                   withoutInteractiveFormatting={true}
                   allowedFormats={['core/bold', 'core/italic']}
                 />
@@ -148,7 +144,6 @@ export const HubspotFormEditor = ({
                   placeholder={__('[hubspot type="form" portal="XXXXXX" id="XXXX-XXXX-XXXX-XXXX"]', 'planet4-blocks-backend')}
                   value={hubspot_shortcode}
                   onChange={toAttribute('hubspot_shortcode')}
-                  keepPlaceholderOnFocus={true}
                   withoutInteractiveFormatting={true}
                   allowedFormats={[]}
                 />
@@ -160,7 +155,6 @@ export const HubspotFormEditor = ({
                     placeholder={__('e.g. Thanks for submitting the form.', 'planet4-blocks-backend')}
                     value={hubspot_thankyou_message}
                     onChange={toAttribute('hubspot_thankyou_message')}
-                    keepPlaceholderOnFocus={true}
                     withoutInteractiveFormatting={true}
                     allowedFormats={[]}
                   />
