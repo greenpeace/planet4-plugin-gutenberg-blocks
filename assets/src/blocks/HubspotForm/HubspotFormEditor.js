@@ -76,18 +76,15 @@ export const HubspotFormEditor = ({
           }}
         />
       </MediaUploadCheck>
-      <section
-        className='hubspot-form hubspot-form--image-full-width'
-        style={{ height: blockHeight }}
-      >
+      <section className='hubspot-form image-full-width' style={{ height: blockHeight }}>
         <div
           ref={wrapperRef}
-          className='hubspot-form__wrapper block-wide'
+          className='hubspot-form-wrapper block-wide'
           style={{ backgroundImage: `url(${block_background_image_url ?? ''})` }}
         >
           <div className='hubspot-form__content container'>
             <div
-              className='hubspot-form__inner-content hubspot-form__inner-content--heading'
+              className='hubspot-form__inner-content--heading'
               style={{ backgroundImage: `url(${block_background_image_url ?? ''})` }}
             >
               <RichText
@@ -116,12 +113,11 @@ export const HubspotFormEditor = ({
                 placeholder={__('Enter CTA text', 'planet4-blocks-backend')}
                 value={cta_text}
                 onChange={toAttribute('cta_text')}
-                keepPlaceholderOnFocus={true}
                 withoutInteractiveFormatting
                 allowedFormats={[]}
               />
             </div>
-            <div className='hubspot-form__inner-content hubspot-form__inner-content--form'>
+            <div className='hubspot-form__inner-content--form'>
               <header className='hubspot-form__form-header'>
                 <RichText
                   tagName='h1'

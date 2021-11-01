@@ -30,17 +30,23 @@ const Component = () => {
     </div>
   );
 
+  useEffect(() => {
+    if(block_background_image_url) {
+      setBackgroundImage(block_background_image_url);
+    }
+  }, [ block_background_image_url ]);
+
   return (
     <Fragment>
-      <section className='hubspot-form hubspot-form--image-full-width'>
+      <section className='hubspot-form image-full-width'>
         <div
-          className='hubspot-form__wrapper block-wide'
-          style={{ backgroundImage: block_background_image_url ? `url(${block_background_image_url})` : 'none' }}
+          className='hubspot-form-wrapper block-wide'
+          style={{ backgroundImage: `url(${backgroundImage})` }}
         >
           <div className='hubspot-form__content container'>
             <div
               className='hubspot-form__inner-content hubspot-form__inner-content--heading'
-              style={{ backgroundImage: block_background_image_url ? `url(${block_background_image_url})` : 'none' }}
+              style={{ backgroundImage: `url(${backgroundImage})` }}
             >
               <h1 className='hubspot-form__title'>{ block_title }</h1>
               <p
@@ -58,7 +64,7 @@ const Component = () => {
             </div>
             <div
               className={`
-                hubspot-form__inner-content hubspot-form__inner-content--form 
+                hubspot-form__inner-content hubspot-form__inner-content--form
                 ${submitted ? 'hubspot-form__form-wrapper--signed' : ''}
               `}
             >
@@ -68,7 +74,7 @@ const Component = () => {
                     <h1 className='hubspot-form__form-title'>{form_title}</h1>
                     <p className='hubspot-form__form-description'>{form_description}</p>
                   </Fragment>
-                ) : null} 
+                ) : null}
               </header>
               <div className='hubspot-form__form-wrapper'>
                 <div
