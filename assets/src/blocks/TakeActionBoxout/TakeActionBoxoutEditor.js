@@ -44,15 +44,21 @@ export const TakeActionBoxoutEditor = ({
   } = attributes;
 
   const actPageList = useSelect(select => {
-    const args = {
+    const commonArgs = {
       per_page: -1,
       sort_order: 'asc',
       sort_column: 'post_title',
-      parent: window.p4ge_vars.planet4_options.act_page,
       post_status: 'publish',
     };
+    const actArgs = {
+      ...commonArgs,
+      parent: window.p4ge_vars.planet4_options.act_page,
+    };
 
-    return select('core').getEntityRecords('postType', 'page', args) || [];
+    const actPages = select('core').getEntityRecords('postType', 'page', actArgs) || [];
+    const campaignPages = select('core').getEntityRecords('postType', 'campaign', commonArgs) || [];
+
+    return [...actPages, ...campaignPages];
   }, []);
 
   const tagsList = useSelect(select => {
@@ -96,7 +102,7 @@ export const TakeActionBoxoutEditor = ({
     imageAlt: alt_text,
   });
 
-  const actPageOptions = actPageList.map(actPage => ({ label: actPage.title.raw, value: actPage.id }));
+  const actPageOptions = actPageList.map(actPage => ({ label: actPage.title?.raw || actPage.id, value: actPage.id }));
 
   const renderEditInPlace = () => (takeActionPageSelected ?
     <TakeActionBoxoutFrontend {...{tags}} {...attributes} /> :
