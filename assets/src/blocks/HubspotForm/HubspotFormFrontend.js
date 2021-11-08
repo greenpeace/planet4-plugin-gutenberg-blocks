@@ -1,4 +1,4 @@
-import { Fragment, useContext, useRef } from '@wordpress/element';
+import { Fragment, useContext, useRef, useEffect } from '@wordpress/element';
 import { HubspotFormContext, HubspotFormProvider } from './HubspotFormContext';
 import { useCreateHubspotForm } from './useCreateHubspotForm';
 
@@ -20,6 +20,7 @@ const Component = () => {
   } = useContext(HubspotFormContext);
   const hubspotFormRef = useRef(null);
   const { submitted } = useCreateHubspotForm(hubspot_shortcode, hubspotFormRef);
+  const [ backgroundImage, setBackgroundImage ] = useState('none');
 
   const renderSuccessMessage = () => (
     <div className='hubspot-form__submitted-message'>
@@ -32,7 +33,7 @@ const Component = () => {
 
   useEffect(() => {
     if(block_background_image_url) {
-      setBackgroundImage(block_background_image_url);
+      setBackgroundImage(`url(${block_background_image_url})`);
     }
   }, [ block_background_image_url ]);
 
