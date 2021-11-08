@@ -39,43 +39,43 @@ class HubspotForm extends Base_Block {
 			self::get_full_block_name(),
 			[
 				'render_callback' => [ $this, 'front_end_rendered_fallback' ],
-				'attributes' => [
-					'block_title'	=> [
+				'attributes'      => [
+					'block_title'                => [
 						'type' => 'string',
 					],
-					'block_text'	=> [
+					'block_text'                 => [
 						'type' => 'string',
 					],
-					'block_background_image_id'	=> [
+					'block_background_image_id'  => [
 						'type' => 'string',
 					],
 					'block_background_image_url' => [
 						'type' => 'string',
 					],
-					'cta_text' => [
+					'cta_text'                   => [
 						'type' => 'string',
 					],
-					'cta_link' => [
+					'cta_link'                   => [
 						'type' => 'string',
 					],
-					'cta_new_tab' => [
-						'type' => 'boolean',
+					'cta_new_tab'                => [
+						'type'    => 'boolean',
 						'default' => false,
 					],
-					'form_title' => [
+					'form_title'                 => [
 						'type' => 'string',
 					],
-					'form_description' => [
+					'form_description'           => [
 						'type' => 'string',
 					],
-					'hubspot_shortcode' => [
+					'hubspot_shortcode'          => [
 						'type' => 'string',
 					],
-					'hubspot_thankyou_message' => [
+					'hubspot_thankyou_message'   => [
 						'type' => 'string',
 					],
 					'enable_custom_hubspot_thankyou_message' => [
-						'type' => 'boolean',
+						'type'    => 'boolean',
 						'default' => true,
 					],
 				],
