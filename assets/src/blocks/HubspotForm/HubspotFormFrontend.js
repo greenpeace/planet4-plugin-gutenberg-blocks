@@ -33,7 +33,7 @@ const Component = () => {
 
   useEffect(() => {
     if(block_background_image_url) {
-      setBackgroundImage(`url(${block_background_image_url})`);
+      setBackgroundImage(block_background_image_url);
     }
   }, [ block_background_image_url ]);
 
