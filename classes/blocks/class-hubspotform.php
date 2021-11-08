@@ -108,26 +108,4 @@ class HubspotForm extends Base_Block {
 	public function prepare_data( $fields ): array {
 		return [];
 	}
-
-	/**
-	 * If the content is not empty, it's the new version and doesn't need any back end rendering.
-	 * Otherwise, it means the block was not migrated in the editor yet. Fall back to front end rendering from scratch.
-	 *
-	 * @param array  $attributes Attributes of the block.
-	 * @param string $content Content of the block.
-	 *
-	 * @return string The block's content string.
-	 */
-	public function front_end_rendered_fallback( $attributes, $content ) {
-		if ( ! empty( $content ) ) {
-			return $content;
-		}
-
-		$json = wp_json_encode( [ 'attributes' => $attributes ] );
-
-		// Render the block using a regular front end rendered, until the block data was migrated in the editor. For
-		// production sites we will do this for all occurrences of the block, right after deploy.
-		return '<div data-render="' . self::get_full_block_name() . '" data-attributes="' . htmlspecialchars( $json ) . '">'
-		. '</div>';
-	}
 }
