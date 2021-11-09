@@ -1,11 +1,11 @@
 import ReactDOMServer from 'react-dom/server';
-import { RawHTML, Fragment } from '@wordpress/element';
+import { RawHTML, Fragment, renderToString } from '@wordpress/element';
 import { Tooltip } from '@wordpress/components';
 import { HubspotFormEditor } from './HubspotFormEditor';
 import { HubspotFormFrontend } from './HubspotFormFrontend';
-
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
+import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
 
 const BLOCK_NAME = 'planet4-blocks/hubspot-form';
 
@@ -80,23 +80,80 @@ export const registerHubspotFormBlock = () => {
         isDefault: true,
       },
     ],
-    edit: (props) => (
-      <Fragment>
-        <HubspotFormEditor {...props} />
-      </Fragment>
-    ),
-    save: ({
-      attributes,
-    }) => {
-      const markup = ReactDOMServer.renderToString(
-        <div
-          data-hydrate={BLOCK_NAME}
-          data-attributes={JSON.stringify({...attributes})}
-        >
-          <HubspotFormFrontend {...attributes} />
+
+    /**
+      The belowed function works correctly without using innerBlocks.
+    */
+    // edit: (props) => {
+    //   return (
+    //     <Fragment>
+    //       <HubspotFormEditor {...props} />
+    //     </Fragment>
+    //   )
+    // },
+
+    /**
+      The belowed function works correctly using innerBlocks.
+    */
+    edit: () => {
+      const blockProps = useBlockProps();
+      const ALLOWED_BLOCKS = [ 'core/heading', 'core/paragraph', 'core/shortcode' ];
+      const TEMPLATE = [
+        [ 'core/heading', { placeholder: 'Block title' } ],
+        [ 'core/paragraph', { placeholder: 'Block description' } ],
+        [ 'core/shortcode', {} ],
+      ];
+      return (
+        <div {...blockProps}>
+          <InnerBlocks template={TEMPLATE} allowedBlocks={ ALLOWED_BLOCKS } />
         </div>
-      );
-      return <RawHTML>{ markup }</RawHTML>;
+      )
+    },
+
+    /**
+      The belowed function works correctly without using innerBlocks.
+    */
+    // save: (props) => {
+    //   const markup = ReactDOMServer.renderToString(
+    //     <div
+    //       data-hydrate={BLOCK_NAME}
+    //       data-attributes={JSON.stringify({...props.attributes})}
+    //       data-innerblocks={JSON.stringify({...props.innerBlocks})}
+    //     >
+    //       <HubspotFormFrontend {...props} />
+    //     </div>
+    //   );
+    //   return <wp.element.RawHTML>{ markup }</wp.element.RawHTML>;
+    // },
+
+    /**
+      The belowed function works correctly using innerBlocks but without hydrate.
+    */
+    // save: () => {
+    //   const blockProps = useBlockProps.save();
+    //   return (
+    //     <div { ...blockProps }>
+    //       <InnerBlocks.Content />
+    //     </div>
+    //   );
+    // },
+
+    /**
+      The belowed function use innerBlocks and hydrate but doesn't work.
+    */
+    save: (props) => {
+      const blockProps = useBlockProps.save();
+      const element = (
+        <div
+          { ...blockProps }
+          data-hydrate={BLOCK_NAME}
+          data-attributes={JSON.stringify({...props.attributes})}
+        >
+          <InnerBlocks.Content />
+        </div>
+      )
+      const markup = ReactDOMServer.renderToString(element);
+      return <wp.element.RawHTML>{ markup }</wp.element.RawHTML>;
     },
   })
 }
