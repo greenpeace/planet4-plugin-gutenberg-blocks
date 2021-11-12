@@ -68,9 +68,6 @@ export const registerHubspotFormBlock = () => {
         type: 'boolean',
         default: true,
       },
-      enable_custom_hubspot_thankyou_message: {
-        type: 'string',
-      },
       version: {
         type: 'integer',
         default: 1,
