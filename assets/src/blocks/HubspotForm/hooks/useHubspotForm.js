@@ -1,7 +1,6 @@
 import { useState, useEffect } from '@wordpress/element';
 
 export const useHubspotForm = (shortcode, targetRef) => {
-  const [ submit, setSubmit ] = useState(false);
   const [ submitted, setSubmitted ] = useState(false);
   const [ formId, setFormId ] = useState();
   const [ portalId, setPortalId ] = useState();
@@ -13,12 +12,8 @@ export const useHubspotForm = (shortcode, targetRef) => {
       formId,
       target: `#${targetRef.current.attributes.id.value}`,
       region: "",
-      onFormSubmit: () => {
-        setSubmit(true);
-      },
       onFormSubmitted: ($form) => {
         setSubmitted(true);
-        setSubmit(false);
         if($form.length) {
           setSubmittedMessage($form[0].innerText);
         }
@@ -66,7 +61,6 @@ export const useHubspotForm = (shortcode, targetRef) => {
   ]);
 
   return {
-    submit,
     submitted,
     submittedMessage,
   };
