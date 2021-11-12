@@ -1,8 +1,10 @@
+import { Fragment, useEffect, useRef } from '@wordpress/element';
 import { MediaUpload, MediaUploadCheck, RichText } from '@wordpress/block-editor';
 import { Button } from '@wordpress/components';
-import { Fragment, useRef } from '@wordpress/element';
-import { useDynamicHeight } from './useDynamicHeight';
 import { Sidebar } from './HubspotFormSidebar';
+import { useToAttribute } from './hooks/useToAttribute';
+import { useBackgroundImage } from './hooks/useBackgroundImage';
+import { getStyleFromClassName } from '../getStyleFromClassName';
 
 const { __ } = wp.i18n;
 

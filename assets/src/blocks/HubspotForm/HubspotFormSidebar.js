@@ -1,6 +1,7 @@
-import { CheckboxControl, PanelBody, PanelRow } from '@wordpress/components';
+import { CheckboxControl, PanelBody, PanelRow, TextControl } from '@wordpress/components';
 import { InspectorControls } from '@wordpress/block-editor';
 import { URLInput } from '../../components/URLInput/URLInput';
+import { useToAttribute } from './hooks/useToAttribute';
 
 const { __ } = wp.i18n;
 
