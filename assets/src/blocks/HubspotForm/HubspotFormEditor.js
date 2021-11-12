@@ -12,21 +12,24 @@ export const HubspotFormEditor = ({
   attributes: {
     block_background_image_id,
     block_background_image_url,
+    block_text,
+    block_title,
+    block_style,
     cta_text,
     cta_link,
     cta_new_tab,
-    block_text,
-    block_title,
-    form_description,
+    form_text,
     form_title,
     hubspot_shortcode,
     hubspot_thankyou_message,
     enable_custom_hubspot_thankyou_message,
+    className,
   },
   setAttributes,
 }) => {
   const wrapperRef = useRef(null);
-  const [ blockHeight ] = useDynamicHeight(wrapperRef);
+  const [ backgroundImage ] = useBackgroundImage(block_background_image_url);
+  const [ toAttribute ] = useToAttribute(setAttributes);
 
   const onSelectImageHandler = ({ id, url }) => {
     if(url && id) {
@@ -49,23 +52,22 @@ export const HubspotFormEditor = ({
       </div>
     ) : null;
   };
-  
-  const toAttribute = (attributeName) => value => {
-    if(setAttributes) {
-      setAttributes({
-        [attributeName]: value,
-      });
+
+  useEffect(() => {
+    if(className) {
+      setAttributes({ block_style: getStyleFromClassName(className) });
     }
-  };
+  }, [ className ]);
 
   return (
     <Fragment>
-      <Sidebar { ...{
+      <Sidebar {...{
         cta_link,
         cta_new_tab,
         enable_custom_hubspot_thankyou_message,
+        hubspot_thankyou_message,
         setAttributes
-      } } />
+      }} />
       <MediaUploadCheck>
         <MediaUpload
           title={__('Select Background Image', 'planet4-blocks-backend')}
@@ -73,26 +75,24 @@ export const HubspotFormEditor = ({
           onSelect={onSelectImageHandler}
           value={block_background_image_id}
           allowedTypes={[ 'image' ]}
-          render={({ open }) => {
-            return getImageOrButton(open);
-          }}
+          render={({ open }) => getImageOrButton(open)}
         />
       </MediaUploadCheck>
-      <section className='hubspot-form image-full-width' style={{ height: blockHeight }}>
+      <section className={`hubspot-form ${block_style}`}>
         <div
           ref={wrapperRef}
           className='hubspot-form-wrapper block-wide'
-          style={{ backgroundImage: `url(${block_background_image_url ?? ''})` }}
+          style={{...backgroundImage}}
         >
-          <div className='hubspot-form__content container'>
+          <div className='hubspot-form-content container'>
             <div
-              className='hubspot-form__inner-content--heading'
-              style={{ backgroundImage: `url(${block_background_image_url ?? ''})` }}
+              className='hubspot-form-inner-content-heading'
+              style={{...backgroundImage}}
             >
               <RichText
                 tagName='h1'
-                className='hubspot-form__title'
-                placeholder={__('Enter description', 'planet4-blocks-backend')}
+                className='block-title'
+                placeholder={__('Enter title', 'planet4-blocks-backend')}
                 value={block_title}
                 onChange={toAttribute('block_title')}
                 withoutInteractiveFormatting={true}
@@ -100,7 +100,7 @@ export const HubspotFormEditor = ({
               />
               <RichText
                 tagName='p'
-                className='hubspot-form__text'
+                className='block-text'
                 placeholder={__('Enter description', 'planet4-blocks-backend')}
                 value={block_text}
                 onChange={toAttribute('block_text')}
@@ -109,7 +109,7 @@ export const HubspotFormEditor = ({
               />
               <RichText
                 tagName='div'
-                className='hubspot-form__button'
+                className='block-button'
                 placeholder={__('Enter CTA text', 'planet4-blocks-backend')}
                 value={cta_text}
                 onChange={toAttribute('cta_text')}
@@ -117,12 +117,12 @@ export const HubspotFormEditor = ({
                 allowedFormats={[]}
               />
             </div>
-            <div className='hubspot-form__inner-content--form'>
-              <header className='hubspot-form__form-header'>
+            <div className='hubspot-form-inner-content-form'>
+              <header className='form-header'>
                 <RichText
                   tagName='h1'
-                  className='hubspot-form__form-title'
-                  placeholder={__('Form title goes here', 'planet4-blocks-backend')}
+                  className='form-title'
+                  placeholder={__('Enter form title', 'planet4-blocks-backend')}
                   value={form_title}
                   onChange={toAttribute('form_title')}
                   withoutInteractiveFormatting={true}
@@ -130,37 +130,27 @@ export const HubspotFormEditor = ({
                 />
                 <RichText
                   tagName='p'
-                  className='hubspot-form__form-description'
-                  placeholder={__('Enter text', 'planet4-blocks-backend')}
-                  value={form_description}
-                  onChange={toAttribute('form_description')}
+                  className='form-text'
+                  placeholder={__('Enter form description', 'planet4-blocks-backend')}
+                  value={form_text}
+                  onChange={toAttribute('form_text')}
                   withoutInteractiveFormatting={true}
                   allowedFormats={['core/bold', 'core/italic']}
                 />
               </header>
-              <div className='hubspot-form__form-wrapper hubspot-form__form-wrapper--editor'>
-                <label className='hubspot-form__shortcode-label'>{__('Enter the Hubspot shortcode', 'planet4-blocks-backend')}</label>
-                <RichText
-                  tagName='p'
-                  className='hubspot-form__shortcode-editor'
-                  placeholder={__('[hubspot type="form" portal="XXXXXX" id="XXXX-XXXX-XXXX-XXXX"]', 'planet4-blocks-backend')}
-                  value={hubspot_shortcode}
-                  onChange={toAttribute('hubspot_shortcode')}
-                  withoutInteractiveFormatting={true}
-                  allowedFormats={[]}
-                />
-                {enable_custom_hubspot_thankyou_message && <Fragment>
-                  <label className='hubspot-form__shortcode-label'>{__('Display a thank you message', 'planet4-blocks-backend')}</label>
+              <div className='form-wrapper form-wrapper-editor'>
+                <div className='form-wrapper-field'>
+                  <label>{__('Paste the Hubspot shortcode here', 'planet4-blocks-backend')}</label>
                   <RichText
                     tagName='p'
-                    className='hubspot-form__shortcode-editor'
-                    placeholder={__('e.g. Thanks for submitting the form.', 'planet4-blocks-backend')}
-                    value={hubspot_thankyou_message}
-                    onChange={toAttribute('hubspot_thankyou_message')}
+                    className='hubspot-form-shortcode-editor'
+                    placeholder={__('[hubspot type="form" portal="XXXXXX" id="XXXX-XXXX-XXXX-XXXX"]', 'planet4-blocks-backend')}
+                    value={hubspot_shortcode}
+                    onChange={toAttribute('hubspot_shortcode')}
                     withoutInteractiveFormatting={true}
                     allowedFormats={[]}
                   />
-                </Fragment>}
+                </div>
               </div>
             </div>
           </div>
