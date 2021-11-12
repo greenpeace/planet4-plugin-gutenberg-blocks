@@ -1,35 +1,22 @@
-@mixin background-image {
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
-}
-
 .hubspot-form {
   position: relative;
   margin-bottom: 32px;
   font-family: $roboto;
 }
 
-.hubspot-form.image-full-width {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
 .hubspot-form-wrapper {
-  @include background-image;
-
   display: flex;
   justify-content: center;
   width: 100%;
   top: 0;
   left: 0;
-  background-color: $grey-80;
   padding-bottom: 32px 0 0;
+  background-color: $grey-80;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
 
   @media (max-width: #{$large-width}) {
-    /* TODO review this @media */
-    // padding-bottom: 32px 0 0 0;
     background-image: none !important;
   }
 
@@ -39,7 +26,7 @@
   }
 }
 
-.hubspot-form__content {
+.hubspot-form-content {
   display: flex;
   flex-direction: column;
 
@@ -53,18 +40,23 @@
   }
 }
 
-.hubspot-form__inner-content--heading {
-  @include background-image;
+.hubspot-form-inner-content-heading {
+  display: flex;
+  flex-direction: column;
   padding: 32px 26px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
 
   @include large-and-up {
+    padding: 0;
     background-image: none !important;
-    margin-right: 20px;
+    margin-right: 120px;
     width: 100%;
   }
 }
 
-.hubspot-form__inner-content--form {
+.hubspot-form-inner-content-form {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -83,15 +75,39 @@
     min-height: 400px;
     border-radius: 4px;
   }
+
+  &.submitted-form {
+    align-items: center;
+    justify-content: center;
+
+    .form-wrapper {
+      display: none;
+    }
+
+    .submitted-message {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      font-family: $roboto;
+      font-size: 20px;
+      font-weight: 700;
+
+      .icon-tick {
+        margin-right: 16px;
+      }
+    }
+  }
 }
 
-.hubspot-form__title {
+.block-editor-rich-text__editable.block-title,
+.block-title {
   font-size: 28px;
   line-height: 32px;
   text-align: left;
-  color: $white !important;
-  margin: 0 !important;
-  word-break: break-word !important;
+  color: $white;
+  margin: 0;
+  word-break: break-word;
 
   @include large-and-up {
     font-size: 40px;
@@ -99,7 +115,8 @@
   }
 }
 
-.hubspot-form__text {
+.block-editor-rich-text__editable.block-text,
+.block-text {
   font-size: 16px;
   font-family: $lora;
   font-weight: 400;
@@ -115,37 +132,19 @@
   }
 }
 
-.hubspot-form__button {
-  border: solid 1px $white;
-  background: transparent;
-  padding: 13px 61px;
-  border-radius: 4px;
-  color: $white;
-  line-height: 19px;
-  font-size: 16px;
-  font-weight: 700;
-  width: fit-content;
-
-  &.external-link {
-    &::after {
-      display: none;
-    }
-  }
-
-  &:hover {
-    background-color: $white;
-    color: $grey-80;
-    text-decoration: none;
-  }
-}
-
-.hubspot-form__form-title {
+.block-editor-rich-text__editable.form-title,
+.form-title {
   color: $grey-80;
-  font-size: 20px !important;
-  margin: 0 0 16px 0 !important;
+  font-size: 20px;
+  margin: 0 0 16px 0;
+
+  @include large-and-up {
+    font-size: 28px;
+  }
 }
 
-.hubspot-form__form-description {
+.block-editor-rich-text__editable.form-text,
+.form-text {
   color: $grey-80;
   font-family: $roboto;
   font-weight: 400;
@@ -153,65 +152,60 @@
   line-height: 26px;
 }
 
-.hubspot-form__form-wrapper {
-  display: flex;
-  flex: 1 0 auto;
+.block-button {
+  border: solid 1px $white;
+  background: transparent;
+  padding: 13px 61px;
+  border-radius: 4px;
+  color: $white !important;
+  line-height: 19px;
+  font-size: 16px;
+  font-weight: 700;
+  width: fit-content;
+
+  &.external-link {
+    &::after {
+      margin-left: 6px;
+    }
+  }
+
+  &:hover {
+    background-color: $white;
+    color: $grey-80 !important;
+    text-decoration: none;
+  }
+}
+
+.form-wrapper {
   width: 100%;
 }
 
-.hubspot-form__form-wrapper--editor {
+.form-wrapper-editor {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: $grey-10;
-  padding: 10px;
+
+  .form-wrapper-field {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: solid 1px $grey-40;
+
+    label {
+      font-size: 14px;
+      align-items: center;
+      font-weight: 600;
+    }
+
+    .rich-text {
+      padding: 10px;
+      margin-top: 10px;
+      border: solid 1px $grey-40;
+      font-size: 15px;
+      line-height: 1.4;
+    }
+  }
 }
 
-.hubspot-form__form-wrapper--signed {
-  align-items: center;
-  justify-content: center;
-}
-
-.hubspot-form__shortcode-label {
-  font-weight: bold;
-}
-
-.hubspot-form__shortcode-editor {
-  margin: 0 !important;
-  background-color: white;
-  padding: 10px;
-  font-size: 15px !important;
-}
-
-.hubspot-form__submitted-message {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+#hubspot-api-form {
   width: 100%;
-  font-family: $roboto;
-  font-size: 20px;
-  font-weight: 700;
-}
-
-.hubspot-form__api-form {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-
-.hubspot-form__api-form--submitted {
-  align-items: center;
-}
-
-.hubspot-form--hide-custom-message {
-  display: none;
-}
-
-.hubspot-form__spinner {
-  display: flex;
-  justify-content: center;
-  padding: 30px 0;
-  width: 100%;
-  font-size: 16px;
-  color: $grey-40;
 }
