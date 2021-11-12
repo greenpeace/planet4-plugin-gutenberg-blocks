@@ -65,7 +65,7 @@ class HubspotForm extends Base_Block {
 					'form_title'                 => [
 						'type' => 'string',
 					],
-					'form_description'           => [
+					'form_text'           => [
 						'type' => 'string',
 					],
 					'hubspot_shortcode'          => [
