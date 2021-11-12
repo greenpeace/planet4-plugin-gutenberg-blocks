@@ -39,6 +39,10 @@ export const registerHubspotFormBlock = () => {
       block_background_image_url: {
         type: 'string',
       },
+      block_style: {
+        type: 'string',
+        default: 'image-full-width',
+      },
       cta_text: {
         type: 'string',
       },

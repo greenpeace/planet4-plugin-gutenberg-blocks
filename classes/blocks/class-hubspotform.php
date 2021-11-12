@@ -52,6 +52,9 @@ class HubspotForm extends Base_Block {
 					'block_background_image_url' => [
 						'type' => 'string',
 					],
+					'block_style' => [
+						'type' => 'string',
+					],
 					'cta_text'                   => [
 						'type' => 'string',
 					],
