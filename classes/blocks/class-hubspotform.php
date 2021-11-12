@@ -52,7 +52,7 @@ class HubspotForm extends Base_Block {
 					'block_background_image_url' => [
 						'type' => 'string',
 					],
-					'block_style' => [
+					'block_style'                => [
 						'type' => 'string',
 					],
 					'cta_text'                   => [
@@ -68,7 +68,7 @@ class HubspotForm extends Base_Block {
 					'form_title'                 => [
 						'type' => 'string',
 					],
-					'form_text'           => [
+					'form_text'                  => [
 						'type' => 'string',
 					],
 					'hubspot_shortcode'          => [
