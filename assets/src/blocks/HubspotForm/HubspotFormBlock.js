@@ -1,11 +1,9 @@
 import ReactDOMServer from 'react-dom/server';
-import { RawHTML, Fragment, renderToString } from '@wordpress/element';
 import { Tooltip } from '@wordpress/components';
 import { HubspotFormEditor } from './HubspotFormEditor';
 import { HubspotFormFrontend } from './HubspotFormFrontend';
-const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
-import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
+const { __ } = wp.i18n;
 
 const BLOCK_NAME = 'planet4-blocks/hubspot-form';
 
@@ -56,11 +54,12 @@ export const registerHubspotFormBlock = () => {
       form_title: {
         type: 'string',
       },
-      form_description: {
+      form_text: {
         type: 'string',
       },
       hubspot_shortcode: {
         type: 'string',
+        default: '',
       },
       hubspot_thankyou_message: {
         type: 'string',
@@ -69,6 +68,9 @@ export const registerHubspotFormBlock = () => {
         type: 'boolean',
         default: true,
       },
+      enable_custom_hubspot_thankyou_message: {
+        type: 'string',
+      },
       version: {
         type: 'integer',
         default: 1,
@@ -76,87 +78,35 @@ export const registerHubspotFormBlock = () => {
     },
     styles: [
       {
-        name: 'imageFullWidth',
+        name: 'image-full-width',
         label: getStyleLabel(
           __('Image full width', 'planet4-blocks-backend'),
-          __('Image full width version', 'planet4-blocks-backend'),
+          __('https://p4-designsystem.greenpeace.org/05f6e9516/p/213df0-hubspot-forms/b/99e047', 'planet4-blocks-backend'),
         ),
         isDefault: true,
       },
     ],
-
-    /**
-      The belowed function works correctly without using innerBlocks.
-    */
-    // edit: (props) => {
-    //   return (
-    //     <Fragment>
-    //       <HubspotFormEditor {...props} />
-    //     </Fragment>
-    //   )
-    // },
-
-    /**
-      The belowed function works correctly using innerBlocks.
-    */
-    edit: () => {
-      const blockProps = useBlockProps();
-      const ALLOWED_BLOCKS = [ 'core/heading', 'core/paragraph', 'core/shortcode' ];
-      const TEMPLATE = [
-        [ 'core/heading', { placeholder: 'Block title' } ],
-        [ 'core/paragraph', { placeholder: 'Block description' } ],
-        [ 'core/shortcode', {} ],
-      ];
-      return (
-        <div {...blockProps}>
-          <InnerBlocks template={TEMPLATE} allowedBlocks={ ALLOWED_BLOCKS } />
-        </div>
-      )
-    },
-
-    /**
-      The belowed function works correctly without using innerBlocks.
-    */
-    // save: (props) => {
-    //   const markup = ReactDOMServer.renderToString(
-    //     <div
-    //       data-hydrate={BLOCK_NAME}
-    //       data-attributes={JSON.stringify({...props.attributes})}
-    //       data-innerblocks={JSON.stringify({...props.innerBlocks})}
-    //     >
-    //       <HubspotFormFrontend {...props} />
-    //     </div>
-    //   );
-    //   return <wp.element.RawHTML>{ markup }</wp.element.RawHTML>;
-    // },
-
-    /**
-      The belowed function works correctly using innerBlocks but without hydrate.
-    */
-    // save: () => {
-    //   const blockProps = useBlockProps.save();
-    //   return (
-    //     <div { ...blockProps }>
-    //       <InnerBlocks.Content />
-    //     </div>
-    //   );
-    // },
-
-    /**
-      The belowed function use innerBlocks and hydrate but doesn't work.
-    */
+    edit: (props) => <HubspotFormEditor {...props} />,
     save: (props) => {
-      const blockProps = useBlockProps.save();
-      const element = (
+      /**
+       * This parser is added cause the Hubspot plugin takes the shortcode, by a hook,
+       * and converts it into a <script>.
+       * In consequence, it fails when it is parsed to json through the hydration.
+       *
+       * Ideally, we should use innerBlocks but it has various reported conflicts using SSR
+       */
+      const attributes = {...props.attributes};
+      attributes.hubspot_shortcode = props.attributes.hubspot_shortcode.replace('[', '').replace(']', '');
+      console.log(props)
+
+      const markup = ReactDOMServer.renderToString(
         <div
-          { ...blockProps }
           data-hydrate={BLOCK_NAME}
-          data-attributes={JSON.stringify({...props.attributes})}
+          data-attributes={JSON.stringify(attributes)}
         >
-          <InnerBlocks.Content />
+          <HubspotFormFrontend {...props} />
         </div>
-      )
-      const markup = ReactDOMServer.renderToString(element);
+      );
       return <wp.element.RawHTML>{ markup }</wp.element.RawHTML>;
     },
   })
