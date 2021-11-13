@@ -37,6 +37,10 @@
 
   @include large-and-up {
     flex-direction: row;
+
+    html[dir="rtl"] & {
+      flex-direction: row-reverse;
+    }
   }
 }
 
