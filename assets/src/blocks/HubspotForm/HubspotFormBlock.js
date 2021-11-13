@@ -87,14 +87,14 @@ export const registerHubspotFormBlock = () => {
     save: (props) => {
       /**
        * This parser is added cause the Hubspot plugin takes the shortcode, by a hook,
-       * and converts it into a <script>.
-       * In consequence, it fails when it is parsed to json through the hydration.
+       * and converts it into a <script>. In consequence, it fails when it is parsed to json through the hydration.
        *
-       * Ideally, we should use innerBlocks but it has various reported conflicts using SSR
+       * This parser is only affected to the hydration.
+       *
+       * Ideally, we should use innerBlocks but it has various reported conflicts using SSR.
        */
       const attributes = {...props.attributes};
       attributes.hubspot_shortcode = props.attributes.hubspot_shortcode.replace('[', '').replace(']', '');
-      console.log(props)
 
       const markup = ReactDOMServer.renderToString(
         <div
