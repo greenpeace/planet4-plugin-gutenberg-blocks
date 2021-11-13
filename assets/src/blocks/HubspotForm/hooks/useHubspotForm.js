@@ -30,8 +30,7 @@ export const useHubspotForm = (shortcode, targetRef) => {
 
   useEffect(() => {
     if(formId && portalId) {
-      console.log('formId %s portalId %s', formId, portalId);
-      if(!window.hbspt.forms.create) {
+      if(!window.hbspt) {
         fetchHubspotFormsLibrary();
       } else {
         createHubspotForm();
