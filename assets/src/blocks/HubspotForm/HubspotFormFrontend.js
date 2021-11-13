@@ -55,13 +55,11 @@ export const HubspotFormFrontend = ({
               { ...cta_new_tab && { target: '_blank' } }
             >{cta_text}</a>}
           </div>
-          {`submitted: ${submitted}`}
           <div className={`hubspot-form-inner-content-form ${submitted ? 'submitted-form' : ''}`}>
             {!submitted && <header className='form-header'>
               <h1 className='form-title'>{form_title}</h1>
               <p className='form-text'>{form_text}</p>
             </header>}
-
             {!submitted ? <div className='form-wrapper'>
               <div id='hubspot-api-form' ref={hubspotFormRef} />
             </div> : renderSuccessMessage(submittedMessage)}
