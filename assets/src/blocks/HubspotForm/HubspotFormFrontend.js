@@ -4,6 +4,14 @@ import { useBackgroundImage } from './hooks/useBackgroundImage';
 
 const { __ } = wp.i18n;
 
+const showThankyou = () => {
+  const thankYou = document.querySelector('.hubspot-thankyou');
+  if (thankYou) {
+    thankYou.classList.remove('d-none');
+    thankYou.scrollIntoView({ behavior: 'smooth' });
+  }
+};
+
 export const HubspotFormFrontend = ({
   formTitle,
   formText,
@@ -28,6 +36,12 @@ export const HubspotFormFrontend = ({
       setStyleClass(blockStyle);
     }
   }, [ blockStyle ]);
+
+  useEffect(() => {
+    if (submitted) {
+      showThankyou();
+    }
+  }, [submitted])
 
   return (
     <section className={`hubspot-form block-wide ${styleClass}`} style={{...backgroundImage}}>
@@ -65,6 +79,9 @@ export const HubspotFormFrontend = ({
           </div>
         </div>
       </div>
+      <button style={ { float: 'right', marginTop: '40px' } } onClick={ showThankyou }>
+        Simulate form submit
+      </button>
     </section>
   );
 };
