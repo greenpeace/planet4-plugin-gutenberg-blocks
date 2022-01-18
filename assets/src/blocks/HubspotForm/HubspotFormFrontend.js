@@ -23,6 +23,20 @@ export const HubspotFormFrontend = ({
   const { submitted, submittedMessage } = useHubspotForm(hubspotShortcode, hubspotFormRef);
   const backgroundImage = useBackgroundImage(blockBackgroundImageUrl);
 
+  const showThankyou = () => {
+    const thankYou = document.querySelector('.hubspot-form-thankyou');
+    if (thankYou) {
+      thankYou.classList.remove('d-none');
+      thankYou.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  useEffect(() => {
+    if(submitted) {
+      showThankyou();
+    }
+  }, [ submitted ]);
+
   useEffect(() => {
     if(blockStyle) {
       setStyleClass(blockStyle);

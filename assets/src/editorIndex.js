@@ -22,6 +22,7 @@ import { blockEditorValidation } from './BlockEditorValidation';
 import { ENFormBlock } from './blocks/OldENForm/ENFormBlock';
 import { registerGuestBookBlock } from './blocks/GuestBook/GuestBookBlock';
 import { registerBlock as registerShareButtonsBlock } from './blocks/ShareButtons/ShareButtonsBlock';
+import { registerBlock as registerHubspotFormThankYouBlock } from './blocks/HubspotForm/HubspotFormThankyou/HubspotFormThankYouBlock';
 
 blockEditorValidation();
 new ArticlesBlock();
@@ -41,6 +42,7 @@ new ENFormBlock();
 registerTimelineBlock();
 registerGuestBookBlock();
 registerShareButtonsBlock();
+registerHubspotFormThankYouBlock();
 
 addBlockFilters();
 setupImageBlockExtension();
