@@ -254,7 +254,10 @@ function set_allowed_block_types( $allowed_block_types, $post ) {
 		return $wordpress_blocks;
 	}
 
-	$allowed_block_types = array_merge( $wordpress_blocks, $allowed_p4_block_types );
+	// Use string instead of class constant to avoid dependency on changes in the other repo.
+	$settings = planet4_get_option( 'core_blocks', []);
+
+	$allowed_block_types = array_merge( $wordpress_blocks, $allowed_p4_block_types, $settings );
 
 	return $allowed_block_types;
 }
