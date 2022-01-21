@@ -144,7 +144,6 @@ const PAGE_BLOCK_TYPES = [
 const BETA_PAGE_BLOCK_TYPES = [
 	'planet4-blocks/enform-beta',
 	'planet4-blocks/hubspot-form',
-	'planet4-blocks/share-buttons',
 ];
 
 // campaigns allow all block types.
@@ -173,7 +172,6 @@ const BETA_CAMPAIGN_BLOCK_TYPES = [
 	'planet4-blocks/enform-beta',
 	'planet4-blocks/social-media-cards',
 	'planet4-blocks/hubspot-form',
-	'planet4-blocks/share-buttons',
 ];
 
 /**
