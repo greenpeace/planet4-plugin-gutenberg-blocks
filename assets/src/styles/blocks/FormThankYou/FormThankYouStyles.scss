@@ -3,18 +3,18 @@
 @import "../../master-theme/assets/src/scss/base/mixins";
 @import "../../master-theme/assets/src/scss/base/fonts";
 
-.hubspot-form-thankyou {
+.form-thankyou {
   margin: 48px 0;
 }
 
-.hubspot-form-thankyou .wp-block-group {
+.form-thankyou .wp-block-group {
   margin-bottom: 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.hubspot-form-thankyou .stepper {
+.form-thankyou .stepper {
   font-family: $roboto;
   font-weight: bold;
   width: 64px;
@@ -31,7 +31,7 @@
   border-radius: 50%;
 }
 
-.hubspot-form-thankyou .heading {
+.form-thankyou .heading {
   font-family: $roboto;
   font-weight: bold;
   font-size: 22px;
@@ -42,7 +42,7 @@
   text-align: center;
 }
 
-.hubspot-form-thankyou .description {
+.form-thankyou .description {
   font-size: 16px;
   font-family: $lora;
   font-weight: 400;
@@ -51,6 +51,6 @@
   margin-bottom: 32px;
 }
 
-.hubspot-form-thankyou .share-buttons {
+.form-thankyou .share-buttons {
   justify-content: center;
 }

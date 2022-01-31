@@ -24,7 +24,7 @@ export const HubspotFormFrontend = ({
   const backgroundImage = useBackgroundImage(blockBackgroundImageUrl);
 
   const showThankyou = () => {
-    const thankYou = document.querySelector('.hubspot-form-thankyou');
+    const thankYou = document.querySelector('.form-thankyou');
     if (thankYou) {
       thankYou.classList.remove('d-none');
       thankYou.scrollIntoView({ behavior: 'smooth' });

@@ -3,11 +3,11 @@ import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
 
 const { __ } = wp.i18n;
 
-const BLOCK_NAME = 'planet4-blocks/hubspot-form-thankyou';
+const BLOCK_NAME = 'planet4-blocks/form-thankyou';
 
 export const registerBlock = () => {
   return registerBlockType(BLOCK_NAME, {
-    title: 'Hubspot Form Thank You Message (beta)',
+    title: 'Form Thank You Message (beta)',
     icon: 'feedback',
     category: 'planet4-blocks-beta',
     supports: {
@@ -15,7 +15,7 @@ export const registerBlock = () => {
       html: false,
     },
     edit: () => {
-      const blockProps = useBlockProps( { className: 'hubspot-form-thankyou' } );
+      const blockProps = useBlockProps( { className: 'form-thankyou' } );
       const innerBlocksProps = useInnerBlocksProps(
         blockProps,
         {
@@ -41,7 +41,7 @@ export const registerBlock = () => {
       );
     },
     save: () => {
-      const blockProps = useBlockProps.save( { className: 'hubspot-form-thankyou ds-none' } );
+      const blockProps = useBlockProps.save( { className: 'form-thankyou d-none' } );
       const innerBlocksProps = useInnerBlocksProps.save( blockProps );
 
       return <section {...innerBlocksProps} />
