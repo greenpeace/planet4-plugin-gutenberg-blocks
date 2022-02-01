@@ -58,6 +58,7 @@
 .campaign-covers-block {
   &.carousel-layout {
     .cover {
+      width: 260px;
       min-width: 260px;
 
       &:not(:last-child) {
@@ -65,6 +66,7 @@
       }
 
       @include medium-and-up {
+        width: 276px;
         min-width: 276px;
 
         &:not(:last-child) {
@@ -73,10 +75,12 @@
       }
 
       @include large-and-up {
+        width: 296px;
         min-width: 296px;
       }
 
       @include x-large-and-up {
+        width: 356px;
         min-width: 356px;
       }
     }
