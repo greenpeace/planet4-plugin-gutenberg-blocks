@@ -45,7 +45,7 @@ export const TakeActionBoxoutEditor = ({
 
   const {
     loading,
-    actPageList,
+    pageList,
     title,
     excerpt,
     link,
@@ -58,34 +58,33 @@ export const TakeActionBoxoutEditor = ({
       per_page: -1,
       sort_order: 'asc',
       sort_column: 'post_title',
-      parent: window.p4ge_vars.planet4_options.act_page,
       post_status: 'publish',
     };
 
-    const actPageList = select('core').getEntityRecords('postType', 'page', args) || [];
-    const actPage = actPageList.find(actPage => take_action_page === actPage.id);
+    const pageList = select('core').getEntityRecords('postType', 'page', args) || [];
+    const page = pageList.find(({id}) => take_action_page === id);
 
-    // Because `useSelect` does an API call to fetch data, the actPageList will be empty the first time it's called.
+    // Because `useSelect` does an API call to fetch data, pageList will be empty the first time it's called.
     // Or first few times.
-    if (take_action_page && !actPage) {
+    if (take_action_page && !page) {
       return { loading: true };
     }
-    const actPageImageId = actPage?.featured_media;
+    const pageImageId = page?.featured_media;
 
     const customImage = customImageId && select('core').getMedia(customImageId);
     const customImageFromId = customImage?.source_url;
 
-    const title = !take_action_page ? customTitle : actPage.title.raw;
-    const excerpt = !take_action_page ? customExcerpt : actPage.excerpt.raw;
-    const link = !take_action_page ? customLink : actPage.link;
+    const title = !take_action_page ? customTitle : page.title.raw;
+    const excerpt = !take_action_page ? customExcerpt : page.excerpt.raw;
+    const link = !take_action_page ? customLink : page.link;
     const linkText = !take_action_page ? customLinkText : DEFAULT_BUTTON_TEXT || __('Take action', 'planet4-blocks');
 
-    const imageId = !take_action_page ? customImageId : actPageImageId;
-    const imageUrl = !take_action_page ? customImageFromId : select('core').getMedia(actPageImageId)?.source_url;
+    const imageId = !take_action_page ? customImageId : pageImageId;
+    const imageUrl = !take_action_page ? customImageFromId : select('core').getMedia(pageImageId)?.source_url;
     const imageAlt = !take_action_page ? customImage?.alt_text : '';
 
     return {
-      actPageList,
+      pageList,
       title,
       excerpt,
       link,
@@ -96,9 +95,9 @@ export const TakeActionBoxoutEditor = ({
     };
   }, [take_action_page, customTitle, customExcerpt, customLink, customLinkText, customImageId]);
 
-  const takeActionPageSelected = take_action_page && parseInt(take_action_page) > 0;
+  const pageSelected = take_action_page && parseInt(take_action_page) > 0;
 
-  if (loading || !actPageList.length) {
+  if (loading || !pageList.length) {
     return __("Populating block's fields...", 'planet4-blocks-backend');
   }
 
@@ -110,11 +109,11 @@ export const TakeActionBoxoutEditor = ({
 
   const selectImage = ({ id }) => setAttributes({ imageId: id });
 
-  const actPageOptions = actPageList.map(actPage => ({ label: actPage.title.raw, value: actPage.id }));
+  const pageOptions = pageList.map(({title, id}) => ({ label: title.raw, value: id }));
 
   const postHasStickyBoxoutAlready = document.querySelector('#action-card');
 
-  const renderEditInPlace = () => (takeActionPageSelected ?
+  const renderEditInPlace = () => (pageSelected ?
     <TakeActionBoxoutFrontend {...attributes} {...{title, excerpt, link, linkText, imageUrl, imageAlt}} /> :
     <section
       className={`boxout ${className || ''}`}
@@ -155,7 +154,7 @@ export const TakeActionBoxoutEditor = ({
           placeholder={ __('Enter description', 'planet4-blocks-backend') }
           value={ excerpt }
           onChange={ toAttribute('excerpt') }
-          disabled={ takeActionPageSelected }
+          disabled={ pageSelected }
           withoutInteractiveFormatting
           allowedFormats={ ['core/bold', 'core/italic'] }
         />
@@ -166,7 +165,7 @@ export const TakeActionBoxoutEditor = ({
         placeholder={__('Button text', 'planet4-blocks-backend')}
         value={linkText}
         onChange={toAttribute('linkText')}
-        disabled={takeActionPageSelected}
+        disabled={pageSelected}
         withoutInteractiveFormatting
         multiline="false"
         allowedFormats={[]}
@@ -191,15 +190,15 @@ export const TakeActionBoxoutEditor = ({
         </PanelBody>
         <PanelBody title={__('Settings', 'planet4-blocks-backend')}>
           <SelectControl
-            label={__('Select Take Action Page:', 'planet4-blocks-backend')}
+            label={__('Select Page:', 'planet4-blocks-backend')}
             value={take_action_page}
             options={[
               { label: __('None (custom)', 'planet4-blocks-backend'), value: 0 },
-              ...actPageOptions,
+              ...pageOptions,
             ]}
             onChange={ page => setAttributes({ take_action_page: parseInt(page) }) }
           />
-          {!takeActionPageSelected && <URLInput
+          {!pageSelected && <URLInput
             label={__('Custom link', 'planet4-blocks-backend')}
             placeholder={__('Enter custom link', 'planet4-blocks-backend')}
             value={link}
@@ -209,14 +208,14 @@ export const TakeActionBoxoutEditor = ({
               }
             } }
           />}
-          {!takeActionPageSelected && <CheckboxControl
+          {!pageSelected && <CheckboxControl
             label={__('Open in a new tab', 'planet4-blocks-backend')}
             value={newTab}
             checked={newTab}
             onChange={toAttribute('newTab')}
-            disabled={takeActionPageSelected}
+            disabled={pageSelected}
           />}
-          {!takeActionPageSelected &&
+          {!pageSelected &&
             <MediaUploadCheck>
               <MediaUpload
                 title={__('Select Background Image', 'planet4-blocks-backend')}
@@ -228,7 +227,7 @@ export const TakeActionBoxoutEditor = ({
                   <Button
                     onClick={open}
                     className='button'
-                    disabled={takeActionPageSelected}
+                    disabled={pageSelected}
                   >
                     + { imageId ? __('Change Background Image', 'planet4-blocks-backend') : __('Select Background Image', 'planet4-blocks-backend') }
                   </Button>
@@ -238,7 +237,7 @@ export const TakeActionBoxoutEditor = ({
           }
         </PanelBody>
       </InspectorControls>
-      {!takeActionPageSelected && imageId &&
+      {!pageSelected && imageId &&
         <BlockControls>
           <ToolbarGroup>
             <MediaUploadCheck>
