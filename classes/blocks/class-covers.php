@@ -186,35 +186,28 @@ class Covers extends Base_Block {
 	 * @return \WP_Post[]
 	 */
 	private static function filter_posts_for_act_pages( $fields ) {
-		$tag_ids       = $fields['tags'] ?? [];
-		$options       = get_option( 'planet4_options' );
-		$parent_act_id = $options['act_page'];
-		$layout        = $fields['layout'] ?? self::GRID_LAYOUT;
+		$tag_ids = $fields['tags'] ?? [];
+		$layout  = $fields['layout'] ?? self::GRID_LAYOUT;
 
-		if ( 0 !== absint( $parent_act_id ) ) {
-			$args = [
-				'post_type'        => 'page',
-				'post_status'      => 'publish',
-				'post_parent'      => $parent_act_id,
-				'orderby'          => [
-					'menu_order' => 'ASC',
-					'date'       => 'DESC',
-					'title'      => 'ASC',
-				],
-				'suppress_filters' => false,
-				'numberposts'      => self::CAROUSEL_LAYOUT === $layout ? self::POSTS_LIMIT_CAROUSEL_LAYOUT : self::POSTS_LIMIT,
-			];
-			// If user selected a tag to associate with the Take Action page covers.
-			if ( ! empty( $tag_ids ) ) {
-				$args['tag__in'] = $tag_ids;
-			}
-
-			// Ignore sniffer rule, arguments contain suppress_filters.
-			// phpcs:ignore
-			return get_posts( $args );
+		$args = [
+			'post_type'        => 'page',
+			'post_status'      => 'publish',
+			'orderby'          => [
+				'menu_order' => 'ASC',
+				'date'       => 'DESC',
+				'title'      => 'ASC',
+			],
+			'suppress_filters' => false,
+			'numberposts'      => self::CAROUSEL_LAYOUT === $layout ? self::POSTS_LIMIT_CAROUSEL_LAYOUT : self::POSTS_LIMIT,
+		];
+		// If user selected a tag to associate with the Take Action page covers.
+		if ( ! empty( $tag_ids ) ) {
+			$args['tag__in'] = $tag_ids;
 		}
 
-		return [];
+		// Ignore sniffer rule, arguments contain suppress_filters.
+		// phpcs:ignore
+		return get_posts( $args );
 	}
 
 	/**

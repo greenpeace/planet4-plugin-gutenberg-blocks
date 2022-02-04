@@ -39,10 +39,8 @@ class PostSelector extends Component {
         path: addQueryArgs('/wp/v2/pages', {
           per_page: -1,
           post_type: 'page',
-          post_parent: window.p4ge_vars.planet4_options.act_page,
           orderby: 'title',
           post_status: 'publish',
-
         })
       };
 
