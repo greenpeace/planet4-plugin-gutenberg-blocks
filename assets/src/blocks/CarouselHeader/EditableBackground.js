@@ -22,7 +22,7 @@ export const EditableBackground = ({
         const { id, alt_text, url, sizes } = image;
         changeSlideImage(index, id, url, alt_text, toSrcSet(Object.values(sizes)));
       }}
-      allowedTypes={['image']}
+      allowedTypes={['image/jpg','image/jpeg']}
       value={image_id}
       render={mediaUploadInstance => (
         <>
