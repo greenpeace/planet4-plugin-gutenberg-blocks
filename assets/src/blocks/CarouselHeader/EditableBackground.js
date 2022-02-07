@@ -24,6 +24,7 @@ export const EditableBackground = ({
       }}
       allowedTypes={['image/jpg','image/jpeg']}
       value={image_id}
+      title={"Select or Upload Photo (only jpg/jpeg)"}
       render={mediaUploadInstance => (
         <>
           <div className='background-holder'>
