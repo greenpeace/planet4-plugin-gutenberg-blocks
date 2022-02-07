@@ -70,8 +70,8 @@ const renderEdit = (attributes, setAttributes) => {
             instructions: __('Upload an image or select from the media library.', 'planet4-blocks-backend'),
           }}
           onSelect={onSelectImage}
-          accept="image/*"
           allowedTypes={["image"]}
+          accept={['image/jpg','image/jpeg']}
           multiple
           value={hasImages ? image_data : undefined}
         />
