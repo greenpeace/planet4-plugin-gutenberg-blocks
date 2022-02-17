@@ -47,3 +47,22 @@ replaceTaxonomyTermSelectors();
 setupCustomSidebar();
 setUpCssVariables();
 blockEditorValidation();
+
+wp.blocks.registerBlockVariation('core/media-text', {
+  name: 'side-image-with-text-and-cta',
+  title: 'Side Image with Text and CTA',
+  // Scope "block" only does something for blocks that support it (query and columns).
+  // Scope "transform" only changes the attributes (this variation has none) and not inner blocks.
+  scope: [
+    'inserter',
+    // 'block',
+    // 'transform',
+  ],
+  innerBlocks: [
+    ['core/heading', { placeHolder: 'Enter title' }],
+    ['core/paragraph', { placeHolder: 'Enter description' }],
+    ['core/buttons', {}, [
+      ['core/button', { className: 'is-style-cta', placeHolder: 'Enter description' }]
+    ]],
+  ],
+});
