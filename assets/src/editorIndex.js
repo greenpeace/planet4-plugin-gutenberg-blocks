@@ -48,6 +48,14 @@ setupCustomSidebar();
 setUpCssVariables();
 blockEditorValidation();
 
+const innerBlocks = [
+  ['core/heading', { placeHolder: 'Enter title' }],
+  ['core/paragraph', { placeHolder: 'Enter description' }],
+  ['core/buttons', {}, [
+    ['core/button', { className: 'is-style-cta', placeHolder: 'Enter description' }]
+  ]],
+];
+
 wp.blocks.registerBlockVariation('core/media-text', {
   name: 'side-image-with-text-and-cta',
   title: 'Side Image with Text and CTA',
@@ -58,11 +66,19 @@ wp.blocks.registerBlockVariation('core/media-text', {
     // 'block',
     // 'transform',
   ],
-  innerBlocks: [
-    ['core/heading', { placeHolder: 'Enter title' }],
-    ['core/paragraph', { placeHolder: 'Enter description' }],
-    ['core/buttons', {}, [
-      ['core/button', { className: 'is-style-cta', placeHolder: 'Enter description' }]
-    ]],
+  innerBlocks,
+});
+wp.blocks.registerBlockVariation('core/media-text', {
+  name: 'red-media-and-text',
+  title: 'Media and Text and a red background.',
+  attributes: {
+    backgroundColor: 'vivid-red'
+  },
+  // Scope "block" only does something for blocks that support it (query and columns).
+  // Scope "transform" only changes the attributes (this variation has none) and not inner blocks.
+  scope: [
+    'inserter',
+    // 'block',
+    'transform',
   ],
 });
