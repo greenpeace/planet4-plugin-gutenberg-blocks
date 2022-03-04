@@ -1,4 +1,7 @@
 /**
+ * @deprecated Blocks should not attach any further logic to WP's block style mechanism. It leads
+ * to infinite loops, performance issues, buggy editor previews, and more.
+ *
  * Get the name of the block style used from the classname string
  * given by Gutenberg
  *
