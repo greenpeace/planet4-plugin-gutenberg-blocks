@@ -67,7 +67,7 @@ const renderEdit = (attributes, setAttributes) => {
           addToGallery={hasImages}
           labels={{
             title: __('Select Gallery Images', 'planet4-blocks-backend'),
-            instructions: __('Upload an image or select from the media library.', 'planet4-blocks-backend'),
+            instructions: __('Upload an JPEG image or select one from the media library.', 'planet4-blocks-backend'),
           }}
           onSelect={onSelectImage}
           allowedTypes={["image"]}
