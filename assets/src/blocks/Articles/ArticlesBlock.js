@@ -40,15 +40,15 @@ export class ArticlesBlock {
           type: 'array',
           default: []
         },
-        read_more_text: {
+        see_all_text: {
           type: 'string',
-          default: __('Load more', 'planet4-blocks')
+          default: __('See all articles', 'planet4-blocks')
         },
-        read_more_link: {
+        see_all_link: {
           type: 'string',
           default: ''
         },
-        button_link_new_tab: {
+        see_all_new_tab: {
           type: 'boolean',
           default: false
         },

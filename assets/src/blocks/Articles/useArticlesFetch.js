@@ -7,18 +7,15 @@ const { apiFetch } = wp;
 export const useArticlesFetch = (attributes, postType, postId, baseUrl = null, postCategories = []) => {
   const { article_count, post_types, posts, tags, ignore_categories } = attributes;
 
-  const [totalPosts, setTotalPosts] = useState(null);
   const [displayedPosts, setDisplayedPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const loadPage = async (reset = false) => {
+  const loadPage = async () => {
     if (loading) {
       return;
     }
     setLoading(true);
-
-    const prevPosts = reset ? [] : displayedPosts;
 
     const args = {
       article_count,
@@ -26,7 +23,6 @@ export const useArticlesFetch = (attributes, postType, postId, baseUrl = null, p
       posts,
       tags,
       ignore_categories,
-      offset: prevPosts.length,
     };
 
     if (postType === 'post') {
@@ -41,14 +37,9 @@ export const useArticlesFetch = (attributes, postType, postId, baseUrl = null, p
         ? await fetchJson(`${ baseUrl }/wp-json/${ path }`)
         : await apiFetch({ path });
 
-      const newPosts = [...prevPosts, ...response.recent_posts];
+      const newPosts = response.recent_posts;
 
       setDisplayedPosts(newPosts);
-
-      if (response.total_posts !== undefined && response.total_posts !== totalPosts) {
-        setTotalPosts(response.total_posts);
-      }
-
     } catch (e) {
       console.log(e);
       setError(e.message);
@@ -59,17 +50,12 @@ export const useArticlesFetch = (attributes, postType, postId, baseUrl = null, p
 
   useEffect(() => {
     setDisplayedPosts([]);
-    loadPage(true);
+    loadPage();
   }, [ article_count, post_types, posts, tags, ignore_categories ]);
 
   return {
     posts: displayedPosts,
-    totalPosts,
     loading,
     error,
-    hasMorePages: totalPosts > displayedPosts.length,
-    loadNextPage: () => {
-      loadPage();
-    },
   };
 };

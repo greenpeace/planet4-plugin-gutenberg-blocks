@@ -124,7 +124,7 @@ describe( 'Articles block', () => {
     await expect(page).toMatchElement('article:nth-child(3) h4 a', { text: 'First post' });
 
     // The "Load more" should not appear.
-    await expect( page ).not.toMatchElement( '.block-editor .article-load-more' );
+    await expect( page ).not.toMatchElement( '.block-editor .articles-see-all' );
   } , 50000 );
 } );
 

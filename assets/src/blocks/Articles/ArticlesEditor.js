@@ -27,23 +27,24 @@ const renderEdit = (attributes, toAttribute) => {
       <InspectorControls>
         <PanelBody title={__('Settings', 'planet4-blocks-backend')}>
           <TextControl
-            label={__('Button Text', 'planet4-blocks-backend')}
+            label={__('"See all" Button Text', 'planet4-blocks-backend')}
             placeholder={__('Override button text', 'planet4-blocks-backend')}
-            help={__('Your default is set to [ Load more ]', 'planet4-blocks-backend')}
-            value={attributes.read_more_text}
-            onChange={toAttribute('read_more_text')}
+            help={__('Your default is set to "See all articles"', 'planet4-blocks-backend')}
+            value={attributes.see_all_text}
+            onChange={toAttribute('see_all_text')}
           />
           <URLInput
-            label={__('Button Link', 'planet4-blocks-backend')}
-            value={attributes.read_more_link}
-            onChange={toAttribute('read_more_link')}
+            label={__('"See all" Button Link', 'planet4-blocks-backend')}
+            value={attributes.see_all_link}
+            onChange={toAttribute('see_all_link')}
+            help={__('By default this will lead to the search page', 'planet4-blocks-backend')}
           />
           <CheckboxControl
             label={__('Open in a new Tab', 'planet4-blocks-backend')}
             help={__('Open button link in new tab', 'planet4-blocks-backend')}
-            value={attributes.button_link_new_tab}
-            checked={attributes.button_link_new_tab}
-            onChange={toAttribute('button_link_new_tab')}
+            value={attributes.see_all_new_tab}
+            checked={attributes.see_all_new_tab}
+            onChange={toAttribute('see_all_new_tab')}
           />
           <TextControl
             label={__('Articles count', 'planet4-blocks-backend')}
@@ -99,55 +100,50 @@ const renderEdit = (attributes, toAttribute) => {
   );
 }
 
-const renderView = ({ attributes, postType, posts, totalPosts }, toAttribute) => {
-
-  const hasMultiplePages = totalPosts > attributes.article_count;
-
-  return (
-    <Fragment>
+const renderView = ({ attributes, postType, posts }, toAttribute) => (
+  <Fragment>
+    <Tooltip text={__('Edit text', 'planet4-blocks-backend')}>
+      <header className="articles-title-container">
+        <RichText
+          tagName="h2"
+          className="page-section-header"
+          placeholder={__('Enter title', 'planet4-blocks-backend')}
+          value={attributes.article_heading}
+          onChange={toAttribute('article_heading')}
+          withoutInteractiveFormatting
+          multiline="false"
+          allowedFormats={[]}
+        />
+      </header>
+    </Tooltip>
+    <RichText
+      tagName="p"
+      className="page-section-description"
+      placeholder={__('Enter description', 'planet4-blocks-backend')}
+      value={attributes.articles_description}
+      onChange={toAttribute('articles_description')}
+      withoutInteractiveFormatting
+      allowedFormats={['core/bold', 'core/italic']}
+    />
+    <ArticlesList posts={posts} postType={postType} />
+    {attributes.posts.length === 0 && (
       <Tooltip text={__('Edit text', 'planet4-blocks-backend')}>
-        <header className="articles-title-container">
+        <div className="btn btn-secondary btn-block articles-see-all">
           <RichText
-            tagName="h2"
-            className="page-section-header"
-            placeholder={__('Enter title', 'planet4-blocks-backend')}
-            value={attributes.article_heading}
-            onChange={toAttribute('article_heading')}
+            tagName="div"
+            placeholder={__('Enter text', 'planet4-blocks-backend')}
+            value={attributes.see_all_text}
+            onChange={toAttribute('see_all_text')}
             withoutInteractiveFormatting
             multiline="false"
             allowedFormats={[]}
           />
-        </header>
+        </div>
       </Tooltip>
-      <RichText
-        tagName="p"
-        className="page-section-description"
-        placeholder={__('Enter description', 'planet4-blocks-backend')}
-        value={attributes.articles_description}
-        onChange={toAttribute('articles_description')}
-        withoutInteractiveFormatting
-        allowedFormats={['core/bold', 'core/italic']}
-      />
-      <ArticlesList posts={posts} postType={postType} />
-      {attributes.posts.length === 0 && hasMultiplePages && (
-        <Tooltip text={__('Edit text', 'planet4-blocks-backend')}>
-          <div className="btn btn-secondary btn-block article-load-more">
-            <RichText
-              tagName="div"
-              placeholder={__('Enter text', 'planet4-blocks-backend')}
-              value={attributes.read_more_text}
-              onChange={toAttribute('read_more_text')}
-              withoutInteractiveFormatting
-              multiline="false"
-              allowedFormats={[]}
-            />
-          </div>
-        </Tooltip>
-      )
-      }
-    </Fragment>
-  );
-}
+    )
+    }
+  </Fragment>
+);
 
 export const ArticlesEditor = (props) => {
   const { isSelected, attributes, setAttributes } = props;
@@ -158,7 +154,7 @@ export const ArticlesEditor = (props) => {
   })
     , []);
 
-  const { posts, totalPosts } = useArticlesFetch(attributes, postType, postId);
+  const { posts } = useArticlesFetch(attributes, postType, postId);
 
   const toAttribute = attributeName => value => setAttributes({ [attributeName]: value });
 
@@ -167,7 +163,7 @@ export const ArticlesEditor = (props) => {
       {
         isSelected && renderEdit(attributes, toAttribute)
       }
-      {renderView({ attributes, postType, posts, totalPosts }, toAttribute)}
+      {renderView({ attributes, postType, posts }, toAttribute)}
     </div>
   );
 }

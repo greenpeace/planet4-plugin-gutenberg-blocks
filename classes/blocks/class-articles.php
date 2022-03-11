@@ -43,8 +43,12 @@ class Articles extends Base_Block {
 				'editor_script'   => 'planet4-blocks',
 				// todo: Remove when all content is migrated.
 				'render_callback' => static function ( $attributes ) {
-					if ( empty( $attributes['read_more_text'] ) ) {
-						$attributes['read_more_text'] = __( 'Load more', 'planet4-blocks' );
+					if ( empty( $attributes['see_all_text'] ) ) {
+						$attributes['see_all_text'] = __( 'See all articles', 'planet4-blocks' );
+					}
+
+					if ( empty( $attributes['see_all_link'] ) ) {
+						$attributes['see_all_link'] = home_url( '/?s=&orderby=_score&f%5Bctype%5D%5BPost%5D=3' );
 					}
 
 					if ( empty( $attributes['article_heading'] ) ) {
@@ -61,10 +65,11 @@ class Articles extends Base_Block {
 						'type'    => 'integer',
 						'default' => 3,
 					],
-					'read_more_text'       => [
-						'type' => 'string',
+					'see_all_text'         => [
+						'type'    => 'string',
+						'default' => '',
 					],
-					'read_more_link'       => [
+					'see_all_link'         => [
 						'type'    => 'string',
 						'default' => '',
 					],
@@ -88,7 +93,7 @@ class Articles extends Base_Block {
 						'type'    => 'boolean',
 						'default' => false,
 					],
-					'button_link_new_tab'  => [
+					'see_all_new_tab'      => [
 						'type'    => 'boolean',
 						'default' => false,
 					],
@@ -140,37 +145,25 @@ class Articles extends Base_Block {
 			$args = self::filter_posts_by_pages_tags( $fields );
 		}
 
-		// If there is an offset, it means that it's not a first load, but a load more action.
-		// In this case we want to get only the needed amount of posts,
-		// since we already got the total amount in the first load.
-		$offset = $fields['offset'] ? (int) $fields['offset'] : 0;
-		if ( $offset > 0 ) {
-			$args['numberposts'] = $fields['article_count'];
-			$args['offset']      = $offset;
-		} else {
-			$args['numberposts'] = self::MAX_ARTICLES;
+		// The only case where we don't set the number of posts is when specific posts are selected.
+		if ( empty( $fields['posts'] ) ) {
+			$args['numberposts'] = $fields['article_count'] ?? 3;
 		}
 
 		// Ignore rule, arguments contain suppress_filters.
 		// phpcs:ignore$fields['article_count']
-		$all_posts    = wp_get_recent_posts( $args );
-		$sliced_posts = $offset ? $all_posts : array_slice( $all_posts, 0, $fields['article_count'] );
+		$posts        = wp_get_recent_posts( $args );
 		$recent_posts = [];
 
 		// Populate posts array for frontend template if results have been returned.
-		if ( false !== $sliced_posts ) {
-			$recent_posts = self::populate_post_items( $sliced_posts );
+		if ( false !== $posts ) {
+			$recent_posts = self::populate_post_items( $posts );
 		}
 
 		// Return the posts and the amount of pages.
 		$to_return = [
 			'recent_posts' => $recent_posts,
 		];
-
-		if ( ! $offset ) {
-			$total_posts              = count( $all_posts );
-			$to_return['total_posts'] = $total_posts;
-		}
 
 		return $to_return;
 	}

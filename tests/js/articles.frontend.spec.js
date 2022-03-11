@@ -124,7 +124,7 @@ describe( 'Articles block frontend', () => {
     // Wait for load more response.
     await new Promise((r) => setTimeout(r, 300));
 
-    await page.waitForSelector( '.article-load-more' );
+    await page.waitForSelector( '.articles-see-all' );
 
     // Number of post in articles block after load more.
     const updatedArticlesCount = await page.evaluate(

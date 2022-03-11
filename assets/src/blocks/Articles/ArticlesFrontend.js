@@ -7,9 +7,9 @@ export const ArticlesFrontend = (props) => {
   const {
     article_heading,
     articles_description,
-    read_more_text,
-    read_more_link,
-    button_link_new_tab,
+    see_all_text,
+    see_all_link,
+    see_all_new_tab,
     className,
   } = props;
 
@@ -21,7 +21,7 @@ export const ArticlesFrontend = (props) => {
 
   const postCategories = props.post_categories || [];
 
-  const { posts, loadNextPage, hasMorePages, loading } = useArticlesFetch(props, postType, postId, document.body.dataset.nro, postCategories);
+  const { posts, loading } = useArticlesFetch(props, postType, postId, document.body.dataset.nro, postCategories);
 
   if (!posts.length) {
     return null;
@@ -30,39 +30,27 @@ export const ArticlesFrontend = (props) => {
   return (
     <section className={`block articles-block ${className ?? ''}`}>
       <header>
-        <h2 className="page-section-header">{ article_heading }</h2>
+        <h2 className="page-section-header">{article_heading}</h2>
       </header>
-      { articles_description &&
+      {articles_description &&
         <div className="page-section-description" dangerouslySetInnerHTML={{ __html: articles_description }} />
       }
-      <ArticlesList posts={ posts } postType={ postType }/>
-      { hasMorePages &&
+      <ArticlesList posts={posts} postType={postType} />
       <div className="row">
-        { read_more_link ?
-          <div className="col-md-12 col-lg-5 col-xl-5">
-            <a
-              className="btn btn-secondary btn-block article-load-more"
-              href={ read_more_link }
-              target={ button_link_new_tab ? '_blank' : '' }
-            >
-              { read_more_text }
-            </a>
-          </div> :
-          <div className="col-md-12 col-lg-5 col-xl-5">
-            <button
-              className="btn btn-secondary btn-block article-load-more"
-              onClick={ loadNextPage }
-              disabled={ loading }
-              data-ga-category="Articles Block"
-              data-ga-action="Load More Button"
-              data-ga-label="n/a"
-            >
-              { read_more_text }
-            </button>
-          </div>
-        }
+        <div className="col-md-12 col-lg-5 col-xl-5">
+          <a
+            className="btn btn-secondary btn-block articles-see-all"
+            href={see_all_link}
+            disabled={loading}
+            data-ga-category="Articles Block"
+            data-ga-action="See All Button"
+            data-ga-label="n/a"
+            {...see_all_new_tab && { target: '_blank' }}
+          >
+            {see_all_text}
+          </a>
+        </div>
       </div>
-      }
     </section>
   );
 };
