@@ -36,6 +36,8 @@ abstract class Block_Pattern {
 			SideImageWithTextAndCta::class,
 			HighlightedCta::class,
 			RealityCheck::class,
+			WholePage::class,
+			WholePageLarge::class,
 		];
 
 		/**

@@ -98,6 +98,11 @@ final class Loader {
 			[ 'label' => __( 'Planet 4', 'planet4-blocks-backend' ) ],
 		);
 
+		register_block_pattern_category(
+			'page-templates',
+			[ 'label' => __( 'Page templates', 'planet4-blocks-backend' ) ],
+		);
+
 		// Load block patterns.
 		Block_Pattern::register_all();
 	}
