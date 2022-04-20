@@ -32,3 +32,18 @@
 // Other
 @import "blocks/WideBlocks";
 @import "blocks/Editor";
+
+.is-style-small-padding {
+  padding: 8px;
+  align-self: stretch;
+}
+
+.is-style-medium-padding {
+  padding: 16px;
+  align-self: stretch;
+}
+
+.is-style-large-padding {
+  padding: 32px;
+  align-self: stretch;
+}

@@ -32,4 +32,20 @@ wp.domReady(() => {
   ];
 
   registerBlockStyle('core/button', styles);
+
+  const coreBlocks = ['core/media-text', 'core/group', 'core/column'];
+  coreBlocks.forEach(block => {
+    registerBlockStyle(block, {
+      name: 'small-padding',
+      label: 'Small padding',
+    });
+    registerBlockStyle(block, {
+      name: 'medium-padding',
+      label: 'Medium padding',
+    });
+    registerBlockStyle(block, {
+      name: 'large-padding',
+      label: 'Large padding',
+    });
+  });
 });
