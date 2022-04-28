@@ -1,0 +1,137 @@
+.wp-block-media-text.is-pattern-p4_page-header {
+  grid-template-columns: 100%;
+  min-width: 360px;
+  padding: 0;
+  width: 100vw;
+
+  .wp-block-media-text__media {
+    grid-column: 1;
+    grid-row: 1;
+
+    img {
+      max-height: 270px;
+      object-fit: cover;
+    }
+  }
+
+  .wp-block-media-text__content {
+    grid-column: 1;
+    grid-row: 2;
+
+    min-width: 312px;
+    margin: -44px 24px 24px 24px;
+  }
+
+  h1.has-background {
+    display: inline;
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: initial;
+    padding: 0;
+    white-space: pre-wrap;
+  }
+
+  p {
+    padding-bottom: $sp-2;
+    padding-top: $sp-2;
+  }
+
+  @include medium-and-up {
+    .wp-block-media-text__media img {
+      max-height: 432px;
+    }
+
+    .wp-block-media-text__content {
+      margin: -44px 44px 0 44px;
+    }
+
+    .wp-block-group:first-child {
+      width: 520px;
+    }
+  }
+
+  @include large-and-up {
+    width: calc(100% + (100vw - 100%) / 2);
+
+    .wp-block-media-text__media img {
+      max-height: 576px;
+    }
+
+    .wp-block-media-text__content {
+      display: grid;
+      margin: 0;
+      padding: 0;
+
+      > *:nth-child(n+2) {
+        max-width: calc(350px - 24px);
+      }
+    }
+
+    .wp-block-group:first-child {
+      display: block;
+      max-width: 660px;
+      width: 660px;
+      position: relative;
+    }
+
+    h1.has-background {
+      display: inline;
+      font-size: 3.5rem;
+      font-weight: 800;
+    }
+  }
+}
+
+.wp-block-media-text.is-pattern-p4_page-header.has-media-on-the-right {
+  @include large-and-up {
+    grid-template-columns: 350px auto;
+    margin-left: 0;
+
+    .wp-block-media-text__media {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .wp-block-media-text__content {
+      grid-column: 1;
+      grid-row: 1;
+      padding-inline-end: 24px;
+
+      & > * {
+        justify-content: start;
+        text-align: left;
+      }
+    }
+  }
+}
+
+.wp-block-media-text.is-pattern-p4_page-header:not(.has-media-on-the-right) {
+  @include large-and-up {
+    grid-template-columns: auto 350px;
+
+    h1.has-background {
+      white-space: unset;
+    }
+
+    .wp-block-group:first-child {
+      left: -334px;
+      text-align: right;
+    }
+
+    .wp-block-media-text__media {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .wp-block-media-text__content {
+      grid-column: 2;
+      grid-row: 1;
+      padding-inline-start: 24px;
+
+      & > * {
+        justify-content: end;
+        text-align: right;
+      }
+    }
+  }
+}
