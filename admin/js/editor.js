@@ -32,4 +32,11 @@ wp.domReady(() => {
   ];
 
   registerBlockStyle('core/button', styles);
+
+  ['core/image'].forEach(block => {
+    registerBlockStyle(block, {
+      name: 'rounded',
+      label: __('Rounded', 'planet4-blocks-backend'),
+    });
+  });
 });
