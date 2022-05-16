@@ -25,6 +25,20 @@ abstract class Block_Pattern {
 	abstract public static function get_config(): array;
 
 	/**
+	 * Patterns list.
+	 */
+	public static function get_list(): array {
+		return [
+			DeepDive::class,
+			HighlightedCta::class,
+			Issues::class,
+			QuickLinks::class,
+			RealityCheck::class,
+			SideImageWithTextAndCta::class,
+		];
+	}
+
+	/**
 	 * Pattern constructor.
 	 */
 	public static function register_all() {
@@ -32,14 +46,7 @@ abstract class Block_Pattern {
 			return;
 		}
 
-		$patterns = [
-			SideImageWithTextAndCta::class,
-			HighlightedCta::class,
-			RealityCheck::class,
-			Issues::class,
-			DeepDive::class,
-			QuickLinks::class,
-		];
+		$patterns = self::get_list();
 
 		/**
 		 * @var $pattern self
