@@ -71,4 +71,8 @@
   &.caption-alignment-right figcaption {
     text-align: right;
   }
+
+  &.no-caption figcaption {
+    display: none;
+  }
 }
