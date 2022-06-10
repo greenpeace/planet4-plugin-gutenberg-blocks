@@ -57,7 +57,8 @@ class Rest_Api {
 						} else {
 							$query = "SELECT id, post_title
 								FROM wp_posts
-								WHERE post_status = 'publish' AND post_type = 'post'
+								WHERE post_status = 'publish'
+									AND post_type IN ('post', 'page')
 								ORDER BY post_date DESC";
 						}
 						// The query is prepared, just not in this line.
@@ -487,7 +488,7 @@ class Rest_Api {
 				FROM wp_posts p
          		JOIN wp_icl_translations t
               		ON p.ID = t.element_id AND t.element_type = 'post_post'
-				WHERE p.post_type = 'post'
+				WHERE p.post_type IN ('post', 'page')
   					AND p.post_status = 'publish'
   					AND t.language_code = %s
 				ORDER BY p.post_date DESC; ",

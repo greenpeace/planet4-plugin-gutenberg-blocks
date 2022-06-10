@@ -38,6 +38,7 @@ export const PostSelector = (attributes) => {
     if ('post' === postType) {
       return [].concat(
         select('core').getEntityRecords('postType', 'post', {'include': selected}) || [],
+        select('core').getEntityRecords('postType', 'page', {'include': selected}) || [],
         select('core').getEntityRecords('planet4/v1', 'all-published-posts', args) || [],
       );
     }
