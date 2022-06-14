@@ -1,5 +1,5 @@
 .wp-block-columns.is-not-stacked-on-mobile.is-style-mobile-carousel {
-  @include mobile-only {
+  @include small-and-less {
     flex-wrap: nowrap;
     overflow-x: auto;
     scrollbar-width: none;
