@@ -34,14 +34,23 @@ class QuickLinks extends Block_Pattern {
 							<!-- wp:image {"align":"center","className":"is-style-rounded-90 force-no-lightbox force-no-caption mb-0"} -->
 								<div class="wp-block-image is-style-rounded-90 force-no-lightbox force-no-caption mb-0">
 									<figure class="aligncenter">
-										<img src="' . esc_url( get_template_directory_uri() ) . '/images/placeholders/placeholder-90x90.jpg" alt="' . __( 'Default image', 'planet4-blocks-backend' ) . '" />
+										<img
+											src="' . esc_url( get_template_directory_uri() ) . '/images/placeholders/placeholder-90x90.jpg"
+											alt="' . __( 'Default image', 'planet4-blocks-backend' ) . '"
+										/>
 									</figure>
 								</div>
 							<!-- /wp:image -->
 							<!-- wp:spacer {"height":"16px"} -->
 								<div style="height:16px" aria-hidden="true" class="wp-block-spacer"></div>
 							<!-- /wp:spacer -->
-							<!-- wp:heading {"level":5,"style":{"typography":{"fontSize":"1rem"}},"align":"center","className":"has-text-align-center","placeholder":"' . __( 'Category', 'planet4-blocks-backend' ) . '"} -->
+							<!-- wp:heading {
+								"level":5,
+								"style":{"typography":{"fontSize":"1rem"}},
+								"align":"center",
+								"className":"has-text-align-center",
+								"placeholder":"' . __( 'Category', 'planet4-blocks-backend' ) . '"
+							} -->
 								<h5 style="font-size:1rem;" class="has-text-align-center"></h5>
 							<!-- /wp:heading -->
 						</div>
