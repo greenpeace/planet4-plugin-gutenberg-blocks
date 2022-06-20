@@ -25,6 +25,14 @@ abstract class Block_Pattern {
 	abstract public static function get_config(): array;
 
 	/**
+	 * Returns the pattern classnam.
+	 */
+	public static function get_classname(): string {
+		return 'is_pattern-'
+			. preg_replace( '#[^_a-zA-Z0-9-]#', '_', static::get_name() );
+	}
+
+	/**
 	 * Patterns list.
 	 */
 	public static function get_list(): array {

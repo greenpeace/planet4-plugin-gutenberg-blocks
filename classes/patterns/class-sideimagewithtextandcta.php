@@ -31,8 +31,8 @@ class SideImageWithTextAndCta extends Block_Pattern {
 			'title'      => __( 'Side image with text and CTA', 'planet4-blocks-backend' ),
 			'categories' => [ 'planet4' ],
 			'content'    => '
-				<!-- wp:media-text {"mediaLink":"' . $media_link . '","mediaType":"image","className":"block"} -->
-					<div class="wp-block-media-text alignwide is-stacked-on-mobile block">
+				<!-- wp:media-text {"mediaLink":"' . $media_link . '","mediaType":"image","className":"' . self::get_classname() . ' block"} -->
+					<div class="wp-block-media-text alignwide is-stacked-on-mobile ' . self::get_classname() . ' block">
 						<figure class="wp-block-media-text__media">
 							<img src="' . $media_link . '" alt="' . __( 'Default image', 'planet4-blocks-backend' ) . '"/>
 						</figure>

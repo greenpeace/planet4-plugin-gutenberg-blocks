@@ -19,6 +19,11 @@ class ContentStructure {
 	private $parser;
 
 	/**
+	 * @var string
+	 */
+	private $content;
+
+	/**
 	 * @var array
 	 */
 	private $tree;
@@ -41,8 +46,13 @@ class ContentStructure {
 	 * @param string $content Post content.
 	 */
 	public function parse_content( string $content ): void {
-		$this->make_content_tree( $content );
+		$this->content = $content;
+		$this->make_content_tree( $this->content );
 		$this->make_structure_signature( $this->tree );
+	}
+
+	public function get_content(): ?string {
+		return $this->content;
 	}
 
 	public function get_content_tree(): array {
@@ -127,6 +137,9 @@ class ContentStructure {
 
 		return [
 			'name'     => $block['blockName'],
+			'classes'  => array_filter(
+				explode( ' ', $block['attrs']['className'] ?? '' )
+			),
 			'children' => empty( $block['innerBlocks'] )
 				? null
 				: array_values( array_filter( array_map(

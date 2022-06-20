@@ -14,6 +14,7 @@ use P4GBKS\Blocks\BlockList;
 use P4GBKS\Search\Block\Sql\SqlQuery;
 use P4GBKS\Search\Block\Query\Parameters;
 use P4GBKS\Controllers\Menu\Blocks_Usage_Controller;
+use P4\MasterTheme\SqlParameters;
 
 if ( ! class_exists( 'WP_List_Table' ) ) {
 	require_once ABSPATH . '/wp-admin/includes/class-wp-list-table.php';
@@ -78,6 +79,10 @@ class PatternUsageTable extends WP_List_Table {
 	 *
 	 */
 	public function prepare_items(): void {
+		$post_ids = $this->query_by_classname(
+			...array_column( $this->pattern_registry, 'classname' )
+		);
+
 		// For each searched pattern.
 		$items = [];
 		foreach ( $this->pattern_registry as $name => $pattern ) {
@@ -99,21 +104,48 @@ class PatternUsageTable extends WP_List_Table {
 				$post_struct->parse_content( $post->post_content ?? '' );
 
 				// Post contains pattern shape.
-				$occurences = substr_count(
+				$struct_matches = substr_count(
 					$post_struct->get_content_signature(),
 					$pattern['signature']
 				);
-				if ( $occurences > 0 ) {
+
+				if ( $struct_matches > 0 ) {
 					$items[] = [
 						'post_title'    => $post->post_title,
 						'pattern_name'  => $name,
 						'pattern_title' => $pattern['title'],
-						'pattern_occ'   => $occurences,
+						'pattern_occ'   => $struct_matches,
 						'post_date'     => $post->post_date_gmt,
 						'post_modified' => $post->post_modified,
 						'post_id'       => $id,
 						'post_status'   => $post->post_status,
+						'match_type'    => 'struct',
 					];
+				}
+
+				$class_matches = $this->match_pattern_class(
+					$post_struct->get_content_tree(),
+					$pattern
+				);
+
+				if ( ! empty( $class_matches ) ) {
+					foreach ( $class_matches as $match ) {
+						echo $this->show_diff(
+							json_encode( $pattern['structure']->get_content_tree()[0], \JSON_PRETTY_PRINT ),
+							json_encode( $match, \JSON_PRETTY_PRINT )
+						);
+						$items[] = [
+							'post_title'    => $post->post_title,
+							'pattern_name'  => $name,
+							'pattern_title' => $pattern['title'],
+							'pattern_occ'   => 1,
+							'post_date'     => $post->post_date_gmt,
+							'post_modified' => $post->post_modified,
+							'post_id'       => $id,
+							'post_status'   => $post->post_status,
+							'match_type'    => 'class',
+						];
+					}
 				}
 			}
 		}
@@ -123,14 +155,36 @@ class PatternUsageTable extends WP_List_Table {
 		$this->_column_headers = $this->get_column_headers();
 	}
 
+	private function match_pattern_class( $struct, $pattern ) {
+		$matches        = [];
+		$array_iterator = new \RecursiveArrayIterator( $struct );
+		$recursive      = new \RecursiveIteratorIterator( $array_iterator );
+		while ( $recursive->valid() ) {
+			$node = $recursive->current();
+			if ( ! is_array( $node ) || empty( $node['classes'] ) ) {
+				$recursive->next();
+				continue;
+			}
+
+			if ( in_array( $pattern['classname'], $node['classes'], true ) ) {
+				$matches[] = $node;
+			}
+
+			$recursive->next();
+		}
+
+		return $matches;
+	}
+
 	/**
+	 * Generate pattern registry.
 	 *
+	 * @param array $patterns_list Patterns classes.
 	 */
 	public function make_pattern_registry( array $patterns_list ): array {
 		$patterns = [];
 		foreach ( $patterns_list as $pattern ) {
 			$conf = $pattern::get_config();
-			//var_dump($conf['title']);
 
 			$structure = new ContentStructure();
 			$structure->parse_content( $conf['content'] ?? '' );
@@ -141,10 +195,11 @@ class PatternUsageTable extends WP_List_Table {
 				'title'     => $conf['title'],
 				'shape'     => $tree,
 				'content'   => $conf['content'],
+				'structure' => $structure,
 				'signature' => $structure->get_content_signature(),
+				'classname' => $pattern::get_classname(),
 			];
 		}
-		//die;
 
 		return $patterns;
 	}
@@ -164,6 +219,7 @@ class PatternUsageTable extends WP_List_Table {
 			'post_modified' => 'Modified',
 			'post_id'       => 'ID',
 			'post_status'   => 'Status',
+			'match_type'    => 'Match',
 			'pattern_occ'   => 'Count',
 		];
 
@@ -305,5 +361,98 @@ class PatternUsageTable extends WP_List_Table {
 			},
 			10
 		);
+	}
+
+	/**
+	 * Query posts by pattern classname.
+	 *
+	 * @param string ...$classname Pattern class name.
+	 */
+	private function query_by_classname( string ...$classname ): array {
+		$classname = array_filter( $classname );
+		if ( empty( $classname ) ) {
+			return [];
+		}
+
+		global $wpdb;
+
+		$like = array_map( fn ( $c ) => "post_content LIKE '%$c%'", $classname );
+		$like = implode( ' OR ', $like );
+
+		$params = new SqlParameters();
+		$query  = 'SELECT ID
+			FROM wp_posts
+			WHERE ' . $like;
+
+		$results = $wpdb->get_results(
+			$wpdb->prepare( $query, $params->get_values() ) // phpcs:ignore
+		);
+
+		return array_map(
+			fn ( $r ) => (int) $r->ID,
+			$results
+		);
+	}
+
+	public function show_diff( $left_string, $right_string, $args = [] ) {
+
+		$defaults = array(
+			'title'           => '',
+			'title_left'      => '',
+			'title_right'     => '',
+			'show_split_view' => true,
+		);
+		$args     = wp_parse_args( $args, $defaults );
+
+		if ( ! class_exists( 'WP_Text_Diff_Renderer_Table', false ) ) {
+			require ABSPATH . WPINC . '/wp-diff.php';
+		}
+
+/*		$left_string  = normalize_whitespace( $left_string );
+		$right_string = normalize_whitespace( $right_string );*/
+
+		$left_lines  = explode( "\n", $left_string );
+		$right_lines = explode( "\n", $right_string );
+		$text_diff   = new \Text_Diff( $left_lines, $right_lines );
+		$renderer    = new \WP_Text_Diff_Renderer_Table( $args );
+		$diff        = $renderer->render( $text_diff );
+
+		if ( ! $diff ) {
+			return '';
+		}
+
+		$is_split_view       = ! empty( $args['show_split_view'] );
+		$is_split_view_class = $is_split_view ? ' is-split-view' : '';
+
+		$r = "<table class='diff$is_split_view_class'>\n";
+
+		if ( $args['title'] ) {
+			$r .= "<caption class='diff-title'>$args[title]</caption>\n";
+		}
+
+		if ( $args['title_left'] || $args['title_right'] ) {
+			$r .= '<thead>';
+		}
+
+		if ( $args['title_left'] || $args['title_right'] ) {
+			$th_or_td_left  = empty( $args['title_left'] ) ? 'td' : 'th';
+			$th_or_td_right = empty( $args['title_right'] ) ? 'td' : 'th';
+
+			$r .= "<tr class='diff-sub-title'>\n";
+			$r .= "\t<$th_or_td_left>$args[title_left]</$th_or_td_left>\n";
+			if ( $is_split_view ) {
+				$r .= "\t<$th_or_td_right>$args[title_right]</$th_or_td_right>\n";
+			}
+			$r .= "</tr>\n";
+		}
+
+		if ( $args['title_left'] || $args['title_right'] ) {
+			$r .= "</thead>\n";
+		}
+
+		$r .= "<tbody>\n$diff\n</tbody>\n";
+		$r .= '</table>';
+
+		return $r;
 	}
 }
