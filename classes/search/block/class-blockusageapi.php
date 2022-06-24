@@ -45,47 +45,41 @@ class BlockUsageApi {
 	}
 
 	/**
-	 * Count by block type
+	 * Count blocks by type and style
+	 *
+	 * If style is not specified, an empty key 'n/a' is used.
 	 */
-	public function get_type_count(): array {
+	public function get_count(): array {
 		if ( null === $this->items ) {
 			$this->fetch_items();
 		}
 
-		$types_count = array_count_values(
+		$types  = array_unique(
 			array_column( $this->items, 'block_type' )
 		);
-		ksort( $types_count );
-
-		return $types_count;
-	}
-
-	/**
-	 * Count by block type and style
-	 *
-	 * If style is not specified, an empty key '' is used.
-	 */
-	public function get_style_count(): array {
-		if ( null === $this->items ) {
-			$this->fetch_items();
-		}
-
-		$types    = array_column( $this->items, 'block_type' );
-		$by_style = array_fill_keys( $types, [] );
-		ksort( $by_style );
+		$blocks = array_fill_keys(
+			$types,
+			[
+				'total'  => 0,
+				'styles' => [],
+			]
+		);
+		ksort( $blocks );
 
 		foreach ( $this->items as $item ) {
-			$styles = empty( $item['block_styles'] ) ? [ '' ] : $item['block_styles'];
+			$styles = empty( $item['block_styles'] ) ? [ 'n/a' ] : $item['block_styles'];
 			foreach ( $styles as $style ) {
-				if ( ! isset( $by_style[ $item['block_type'] ][ $style ] ) ) {
-					$by_style[ $item['block_type'] ][ $style ] = 0;
+				$type = $item['block_type'];
+				if ( ! isset( $blocks[ $type ]['styles'][ $style ] ) ) {
+					$blocks[ $type ]['styles'][ $style ] = 0;
 				}
-				$by_style[ $item['block_type'] ][ $style ]++;
+				$blocks[ $type ]['styles'][ $style ]++;
+				$blocks[ $type ]['total']++;
 			}
-			ksort( $by_style[ $item['block_type'] ] );
+			ksort( $blocks[ $type ]['styles'] );
 		}
 
-		return $by_style;
+		return $blocks;
 	}
 
 	/**

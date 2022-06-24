@@ -126,9 +126,8 @@ if ( ! class_exists( 'Blocks_Usage_Controller' ) ) {
 			// Group results.
 			$api    = new BlockUsageApi();
 			$report = [
-				'block_types'  => $api->get_type_count(),
-				'block_styles' => $api->get_style_count(),
-				'post_types'   => $post_types,
+				'block_types' => $api->get_count(),
+				'post_types'  => $post_types,
 			];
 
 			return $report;
