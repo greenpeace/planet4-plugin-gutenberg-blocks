@@ -18,6 +18,7 @@ use P4GBKS\Patterns\Block_Pattern;
 use P4GBKS\Views\View;
 use WP_CLI;
 use P4GBKS\Command\Controller;
+use P4\MasterTheme\GravityFormsSettings;
 
 /**
  * Class Loader
@@ -185,6 +186,9 @@ final class Loader {
 
 		// Setup image sizes.
 		add_action( 'admin_init', [ $this, 'setup_image_sizes' ] );
+
+		// Set up user capabilities to gravity forms plugin.
+		add_action( 'admin_init', [ GravityFormsSettings::class, 'user_capaibilities' ], 10, 1 );
 
 		global $wp_version;
 		$category_filter = version_compare( $wp_version, '5.8', '>=' ) ? 'block_categories_all' : 'block_categories';
