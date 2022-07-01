@@ -50,7 +50,11 @@ class GetInformed extends Block_Pattern {
 							"gallery_block_title":"' . __( 'Our latest actions around the world', 'planet4-blocks' ) . '"
 						} /-->
 						<!-- wp:planet4-blocks/articles {"article_heading":"' . __( 'Latest news & stories', 'planet4-blocks' ) . '"} /-->
-						<!-- wp:gravityforms/form /-->
+						<!-- wp:group {"backgroundColor":"grey-05"} -->
+							<div class="wp-block-group has-grey-05-background-color has-background">
+								<!-- wp:gravityforms/form /-->
+							</div>
+						<!-- /wp:group -->
 					</div>
 				<!-- /wp:group -->
 			',
