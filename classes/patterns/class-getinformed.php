@@ -34,14 +34,22 @@ class GetInformed extends Block_Pattern {
 			'content'    => '
 				<!-- wp:group {"className":"block"} -->
 					<div class="wp-block-group">
-						' . QuickLinks::get_config()['content'] . '
-						' . SideImageWithTextAndCta::get_config()['content'] . '
-						' . SideImageWithTextAndCta::get_config( [ 'media_position' => 'right' ] )['content'] . '
-						' . SideImageWithTextAndCta::get_config()['content'] . '
-						' . Issues::get_config()['content'] . '
-						<!-- wp:planet4-blocks/articles --><!-- /wp:planet4-blocks/articles -->
-						<!-- wp:planet4-blocks/gallery {"className":"is-style-grid"} --><!-- /wp:planet4-blocks/gallery -->
-						<!-- wp:planet4-blocks/articles --><!-- /wp:planet4-blocks/articles -->
+						' . QuickLinks::get_config( [ 'title_placeholder' => __( 'Explore by topic', 'planet4-blocks' ) ] )['content'] . '
+						' . SideImageWithTextAndCta::get_config( [ 'title_placeholder' => __( 'Topic 1', 'planet4-blocks' ) ] )['content'] . '
+						' . SideImageWithTextAndCta::get_config(
+							[
+								'media_position'    => 'right',
+								'title_placeholder' => __( 'Topic 2', 'planet4-blocks' ),
+							]
+						)['content'] . '
+						' . SideImageWithTextAndCta::get_config( [ 'title_placeholder' => __( 'Topic 3', 'planet4-blocks' ) ] )['content'] . '
+						' . Issues::get_config( [ 'title_placeholder' => __( 'Issues we work on', 'planet4-blocks' ) ] )['content'] . '
+						<!-- wp:planet4-blocks/articles {"article_heading":"' . __( 'Our recent victories', 'planet4-blocks' ) . '"} /-->
+						<!-- wp:planet4-blocks/gallery {
+							"className":"is-style-grid",
+							"gallery_block_title":"' . __( 'Our latest actions around the world', 'planet4-blocks' ) . '"
+						} /-->
+						<!-- wp:planet4-blocks/articles {"article_heading":"' . __( 'Latest news & stories', 'planet4-blocks' ) . '"} /-->
 						<!-- wp:gravityforms/form /-->
 					</div>
 				<!-- /wp:group -->
