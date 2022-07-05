@@ -27,6 +27,29 @@ abstract class Block_Pattern {
 	abstract public static function get_config( $params = [] ): array;
 
 	/**
+	 * Returns the pattern classname used for tracking patterns.
+	 */
+	public static function get_classname(): string {
+		return 'is_pattern-' . preg_replace( '#[^_a-zA-Z0-9-]#', '_', static::get_name() );
+	}
+
+	/**
+	 * Patterns list.
+	 */
+	public static function get_list(): array {
+		return [
+			BlankPage::class,
+			DeepDive::class,
+			GetInformed::class,
+			HighlightedCta::class,
+			Issues::class,
+			QuickLinks::class,
+			RealityCheck::class,
+			SideImageWithTextAndCta::class,
+		];
+	}
+
+	/**
 	 * Pattern constructor.
 	 */
 	public static function register_all() {
@@ -34,16 +57,7 @@ abstract class Block_Pattern {
 			return;
 		}
 
-		$patterns = [
-			BlankPage::class,
-			SideImageWithTextAndCta::class,
-			HighlightedCta::class,
-			RealityCheck::class,
-			Issues::class,
-			DeepDive::class,
-			QuickLinks::class,
-			GetInformed::class,
-		];
+		$patterns = self::get_list();
 
 		/**
 		 * @var $pattern self

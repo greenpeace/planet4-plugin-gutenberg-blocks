@@ -10,11 +10,16 @@ namespace P4GBKS\Controllers\Menu;
 
 use P4\MasterTheme\SqlParameters;
 use P4\MasterTheme\Exception\SqlInIsEmpty;
+use P4GBKS\Patterns\Block_Pattern;
 use P4GBKS\Search\Block\BlockUsage;
 use P4GBKS\Search\Block\BlockUsageTable;
 use P4GBKS\Search\Block\BlockUsageApi;
-use P4GBKS\Search\Block\Query\Parameters;
+use P4GBKS\Search\Block\Query\Parameters as BlockParameters;
+use P4GBKS\Search\Pattern\Query\Parameters as PatternParameters;
+use P4GBKS\Search\Pattern\PatternUsage;
+use P4GBKS\Search\Pattern\PatternUsageTable;
 use WP_Block_Type_Registry;
+use WP_Block_Patterns_Registry;
 
 if ( ! class_exists( 'Blocks_Usage_Controller' ) ) {
 
@@ -52,6 +57,7 @@ if ( ! class_exists( 'Blocks_Usage_Controller' ) ) {
 		private function hooks() {
 			add_action( 'rest_api_init', [ $this, 'plugin_blocks_report_register_rest_route' ] );
 			BlockUsageTable::set_hooks();
+			PatternUsageTable::set_hooks();
 		}
 
 		/**
@@ -159,6 +165,15 @@ if ( ! class_exists( 'Blocks_Usage_Controller' ) ) {
 					'plugin_blocks_report_beta',
 					[ $this, 'plugin_blocks_report_beta' ]
 				);
+
+				add_submenu_page(
+					P4GBKS_PLUGIN_SLUG_NAME,
+					__( 'Pattern Report (Beta)', 'planet4-blocks-backend' ),
+					__( 'Pattern Report (Beta)', 'planet4-blocks-backend' ),
+					'manage_options',
+					'plugin_patterns_report',
+					[ $this, 'plugin_patterns_report' ]
+				);
 			}
 		}
 
@@ -185,7 +200,7 @@ if ( ! class_exists( 'Blocks_Usage_Controller' ) ) {
 			$special_filter = isset( $_REQUEST['unregistered'] ) ? 'unregistered'
 				: ( isset( $_REQUEST['unallowed'] ) ? 'unallowed' : null );
 			$table->prepare_items(
-				Parameters::from_request( $_REQUEST ),
+				BlockParameters::from_request( $_REQUEST ),
 				$_REQUEST['group'] ?? null,
 				$special_filter
 			);
@@ -202,6 +217,46 @@ if ( ! class_exists( 'Blocks_Usage_Controller' ) ) {
 			echo '<input type="hidden" name="action"
 				value="' . esc_attr( BlockUsageTable::ACTION_NAME ) . '"/>';
 			echo '</form>';
+			echo '</div>';
+		}
+
+		/**
+		 * Beta block usage report page.
+		 *
+		 * @todo before replacing current one:
+		 * - review json report / keep or replace with new search
+		 */
+		public function plugin_patterns_report() {
+			// Nonce verify.
+			if ( isset( $_REQUEST['filter_action'] ) ) {
+				check_admin_referer( 'bulk-' . PatternUsageTable::PLURAL );
+			}
+
+			// Create table.
+			$args  = [
+				'pattern_usage'    => new PatternUsage(),
+				'pattern_registry' => WP_Block_Patterns_Registry::get_instance(),
+			];
+			$table = new PatternUsageTable( $args );
+
+			// Prepare data.
+			$table->prepare_items(
+				PatternParameters::from_request( $_REQUEST ),
+				$_REQUEST['group'] ?? null
+			);
+
+			// Display data.
+			echo '<div class="wrap">
+				<h1 class="wp-heading-inline">Pattern usage</h1>
+				<hr class="wp-header-end">';
+
+			echo '<form id="patterns-report" method="get">';
+			$table->views();
+			$table->display();
+			echo '<input type="hidden" name="action"
+				value="' . esc_attr( PatternUsageTable::ACTION_NAME ) . '"/>';
+			echo '</form>';
+			echo '</div>';
 		}
 
 		/**
