@@ -30,6 +30,7 @@ class GetInformed extends Block_Pattern {
 	public static function get_config( $params = [] ): array {
 		return [
 			'title'      => __( 'Get Informed', 'planet4-blocks-backend' ),
+			'blockTypes' => [ 'core/post-content' ],
 			'categories' => [ 'pages' ],
 			'content'    => '
 				<!-- wp:group {"className":"block"} -->
