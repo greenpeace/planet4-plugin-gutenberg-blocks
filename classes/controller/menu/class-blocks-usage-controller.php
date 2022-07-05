@@ -18,6 +18,7 @@ use P4GBKS\Search\Block\Query\Parameters as BlockParameters;
 use P4GBKS\Search\Pattern\Query\Parameters as PatternParameters;
 use P4GBKS\Search\Pattern\PatternUsage;
 use P4GBKS\Search\Pattern\PatternUsageTable;
+use P4GBKS\Search\Pattern\PatternUsageApi;
 use WP_Block_Type_Registry;
 use WP_Block_Patterns_Registry;
 
@@ -130,10 +131,12 @@ if ( ! class_exists( 'Blocks_Usage_Controller' ) ) {
 			);
 
 			// Group results.
-			$api    = new BlockUsageApi();
-			$report = [
-				'block_types' => $api->get_count(),
-				'post_types'  => $post_types,
+			$block_api   = new BlockUsageApi();
+			$pattern_api = new PatternUsageApi();
+			$report      = [
+				'block_types'    => $block_api->get_count(),
+				'block_patterns' => $pattern_api->get_count(),
+				'post_types'     => $post_types,
 			];
 
 			return $report;
