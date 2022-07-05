@@ -73,9 +73,12 @@ class PatternUsageApi {
 	 * Get all patterns names
 	 */
 	private function pattern_names(): array {
-		return array_column(
-			( WP_Block_Patterns_Registry::get_instance() )->get_all_registered(),
-			'name'
+		return array_filter(
+			array_column(
+				( WP_Block_Patterns_Registry::get_instance() )->get_all_registered(),
+				'name'
+			),
+			fn ( $name ) => 'p4/blank-page' !== $name
 		);
 	}
 

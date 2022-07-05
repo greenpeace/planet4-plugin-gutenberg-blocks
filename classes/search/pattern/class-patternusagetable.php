@@ -94,9 +94,12 @@ class PatternUsageTable extends WP_List_Table {
 			);
 		}
 
-		$this->pattern_names = array_column(
-			$this->pattern_registry->get_all_registered(),
-			'name'
+		$this->pattern_names = array_filter(
+			array_column(
+				$this->pattern_registry->get_all_registered(),
+				'name'
+			),
+			fn ( $name ) => 'p4/blank-page' !== $name
 		);
 	}
 
@@ -142,10 +145,7 @@ class PatternUsageTable extends WP_List_Table {
 		$search_params = clone $this->search_params;
 		if ( empty( $search_params->name() ) ) {
 			$search_params = $search_params->with_name(
-				array_column(
-					( WP_Block_Patterns_Registry::get_instance() )->get_all_registered(),
-					'name'
-				)
+				$this->pattern_names
 			);
 		}
 
