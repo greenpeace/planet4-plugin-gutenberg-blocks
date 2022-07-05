@@ -39,6 +39,11 @@ class Parameters {
 	/**
 	 * @var string[]
 	 */
+	private $post_type;
+
+	/**
+	 * @var string[]
+	 */
 	private $order;
 
 	/**
@@ -88,6 +93,7 @@ class Parameters {
 				'content'     => $text_search,
 				'attributes'  => $request['attributes'] ?? [ $text_search ],
 				'post_status' => $request['post_status'] ?? self::DEFAULT_POST_STATUS,
+				'post_type'   => $request['post_type'] ?? null,
 				'order'       => $request['order'] ?? null,
 			]
 		);
@@ -120,10 +126,10 @@ class Parameters {
 	 *
 	 * @throws \BadMethodCallException Property not allowed.
 	 *
-	 * @return self Unmutable parameter object.
+	 * @return self Immutable parameter object.
 	 */
 	public function with( string $name, $value = null ): self {
-		$allowed = [ 'namespace', 'name', 'attributes', 'content', 'post_status', 'order' ];
+		$allowed = [ 'namespace', 'name', 'attributes', 'content', 'post_status', 'post_type', 'order' ];
 		if ( ! in_array( $name, $allowed, true ) ) {
 			throw new \BadMethodCallException( 'Property ' . $name . ' does not exist.' );
 		}
@@ -165,6 +171,13 @@ class Parameters {
 	 */
 	public function post_status(): ?array {
 		return $this->post_status ? $this->post_status : self::DEFAULT_POST_STATUS;
+	}
+
+	/**
+	 * List of required post types.
+	 */
+	public function post_type(): ?array {
+		return $this->post_type ? $this->post_type : null;
 	}
 
 	/**

@@ -137,6 +137,12 @@ class BlockUsageTable extends WP_List_Table {
 
 		$this->search_params = $search_params
 			->with_post_status( self::DEFAULT_POST_STATUS )
+			->with_post_type(
+				array_filter(
+					\get_post_types( [ 'show_in_rest' => true ] ),
+					fn ( $t ) => \post_type_supports( $t, 'editor' )
+				)
+			)
 			->with_order( array_merge( [ $this->group_by ], $this->sort_by ) );
 
 		$items = $this->block_usage->get_blocks( $this->search_params );
