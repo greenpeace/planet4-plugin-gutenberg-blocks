@@ -222,7 +222,6 @@ class BlockUsageTable extends WP_List_Table {
 				)
 			)
 		);
-		// @todo WP 5.? : parse blocks variations when available
 		sort( $namespaces );
 		$this->blocks_ns = $namespaces;
 	}
@@ -591,31 +590,6 @@ class BlockUsageTable extends WP_List_Table {
 			return;
 		}
 		parent::display_tablenav( $which );
-	}
-
-	/**
-	 * Block count in search result.
-	 *
-	 * @return int
-	 */
-	public function block_count(): int {
-		return count( $this->items );
-	}
-
-	/**
-	 * Post count in search result.
-	 *
-	 * @return int
-	 */
-	public function post_count(): int {
-		return count(
-			array_unique(
-				array_column(
-					$this->items,
-					'post_id'
-				)
-			)
-		);
 	}
 
 	/**

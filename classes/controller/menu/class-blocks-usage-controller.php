@@ -171,7 +171,7 @@ if ( ! class_exists( 'Blocks_Usage_Controller' ) ) {
 		public function plugin_blocks_report_beta() {
 			// Nonce verify.
 			if ( isset( $_REQUEST['filter_action'] ) ) {
-				check_admin_referer( 'bulk-blocks' );
+				check_admin_referer( 'bulk-' . BlockUsageTable::PLURAL );
 			}
 
 			// Create table.
