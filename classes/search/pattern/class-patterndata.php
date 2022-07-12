@@ -120,6 +120,6 @@ class PatternData {
 	 * @param string $name Pattern name.
 	 */
 	public static function make_classname( string $name ): string {
-		return 'is_pattern-' . preg_replace( '#[^_a-zA-Z0-9-]#', '_', $name );
+		return 'is-pattern-' . preg_replace( '#[^_a-zA-Z0-9-]#', '-', $name );
 	}
 }

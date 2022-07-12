@@ -134,14 +134,14 @@ class Parameters {
 	 * List of required post status.
 	 */
 	public function post_status(): ?array {
-		return $this->post_status ? $this->post_status : self::DEFAULT_POST_STATUS;
+		return $this->post_status ?? self::DEFAULT_POST_STATUS;
 	}
 
 	/**
 	 * List of required post types.
 	 */
 	public function post_type(): ?array {
-		return $this->post_type ? $this->post_type : null;
+		return $this->post_type ?? null;
 	}
 
 	/**

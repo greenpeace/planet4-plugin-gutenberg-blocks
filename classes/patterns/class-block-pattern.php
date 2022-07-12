@@ -7,6 +7,8 @@
 
 namespace P4GBKS\Patterns;
 
+use P4GBKS\Search\Pattern\PatternData;
+
 /**
  * Class Base_Pattern
  *
@@ -30,7 +32,7 @@ abstract class Block_Pattern {
 	 * Returns the pattern classname used for tracking patterns.
 	 */
 	public static function get_classname(): string {
-		return 'is_pattern-' . preg_replace( '#[^_a-zA-Z0-9-]#', '_', static::get_name() );
+		return PatternData::make_classname( static::get_name() );
 	}
 
 	/**

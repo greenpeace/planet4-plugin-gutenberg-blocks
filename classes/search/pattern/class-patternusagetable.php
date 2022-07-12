@@ -10,6 +10,7 @@ namespace P4GBKS\Search\Pattern;
 use InvalidArgumentException;
 use WP_List_Table;
 use WP_Block_Patterns_Registry;
+use P4GBKS\Patterns\BlankPage;
 use P4GBKS\Search\RowActions;
 use P4GBKS\Search\Pattern\Query\Parameters;
 
@@ -99,7 +100,7 @@ class PatternUsageTable extends WP_List_Table {
 				$this->pattern_registry->get_all_registered(),
 				'name'
 			),
-			fn ( $name ) => 'p4/blank-page' !== $name
+			fn ( $name ) => BlankPage::get_name() !== $name
 		);
 	}
 
@@ -170,7 +171,9 @@ class PatternUsageTable extends WP_List_Table {
 		$filter = $this->search_params->name() ?? [];
 
 		echo '<select name="name" id="filter-by-name">';
-		echo '<option value="">- All patterns -</option>';
+		echo '<option value="">'
+			. esc_html( __( '- All patterns -', 'planet4-blocks-backend' ) )
+			. '</option>';
 		foreach ( $this->pattern_names as $name ) {
 			echo sprintf(
 				'<option value="%s" %s>%s</option>',
@@ -276,17 +279,17 @@ class PatternUsageTable extends WP_List_Table {
 			'pattern_name' => sprintf(
 				'pattern_name' === $this->group_by ? $active_link_tpl : $link_tpl,
 				add_query_arg( 'group', 'pattern_name' ),
-				'Group by pattern name'
+				__( 'Group by pattern name', 'planet4-blocks-backend' )
 			),
 			'post_title'   => sprintf(
 				'post_title' === $this->group_by ? $active_link_tpl : $link_tpl,
 				add_query_arg( 'group', 'post_title' ),
-				'Group by post title'
+				__( 'Group by post title', 'planet4-blocks-backend' )
 			),
 			'post_id'      => sprintf(
 				'post_id' === $this->group_by ? $active_link_tpl : $link_tpl,
 				add_query_arg( 'group', 'post_id' ),
-				'Group by post ID'
+				__( 'Group by post ID', 'planet4-blocks-backend' )
 			),
 		];
 	}
