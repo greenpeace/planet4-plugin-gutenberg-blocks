@@ -16,6 +16,16 @@ namespace P4GBKS\Patterns;
 class PageHeader extends Block_Pattern {
 
 	/**
+	 * @var string
+	 */
+	protected static $title = 'Page Header with image on the right';
+
+	/**
+	 * @var string
+	 */
+	protected static $media_position = 'right';
+
+	/**
 	 * Returns the pattern name.
 	 */
 	public static function get_name(): string {
@@ -28,16 +38,16 @@ class PageHeader extends Block_Pattern {
 	 * @param array $params Optional array of parameters for the config.
 	 */
 	public static function get_config( $params = [] ): array {
-		$classname  = 'is-pattern-p4_page-header';
+		$classname  = 'is-pattern-p4-page-header';
 		$media_link = esc_url( get_template_directory_uri() ) . '/images/placeholders/placeholder-546x415.jpg';
-		$media_pos  = empty( $params['media_position'] ) ? 'right' : $params['media_position'];
-		$pos_class  = 'left' === $media_pos ? '' : 'has-media-on-the-' . $media_pos;
+		$pos_class  = 'left' === static::$media_position ? ''
+			: 'has-media-on-the-' . static::$media_position;
 
 		return [
-			'title'      => __( 'Page Header with image on the right', 'planet4-blocks-backend' ),
+			'title'      => __( static::$title, 'planet4-blocks-backend' ), // phpcs:ignore
 			'categories' => [ 'page-headers' ],
 			'content'    => '
-				<!-- wp:media-text {"align":"full","mediaPosition":"' . $media_pos . '","mediaType":"image","imageFill":false,"className":"' . $classname . '"} -->
+				<!-- wp:media-text {"align":"full","mediaPosition":"' . static::$media_position . '","mediaType":"image","imageFill":false,"className":"' . $classname . '"} -->
 				<div class="wp-block-media-text alignfull ' . $pos_class . ' is-stacked-on-mobile ' . $classname . '">
 
 					<figure class="wp-block-media-text__media">

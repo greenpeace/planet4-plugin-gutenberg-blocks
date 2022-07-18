@@ -3,10 +3,7 @@ const { __ } = wp.i18n;
 
 export const registerPageHeaderBlock = () => {
 
-  const POS_LEFT = 'left';
-  const POS_RIGHT = 'right';
-  let opposite = (pos) => pos === POS_LEFT ? POS_RIGHT : POS_LEFT;
-  let classname = 'is-pattern-p4_page-header';
+  let classname = 'is-pattern-p4-page-header';
 
   let scope = ['inserter'];
 
@@ -23,45 +20,30 @@ export const registerPageHeaderBlock = () => {
       ['core/heading', {
         level: 1,
         backgroundColor: 'white',
-        //textAlign: opposite(imgPosition),
         placeholder: __('Enter title', 'planet4-blocks-backend')
       }]
     ]],
     ['core/paragraph', {
-      //align: opposite(imgPosition),
       placeholder: __('Enter description', 'planet4-blocks-backend'),
       style: { typography: { fontSize: '1.25rem'} }
     }],
-    ['core/buttons', {
-      //layout: { type:"flex", justifyContent: opposite(imgPosition) }
-    }, [
+    ['core/buttons', {}, [
       ['core/button', {className: 'is-style-cta'}]
     ]],
   ];
 
-  registerBlockVariation('core/media-text', {
-    name: 'page-header-img-right',
-    title: __('Page header with image on the right', 'planet4-blocks-backend'),
-    description: __('Page header with image on the right', 'planet4-blocks-backend'),
-    scope: scope,
-    attributes: { mediaPosition: POS_RIGHT, ...attributes },
-    innerBlocks: innerBlocks(POS_RIGHT),
-    isActive: (blockAttributes) => {
-      return blockAttributes.className === classname
-        && blockAttributes.mediaPosition === POS_RIGHT;
-    }
-  });
-
-  registerBlockVariation('core/media-text', {
-    name: 'page-header-img-left',
-    title: __('Page header with image on the left', 'planet4-blocks-backend'),
-    description: __('Page header with image on the left', 'planet4-blocks-backend'),
-    scope: scope,
-    attributes: { mediaPosition: POS_LEFT, ...attributes },
-    innerBlocks: innerBlocks(POS_LEFT),
-    isActive: (blockAttributes) => {
-      return blockAttributes.className === classname
-        && blockAttributes.mediaPosition === POS_LEFT;
-    }
+  [ 'left' , 'right' ].forEach((variation) => {
+    registerBlockVariation('core/media-text', {
+      name: `page-header-img-${variation}`,
+      title: __(`Page header with image on the ${variation}`, 'planet4-blocks-backend'),
+      description: __(`Page header with image on the ${variation}`, 'planet4-blocks-backend'),
+      scope,
+      attributes: { mediaPosition: variation, ...attributes },
+      innerBlocks: innerBlocks(variation),
+      isActive: (blockAttributes) => (
+        blockAttributes.className === classname
+        && blockAttributes.mediaPosition === variation
+      )
+    });
   });
 }
