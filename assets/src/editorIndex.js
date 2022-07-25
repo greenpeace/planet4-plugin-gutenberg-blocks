@@ -22,6 +22,8 @@ import { blockEditorValidation } from './BlockEditorValidation';
 import { registerGuestBookBlock } from './blocks/GuestBook/GuestBookBlock';
 import { registerBlock as registerShareButtonsBlock } from './blocks/ShareButtons/ShareButtonsBlock';
 
+import { registerBlockPatterns } from './block-patterns/register';
+
 blockEditorValidation();
 new ArticlesBlock();
 registerColumnsBlock();
@@ -62,3 +64,15 @@ registerBlockVariation('core/group', {
   },
   icon: 'admin-links',
 });
+
+window.onload = function() {
+  let obs = new MutationObserver((o, m) => {
+    let button = document.querySelector('.edit-post-header-toolbar__inserter-toggle');
+    if (button) {
+      button.addEventListener('click', () => registerBlockPatterns());
+      m.disconnect();
+      return;
+    }
+  });
+  obs.observe(document, { childList: true, subtree: true });
+};

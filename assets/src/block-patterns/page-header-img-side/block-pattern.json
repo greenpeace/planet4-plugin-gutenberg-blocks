@@ -1,0 +1,8 @@
+{
+  "name": "p4/page-header-img",
+  "title": "Page Header with image",
+  "description": "Page Header with image",
+  "classname": "is-pattern-p4-page-header",
+  "categories": ["page-headers"],
+  "textdomain": "planet4-blocks-backend"
+}

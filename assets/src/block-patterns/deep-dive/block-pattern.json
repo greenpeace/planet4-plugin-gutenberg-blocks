@@ -1,0 +1,8 @@
+{
+  "name": "p4/deep-dive",
+  "title": "Deep Dive",
+  "description": "Deep Dive",
+  "categories": ["planet4"],
+  "classname": "is-pattern-p4-deep-dive",
+  "textdomain": "planet4-blocks-backend"
+}

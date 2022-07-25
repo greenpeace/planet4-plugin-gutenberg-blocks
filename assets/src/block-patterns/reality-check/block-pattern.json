@@ -1,0 +1,8 @@
+{
+  "name": "p4/reality-check",
+  "title": "Reality Check",
+  "description": "Reality Check",
+  "classname": "is-pattern-p4-reality-check",
+  "categories": ["planet4"],
+  "textdomain": "planet4-blocks-backend"
+}

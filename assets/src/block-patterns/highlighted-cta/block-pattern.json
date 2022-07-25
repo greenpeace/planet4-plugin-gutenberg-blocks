@@ -1,0 +1,8 @@
+{
+  "name": "p4/highlighted-cta",
+  "title": "Highlighted CTA",
+  "description": "Highlighted CTA",
+  "categories": ["planet4"],
+  "classname": "is-pattern-p4-highlighted-cta",
+  "textdomain": "planet4-blocks-backend"
+}

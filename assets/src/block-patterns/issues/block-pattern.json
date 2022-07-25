@@ -1,0 +1,8 @@
+{
+  "name": "p4/issues",
+  "title": "Issues",
+  "description": "Issues",
+  "categories": ["planet4"],
+  "classname": "is-pattern-p4-issues",
+  "textdomain": "planet4-blocks-backend"
+}

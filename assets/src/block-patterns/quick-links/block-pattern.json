@@ -1,0 +1,8 @@
+{
+  "name": "p4/quick-links",
+  "title": "Quick Links",
+  "description": "Quick Links",
+  "classname": "is-pattern-p4-quick-links",
+  "categories": ["planet4"],
+  "textdomain": "planet4-blocks-backend"
+}

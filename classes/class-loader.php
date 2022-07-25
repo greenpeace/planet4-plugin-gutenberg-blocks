@@ -103,6 +103,11 @@ final class Loader {
 			[ 'label' => __( 'Layouts', 'planet4-blocks-backend' ) ],
 		);
 
+		register_block_pattern_category(
+			'page-headers',
+			[ 'label' => __( 'Page headers', 'planet4-blocks-backend' ) ],
+		);
+
 		// Load block patterns.
 		Block_Pattern::register_all();
 	}

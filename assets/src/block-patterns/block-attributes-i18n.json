@@ -1,0 +1,8 @@
+{
+    "core/heading": {
+      "placeholder": "heading placeholder text"
+    },
+    "core/paragraph": {
+      "placeholder": "paragraph placeholder text"
+    }
+}

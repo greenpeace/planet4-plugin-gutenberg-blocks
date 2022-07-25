@@ -1,0 +1,9 @@
+{
+  "name": "p4/high-level-topic-pattern-layout",
+  "title": "High-Level Topic",
+  "description": "High-Level Topic",
+  "categories": ["layouts"],
+  "blockTypes": ["core/post-content"],
+  "classname": "is-pattern-p4-high-level-topic-pattern-layout",
+  "textdomain": "planet4-blocks"
+}
