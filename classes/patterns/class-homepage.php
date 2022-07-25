@@ -67,16 +67,16 @@ class HomePage extends Block_Pattern {
 
 				' . Issues::get_config()['content'] . '
 
-				<!-- wp:spacer {"height":"80px"} -->
-				<div style="height:80px" aria-hidden="true" class="wp-block-spacer"></div>
+				<!-- wp:spacer {"height":"88px"} -->
+				<div style="height:88px" aria-hidden="true" class="wp-block-spacer"></div>
 				<!-- /wp:spacer -->
 
 				<!-- wp:planet4-blocks/articles {
 					"article_heading":"' . __( 'Read our Stories', 'planet4-blocks' ) . '"
 				} /-->
 
-				<!-- wp:spacer {"height":"54px"} -->
-				<div style="height:54px" aria-hidden="true" class="wp-block-spacer"></div>
+				<!-- wp:spacer {"height":"56px"} -->
+				<div style="height:56px" aria-hidden="true" class="wp-block-spacer"></div>
 				<!-- /wp:spacer -->
 
 				' . SideImageWithTextAndCta::get_config( [] )['content'] . '
@@ -87,7 +87,7 @@ class HomePage extends Block_Pattern {
 
 				' . SideImageWithTextAndCta::get_config( [ 'media_position' => 'right' ] )['content'] . '
 
-				<!-- wp:spacer {"height":"54px"} -->
+				<!-- wp:spacer {"height":"56px"} -->
 				<div style="height:54px" aria-hidden="true" class="wp-block-spacer"></div>
 				<!-- /wp:spacer -->
 
@@ -95,8 +95,8 @@ class HomePage extends Block_Pattern {
 				<div class="wp-block-planet4-blocks-covers is-style-take-action" data-render="planet4-blocks/covers" data-attributes="{&quot;attributes&quot;:{&quot;cover_type&quot;:&quot;take-action&quot;,&quot;initialRowsLimit&quot;:1,&quot;title&quot;:&quot;&quot;,&quot;description&quot;:&quot;&quot;,&quot;tags&quot;:[],&quot;post_types&quot;:[],&quot;posts&quot;:[],&quot;version&quot;:2,&quot;layout&quot;:&quot;grid&quot;,&quot;isExample&quot;:false,&quot;readMoreText&quot;:&quot;Load more&quot;,&quot;className&quot;:&quot;is-style-take-action&quot;},&quot;innerBlocks&quot;:[]}"></div>
 				<!-- /wp:planet4-blocks/covers -->
 
-				<!-- wp:spacer {"height":"74px"} -->
-				<div style="height:74px" aria-hidden="true" class="wp-block-spacer"></div>
+				<!-- wp:spacer {"height":"72px"} -->
+				<div style="height:72px" aria-hidden="true" class="wp-block-spacer"></div>
 				<!-- /wp:spacer -->
 
 				<!-- wp:group {"align":"full","backgroundColor":"grey-05"} -->
