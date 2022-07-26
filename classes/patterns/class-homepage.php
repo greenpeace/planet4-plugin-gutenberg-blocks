@@ -79,7 +79,7 @@ class HomePage extends Block_Pattern {
 				<div style="height:56px" aria-hidden="true" class="wp-block-spacer"></div>
 				<!-- /wp:spacer -->
 
-				' . SideImageWithTextAndCta::get_config( [] )['content'] . '
+				' . SideImageWithTextAndCta::get_config()['content'] . '
 
 				<!-- wp:spacer {"height":"30px"} -->
 				<div style="height:30px" aria-hidden="true" class="wp-block-spacer"></div>
@@ -88,7 +88,7 @@ class HomePage extends Block_Pattern {
 				' . SideImageWithTextAndCta::get_config( [ 'media_position' => 'right' ] )['content'] . '
 
 				<!-- wp:spacer {"height":"56px"} -->
-				<div style="height:54px" aria-hidden="true" class="wp-block-spacer"></div>
+				<div style="height:56px" aria-hidden="true" class="wp-block-spacer"></div>
 				<!-- /wp:spacer -->
 
 				<!-- wp:planet4-blocks/covers {"cover_type":"take-action","className":"is-style-take-action"} -->

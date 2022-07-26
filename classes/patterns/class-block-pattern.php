@@ -44,7 +44,6 @@ abstract class Block_Pattern {
 			DeepDive::class,
 			GetInformed::class,
 			HomePage::class,
-			SideImageWithTextAndCta::class,
 			HighlightedCta::class,
 			Issues::class,
 			QuickLinks::class,
