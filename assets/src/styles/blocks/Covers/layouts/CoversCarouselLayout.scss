@@ -18,10 +18,6 @@
     &::-webkit-scrollbar {
       display: none;
     }
-
-    @include large-and-up {
-      overflow-x: hidden;
-    }
   }
 
   .carousel-control-prev,
