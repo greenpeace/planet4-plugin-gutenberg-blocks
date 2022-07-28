@@ -8,6 +8,9 @@
 
 namespace P4GBKS\Patterns;
 
+use P4GBKS\Patterns\Templates\Covers;
+use P4GBKS\Patterns\Templates\TwoColumnsGravityForms;
+
 /**
  * This class is used for returning a homepage pattern layout template.
  *
@@ -99,57 +102,13 @@ class Homepage extends Block_Pattern {
 				<div style="height:56px" aria-hidden="true" class="wp-block-spacer"></div>
 				<!-- /wp:spacer -->
 
-				<!-- wp:planet4-blocks/covers {"cover_type":"take-action","className":"is-style-take-action"} -->
-				<div class="wp-block-planet4-blocks-covers is-style-take-action" data-render="planet4-blocks/covers" data-attributes="{&quot;attributes&quot;:{&quot;cover_type&quot;:&quot;take-action&quot;,&quot;initialRowsLimit&quot;:1,&quot;title&quot;:&quot;&quot;,&quot;description&quot;:&quot;&quot;,&quot;tags&quot;:[],&quot;post_types&quot;:[],&quot;posts&quot;:[],&quot;version&quot;:2,&quot;layout&quot;:&quot;grid&quot;,&quot;isExample&quot;:false,&quot;readMoreText&quot;:&quot;Load more&quot;,&quot;className&quot;:&quot;is-style-take-action&quot;},&quot;innerBlocks&quot;:[]}"></div>
-				<!-- /wp:planet4-blocks/covers -->
+				' . Covers::get_content( [ 'cover_type' => 'take-action' ] ) . '
 
 				<!-- wp:spacer {"height":"72px"} -->
 				<div style="height:72px" aria-hidden="true" class="wp-block-spacer"></div>
 				<!-- /wp:spacer -->
 
-				<!-- wp:group {"align":"full","backgroundColor":"grey-05"} -->
-				<div class="wp-block-group alignfull has-grey-05-background-color has-background">
-					<!-- wp:spacer {"height":"80px"} -->
-					<div style="height:80px" aria-hidden="true" class="wp-block-spacer"></div>
-					<!-- /wp:spacer -->
-
-					<!-- wp:group {"className":"container"} -->
-					<div class="wp-block-group container">
-
-					<!-- wp:columns -->
-					<div class="wp-block-columns">
-
-						<!-- wp:column -->
-						<div class="wp-block-column">
-
-							<!-- wp:heading {"level":2,"style":{"typography":{"fontSize":"40px"}},"placeholder":"' . __( 'Enter title', 'planet4-blocks-backend' ) . '"} -->
-							<h2 style="font-size:40px;"></h2>
-							<!-- /wp:heading -->
-
-							<!-- wp:paragraph {"placeholder":"' . __( 'Enter text', 'planet4-blocks-backend' ) . '"} -->
-							<p></p>
-							<!-- /wp:paragraph -->
-
-						</div>
-						<!-- /wp:column -->
-
-						<!-- wp:column -->
-						<div class="wp-block-column">
-							<!-- wp:gravityforms/form {"title":false,"description":false} /-->
-						</div>
-						<!-- /wp:column -->
-
-					</div>
-					<!-- /wp:columns -->
-
-					</div>
-					<!-- /wp:group -->
-
-					<!-- wp:spacer {"height":"50px"} -->
-					<div style="height:50px" aria-hidden="true" class="wp-block-spacer"></div>
-					<!-- /wp:spacer -->
-				</div>
-				<!-- /wp:group -->
+				' . TwoColumnsGravityForms::get_content() . '
 
 			</div>
 			<!-- /wp:group -->
