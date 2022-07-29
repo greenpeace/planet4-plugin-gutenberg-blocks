@@ -442,14 +442,16 @@ $breakpoints = [
 add_filter(
 	'render_block_core/query-pagination-previous',
 	function ( $content, $parsed, $block ) {
-		if ( empty( $block->attributes['label'] ) ) {
-			$block->attributes['label'] = __( 'Prev', 'planet4-blocks' );
+		$button_label = __( 'Prev', 'planet4-blocks' );
+
+		if ( ! array_key_exists( 'label', $block->attributes ) ) {
+			$block->attributes['label'] = $button_label;
 			return $block->render();
 		}
 
 		// Check if the button isn't rendered, then return it.
 		if ( empty( $content ) ) {
-			return '<a href="/" class="wp-block-query-pagination-previous disabled">' . __( 'Prev', 'planet4-blocks' ) . '</a>';
+			return '<a href="/" class="wp-block-query-pagination-previous disabled">' . $button_label . '</a>';
 		}
 
 		return $content;
@@ -461,14 +463,16 @@ add_filter(
 add_filter(
 	'render_block_core/query-pagination-next',
 	function ( $content, $parsed, $block ) {
-		if ( empty( $block->attributes['label'] ) ) {
-			$block->attributes['label'] = __( 'Next', 'planet4-blocks' );
+		$button_label = __( 'Next', 'planet4-blocks' );
+
+		if ( ! array_key_exists( 'label', $block->attributes ) ) {
+			$block->attributes['label'] = $button_label;
 			return $block->render();
 		}
 
 		// Check if the button isn't rendered, then return it.
 		if ( empty( $content ) ) {
-			return '<a href="/" class="wp-block-query-pagination-next disabled">' . __( 'Next', 'planet4-blocks' ) . '</a>';
+			return '<a href="/" class="wp-block-query-pagination-next disabled">' . $button_label . '</a>';
 		}
 
 		return $content;
