@@ -11,7 +11,7 @@ namespace P4GBKS\Patterns\Templates;
 use P4GBKS\Patterns\Templates\TemplatePattern;
 
 /**
- * This class is used for returning a blank page with a default content.
+ * This class is used for returning a carousel header with a default content.
  *
  * @package P4GBKS\Patterns\Templates
  */
