@@ -28,16 +28,18 @@ class Issues extends Block_Pattern {
 	 */
 	public static function get_media_text_template(): string {
 		$media_link = esc_url( get_template_directory_uri() ) . '/images/placeholders/placeholder-40x40.jpg';
-		return '
-			<!-- wp:media-text {"mediaWidth":15,"mediaLink":"' . $media_link . '","mediaType":"image","mediaSizeSlug":"thumbnail","isStackedOnMobile":false,"verticalAlignment":"center","imageFill":false,"backgroundColor":"white","className":"is-style-large-padding force-no-lightbox"} -->
-			<div class="wp-block-media-text alignwide is-vertically-aligned-center has-white-background-color is-style-large-padding has-background force-no-lightbox" style="grid-template-columns:15% auto">
+
+		return '<!-- wp:group {"style":{"spacing":{"padding":{"top":"16px","right":"16px","bottom":"16px","left":"16px"}}},"backgroundColor":"white"} -->
+			<div class="wp-block-group has-white-background-color has-background" style="padding-top:16px;padding-right:16px;padding-bottom:16px;padding-left:16px">
+			<!-- wp:media-text {"mediaLink":"' . $media_link . '","mediaType":"image","mediaWidth":15,"mediaSizeSlug":"thumbnail","isStackedOnMobile":false,"verticalAlignment":"center","imageFill":false,"className":"force-no-lightbox is-style-default"} -->
+			<div class="wp-block-media-text alignwide is-vertically-aligned-center force-no-lightbox is-style-default" style="grid-template-columns:15% auto">
 			<figure class="wp-block-media-text__media"><img src="' . $media_link . '" alt="' . __( 'Default image', 'planet4-blocks-backend' ) . '"/></figure>
 			<div class="wp-block-media-text__content">
 			<!-- wp:paragraph {"align":"left","placeholder":"' . __( 'Enter text', 'planet4-blocks-backend' ) . '","style":{"typography":{"fontSize":"1rem","fontStyle":"normal","fontWeight":"700"}},"className":"is-style-roboto-font-family"} -->
 			<p class="has-text-align-left is-style-roboto-font-family" style="font-size:1rem;font-style:normal;font-weight:700"></p>
 			<!-- /wp:paragraph --></div></div>
-			<!-- /wp:media-text -->
-		';
+			<!-- /wp:media-text --></div>
+		<!-- /wp:group -->';
 	}
 
 	/**
