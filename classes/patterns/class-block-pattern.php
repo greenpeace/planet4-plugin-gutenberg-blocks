@@ -40,18 +40,16 @@ abstract class Block_Pattern {
 	 */
 	public static function get_list(): array {
 		return [
-			BlankPage::class,
-			DeepDive::class,
-			GetInformed::class,
-			Homepage::class,
-			HighlightedCta::class,
-			Issues::class,
-			PageHeader::class,
-			PageHeaderImgLeft::class,
-			QuickLinks::class,
-			RealityCheck::class,
-			SideImageWithTextAndCta::class,
-			Action::class,
+			'deep-dive',
+			'highlighted-cta',
+			'issues',
+			'page-header-img-side/left',
+			'page-header-img-side/right',
+			'quick-links',
+			'reality-check',
+			'side-image-with-text-and-cta',
+			// Content layout.
+			'high-level-topic',
 		];
 	}
 
@@ -63,13 +61,41 @@ abstract class Block_Pattern {
 			return;
 		}
 
-		$patterns = self::get_list();
+		$tpl_list = self::get_list();
 
-		/**
-		 * @var $pattern self
-		 */
-		foreach ( $patterns as $pattern ) {
-			register_block_pattern( $pattern::get_name(), $pattern::get_config() );
+		foreach ( $tpl_list as $tpl_dir ) {
+			$metadata_file = sprintf(
+				'%s/assets/src/block-templates/%s/block.json',
+				P4GBKS_PLUGIN_DIR,
+				$tpl_dir
+			);
+
+			if ( ! file_exists( $metadata_file ) ) {
+				continue;
+			}
+
+			$metadata = wp_json_file_decode(
+				$metadata_file,
+				[ 'associative' => true ]
+			);
+
+			if ( ! isset( $metadata['pattern'] )
+				|| ( $metadata['pattern']['contentOnly'] ?? false )
+			) {
+				continue;
+			}
+
+			register_block_pattern(
+				$metadata['name'],
+				[
+					'title'      => $metadata['title'],
+					'categories' => $metadata['pattern']['categories'] ?? [],
+					'content'    => sprintf(
+						'<!-- wp:%s /-->',
+						$metadata['name']
+					),
+				]
+			);
 		}
 	}
 }

@@ -66,3 +66,6 @@ registerBlockVariation('core/group', {
   },
   icon: 'admin-links',
 });
+
+import { registerBlockTemplates } from './block-templates/register';
+registerBlockTemplates();

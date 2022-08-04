@@ -1,0 +1,13 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "p4-block-templates/page-header-img-left",
+  "title": "Page Header with image on the left",
+  "description": "Page Header with image on the left",
+  "classname": "is-pattern-p4-page-header",
+  "category": "page-headers",
+  "textdomain": "planet4-blocks-backend",
+  "pattern": {
+    "categories": ["page-headers"]
+  }
+}

@@ -140,6 +140,17 @@ const PAGE_BLOCK_TYPES = [
 	'planet4-blocks/guestbook',
 	'leadin/hubspot-form-block',
 	'gravityforms/form',
+	// Block templates.
+	'p4-block-templates/deep-dive',
+	'p4-block-templates/highlighted-cta',
+	'p4-block-templates/issues',
+	'p4-block-templates/page-header-img-left',
+	'p4-block-templates/page-header-img-right',
+	'p4-block-templates/quick-links',
+	'p4-block-templates/reality-check',
+	'p4-block-templates/side-image-with-text-and-cta',
+	// Content layouts.
+	'p4-block-templates/high-level-topic-pattern-layout',
 ];
 
 const BETA_PAGE_BLOCK_TYPES = [
