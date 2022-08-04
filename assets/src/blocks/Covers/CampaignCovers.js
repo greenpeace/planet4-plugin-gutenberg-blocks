@@ -5,19 +5,16 @@ const { __ } = wp.i18n;
 
 export const CampaignCovers = ({
   covers,
-  initialRowsLimit,
-  row,
   inEditor = false,
-  isCarouselLayout,
-  amountOfCoversPerRow,
   isExample,
+  hideCover,
 }) => (
   <div className='covers'>
     {covers.map((cover, index) => {
       const { image, alt_text } = cover;
-      const hideCover = !isCarouselLayout && !!initialRowsLimit && index >= row * amountOfCoversPerRow;
+      const hideThisCover = hideCover(index);
 
-      if (hideCover) {
+      if (hideThisCover) {
         return null;
       }
 

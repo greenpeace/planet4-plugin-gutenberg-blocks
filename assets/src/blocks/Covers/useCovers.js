@@ -15,15 +15,17 @@ export const useCovers = ({ post_types, tags, cover_type, initialRowsLimit, post
   const [amountOfCoversPerRow, setAmountOfCoversPerRow] = useState(null);
   const [error, setError] = useState(null);
 
+  const isCarouselLayout = layout === COVERS_LAYOUTS.carousel;
+
   const updateRowCoversAmount = () => {
     if(cover_type === COVERS_TYPES.campaign || cover_type === COVERS_TYPES.takeAction) {
-      if (layout === COVERS_LAYOUTS.carousel) {
+      if (isCarouselLayout) {
         setAmountOfCoversPerRow(3);
       } else {
         setAmountOfCoversPerRow(isSmallWindow() ? 2 : 3);
       }
     } else {
-      if (layout === COVERS_LAYOUTS.carousel) {
+      if (isCarouselLayout) {
         setAmountOfCoversPerRow(4);
       } else {
         if (isMobile()) {
@@ -66,6 +68,14 @@ export const useCovers = ({ post_types, tags, cover_type, initialRowsLimit, post
     }
   };
 
+  const hideCover = index => {
+    if (isCarouselLayout && !isSmallWindow()) {
+      return index >= row * amountOfCoversPerRow || index < (row - 1) * amountOfCoversPerRow;
+    } else if (!isCarouselLayout) {
+      return !!initialRowsLimit && index >= row * amountOfCoversPerRow;
+    }
+  };
+
   useEffect(() => {
     if (!noLoading) {
       loadCovers();
@@ -95,5 +105,6 @@ export const useCovers = ({ post_types, tags, cover_type, initialRowsLimit, post
     setRow,
     row,
     amountOfCoversPerRow,
+    hideCover,
   };
 };

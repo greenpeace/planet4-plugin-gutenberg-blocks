@@ -5,11 +5,8 @@ const { __ } = wp.i18n;
 
 export const ContentCovers = ({
   covers,
-  initialRowsLimit,
-  row,
+  hideCover,
   inEditor = false,
-  isCarouselLayout,
-  amountOfCoversPerRow,
   isExample,
 }) => (
   <div className='covers'>
@@ -21,9 +18,9 @@ export const ContentCovers = ({
         date_formatted,
       } = cover;
 
-      const hideCover = !isCarouselLayout && !!initialRowsLimit && index >= row * amountOfCoversPerRow;
+      const hideThisCover = hideCover(index);
 
-      if (hideCover) {
+      if (hideThisCover) {
         return null;
       }
 

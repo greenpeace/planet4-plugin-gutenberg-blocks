@@ -4,12 +4,9 @@ import { IMAGE_SIZES } from './imageSizes';
 const { __ } = wp.i18n;
 
 export const TakeActionCovers = ({
-  initialRowsLimit,
   covers,
-  row,
+  hideCover,
   inEditor = false,
-  isCarouselLayout,
-  amountOfCoversPerRow,
   isExample,
 }) => (
   <div className='covers'>
@@ -23,9 +20,10 @@ export const TakeActionCovers = ({
         excerpt,
         button_text,
       } = cover;
-      const hideCover = !isCarouselLayout && !!initialRowsLimit && index >= row * amountOfCoversPerRow;
 
-      if (hideCover) {
+      const hideThisCover = hideCover(index);
+
+      if (hideThisCover) {
         return null;
       }
 

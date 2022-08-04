@@ -14,18 +14,15 @@ export const CoversFrontend = attributes => {
     row,
     amountOfCoversPerRow,
     setRow,
+    hideCover,
   } = useCovers(attributes, true);
 
   const isCarouselLayout = layout === COVERS_LAYOUTS.carousel;
 
   const coversProps = {
     covers,
-    initialRowsLimit,
-    row,
-    showMoreCovers,
     cover_type,
-    isCarouselLayout,
-    amountOfCoversPerRow
+    hideCover,
   };
 
   if (!covers.length) {
@@ -55,11 +52,8 @@ export const CoversFrontend = attributes => {
     }
 
     if (direction) {
-      const initialScrollPosition = covers.scrollLeft;
-      covers.scrollLeft = initialScrollPosition + (direction === 'next' ? scrollOffset : -scrollOffset);
       setRow(direction === 'next' ? row + 1 : row - 1);
     } else if (rowNumber) {
-      covers.scrollLeft = (rowNumber - 1) * scrollOffset;
       setRow(rowNumber);
     }
   };

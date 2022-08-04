@@ -108,21 +108,16 @@ const renderView = (attributes, toAttribute) => {
     exampleCovers,
     readMoreText,
   } = attributes;
-  const { covers, loading, row, amountOfCoversPerRow } = useCovers(attributes);
+  const { covers, loading, row, amountOfCoversPerRow, hideCover } = useCovers(attributes);
 
   const isCarouselLayout = layout === COVERS_LAYOUTS.carousel;
 
   const coversProps = {
     covers: isExample ? exampleCovers[cover_type] : covers,
-    initialRowsLimit,
-    row,
-    showMoreCovers: () => {},
     cover_type,
     inEditor: true,
-    isCarouselLayout,
-    amountOfCoversPerRow,
     isExample,
-    readMoreText,
+    hideCover,
   };
 
   const showLoadMoreButton = !isCarouselLayout && !!initialRowsLimit && covers.length > (amountOfCoversPerRow * row);
