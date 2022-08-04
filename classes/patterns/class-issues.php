@@ -29,14 +29,16 @@ class Issues extends Block_Pattern {
 	public static function get_media_text_template(): string {
 		$media_link = esc_url( get_template_directory_uri() ) . '/images/placeholders/placeholder-40x40.jpg';
 
-		return '<!-- wp:group {"style":{"spacing":{"padding":{"top":"32px","right":"16px","bottom":"32px","left":"16px"}}},"backgroundColor":"white"} -->
+		return '<!-- wp:group {"className":"d-flex jujstify-content-center has-white-background-color has-background","style":{"spacing":{"padding":{"top":"32px","right":"16px","bottom":"32px","left":"16px"}}},"backgroundColor":"white"} -->
 			<div class="wp-block-group d-flex jujstify-content-center has-white-background-color has-background" style="padding-top:32px;padding-right:16px;padding-bottom:32px;padding-left:16px">
-			<!-- wp:media-text {"mediaLink":"' . $media_link . '","mediaType":"image","mediaWidth":15,"mediaSizeSlug":"thumbnail","isStackedOnMobile":false,"verticalAlignment":"center","imageFill":false,"className":"force-no-lightbox"} -->
-			<div class="wp-block-media-text alignwide is-vertically-aligned-center force-no-lightbox" style="grid-template-columns:15% auto">
-			<figure class="wp-block-media-text__media"><img src="' . $media_link . '" alt="' . __( 'Default image', 'planet4-blocks-backend' ) . '"/></figure>
+			<!-- wp:media-text {"mediaLink":"' . $media_link . '","mediaType":"image","mediaWidth":14,"mediaSizeSlug":"thumbnail","isStackedOnMobile":false,"imageFill":false,"className":"w-100 force-no-lightbox"} -->
+			<div class="wp-block-media-text w-100 force-no-lightbox" style="grid-template-columns:14% auto">
+			<figure class="wp-block-media-text__media">
+				<img src="' . $media_link . '" alt="' . __( 'Default image', 'planet4-blocks-backend' ) . '"/>
+			</figure>
 			<div class="wp-block-media-text__content">
 			<!-- wp:paragraph {"align":"left","placeholder":"' . __( 'Enter text', 'planet4-blocks-backend' ) . '","style":{"typography":{"fontSize":"1rem","fontStyle":"normal","fontWeight":"700"}},"className":"is-style-roboto-font-family"} -->
-			<p class="mb-0 has-text-align-left is-style-roboto-font-family" style="font-size:1rem;font-style:normal;font-weight:700"></p>
+			<p class="mb-0 lh-1 has-text-align-left is-style-roboto-font-family" style="font-size:1rem;font-style:normal;font-weight:700"></p>
 			<!-- /wp:paragraph --></div></div>
 			<!-- /wp:media-text --></div>
 		<!-- /wp:group -->';
