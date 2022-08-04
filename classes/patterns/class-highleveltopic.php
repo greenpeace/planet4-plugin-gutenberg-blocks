@@ -41,6 +41,7 @@ class HighLevelTopic extends Block_Pattern {
 			'content'    => '
 				<!-- wp:group {"className":"block ' . $classname . '"} -->
 					<div class="wp-block-group ' . $classname . '">
+						' . PageHeader::get_config()['content'] . '
 						' . RealityCheck::get_config()['content'] . '
 						' . SideImageWithTextAndCta::get_config(
 							[
