@@ -29,8 +29,8 @@ class Issues extends Block_Pattern {
 	public static function get_media_text_template(): string {
 		$media_link = esc_url( get_template_directory_uri() ) . '/images/placeholders/placeholder-40x40.jpg';
 
-		return '<!-- wp:group {"className":"d-flex has-white-background-color has-background","style":{"spacing":{"padding":{"top":"32px","right":"16px","bottom":"32px","left":"16px"}}},"backgroundColor":"white"} -->
-			<div class="d-flex wp-block-group has-white-background-color has-background" style="padding-top:32px;padding-right:16px;padding-bottom:32px;padding-left:16px">
+		return '<!-- wp:group {"className":"d-flex has-white-background-color has-background","style":{"border":{"radius":"4px"},"spacing":{"padding":{"top":"32px","right":"16px","bottom":"32px","left":"16px"}}},"backgroundColor":"white"} -->
+			<div class="d-flex wp-block-group has-white-background-color has-background" style="border-radius:4px;padding-top:32px;padding-right:16px;padding-bottom:32px;padding-left:16px">
 			<!-- wp:media-text {"mediaLink":"' . $media_link . '","mediaType":"image","mediaWidth":14,"mediaSizeSlug":"thumbnail","isStackedOnMobile":false,"imageFill":false,"className":"w-100 force-no-lightbox"} -->
 			<div class="wp-block-media-text w-100 force-no-lightbox" style="grid-template-columns:14% auto">
 			<figure class="wp-block-media-text__media">
