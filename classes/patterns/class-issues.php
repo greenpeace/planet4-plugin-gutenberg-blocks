@@ -57,8 +57,8 @@ class Issues extends Block_Pattern {
 			'title'      => __( 'Issues', 'planet4-blocks-backend' ),
 			'categories' => [ 'planet4' ],
 			'content'    => '
-				<!-- wp:group {"className":"' . $classname . '","align":"full","backgroundColor":"grey-05","style":{"spacing":{"padding":{"top":"80px","right":"0px","bottom":"80px","left":"0px"}}}} -->
-				<div class="wp-block-group ' . $classname . ' alignfull has-grey-05-background-color has-background" style="padding-top:80px;padding-right:0px;padding-bottom:80px;padding-left:0px">
+				<!-- wp:group {"className":"' . $classname . '","align":"full","backgroundColor":"grey-05","style":{"spacing":{"padding":{"top":"80px","bottom":"80px"}}}} -->
+				<div class="wp-block-group ' . $classname . ' alignfull has-grey-05-background-color has-background" style="padding-top:80px;padding-bottom:80px;">
 
 					<!-- wp:group {"className":"container"} -->
 					<div class="wp-block-group container">
