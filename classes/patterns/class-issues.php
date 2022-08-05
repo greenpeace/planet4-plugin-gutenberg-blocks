@@ -29,16 +29,16 @@ class Issues extends Block_Pattern {
 	public static function get_media_text_template(): string {
 		$media_link = esc_url( get_template_directory_uri() ) . '/images/placeholders/placeholder-40x40.jpg';
 
-		return '<!-- wp:group {"className":"d-flex jujstify-content-center has-white-background-color has-background","style":{"spacing":{"padding":{"top":"32px","right":"16px","bottom":"32px","left":"16px"}}},"backgroundColor":"white"} -->
-			<div class="wp-block-group d-flex jujstify-content-center has-white-background-color has-background" style="padding-top:32px;padding-right:16px;padding-bottom:32px;padding-left:16px">
+		return '<!-- wp:group {"className":"d-flex has-white-background-color has-background","style":{"spacing":{"padding":{"top":"32px","right":"16px","bottom":"32px","left":"16px"}}},"backgroundColor":"white"} -->
+			<div class="d-flex wp-block-group has-white-background-color has-background" style="padding-top:32px;padding-right:16px;padding-bottom:32px;padding-left:16px">
 			<!-- wp:media-text {"mediaLink":"' . $media_link . '","mediaType":"image","mediaWidth":14,"mediaSizeSlug":"thumbnail","isStackedOnMobile":false,"imageFill":false,"className":"w-100 force-no-lightbox"} -->
 			<div class="wp-block-media-text w-100 force-no-lightbox" style="grid-template-columns:14% auto">
 			<figure class="wp-block-media-text__media">
 				<img src="' . $media_link . '" alt="' . __( 'Default image', 'planet4-blocks-backend' ) . '"/>
 			</figure>
 			<div class="wp-block-media-text__content">
-			<!-- wp:paragraph {"align":"left","placeholder":"' . __( 'Enter text', 'planet4-blocks-backend' ) . '","style":{"typography":{"fontSize":"1rem","fontStyle":"normal","fontWeight":"700"}},"className":"is-style-roboto-font-family"} -->
-			<p class="mb-0 lh-1 has-text-align-left is-style-roboto-font-family" style="font-size:1rem;font-style:normal;font-weight:700"></p>
+			<!-- wp:paragraph {"className":"mb-0 lh-sm","align":"left","placeholder":"' . __( 'Enter text', 'planet4-blocks-backend' ) . '","style":{"typography":{"fontSize":"1rem","fontStyle":"normal","fontWeight":"700"}},"className":"is-style-roboto-font-family"} -->
+			<p class="mb-0 lh-sm has-text-align-left is-style-roboto-font-family" style="font-size:1rem;font-style:normal;font-weight:700"></p>
 			<!-- /wp:paragraph --></div></div>
 			<!-- /wp:media-text --></div>
 		<!-- /wp:group -->';
@@ -67,12 +67,12 @@ class Issues extends Block_Pattern {
 						<h1 class="has-text-align-center" style="margin-bottom:24px">' . $title_placeholder . '</h1>
 						<!-- /wp:heading -->
 
-						<!-- wp:paragraph {"align":"center", "placeholder":"' . __( 'Enter description', 'planet4-blocks-backend' ) . '"} -->
+						<!-- wp:paragraph {"className":"mb-0","align":"center", "placeholder":"' . __( 'Enter description', 'planet4-blocks-backend' ) . '"} -->
 						<p class="mb-0 has-text-align-center"></p>
 						<!-- /wp:paragraph -->
 
-						<!-- wp:group {"style":{"spacing":{"padding":{"top":"37px","right":"0px","bottom":"56px","left":"0px"}}},"className":"is-style-space-evenly","layout":{"type":"flex","allowOrientation":false}} -->
-						<div class="wp-block-group is-style-space-evenly" style="padding-top:37px;padding-right:0px;padding-bottom:56px;padding-left:0px">
+						<!-- wp:group {"style":{"spacing":{"padding":{"top":"40px","right":"0px","bottom":"56px","left":"0px"}}},"className":"is-style-space-evenly","layout":{"type":"flex","allowOrientation":false}} -->
+						<div class="wp-block-group is-style-space-evenly" style="padding-top:40px;padding-right:0px;padding-bottom:56px;padding-left:0px">
 						' . self::get_media_text_template() . '
 						' . self::get_media_text_template() . '
 						' . self::get_media_text_template() . '
