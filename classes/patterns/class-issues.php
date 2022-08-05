@@ -71,8 +71,8 @@ class Issues extends Block_Pattern {
 						<p class="mb-0 has-text-align-center"></p>
 						<!-- /wp:paragraph -->
 
-						<!-- wp:group {"style":{"spacing":{"padding":{"top":"40px","right":"0px","bottom":"56px","left":"0px"}}},"className":"is-style-space-evenly","layout":{"type":"flex","allowOrientation":false}} -->
-						<div class="wp-block-group is-style-space-evenly" style="padding-top:40px;padding-right:0px;padding-bottom:56px;padding-left:0px">
+						<!-- wp:group {"style":{"spacing":{"padding":{"top":"40px","bottom":"56px"}}},"className":"is-style-space-evenly","layout":{"type":"flex","allowOrientation":false}} -->
+						<div class="wp-block-group is-style-space-evenly" style="padding-top:40px;padding-bottom:56px;">
 						' . self::get_media_text_template() . '
 						' . self::get_media_text_template() . '
 						' . self::get_media_text_template() . '
