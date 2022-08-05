@@ -63,8 +63,8 @@ class Issues extends Block_Pattern {
 					<!-- wp:group {"className":"container"} -->
 					<div class="wp-block-group container">
 
-						<!-- wp:heading {"textAlign":"center","level":1, "placeholder":"' . __( 'Enter title', 'planet4-blocks-backend' ) . '","style":{"spacing":{"margin":{"bottom":"24px"}}}} -->
-						<h1 class="has-text-align-center" style="margin-bottom:24px">' . $title_placeholder . '</h1>
+						<!-- wp:heading {"textAlign":"center","level":2, "placeholder":"' . __( 'Enter title', 'planet4-blocks-backend' ) . '","style":{"spacing":{"margin":{"bottom":"24px"}}}} -->
+						<h2 class="has-text-align-center" style="margin-bottom:24px">' . $title_placeholder . '</h2>
 						<!-- /wp:heading -->
 
 						<!-- wp:paragraph {"className":"mb-0","align":"center", "placeholder":"' . __( 'Enter description', 'planet4-blocks-backend' ) . '"} -->
