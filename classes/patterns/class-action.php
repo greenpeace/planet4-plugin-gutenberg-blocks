@@ -31,12 +31,14 @@ class Action extends Block_Pattern {
 	 * @param array $params Optional array of parameters for the config.
 	 */
 	public static function get_config( $params = [] ): array {
+		$classname = self::get_classname();
+
 		return [
 			'title'      => __( 'Action', 'planet4-blocks-backend' ),
 			'categories' => [ 'layouts' ],
 			'content'    => '
-				<!-- wp:group {"className":"block"} -->
-					<div class="wp-block-group">
+				<!-- wp:group {"className":"block ' . $classname . '"} -->
+					<div class="wp-block-group block ' . $classname . '">
 						' . GravityFormWithImage::get_content() . '
 						<!-- wp:group {"backgroundColor":"grey-05","align":"full","style":{"spacing":{"padding":{"top":"80px","bottom":"80px"}}}} -->
 							<div class="wp-block-group alignfull has-grey-05-background-color has-background" style="padding-top:80px;padding-bottom:80px;">
