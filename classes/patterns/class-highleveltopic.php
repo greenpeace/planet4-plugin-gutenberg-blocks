@@ -42,6 +42,9 @@ class HighLevelTopic extends Block_Pattern {
 				<!-- wp:group {"className":"block ' . $classname . '"} -->
 					<div class="wp-block-group ' . $classname . '">
 						' . PageHeader::get_config()['content'] . '
+						<!-- wp:spacer {"height":"64px"} -->
+							<div style="height:64px" aria-hidden="true" class="wp-block-spacer"></div>
+						<!-- /wp:spacer -->
 						' . RealityCheck::get_config()['content'] . '
 						' . SideImageWithTextAndCta::get_config(
 							[
