@@ -41,12 +41,12 @@ class Action extends Block_Pattern {
 						<!-- wp:group {"backgroundColor":"grey-05","align":"full","style":{"spacing":{"padding":{"top":"80px","bottom":"80px"}}}} -->
 							<div class="wp-block-group alignfull has-grey-05-background-color has-background" style="padding-top:80px;padding-bottom:80px;">
 									<div class="wp-block-group container">
-										' . SideImageWithTextAndCta::get_config(
-										[
-											'media_position'    => 'right',
-											'title_placeholder' => __( 'The problem', 'planet4-blocks' ),
-										]
-									)['content'] . '
+						' . SideImageWithTextAndCta::get_config(
+							[
+								'media_position'    => 'right',
+								'title_placeholder' => __( 'The problem', 'planet4-blocks' ),
+							]
+						)['content'] . '
 									</div>
 								<!-- /wp:group -->
 							</div>
