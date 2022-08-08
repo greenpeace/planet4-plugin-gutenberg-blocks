@@ -42,6 +42,7 @@ class Action extends Block_Pattern {
 						' . GravityFormWithImage::get_content() . '
 						<!-- wp:group {"backgroundColor":"grey-05","align":"full","style":{"spacing":{"padding":{"top":"80px","bottom":"80px"}}}} -->
 							<div class="wp-block-group alignfull has-grey-05-background-color has-background" style="padding-top:80px;padding-bottom:80px;">
+								<!-- wp:group {"className":"container"} -->
 									<div class="wp-block-group container">
 						' . SideImageWithTextAndCta::get_config(
 							[
