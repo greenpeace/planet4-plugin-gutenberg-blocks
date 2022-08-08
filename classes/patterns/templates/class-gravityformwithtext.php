@@ -11,11 +11,11 @@ namespace P4GBKS\Patterns\Templates;
 use P4GBKS\Patterns\Templates\TemplatePattern;
 
 /**
- * This class is used for returning a blank page with a default content.
+ * This class is used to return a Gravity Form block with text on the side.
  *
  * @package P4GBKS\Patterns\Templates
  */
-class TwoColumnsGravityForms extends TemplatePattern {
+class GravityFormWithText extends TemplatePattern {
 
 	/**
 	 * @inheritDoc
