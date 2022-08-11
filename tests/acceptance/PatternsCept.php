@@ -9,8 +9,13 @@ $I->loginAsAdminCached();
 $I->amOnPage('/wp-admin/post-new.php?post_type=page');
 
 // Close Welcome modal
-$I->waitForElement('//button[contains(@aria-label, "Close dialog")]');
-$I->click('//button[contains(@aria-label, "Close dialog")]');
+try {
+	$closeWelcomeGuide = '//[contains(@class, \'.edit-post-welcome-guide\')]'
+		. '//button[contains(@aria-label, "Close dialog")]';
+	$I->waitForElement($closeWelcomeGuide);
+	$I->click($closeWelcomeGuide);
+} catch (\Exception $e) {
+}
 
 // We need to chek these class names since we've overriden its layout
 // https://github.com/greenpeace/planet4-master-theme/blob/master/assets/src/scss/editorStyle.scss
