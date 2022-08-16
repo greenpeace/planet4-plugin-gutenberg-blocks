@@ -10,7 +10,7 @@ namespace P4GBKS\Patterns;
 use P4GBKS\Patterns\Templates\Covers;
 
 /**
- * Class Deep Dive.
+ * Class Deep Dive Topic.
  *
  * @package P4GBKS\Patterns
  */
@@ -20,13 +20,11 @@ class DeepDiveTopic extends Block_Pattern {
 	 * Returns the pattern name.
 	 */
 	public static function get_name(): string {
-		return 'p4/deep-dive-topic';
+		return 'p4/deep-dive-topic-pattern-layout';
 	}
 
 	/**
 	 * Returns the pattern config.
-	 * We start with 4 columns, but editors can easily remove and/or duplicate them.
-	 * This pattern should have grey 5% background by default.
 	 *
 	 * @param array $params Optional array of parameters for the config.
 	 */
@@ -49,7 +47,6 @@ class DeepDiveTopic extends Block_Pattern {
 					' . SideImageWithTextAndCta::get_config(
 						[
 							'title_placeholder' => __( 'The problem', 'planet4-blocks' ),
-							'media_position'    => 'left',
 						]
 					)['content'] . '
 					' . SideImageWithTextAndCta::get_config(
@@ -61,7 +58,6 @@ class DeepDiveTopic extends Block_Pattern {
 					' . Covers::get_content(
 						[
 							'title_placeholder' => __( 'How you can help', 'planet4-blocks' ),
-							'cover_type'        => 'take-action',
 						]
 					) . '
 					<!-- wp:planet4-blocks/articles {"article_heading":"' . __( 'Latest news & stories', 'planet4-blocks' ) . '"} /-->
