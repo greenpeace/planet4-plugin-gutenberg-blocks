@@ -1,0 +1,20 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "p4-block-templates/side-image-with-text-and-cta",
+  "title": "Side image with text and CTA",
+  "description": "Side image with text and CTA",
+  "classname": "is-pattern-p4-side-image-with-text-and-cta",
+  "category": "planet4",
+  "textdomain": "planet4-blocks-backend",
+  "attributes": {
+    "title": { "type": "string" },
+    "titlePlaceholder": { "type": "string" },
+    "backgroundColor": { "type": "string" },
+    "alignFull": { "type": "bool" },
+    "mediaPosition": { "type": "string" }
+  },
+  "pattern": {
+    "categories": ["planet4"]
+  }
+}

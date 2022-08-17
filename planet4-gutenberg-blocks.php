@@ -140,6 +140,8 @@ const PAGE_BLOCK_TYPES = [
 	'planet4-blocks/guestbook',
 	'leadin/hubspot-form-block',
 	'gravityforms/form',
+	// Block templates.
+	'p4-block-templates/side-image-with-text-and-cta',
 ];
 
 const BETA_PAGE_BLOCK_TYPES = [
