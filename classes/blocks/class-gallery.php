@@ -53,7 +53,7 @@ class Gallery extends Base_Block {
 				'render_callback' => static function ( $attributes ) {
 					$attributes['images'] = self::get_images( $attributes );
 
-					return self::render_frontend( $attributes );
+					return self::hydrate_frontend( $attributes );
 				},
 				'attributes'      => [
 					'gallery_block_style'        => [ // Needed for existing blocks conversion.
@@ -93,6 +93,10 @@ class Gallery extends Base_Block {
 								],
 							],
 						],
+					],
+					'images'                     => [
+						'type'    => 'array',
+						'default' => [],
 					],
 				],
 			]

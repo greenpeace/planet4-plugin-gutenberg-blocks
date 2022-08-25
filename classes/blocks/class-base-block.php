@@ -235,4 +235,15 @@ abstract class Base_Block {
 
 		return '<div data-render="' . self::get_full_block_name() . '" data-attributes="' . htmlspecialchars( $json ) . '"></div>';
 	}
+
+	/**
+	 * Hydrate a `div` with the block's attributes in a `data-` attribute to be handled in the frontend.
+	 *
+	 * @param array $attributes The block's attributes.
+	 */
+	public static function hydrate_frontend( $attributes ) {
+		$json = wp_json_encode( [ 'attributes' => $attributes ] );
+
+		return '<div data-hydrate="' . self::get_full_block_name() . '" data-attributes="' . htmlspecialchars( $json ) . '"></div>';
+	}
 }
