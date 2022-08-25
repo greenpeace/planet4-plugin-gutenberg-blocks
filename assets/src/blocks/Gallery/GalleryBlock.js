@@ -1,6 +1,8 @@
+import ReactDOMServer from 'react-dom/server';
 import { GalleryEditor } from './GalleryEditor';
 import { frontendRendered } from '../frontendRendered';
 import { getStyleLabel } from '../../functions/getStyleLabel';
+import { GalleryFrontend } from './GalleryFrontend';
 
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
@@ -32,6 +34,10 @@ const attributes = {
     type: 'array',
     default: []
   },
+  images: {
+    type: 'array',
+    default: []
+  },
 };
 
 export const registerGalleryBlock = () => {
@@ -44,7 +50,18 @@ export const registerGalleryBlock = () => {
       html: false, // Disable "Edit as HTMl" block option.
     },
     edit: GalleryEditor,
-    save: frontendRendered(BLOCK_NAME),
+    save: (props) => {
+      const attributes = {...props.attributes};
+      const markup = ReactDOMServer.renderToString(
+        <div
+          data-hydrate={BLOCK_NAME}
+          data-attributes={JSON.stringify(attributes)}
+        >
+          <GalleryFrontend {...props} />
+        </div>
+      );
+      return <wp.element.RawHTML>{ markup }</wp.element.RawHTML>;
+    },
     // Add our custom styles
     styles: [
       {
@@ -73,10 +90,15 @@ export const registerGalleryBlock = () => {
     deprecated: [
       {
         attributes,
+        edit: GalleryEditor,
+        save: frontendRendered(BLOCK_NAME),
+      },
+      {
+        attributes,
         save() {
           return null;
         }
-      }
+      },
     ],
   });
 };
