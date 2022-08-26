@@ -34,10 +34,6 @@ const attributes = {
     type: 'array',
     default: []
   },
-  images: {
-    type: 'array',
-    default: []
-  },
 };
 
 export const registerGalleryBlock = () => {
@@ -45,13 +41,19 @@ export const registerGalleryBlock = () => {
     title: 'Gallery',
     icon: 'format-gallery',
     category: 'planet4-blocks',
-    attributes,
+    attributes: {
+      ...attributes,
+      images: {
+        type: 'array',
+        default: []
+      },
+    },
     supports: {
       html: false, // Disable "Edit as HTMl" block option.
     },
     edit: GalleryEditor,
     save: (props) => {
-      const attributes = {...props.attributes};
+      const { attributes } = props;
       const markup = ReactDOMServer.renderToString(
         <div
           data-hydrate={BLOCK_NAME}

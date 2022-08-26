@@ -54,7 +54,7 @@ export const Lightbox = ({ index, isOpen, items, onClose = () => {} }) => {
 
     photoSwipe.init();
 
-  }, [items]);
+  }, [items, isOpen, index]);
 
   return wp.element.createPortal(
     <div
