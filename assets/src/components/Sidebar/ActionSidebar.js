@@ -28,8 +28,8 @@ export const ActionSidebar = () => {
   return (
     <>
       <PluginDocumentSettingPanel
-        name="meta-options-panel"
-        title={ __( "Meta options", 'planet4-blocks-backend' ) }
+        name="page-header-panel"
+        title={ __( "Page header", 'planet4-blocks-backend' ) }
       >
         <HidePageTitle {...hidePageTitleParams} />
       </PluginDocumentSettingPanel>
