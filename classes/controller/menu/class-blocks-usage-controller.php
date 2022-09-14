@@ -158,13 +158,15 @@ if ( ! class_exists( 'Blocks_Usage_Controller' ) ) {
 					'plugin_blocks_report',
 					[ $this, 'plugin_blocks_report' ]
 				);
+			}
 
+			if ( ( in_array( 'administrator', $current_user->roles, true ) || in_array( 'editor', $current_user->roles, true ) ) && current_user_can( 'edit_posts' ) ) {
 				// Experimental block usage page, hidden from menu.
 				add_submenu_page(
 					P4GBKS_PLUGIN_SLUG_NAME,
 					__( 'Report (Beta)', 'planet4-blocks-backend' ),
 					__( 'Report (Beta)', 'planet4-blocks-backend' ),
-					'manage_options',
+					'edit_posts',
 					'plugin_blocks_report_beta',
 					[ $this, 'plugin_blocks_report_beta' ]
 				);
@@ -173,7 +175,7 @@ if ( ! class_exists( 'Blocks_Usage_Controller' ) ) {
 					P4GBKS_PLUGIN_SLUG_NAME,
 					__( 'Pattern Report (Beta)', 'planet4-blocks-backend' ),
 					__( 'Pattern Report (Beta)', 'planet4-blocks-backend' ),
-					'manage_options',
+					'edit_posts',
 					'plugin_patterns_report',
 					[ $this, 'plugin_patterns_report' ]
 				);
