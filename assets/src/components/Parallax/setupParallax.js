@@ -1,7 +1,7 @@
 export const setupParallax = () => {
   const parallaxImages = document.querySelectorAll('.is-style-parallax img');
 
-  if (parallaxImages.length === 0) {
+  if (!parallaxImages.length) {
     return;
   }
 
