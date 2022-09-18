@@ -29,18 +29,16 @@ class Issues extends Block_Pattern {
 	public static function get_media_text_template(): string {
 		$media_link = esc_url( get_template_directory_uri() ) . '/images/placeholders/placeholder-40x40.jpg';
 
-		return '<!-- wp:group {"className":"d-flex has-white-background-color has-background","style":{"border":{"radius":"4px"},"spacing":{"padding":{"top":"32px","right":"16px","bottom":"32px","left":"16px"}}},"backgroundColor":"white"} -->
-			<div class="d-flex wp-block-group has-white-background-color has-background" style="border-radius:4px;padding-top:32px;padding-right:16px;padding-bottom:32px;padding-left:16px">
-			<!-- wp:media-text {"mediaLink":"' . $media_link . '","mediaType":"image","mediaWidth":14,"mediaSizeSlug":"thumbnail","isStackedOnMobile":false,"imageFill":false,"className":"w-100 force-no-lightbox"} -->
-			<div class="wp-block-media-text w-100 force-no-lightbox" style="grid-template-columns:14% auto">
-			<figure class="wp-block-media-text__media">
-				<img src="' . $media_link . '" alt="' . __( 'Default image', 'planet4-blocks-backend' ) . '"/>
-			</figure>
-			<div class="wp-block-media-text__content">
-			<!-- wp:paragraph {"className":"mb-0 lh-sm","align":"left","placeholder":"' . __( 'Enter text', 'planet4-blocks-backend' ) . '","style":{"typography":{"fontSize":"1rem","fontStyle":"normal","fontWeight":"700"}},"className":"is-style-roboto-font-family"} -->
-			<p class="mb-0 lh-sm has-text-align-left is-style-roboto-font-family" style="font-size:1rem;font-style:normal;font-weight:700"></p>
-			<!-- /wp:paragraph --></div></div>
-			<!-- /wp:media-text --></div>
+		return '<!-- wp:group {"style":{"border":{"radius":"4px"},"spacing":{"padding":{"top":"32px","right":"16px","bottom":"32px","left":"16px"}}},"backgroundColor":"white","layout":{"type":"flex","flexWrap":"nowrap"}} -->
+		<div class="wp-block-group has-white-background-color has-background" style="border-radius:4px;padding-top:32px;padding-right:16px;padding-bottom:32px;padding-left:16px">
+		<!-- wp:image {"width":40,"height":40,"sizeSlug":"thumbnail","linkDestination":"none","className":"caption-alignment-center is-style-default"} -->
+		<figure class="wp-block-image size-thumbnail is-resized caption-alignment-center is-style-default">
+			<img src="' . $media_link . '" alt="' . __( 'Default image', 'planet4-blocks-backend' ) . '" width="40" height="40"/>
+		</figure>
+		<!-- /wp:image -->
+		<!-- wp:heading {"level":4,"placeholder":"' . __( 'Enter text', 'planet4-blocks-backend' ) . '","style":{"typography":{"fontSize":"1rem","fontStyle":"normal","fontWeight":"700"},"spacing":{"margin":{"left":"12px"}}},"className":"is-style-roboto-font-family is-style-default"} -->
+		<h4 class="is-style-roboto-font-family is-style-default" style="font-size:1rem;font-style:normal;font-weight:700;margin-left:12px"></h4>
+		<!-- /wp:heading --></div>
 		<!-- /wp:group -->';
 	}
 
