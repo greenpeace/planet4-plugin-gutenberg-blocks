@@ -11,6 +11,7 @@ export const useArticlesFetch = (attributes, postType, postId, baseUrl = null, p
   const [displayedPosts, setDisplayedPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [controller, setController] = useState();
 
   const loadPage = async (reset = false) => {
     if (loading) {
@@ -59,8 +60,22 @@ export const useArticlesFetch = (attributes, postType, postId, baseUrl = null, p
 
   useEffect(() => {
     setDisplayedPosts([]);
-    loadPage(true);
+    setController(typeof AbortController === 'undefined' ? undefined : new AbortController());
   }, [ article_count, post_types, posts, tags, ignore_categories ]);
+
+  useEffect(() => {
+    if(controller) {
+      loadPage(true);
+    }
+
+    return () => {
+      if(controller) {
+        setLoading(false);
+        controller.abort();
+        setController(null);
+      }
+    }
+  }, [ controller ]);
 
   return {
     posts: displayedPosts,
