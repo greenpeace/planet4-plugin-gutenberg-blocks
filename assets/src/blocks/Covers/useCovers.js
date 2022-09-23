@@ -1,5 +1,6 @@
 import { useState, useEffect } from '@wordpress/element';
 import { addQueryArgs } from '../../functions/addQueryArgs';
+import { getAbortController } from '../../functions/getAbortController';
 import { COVERS_TYPES, COVERS_LAYOUTS } from './CoversConstants';
 
 const { apiFetch } = wp;
@@ -68,7 +69,7 @@ export const useCovers = ({ post_types, tags, cover_type, initialRowsLimit, post
 
   useEffect(() => {
     if (!noLoading) {
-      setController(typeof AbortController === 'undefined' ? undefined : new AbortController());
+      setController(getAbortController());
     }
   }, [cover_type, post_types, tags, posts, layout]);
 

@@ -1,6 +1,7 @@
 import { useState, useEffect } from '@wordpress/element';
 import { fetchJson } from '../../functions/fetchJson';
 import { addQueryArgs } from '../../functions/addQueryArgs';
+import { getAbortController } from '../../functions/getAbortController';
 
 const { apiFetch } = wp;
 
@@ -36,7 +37,7 @@ export const useGalleryImages = ({ multiple_image, gallery_block_focus_points },
 
   useEffect(() => {
     setImages([]);
-    setController(typeof AbortController === 'undefined' ? undefined : new AbortController());
+    setController(getAbortController());
   }, [multiple_image, gallery_block_focus_points]);
 
   useEffect(() => {

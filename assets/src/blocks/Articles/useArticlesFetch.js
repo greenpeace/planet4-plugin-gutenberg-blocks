@@ -1,6 +1,7 @@
 import { useState, useEffect } from '@wordpress/element';
 import { fetchJson } from '../../functions/fetchJson';
 import { addQueryArgs } from '../../functions/addQueryArgs';
+import { getAbortController } from '../../functions/getAbortController';
 
 const { apiFetch } = wp;
 
@@ -60,7 +61,7 @@ export const useArticlesFetch = (attributes, postType, postId, baseUrl = null, p
 
   useEffect(() => {
     setDisplayedPosts([]);
-    setController(typeof AbortController === 'undefined' ? undefined : new AbortController());
+    setController(getAbortController());
   }, [ article_count, post_types, posts, tags, ignore_categories ]);
 
   useEffect(() => {
