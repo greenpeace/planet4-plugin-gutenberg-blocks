@@ -14,6 +14,7 @@ export const useCovers = ({ post_types, tags, cover_type, initialRowsLimit, post
   const [isSmallWindow, setIsSmallWindow] = useState(window.innerWidth < 992);
   const [amountOfCoversPerRow, setAmountOfCoversPerRow] = useState(null);
   const [error, setError] = useState(null);
+  const [controller, setController] = useState();
 
   const updateRowCoversAmount = () => {
     setIsSmallWindow(window.innerWidth < 992);
@@ -53,25 +54,37 @@ export const useCovers = ({ post_types, tags, cover_type, initialRowsLimit, post
     const path = addQueryArgs('planet4/v1/get-covers', args);
 
     try {
-      const loadedCovers = await apiFetch({ path });
+      const loadedCovers = await apiFetch( { path, signal: controller.signal } );
 
-      if (loadedCovers) {
+      if(loadedCovers) {
         setCovers(loadedCovers);
       }
-
-    } catch (e) {
-      console.log(e);
-      setError(e.message);
-    } finally {
-      setLoading(false);
+    } catch (err) {
+      setError(err.message);
     }
+
+    setLoading(false);
   };
 
   useEffect(() => {
     if (!noLoading) {
-      loadCovers();
+      setController(typeof AbortController === 'undefined' ? undefined : new AbortController());
     }
   }, [cover_type, post_types, tags, posts, layout]);
+
+  useEffect(() => {
+    if(controller) {
+      loadCovers();
+    }
+
+    return () => {
+      if(controller) {
+        setLoading(false);
+        controller.abort();
+        setController(null);
+      }
+    }
+  }, [ controller ]);
 
   useEffect(() => {
     updateRowCoversAmount();
