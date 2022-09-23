@@ -12,6 +12,7 @@ const GALLERY_IMAGE_SIZES = {
 
 export const useGalleryImages = ({ multiple_image, gallery_block_focus_points }, layout, baseUrl = null) => {
   const [images, setImages] = useState([]);
+  const [controller, setController] = useState();
 
   const imageSize = GALLERY_IMAGE_SIZES[layout];
 
@@ -35,8 +36,21 @@ export const useGalleryImages = ({ multiple_image, gallery_block_focus_points },
 
   useEffect(() => {
     setImages([]);
-    loadPage();
+    setController(typeof AbortController === 'undefined' ? undefined : new AbortController());
   }, [multiple_image, gallery_block_focus_points]);
+
+  useEffect(() => {
+    if(controller) {
+      loadPage();
+    }
+
+    return () => {
+      if(controller) {
+        controller.abort();
+        setController(null);
+      }
+    }
+  }, [ controller ]);
 
   return { images };
 };
