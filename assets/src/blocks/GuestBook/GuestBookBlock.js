@@ -1,4 +1,6 @@
+import ReactDOMServer from 'react-dom/server';
 import { frontendRendered } from '../frontendRendered';
+import { GuestBookFrontend } from './GuestBookFrontend';
 const { registerBlockType } = wp.blocks;
 const { __ } = wp.i18n;
 
@@ -18,5 +20,22 @@ export const registerGuestBookBlock = () =>
         {__('This block only renders in the frontend', 'planet4-blocks-backend')}
       </p>
     ),
-    save: frontendRendered(BLOCK_NAME),
-  });
+    save: (props) => {
+      const attributes = {...props.attributes};
+      const markup = ReactDOMServer.renderToString(
+        <div
+          data-hydrate={BLOCK_NAME}
+          data-attributes={JSON.stringify(attributes)}
+        >
+          <GuestBookFrontend {...props} />
+        </div>
+      );
+      return <wp.element.RawHTML>{ markup }</wp.element.RawHTML>;
+    },
+    deprecated: [
+      {
+        save: frontendRendered(BLOCK_NAME),
+      }
+    ],
+  }
+);

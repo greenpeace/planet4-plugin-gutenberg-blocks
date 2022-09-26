@@ -45,6 +45,7 @@ const publicJsConfig = {
     TimelineScript: './assets/src/blocks/Timeline/TimelineScript.js',
     GalleryScript: './assets/src/blocks/Gallery/GalleryScript.js',
     HubspotFormScript: './assets/src/blocks/HubspotForm/HubspotFormScript.js',
+    GuestBookScript: './assets/src/blocks/GuestBook/GuestBookScript.js',
   },
 };
 
