@@ -21,7 +21,7 @@
     "@greenpeace/dashdash": "^1.1.2",
     "@wordpress/components": "^8.3.2",
     "@wordpress/data": "^4.9.2",
-    "@wordpress/e2e-test-utils": "^4.5.0",
+    "@wordpress/e2e-test-utils": "^4.16.1",
     "@wordpress/scripts": "3.3.0",
     "autoprefixer": "^9.7.0",
     "bootstrap": "^5.1.3",
