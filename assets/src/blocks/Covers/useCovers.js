@@ -8,7 +8,7 @@ const { apiFetch } = wp;
 const isMobile = () => window.innerWidth < 768;
 const isMediumWindow = () => window.innerWidth >= 768 && window.innerWidth < 992;
 
-export const useCovers = ({ post_types, tags, cover_type, initialRowsLimit, posts, layout }, noLoading) => {
+export const useCovers = ({ post_types, tags, cover_type, initialRowsLimit, posts, layout }, noLoading = false) => {
   const [covers, setCovers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [row, setRow] = useState(initialRowsLimit);
@@ -71,7 +71,7 @@ export const useCovers = ({ post_types, tags, cover_type, initialRowsLimit, post
     if (!noLoading) {
       setController(getAbortController());
     }
-  }, [cover_type, post_types, tags, posts, layout]);
+  }, [cover_type, post_types, tags, posts, layout, noLoading]);
 
   useEffect(() => {
     if(controller) {
@@ -81,7 +81,6 @@ export const useCovers = ({ post_types, tags, cover_type, initialRowsLimit, post
     return () => {
       if(controller) {
         setLoading(false);
-        controller.abort();
         setController(null);
       }
     }
