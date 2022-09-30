@@ -146,15 +146,14 @@ if ( ! class_exists( 'Blocks_Usage_Controller' ) ) {
 		 * Create menu/submenu entry.
 		 */
 		public function create_admin_menu() {
-
 			$current_user = wp_get_current_user();
 
-			if ( in_array( 'administrator', $current_user->roles, true ) && current_user_can( 'manage_options' ) ) {
+			if ( ( in_array( 'administrator', $current_user->roles, true ) || in_array( 'editor', $current_user->roles, true ) ) && current_user_can( 'edit_posts' ) ) {
 				add_submenu_page(
 					P4GBKS_PLUGIN_SLUG_NAME,
 					__( 'Usage', 'planet4-blocks-backend' ),
 					__( 'Usage', 'planet4-blocks-backend' ),
-					'manage_options',
+					'edit_posts',
 					'plugin_blocks_report',
 					[ $this, 'plugin_blocks_report' ]
 				);
