@@ -1,5 +1,6 @@
 import { CarouselHeaderEditor } from './CarouselHeaderEditor.js';
 import { carouselHeaderV1 } from './deprecated/carouselHeaderV1.js';
+import { carouselHeaderV2 } from './deprecated/carouselHeaderV2.js';
 import { CarouselHeaderFrontend } from './CarouselHeaderFrontend';
 import ReactDOMServer from 'react-dom/server';
 
@@ -58,12 +59,14 @@ export const registerCarouselHeaderBlock = () =>
       const markup = ReactDOMServer.renderToString(<div
         data-hydrate={'planet4-blocks/carousel-header'}
         data-attributes={JSON.stringify(attributes)}
+        data-reactroot=""
       >
         <CarouselHeaderFrontend { ...attributes } />
       </div>);
       return <wp.element.RawHTML>{ markup }</wp.element.RawHTML>;
     },
     deprecated: [
+      carouselHeaderV2,
       carouselHeaderV1
     ]
   });
