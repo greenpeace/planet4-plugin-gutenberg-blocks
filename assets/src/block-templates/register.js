@@ -9,7 +9,6 @@ export const registerBlockTemplates = ( blockTemplates ) => {
   const templates = blockTemplates || templateList;
   const postType = getCurrentPostType();
 
-  let registerContentOnly = [];
   templates.map( (blockTemplate) => {
     const { metadata, template, templateLock = false } = blockTemplate;
 

@@ -31,8 +31,8 @@ class SideImageWithTextAndCta extends Block_Pattern {
 		return [
 			'title'      => 'Side image with text and CTA',
 			'categories' => [ 'planet4' ],
-			'content'    => '<!-- wp:p4-block-templates/side-image-with-text-and-cta '
-				. wp_json_encode( $params )
+			'content'    => '<!-- wp:planet4-block-templates/side-image-with-text-and-cta '
+				. wp_json_encode( $params, \JSON_FORCE_OBJECT )
 				. ' /-->',
 		];
 	}

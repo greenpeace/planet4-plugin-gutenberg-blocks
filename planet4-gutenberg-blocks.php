@@ -141,7 +141,7 @@ const PAGE_BLOCK_TYPES = [
 	'leadin/hubspot-form-block',
 	'gravityforms/form',
 	// Block templates.
-	'p4-block-templates/side-image-with-text-and-cta',
+	'planet4-block-templates/side-image-with-text-and-cta',
 ];
 
 const BETA_PAGE_BLOCK_TYPES = [

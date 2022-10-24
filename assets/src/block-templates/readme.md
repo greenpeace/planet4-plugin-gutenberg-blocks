@@ -14,11 +14,11 @@ Block templates appear in the _Blocks_ tab of the _Blocks selector_ in the Edito
 
 They can also be copy/pasted in their self closing delimiter form
 ```html
-<!-- wp:p4-block-templates/my-template /-->
+<!-- wp:planet4-block-templates/my-template /-->
 ```
 and can support attributes
 ```html
-<!-- wp:p4-block-templates/my-template {"title": "My template title"} /-->
+<!-- wp:planet4-block-templates/my-template {"title": "My template title"} /-->
 ```
 This inline version is expanded with its generated content during post editing.
 
@@ -38,7 +38,7 @@ _my-template/block.json_
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 2,
-  "name": "p4-block-templates/my-template",
+  "name": "planet4-block-templates/my-template",
   "title": "My template",
   "description": "My template",
   "category": "planet4",
@@ -104,7 +104,7 @@ _my-template/block.json_
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 2,
-  "name": "p4-block-templates/my-template",
+  "name": "planet4-block-templates/my-template",
   "title": "My template",
   "description": "My template",
   "category": "planet4",
@@ -137,8 +137,8 @@ class MyTemplate extends Block_Pattern {
         return [
             'title'      => __( 'My template', 'planet4-blocks-backend' ),
             'categories' => [ 'planet4' ],
-            'content'    => '<!-- wp:p4-block-templates/my-template '
-                . wp_json_encode( $params )
+            'content'    => '<!-- wp:planet4-block-templates/my-template '
+                . wp_json_encode( $params, \JSON_FORCE_OBJECT )
                 . ' /-->',
         ];
     }
@@ -159,3 +159,8 @@ const templateLock = 'all'; // 'all', 'insert', false
 
 export { name, metadata, template, templateLock };
 ```
+
+## Removing a Block template
+
+If we decide to remove a Block template from the available templates, it will trigger an error in the Visual editor "Your site doesn't include support for the `<your block>` block. You can leave this block intact, convert its content to a Custom HTML block, or remove it entirely".  
+To avoid this situation, any Block template removal should include a database patch that will remove the html comments describing the block template (ie `<!-- wp:planet4-block-templates/my-template -->` and closing tag) in post content. The content between those tags should stay the same.
