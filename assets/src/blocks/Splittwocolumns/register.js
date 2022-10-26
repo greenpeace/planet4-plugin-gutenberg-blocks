@@ -1,4 +1,5 @@
 import { SplittwocolumnsEditor } from './SplittwocolumnsEditor';
+import { SplittwocolumnsFrontend } from './SplittwocolumnsFrontend';
 import { frontendRendered } from '../frontendRendered';
 import { splitTwoColumnsV1 } from './deprecated/SplittwocolumnsV1';
 
@@ -47,7 +48,9 @@ export const registerSplittwocolumnsBlock = () => {
         } },
     },
     edit: SplittwocolumnsEditor,
-    save: frontendRendered( BLOCK_NAME ),
+    save: ({ attributes }) => {
+      return <SplittwocolumnsFrontend {...attributes} />
+    },
     supports: {
       html: false, // Disable "Edit as HTMl" block option.
     },
