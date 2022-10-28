@@ -1,10 +1,12 @@
 import { ColumnsEditor } from './ColumnsEditor.js';
+import { ColumnsFrontend } from './ColumnsFrontend.js'
 import { LAYOUT_NO_IMAGE, LAYOUT_IMAGES, LAYOUT_ICONS, LAYOUT_TASKS } from './ColumnConstants.js';
 import { example } from './example';
 import { getStyleLabel } from '../../functions/getStyleLabel';
 
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
+import ReactDOMServer from 'react-dom/server';
 
 export const registerColumnsBlock = () =>
   registerBlockType('planet4-blocks/columns', {
@@ -54,8 +56,15 @@ export const registerColumnsBlock = () =>
       },
     },
     edit: ColumnsEditor,
-    save() {
-      return null;
+    save: ({ attributes }) => {
+        const markup = ReactDOMServer.renderToString(
+          <div data-hydrate={'planet4-blocks/columns'}
+            data-attributes={JSON.stringify(attributes)}>
+            <ColumnsFrontend { ...attributes } />
+          </div>
+        );
+
+        return <wp.element.RawHTML>{ markup }</wp.element.RawHTML>;
     },
     styles: [
       {

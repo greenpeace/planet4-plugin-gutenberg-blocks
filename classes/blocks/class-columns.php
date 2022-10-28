@@ -39,11 +39,6 @@ class Columns extends Base_Block {
 			self::get_full_block_name(),
 			[
 				'editor_script'   => 'planet4-blocks',
-				'render_callback' => static function ( $attributes ) {
-					$attributes['columns'] = self::get_columns_data( $attributes );
-
-					return self::render_frontend( $attributes );
-				},
 				'attributes'      => [
 					'columns_block_style' => [
 						'type'    => 'string',
