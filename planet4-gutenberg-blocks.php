@@ -448,7 +448,7 @@ add_filter(
 			str_contains( $content, 'wp-block-query-pagination-previous disabled' )
 			&& str_contains( $content, 'wp-block-query-pagination-next disabled' )
 		) {
-			return '<div class="wp-block-query-pagination is-empty"></div>';
+			return null;
 		}
 
 		return $content;
