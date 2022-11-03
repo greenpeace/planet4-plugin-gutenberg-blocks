@@ -14,7 +14,7 @@ import {
  */
 import { __, _x, sprintf } from '@wordpress/i18n';
 import { Component } from '@wordpress/element';
-import { FormTokenField} from '@wordpress/components';
+import { CheckboxControl } from '@wordpress/components';
 import { withSelect, withDispatch } from '@wordpress/data';
 import { compose } from '@wordpress/compose';
 import apiFetch from '@wordpress/api-fetch';
@@ -29,7 +29,6 @@ const DEFAULT_QUERY = {
   order: 'desc',
   _fields: 'id,name',
 };
-const MAX_TERMS_SUGGESTIONS = 20;
 const isSameTermName = ( termA, termB ) => termA.toLowerCase() === termB.toLowerCase();
 
 /**
@@ -70,47 +69,14 @@ class AssignOnlyFlatTermSelector extends Component {
   constructor() {
     super( ...arguments );
     this.onChange = this.onChange.bind( this );
-    this.searchTerms = throttle( this.searchTerms.bind( this ), 500 );
     this.state = {
-      loading: ! isEmpty( this.props.terms ),
       availableTerms: [],
       selectedTerms: [],
     };
   }
 
   componentDidMount() {
-    if ( isEmpty( this.props.terms ) ) {
-      return
-    }
-
-    this.initRequest = this.fetchTerms( {
-      include: this.props.terms.join( ',' ),
-      per_page: -1,
-    } );
-    this.initRequest.then(
-      () => {
-        this.setState( {loading: false} );
-      },
-      ( xhr ) => {
-        if ( xhr.statusText === 'abort' ) {
-          return;
-        }
-        this.setState( {
-          loading: false,
-        } );
-      }
-    );
-  }
-
-  componentWillUnmount() {
-    invoke( this.initRequest, [ 'abort' ] );
-    invoke( this.searchRequest, [ 'abort' ] );
-  }
-
-  componentDidUpdate( prevProps ) {
-    if ( prevProps.terms !== this.props.terms ) {
-      this.updateSelectedTerms( this.props.terms );
-    }
+    this.fetchTerms();
   }
 
   fetchTerms( params = {} ) {
@@ -121,53 +87,28 @@ class AssignOnlyFlatTermSelector extends Component {
       path: addQueryArgs( `/wp/v2/${ taxonomy.rest_base }`, query ),
     } );
     request.then( unescapeTerms ).then( ( terms ) => {
-      this.setState( ( state ) => ( {
-        availableTerms: state.availableTerms.concat(
-          terms.filter( ( term ) => ! find( state.availableTerms, ( availableTerm ) => availableTerm.id === term.id ) )
-        ),
-      } ) );
-      this.updateSelectedTerms( this.props.terms );
-    } );
+      this.setState({
+        availableTerms: terms,
+        selectedTerms: this.props.terms
+      });
+    });
 
     return request;
   }
 
-  updateSelectedTerms( terms = [] ) {
-    const selectedTerms = terms.reduce( ( accumulator, termId ) => {
-      const termObject = find( this.state.availableTerms, ( term ) => term.id === termId );
-      if ( termObject ) {
-        accumulator.push( termObject.name );
-      }
+  onChange(id, checked) {
+    let { selectedTerms } = this.state;
 
-      return accumulator;
-    }, [] );
-    this.setState( {
-      selectedTerms,
-    } );
-  }
+    const newTerms = checked ? [...selectedTerms, id] : selectedTerms.filter(term => term !== id);
 
-  onChange( termNames ) {
-    const uniqueTerms = uniqBy( termNames, ( term ) => term.toLowerCase() );
-    const allowedTerms = uniqueTerms.filter( ( termName ) =>
-      find( this.state.availableTerms, ( term ) => isSameTermName( term.name, termName ) )
-    );
-    this.setState( { selectedTerms: allowedTerms } );
-    const termNamesToIds = ( names, availableTerms ) => {
-      return names
-        .map( ( termName ) =>
-          find( availableTerms, ( term ) => isSameTermName( term.name, termName ) ).id
-        );
-    };
+    this.setState({
+      selectedTerms: newTerms,
+    });
 
     return this.props.onUpdateTerms(
-      termNamesToIds( allowedTerms, this.state.availableTerms ),
+      newTerms,
       this.props.taxonomy.rest_base
     );
-  }
-
-  searchTerms( search = '' ) {
-    invoke( this.searchRequest, [ 'abort' ] );
-    this.searchRequest = this.fetchTerms( { search } );
   }
 
   render() {
@@ -177,8 +118,7 @@ class AssignOnlyFlatTermSelector extends Component {
       return null;
     }
 
-    const { loading, availableTerms, selectedTerms } = this.state;
-    const termNames = availableTerms.map( ( term ) => term.name );
+    const { availableTerms, selectedTerms } = this.state;
     const newTermLabel = get(
       taxonomy,
       [ 'labels', 'add_new_item' ],
@@ -193,20 +133,13 @@ class AssignOnlyFlatTermSelector extends Component {
     const termRemovedLabel = sprintf( _x( '%s removed', 'term' ), singularName );
     const removeTermLabel = sprintf( _x( 'Remove %s', 'term' ), singularName );
 
-    return (
-      <FormTokenField
-        value={ selectedTerms }
-        suggestions={ termNames }
-        onChange={ this.onChange }
-        onInputChange={ this.searchTerms }
-        maxSuggestions={ MAX_TERMS_SUGGESTIONS }
-        disabled={ loading }
-        label={ newTermLabel }
-        messages={ {
-          added: termAddedLabel,
-          removed: termRemovedLabel,
-          remove: removeTermLabel,
-        } }
+    return availableTerms.map(({ id, name }) =>
+      <CheckboxControl
+        key={name}
+        label={name}
+        value={id}
+        checked={selectedTerms.includes(id)}
+        onChange={checked => this.onChange(id, checked)}
       />
     );
   }
