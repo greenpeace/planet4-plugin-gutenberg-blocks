@@ -1,3 +1,1 @@
-const mainThemeUrl = `${window.p4bk_vars.themeUrl || ''}`;
-
-export default mainThemeUrl;
+export default window.p4bk_vars.themeUrl || '';

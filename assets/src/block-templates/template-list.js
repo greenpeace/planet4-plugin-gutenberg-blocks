@@ -1,7 +1,5 @@
 import * as sideImgTextCta from './side-image-with-text-and-cta';
 
-const templateList = [
+export default [
   sideImgTextCta,
 ];
-
-export default templateList;

@@ -1,11 +1,16 @@
-const el = wp.element.createElement;
-const { InnerBlocks } = wp.blockEditor;
+import { useBlockProps } from '@wordpress/block-editor';
 
-const edit = ( template, templateLock = false ) => ( props ) => {
-  return el( InnerBlocks, {
-    template: template( props.attributes ?? {} ),
-    templateLock
-  } );
-};
-
-export default edit;
+export default function ( template, templateLock = false ) {
+  return ( props ) => {
+    return (
+      <div { ...useBlockProps() }>
+        {
+          wp.element.createElement( wp.blockEditor.InnerBlocks, {
+            template: template( props.attributes ?? {} ),
+            templateLock
+          } )
+        }
+      </div>
+    );
+  };
+}
