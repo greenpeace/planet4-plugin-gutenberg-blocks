@@ -68,9 +68,7 @@ _my-template/index.js_
 import metadata from './block.json';
 import template from './template';
 
-const { name } = metadata;
-
-export { name, metadata, template };
+export { metadata, template };
 ```
 
 ## Adding parameters to you Block template
@@ -154,10 +152,9 @@ Export a `templateLock` attribute, following the [templateLock definition](https
 import metadata from './block.json';
 import template from './template';
 
-const { name } = metadata;
 const templateLock = 'all'; // 'all', 'insert', false
 
-export { name, metadata, template, templateLock };
+export { metadata, template, templateLock };
 ```
 
 ## Removing a Block template

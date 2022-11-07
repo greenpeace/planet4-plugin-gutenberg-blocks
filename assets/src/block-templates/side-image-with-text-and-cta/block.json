@@ -3,17 +3,12 @@
   "apiVersion": 2,
   "name": "planet4-block-templates/side-image-with-text-and-cta",
   "title": "Side image with text and CTA",
-  "description": "Side image with text and CTA",
   "category": "planet4-block-templates",
   "textdomain": "planet4-blocks-backend",
   "attributes": {
     "title": { "type": "string" },
-    "titlePlaceholder": { "type": "string" },
     "backgroundColor": { "type": "string" },
-    "alignFull": { "type": "bool" },
-    "mediaPosition": { "type": "string" }
-  },
-  "pattern": {
-    "categories": ["planet4"]
+    "alignFull": { "type": "boolean" },
+    "mediaPosition": { "type": "string", "enum": [ "left", "right" ] }
   }
 }

@@ -140,8 +140,6 @@ const PAGE_BLOCK_TYPES = [
 	'planet4-blocks/guestbook',
 	'leadin/hubspot-form-block',
 	'gravityforms/form',
-	// Block templates.
-	'planet4-block-templates/side-image-with-text-and-cta',
 ];
 
 const BETA_PAGE_BLOCK_TYPES = [
@@ -206,6 +204,10 @@ const BETA_ACTION_BLOCK_TYPES = [
 	'planet4-blocks/social-media-cards',
 	'planet4-blocks/hubspot-form',
 	'planet4-blocks/share-buttons',
+];
+
+const BLOCK_TEMPLATES = [
+	'planet4-block-templates/side-image-with-text-and-cta',
 ];
 
 /**
@@ -276,6 +278,7 @@ function set_allowed_block_types( $allowed_block_types, $context ) {
 		PAGE_BLOCK_TYPES,
 		! Features::is_active( 'beta_blocks' ) ? [] : BETA_PAGE_BLOCK_TYPES,
 		! $enform_active ? [] : [ 'planet4-blocks/enform' ],
+		BLOCK_TEMPLATES,
 	);
 
 	$campaign_block_types = array_merge(
@@ -288,6 +291,7 @@ function set_allowed_block_types( $allowed_block_types, $context ) {
 		ACTION_BLOCK_TYPES,
 		! Features::is_active( 'beta_blocks' ) ? [] : BETA_ACTION_BLOCK_TYPES,
 		! $enform_active ? [] : [ 'planet4-blocks/enform' ],
+		BLOCK_TEMPLATES,
 	);
 
 	$all_allowed_p4_block_types = [

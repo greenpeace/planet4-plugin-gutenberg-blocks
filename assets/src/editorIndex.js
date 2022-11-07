@@ -23,6 +23,7 @@ import { registerGuestBookBlock } from './blocks/GuestBook/GuestBookBlock';
 import { registerBlock as registerShareButtonsBlock } from './blocks/ShareButtons/ShareButtonsBlock';
 import { registerPageHeaderBlock } from './blocks/PageHeader/PageHeaderBlock';
 import { registerActionPageDummyBlock } from './blocks/ActionPageDummy/ActionPageDummyBlock';
+import { registerBlockTemplates } from './block-templates/register';
 
 blockEditorValidation();
 new ArticlesBlock();
@@ -67,5 +68,4 @@ registerBlockVariation('core/group', {
   icon: 'admin-links',
 });
 
-import { registerBlockTemplates } from './block-templates/register';
 registerBlockTemplates();
