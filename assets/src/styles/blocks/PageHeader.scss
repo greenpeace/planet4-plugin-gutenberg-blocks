@@ -5,10 +5,6 @@ $text-column-width-xxl: 440px;
 $text-column-padding-in: 24px;
 
 .wp-block-group.is-pattern-p4-page-header {
-  .wp-block-media-text__media img {
-    transform: translate3d(0px, 0px, 0px) !important;
-  }
-
   @include large-and-up {
     padding-top: $sp-7;
     padding-bottom: $sp-7;
@@ -21,6 +17,10 @@ $text-column-padding-in: 24px;
   padding: 0;
   width: 100vw;
 
+  @include medium-and-less {
+    margin-top: 0;
+  }
+
   .wp-block-media-text__media {
     grid-column: 1;
     grid-row: 1;
@@ -28,6 +28,10 @@ $text-column-padding-in: 24px;
     img {
       max-height: 270px;
       object-fit: cover;
+
+      @include medium-and-less {
+        transform: translate3d(0, 0, 0) !important;
+      }
     }
   }
 
