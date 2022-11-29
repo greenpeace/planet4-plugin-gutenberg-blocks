@@ -3,7 +3,7 @@ import save from './save';
 import templateList from './template-list';
 
 const { registerBlockType } = wp.blocks;
-const { getCurrentPostType } = wp.data.select('core/editor');
+const { getCurrentPostType } = wp.data.select( 'core/editor' );
 
 const setSupport = ( metadata ) => {
   if ( ! metadata.supports ) {
@@ -22,10 +22,10 @@ export const registerBlockTemplates = ( blockTemplates ) => {
   const templates = blockTemplates || templateList;
   const postType = getCurrentPostType();
 
-  templates.map( ( blockTemplate ) => {
+  templates.forEach( ( blockTemplate ) => {
     let { metadata, template, templateLock = false } = blockTemplate;
 
-    if ( metadata.postTypes && ! metadata.postTypes.includes(postType) ) {
+    if ( metadata.postTypes && ! metadata.postTypes.includes( postType ) ) {
       return null;
     }
 

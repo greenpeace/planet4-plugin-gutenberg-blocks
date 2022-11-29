@@ -22,6 +22,7 @@
     "@wordpress/components": "^8.3.2",
     "@wordpress/data": "^4.9.2",
     "@wordpress/e2e-test-utils": "^4.5.0",
+    "@wordpress/eslint-plugin": "^13.6.0",
     "@wordpress/scripts": "3.3.0",
     "autoprefixer": "^9.7.0",
     "bootstrap": "^5.1.3",
