@@ -4,11 +4,10 @@ import { OEMBED_EMBED_TYPE, FACEBOOK_PAGE_TAB_TIMELINE } from './SocialMediaCons
 import { SocialMediaFrontend } from './SocialMediaFrontend.js';
 
 const { registerBlockType } = wp.blocks;
-const { __ } = wp.i18n;
 
 const BLOCK_NAME = 'planet4-blocks/social-media';
 
-export const registerSocialMediaBlock = () => registerBlockType(BLOCK_NAME, {
+export const registerSocialMediaBlock = () => registerBlockType( BLOCK_NAME, {
   title: 'Social Media',
   icon: 'share',
   category: 'planet4-blocks',
@@ -31,11 +30,11 @@ export const registerSocialMediaBlock = () => registerBlockType(BLOCK_NAME, {
     },
     social_media_url: {
       type: 'string',
-      default: ''
+      default: '',
     },
     alignment_class: {
       type: 'string',
-      default: ''
+      default: '',
     },
     embed_code: {
       type: 'string',
@@ -43,8 +42,8 @@ export const registerSocialMediaBlock = () => registerBlockType(BLOCK_NAME, {
     },
   },
   edit: SocialMediaEditor,
-  save: ({ attributes }) => <SocialMediaFrontend {...attributes} />,
+  save: ( { attributes } ) => <SocialMediaFrontend { ...attributes } />,
   deprecated: [
     socialMediaV1,
   ],
-});
+} );

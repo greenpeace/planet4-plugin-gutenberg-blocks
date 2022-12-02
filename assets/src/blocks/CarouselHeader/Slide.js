@@ -2,18 +2,18 @@ import {
   forwardRef,
 } from '@wordpress/element';
 
-export const SlideWithRef = ({
+export const SlideWithRef = ( {
   children,
   active,
-}, ref) => (
+}, ref ) => (
   <div
-    className={`carousel-item ${active ? 'active' : ''}`}
-    ref={ref}
+    className={ `carousel-item ${ active ? 'active' : '' }` }
+    ref={ ref }
   >
-    <div className='carousel-item-mask'>
-      {children}
+    <div className="carousel-item-mask">
+      { children }
     </div>
   </div>
 );
 
-export const Slide = forwardRef(SlideWithRef);
+export const Slide = forwardRef( SlideWithRef );

@@ -42,10 +42,10 @@ export const splitTwoColumnsV1 = {
       type: 'string',
     },
   },
-  isEligible(attributes) {
+  isEligible( attributes ) {
     return attributes.issue_image || attributes.tag_image;
   },
-  migrate(attributes) {
+  migrate( attributes ) {
     attributes.version = 1;
     attributes.issue_image_id = attributes.issue_image;
     attributes.tag_image_id = attributes.tag_image;

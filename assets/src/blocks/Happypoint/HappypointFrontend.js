@@ -2,7 +2,7 @@ import { useHappypointImageData } from './useHappypointImageData';
 import { HubspotEmbed } from './useHubspotEmbedCode';
 import { USE_IFRAME_URL, USE_EMBED_CODE, USE_NONE } from './HappyPointConstants';
 
-export const HappypointFrontend = ({
+export const HappypointFrontend = ( {
   focus_image,
   opacity,
   mailing_list_iframe,
@@ -12,8 +12,8 @@ export const HappypointFrontend = ({
   override_default_content,
   local_content_provider,
   className,
-}) => {
-  const { imageData: happypointData } = useHappypointImageData(id);
+} ) => {
+  const { imageData: happypointData } = useHappypointImageData( id );
   const {
     background_src,
     background_srcset,
@@ -22,60 +22,66 @@ export const HappypointFrontend = ({
     default_image,
     // Settings from Planet4 > Default content
     default_content_provider,
-    engaging_network_id,      // default iframe url
-    default_embed_code,       // default embed code
+    engaging_network_id, // default iframe url
+    default_embed_code, // default embed code
   } = happypointData;
 
   const imgProps = {
     src: background_src || default_image,
     style: {
       objectPosition: focus_image,
-      opacity: opacity ? (opacity / 100) : 0.3,
+      opacity: opacity ? ( opacity / 100 ) : 0.3,
     },
-    alt: background_alt
+    alt: background_alt,
   };
 
-  if (background_src) {
+  if ( background_src ) {
     imgProps.srcSet = background_srcset || null;
     imgProps.sizes = background_sizes || null;
   }
 
-  const legacy_provider = typeof mailing_list_iframe === 'undefined'
-    ? null : ( mailing_list_iframe ? USE_IFRAME_URL : USE_NONE );
+  let legacy_provider;
 
-  const content_provider = legacy_provider || (override_default_content ? local_content_provider : default_content_provider);
+  if ( typeof mailing_list_iframe === 'undefined' ) {
+    legacy_provider = null;
+  } else {
+    legacy_provider = mailing_list_iframe ? USE_IFRAME_URL : USE_NONE;
+  }
+
+  const content_provider = legacy_provider || ( override_default_content ? local_content_provider : default_content_provider );
   const url = iframe_url || engaging_network_id;
   const code = embed_code || default_embed_code;
-  const html_code = safeHTML(code || '');
+  const html_code = safeHTML( code || '' );
 
   const instanceId = 'happy-point';
 
   return (
-    <section className={`block block-footer alignfull happy-point-block-wrap ${className ?? ''}`}>
+    <section className={ `block block-footer alignfull happy-point-block-wrap ${ className ?? '' }` }>
       <picture>
-        <img {...imgProps} loading="lazy" />
+        <img { ...imgProps } loading="lazy" alt="" />
       </picture>
       <div className="container">
         <div className="row justify-content-md-center">
-          {USE_IFRAME_URL === content_provider && url &&
+          { USE_IFRAME_URL === content_provider && url &&
             (
-              <div className="col-md-10 happy-point" id={instanceId} data-src={url}>
-                <iframe
-                  src={url}
-                  cellSpacing={0}
-                  allowtransparency="true"
-                  frameBorder={0}
-                  scrolling="no"
-                  width="100%"
-                  loading="lazy"
-                />
-              </div>
+            	<div className="col-md-10 happy-point" id={ instanceId } data-src={ url }>
+            		<iframe
+            			src={ url }
+            			cellSpacing={ 0 }
+            			allowtransparency="true"
+            			frameBorder={ 0 }
+            			scrolling="no"
+            			width="100%"
+            			loading="lazy"
+            			title="Happy Point Iframe"
+            		/>
+            	</div>
             )
           }
-          {USE_EMBED_CODE === content_provider &&
-            <div className="col-md-10 mt-5" id={instanceId} dangerouslySetInnerHTML={{ __html: html_code }} />
+          { USE_EMBED_CODE === content_provider &&
+					<div className="col-md-10 mt-5" id={ instanceId } dangerouslySetInnerHTML={ { __html: html_code } } />
           }
-          <HubspotEmbed params={{use_embed_code: USE_EMBED_CODE === content_provider, embed_code: code, target: `#${instanceId}`}} />
+          <HubspotEmbed params={ { use_embed_code: USE_EMBED_CODE === content_provider, embed_code: code, target: `#${ instanceId }` } } />
         </div>
       </div>
     </section>
@@ -84,6 +90,8 @@ export const HappypointFrontend = ({
 
 /**
  * cf. https://github.com/WordPress/gutenberg/blob/wp/5.9/packages/dom/src/dom/safe-html.js
+ *
+ * @param {*} html
  */
 const safeHTML = ( html ) => {
   const { body } = document.implementation.createHTMLDocument( '' );
@@ -110,4 +118,4 @@ const safeHTML = ( html ) => {
   }
 
   return body.innerHTML;
-}
+};

@@ -6,7 +6,7 @@ export class CookiesBlock {
   constructor() {
     const { registerBlockType } = wp.blocks;
 
-    registerBlockType(BLOCK_NAME, {
+    registerBlockType( BLOCK_NAME, {
       title: 'Cookies',
       icon: 'welcome-view-site',
       category: 'planet4-blocks',
@@ -16,11 +16,11 @@ export class CookiesBlock {
       attributes: {
         title: {
           type: 'string',
-          default: ''
+          default: '',
         },
         description: {
           type: 'string',
-          default: ''
+          default: '',
         },
         necessary_cookies_name: {
           type: 'string',
@@ -45,6 +45,6 @@ export class CookiesBlock {
       save() {
         return null;
       },
-    });
+    } );
   }
 }

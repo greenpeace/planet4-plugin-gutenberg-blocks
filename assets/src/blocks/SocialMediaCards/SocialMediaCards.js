@@ -2,7 +2,7 @@ import { Component, Fragment } from '@wordpress/element';
 import { Preview } from '../../components/Preview';
 import {
   MediaUpload,
-  MediaUploadCheck
+  MediaUploadCheck,
 } from '@wordpress/editor';
 
 import {
@@ -10,14 +10,10 @@ import {
   TextareaControl,
   ServerSideRender,
   Button,
-  Tooltip
+  Tooltip,
 } from '@wordpress/components';
 
 export class SocialMediaCards extends Component {
-  constructor( props ) {
-    super( props );
-  }
-
   renderEdit() {
     const { __ } = wp.i18n;
 
@@ -25,24 +21,29 @@ export class SocialMediaCards extends Component {
 
     const getImageOrButton = ( openEvent ) => {
       if ( cards.length > 0 ) {
-
         return cards.map( ( card, index ) => (
-          <span className="img-wrap">
-                <Tooltip text={ __( 'Remove Image', 'planet4-blocks-backend' ) }>
-                  <span className="close" onClick={ ev => {
-                    onDeleteImage( card.image_id );
-                    ev.stopPropagation();
-                  } }>&times;</span>
-                </Tooltip>
-                <img
-                  src={ card.image_url }
-                  onClick={ openEvent }
-                  className="gallery__imgs"
-                  key={ index }
-                  width='150 px'
-                  style={ { padding: '10px 10px' } }
-                />
-              </span>
+          <span className="img-wrap" key={ index + 1 }>
+            <Tooltip text={ __( 'Remove Image', 'planet4-blocks-backend' ) }>
+              <span
+                className="close"
+                onClick={ ( ev ) => {
+                  onDeleteImage( card.image_id );
+                  ev.stopPropagation();
+                } }
+                role="presentation"
+              >&times;</span>
+            </Tooltip>
+            <img
+              src={ card.image_url }
+              onClick={ openEvent }
+              className="gallery__imgs"
+              key={ index }
+              width="150 px"
+              style={ { padding: '10px 10px' } }
+              alt=""
+              role="presentation"
+            />
+          </span>
         ) );
       }
 
@@ -51,7 +52,7 @@ export class SocialMediaCards extends Component {
           <Button
             onClick={ openEvent }
             className="button">
-            + { __( 'Select Images', 'planet4-blocks-backend' ) }
+						+ { __( 'Select Images', 'planet4-blocks-backend' ) }
           </Button>
 
           <div>{ __( 'Select images in the order you want them to appear.', 'planet4-blocks-backend' ) }</div>
@@ -84,8 +85,8 @@ export class SocialMediaCards extends Component {
               title={ __( 'Select Images', 'planet4-blocks-backend' ) }
               type="image"
               onSelect={ this.props.onSelectImages }
-              value={ cards.map( card => card.image_id ) }
-              allowedTypes={ ["image"] }
+              value={ cards.map( ( card ) => card.image_id ) }
+              allowedTypes={ [ 'image' ] }
               multiple="true"
               render={ ( { open } ) => getImageOrButton( open ) }
             />
@@ -103,6 +104,7 @@ export class SocialMediaCards extends Component {
                         src={ card.image_url }
                         width={ 212 }
                         height={ 212 }
+                        alt=""
                       />
                     </div>
                     <div className="col-md-6">
@@ -123,7 +125,7 @@ export class SocialMediaCards extends Component {
                       />
                     </div>
                   </div>
-                  <hr/>
+                  <hr />
                 </li>
               );
             } ) }

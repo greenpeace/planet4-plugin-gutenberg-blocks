@@ -1,9 +1,10 @@
+/* eslint-disable @wordpress/i18n-no-variables */
 import { CoversImagePlaceholder } from './CoversImagePlaceholder';
 import { IMAGE_SIZES } from './imageSizes';
 
 const { __ } = wp.i18n;
 
-export const CampaignCovers = ({
+export const CampaignCovers = ( {
   covers,
   initialRowsLimit,
   row,
@@ -11,13 +12,13 @@ export const CampaignCovers = ({
   isCarouselLayout,
   amountOfCoversPerRow,
   isExample,
-}) => (
-  <div className='covers'>
-    {covers.map((cover, index) => {
+} ) => (
+  <div className="covers">
+    { covers.map( ( cover, index ) => {
       const { image, alt_text } = cover;
-      const hideCover = !isCarouselLayout && !!initialRowsLimit && index >= row * amountOfCoversPerRow;
+      const hideCover = ! isCarouselLayout && !! initialRowsLimit && index >= row * amountOfCoversPerRow;
 
-      if (hideCover) {
+      if ( hideCover ) {
         return null;
       }
 
@@ -28,31 +29,31 @@ export const CampaignCovers = ({
       const campaignLink = inEditor ? null : link;
 
       return (
-        <div key={link} className='campaign-card-column cover'>
+        <div key={ link } className="campaign-card-column cover">
           <a
-            href={campaignLink}
-            data-ga-category='Campaign Covers'
-            data-ga-action='Image'
-            data-ga-label='n/a'
-            aria-label={__('Check our campaign about ' + title, 'planet4-blocks')}
+            href={ campaignLink }
+            data-ga-category="Campaign Covers"
+            data-ga-action="Image"
+            data-ga-label="n/a"
+            aria-label={ __( 'Check our campaign about ' + title, 'planet4-blocks' ) }
           >
-            <div className='thumbnail-large'>
-              {image && image[0] && !isExample &&
-                <img
-                  loading='lazy'
-                  sizes={IMAGE_SIZES.campaign}
-                  srcSet={srcset}
-                  src={image[0]}
-                  alt={alt_text}
-                  title={alt_text}
-                />
+            <div className="thumbnail-large">
+              { image && image[ 0 ] && ! isExample &&
+							<img
+							  loading="lazy"
+							  sizes={ IMAGE_SIZES.campaign }
+							  srcSet={ srcset }
+							  src={ image[ 0 ] }
+							  alt={ alt_text }
+							  title={ alt_text }
+							/>
               }
-              {isExample && <CoversImagePlaceholder height={150} />}
-              <span className='yellow-cta'><span aria-label='hashtag'>#</span>{title}</span>
+              { isExample && <CoversImagePlaceholder height={ 150 } /> }
+              <span className="yellow-cta"><span aria-label="hashtag">#</span>{ title }</span>
             </div>
           </a>
         </div>
       );
-    })}
+    } ) }
   </div>
 );

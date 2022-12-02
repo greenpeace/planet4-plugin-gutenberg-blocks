@@ -10,32 +10,32 @@ export class CounterBlock {
     const attributes = {
       title: {
         type: 'string',
-        default: ''
+        default: '',
       },
       description: {
         type: 'string',
-        default: ''
+        default: '',
       },
       completed: {
         type: 'integer',
-        default: ''
+        default: '',
       },
       completed_api: {
         type: 'string',
-        default: ''
+        default: '',
       },
       target: {
         type: 'integer',
-        default: ''
+        default: '',
       },
       text: {
         type: 'string',
-        default: ''
+        default: '',
       },
       style: { // Needed to convert existing blocks
         type: 'string',
-        default: ''
-      }
+        default: '',
+      },
     };
 
     registerBlockType( BLOCK_NAME, {
@@ -52,45 +52,46 @@ export class CounterBlock {
           save() {
             return null;
           },
-        }
+        },
       ],
-      edit: ( { isSelected, attributes, setAttributes } ) => {
+      // Renamed attributes to editAttributes to avoid eslint error.
+      edit: ( { isSelected, editAttributes, setAttributes } ) => {
         return <CounterEditor
-          attributes={attributes}
-          setAttributes={setAttributes}
+          attributes={ editAttributes }
+          setAttributes={ setAttributes }
           isSelected={ isSelected }
-        />
+        />;
       },
-      save: frontendRendered( BLOCK_NAME )
-    });
+      save: frontendRendered( BLOCK_NAME ),
+    } );
 
     // Remove the default style since it's the same as "text only"
-    unregisterBlockStyle(BLOCK_NAME, 'default');
+    unregisterBlockStyle( BLOCK_NAME, 'default' );
 
     const styles = [
-        {
-          name: 'plain',
-          label: 'Text Only',
-          isDefault: true
-        },
-        {
-          name: 'bar',
-          label: 'Progress Bar'
-        },
-        {
-          name: 'arc',
-          label: 'Progress Dial'
-        },
+      {
+        name: 'plain',
+        label: 'Text Only',
+        isDefault: true,
+      },
+      {
+        name: 'bar',
+        label: 'Progress Bar',
+      },
+      {
+        name: 'arc',
+        label: 'Progress Dial',
+      },
 
-      ]
+    ];
 
-    if (window.p4ge_vars.features.feature_engaging_networks) {
-      styles.push({
+    if ( window.p4ge_vars.features.feature_engaging_networks ) {
+      styles.push( {
         name: 'en-forms-bar',
-        label: __('Progress Bar inside EN Form', 'planet4-blocks-backend')
-      });
+        label: __( 'Progress Bar inside EN Form', 'planet4-blocks-backend' ),
+      } );
     }
     // Add our custom styles
-    registerBlockStyle( BLOCK_NAME, styles);
-  };
+    registerBlockStyle( BLOCK_NAME, styles );
+  }
 }

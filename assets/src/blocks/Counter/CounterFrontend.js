@@ -2,41 +2,45 @@ import { Component, Fragment } from '@wordpress/element';
 import { getStyleFromClassName } from '../getStyleFromClassName';
 
 export class CounterFrontend extends Component {
-  constructor(props) {
-    super(props);
+  constructor( props ) {
+    super( props );
     this.state = {
       remaining: 0,
-      completed: 0
+      completed: 0,
     };
 
-    this.calculateRemaining = this.calculateRemaining.bind(this);
-    this.getCounterText = this.getCounterText.bind(this);
+    this.calculateRemaining = this.calculateRemaining.bind( this );
+    this.getCounterText = this.getCounterText.bind( this );
   }
 
   componentDidMount() {
     const { completed_api } = this.props;
     // Calculate completed and remaining values depending on props
-    let counter = this;
+    const counter = this;
     counter.calculateRemaining();
     // Add an eventListener to the window to enable instantly updating counters with supported APIs
-    if (completed_api && completed_api.startsWith('https://')) {
-      window.addEventListener('updateCounter', function () { counter.calculateRemaining(); }, false);
+    if ( completed_api && completed_api.startsWith( 'https://' ) ) {
+      window.addEventListener( 'updateCounter', () => {
+        counter.calculateRemaining();
+      }, false );
     }
     this.appendENForm();
   }
 
   componentWillUnmount() {
     const { completed_api } = this.props;
-    let counter = this;
-    if (completed_api && completed_api.startsWith('https://')) {
-      window.removeEventListener('updateCounter', function () { counter.calculateRemaining(); }, false);
+    const counter = this;
+    if ( completed_api && completed_api.startsWith( 'https://' ) ) {
+      window.removeEventListener( 'updateCounter', () => {
+        counter.calculateRemaining();
+      }, false );
     }
   }
 
-  componentDidUpdate({ target: prevTarget, completed: prevCompleted, completed_api: prevCompletedApi }) {
+  componentDidUpdate( { target: prevTarget, completed: prevCompleted, completed_api: prevCompletedApi } ) {
     // Update completed and remaining values depending on props
     const { target, completed, completed_api } = this.props;
-    if (target !== prevTarget || completed !== prevCompleted || completed_api !== prevCompletedApi) {
+    if ( target !== prevTarget || completed !== prevCompleted || completed_api !== prevCompletedApi ) {
       this.calculateRemaining();
     }
     this.appendENForm();
@@ -44,37 +48,37 @@ export class CounterFrontend extends Component {
 
   appendENForm() {
     // Append the counter inside the En-Form
-    var counterBar = document.querySelector('.wp-block-planet4-blocks-counter .counter-style-en-forms-bar')?.cloneNode(true);
-    var enFormHeader = document.querySelector('.enform-extra-header-placeholder');
+    const counterBar = document.querySelector( '.wp-block-planet4-blocks-counter .counter-style-en-forms-bar' )?.cloneNode( true );
+    const enFormHeader = document.querySelector( '.enform-extra-header-placeholder' );
 
     if ( counterBar && enFormHeader ) {
       enFormHeader.innerHTML = '';
-      enFormHeader.append(counterBar);
+      enFormHeader.append( counterBar );
     }
   }
 
   calculateRemaining() {
     const { completed_api } = this.props;
-    const target = Math.max(this.props.target, 0);
-    let completed = Math.max(this.props.completed, 0);
+    const target = Math.max( this.props.target, 0 );
+    let completed = Math.max( this.props.completed, 0 );
     let remaining = 0;
-    if (completed_api && completed_api.startsWith('https://')) {
-      fetch(completed_api)
-        .then(response => response.json())
-        .then(({ unique_count }) => {
-          if (unique_count) {
-            completed = Math.max(unique_count, 0);
-            this.setState({
+    if ( completed_api && completed_api.startsWith( 'https://' ) ) {
+      fetch( completed_api )
+        .then( ( response ) => response.json() )
+        .then( ( { unique_count } ) => {
+          if ( unique_count ) {
+            completed = Math.max( unique_count, 0 );
+            this.setState( {
               completed,
-              remaining: Math.max(target - completed, 0)
-            });
+              remaining: Math.max( target - completed, 0 ),
+            } );
           }
-        }).catch(function() {
-          console.log('Error: Fetching api response...');
-        });
+        } ).catch( () => {
+          throw 'Error: Fetching api response...';
+        } );
     } else {
-      remaining = Math.max(target - completed, 0);
-      this.setState({ remaining, completed });
+      remaining = Math.max( target - completed, 0 );
+      this.setState( { remaining, completed } );
     }
   }
 
@@ -82,12 +86,12 @@ export class CounterFrontend extends Component {
     const { text, target } = this.props;
     const { remaining, completed } = this.state;
     const COUNTER_TEXT = {
-      '%completed%': `<span class="counter-target">${completed}</span>`,
-      '%target%': `<span class="counter-target">${target || 0}</span>`,
-      '%remaining%': `<span class="counter-target">${remaining}</span>`
+      '%completed%': `<span class="counter-target">${ completed }</span>`,
+      '%target%': `<span class="counter-target">${ target || 0 }</span>`,
+      '%remaining%': `<span class="counter-target">${ remaining }</span>`,
     };
 
-    return text.replace(/%completed%|%target%|%remaining%/gi, match => COUNTER_TEXT[match]);
+    return text.replace( /%completed%|%target%|%remaining%/gi, ( match ) => COUNTER_TEXT[ match ] );
   }
 
   render() {
@@ -97,58 +101,61 @@ export class CounterFrontend extends Component {
       description,
       text,
       target,
-      isEditing
+      isEditing,
     } = this.props;
 
     const { completed } = this.state;
 
     let style = this.props.style || 'plain'; // Needed to convert existing blocks
-    const styleClass = getStyleFromClassName(className);
-    if (styleClass) {
+    const styleClass = getStyleFromClassName( className );
+    if ( styleClass ) {
       style = styleClass;
     }
     const arcLength = 31.5;
 
-    const percent = Math.min(target > 0 ? Math.round(completed / target * 100) : 0, 100);
+    const percent = Math.min( target > 0 ? Math.round( completed / target * 100 ) : 0, 100 );
 
-    let counterClassName = `block counter-block counter-style-${style} ${className ?? ''}`;
-    if (isEditing) counterClassName += ` editing`;
+    let counterClassName = `block counter-block counter-style-${ style } ${ className ?? '' }`;
+    if ( isEditing ) {
+      counterClassName += ' editing';
+    }
 
     return (
       <Fragment>
-        <section className={counterClassName}>
-          {title && !isEditing &&
-            <header>
-              <h2 className="page-section-header">{title}</h2>
-            </header>
+        <section className={ counterClassName }>
+          { title && ! isEditing &&
+					<header>
+					  <h2 className="page-section-header">{ title }</h2>
+					</header>
           }
-          {description && !isEditing &&
-            <p className="page-section-description" dangerouslySetInnerHTML={{ __html: description }} />
+          { description && ! isEditing &&
+					<p className="page-section-description" dangerouslySetInnerHTML={ { __html: description } } />
           }
           <div className="content-counter">
-            {(style === 'bar' || style === 'en-forms-bar') &&
-              <div className="progress-container">
-                <div className={`progress-bar ${style === 'en-forms-bar' ? 'enform-progress-bar' : ''}`} style={{ width: `calc(${percent}% + 20px)` }} />
-              </div>
+            { ( style === 'bar' || style === 'en-forms-bar' ) &&
+						<div className="progress-container">
+						  <div className={ `progress-bar ${ style === 'en-forms-bar' ? 'enform-progress-bar' : '' }` } style={ { width: `calc(${ percent }% + 20px)` } } />
+						</div>
             }
-            {style === 'arc' &&
-              <svg className="progress-arc" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 24 14">
-                <path className="background" d="M 2 12 A 1 1 0 1 1 22 12" />
-                <path className="foreground" d="M 2 12 A 1 1 0 1 1 22 12"
-                  strokeDasharray={arcLength}
-                  strokeDashoffset={`${(1 - percent / 100) * arcLength}`} />
-              </svg>
+            { style === 'arc' &&
+						<svg className="progress-arc" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 24 14">
+						  <path className="background" d="M 2 12 A 1 1 0 1 1 22 12" />
+						  <path className="foreground" d="M 2 12 A 1 1 0 1 1 22 12"
+						    strokeDasharray={ arcLength }
+						    // eslint-disable-next-line no-mixed-operators
+						    strokeDashoffset={ `${ ( 1 - percent / 100 ) * arcLength }` } />
+						</svg>
             }
-            {text &&
-              <div
-                className={`counter-text ${100 <= percent ? 'counter-text-goal_reached' : ''}`}
-                role="text"
-                dangerouslySetInnerHTML={{ __html: this.getCounterText() }}
-              />
+            { text &&
+						<div
+						  className={ `counter-text ${ 100 <= percent ? 'counter-text-goal_reached' : '' }` }
+						  role="presentation"
+						  dangerouslySetInnerHTML={ { __html: this.getCounterText() } }
+						/>
             }
           </div>
         </section>
       </Fragment>
-    )
+    );
   }
 }

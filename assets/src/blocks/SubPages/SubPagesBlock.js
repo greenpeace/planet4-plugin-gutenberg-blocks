@@ -16,16 +16,12 @@ export class SubPagesBlock {
       save() {
         return null;
       },
-      edit: withSelect( ( select ) => {
+      edit: withSelect( () => {
 
-      } )( ( {
-               isSelected,
-               attributes,
-               setAttributes
-             } ) => {
-        return <SubPages/>;
+      } )( () => {
+        return <SubPages />;
       } ),
     } );
-  };
+  }
 }
 

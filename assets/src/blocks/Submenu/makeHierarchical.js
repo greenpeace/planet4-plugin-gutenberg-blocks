@@ -1,13 +1,13 @@
-export const makeHierarchical = headings => {
+export const makeHierarchical = ( headings ) => {
   let previousMenuItem;
 
-  return headings.reduce((menuItems, heading) => {
+  return headings.reduce( ( menuItems, heading ) => {
     const { level, shouldLink, anchor, content, style } = heading;
 
     // const parent = deeperThanPrevious ? previousHeading.children : menuItems;
     let possibleParent = previousMenuItem || menuItems;
 
-    while (possibleParent.level && possibleParent.level >= level) {
+    while ( possibleParent.level && possibleParent.level >= level ) {
       possibleParent = possibleParent.parent;
     }
 
@@ -24,10 +24,10 @@ export const makeHierarchical = headings => {
       shouldLink,
       anchor,
     };
-    container.push(menuItem);
+    container.push( menuItem );
 
     previousMenuItem = menuItem;
 
     return menuItems;
-  }, []);
+  }, [] );
 };

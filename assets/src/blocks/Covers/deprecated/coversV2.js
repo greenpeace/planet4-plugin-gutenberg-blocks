@@ -22,15 +22,15 @@ export const coversV2 = {
     },
     tags: {
       type: 'array',
-      default: []
+      default: [],
     },
     post_types: {
       type: 'array',
-      default: []
+      default: [],
     },
     posts: {
       type: 'array',
-      default: []
+      default: [],
     },
     version: {
       type: 'integer',
@@ -48,15 +48,15 @@ export const coversV2 = {
       type: 'object',
     },
   },
-  isEligible({ readMoreText }) {
-    return !readMoreText;
+  isEligible( { readMoreText } ) {
+    return ! readMoreText;
   },
-  migrate({ className, ...attributes }) {
+  migrate( { className, ...attributes } ) {
     return {
       ...attributes,
-      readMoreText: __('Load more', 'planet4-blocks'),
+      readMoreText: __( 'Load more', 'planet4-blocks' ),
       className,
     };
   },
-  save: () => null
+  save: () => null,
 };

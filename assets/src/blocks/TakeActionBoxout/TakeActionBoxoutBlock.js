@@ -6,8 +6,8 @@ const { __ } = wp.i18n;
 
 const BLOCK_NAME = 'planet4-blocks/take-action-boxout';
 
-export const registerTakeActionBoxoutBlock = () => registerBlockType(BLOCK_NAME, {
-  title: __('Take Action Boxout', 'planet4-blocks-backend'),
+export const registerTakeActionBoxoutBlock = () => registerBlockType( BLOCK_NAME, {
+  title: __( 'Take Action Boxout', 'planet4-blocks-backend' ),
   icon: 'welcome-widgets-menus',
   category: 'planet4-blocks',
   supports: {
@@ -32,23 +32,23 @@ export const registerTakeActionBoxoutBlock = () => registerBlockType(BLOCK_NAME,
     },
     newTab: {
       type: 'boolean',
-      default: false
+      default: false,
     },
     tag_ids: {
       type: 'array',
-      default: []
+      default: [],
     },
     imageId: {
       type: 'number',
-      default: ''
+      default: '',
     },
     imageUrl: {
       type: 'string',
-      default: ''
+      default: '',
     },
     imageAlt: {
       type: 'string',
-      default: ''
+      default: '',
     },
     stickyOnMobile: {
       type: 'boolean',
@@ -62,4 +62,4 @@ export const registerTakeActionBoxoutBlock = () => registerBlockType(BLOCK_NAME,
   deprecated: [
     takeActionBoxoutV1,
   ],
-});
+} );

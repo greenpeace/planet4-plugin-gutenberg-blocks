@@ -1,3 +1,4 @@
+/* eslint-disable jsdoc/require-returns-type */
 /**
  * Get the name of the block style used from the classname string
  * given by Gutenberg
@@ -8,17 +9,17 @@
  * getStyleFromClassName('bar baz') => null
  *
  * @param {string} className
- * @returns string|null
+ * @return string|null
  */
-export const getStyleFromClassName = className => {
-  if (!className || className.trim().length <= 9) {
+export const getStyleFromClassName = ( className ) => {
+  if ( ! className || className.trim().length <= 9 ) {
     return null;
   }
 
-  const styleClass = className.split(' ').filter((c) => c.startsWith('is-style-'))[0];
-  if (!styleClass) {
+  const styleClass = className.split( ' ' ).filter( ( c ) => c.startsWith( 'is-style-' ) )[ 0 ];
+  if ( ! styleClass ) {
     return null;
   }
 
-  return styleClass.replace(/^is-style-/, '');
+  return styleClass.replace( /^is-style-/, '' );
 };

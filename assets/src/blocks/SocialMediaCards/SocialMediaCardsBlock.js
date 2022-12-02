@@ -38,12 +38,11 @@ export class SocialMediaCardsBlock {
         return null;
       },
       edit: withSelect( ( select, props ) => {
-
         const { attributes } = props;
 
-        let cards = attributes.cards.map( ( card ) => {
+        const cards = attributes.cards.map( ( card ) => {
           const { image_id } = card;
-          let imgDetails = select( 'core' ).getMedia( image_id );
+          const imgDetails = select( 'core' ).getMedia( image_id );
 
           return {
             image_url: imgDetails ? imgDetails.source_url : null,
@@ -52,16 +51,14 @@ export class SocialMediaCardsBlock {
         } );
 
         return {
-          cards
+          cards,
         };
-
       } )( ( {
-               cards,
-               isSelected,
-               attributes,
-               setAttributes
-             } ) => {
-
+        cards,
+        isSelected,
+        attributes,
+        setAttributes,
+      } ) => {
         function onTitleChange( value ) {
           setAttributes( { title: value } );
         }
@@ -71,39 +68,39 @@ export class SocialMediaCardsBlock {
         }
 
         function onMessageChange( index, value ) {
-          let cards = [...attributes.cards];
-          cards[ index ].message = value;
-          setAttributes( { cards: cards } );
+          const messageCards = [ ...attributes.cards ];
+          messageCards[ index ].message = value;
+          setAttributes( { messageCards } );
         }
 
         function onURLChange( index, value ) {
-          let cards = [...attributes.cards];
-          cards[ index ].social_url = value;
-          setAttributes( { cards: cards } );
+          const urlCards = [ ...attributes.cards ];
+          urlCards[ index ].social_url = value;
+          setAttributes( { urlCards } );
         }
 
         function onSelectImages( images ) {
-          const imageIds = images.map( image => image.id );
-          const newImageIds = imageIds.filter( id => !cards.some( card => card.image_id === id ) );
-          const stillSelectedCards = cards.filter( card => imageIds.includes( card.image_id ) );
+          const imageIds = images.map( ( image ) => image.id );
+          const newImageIds = imageIds.filter( ( id ) => ! cards.some( ( card ) => card.image_id === id ) );
+          const stillSelectedCards = cards.filter( ( card ) => imageIds.includes( card.image_id ) );
 
           const newCards = [
             ...stillSelectedCards,
-            ...newImageIds.map( id => ({
+            ...newImageIds.map( ( id ) => ( {
               image_id: id,
               message: '',
               social_url: '',
-            }) )
+            } ) ),
           ];
 
           setAttributes( {
-            cards: newCards
+            cards: newCards,
           } );
         }
 
         function onDeleteImage( imageId ) {
           setAttributes( {
-            cards: cards.filter( card => card.image_id !== imageId )
+            cards: cards.filter( ( card ) => card.image_id !== imageId ),
           } );
         }
 
@@ -120,6 +117,6 @@ export class SocialMediaCardsBlock {
         />;
       } ),
     } );
-  };
+  }
 }
 

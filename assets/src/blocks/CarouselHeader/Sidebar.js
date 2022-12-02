@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from '@wordpress/element';
 import {
   CheckboxControl,
   PanelBody,
@@ -8,170 +8,171 @@ import { SidebarSlide } from './SidebarSlide';
 
 const { __ } = wp.i18n;
 
-const getNode = (index) => (
-  document.querySelector(`.sidebar-slide[data-index="${index}"]`)
-)
+const getNode = ( index ) => (
+  document.querySelector( `.sidebar-slide[data-index="${ index }"]` )
+);
 
-export const Sidebar = ({
+export const Sidebar = ( {
   carouselAutoplay,
   setAttributes,
   slides,
   changeSlideAttribute,
   goToSlide,
-}) => {
-  const [dragTarget, setDragTarget] = useState(null);
-  const [draggedSlide, setDraggedSlide] = useState(null);
-  const slidesRef = useRef(null);
+} ) => {
+  const [ dragTarget, setDragTarget ] = useState( null );
+  const [ draggedSlide, setDraggedSlide ] = useState( null );
+  const slidesRef = useRef( null );
 
   const upOrDownHandler = ( evt ) => {
     evt.stopPropagation();
 
-    if(!slidesRef.current) {
+    if ( ! slidesRef.current ) {
       return;
     }
 
-    const currentIndex = parseInt(evt.currentTarget.dataset.index)
-    const currentNode = getNode(currentIndex);
-    let siblingNode, siblingIndex = -1;
+    const currentIndex = parseInt( evt.currentTarget.dataset.index );
+    const currentNode = getNode( currentIndex );
+    let siblingIndex = -1;
 
-    switch(evt.currentTarget.dataset.type) {
-      case 'up':
-        siblingIndex = currentIndex - 1;
+    switch ( evt.currentTarget.dataset.type ) {
+    case 'up':
+      siblingIndex = currentIndex - 1;
       break;
-      case 'down':
-        siblingIndex = currentIndex + 1;
+    case 'down':
+      siblingIndex = currentIndex + 1;
       break;
     }
 
-    siblingNode = getNode(siblingIndex);
+    const siblingNode = getNode( siblingIndex );
 
     // Get the data-index from sidebar-slide
     // Set to position absolute and find it sibbling element
-    const currentNodeCloned = currentNode.cloneNode(true);
-    const siblingNodeCloned = siblingNode.cloneNode(true);
+    const currentNodeCloned = currentNode.cloneNode( true );
+    const siblingNodeCloned = siblingNode.cloneNode( true );
 
-    currentNodeCloned.classList.add('cloned-slide');
-    siblingNodeCloned.classList.add('cloned-slide');
+    currentNodeCloned.classList.add( 'cloned-slide' );
+    siblingNodeCloned.classList.add( 'cloned-slide' );
 
     // Append before setting the top
-    slidesRef.current.append(currentNodeCloned);
-    slidesRef.current.append(siblingNodeCloned);
+    slidesRef.current.append( currentNodeCloned );
+    slidesRef.current.append( siblingNodeCloned );
 
     currentNode.style.opacity = 0;
     siblingNode.style.opacity = 0;
 
-    currentNodeCloned.style.top = `${currentNode.offsetTop}px`;
-    siblingNodeCloned.style.top = `${siblingNode.offsetTop}px`;
+    currentNodeCloned.style.top = `${ currentNode.offsetTop }px`;
+    siblingNodeCloned.style.top = `${ siblingNode.offsetTop }px`;
 
-    const timeout = setTimeout(() => {
+    const timeout = setTimeout( () => {
       // Switch positions
-      currentNodeCloned.style.top = `${siblingNodeCloned.offsetTop}px`;
-      siblingNodeCloned.style.top = `${currentNodeCloned.offsetTop}px`;
+      currentNodeCloned.style.top = `${ siblingNodeCloned.offsetTop }px`;
+      siblingNodeCloned.style.top = `${ currentNodeCloned.offsetTop }px`;
 
-      setTimeout(() => {
+      setTimeout( () => {
         // Re order slides
-        setAttributes({ slides: slides.reduce((prev, curr, idx) => {
-          if(idx !== currentIndex && idx !== siblingIndex) {
-            if(prev) {
-              return prev.concat(curr)
+        // eslint-disable-next-line array-callback-return
+        setAttributes( { slides: slides.reduce( ( prev, curr, idx ) => {
+          if ( idx !== currentIndex && idx !== siblingIndex ) {
+            if ( prev ) {
+              return prev.concat( curr );
             }
           } else {
-            if(idx === currentIndex) {
-              return prev.concat(slides[siblingIndex]);
+            if ( idx === currentIndex ) {
+              return prev.concat( slides[ siblingIndex ] );
             }
-            if(idx === siblingIndex) {
-              return prev.concat(slides[currentIndex]);
+            if ( idx === siblingIndex ) {
+              return prev.concat( slides[ currentIndex ] );
             }
             return prev;
           }
-        }, []) });
+        }, [] ) } );
 
         // Add a delay
-        setTimeout(() => {
+        setTimeout( () => {
           currentNode.style.opacity = 1;
           siblingNode.style.opacity = 1;
 
-          slidesRef.current.removeChild(currentNodeCloned);
-          slidesRef.current.removeChild(siblingNodeCloned);
-        }, 100)
-      }, 500);
-    });
+          slidesRef.current.removeChild( currentNodeCloned );
+          slidesRef.current.removeChild( siblingNodeCloned );
+        }, 100 );
+      }, 500 );
+    } );
 
     return () => {
-      clearTimeout(timeout);
+      clearTimeout( timeout );
     };
-  }
+  };
 
-  const onDragStartHandler = (evt) => {
+  const onDragStartHandler = ( evt ) => {
     // This is a workaround that avoids to show the `not-allowed` icon on Chrome/Windows
-    evt.dataTransfer.effectAllowed = "move";
-    setDraggedSlide(getNode(parseInt(evt.currentTarget.dataset.index)));
-  }
+    evt.dataTransfer.effectAllowed = 'move';
+    setDraggedSlide( getNode( parseInt( evt.currentTarget.dataset.index ) ) );
+  };
 
-  const onDragEndHandler = (evt) => {
+  const onDragEndHandler = ( evt ) => {
     evt.preventDefault();
 
-    if(draggedSlide) {
-      draggedSlide.classList.remove('dragged-slide');
+    if ( draggedSlide ) {
+      draggedSlide.classList.remove( 'dragged-slide' );
     }
 
-    setDragTarget(null);
-    setDraggedSlide(null);
+    setDragTarget( null );
+    setDraggedSlide( null );
 
-    if(slidesRef.current) {
-      setAttributes({
-        slides: Object.values(slidesRef.current.children).map((node) => slides[parseInt(node.dataset.index)])
-      });
+    if ( slidesRef.current ) {
+      setAttributes( {
+        slides: Object.values( slidesRef.current.children ).map( ( node ) => slides[ parseInt( node.dataset.index ) ] ),
+      } );
     }
-  }
+  };
 
-  const onDragOverHandler = (evt) => {
+  const onDragOverHandler = ( evt ) => {
     evt.preventDefault();
-    evt.dataTransfer.dropEffect = "move"
-    setDragTarget(getNode(parseInt(evt.currentTarget.dataset.index)));
-  }
+    evt.dataTransfer.dropEffect = 'move';
+    setDragTarget( getNode( parseInt( evt.currentTarget.dataset.index ) ) );
+  };
 
-  useEffect(() => {
-    if(draggedSlide) {
-      draggedSlide.classList.add('dragged-slide');
+  useEffect( () => {
+    if ( draggedSlide ) {
+      draggedSlide.classList.add( 'dragged-slide' );
     }
-  }, [ draggedSlide ]);
+  }, [ draggedSlide ] );
 
-  useEffect(() => {
-    if(slidesRef.current && draggedSlide && dragTarget) {
+  useEffect( () => {
+    if ( slidesRef.current && draggedSlide && dragTarget ) {
       // Check if it's the last node into the list
-      const lastNode = slidesRef.current.children[slidesRef.current.children.length - 1];
-      if(dragTarget.dataset.index === lastNode.dataset.index) {
-        lastNode.insertAdjacentElement("afterend", draggedSlide);
+      const lastNode = slidesRef.current.children[ slidesRef.current.children.length - 1 ];
+      if ( dragTarget.dataset.index === lastNode.dataset.index ) {
+        lastNode.insertAdjacentElement( 'afterend', draggedSlide );
       } else {
-        slidesRef.current.insertBefore(draggedSlide, dragTarget);
+        slidesRef.current.insertBefore( draggedSlide, dragTarget );
       }
     }
-  }, [ dragTarget ]);
+  }, [ dragTarget ] );
 
   return <InspectorControls>
-    <PanelBody title={__('Settings', 'planet4-blocks-backend')}>
+    <PanelBody title={ __( 'Settings', 'planet4-blocks-backend' ) }>
       <CheckboxControl
-        label={__('Carousel Autoplay', 'planet4-blocks-backend')}
-        help={__('Select to trigger images autoslide', 'planet4-blocks-backend')}
-        value={carouselAutoplay}
-        checked={carouselAutoplay === true}
-        onChange={value => setAttributes({ carousel_autoplay: value })}
+        label={ __( 'Carousel Autoplay', 'planet4-blocks-backend' ) }
+        help={ __( 'Select to trigger images autoslide', 'planet4-blocks-backend' ) }
+        value={ carouselAutoplay }
+        checked={ carouselAutoplay === true }
+        onChange={ ( value ) => setAttributes( { carousel_autoplay: value } ) }
       />
     </PanelBody>
-    <div ref={slidesRef} className='sidebar-slides'>
-      { slides.map((slide, index) => <SidebarSlide
-        {...slide}
-        index={index}
+    <div ref={ slidesRef } className="sidebar-slides">
+      { slides.map( ( slide, index ) => <SidebarSlide
+        { ...slide }
+        index={ index }
         key={ `${ slide.image_srcset }${ index }` }
-        isLastItem={index === slides.length - 1}
-        changeSlideAttribute={changeSlideAttribute}
-        goToSlideHandler={goToSlide}
-        onDragStartHandler={onDragStartHandler}
-        onDragEndHandler={onDragEndHandler}
-        onDragOverHandler={onDragOverHandler}
-        upOrDownHandler={upOrDownHandler}
-      />) }
+        isLastItem={ index === slides.length - 1 }
+        changeSlideAttribute={ changeSlideAttribute }
+        goToSlideHandler={ goToSlide }
+        onDragStartHandler={ onDragStartHandler }
+        onDragEndHandler={ onDragEndHandler }
+        onDragOverHandler={ onDragOverHandler }
+        upOrDownHandler={ upOrDownHandler }
+      /> ) }
     </div>
   </InspectorControls>;
 };

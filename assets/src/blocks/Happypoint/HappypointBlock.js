@@ -6,8 +6,8 @@ export class HappypointBlock {
     const { registerBlockType } = wp.blocks;
     const { __ } = wp.i18n;
 
-    registerBlockType('planet4-blocks/happypoint', {
-      title: __('Happypoint', 'planet4-blocks-backend'),
+    registerBlockType( 'planet4-blocks/happypoint', {
+      title: __( 'Happypoint', 'planet4-blocks-backend' ),
       icon: 'format-image',
       category: 'planet4-blocks',
       supports: {
@@ -20,7 +20,7 @@ export class HappypointBlock {
         },
         opacity: {
           type: 'number',
-          default: 30
+          default: 30,
         },
         mailing_list_iframe: {
           type: 'boolean',
@@ -42,20 +42,20 @@ export class HappypointBlock {
         },
         override_default_content: {
           type: 'boolean',
-          default: false
+          default: false,
         },
         local_content_provider: {
           type: 'string',
-          default: 'none'
-        }
+          default: 'none',
+        },
       },
       edit: HappypointEditor,
       save() {
         return null;
       },
       deprecated: [
-        HappyPointV1
-      ]
-    });
+        HappyPointV1,
+      ],
+    } );
   }
 }

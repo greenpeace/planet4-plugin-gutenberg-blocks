@@ -36,32 +36,32 @@ const attributes = {
   },
   buttons: {
     type: 'array',
-    default: [{
-        type: 'facebook',
-        iconName: 'facebook-f',
-        hiddenText: __( 'Share on Facebook', 'planet4-blocks' ),
-        showInMenu: true,
-      }, {
-        type: 'twitter',
-        iconName: 'twitter',
-        hiddenText: __( 'Share on Twitter', 'planet4-blocks' ),
-        showInMenu: true,
-        text: '',
-        description: '',
-        account: '',
-      }, {
-        type: 'whatsapp',
-        iconName: 'whatsapp',
-        hiddenText: __( 'Share on Whatsapp', 'planet4-blocks' ),
-        showInMenu: true,
-      }, {
-        type: 'email',
-        iconName: 'envelope-outline',
-        hiddenText: __( 'Share via Email', 'planet4-blocks' ),
-        showInMenu: true,
-        title: '',
-        body: '',
-      },
+    default: [ {
+      type: 'facebook',
+      iconName: 'facebook-f',
+      hiddenText: __( 'Share on Facebook', 'planet4-blocks' ),
+      showInMenu: true,
+    }, {
+      type: 'twitter',
+      iconName: 'twitter',
+      hiddenText: __( 'Share on Twitter', 'planet4-blocks' ),
+      showInMenu: true,
+      text: '',
+      description: '',
+      account: '',
+    }, {
+      type: 'whatsapp',
+      iconName: 'whatsapp',
+      hiddenText: __( 'Share on Whatsapp', 'planet4-blocks' ),
+      showInMenu: true,
+    }, {
+      type: 'email',
+      iconName: 'envelope-outline',
+      hiddenText: __( 'Share via Email', 'planet4-blocks' ),
+      showInMenu: true,
+      title: '',
+      body: '',
+    },
     ],
   },
   version: {
@@ -71,7 +71,7 @@ const attributes = {
 };
 
 export const registerBlock = () => {
-  return registerBlockType(BLOCK_NAME, {
+  return registerBlockType( BLOCK_NAME, {
     title: 'Share Buttons (beta)',
     icon: 'feedback',
     category: 'planet4-blocks-beta',
@@ -80,12 +80,12 @@ export const registerBlock = () => {
     },
     attributes,
     edit: ShareButtonsEditor,
-    save: ({ attributes }) => {
-      if(!attributes) {
+    save: ( { saveAttributes } ) => {
+      if ( ! saveAttributes ) {
         return null;
       }
 
-      return <ShareButtonsFrontend {...attributes} />;
+      return <ShareButtonsFrontend { ...saveAttributes } />;
     },
-  })
-}
+  } );
+};

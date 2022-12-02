@@ -2,7 +2,6 @@ import { SpreadsheetEditor } from './SpreadsheetEditorScript';
 import { CSS_VARIABLES_ATTRIBUTE } from '../CssVariablesAttribute';
 import { frontendRendered } from '../frontendRendered';
 
-const {__} = wp.i18n;
 const BLOCK_NAME = 'planet4-blocks/spreadsheet';
 
 const attributes = {
@@ -26,9 +25,9 @@ export const registerSpreadsheetBlock = () => {
         save() {
           return null;
         },
-      }
+      },
     ],
     edit: SpreadsheetEditor,
-    save: frontendRendered( BLOCK_NAME )
-  });
-}
+    save: frontendRendered( BLOCK_NAME ),
+  } );
+};

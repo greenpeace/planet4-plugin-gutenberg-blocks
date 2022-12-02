@@ -7,7 +7,7 @@ const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 
 export const registerColumnsBlock = () =>
-  registerBlockType('planet4-blocks/columns', {
+  registerBlockType( 'planet4-blocks/columns', {
     title: 'Planet 4 Columns',
     icon: 'grid-view',
     category: 'planet4-blocks',
@@ -17,32 +17,32 @@ export const registerColumnsBlock = () =>
         default: LAYOUT_NO_IMAGE,
       },
       columns_title: {
-        type: 'string'
+        type: 'string',
       },
       columns_description: {
-        type: 'string'
+        type: 'string',
       },
       columns: {
         type: 'array',
-        default: [{}, {}, {}],
+        default: [ {}, {}, {} ],
         title: {
-          type: 'string'
+          type: 'string',
         },
         description: {
-          type: 'string'
+          type: 'string',
         },
         attachment: {
           type: 'integer',
-          default: 0
+          default: 0,
         },
         cta_link: {
-          type: 'string'
+          type: 'string',
         },
         link_new_tab: {
-          type: 'boolean'
+          type: 'boolean',
         },
         cta_text: {
-          type: 'string'
+          type: 'string',
         },
       },
       isExample: {
@@ -62,7 +62,7 @@ export const registerColumnsBlock = () =>
         name: LAYOUT_NO_IMAGE,
         label: getStyleLabel(
           'No Image',
-          __('Optional headers, description text and buttons in a column display.', 'planet4-blocks-backend')
+          __( 'Optional headers, description text and buttons in a column display.', 'planet4-blocks-backend' )
         ),
         isDefault: true,
       },
@@ -70,23 +70,23 @@ export const registerColumnsBlock = () =>
         name: LAYOUT_TASKS,
         label: getStyleLabel(
           'Tasks',
-          __('Used on Take Action pages, this display has ordered tasks, and call to action buttons.', 'planet4-blocks-backend')
+          __( 'Used on Take Action pages, this display has ordered tasks, and call to action buttons.', 'planet4-blocks-backend' )
         ),
       },
       {
         name: LAYOUT_ICONS,
         label: getStyleLabel(
           'Icons',
-          __('For more static content, this display has an icon, header, description and text link.', 'planet4-blocks-backend')
+          __( 'For more static content, this display has an icon, header, description and text link.', 'planet4-blocks-backend' )
         ),
       },
       {
         name: LAYOUT_IMAGES,
         label: getStyleLabel(
           'Images',
-          __('For more static content, this display has an image, header, description and text link.', 'planet4-blocks-backend')
+          __( 'For more static content, this display has an image, header, description and text link.', 'planet4-blocks-backend' )
         ),
       },
     ],
     example,
-  });
+  } );

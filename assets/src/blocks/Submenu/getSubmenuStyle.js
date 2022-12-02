@@ -4,14 +4,14 @@ import { getStyleFromClassName } from '../getStyleFromClassName';
 const SUBMENU_STYLES = {
   1: 'long',
   2: 'short',
-  3: 'sidebar'
+  3: 'sidebar',
 };
 
-export const getSubmenuStyle = (className, submenu_style) => {
-  const styleClass = getStyleFromClassName(className);
-  if (styleClass) {
+export const getSubmenuStyle = ( className, submenu_style ) => {
+  const styleClass = getStyleFromClassName( className );
+  if ( styleClass ) {
     return styleClass;
   }
 
-  return submenu_style ? SUBMENU_STYLES[submenu_style] : 'long';
+  return submenu_style ? SUBMENU_STYLES[ submenu_style ] : 'long';
 };

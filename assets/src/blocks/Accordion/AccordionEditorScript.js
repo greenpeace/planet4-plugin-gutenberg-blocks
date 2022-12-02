@@ -1,7 +1,6 @@
 import { AccordionEditor } from './AccordionEditor';
 import { AccordionFrontend } from './AccordionFrontend';
 const { registerBlockType, registerBlockStyle } = wp.blocks;
-const { __ } = wp.i18n;
 
 const BLOCK_NAME = 'planet4-blocks/accordion';
 
@@ -24,36 +23,37 @@ const styles = [
   {
     name: 'dark',
     label: 'Dark',
-    isDefault: true
+    isDefault: true,
   },
   {
     name: 'light',
-    label: 'Light'
+    label: 'Light',
   },
 ];
 
-registerBlockType(BLOCK_NAME, {
+registerBlockType( BLOCK_NAME, {
   title: 'Accordion',
   icon: 'menu',
   category: 'planet4-blocks',
   keywords: [
     'accordion',
     'faq',
-    'collapsible'
+    'collapsible',
   ],
   supports: {
     html: false, // Disable "Edit as HTMl" block option.
   },
   attributes,
   edit: AccordionEditor,
-  save: ({ attributes }) => {
-    if (!attributes) {
+  // Changed this variable name from attributes to saveAttributes to prevent {'attributes' is already declared in the upper scope:  no-shadow} error.
+  save: ( { saveAttributes } ) => {
+    if ( ! saveAttributes ) {
       return null;
     }
 
-    return <AccordionFrontend {...attributes} />;
+    return <AccordionFrontend { ...saveAttributes } />;
   },
-});
+} );
 
 // Add our custom styles
-registerBlockStyle(BLOCK_NAME, styles);
+registerBlockStyle( BLOCK_NAME, styles );

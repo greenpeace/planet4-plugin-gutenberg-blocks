@@ -2,14 +2,14 @@ import { USE_NONE, USE_IFRAME_URL } from '../HappyPointConstants';
 
 export const HappyPointV1 = {
   attributes: {
-    focus_image: { type: 'string', },
+    focus_image: { type: 'string' },
     opacity: { type: 'number', default: 30 },
-    mailing_list_iframe: { type: 'boolean', },
-    iframe_url: { type: 'string', },
-    id: { type: 'number', },
-    load_iframe: { type: 'boolean', default: false, },
-    use_embed_code: { type: 'boolean', },
-    embed_code: { type: 'string', },
+    mailing_list_iframe: { type: 'boolean' },
+    iframe_url: { type: 'string' },
+    id: { type: 'number' },
+    load_iframe: { type: 'boolean', default: false },
+    use_embed_code: { type: 'boolean' },
+    embed_code: { type: 'string' },
   },
   isEligible( attributes ) {
     return typeof attributes.override_default_content === 'undefined';
@@ -32,5 +32,5 @@ export const HappyPointV1 = {
   },
   save() {
     return null;
-  }
+  },
 };

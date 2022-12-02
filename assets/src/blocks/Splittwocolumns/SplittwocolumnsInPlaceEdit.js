@@ -1,3 +1,4 @@
+/* eslint-disable jsdoc/require-param-type */
 import { RichText } from '@wordpress/block-editor';
 import { debounce } from 'lodash';
 
@@ -5,8 +6,12 @@ const { __ } = wp.i18n;
 
 /**
  * WYSIWYG in-place editor
+ *
+ * @param  root0
+ * @param  root0.attributes
+ * @param  root0.setAttributes
  */
-export const SplittwocolumnsInPlaceEdit = ({attributes, charLimit, setAttributes}) => {
+export const SplittwocolumnsInPlaceEdit = ( { attributes, setAttributes } ) => {
   const {
     title,
     issue_description,
@@ -26,101 +31,101 @@ export const SplittwocolumnsInPlaceEdit = ({attributes, charLimit, setAttributes
     className,
   } = attributes;
 
-  const onTextChange = (field_name) => debounce(content => {
-    setAttributes({
-      [field_name]: content,
+  const onTextChange = ( field_name ) => debounce( ( content ) => {
+    setAttributes( {
+      [ field_name ]: content,
       edited: {
         ...edited,
-        [field_name]: content.length > 0
-      }
-    });
-  }, 400);
+        [ field_name ]: content.length > 0,
+      },
+    } );
+  }, 400 );
 
   return (
-    <section className={`alignfull split-two-column ${className ?? ''}`}>
+    <section className={ `alignfull split-two-column ${ className ?? '' }` }>
       <div className="split-two-column-item item--left">
-        {issue_image_src &&
-          <div className="split-two-column-item-image">
-            <img
-              src={issue_image_src}
-              alt={issue_image_title}
-              title={issue_image_title}
-              style={{objectPosition: focus_issue_image}}
-            />
-          </div>
+        { issue_image_src &&
+				<div className="split-two-column-item-image">
+				  <img
+				    src={ issue_image_src }
+				    alt={ issue_image_title }
+				    title={ issue_image_title }
+				    style={ { objectPosition: focus_issue_image } }
+				  />
+				</div>
         }
         <div className="split-two-column-item-content">
           <RichText
             tagName="h2"
             className="split-two-column-item-title"
-            placeholder={__('Enter Title', 'planet4-blocks-backend')}
-            value={title}
-            onChange={onTextChange('title')}
+            placeholder={ __( 'Enter Title', 'planet4-blocks-backend' ) }
+            value={ title }
+            onChange={ onTextChange( 'title' ) }
             multiline="false"
             withoutInteractiveFormatting
-            allowedFormats={[]}
-            />
+            allowedFormats={ [] }
+          />
           <RichText
             tagName="p"
             className="split-two-column-item-subtitle"
-            placeholder={__('Enter Description', 'planet4-blocks-backend')}
-            value={issue_description}
-            onChange={onTextChange('issue_description')}
+            placeholder={ __( 'Enter Description', 'planet4-blocks-backend' ) }
+            value={ issue_description }
+            onChange={ onTextChange( 'issue_description' ) }
             multiline="false"
-            allowedFormats={['core/bold', 'core/italic']}
-            />
-          {issue_link_path &&
-            <RichText
-              tagName="a"
-              className="split-two-column-item-link"
-              placeholder={__('Enter Link Text', 'planet4-blocks-backend')}
-              value={issue_link_text}
-              onChange={onTextChange('issue_link_text')}
-              multiline="false"
-              withoutInteractiveFormatting
-              allowedFormats={[]}
-              />
+            allowedFormats={ [ 'core/bold', 'core/italic' ] }
+          />
+          { issue_link_path &&
+					<RichText
+					  tagName="a"
+					  className="split-two-column-item-link"
+					  placeholder={ __( 'Enter Link Text', 'planet4-blocks-backend' ) }
+					  value={ issue_link_text }
+					  onChange={ onTextChange( 'issue_link_text' ) }
+					  multiline="false"
+					  withoutInteractiveFormatting
+					  allowedFormats={ [] }
+					/>
           }
         </div>
       </div>
       <div className="split-two-column-item item--right">
-        {tag_image_src &&
-          <div className="split-two-column-item-image">
-            <img
-              src={tag_image_src}
-              alt={tag_image_title}
-              title={tag_image_title}
-              style={{objectPosition: focus_tag_image}}
-            />
-          </div>
+        { tag_image_src &&
+				<div className="split-two-column-item-image">
+				  <img
+				    src={ tag_image_src }
+				    alt={ tag_image_title }
+				    title={ tag_image_title }
+				    style={ { objectPosition: focus_tag_image } }
+				  />
+				</div>
         }
         <div className="split-two-column-item-content">
-          {tag_name &&
-            <a className="split-two-column-item-tag" href={tag_link}>
-              #{tag_name}
-            </a>
+          { tag_name &&
+					<a className="split-two-column-item-tag" href={ tag_link }>
+						#{ tag_name }
+					</a>
           }
           <RichText
             tagName="p"
             className="split-two-column-item-subtitle"
-            placeholder={__('Enter Description', 'planet4-blocks-backend')}
-            value={tag_description}
-            onChange={onTextChange('tag_description')}
+            placeholder={ __( 'Enter Description', 'planet4-blocks-backend' ) }
+            value={ tag_description }
+            onChange={ onTextChange( 'tag_description' ) }
             multiline="false"
-            allowedFormats={['core/bold', 'core/italic']}
-            />
+            allowedFormats={ [ 'core/bold', 'core/italic' ] }
+          />
           <RichText
             tagName="a"
             className="btn btn-primary btn-block split-two-column-item-button"
-            placeholder={__('Enter button text', 'planet4-blocks-backend')}
-            value={button_text}
-            onChange={onTextChange('button_text')}
+            placeholder={ __( 'Enter button text', 'planet4-blocks-backend' ) }
+            value={ button_text }
+            onChange={ onTextChange( 'button_text' ) }
             multiline="false"
             withoutInteractiveFormatting
-            allowedFormats={[]}
-            />
+            allowedFormats={ [] }
+          />
         </div>
       </div>
     </section>
-  )
-}
+  );
+};

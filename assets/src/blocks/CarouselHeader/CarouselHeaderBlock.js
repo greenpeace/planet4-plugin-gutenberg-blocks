@@ -5,6 +5,10 @@ import ReactDOMServer from 'react-dom/server';
 
 const { registerBlockType } = wp.blocks;
 
+const { RawHTML } = wp.element;
+
+const { __ } = wp.i18n;
+
 const BLOCK_NAME = 'planet4-blocks/carousel-header';
 
 const attributes = {
@@ -14,7 +18,7 @@ const attributes = {
   },
   slides: {
     type: 'array',
-    default: [{
+    default: [ {
       image: null,
       focal_points: {},
       header: '',
@@ -22,14 +26,14 @@ const attributes = {
       link_text: '',
       link_url: '',
       link_url_new_tab: false,
-    }],
-    validation: slides => {
-      const invalidSlides = slides.filter(slide => slide.image === null);
+    } ],
+    validation: ( slides ) => {
+      const invalidSlides = slides.filter( ( slide ) => slide.image === null );
 
       const isValid = invalidSlides.length === 0;
-      const messages = invalidSlides.map( invalidSlide => {
-        return `Carousel Header Block: Slide ${ slides.findIndex( slide => slide === invalidSlide ) + 1 } has no image`;
-      });
+      const messages = invalidSlides.map( ( invalidSlide ) => {
+        return `Carousel Header Block: Slide ${ slides.findIndex( ( slide ) => slide === invalidSlide ) + 1 } has no image`;
+      } );
 
       return { isValid, messages };
     },
@@ -37,7 +41,7 @@ const attributes = {
 };
 
 export const registerCarouselHeaderBlock = () =>
-  registerBlockType(BLOCK_NAME, {
+  registerBlockType( BLOCK_NAME, {
     title: 'Carousel Header',
     icon: 'welcome-widgets-menus',
     category: 'planet4-blocks',
@@ -49,21 +53,22 @@ export const registerCarouselHeaderBlock = () =>
     styles: [
       {
         name: 'fit-height-to-content',
-        label: __('Fit height to content', 'planet4-blocks-backend'),
+        label: __( 'Fit height to content', 'planet4-blocks-backend' ),
         isDefault: false,
       },
     ],
     edit: CarouselHeaderEditor,
-    save: ({ attributes }) => {
-      const markup = ReactDOMServer.renderToString(<div
-        data-hydrate={'planet4-blocks/carousel-header'}
-        data-attributes={JSON.stringify(attributes)}
+    // attributes renamed to saveAttributes to avoid error.
+    save: ( { saveAttributes } ) => {
+      const markup = ReactDOMServer.renderToString( <div
+        data-hydrate={ 'planet4-blocks/carousel-header' }
+        data-attributes={ JSON.stringify( saveAttributes ) }
       >
-        <CarouselHeaderFrontend { ...attributes } />
-      </div>);
-      return <wp.element.RawHTML>{ markup }</wp.element.RawHTML>;
+        <CarouselHeaderFrontend { ...saveAttributes } />
+      </div> );
+      return <RawHTML>{ markup }</RawHTML>;
     },
     deprecated: [
-      carouselHeaderV1
-    ]
-  });
+      carouselHeaderV1,
+    ],
+  } );

@@ -1,4 +1,4 @@
-import { useState, useEffect } from '@wordpress/element';
+import { useState } from '@wordpress/element';
 
 /**
  * Takes an array of refs to the slides
@@ -8,104 +8,107 @@ import { useState, useEffect } from '@wordpress/element';
  * - Adds an *exit* transition class for the `active` element
  * - Adds a listener for `ontransitionend` to the `active` element
  *
- * @param {Array} slidesRef
+ * @param {Array}  slidesRef
+ * @param {number} lastSlide
+ * @param {Object} containerRef
  * @param {Object} options
  */
-export const useSlides = (slidesRef, lastSlide, containerRef, options = {
+export const useSlides = ( slidesRef, lastSlide, containerRef, options = {
   // Following Bootstrap's approach for RTL:
   // https://getbootstrap.com/docs/5.0/getting-started/rtl/#approach
   // Note: in non-directional transitions (e.g.: fade out),
   // these could have the same class for both directions.
   enterTransitionClasses: {
     next: 'enter-from-end',
-    prev: 'enter-from-start'
+    prev: 'enter-from-start',
   },
   exitTransitionClasses: {
     next: 'exit-to-start',
-    prev: 'exit-to-end'
-  }
-}) => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [autoplayCancelled, setAutoplayCancelled] = useState(false);
-  const [sliding, setSliding] = useState(false);
+    prev: 'exit-to-end',
+  },
+} ) => {
+  const [ currentSlide, setCurrentSlide ] = useState( 0 );
+  const [ autoplayCancelled, setAutoplayCancelled ] = useState( false );
+  const [ sliding, setSliding ] = useState( false );
 
-  const goToNextSlide = (autoplay = false) => {
-    goToSlide(currentSlide === lastSlide ? 0 : currentSlide + 1);
-    if (!autoplay) {
-      setAutoplayCancelled(true);
+  const goToNextSlide = ( autoplay = false ) => {
+    goToSlide( currentSlide === lastSlide ? 0 : currentSlide + 1 );
+    if ( ! autoplay ) {
+      setAutoplayCancelled( true );
     }
   };
 
   const goToPrevSlide = () => {
-    goToSlide(currentSlide === 0 ? lastSlide : currentSlide - 1);
-    setAutoplayCancelled(true);
+    goToSlide( currentSlide === 0 ? lastSlide : currentSlide - 1 );
+    setAutoplayCancelled( true );
   };
 
-  const getOrder = (currentSlide, newSlide, lastSlide) => {
-    let order = newSlide < currentSlide ? 'prev' : 'next';
-    if (newSlide === lastSlide && currentSlide === 0 && order !== 'prev') {
+  // Renamed currentSlide and lastSlide to currentSlideVal and lastSlideVal to avoid eslint errors.
+  const getOrder = ( currentSlideVal, newSlide, lastSlideVal ) => {
+    let order = newSlide < currentSlideVal ? 'prev' : 'next';
+    if ( newSlide === lastSlideVal && currentSlideVal === 0 && order !== 'prev' ) {
       order = 'prev';
-    } else if (newSlide === 0 && currentSlide === lastSlide && order !== 'next') {
+    } else if ( newSlide === 0 && currentSlideVal === lastSlideVal && order !== 'next' ) {
       order = 'next';
     }
     return order;
   };
 
-  const getSlideHeight = slideRef => {
-    return `${slideRef.querySelector('.carousel-item-mask .background-holder').offsetHeight + slideRef.querySelector('.carousel-caption').offsetHeight}px`;
+  const getSlideHeight = ( slideRef ) => {
+    return `${ slideRef.querySelector( '.carousel-item-mask .background-holder' ).offsetHeight + slideRef.querySelector( '.carousel-caption' ).offsetHeight }px`;
   };
 
-  const setCarouselHeight = slideRef => {
-    if (!containerRef || !containerRef.current) {
+  const setCarouselHeight = ( slideRef ) => {
+    if ( ! containerRef || ! containerRef.current ) {
       return;
     }
 
     const carouselElement = containerRef.current;
-    if (window.matchMedia('(max-width: 991px)').matches) {
-      carouselElement.querySelectorAll('.carousel-inner, .carousel-item-mask').forEach(container =>
-        container.style.height = getSlideHeight(slideRef)
+    if ( window.matchMedia( '(max-width: 991px)' ).matches ) {
+      carouselElement.querySelectorAll( '.carousel-inner, .carousel-item-mask' ).forEach( ( container ) =>
+        container.style.height = getSlideHeight( slideRef )
       );
     } else {
-      carouselElement.querySelectorAll('.carousel-inner, .carousel-item-mask').forEach(container =>
+      carouselElement.querySelectorAll( '.carousel-inner, .carousel-item-mask' ).forEach( ( container ) =>
         container.style.height = null
       );
     }
   };
 
-  const goToSlide = (newSlide, forceCurrentSlide = false) => {
-    if (!slidesRef.current) {
+  const goToSlide = ( newSlide, forceCurrentSlide = false ) => {
+    if ( ! slidesRef.current ) {
       return;
     }
 
-    const nextElement = slidesRef.current[newSlide];
-    const activeElement = slidesRef.current[currentSlide];
+    const nextElement = slidesRef.current[ newSlide ];
+    const activeElement = slidesRef.current[ currentSlide ];
 
-    if (newSlide !== currentSlide && nextElement && activeElement && !sliding) {
-      setSliding(true);
+    if ( newSlide !== currentSlide && nextElement && activeElement && ! sliding ) {
+      setSliding( true );
 
-      const order = getOrder(currentSlide, newSlide, lastSlide);
-      const enterTransitionClass = options.enterTransitionClasses[order];
-      const exitTransitionClass = options.exitTransitionClasses[order];
+      const order = getOrder( currentSlide, newSlide, lastSlide );
+      const enterTransitionClass = options.enterTransitionClasses[ order ];
+      const exitTransitionClass = options.exitTransitionClasses[ order ];
 
-      setCarouselHeight(nextElement);
+      setCarouselHeight( nextElement );
 
-      activeElement.classList.add(exitTransitionClass);
-      nextElement.classList.add(enterTransitionClass);
+      activeElement.classList.add( exitTransitionClass );
+      nextElement.classList.add( enterTransitionClass );
 
       const unsetTransitionClasses = () => {
-        activeElement.classList.remove(exitTransitionClass);
-        nextElement.classList.remove(enterTransitionClass);
-        activeElement.removeEventListener('transitionend', unsetTransitionClasses);
-        setSliding(false);
-        setCurrentSlide(newSlide);
+        activeElement.classList.remove( exitTransitionClass );
+        nextElement.classList.remove( enterTransitionClass );
+        activeElement.removeEventListener( 'transitionend', unsetTransitionClasses );
+        setSliding( false );
+        setCurrentSlide( newSlide );
       };
 
-      activeElement.addEventListener('transitionend', unsetTransitionClasses);
+      activeElement.addEventListener( 'transitionend', unsetTransitionClasses );
 
       // This hack is used to force what happens
       // on transitionEnd when the active slide was removed in the editor
       // (thus no longer present in the DOM)
-      if (forceCurrentSlide) {
+      if ( forceCurrentSlide ) {
         unsetTransitionClasses();
       }
     }

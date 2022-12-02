@@ -8,7 +8,7 @@ export class ArticlesBlock {
     const { registerBlockType } = wp.blocks;
     const { __ } = wp.i18n;
 
-    registerBlockType(BLOCK_NAME, {
+    registerBlockType( BLOCK_NAME, {
       title: 'Articles',
       icon: 'excerpt-view',
       category: 'planet4-blocks',
@@ -18,47 +18,47 @@ export class ArticlesBlock {
       attributes: {
         article_heading: {
           type: 'string',
-          default: __('Related Articles', 'planet4-blocks')
+          default: __( 'Related Articles', 'planet4-blocks' ),
         },
         articles_description: {
           type: 'string',
-          default: ''
+          default: '',
         },
         article_count: {
           type: 'integer',
-          default: 3
+          default: 3,
         },
         tags: {
           type: 'array',
-          default: []
+          default: [],
         },
         posts: {
           type: 'array',
-          default: []
+          default: [],
         },
         post_types: {
           type: 'array',
-          default: []
+          default: [],
         },
         read_more_text: {
           type: 'string',
-          default: __('Load more', 'planet4-blocks')
+          default: __( 'Load more', 'planet4-blocks' ),
         },
         read_more_link: {
           type: 'string',
-          default: ''
+          default: '',
         },
         button_link_new_tab: {
           type: 'boolean',
-          default: false
+          default: false,
         },
         ignore_categories: {
           type: 'boolean',
-          default: false
-        }
+          default: false,
+        },
       },
       edit: ArticlesEditor,
-      save: frontendRendered(BLOCK_NAME),
+      save: frontendRendered( BLOCK_NAME ),
       deprecated: [
         {
           attributes: {
@@ -72,19 +72,19 @@ export class ArticlesBlock {
             },
             article_count: {
               type: 'integer',
-              default: 3
+              default: 3,
             },
             tags: {
               type: 'array',
-              default: []
+              default: [],
             },
             posts: {
               type: 'array',
-              default: []
+              default: [],
             },
             post_types: {
               type: 'array',
-              default: []
+              default: [],
             },
             read_more_text: {
               type: 'string',
@@ -92,23 +92,23 @@ export class ArticlesBlock {
             },
             read_more_link: {
               type: 'string',
-              default: ''
+              default: '',
             },
             button_link_new_tab: {
               type: 'boolean',
-              default: false
+              default: false,
             },
             ignore_categories: {
               type: 'boolean',
-              default: false
-            }
+              default: false,
+            },
           },
           save() {
             return null;
           },
-        }
+        },
       ],
-    });
-  };
+    } );
+  }
 }
 

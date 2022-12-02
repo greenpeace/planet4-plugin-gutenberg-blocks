@@ -1,6 +1,5 @@
-const { __ } = wp.i18n;
-
-export const TakeActionBoxoutFrontend = ({
+/* eslint-disable jsx-a11y/anchor-has-content */
+export const TakeActionBoxoutFrontend = ( {
   title,
   excerpt,
   link,
@@ -10,47 +9,47 @@ export const TakeActionBoxoutFrontend = ({
   imageAlt,
   className,
   stickyOnMobile,
-}) => (
+} ) => (
   <section
-    className={`boxout ${className || ''}`}
-    {...stickyOnMobile && { id: 'action-card' }}
+    className={ `boxout ${ className || '' }` }
+    { ...stickyOnMobile && { id: 'action-card' } }
   >
     <a
       data-ga-category="Take Action Boxout"
       data-ga-action="Image"
       data-ga-label="n/a"
       className="cover-card-overlay"
-      href={link}
-      {...newTab && link && { target: "_blank" }}
+      href={ link }
+      { ...newTab && link && { target: '_blank' } }
     />
-    <img src={imageUrl} alt={imageAlt} />
+    <img src={ imageUrl } alt={ imageAlt } />
     <div className="boxout-content">
-      {title &&
-        <a
-          className="boxout-heading"
-          data-ga-category="Take Action Boxout"
-          data-ga-action="Title"
-          data-ga-label="n/a"
-          dangerouslySetInnerHTML={{ __html: title }}
-          href={link}
-          {...newTab && link && { target: "_blank" }}
-        />
+      { title &&
+	<a
+	  className="boxout-heading"
+	  data-ga-category="Take Action Boxout"
+	  data-ga-action="Title"
+	  data-ga-label="n/a"
+	  dangerouslySetInnerHTML={ { __html: title } }
+	  href={ link }
+	  { ...newTab && link && { target: '_blank' } }
+	/>
       }
-      {excerpt &&
-        <p className="boxout-excerpt" dangerouslySetInnerHTML={{ __html: excerpt }} />
+      { excerpt &&
+	<p className="boxout-excerpt" dangerouslySetInnerHTML={ { __html: excerpt } } />
       }
     </div>
-    {link && linkText &&
-      <a
-        className="btn btn-action btn-block cover-card-btn"
-        data-ga-category="Take Action Boxout"
-        data-ga-action="Call to Action"
-        data-ga-label="n/a"
-        href={link}
-        {...newTab && link && { target: "_blank" }}
-      >
-        {linkText}
-      </a>
+    { link && linkText &&
+	<a
+	  className="btn btn-action btn-block cover-card-btn"
+	  data-ga-category="Take Action Boxout"
+	  data-ga-action="Call to Action"
+	  data-ga-label="n/a"
+	  href={ link }
+	  { ...newTab && link && { target: '_blank' } }
+	>
+	  { linkText }
+	</a>
     }
   </section>
 );
