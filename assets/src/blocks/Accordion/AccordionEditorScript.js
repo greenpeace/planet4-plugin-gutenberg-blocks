@@ -45,13 +45,13 @@ registerBlockType( BLOCK_NAME, {
   },
   attributes,
   edit: AccordionEditor,
-  // Changed this variable name from attributes to saveAttributes to prevent {'attributes' is already declared in the upper scope:  no-shadow} error.
-  save: ( { saveAttributes } ) => {
-    if ( ! saveAttributes ) {
+  // eslint-disable-next-line no-shadow
+  save: ( { attributes } ) => {
+    if ( ! attributes ) {
       return null;
     }
 
-    return <AccordionFrontend { ...saveAttributes } />;
+    return <AccordionFrontend { ...attributes } />;
   },
 } );
 

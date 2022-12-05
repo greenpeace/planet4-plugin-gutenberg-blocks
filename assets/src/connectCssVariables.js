@@ -1,6 +1,6 @@
 const root = document.documentElement;
 
-const readCssVariable = name => root.style.getPropertyValue( name );
+const readCssVariable = ( name ) => root.style.getPropertyValue( name );
 
 const setCssVariable = ( name, value ) => {
   root.style.setProperty( name, value );
@@ -38,29 +38,29 @@ const metaToVariableMapping = [
         plastic: '"Montserrat", sans-serif',
       };
 
-      return campaignDefaults[ getMeta()[ 'theme' ] || 'default' ];
-    }
+      return campaignDefaults[ getMeta().theme || 'default' ];
+    },
   },
 ];
 
 export const setUpCssVariables = () => {
-  document.addEventListener( 'DOMContentLoaded', ( event ) => {
+  document.addEventListener( 'DOMContentLoaded', () => {
     const postType = wp.data.select( 'core/editor' ).getCurrentPostType();
 
     if ( postType !== 'campaign' ) {
       return;
     }
 
-    metaToVariableMapping.forEach( mapping => {
+    metaToVariableMapping.forEach( ( mapping ) => {
       wp.data.subscribe( () => {
         const postMeta = getMeta();
 
         // wp.data starts dispatching before meta is available.
-        if ( !postMeta ) {
+        if ( ! postMeta ) {
           return;
         }
 
-        const transform = mapping.transform || (value => value);
+        const transform = mapping.transform || ( ( value ) => value );
 
         const metaValue = transform( postMeta[ mapping.metaKey ] );
 
@@ -68,7 +68,6 @@ export const setUpCssVariables = () => {
 
         if ( currentValue !== metaValue ) {
           setCssVariable( mapping.cssVariable, metaValue );
-          console.log( `Set css variable "${ mapping.cssVariable }" to "${ metaValue }"` );
         }
       } );
     } );

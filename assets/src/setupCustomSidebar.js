@@ -4,8 +4,8 @@ import { CampaignThemeSidebar } from './components/Sidebar/CampaignThemeSidebar'
 import { ActionSidebar } from './components/Sidebar/ActionSidebar';
 import { OpenGraphSidebar } from './components/Sidebar/OpenGraphSidebar';
 
-const sidebarsForPostType = postType => {
-  switch (postType) {
+const sidebarsForPostType = ( postType ) => {
+  switch ( postType ) {
   case 'campaign':
     return [
       PageHeaderSidebar,
@@ -51,10 +51,10 @@ export const setupCustomSidebar = () => {
         return;
       }
 
-      sidebars.forEach(sidebar => registerPlugin( sidebar.getId(), {
+      sidebars.forEach( ( sidebar ) => registerPlugin( sidebar.getId(), {
         icon: sidebar.getIcon ? sidebar.getIcon() : '',
-        render: sidebar.render
-      } ));
+        render: sidebar.render,
+      } ) );
     } );
   } );
 };

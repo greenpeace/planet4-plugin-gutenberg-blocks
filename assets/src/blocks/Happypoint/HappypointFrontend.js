@@ -68,7 +68,7 @@ export const HappypointFrontend = ( {
             		<iframe
             			src={ url }
             			cellSpacing={ 0 }
-            			allowtransparency="true"
+            			allowTransparency="true"
             			frameBorder={ 0 }
             			scrolling="no"
             			width="100%"

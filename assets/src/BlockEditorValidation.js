@@ -1,7 +1,7 @@
 const { registerPlugin } = wp.plugins;
 const { PluginPrePublishPanel } = wp.editPost;
 const { select, dispatch, subscribe, useSelect } = wp.data;
-const {__} = wp.i18n;
+const { __ } = wp.i18n;
 
 const blockValidations = {};
 
@@ -9,51 +9,50 @@ let messages = [];
 let canPublish = true;
 
 export const blockEditorValidation = () => {
-  subscribe(() => {
+  subscribe( () => {
     const blocks = select( 'core/block-editor' ).getBlocks();
 
     const currentMessages = [];
-    const invalidBlocks = blocks.reduce( (invalidBlocks, block ) => {
+    const invalidBlocks = blocks.reduce( ( invalidBlocksArr, block ) => {
       // Normally `blocks` contains a valid list of blocks, however it can happen that one of them is `null` in rare
       // cases. It happened to me once while running with WordPress 5.8.1 and undoing multiple edits. This made the
       // editor crash while it's trying to access `block.name`.
-      if (!block) {
-        return;
+      if ( ! block ) {
+        return null;
       }
       const validations = blockValidations[ block.name ] || {};
 
-      const results = Object.entries( validations ).reduce( (results, [attrName, validate]) => {
-        const value = block.attributes[attrName];
-        const result = validate(value);
+      const results = Object.entries( validations ).reduce( ( resultsArr, [ attrName, validate ] ) => {
+        const value = block.attributes[ attrName ];
+        const result = validate( value );
 
-        if (!result.isValid) {
-          results.push(result);
+        if ( ! result.isValid ) {
+          resultsArr.push( result );
         }
 
-        return results;
+        return resultsArr;
       }, [] );
 
-      invalidBlocks.push(...results);
+      invalidBlocksArr.push( ...results );
 
-      return invalidBlocks;
-    }, []);
-    invalidBlocks.forEach(block => currentMessages.push(...block.messages));
+      return invalidBlocksArr;
+    }, [] );
+    invalidBlocks.forEach( ( block ) => currentMessages.push( ...block.messages ) );
 
-    const postType = wp.data.select('core/editor').getCurrentPostType();
-    let currentlyValid = (0 === invalidBlocks.length);
+    const currentlyValid = ( 0 === invalidBlocks.length );
     messages = currentMessages;
 
-    if (canPublish === currentlyValid) {
+    if ( canPublish === currentlyValid ) {
       return;
     }
     canPublish = currentlyValid;
 
-    if (!canPublish) {
+    if ( ! canPublish ) {
       dispatch( 'core/editor' ).lockPostSaving();
     } else {
       dispatch( 'core/editor' ).unlockPostSaving();
     }
-  });
+  } );
 
   registerPlugin( 'pre-publish-checklist', { render: PrePublishCheckList } );
   wp.hooks.addFilter(
@@ -63,46 +62,46 @@ export const blockEditorValidation = () => {
   );
 };
 
-document.addEventListener('change', e=> {
-  if (!e.target.matches('select[name="p4_campaign_name"]')) {
+document.addEventListener( 'change', ( e ) => {
+  if ( ! e.target.matches( 'select[name="p4_campaign_name"]' ) ) {
     return;
   }
-  dispatch('core/editor').editPost({ meta: { p4_campaign_name: e.target.value } });
-})
+  dispatch( 'core/editor' ).editPost( { meta: { p4_campaign_name: e.target.value } } );
+} );
 
 const registerAttributeValidations = ( settings, blockName ) => {
   const { attributes } = settings;
 
-  Object.keys(settings.attributes).forEach( attrName => {
+  Object.keys( settings.attributes ).forEach( ( attrName ) => {
     const attr = attributes[ attrName ];
 
     if ( typeof attr.validation === 'function' ) {
       blockValidations[ blockName ] = blockValidations[ blockName ] || {};
       blockValidations[ blockName ][ attrName ] = attr.validation;
     }
-  });
+  } );
 
   return settings;
-}
-
+};
 
 const PrePublishCheckList = () => {
   // This doesn't assign anything from useSelect, which is intended. We want to update the component whenever anything
   // that can affect validity changes. This could probably be done more properly by adding a store with `canPublish`.
-  useSelect(select=>[select('core/editor').getEditedPostAttribute('meta'), select('core/block-editor').getBlocks()]);
+  // eslint-disable-next-line no-shadow
+  useSelect( ( select ) => [ select( 'core/editor' ).getEditedPostAttribute( 'meta' ), select( 'core/block-editor' ).getBlocks() ] );
   return (
     <PluginPrePublishPanel
-      title={ __('Publish Checklist', 'planet4-blocks-backend') }
+      title={ __( 'Publish Checklist', 'planet4-blocks-backend' ) }
       initialOpen="true"
-      className={ !canPublish ? 'p4-plugin-pre-publish-panel-error' : '' }
+      className={ ! canPublish ? 'p4-plugin-pre-publish-panel-error' : '' }
       icon="none">
-      { !!canPublish && <p>{ __('All good.', 'planet4-blocks-backend') }</p> }
-      { !canPublish && <ul>
-        { messages.map(msg =>
+      { !! canPublish && <p>{ __( 'All good.', 'planet4-blocks-backend' ) }</p> }
+      { ! canPublish && <ul>
+        { messages.map( ( msg ) =>
           <li key={ msg }><p>{ msg }</p></li>
         ) }
       </ul> }
 
     </PluginPrePublishPanel>
-  )
+  );
 };

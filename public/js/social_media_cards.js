@@ -1,7 +1,6 @@
 document.addEventListener( 'DOMContentLoaded', () => {
-
   function openPopup( url ) {
-    let popup = window.open(
+    const popup = window.open(
       url,
       'popup',
       'height=350,width=600'

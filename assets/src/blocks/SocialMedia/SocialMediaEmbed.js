@@ -25,7 +25,7 @@ export const SocialMediaEmbed = ( {
 					  src={ `https://www.facebook.com/plugins/page.php?href=${ encodeURIComponent( facebookPageUrl ) }&tabs=${ facebookPageTab }&width=240&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true` }
 					  scrolling="no"
 					  frameBorder="0"
-					  allowtransparency="true"
+					  allowTransparency="true"
 					  allow="encrypted-media"
 					/>
 					<iframe
@@ -33,7 +33,7 @@ export const SocialMediaEmbed = ( {
 					  src={ `https://www.facebook.com/plugins/page.php?href=${ encodeURIComponent( facebookPageUrl ) }&tabs=${ facebookPageTab }&width=500&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true` }
 					  scrolling="no"
 					  frameBorder="0"
-					  allowtransparency="true"
+					  allowTransparency="true"
 					  allow="encrypted-media"
 					/>
 				</>

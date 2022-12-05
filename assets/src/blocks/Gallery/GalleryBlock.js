@@ -51,7 +51,7 @@ export const registerGalleryBlock = () => {
         name: 'slider',
         label: getStyleLabel(
           'Slider',
-          __( 'The slider is a carousel of images. For more than 5 images, consider using a grid.', 'planet4-blocks-backend' ),
+          __( 'The slider is a carousel of images. For more than 5 images, consider using a grid.', 'planet4-blocks-backend' )
         ),
         isDefault: true,
       },
@@ -59,14 +59,14 @@ export const registerGalleryBlock = () => {
         name: 'three-columns',
         label: getStyleLabel(
           '3 Columns',
-          __( 'The 3 columns image display is great for accentuating text, and telling a visual story.', 'planet4-blocks-backend' ),
+          __( 'The 3 columns image display is great for accentuating text, and telling a visual story.', 'planet4-blocks-backend' )
         ),
       },
       {
         name: 'grid',
         label: getStyleLabel(
           'Grid',
-          __( 'The grid shows thumbnails of lots of images. Good to use when showing lots of activity.', 'planet4-blocks-backend' ),
+          __( 'The grid shows thumbnails of lots of images. Good to use when showing lots of activity.', 'planet4-blocks-backend' )
         ),
       },
     ],

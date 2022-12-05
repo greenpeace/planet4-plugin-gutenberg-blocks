@@ -34,7 +34,7 @@ export const Timeline = ( props ) => {
       google_sheets_url,
       timenav_position,
       language,
-    ],
+    ]
   );
 
   return <div ref={ timelineNode }></div>;

@@ -43,7 +43,7 @@ export const registerSubmenuBlock = () => {
         name: 'long',
         label: getStyleLabel(
           __( 'Long full-width', 'planet4-blocks-backend' ),
-          __( 'Use: on long pages (more than 5 screens) when list items are long (+ 10 words). No max items recommended.', 'planet4-blocks-backend' ),
+          __( 'Use: on long pages (more than 5 screens) when list items are long (+ 10 words). No max items recommended.', 'planet4-blocks-backend' )
         ),
         isDefault: true,
       },
@@ -51,14 +51,14 @@ export const registerSubmenuBlock = () => {
         name: 'short',
         label: getStyleLabel(
           __( 'Short full-width', 'planet4-blocks-backend' ),
-          __( 'Use: on long pages (more than 5 screens) when list items are short (up to 5 words). No max items recommended.', 'planet4-blocks-backend' ),
+          __( 'Use: on long pages (more than 5 screens) when list items are short (up to 5 words). No max items recommended.', 'planet4-blocks-backend' )
         ),
       },
       {
         name: 'sidebar',
         label: getStyleLabel(
           __( 'Short sidebar', 'planet4-blocks-backend' ),
-          __( 'Use: on long pages (more than 5 screens) when list items are short (up to 10 words). Max items recommended: 9', 'planet4-blocks-backend' ),
+          __( 'Use: on long pages (more than 5 screens) when list items are short (up to 10 words). Max items recommended: 9', 'planet4-blocks-backend' )
         ),
       },
     ],

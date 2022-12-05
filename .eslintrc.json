@@ -34,6 +34,13 @@
       "error",
       "all"
     ],
+    "comma-dangle": ["error", {
+      "arrays": "always-multiline",
+      "objects": "always-multiline",
+      "imports": "always-multiline",
+      "exports": "always-multiline",
+      "functions": "never"
+    }],
     "one-var-declaration-per-line": [
       "error",
       "always"
@@ -51,7 +58,9 @@
     "react/jsx-indent": "off",
     "no-mixed-spaces-and-tabs": "off",
     "react/jsx-indent-props": "off",
-    "react-hooks/rules-of-hooks": "off"
+    "react-hooks/rules-of-hooks": "off",
+    "react/no-unkown-property": "off",
+    "@wordpress/dependency-group": "off"
   },
   "parserOptions": {
     "ecmaVersion": 9,

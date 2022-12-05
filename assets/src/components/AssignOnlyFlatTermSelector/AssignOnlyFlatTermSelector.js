@@ -231,5 +231,5 @@ export default compose(
         dispatch( 'core/editor' ).editPost( { [ restBase ]: terms } );
       },
     };
-  } ),
+  } )
 )( AssignOnlyFlatTermSelector );

@@ -58,13 +58,13 @@ export const registerCarouselHeaderBlock = () =>
       },
     ],
     edit: CarouselHeaderEditor,
-    // attributes renamed to saveAttributes to avoid error.
-    save: ( { saveAttributes } ) => {
+    // eslint-disable-next-line no-shadow
+    save: ( { attributes } ) => {
       const markup = ReactDOMServer.renderToString( <div
         data-hydrate={ 'planet4-blocks/carousel-header' }
-        data-attributes={ JSON.stringify( saveAttributes ) }
+        data-attributes={ JSON.stringify( attributes ) }
       >
-        <CarouselHeaderFrontend { ...saveAttributes } />
+        <CarouselHeaderFrontend { ...attributes } />
       </div> );
       return <RawHTML>{ markup }</RawHTML>;
     },
