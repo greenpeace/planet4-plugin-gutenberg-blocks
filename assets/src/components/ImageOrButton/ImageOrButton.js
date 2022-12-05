@@ -1,8 +1,7 @@
-import {Button} from '@wordpress/components';
-import {MediaUpload,MediaUploadCheck} from '@wordpress/block-editor';
+import { Button } from '@wordpress/components';
+import { MediaUpload, MediaUploadCheck } from '@wordpress/block-editor';
 
-export const ImageOrButton = props => {
-  const {__} = wp.i18n;
+export const ImageOrButton = ( props ) => {
   const {
     disabled = false,
     imageId,
@@ -14,24 +13,25 @@ export const ImageOrButton = props => {
     onSelectImage,
   } = props;
 
-  const getImageOrButton = (openEvent) => {
-    if (imageId) {
-
+  const getImageOrButton = ( openEvent ) => {
+    if ( imageId ) {
       return (
         <img
           src={ imageUrl }
           onClick={ openEvent }
           className={ imgClass }
+          alt=""
+          role="presentation"
         />
 
       );
     }
 
     return (
-      <div className='button-container'>
+      <div className="button-container">
         <Button
           onClick={ openEvent }
-          className='button'
+          className="button"
           disabled={ disabled }>
           { buttonLabel }
         </Button>
@@ -41,16 +41,16 @@ export const ImageOrButton = props => {
     );
   };
 
-  return <div className='ImageOrButton'>
+  return <div className="ImageOrButton">
     <MediaUploadCheck>
       <MediaUpload
-        title={title}
-        type='image'
-        onSelect={onSelectImage}
-        value={imageId}
-        allowedTypes={['image']}
-        render={ ({ open }) => getImageOrButton(open) }
+        title={ title }
+        type="image"
+        onSelect={ onSelectImage }
+        value={ imageId }
+        allowedTypes={ [ 'image' ] }
+        render={ ( { open } ) => getImageOrButton( open ) }
       />
     </MediaUploadCheck>
   </div>;
-}
+};

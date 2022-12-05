@@ -39,7 +39,7 @@ export const registerPageHeaderBlock = () => {
       description: __( `Page header with image on the ${ variation }`, 'planet4-blocks-backend' ),
       scope,
       attributes: { mediaPosition: variation, ...attributes },
-      innerBlocks: innerBlocks( variation ),
+      innerBlocks: innerBlocks(),
       isActive: ( blockAttributes ) => (
         blockAttributes.className === classname &&
         blockAttributes.mediaPosition === variation

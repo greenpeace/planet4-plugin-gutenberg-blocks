@@ -2,14 +2,14 @@
 // Certain fields can have multiple sets of options, depending on which value is chosen for another field. For example,
 // we have a "default" and a "light" footer theme. Each of these results in a separate set of footer link colors.
 // See https://github.com/greenpeace/planet4-master-theme/blob/1905eee9f94ef1ac64aaed1570ea4150671684c1/campaign_themes/plastic.json#L176-L187
-export const resolveField = (theme, fieldId, meta ) => {
-  if ( !theme ) {
+export const resolveField = ( theme, fieldId, meta ) => {
+  if ( ! theme ) {
     return null;
   }
 
-  const field = theme.fields.find( field => field.id === fieldId );
+  const field = theme.fields.find( ( themeField ) => themeField.id === fieldId );
 
-  if ( !field ) {
+  if ( ! field ) {
     return null;
   }
 
@@ -21,34 +21,33 @@ export const resolveField = (theme, fieldId, meta ) => {
 };
 
 const resolveDependency = ( theme, field, meta ) => {
-  const dependencyField = theme.fields.find( field2 => field2.id === field.dependsOn );
+  const dependencyField = theme.fields.find( ( field2 ) => field2.id === field.dependsOn );
 
   // Sanity check, the dependent field should be there if the config file is valid.
-  if ( !dependencyField ) {
+  if ( ! dependencyField ) {
     return null;
   }
 
-  if ( !meta ) {
+  if ( ! meta ) {
     return null;
   }
 
   const dependencyConfiguration = dependencyField.dependsOn ? resolveDependency( theme, dependencyField, meta ) : dependencyField;
 
-  if ( !dependencyConfiguration ) {
+  if ( ! dependencyConfiguration ) {
     return null;
   }
 
   let dependencyValue = meta[ field.dependsOn ];
 
-  const dependencyValueIsAllowed = dependencyConfiguration.options?.find( option => option.value === dependencyValue );
+  const dependencyValueIsAllowed = dependencyConfiguration.options?.find( ( option ) => option.value === dependencyValue );
 
-  if ( !dependencyValueIsAllowed ) {
+  if ( ! dependencyValueIsAllowed ) {
     // The field has a dependency and the current value of the post is not in the list of options, so use default value of the dependency.
     dependencyValue = dependencyConfiguration.default;
   }
 
-
-  if ( !dependencyValue || !field.configurations[dependencyValue]) {
+  if ( ! dependencyValue || ! field.configurations[ dependencyValue ] ) {
     return null;
   }
 
@@ -59,20 +58,20 @@ const resolveDependency = ( theme, field, meta ) => {
 };
 
 export const getDependencyUpdates = ( theme, fieldName, value, meta ) => {
-  const allChildren = theme.fields.filter( field => field.dependsOn === fieldName );
+  const allChildren = theme.fields.filter( ( field ) => field.dependsOn === fieldName );
   const needUpdate = allChildren.filter(
-    field => {
+    ( field ) => {
       const configuration = field.configurations[ value ];
 
-      if ( !configuration ) {
-        return typeof meta[ field.id  ] !== 'undefined'
+      if ( ! configuration ) {
+        return typeof meta[ field.id ] !== 'undefined';
       }
 
-      if (!configuration.options) {
+      if ( ! configuration.options ) {
         return true;
       }
 
-      return !(configuration.options.some(option => option.value === meta[ field.id ] ));
+      return ! ( configuration.options.some( ( option ) => option.value === meta[ field.id ] ) );
     }
   );
 
@@ -83,7 +82,7 @@ export const getDependencyUpdates = ( theme, fieldName, value, meta ) => {
 
     return {
       ...updates,
-      [field.id]: configuration?.default || null,
+      [ field.id ]: configuration?.default || null,
     };
-  }, {});
+  }, {} );
 };

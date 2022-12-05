@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from '@wordpress/element';
 
 import PhotoSwipe from '../../../../node_modules/photoswipe/dist/photoswipe.js';
 import PhotoSwipeUI_Default from '../../../../node_modules/photoswipe/dist/photoswipe-ui-default.js';
@@ -6,8 +6,8 @@ import PhotoSwipeUI_Default from '../../../../node_modules/photoswipe/dist/photo
 // `items` should be an array of object with this shape:
 // [{ src, w, h, title }, ...]
 // See: https://photoswipe.com/documentation/getting-started.html
-export const Lightbox = ({ index, isOpen, items, onClose = () => {} }) => {
-  let photoSwipeElement = useRef(null);
+export const Lightbox = ( { index, isOpen, items, onClose = () => {} } ) => {
+  let photoSwipeElement = useRef( null );
 
   const photoSwipeOptions = {
     index: index || 0,
@@ -19,42 +19,41 @@ export const Lightbox = ({ index, isOpen, items, onClose = () => {} }) => {
     counterEl: false,
   };
 
-  const [currentIndex, setCurrentIndex] = useState(photoSwipeOptions.index);
+  const [ currentIndex, setCurrentIndex ] = useState( photoSwipeOptions.index );
 
-  useEffect(() => {
-    if (!isOpen) {
+  useEffect( () => {
+    if ( ! isOpen ) {
       return;
     }
 
-    const photoSwipe = new PhotoSwipe(photoSwipeElement, PhotoSwipeUI_Default, items, photoSwipeOptions);
+    const photoSwipe = new PhotoSwipe( photoSwipeElement, PhotoSwipeUI_Default, items, photoSwipeOptions );
 
-    photoSwipe.listen('gettingData', function (index, galleryItem) {
-      if (galleryItem.w < 1 || galleryItem.h < 1) {
-        var imageSizeHandler = new Image();
-        imageSizeHandler.onload = function () {
-            galleryItem.w = this.width;
-            galleryItem.h = this.height;
-            photoSwipe.updateSize(true);
+    photoSwipe.listen( 'gettingData', ( idx, galleryItem ) => {
+      if ( galleryItem.w < 1 || galleryItem.h < 1 ) {
+        const imageSizeHandler = new Image();
+        imageSizeHandler.onload = function() {
+          galleryItem.w = this.width;
+          galleryItem.h = this.height;
+          photoSwipe.updateSize( true );
         };
         imageSizeHandler.src = galleryItem.src;
       }
-    });
+    } );
 
-    photoSwipe.listen('destroy', () => {
+    photoSwipe.listen( 'destroy', () => {
       onClose();
-    });
+    } );
 
-    photoSwipe.listen('close', () => {
+    photoSwipe.listen( 'close', () => {
       onClose();
-    });
+    } );
 
-    photoSwipe.listen('afterChange', () => {
-      setCurrentIndex(photoSwipe.getCurrentIndex());
-    });
+    photoSwipe.listen( 'afterChange', () => {
+      setCurrentIndex( photoSwipe.getCurrentIndex() );
+    } );
 
     photoSwipe.init();
-
-  }, [items]);
+  }, [ items ] );
 
   return wp.element.createPortal(
     <div
@@ -62,9 +61,9 @@ export const Lightbox = ({ index, isOpen, items, onClose = () => {} }) => {
       tabIndex="-1"
       role="dialog"
       aria-hidden="true"
-      ref={node => {
+      ref={ ( node ) => {
         photoSwipeElement = node;
-      }}
+      } }
     >
       <div className="pswp__bg" />
       <div className="pswp__scroll-wrap">
@@ -72,7 +71,7 @@ export const Lightbox = ({ index, isOpen, items, onClose = () => {} }) => {
           <div className="pswp__item" />
           <div className="pswp__item" />
           <div className="pswp__item" />
-        </div>      
+        </div>
 
         <div className="pswp__ui pswp__ui--hidden">
           <div className="pswp__top-bar">
@@ -101,8 +100,8 @@ export const Lightbox = ({ index, isOpen, items, onClose = () => {} }) => {
           <div className="p4-caption-and-indicators">
             <div className="p4-photoswipe-indicators-wrapper">
               {
-                items.length > 1 && items.map((item, index) => 
-                  <span className={ `p4-photoswipe-indicator-click-area ${ index == currentIndex ? 'active' : ''}` } key={ index }>
+                items.length > 1 && items.map( ( item, idx ) =>
+                  <span className={ `p4-photoswipe-indicator-click-area ${ idx === currentIndex ? 'active' : '' }` } key={ idx }>
                     <span className="p4-photoswipe-indicator-bar" />
                   </span>
                 )

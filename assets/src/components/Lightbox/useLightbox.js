@@ -1,17 +1,17 @@
 import { useState } from '@wordpress/element';
 
 export const useLightbox = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [index, setIndex] = useState(0);
+  const [ isOpen, setIsOpen ] = useState( false );
+  const [ index, setIndex ] = useState( 0 );
 
-  const openLightbox = index => {
-    setIsOpen(true);
-    setIndex(index);
+  const openLightbox = ( idx ) => {
+    setIsOpen( true );
+    setIndex( idx );
   };
 
   const closeLightbox = () => {
-    setIsOpen(false);
+    setIsOpen( false );
   };
 
   return { isOpen, index, openLightbox, closeLightbox };
-}
+};

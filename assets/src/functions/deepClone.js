@@ -2,8 +2,8 @@
 // See https://stackoverflow.com/a/6930376/4961158.
 let global;
 try {
-  global = Function('return this')();
-} catch(e) {
+  global = Function( 'return this' )();
+} catch ( e ) {
   global = window;
 }
 
@@ -13,28 +13,27 @@ try {
 // It does not preserve the object in the same way as Lodash does, i.e. non-built in classes are not preserved, just
 // like they aren't in the JSON switcheroo approach. So it's only intended to be used where you would otherwise be able
 // to use the JSON approach.
-const _deepClone = (value, ancestors = [], clones = []) => {
+const _deepClone = ( value, ancestors = [], clones = [] ) => {
   const type = typeof value;
-  if (type === 'function') {
+  if ( type === 'function' ) {
     return undefined;
   }
-  if (type !== 'object') {
+  if ( type !== 'object' ) {
     return value;
   }
-  if (ancestors.includes(value)) {
-
-    return clones[ancestors.indexOf(value)];
+  if ( ancestors.includes( value ) ) {
+    return clones[ ancestors.indexOf( value ) ];
   }
-  if (Array.isArray(value)) {
-    const cloned = value.map(v => _deepClone(v, ancestors, clones));
-    ancestors.push(value);
-    clones.push(cloned);
+  if ( Array.isArray( value ) ) {
+    const cloned = value.map( ( v ) => _deepClone( v, ancestors, clones ) );
+    ancestors.push( value );
+    clones.push( cloned );
     // We actually do want to check the builtins here.
     /* eslint-disable no-prototype-builtins */
-    if (value.hasOwnProperty('index')) {
+    if ( value.hasOwnProperty( 'index' ) ) {
       cloned.index = value.index;
     }
-    if (value.hasOwnProperty('input')) {
+    if ( value.hasOwnProperty( 'input' ) ) {
       cloned.input = value.input;
     }
     /* eslint-enable no-prototype-builtins */
@@ -48,15 +47,15 @@ const _deepClone = (value, ancestors = [], clones = []) => {
   // the same value. Needed for Date, also makes Boolean objects work (even though you shouldn't use them).
   const param = typeof valueOf === 'object' ? null : valueOf;
   // Don't try to construct custom objects, use Object instead, which behaves the same as the JSON approach.
-  let constructor = global[value.constructor.name] || Object;
-  const newObject = new constructor(param);
+  const constructor = global[ value.constructor.name ] || Object;
+  const newObject = new constructor( param );
 
-  ancestors.push(value);
-  clones.push(newObject);
+  ancestors.push( value );
+  clones.push( newObject );
 
-  Object.keys(value).forEach(k => newObject[k] = _deepClone(value[k], ancestors, clones));
+  Object.keys( value ).forEach( ( k ) => newObject[ k ] = _deepClone( value[ k ], ancestors, clones ) );
 
   return newObject;
 };
 
-export const deepClone = value => _deepClone(value);
+export const deepClone = ( value ) => _deepClone( value );

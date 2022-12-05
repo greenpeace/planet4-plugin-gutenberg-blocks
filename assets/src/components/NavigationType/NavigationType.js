@@ -1,3 +1,4 @@
+/* eslint-disable jsdoc/require-param-type */
 import { RadioControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
@@ -6,16 +7,22 @@ const NAVIGATION_TYPE_MINIMAL = 'minimal';
 
 /**
  * Navigation type selector
+ *
+ * @param  root0
+ * @param  root0.value
+ * @param  root0.setValue
+ * @param  root0.defaultValue
+ * @param  root0.options
  */
-export const NavigationType = ({value, setValue, defaultValue, options}) => {
+export const NavigationType = ( { value, setValue, defaultValue, options } ) => {
   const defaultOptions = [
     {
-      "label": __( 'Main website navigation', 'planet4-blocks-backend' ),
-      "value": NAVIGATION_TYPE_PLANET4,
+      label: __( 'Main website navigation', 'planet4-blocks-backend' ),
+      value: NAVIGATION_TYPE_PLANET4,
     },
     {
-      "label": __( 'Minimal Navigation', 'planet4-blocks-backend' ),
-      "value": NAVIGATION_TYPE_MINIMAL,
+      label: __( 'Minimal Navigation', 'planet4-blocks-backend' ),
+      value: NAVIGATION_TYPE_MINIMAL,
     },
   ];
 
@@ -24,7 +31,7 @@ export const NavigationType = ({value, setValue, defaultValue, options}) => {
       label={ __( 'Navigation type', 'planet4-blocks-backend' ) }
       selected={ value || defaultValue || NAVIGATION_TYPE_PLANET4 }
       options={ options || defaultOptions }
-      onChange={ (value) => setValue(value) }
+      onChange={ ( val ) => setValue( val ) }
     />
   );
-}
+};

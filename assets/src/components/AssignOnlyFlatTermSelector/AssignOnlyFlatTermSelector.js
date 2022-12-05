@@ -1,3 +1,4 @@
+/* eslint-disable @wordpress/i18n-translator-comments */
 import {
   find,
   get,
@@ -14,7 +15,7 @@ import {
  */
 import { __, _x, sprintf } from '@wordpress/i18n';
 import { Component } from '@wordpress/element';
-import { FormTokenField} from '@wordpress/components';
+import { FormTokenField } from '@wordpress/components';
 import { withSelect, withDispatch } from '@wordpress/data';
 import { compose } from '@wordpress/compose';
 import apiFetch from '@wordpress/api-fetch';
@@ -80,7 +81,7 @@ class AssignOnlyFlatTermSelector extends Component {
 
   componentDidMount() {
     if ( isEmpty( this.props.terms ) ) {
-      return
+      return;
     }
 
     this.initRequest = this.fetchTerms( {
@@ -89,7 +90,7 @@ class AssignOnlyFlatTermSelector extends Component {
     } );
     this.initRequest.then(
       () => {
-        this.setState( {loading: false} );
+        this.setState( { loading: false } );
       },
       ( xhr ) => {
         if ( xhr.statusText === 'abort' ) {
@@ -115,7 +116,7 @@ class AssignOnlyFlatTermSelector extends Component {
 
   fetchTerms( params = {} ) {
     const { taxonomy } = this.props;
-    const query = Object.assign({}, DEFAULT_QUERY, params);
+    const query = Object.assign( {}, DEFAULT_QUERY, params );
 
     const request = apiFetch( {
       path: addQueryArgs( `/wp/v2/${ taxonomy.rest_base }`, query ),

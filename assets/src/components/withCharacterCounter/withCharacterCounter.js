@@ -28,9 +28,9 @@ const withCharacterCounter = ( WrappedComponent ) => {
     }
 
     shouldShowWarning() {
-      return this.props.characterLimit
-        && !this.exceededLimit()
-        && this.props.characterLimit - this.state.charactersUsed < this.warningThreshold();
+      return this.props.characterLimit &&
+        ! this.exceededLimit() &&
+        this.props.characterLimit - this.state.charactersUsed < this.warningThreshold();
     }
 
     warningThreshold() {
@@ -48,7 +48,7 @@ const withCharacterCounter = ( WrappedComponent ) => {
 
     showCounter() {
       // Force to return only boolean with `!!` or it will get rendered.
-      return !!this.props.characterLimit;
+      return !! this.props.characterLimit;
     }
 
     render() {

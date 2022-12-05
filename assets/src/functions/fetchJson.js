@@ -1,3 +1,4 @@
+/* eslint-disable jsdoc/require-param-type */
 /**
  * Function with a similar signature as WordPress's apiFetch, but doesn't do a bunch of things we don't need and cause
  * issues. You could as well use what is inside this function directly, but having this in a single function makes it
@@ -11,8 +12,10 @@
  * document.body.dataset.nro, which has the language suffix, so will cause the API to use that language.
  *
  * 3) It's yet another blocking script to load.
+ *
+ * @param  url
  */
-export const fetchJson = async(url) => {
-  const response = await fetch(url);
+export const fetchJson = async ( url ) => {
+  const response = await fetch( url );
   return response.json();
 };

@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
 import { addScriptTag } from '../../components/useScript/addScriptTag';
 import { addLinkTag } from '../../components/useStyleSheet/addLinkTag';
 
@@ -13,7 +14,7 @@ export const setupMediaElementJS = function() {
 
   const onLoad = () => {
     meJSNodes.forEach( ( node ) => {
-      new MediaElementPlayer( node, {
+      const player = new MediaElementPlayer( node, {
         classPrefix: 'mejs-',
         alwaysShowControls: true,
       } );
