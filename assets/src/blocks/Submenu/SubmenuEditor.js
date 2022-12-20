@@ -106,7 +106,7 @@ const renderView = ( attributes, setAttributes, className ) => {
         tagName="h2"
         placeholder={ __( 'Enter title', 'planet4-blocks-backend' ) }
         value={ title }
-        onChange={ ( titleToChange ) => setAttributes( { titleToChange } ) }
+        onChange={ ( titleToChange ) => setAttributes( { title: titleToChange } ) }
         withoutInteractiveFormatting
         multiline="false"
         allowedFormats={ [] }

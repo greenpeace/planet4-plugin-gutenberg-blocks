@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 import { CounterEditor } from './CounterEditor';
 import { frontendRendered } from '../frontendRendered';
 
@@ -54,10 +55,9 @@ export class CounterBlock {
           },
         },
       ],
-      // Renamed attributes to editAttributes to avoid eslint error.
-      edit: ( { isSelected, editAttributes, setAttributes } ) => {
+      edit: ( { isSelected, attributes, setAttributes } ) => {
         return <CounterEditor
-          attributes={ editAttributes }
+          attributes={ attributes }
           setAttributes={ setAttributes }
           isSelected={ isSelected }
         />;

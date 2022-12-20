@@ -1,16 +1,8 @@
-/* eslint-disable jsdoc/require-param-type */
 import { RichText } from '@wordpress/block-editor';
 import { debounce } from 'lodash';
 
 const { __ } = wp.i18n;
 
-/**
- * WYSIWYG in-place editor
- *
- * @param  root0
- * @param  root0.attributes
- * @param  root0.setAttributes
- */
 export const SplittwocolumnsInPlaceEdit = ( { attributes, setAttributes } ) => {
   const {
     title,

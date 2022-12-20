@@ -76,7 +76,7 @@ export class SocialMediaCardsBlock {
         function onURLChange( index, value ) {
           const urlCards = [ ...attributes.cards ];
           urlCards[ index ].social_url = value;
-          setAttributes( { urlCards } );
+          setAttributes( { cards: urlCards } );
         }
 
         function onSelectImages( images ) {

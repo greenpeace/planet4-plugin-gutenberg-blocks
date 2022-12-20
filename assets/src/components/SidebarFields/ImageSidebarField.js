@@ -1,7 +1,8 @@
 import { MediaUpload, MediaUploadCheck } from '@wordpress/block-editor';
 import { Button } from '@wordpress/components';
 import { ImageHoverControls } from '../ImageHoverControls';
-import { __ } from '@wordpress/i18n';
+
+const { __ } = wp.i18n;
 
 export const ImageSidebarField = ( { value, setValue, label } ) => (
   <div className="components-base-control mb-3">
@@ -10,7 +11,6 @@ export const ImageSidebarField = ( { value, setValue, label } ) => (
     </label>
     <MediaUploadCheck>
       <MediaUpload
-        id="media-elt"
         title={ label }
         type="image"
         value={ value.id }

@@ -1,14 +1,6 @@
-/* eslint-disable jsdoc/require-param-type */
 /* eslint-disable no-undef */
 import { useScript, removeScript } from '../../components/useScript/useScript';
 
-/**
- * Find Hubspot parameters in the embed code
- * Load the Hubspot form if found
- *
- * @param  root0
- * @param  root0.params
- */
 export const HubspotEmbed = ( { params } ) => {
   const {
     use_embed_code,

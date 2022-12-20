@@ -26,7 +26,7 @@ const MediaInspectorOptions = ( { attributes, setAttributes } ) => {
     } catch ( error ) {
       embed_html = null;
     }
-    setAttributes( { mediaUrl, embed_html } );
+    setAttributes( { media_url: mediaUrl, embed_html } );
   };
 
   const debouncedMediaURLUpdate = useCallback( debounce( updateEmbed, 300 ), [] );

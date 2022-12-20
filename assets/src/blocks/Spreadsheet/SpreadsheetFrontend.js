@@ -1,4 +1,3 @@
-/* eslint-disable new-cap */
 import { Component, Fragment } from '@wordpress/element';
 import { ArrowIcon } from './ArrowIcon';
 import { toDeclarations } from '../toDeclarations';
@@ -147,6 +146,7 @@ export class SpreadsheetFrontend extends Component {
               <td key={ cellIndex }>
                 {
                   this.state.searchText.length > 0
+                    // eslint-disable-next-line new-cap
                     ? HighlightMatches( cell, this.state.searchText )
                     : cell
                 }

@@ -156,17 +156,17 @@ export const GalleryEditor = ( { isSelected, attributes, setAttributes } ) => {
   const { multiple_image } = attributes;
 
   const { image_urls_array } = useSelect( ( select ) => {
-    const image_urls_array_2 = [];
+    const image_urls_array_new = [];
     if ( multiple_image ) {
       const image_id_array = multiple_image.split( ',' );
       image_id_array.forEach( ( img_id ) => {
         const img_details = select( 'core' ).getMedia( img_id );
         if ( img_details ) {
-          image_urls_array_2[ img_id ] = img_details.source_url;
+          image_urls_array_new[ img_id ] = img_details.source_url;
         }
       } );
     }
-    return { image_urls_array_2 };
+    return { image_urls_array: image_urls_array_new };
   }, [] );
 
   const { image_data, gallery_block_focus_points } = attributes;

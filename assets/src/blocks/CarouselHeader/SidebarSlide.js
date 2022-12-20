@@ -27,13 +27,12 @@ export const SidebarSlide = ( {
 } ) => {
   const [ isOpened, setIsOpened ] = useState( false );
 
-  // Changed index to idx to avoid eslint errors.
-  const onFocalPointsChange = ( idx, value ) => {
+  const onFocalPointsChange = ( value ) => {
     let focalPoints = null;
     if ( null !== value ) {
       focalPoints = JSON.parse( JSON.stringify( value ) );
     }
-    changeSlideAttribute( 'focal_points', idx )( focalPoints );
+    changeSlideAttribute( 'focal_points', index )( focalPoints );
   };
 
   const onToggleHandler = ( opened ) => {
@@ -126,7 +125,7 @@ export const SidebarSlide = ( {
                       url={ image_url }
                       dimensions={ { width: 300, height: 100 } }
                       value={ focal_points?.x && focal_points?.y ? focal_points : { x: .5, y: .5 } }
-                      onChange={ ( value ) => onFocalPointsChange( index, value ) }
+                      onChange={ ( value ) => onFocalPointsChange( value ) }
                       key={ index }
                     />
                   </div>

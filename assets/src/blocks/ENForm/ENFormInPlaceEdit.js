@@ -205,9 +205,7 @@ const Signup = ( { attributes, setAttributes } ) => {
           <RichText
             tagName="h2"
             value={ title }
-            onChange={ ( titleVal ) => {
-              setAttributes( { titleVal } );
-            } }
+            onChange={ ( titleVal ) => setAttributes( { title: titleVal } ) }
             placeholder={ __( 'Enter form title', 'planet4-blocks-backend' ) }
             withoutInteractiveFormatting
             allowedFormats={ [] }
@@ -217,9 +215,7 @@ const Signup = ( { attributes, setAttributes } ) => {
             tagName="div"
             value={ description }
             className="form-description"
-            onChange={ ( descriptionVal ) => {
-              setAttributes( { descriptionVal } );
-            } }
+            onChange={ ( descriptionVal ) => setAttributes( { description: descriptionVal } ) }
             placeholder={ __( 'Enter form description', 'planet4-blocks-backend' ) }
             allowedFormats={ [ 'core/bold', 'core/italic' ] }
             multiline

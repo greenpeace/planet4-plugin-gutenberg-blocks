@@ -1,19 +1,9 @@
-/* eslint-disable jsdoc/require-param-type */
 import { RadioControl } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
 
 const NAVIGATION_TYPE_PLANET4 = 'planet4';
 const NAVIGATION_TYPE_MINIMAL = 'minimal';
 
-/**
- * Navigation type selector
- *
- * @param  root0
- * @param  root0.value
- * @param  root0.setValue
- * @param  root0.defaultValue
- * @param  root0.options
- */
+const { __ } = wp.i18n;
 export const NavigationType = ( { value, setValue, defaultValue, options } ) => {
   const defaultOptions = [
     {

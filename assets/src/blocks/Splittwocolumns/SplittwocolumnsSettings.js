@@ -1,4 +1,3 @@
-/* eslint-disable jsdoc/require-param-type */
 import { FocalPointPicker, PanelBody, SelectControl } from '@wordpress/components';
 import { InspectorControls } from '@wordpress/block-editor';
 import { ImageOrButton } from '../../components/ImageOrButton/ImageOrButton';
@@ -7,14 +6,6 @@ import { URLInput } from '../../components/URLInput/URLInput';
 const { useSelect } = wp.data;
 const { __ } = wp.i18n;
 
-/**
- * Sidebar settings
- *
- * @param  root0
- * @param  root0.attributes
- * @param  root0.charLimit
- * @param  root0.setAttributes
- */
 export const SplittwocolumnsSettings = ( { attributes, charLimit, setAttributes } ) => {
   const {
     title,
@@ -238,12 +229,6 @@ const convertFocalStringToObj = ( focal_str ) => {
   return { x: ( ( parseInt( x ) || 0 ) / 100 ), y: ( ( parseInt( y ) || 0 ) / 100 ) };
 };
 
-/**
- * Remove tags, line breaks, and cut to limit
- *
- * @param  str
- * @param  limit
- */
 const cleanString = ( str, limit ) => {
   return str.replace( /<[^>]+>/g, '' )
     .replace( /(\r\n\t|\n|\r\t)/gm, '' )

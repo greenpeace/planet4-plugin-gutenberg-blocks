@@ -1,4 +1,3 @@
-/* eslint-disable jsdoc/require-param-type */
 import { Fragment, useEffect } from '@wordpress/element';
 import { RichText } from '@wordpress/block-editor';
 import { Sidebar } from './HubspotFormSidebar';
@@ -8,16 +7,6 @@ import { getStyleFromClassName } from '../getStyleFromClassName';
 
 const { __ } = wp.i18n;
 
-/**
- * This component is created as a workaround because the <RichText> doesn't provide
- * The functionality to set max characters like any content editable element.
- *
- * @param  root0
- * @param  root0.value
- * @param  root0.maxLength
- * @param  root0.children
- * @param  root0.darkTheme
- */
 const MaxLengthHelperComponent = ( { value, maxLength, children, darkTheme = false } ) => (
   <div>
     { children }

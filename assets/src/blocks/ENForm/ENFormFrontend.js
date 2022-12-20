@@ -335,7 +335,7 @@ const validateForm = ( form_data, fields, setErrors ) => {
   return formIsValid;
 };
 
-const validateField = ( field, form_data, setErrors ) => {
+const validateField = ( field, form_data, setErrors, fields ) => {
   const { id, name } = inputId( field );
   const value = form_data[ name ];
   const element = document.getElementById( id );

@@ -48,7 +48,7 @@ export const HappypointEditor = ( { attributes, setAttributes, isSelected } ) =>
       const imageDetails = select( 'core' ).getMedia( id );
       imageUrlSelect = ( imageDetails && imageDetails.source_url ) || '';
     }
-    return { imageUrlSelect };
+    return { imageUrl: imageUrlSelect };
   }, [ id ] );
 
   let focal_point_params = { x: '', y: '' };
@@ -90,7 +90,7 @@ export const HappypointEditor = ( { attributes, setAttributes, isSelected } ) =>
 
   const onRemoveImages = () => setAttributes( { id: '', focus_image: '' } );
 
-  const selectImage = ( { imageId } ) => setAttributes( { imageId } );
+  const selectImage = ( { id: imageId } ) => setAttributes( { id: imageId } );
 
   const debounceIframeUrl = debounce( ( url ) => {
     setAttributes( { iframe_url: url } );

@@ -1,4 +1,4 @@
-import { Fragment } from '@wordpress/element'; // eslint-disable-line no-unused-vars
+import { Fragment } from '@wordpress/element';
 
 export const HighlightMatches = ( cellValue, searchText, className = 'highlighted-text' ) => {
   const reg = new RegExp( '(' + searchText.trim() + ')', 'gi' );

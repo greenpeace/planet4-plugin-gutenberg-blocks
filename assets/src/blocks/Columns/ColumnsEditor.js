@@ -127,7 +127,7 @@ export const ColumnsEditor = ( { isSelected, attributes, setAttributes } ) => {
         }
       }
     } );
-    return { columnImagesArray };
+    return { columnImages: columnImagesArray };
   }, [ columns ] );
 
   const toAttribute = ( attributeName, index ) => ( value ) => {
@@ -138,7 +138,7 @@ export const ColumnsEditor = ( { isSelected, attributes, setAttributes } ) => {
     } else {
       const attributeColumns = JSON.parse( JSON.stringify( attributes.columns ) );
       attributeColumns[ index ][ attributeName ] = value;
-      setAttributes( { attributeColumns } );
+      setAttributes( { columns: attributeColumns } );
     }
   };
 

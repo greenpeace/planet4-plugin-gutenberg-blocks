@@ -142,8 +142,7 @@ export class CounterFrontend extends Component {
 						  <path className="background" d="M 2 12 A 1 1 0 1 1 22 12" />
 						  <path className="foreground" d="M 2 12 A 1 1 0 1 1 22 12"
 						    strokeDasharray={ arcLength }
-						    // eslint-disable-next-line no-mixed-operators
-						    strokeDashoffset={ `${ ( 1 - percent / 100 ) * arcLength }` } />
+						    strokeDashoffset={ `${ ( 1 - ( percent / 100 ) ) * arcLength }` } />
 						</svg>
             }
             { text &&

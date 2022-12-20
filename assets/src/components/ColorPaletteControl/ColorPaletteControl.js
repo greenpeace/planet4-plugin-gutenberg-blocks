@@ -6,7 +6,7 @@ import { BaseControl, ColorPalette } from '@wordpress/components';
 function ColorPaletteControl( { label, className, value, help, instanceId, onChange, options = [], ...passThroughProps } ) {
   const id = `inspector-color-palette-control-${ instanceId }`;
 
-  const optionsAsColors = options.map( ( { optionsValue, ...props } ) => ( { color: optionsValue, ...props } ) );
+  const optionsAsColors = options.map( ( { value: optionValue, ...props } ) => ( { color: optionValue, ...props } ) );
 
   return ! isEmpty( options ) && (
     <BaseControl label={ label } id={ id } help={ help }

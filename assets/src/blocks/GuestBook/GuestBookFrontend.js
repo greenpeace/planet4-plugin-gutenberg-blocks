@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/iframe-has-title */
 export const GuestBookFrontend = () => {
   const buildURL = () => {
     const hostname = window.location.hostname;
@@ -10,7 +9,7 @@ export const GuestBookFrontend = () => {
 
   return (
     <p>
-      <iframe src={ buildURL() } width="100%" height={ 700 } frameBorder="0" />
+      <iframe src={ buildURL() } width="100%" height={ 700 } frameBorder="0" title="GuestBook" />
     </p>
   );
 };

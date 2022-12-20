@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable jsx-a11y/label-has-for */
 import { PanelBody, PanelRow, TextControl, TextareaControl, CheckboxControl } from '@wordpress/components';
 import { InspectorControls } from '@wordpress/block-editor';
 import { URLInput } from '../../components/URLInput/URLInput';

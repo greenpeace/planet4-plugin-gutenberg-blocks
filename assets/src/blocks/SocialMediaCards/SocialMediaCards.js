@@ -37,7 +37,6 @@ export class SocialMediaCards extends Component {
               src={ card.image_url }
               onClick={ openEvent }
               className="gallery__imgs"
-              key={ index }
               width="150 px"
               style={ { padding: '10px 10px' } }
               alt=""

@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-expressions */
 import { CountrySelector } from './CountrySelector';
 import { PositionSelector } from './PositionSelector';
 import { inputId } from './inputId';
@@ -337,10 +336,10 @@ const toggleDependencies = ( e ) => {
 
   if ( target.checked ) {
     dep_element.removeAttribute( 'disabled' );
-    dep_element.parentElement?.classList.remove( 'disable-checkbox' );
+    dep_element.parentElement.classList.remove( 'disable-checkbox' );
   } else {
     dep_element.setAttribute( 'disabled', '' );
     dep_element.checked = false;
-    dep_element.parentElement?.classList.add( 'disable-checkbox' );
+    dep_element.parentElement.classList.add( 'disable-checkbox' );
   }
 };
