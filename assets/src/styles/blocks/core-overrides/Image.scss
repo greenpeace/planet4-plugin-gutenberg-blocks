@@ -34,6 +34,10 @@
     display: none !important;
   }
 
+  &.w-40 {
+    width: 40px !important;
+  }
+
   @include large-and-up {
     margin-top: $sp-2;
     margin-bottom: $sp-4;
