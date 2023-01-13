@@ -22,11 +22,9 @@ const item = ['core/group', {
   },
 }, [
   ['core/image', {
-    className: 'force-no-lightbox force-no-caption my-0 w-40',
+    className: 'force-no-lightbox force-no-caption my-0 square-40',
     url: `${mainThemeUrl}/images/placeholders/placeholder-40x40.jpg`,
     alt: __('Enter text', 'planet4-blocks-backend'),
-    width: 40,
-    height: 40,
   }],
   ['core/heading', {
     level: 5,
