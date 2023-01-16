@@ -1,23 +1,22 @@
 import mainThemeUrl from '../main-theme-url';
 
 const item = ['core/group', {
-  className: 'd-flex',
   backgroundColor: 'white',
   style: {
-    border: { radius:'4px' },
+    border: { radius: '4px' },
     spacing: {
       padding: {
-        top:'32px',
-        right:'16px',
-        bottom:'32px',
-        left:'16px',
+        top: '32px',
+        right: '16px',
+        bottom: '32px',
+        left: '16px',
       }
     },
   },
   layout: {
     type: 'flex',
     flexWrap: 'nowrap',
-    justifyContent: "left",
+    justifyContent: 'left',
     orientation: 'horizontal',
   },
 }, [
@@ -30,7 +29,7 @@ const item = ['core/group', {
     level: 5,
     className: 'w-auto',
     style: {
-      typography: { fontSize: '16px' },
+      typography: { fontSize: '1rem' },
       spacing: {
         margin: { top: '0px', bottom: '0px', left: '16px' },
       },
@@ -82,14 +81,14 @@ const template = ({
           [ 'core/group', {
               className: 'is-style-space-evenly',
               layout: {
-                type: "flex",
+                type: 'flex',
                 allowOrientation: false,
               },
               style: {
                 spacing: {
                   padding: {
-                    top: "40px",
-                    bottom: "56px",
+                    top: '40px',
+                    bottom: '56px',
                   },
                 },
               },
@@ -98,8 +97,8 @@ const template = ({
           ],
           [ 'core/buttons', {
               layout: {
-                type: "flex",
-                justifyContent: "center",
+                type: 'flex',
+                justifyContent: 'center',
               },
             }, [
             [ 'core/button', { placeholder: __( 'Enter text', 'planet4-blocks-backend' ) } ]]],
