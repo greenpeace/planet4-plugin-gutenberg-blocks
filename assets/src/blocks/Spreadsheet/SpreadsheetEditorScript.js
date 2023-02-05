@@ -126,18 +126,18 @@ export class SpreadsheetEditor extends Component {
     return <Fragment>
       {
         ! attributes.url
-        ? <div className="block-edit-mode-warning components-notice is-warning">
+          ? <div className="block-edit-mode-warning components-notice is-warning">
             { __( 'No URL has been specified. Please edit the block and provide a Spreadsheet URL using the sidebar.', 'planet4-blocks-backend' ) }
           </div>
-        : null
+          : null
       }
 
       {
         attributes.url && this.state.invalidSheetId
-        ? <div className="block-edit-mode-warning components-notice is-error">
+          ? <div className="block-edit-mode-warning components-notice is-error">
             { __( 'The Spreadsheet URL appears to be invalid.', 'planet4-blocks-backend' ) }
           </div>
-        : null
+          : null
       }
 
       <SpreadsheetFrontend { ...attributes } handleErrors={ this.handleErrors } />

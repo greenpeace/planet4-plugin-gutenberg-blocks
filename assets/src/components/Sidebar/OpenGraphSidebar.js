@@ -14,7 +14,7 @@ const OG_IMAGE_URL = 'p4_og_image';
 /**
  * Open Graph settings for the sidebar
  */
- export const OpenGraphSidebar = {
+export const OpenGraphSidebar = {
   getId: () => 'planet4-open-graph-sidebar',
   render: () => {
     const { getParams, getImageParams } = getSidebarFunctions();
@@ -29,6 +29,6 @@ const OG_IMAGE_URL = 'p4_og_image';
         <ImageSidebarField label={__('Image override', 'planet4-blocks-backend')} {...getImageParams(OG_IMAGE_ID, OG_IMAGE_URL)} />
       </PluginDocumentSettingPanel>
     );
-  }
-}
+  },
+};
 

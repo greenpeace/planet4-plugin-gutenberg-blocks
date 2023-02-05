@@ -56,11 +56,11 @@ export class SocialMediaCardsBlock {
         };
 
       } )( ( {
-               cards,
-               isSelected,
-               attributes,
-               setAttributes
-             } ) => {
+        cards,
+        isSelected,
+        attributes,
+        setAttributes
+      } ) => {
 
         function onTitleChange( value ) {
           setAttributes( { title: value } );

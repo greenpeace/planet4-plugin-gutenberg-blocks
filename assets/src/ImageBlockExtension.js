@@ -12,23 +12,23 @@ const targetBlocks = [
 
 const captionStyleOptions = [
   {
-  label: __( 'Medium' ),
-  value: 'medium',
+    label: __( 'Medium' ),
+    value: 'medium',
   },
 ];
 
 const captionAlignmentOptions = [
   {
-  label: __( 'Left' ),
-  value: 'left',
+    label: __( 'Left' ),
+    value: 'left',
   },
   {
-  label: __( 'Center' ),
-  value: 'center',
+    label: __( 'Center' ),
+    value: 'center',
   },
   {
-  label: __( 'Right' ),
-  value: 'right',
+    label: __( 'Right' ),
+    value: 'right',
   },
 ];
 
@@ -40,23 +40,23 @@ export const setupImageBlockExtension = function() {
 const addExtraAttributes = function() {
   const addCaptionStyleAttributes = ( settings, name ) => {
   // Do nothing if it's another block than our defined ones.
-  if ( ! targetBlocks.includes( name ) ) {
-    return settings;
-  }
-
-  // Use Lodash's assign to gracefully handle if attributes are undefined
-  settings.attributes = assign( settings.attributes, {
-    captionStyle: {
-    type: 'string',
-    default: captionStyleOptions[ 0 ].value,
-    },
-    captionAlignment: {
-    type: 'string',
-    default: captionAlignmentOptions[ 1 ].value,
+    if ( ! targetBlocks.includes( name ) ) {
+      return settings;
     }
-  } );
 
-  return settings;
+    // Use Lodash's assign to gracefully handle if attributes are undefined
+    settings.attributes = assign( settings.attributes, {
+      captionStyle: {
+        type: 'string',
+        default: captionStyleOptions[ 0 ].value,
+      },
+      captionAlignment: {
+        type: 'string',
+        default: captionAlignmentOptions[ 1 ].value,
+      }
+    } );
+
+    return settings;
   };
 
   addFilter( 'blocks.registerBlockType', 'planet4-blocks/overrides/image', addCaptionStyleAttributes );
@@ -94,23 +94,23 @@ const addExtraControls = function() {
             >
               <label>Caption alignment</label>
               <ButtonGroup>
-              {
-                captionAlignmentOptions.map((option, key) => {
-									return <Button
-										key={key}
-										value={option.value}
-										onClick={() => {
-											props.setAttributes({
-                        captionAlignment: option.value
-                      });
-                      updateCaptionAlignment(option.value);
-										}}
-										isPrimary={ captionAlignment === option.value }
-										isSecondary={ captionAlignment !== option.value }>
-											{ option.label }
-									</Button>;
-                })
-              }
+                {
+                  captionAlignmentOptions.map((option, key) => {
+                    return <Button
+                      key={key}
+                      value={option.value}
+                      onClick={() => {
+                        props.setAttributes({
+                          captionAlignment: option.value
+                        });
+                        updateCaptionAlignment(option.value);
+                      }}
+                      isPrimary={ captionAlignment === option.value }
+                      isSecondary={ captionAlignment !== option.value }>
+                      { option.label }
+                    </Button>;
+                  })
+                }
               </ButtonGroup>
             </PanelBody>
           </InspectorControls>

@@ -1,7 +1,7 @@
-import { AccordionEditor } from './AccordionEditor';
-import { AccordionFrontend } from './AccordionFrontend';
-const { registerBlockType, registerBlockStyle } = wp.blocks;
-const { __ } = wp.i18n;
+import {AccordionEditor} from './AccordionEditor';
+import {AccordionFrontend} from './AccordionFrontend';
+const {registerBlockType, registerBlockStyle} = wp.blocks;
+const {__} = wp.i18n;
 
 const BLOCK_NAME = 'planet4-blocks/accordion';
 
@@ -24,11 +24,11 @@ const styles = [
   {
     name: 'dark',
     label: 'Dark',
-    isDefault: true
+    isDefault: true,
   },
   {
     name: 'light',
-    label: 'Light'
+    label: 'Light',
   },
 ];
 
@@ -39,14 +39,14 @@ registerBlockType(BLOCK_NAME, {
   keywords: [
     'accordion',
     'faq',
-    'collapsible'
+    'collapsible',
   ],
   supports: {
     html: false, // Disable "Edit as HTMl" block option.
   },
   attributes,
   edit: AccordionEditor,
-  save: ({ attributes }) => {
+  save: ({attributes}) => {
     if (!attributes) {
       return null;
     }

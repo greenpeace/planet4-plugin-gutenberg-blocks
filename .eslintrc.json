@@ -3,7 +3,7 @@
     "browser": true,
     "es6": true
   },
-  "extends": "eslint:recommended",
+  "extends": [ "plugin:@wordpress/eslint-plugin/recommended" ],
   "globals": {
     "page": true,
     "browser": true,
@@ -30,6 +30,13 @@
       "error",
       "all"
     ],
+    "comma-dangle": ["error", {
+      "arrays": "always-multiline",
+      "objects": "always-multiline",
+      "imports": "always-multiline",
+      "exports": "always-multiline",
+      "functions": "never"
+    }],
     "one-var-declaration-per-line": [
       "error",
       "always"
@@ -39,10 +46,38 @@
         "allowNamedFunctions": true
       }
     ],
+    "camelcase": "off",
     "new-cap": "error",
     "no-var": 1,
     "react/jsx-uses-react": "error",
-    "react/jsx-uses-vars": "error"
+    "react/jsx-uses-vars": "error",
+    "react/jsx-indent": "off",
+    "react/jsx-indent-props": "off",
+    "react-hooks/rules-of-hooks": "off",
+    "react/no-unkown-property": "off",
+    "@wordpress/dependency-group": "off",
+    "space-in-parens": "off",
+    "react/jsx-curly-spacing": "off",
+    "prettier/prettier": "off",
+    "template-curly-spacing": [
+      "error",
+      "never"
+    ],
+    "object-curly-spacing": [
+      "error",
+      "never"
+    ],
+    "space-unary-ops": [
+      "error",
+      {
+        "words": true,
+        "nonwords": false
+      }
+    ],
+    "array-bracket-spacing": [
+      "error",
+      "never"
+    ]
   },
   "parserOptions": {
     "ecmaVersion": 11,

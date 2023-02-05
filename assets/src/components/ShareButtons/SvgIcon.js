@@ -10,5 +10,5 @@ export const SvgIcon = (props) => {
     <svg viewBox="0 0 32 32" className={ class_name }>
       <use xlinkHref={ `${sprite}#${name}` } />
     </svg>
-  )
-}
+  );
+};

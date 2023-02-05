@@ -14,5 +14,5 @@ export const FrontendRichText = ({ editable, ...richTextProps }) => {
         dangerouslySetInnerHTML={{ __html: richTextProps.value }}
       />
     }
-  </Fragment>
-}
+  </Fragment>;
+};

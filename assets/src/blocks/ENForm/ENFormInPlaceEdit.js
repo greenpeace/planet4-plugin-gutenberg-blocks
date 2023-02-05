@@ -35,57 +35,57 @@ export const ENFormInPlaceEdit = ({attributes, setAttributes}) => {
   const style_has_image = en_form_style === 'full-width-bg' || en_form_style === 'side-style';
   const section_style = ((style) => {
     switch (style) {
-      case 'side-style':
-        return 'block-header alignfull';
-      case 'full-width-bg':
-        return 'block-footer alignfull';
-      default:
-        return '';
+    case 'side-style':
+      return 'block-header alignfull';
+    case 'full-width-bg':
+      return 'block-footer alignfull';
+    default:
+      return '';
     }
   })(en_form_style);
 
   return (
     <>
-    <BlockControls>
-      <ToolbarGroup
-        isCollapsed={ true }
-        icon={ activeTpl.icon }
-        label={ activeTpl.title }
-        controls={
-          templates.map((tpl) => {
-            return {
-              icon: tpl.icon,
-              title: tpl.title,
-              isActive: activeTplId === tpl.id,
-              onClick: () => { setActiveTplId(tpl.id) }
-            }
-          })
-        }
-      />
-    </BlockControls>
+      <BlockControls>
+        <ToolbarGroup
+          isCollapsed={ true }
+          icon={ activeTpl.icon }
+          label={ activeTpl.title }
+          controls={
+            templates.map((tpl) => {
+              return {
+                icon: tpl.icon,
+                title: tpl.title,
+                isActive: activeTplId === tpl.id,
+                onClick: () => { setActiveTplId(tpl.id) }
+              }
+            })
+          }
+        />
+      </BlockControls>
 
-    <section
-      className={`block enform-wrap enform-${en_form_style} ${section_style} ${className ?? ''}`}
-    >
-      {style_has_image &&
+      <section
+        className={`block enform-wrap enform-${en_form_style} ${section_style} ${className ?? ''}`}
+      >
+        {style_has_image &&
         <BackgroundImage {...{attributes}} />
-      }
-      <div className="container">
-        <div className="row">
-          <div className="col-md-12">
-            {is_side_style &&
+        }
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12">
+              {is_side_style &&
               <SideContent {...{attributes, setAttributes}} />
-            }
-            {activeTplId === 'signup' &&
+              }
+              {activeTplId === 'signup' &&
               <Signup {...{attributes, setAttributes}} />
-            }
-            {activeTplId === 'thankyou' &&
+              }
+              {activeTplId === 'thankyou' &&
               <ThankYou {...{attributes, setAttributes}} />
-            }
+              }
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
     </>
   )
 }
@@ -129,47 +129,47 @@ const SideContent = ({attributes, setAttributes}) => {
 
   return (
     <>
-    <BlockControls>
-      <ToolbarGroup
-        isCollapsed={ true }
-        icon="heading"
-        label={title_size.toUpperCase()}
-        controls={
-          ['h1', 'h2'].map((size) => {
-            return {
-              isActive: title_size === size,
-              icon: "heading",
-              title: size.toUpperCase(),
-              onClick: () => { setAttributes({content_title_size: size}) }
-            }
-          })
-        }
-      />
-    </BlockControls>
-    <div className="form-caption">
-      {campaign_logo && campaign_logo_path &&
+      <BlockControls>
+        <ToolbarGroup
+          isCollapsed={ true }
+          icon="heading"
+          label={title_size.toUpperCase()}
+          controls={
+            ['h1', 'h2'].map((size) => {
+              return {
+                isActive: title_size === size,
+                icon: "heading",
+                title: size.toUpperCase(),
+                onClick: () => { setAttributes({content_title_size: size}) }
+              }
+            })
+          }
+        />
+      </BlockControls>
+      <div className="form-caption">
+        {campaign_logo && campaign_logo_path &&
         <img src={ campaign_logo_path }
-            alt={ content_title ?? '' }
-            className="campaign-logo" />
-      }
-      <RichText
-        tagName={title_size}
-        value={content_title}
-        onChange={(title) => { setAttributes({content_title: title}) }}
-        placeholder={__('Enter title', 'planet4-blocks-backend')}
-        withoutInteractiveFormatting
-        allowedFormats={[]}
-        multiline="false"
-      />
-      <RichText
-        tagName="div"
-        value={autop(content_description ?? '')}
-        onChange={(desc) => { setAttributes({content_description: desc}) }}
-        placeholder={__('Enter description', 'planet4-blocks-backend')}
-        allowedFormats={['core/bold', 'core/italic']}
-        multiline
-      />
-    </div>
+          alt={ content_title ?? '' }
+          className="campaign-logo" />
+        }
+        <RichText
+          tagName={title_size}
+          value={content_title}
+          onChange={(title) => { setAttributes({content_title: title}) }}
+          placeholder={__('Enter title', 'planet4-blocks-backend')}
+          withoutInteractiveFormatting
+          allowedFormats={[]}
+          multiline="false"
+        />
+        <RichText
+          tagName="div"
+          value={autop(content_description ?? '')}
+          onChange={(desc) => { setAttributes({content_description: desc}) }}
+          placeholder={__('Enter description', 'planet4-blocks-backend')}
+          allowedFormats={['core/bold', 'core/italic']}
+          multiline
+        />
+      </div>
     </>
   );
 };

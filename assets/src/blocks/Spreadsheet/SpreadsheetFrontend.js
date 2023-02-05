@@ -135,27 +135,27 @@ export class SpreadsheetFrontend extends Component {
 
     return this.state.searchText.length >= 1 && rows.length === 0
       ? <tr>
-          <td colSpan="99999">
-            <div className='spreadsheet-empty-message'>
-              { __('No data matching your search.', 'planet4-blocks') }
-            </div>
-          </td>
-        </tr>
+        <td colSpan="99999">
+          <div className='spreadsheet-empty-message'>
+            { __('No data matching your search.', 'planet4-blocks') }
+          </div>
+        </td>
+      </tr>
       : rows.map((row, rowNumber) => (
-          <tr key={ rowNumber } data-order={ rowNumber }>
-            {
-              row.map((cell, cellIndex) => (
-                <td key={ cellIndex }>
-                  {
-                    this.state.searchText.length > 0
+        <tr key={ rowNumber } data-order={ rowNumber }>
+          {
+            row.map((cell, cellIndex) => (
+              <td key={ cellIndex }>
+                {
+                  this.state.searchText.length > 0
                     ? HighlightMatches( cell, this.state.searchText )
                     : cell
-                  }
-                </td>
-              ))
-            }
-          </tr>
-        ));
+                }
+              </td>
+            ))
+          }
+        </tr>
+      ));
   }
 
   render() {
@@ -202,12 +202,12 @@ export class SpreadsheetFrontend extends Component {
               <tbody>
                 {
                   this.state.loading === true
-                  ? <tr>
+                    ? <tr>
                       <td colSpan="99999">
                         <div className="spreadsheet-loading">{ __('Loading spreadsheet data...', 'planet4-blocks') }</div>
                       </td>
                     </tr>
-                  : this.renderRows()
+                    : this.renderRows()
                 }
               </tbody>
             </table>

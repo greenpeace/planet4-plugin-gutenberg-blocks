@@ -37,14 +37,14 @@ export const registerSplittwocolumnsBlock = () => {
       tag_image_title: { type: 'string', default: '' },
       focus_tag_image: { type: 'string', default: '50% 50%' },
       edited: { type: 'object', default: {
-          title: false,
-          issue_description: false,
-          issue_link_text: false,
-          tag_description: false,
-          button_text: false,
-          issue_image_id: false,
-          tag_image_id: false
-        } },
+        title: false,
+        issue_description: false,
+        issue_link_text: false,
+        tag_description: false,
+        button_text: false,
+        issue_image_id: false,
+        tag_image_id: false
+      } },
     },
     edit: SplittwocolumnsEditor,
     save: frontendRendered( BLOCK_NAME ),

@@ -20,7 +20,7 @@ export const getSidebarFunctions = () => {
     setValue: (id, url) => {
       updateValueAndDependencies(idField)(id);
       updateValueAndDependencies(urlField)(url);
-    }
+    },
   });
 
   return {

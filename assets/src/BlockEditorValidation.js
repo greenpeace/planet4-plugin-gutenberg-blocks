@@ -68,7 +68,7 @@ document.addEventListener('change', e=> {
     return;
   }
   dispatch('core/editor').editPost({ meta: { p4_campaign_name: e.target.value } });
-})
+});
 
 const registerAttributeValidations = ( settings, blockName ) => {
   const { attributes } = settings;
@@ -83,7 +83,7 @@ const registerAttributeValidations = ( settings, blockName ) => {
   });
 
   return settings;
-}
+};
 
 
 const PrePublishCheckList = () => {
@@ -104,5 +104,5 @@ const PrePublishCheckList = () => {
       </ul> }
 
     </PluginPrePublishPanel>
-  )
+  );
 };

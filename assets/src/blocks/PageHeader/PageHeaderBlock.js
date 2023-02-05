@@ -8,11 +8,11 @@ export const registerPageHeaderBlock = () => {
   let scope = ['inserter'];
 
   let attributes = {
-      className: classname,
-      mediaType: 'image',
-      mediaUrl: `${window.p4bk_vars.themeUrl}/images/placeholders/placeholder-546x415.jpg`,
-      imageFill: false,
-      align:'full'
+    className: classname,
+    mediaType: 'image',
+    mediaUrl: `${window.p4bk_vars.themeUrl}/images/placeholders/placeholder-546x415.jpg`,
+    imageFill: false,
+    align:'full'
   };
 
   let innerBlocks = (imgPosition) => [

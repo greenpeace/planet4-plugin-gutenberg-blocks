@@ -2,20 +2,20 @@ import { ShareButton } from './ShareButton';
 
 const parseUrl = (attrs) => {
   switch (attrs.type) {
-    case 'whatsapp':
-      return `https://wa.me?text=${encodeURIComponent(attrs.url)}`
-    case 'facebook':
-      return `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(attrs.url)}`
-    case 'twitter':
-      return `https://twitter.com/share
+  case 'whatsapp':
+    return `https://wa.me?text=${encodeURIComponent(attrs.url)}`
+  case 'facebook':
+    return `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(attrs.url)}`
+  case 'twitter':
+    return `https://twitter.com/share
         ?url=${encodeURIComponent(attrs.url)}
         &text=${encodeURIComponent(attrs.text)}
         ${(attrs.description ? ' - ' + encodeURIComponent(attrs.description) : '')}
         ${(attrs.account
-            ? ' via @' + encodeURIComponent(attrs.account) + '&related=' + encodeURIComponent(attrs.account)
-            : '')}`
-    case 'email':
-      return `mailto:?subject=${attrs.title}&body=${attrs.body ? encodeURIComponent(attrs.body) : ''}`
+    ? ' via @' + encodeURIComponent(attrs.account) + '&related=' + encodeURIComponent(attrs.account)
+    : '')}`
+  case 'email':
+    return `mailto:?subject=${attrs.title}&body=${attrs.body ? encodeURIComponent(attrs.body) : ''}`
   }
 };
 

@@ -14,4 +14,4 @@ export const useLightbox = () => {
   };
 
   return { isOpen, index, openLightbox, closeLightbox };
-}
+};

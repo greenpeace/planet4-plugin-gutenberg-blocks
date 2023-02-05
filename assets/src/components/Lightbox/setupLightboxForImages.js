@@ -12,7 +12,7 @@ const setupImageAndCaption = (lightBoxNode, imageSelector = 'img', captionSelect
     const item = {
       src: image.src ? image.src : image.dataset.src,
       w: 0,
-      h: 0
+      h: 0,
     };
 
     const caption = imageBlock.querySelector(captionSelector);
@@ -21,12 +21,12 @@ const setupImageAndCaption = (lightBoxNode, imageSelector = 'img', captionSelect
     }
 
     imageBlock.querySelector('img').addEventListener('click', () => wp.element.render(
-        <Lightbox isOpen={true} index={index} items={[item]} />,
-        lightBoxNode
-      )
+      <Lightbox isOpen={true} index={index} items={[item]} />,
+      lightBoxNode
+    )
     );
-  }
-}
+  };
+};
 
 export const setupLightboxForImages = function() {
   // We can't use `createPortal` outside `render()`,
@@ -53,4 +53,4 @@ export const setupLightboxForImages = function() {
 
   const mediaAndTextImages = document.querySelectorAll('.wp-block-media-text:not(.force-no-lightbox)');
   mediaAndTextImages.forEach(setupImageAndCaption(lightBoxNode));
-}
+};

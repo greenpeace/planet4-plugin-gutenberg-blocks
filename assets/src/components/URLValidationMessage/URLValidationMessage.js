@@ -20,14 +20,14 @@ export class URLValidationMessage extends Component {
   render() {
 
     const {__} = wp.i18n;
-    const { url } = this.props
+    const { url } = this.props;
 
     if ( this.isValid( url ) ) {
-        return null;
+      return null;
     }
 
     return (
-        <span className='input_error'>{ __('The URL must start with "https://"', 'planet4-blocks-backend') }</span>
-    )
+      <span className='input_error'>{ __('The URL must start with "https://"', 'planet4-blocks-backend') }</span>
+    );
   }
 }

@@ -80,7 +80,7 @@ class AssignOnlyFlatTermSelector extends Component {
 
   componentDidMount() {
     if ( isEmpty( this.props.terms ) ) {
-      return
+      return;
     }
 
     this.initRequest = this.fetchTerms( {
@@ -230,5 +230,5 @@ export default compose(
         dispatch( 'core/editor' ).editPost( { [ restBase ]: terms } );
       },
     };
-  } ),
+  } )
 )( AssignOnlyFlatTermSelector );

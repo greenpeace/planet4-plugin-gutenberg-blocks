@@ -21,7 +21,7 @@ const HEADER_BUTTON_NEW_TAB = 'p4_button_link_checkbox';
 /**
  * Page header settings for the sidebar
  */
- export const PageHeaderSidebar = {
+export const PageHeaderSidebar = {
   getId: () => 'planet4-page-header-sidebar',
   render: () => {
     const postType = useSelect(select => select('core/editor').getCurrentPostType());
@@ -48,6 +48,6 @@ const HEADER_BUTTON_NEW_TAB = 'p4_button_link_checkbox';
         <CheckboxSidebarField label={__( 'Hide page title', 'planet4-blocks-backend' )} {...getParams(HIDE_PAGE_TITLE)} />
       </PluginDocumentSettingPanel>
     );
-  }
-}
+  },
+};
 

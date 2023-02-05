@@ -32,9 +32,9 @@ export const Lightbox = ({ index, isOpen, items, onClose = () => {} }) => {
       if (galleryItem.w < 1 || galleryItem.h < 1) {
         var imageSizeHandler = new Image();
         imageSizeHandler.onload = function () {
-            galleryItem.w = this.width;
-            galleryItem.h = this.height;
-            photoSwipe.updateSize(true);
+          galleryItem.w = this.width;
+          galleryItem.h = this.height;
+          photoSwipe.updateSize(true);
         };
         imageSizeHandler.src = galleryItem.src;
       }

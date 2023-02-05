@@ -1,6 +1,6 @@
 import { Component } from '@wordpress/element';
 import { compose } from '@wordpress/compose';
-import { withSelect } from "@wordpress/data";
+import { withSelect } from '@wordpress/data';
 import {
   FormTokenField,
 } from '@wordpress/components';
@@ -39,6 +39,6 @@ class PostTypeSelector extends Component {
 
 export default compose(
   withSelect( select => ({
-    postTypes: select( 'core' ).getEntityRecords( 'taxonomy', 'p4-page-type' )
+    postTypes: select( 'core' ).getEntityRecords( 'taxonomy', 'p4-page-type' ),
   }) )
 )( PostTypeSelector );
