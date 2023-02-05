@@ -11,7 +11,7 @@ function ColorPaletteControl( { label, className, value, help, instanceId, onCha
 
   return !isEmpty( options ) && (
     <BaseControl label={ label } id={ id } help={ help }
-                 className={ classnames( className, 'components-color-palette-control' ) }>
+      className={ classnames( className, 'components-color-palette-control' ) }>
       <ColorPalette
         value={ value }
         onChange={ onChange }

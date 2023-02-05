@@ -68,21 +68,21 @@ export class CounterBlock {
     unregisterBlockStyle(BLOCK_NAME, 'default');
 
     const styles = [
-        {
-          name: 'plain',
-          label: 'Text Only',
-          isDefault: true
-        },
-        {
-          name: 'bar',
-          label: 'Progress Bar'
-        },
-        {
-          name: 'arc',
-          label: 'Progress Dial'
-        },
+      {
+        name: 'plain',
+        label: 'Text Only',
+        isDefault: true
+      },
+      {
+        name: 'bar',
+        label: 'Progress Bar'
+      },
+      {
+        name: 'arc',
+        label: 'Progress Dial'
+      },
 
-      ]
+    ]
 
     if (window.p4ge_vars.features.feature_engaging_networks) {
       styles.push({

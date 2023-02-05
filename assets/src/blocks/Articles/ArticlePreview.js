@@ -15,13 +15,13 @@ export class ArticlePreview extends Component {
       return <span className={className}>{unescape(pageType)}</span>;
     }
     return <a
-              className={className}
-              href={link}
-              data-ga-category="Articles Block"
-              data-ga-action="Post Type Tag"
-              data-ga-label="n/a">
-                {unescape(pageType)}
-           </a>
+      className={className}
+      href={link}
+      data-ga-category="Articles Block"
+      data-ga-action="Post Type Tag"
+      data-ga-label="n/a">
+      {unescape(pageType)}
+    </a>
   }
 
   getAuthorLink() {
@@ -70,14 +70,14 @@ export class ArticlePreview extends Component {
         data-ga-category="Articles Block"
         data-ga-action="Image"
         data-ga-label="n/a">
-          <img
-            className="topicwise-article-image"
-            src={thumbnail_url}
-            srcSet={thumbnail_srcset || null}
-            alt={alt_text}
-            loading="lazy"
-            sizes={IMAGE_SIZES.preview}
-          />
+        <img
+          className="topicwise-article-image"
+          src={thumbnail_url}
+          srcSet={thumbnail_srcset || null}
+          alt={alt_text}
+          loading="lazy"
+          sizes={IMAGE_SIZES.preview}
+        />
       </a>
     );
 
@@ -135,8 +135,8 @@ export class ArticlePreview extends Component {
                       data-ga-category="Articles Block"
                       data-ga-action="Navigation Tag"
                       data-ga-label="n/a">
-                        <span aria-label="hashtag">#</span>
-                        {unescape(tag.name)}
+                      <span aria-label="hashtag">#</span>
+                      {unescape(tag.name)}
                     </a>
                   )}
                 </div>

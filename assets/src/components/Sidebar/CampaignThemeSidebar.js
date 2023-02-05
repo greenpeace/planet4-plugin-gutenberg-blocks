@@ -1,4 +1,4 @@
-import { PluginSidebar, PluginSidebarMoreMenuItem } from "@wordpress/edit-post";
+import { PluginSidebar, PluginSidebarMoreMenuItem } from '@wordpress/edit-post';
 import { Component } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { resolveField } from '../fromThemeOptions/fromThemeOptions';
@@ -30,7 +30,7 @@ const loadOptions = async (value) => {
 
   const response = await fetch(optionsJsonUrl);
   return await response.json();
-}
+};
 const makeDefaultOrNull = ( result, field ) => {
   // Adding this check to prevent a crash. Probably the previous code can be rewritten to not produce null, but
   // that would probably cascade into many changes and this is code we'll probably remove soon.
@@ -41,7 +41,7 @@ const makeDefaultOrNull = ( result, field ) => {
     ...result,
     [ field.id ]: field.default || null,
   };
-}
+};
 
 // Check if the field has a value in the current post meta that is not allowed anymore by the new options.
 const gotInvalidated = (field, options, meta) => {
@@ -55,7 +55,7 @@ const gotInvalidated = (field, options, meta) => {
   }
 
   return !(resolvedField.options.some( option => option.value === currentValue) );
-}
+};
 
 export class CampaignThemeSidebar extends Component {
   static getId() {
@@ -80,7 +80,7 @@ export class CampaignThemeSidebar extends Component {
   // For each of these, we either set them to the default value
   async handleThemeSwitch( metaKey, newThemeName, meta ) {
     const prevOptions = this.state.options;
-    const options = await loadOptions( newThemeName )
+    const options = await loadOptions( newThemeName );
     this.setState({ options });
 
     // Loop through the new theme's fields, and check whether any of the already chosen options has a value that is not

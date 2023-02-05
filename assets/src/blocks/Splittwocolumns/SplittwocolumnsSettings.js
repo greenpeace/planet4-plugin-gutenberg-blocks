@@ -52,13 +52,13 @@ export const SplittwocolumnsSettings = ({attributes, charLimit, setAttributes}) 
     setAttributes({
       select_issue: parseInt(issue_id),
       title: edited.title ? title : cleanString(
-          issue?.cmb2?.p4_metabox.p4_title || issue?.title.raw || title,
-          charLimit.title
-        ),
+        issue?.cmb2?.p4_metabox.p4_title || issue?.title.raw || title,
+        charLimit.title
+      ),
       issue_description: edited.issue_description ? issue_description : cleanString(
-          issue?.cmb2?.p4_metabox.p4_description ?? issue_description,
-          charLimit.description
-        ),
+        issue?.cmb2?.p4_metabox.p4_description ?? issue_description,
+        charLimit.description
+      ),
       issue_link_text: edited.issue_link_text ? issue_link_text
         : issue_link_text || __('Learn more about this issue', 'planet4-blocks'),
       issue_link_path: issue?.link || '',
@@ -73,9 +73,9 @@ export const SplittwocolumnsSettings = ({attributes, charLimit, setAttributes}) 
       select_tag: parseInt(tag_id),
       tag_name: cleanString(tag?.name || '', charLimit.title),
       tag_description: edited.tag_description ? tag_description : cleanString(
-          tag?.description || tag_description,
-          charLimit.description
-        ),
+        tag?.description || tag_description,
+        charLimit.description
+      ),
       button_text: edited.button_text ? button_text
         : button_text || __( 'Get involved', 'planet4-blocks' ),
       tag_link: tag?.link || '',
@@ -124,7 +124,7 @@ export const SplittwocolumnsSettings = ({attributes, charLimit, setAttributes}) 
               options={issueOptions}
               onChange={onIssueChange}
             />
-            }
+          }
         </div>
         <div>
           <URLInput

@@ -1,6 +1,6 @@
 import { Component } from '@wordpress/element';
 import { compose } from '@wordpress/compose';
-import { withSelect } from "@wordpress/data";
+import { withSelect } from '@wordpress/data';
 import {
   FormTokenField,
 } from '@wordpress/components';
@@ -58,6 +58,6 @@ class TagSelector extends Component {
 
 export default compose(
   withSelect( select => ({
-    tagSuggestions: select( 'core' ).getEntityRecords( 'taxonomy', 'post_tag', { hide_empty: false, per_page: -1 } )
+    tagSuggestions: select( 'core' ).getEntityRecords( 'taxonomy', 'post_tag', { hide_empty: false, per_page: -1 } ),
   }) )
 )( TagSelector );

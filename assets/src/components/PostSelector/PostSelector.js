@@ -4,10 +4,10 @@ const { __ } = wp.i18n;
 
 // Allows to query a custom endpoint with select('core') tools
 dispatch('core').addEntities( [{
-    baseURL: '/planet4/v1/published',
-    kind: 'planet4/v1',
-    name: 'published',
-    label: 'All published of post_type',
+  baseURL: '/planet4/v1/published',
+  kind: 'planet4/v1',
+  name: 'published',
+  label: 'All published of post_type',
 }] );
 
 /**
@@ -84,8 +84,8 @@ export const PostSelector = (attributes) => {
    */
   const getPostsTitlesFromIds = (ids) => {
     return options?.length && ids?.length
-    ? ids.map(postId => options.find(option => option.id === parseInt(postId))?.title).filter(t => t)
-    : []
+      ? ids.map(postId => options.find(option => option.id === parseInt(postId))?.title).filter(t => t)
+      : [];
   };
 
   /**

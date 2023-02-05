@@ -6,7 +6,7 @@ const CANONICAL_URL = 'p4_seo_canonical_url';
 
 const { __ } = wp.i18n;
 
- export const SearchEngineOptimizationsSidebar = {
+export const SearchEngineOptimizationsSidebar = {
   getId: () => 'planet4-seo-sidebar',
   render: () => {
     const meta = useSelect(select => select('core/editor').getEditedPostAttribute('meta'),[]);
@@ -20,5 +20,5 @@ const { __ } = wp.i18n;
         <URLInput label={__( 'Canonical link', 'planet4-blocks-backend' )} value={meta[CANONICAL_URL]}  onChange={value => editPost({ meta: {[CANONICAL_URL]: value} })} />
       </PluginDocumentSettingPanel>
     );
-  }
-}
+  },
+};

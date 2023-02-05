@@ -31,12 +31,12 @@ export const ENFormFrontend = (attributes) => {
 
   const section_style = ((style) => {
     switch (style) {
-      case 'side-style':
-        return 'block-header alignfull';
-      case 'full-width-bg':
-        return 'block-footer alignfull';
-      default:
-        return '';
+    case 'side-style':
+      return 'block-header alignfull';
+    case 'full-width-bg':
+      return 'block-footer alignfull';
+    default:
+      return '';
     }
   })(en_form_style);
 
@@ -117,8 +117,8 @@ export const ENFormFrontend = (attributes) => {
               <div className="form-caption">
                 {campaign_logo && campaign_logo_path &&
                   <img src={ campaign_logo_path }
-                      alt={ ccontent_title ?? '' }
-                      className="campaign-logo" />
+                    alt={ ccontent_title ?? '' }
+                    className="campaign-logo" />
                 }
                 <HeadingTag dangerouslySetInnerHTML={{ __html: content_title ? unescape(content_title) : ''  }} />
                 <div dangerouslySetInnerHTML={{ __html: unescape(content_description) }} />
@@ -178,7 +178,7 @@ const Signup = ({attributes, fields, form_data, onInputChange, onBlur, onFormSub
           >
             <div className={ en_form_style == 'full-width-bg' ? 'row' : '' }>
               <div className={ en_form_style == 'full-width-bg' ? 'col-md-8' : '' }>
-                  <FormGenerator {...{fields, attributes, onInputChange, onBlur, errors}} />
+                <FormGenerator {...{fields, attributes, onInputChange, onBlur, errors}} />
               </div>
 
               <div className={ en_form_style == 'full-width-bg' ? 'col-md-4 submit' : 'submit' }>
@@ -188,7 +188,7 @@ const Signup = ({attributes, fields, form_data, onInputChange, onBlur, onFormSub
                 <div className="enform-notice"></div>
                 {en_form_style == 'full-width-bg' &&
                   <div className="enform-legal">
-                  <p dangerouslySetInnerHTML={{ __html: text_below_button ? unescape(text_below_button) : '' }} />
+                    <p dangerouslySetInnerHTML={{ __html: text_below_button ? unescape(text_below_button) : '' }} />
                   </div>
                 }
               </div>
@@ -226,53 +226,53 @@ const submitENForm = (props) => {
   // Send form
   const post_url = `${p4bk_vars.siteUrl}/wp-json/planet4/v1/enform/${en_page_id}`;
   fetch(post_url, {
-      method: 'POST',
-      contentType: 'application/json',
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(post_data),
+    method: 'POST',
+    contentType: 'application/json',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(post_data),
   })
-  .then((response) => {
-    if (response.status !== 200) {
-      console.log(response, response.json());
-      throw new Error(`Error submitting form: ${response.statusText || 'unknown error'}`);
-    }
-    return response.json();
-  })
-  .then((reponseData) => {
-    // Submit Hotjar success
-    if ( typeof hj === 'function' ) {
-      hj('formSubmitSuccessful'); // eslint-disable-line no-undef
-    }
-
-    // DataLayer push event on successful EN form submission.
-    if ( typeof google_tag_value !== 'undefined' && google_tag_value ) {
-      let dataLayerPayload = {
-        'event' : 'petitionSignup'
-      };
-      if ( enform_goal ) {
-        dataLayerPayload.gGoal = enform_goal;
+    .then((response) => {
+      if (response.status !== 200) {
+        console.log(response, response.json());
+        throw new Error(`Error submitting form: ${response.statusText || 'unknown error'}`);
       }
-      dataLayer.push(dataLayerPayload);
-    }
+      return response.json();
+    })
+    .then((reponseData) => {
+    // Submit Hotjar success
+      if ( typeof hj === 'function' ) {
+        hj('formSubmitSuccessful'); // eslint-disable-line no-undef
+      }
 
-    // redirect or thanks
-    if (thankyou_url && urlIsValid(thankyou_url)) {
-      window.location = thankyou_url;
-    } else {
-      setActiveTplId('thankyou');
-    }
-  })
-  .catch((error) => {
-    console.error('Error:', error);
-    // Submit Hotjar failure
-    if ( typeof hj === 'function' ) {
-      hj('formSubmitFailed'); // eslint-disable-line no-undef
-    }
-    setErrorMsg(error.message);
-  });
+      // DataLayer push event on successful EN form submission.
+      if ( typeof google_tag_value !== 'undefined' && google_tag_value ) {
+        let dataLayerPayload = {
+          'event' : 'petitionSignup'
+        };
+        if ( enform_goal ) {
+          dataLayerPayload.gGoal = enform_goal;
+        }
+        dataLayer.push(dataLayerPayload);
+      }
+
+      // redirect or thanks
+      if (thankyou_url && urlIsValid(thankyou_url)) {
+        window.location = thankyou_url;
+      } else {
+        setActiveTplId('thankyou');
+      }
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+      // Submit Hotjar failure
+      if ( typeof hj === 'function' ) {
+        hj('formSubmitFailed'); // eslint-disable-line no-undef
+      }
+      setErrorMsg(error.message);
+    });
 };
 
 /**
@@ -449,30 +449,30 @@ const ThankYou = ({attributes, error_msg}) => {
 
   return (
     <div className="enform" id="enform">
-    <div
-      className={'thankyou ' + (en_form_style != 'side-style' ? 'full-width': '')}
-    >
-      {error_msg &&
+      <div
+        className={'thankyou ' + (en_form_style != 'side-style' ? 'full-width': '')}
+      >
+        {error_msg &&
         <span className="enform-error">{ error_msg }</span>
-      }
+        }
 
-      <header>
-        <h2 className="page-section-header">{ unescape(thankyou_title) }</h2>
-      </header>
-      <p className="page-section-description"
-        dangerouslySetInnerHTML={{ __html: thankyou_subtitle }} />
+        <header>
+          <h2 className="page-section-header">{ unescape(thankyou_title) }</h2>
+        </header>
+        <p className="page-section-description"
+          dangerouslySetInnerHTML={{ __html: thankyou_subtitle }} />
 
-      <div className="sub-section formblock-flex">
+        <div className="sub-section formblock-flex">
 
-        <div className="form-group">
-          <h5>{ thankyou_social_media_message }</h5>
-        </div>
+          <div className="form-group">
+            <h5>{ thankyou_social_media_message }</h5>
+          </div>
 
-        <div className="social-media form-group">
-          <ShareButtons {...{social_params, social_accounts}} />
-        </div>
+          <div className="social-media form-group">
+            <ShareButtons {...{social_params, social_accounts}} />
+          </div>
 
-        {! donate_button_checkbox &&
+          {! donate_button_checkbox &&
           <>
             <div className="form-group">
               <h5>{thankyou_donate_message}</h5>
@@ -482,10 +482,10 @@ const ThankYou = ({attributes, error_msg}) => {
               <a href={donatelink} className="btn btn-primary btn-block">{donate_text ?? __('Donate', 'planet4-engagingnetworks')}</a>
             </div>
           </>
-        }
+          }
 
+        </div>
       </div>
-    </div>
     </div>
   )
 }

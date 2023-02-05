@@ -19,10 +19,10 @@ export class SubPagesBlock {
       edit: withSelect( ( select ) => {
 
       } )( ( {
-               isSelected,
-               attributes,
-               setAttributes
-             } ) => {
+        isSelected,
+        attributes,
+        setAttributes
+      } ) => {
         return <SubPages/>;
       } ),
     } );

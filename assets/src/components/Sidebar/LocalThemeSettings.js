@@ -37,7 +37,7 @@ const collectTheme = async (a, t) => {
     ...await a,
     [t]: await response.json(),
   };
-}
+};
 
 const useJsonThemes = () => {
   const [jsonThemes, setJsonThemes] = useState({});
@@ -49,7 +49,7 @@ const useJsonThemes = () => {
   }, []);
 
   return jsonThemes;
-}
+};
 
 export const applyChangesToDom = (theme, initialVars) => {
   if (!theme) {

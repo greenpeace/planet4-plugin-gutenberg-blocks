@@ -44,8 +44,8 @@ export const MediaFrontend = ( attributes ) => {
       }
       {
         media_url && media_url.endsWith('.mp4')
-        ? <MediaElementVideo videoURL={ media_url } videoPoster={ poster_url } />
-        : <div dangerouslySetInnerHTML={{ __html: wrapEmbedHTML(embed_html) || null }} />
+          ? <MediaElementVideo videoURL={ media_url } videoPoster={ poster_url } />
+          : <div dangerouslySetInnerHTML={{ __html: wrapEmbedHTML(embed_html) || null }} />
       }
     </section>
   );

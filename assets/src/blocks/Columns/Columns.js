@@ -39,17 +39,17 @@ export const Columns = ({ columns, columns_block_style, isCampaign, isExample = 
                     width={columns_block_style !== LAYOUT_ICONS ? '100%' : 100}
                     height={columns_block_style !== LAYOUT_ICONS ? 150 : 100}
                   />
-                : cta_link ?
-                  <a
-                    href={cta_link}
-                    data-ga-category='Columns Block'
-                    data-ga-action={columns_block_style === LAYOUT_ICONS ? 'Icon' : 'Image'}
-                    data-ga-label={cta_link}
-                    { ...link_new_tab && { target: '_blank' } }
-                  >
+                  : cta_link ?
+                    <a
+                      href={cta_link}
+                      data-ga-category='Columns Block'
+                      data-ga-action={columns_block_style === LAYOUT_ICONS ? 'Icon' : 'Image'}
+                      data-ga-label={cta_link}
+                      { ...link_new_tab && { target: '_blank' } }
+                    >
+                      <img src={attachment} alt={title} title={title} loading='lazy' />
+                    </a> :
                     <img src={attachment} alt={title} title={title} loading='lazy' />
-                  </a> :
-                  <img src={attachment} alt={title} title={title} loading='lazy' />
                 }
               </div>
             }

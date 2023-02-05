@@ -19,7 +19,7 @@ const LEGACY_FIELDS = {
   bodyFont: 'campaign_body_font',
   footerTheme: 'campaign_footer_theme',
   footerLinksColor: 'footer_links_color',
-}
+};
 
 const themeOptions = [
   {
@@ -55,7 +55,7 @@ export const ThemeSettings = props => {
   const { editPost } = useDispatch('core/editor');
 
   useEffect(() => {
-    handleThemeSwitch('theme', meta.theme, meta)
+    handleThemeSwitch('theme', meta.theme, meta);
   }, [meta.theme]);
 
   // resolveField is a cheap function so it's not a problem to call it twice.
@@ -65,7 +65,7 @@ export const ThemeSettings = props => {
   const updateValueAndDependencies = fieldId => value => {
     const updatedDeps = getDependencyUpdates(theme, fieldId, value, meta);
     editPost({ meta: {[fieldId]: value, ...updatedDeps} });
-  }
+  };
 
   const navParams = {
     value: getValue(LEGACY_FIELDS.navigationType),
@@ -85,7 +85,7 @@ export const ThemeSettings = props => {
       />
     </div>
     <PanelBody
-      title={ __( "Navigation", 'planet4-blocks-backend' ) }
+      title={ __( 'Navigation', 'planet4-blocks-backend' ) }
       initialOpen={ true }
     >
       <NavigationType {...navParams} />
@@ -119,7 +119,7 @@ export const ThemeSettings = props => {
       />
     </PanelBody>
     <PanelBody
-      title={ __( "Fonts", 'planet4-blocks-backend' ) }
+      title={ __( 'Fonts', 'planet4-blocks-backend' ) }
       initialOpen={ true }
     >
       <SelectControl
@@ -136,7 +136,7 @@ export const ThemeSettings = props => {
       />
     </PanelBody>
     <PanelBody
-      title={ __( "Footer", 'planet4-blocks-backend' ) }
+      title={ __( 'Footer', 'planet4-blocks-backend' ) }
       initialOpen={ true }
     >
       <RadioControl
@@ -154,5 +154,5 @@ export const ThemeSettings = props => {
         clearable={ false }
       />
     </PanelBody>
-  </>
-}
+  </>;
+};

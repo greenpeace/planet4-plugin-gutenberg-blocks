@@ -43,25 +43,25 @@ const MediaInspectorOptions = ({ attributes, setAttributes }) => {
   }
 
   return <InspectorControls>
-      <PanelBody title={__('Settings', 'planet4-blocks-backend')}>
-        <TextControl
-          label={__('Media URL/ID', 'planet4-blocks-backend')}
-          placeholder={__('Enter URL', 'planet4-blocks-backend')}
-          defaultValue={ media_url }
-          onChange={ debouncedMediaURLUpdate }
-          help={__('Can be a YouTube, Vimeo or Soundcloud URL or an mp4, mp3 or wav file URL.', 'planet4-blocks-backend')}
-        />
+    <PanelBody title={__('Settings', 'planet4-blocks-backend')}>
+      <TextControl
+        label={__('Media URL/ID', 'planet4-blocks-backend')}
+        placeholder={__('Enter URL', 'planet4-blocks-backend')}
+        defaultValue={ media_url }
+        onChange={ debouncedMediaURLUpdate }
+        help={__('Can be a YouTube, Vimeo or Soundcloud URL or an mp4, mp3 or wav file URL.', 'planet4-blocks-backend')}
+      />
 
-        <MediaPlaceholder
-          labels={{ title: __('Video poster image [Optional]', 'planet4-blocks-backend'), instructions: __('Applicable for .mp4 video URLs only.', 'planet4-blocks-backend')}}
-          icon="format-image"
-          onSelect={ onSelectImage }
-          onError={ console.log }
-          accept="image/*"
-          allowedTypes={["image"]}
-        />
-      </PanelBody>
-    </InspectorControls>
+      <MediaPlaceholder
+        labels={{ title: __('Video poster image [Optional]', 'planet4-blocks-backend'), instructions: __('Applicable for .mp4 video URLs only.', 'planet4-blocks-backend')}}
+        icon="format-image"
+        onSelect={ onSelectImage }
+        onError={ console.log }
+        accept="image/*"
+        allowedTypes={["image"]}
+      />
+    </PanelBody>
+  </InspectorControls>
   ;
 }
 

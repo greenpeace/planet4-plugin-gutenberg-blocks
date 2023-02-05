@@ -28,21 +28,21 @@ export class SocialMediaCards extends Component {
 
         return cards.map( ( card, index ) => (
           <span className="img-wrap">
-                <Tooltip text={ __( 'Remove Image', 'planet4-blocks-backend' ) }>
-                  <span className="close" onClick={ ev => {
-                    onDeleteImage( card.image_id );
-                    ev.stopPropagation();
-                  } }>&times;</span>
-                </Tooltip>
-                <img
-                  src={ card.image_url }
-                  onClick={ openEvent }
-                  className="gallery__imgs"
-                  key={ index }
-                  width='150 px'
-                  style={ { padding: '10px 10px' } }
-                />
-              </span>
+            <Tooltip text={ __( 'Remove Image', 'planet4-blocks-backend' ) }>
+              <span className="close" onClick={ ev => {
+                onDeleteImage( card.image_id );
+                ev.stopPropagation();
+              } }>&times;</span>
+            </Tooltip>
+            <img
+              src={ card.image_url }
+              onClick={ openEvent }
+              className="gallery__imgs"
+              key={ index }
+              width='150 px'
+              style={ { padding: '10px 10px' } }
+            />
+          </span>
         ) );
       }
 

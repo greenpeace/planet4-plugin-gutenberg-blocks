@@ -5,7 +5,7 @@ export class LayoutSelector extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedOption: props.selectedOption
+      selectedOption: props.selectedOption,
     };
     this.setSelected = this.setSelected.bind(this);
   }
@@ -31,7 +31,7 @@ export class LayoutSelector extends Component {
                   name={'layoutOption'}
                   selected={this.state.selectedOption}
                   options={[
-                    {value: layoutOption.value}
+                    {value: layoutOption.value},
                   ]}
                   onChange={this.setSelected}
                 />
@@ -48,7 +48,7 @@ export class LayoutSelector extends Component {
                   : null
               }
             </label>
-          )
+          );
         })
       }
     </div>;

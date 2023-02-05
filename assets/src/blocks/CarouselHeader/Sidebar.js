@@ -35,11 +35,11 @@ export const Sidebar = ({
     let siblingNode, siblingIndex = -1;
 
     switch(evt.currentTarget.dataset.type) {
-      case 'up':
-        siblingIndex = currentIndex - 1;
+    case 'up':
+      siblingIndex = currentIndex - 1;
       break;
-      case 'down':
-        siblingIndex = currentIndex + 1;
+    case 'down':
+      siblingIndex = currentIndex + 1;
       break;
     }
 

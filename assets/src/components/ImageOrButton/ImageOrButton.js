@@ -53,4 +53,4 @@ export const ImageOrButton = props => {
       />
     </MediaUploadCheck>
   </div>;
-}
+};

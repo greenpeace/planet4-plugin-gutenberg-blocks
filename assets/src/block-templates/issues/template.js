@@ -41,69 +41,70 @@ const item = ['core/group', {
 
 const template = () => ([
   [ 'core/group', {
-      align: 'full',
-      className: 'block',
-      style: {
-        spacing: {
-          padding: {
-            top: '80px',
-            bottom: '80px',
-          },
+    align: 'full',
+    backgroundColor,
+    className: 'block',
+    style: {
+      spacing: {
+        padding: {
+          top: '80px',
+          bottom: '80px',
         },
       },
     },
-    [
-      [ 'core/group', {
-          className: 'container',
-        }, [
-          [ 'core/heading', {
-              level: 2,
-              placeholder: __( 'Enter title', 'planet4-blocks-backend' ),
-              style: {
-                spacing: {
-                  margin: {
-                    bottom: '24px',
-                  },
-                },
-              },
-              textAlign: 'center',
-            }
-          ],
-          [ 'core/paragraph', {
-              className: 'my-0',
-              placeholder: __( 'Enter description', 'planet4-blocks-backend' ),
-              align: 'center',
+  },
+  [
+    [ 'core/group', {
+      className: 'container',
+    }, [
+      [ 'core/heading', {
+        level: 2,
+        placeholder: __( 'Enter title', 'planet4-blocks-backend' ),
+        style: {
+          spacing: {
+            margin: {
+              bottom: '24px',
             },
-          ],
-          [ 'core/group', {
-              className: 'is-style-space-evenly',
-              layout: {
-                type: 'flex',
-                allowOrientation: false,
-              },
-              style: {
-                spacing: {
-                  padding: {
-                    top: '40px',
-                    bottom: '56px',
-                  },
-                },
-              },
-            },
-            [...Array(4).keys()].map(() => item)
-          ],
-          [ 'core/buttons', {
-              layout: {
-                type: 'flex',
-                justifyContent: 'center',
-              },
-            }, [
-            [ 'core/button', { placeholder: __( 'Enter text', 'planet4-blocks-backend' ) } ]]],
-          ],
-        ],
+          },
+        },
+        textAlign: 'center',
+      }
       ],
+      [ 'core/paragraph', {
+        className: 'my-0',
+        placeholder: __( 'Enter description', 'planet4-blocks-backend' ),
+        align: 'center',
+      },
+      ],
+      [ 'core/group', {
+        className: 'is-style-space-evenly',
+        layout: {
+          type: 'flex',
+          allowOrientation: false,
+        },
+        style: {
+          spacing: {
+            padding: {
+              top: '40px',
+              bottom: '56px',
+            },
+          },
+        },
+      },
+      [...Array(4).keys()].map(() => item)
+      ],
+      [ 'core/buttons', {
+        layout: {
+          type: 'flex',
+          justifyContent: 'center',
+        },
+      }, [
+        [ 'core/button', { placeholder: __( 'Enter text', 'planet4-blocks-backend' ) } ]]],
     ],
-  ]
+    ],
+  ],
+  ],
+]
 );
 
 export default template;

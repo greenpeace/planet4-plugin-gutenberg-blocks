@@ -42,22 +42,22 @@ const Input = (props) => {
 
   return ((field) => {
     switch (field?.input_type) {
-      case 'text':
-      case 'email':
-        return <TextInput {...{field, onInputChange, onBlur, errors, is_side_style}} />;
-      case 'checkbox':
-        return <CheckboxInput {...{field, onInputChange, onBlur, index, dependent_field, errors, is_side_style}} />;
-      case 'radio':
-        return <RadioInput {...{field, onInputChange, onBlur, errors, is_side_style}} />;
-      case 'country':
-        return <CountryInput {...{field, onInputChange, onBlur, errors, is_side_style}} />;
-      case 'position':
-        return <PositionInput {...{field, onInputChange, onBlur, errors, is_side_style}} />;
-      case 'hidden':
-        return <HiddenInput {...{field}} />;
-      default:
-        console.error(`Input type <${field?.input_type}> unknown.`, field);
-        return null;
+    case 'text':
+    case 'email':
+      return <TextInput {...{field, onInputChange, onBlur, errors, is_side_style}} />;
+    case 'checkbox':
+      return <CheckboxInput {...{field, onInputChange, onBlur, index, dependent_field, errors, is_side_style}} />;
+    case 'radio':
+      return <RadioInput {...{field, onInputChange, onBlur, errors, is_side_style}} />;
+    case 'country':
+      return <CountryInput {...{field, onInputChange, onBlur, errors, is_side_style}} />;
+    case 'position':
+      return <PositionInput {...{field, onInputChange, onBlur, errors, is_side_style}} />;
+    case 'hidden':
+      return <HiddenInput {...{field}} />;
+    default:
+      console.error(`Input type <${field?.input_type}> unknown.`, field);
+      return null;
     }
   })(field);
 }
@@ -140,28 +140,28 @@ const CheckboxOpt = ({field, onInputChange, onBlur, dependent_field, errors}) =>
         className="en__field__element en__field__element--check form-group form-check-label-block custom-control p4-custom-control-input"
       >
         <label className={`custom-checkbox ${field.name == dependent_field ? 'disable-checkbox' : ''}`}>
-        <input
-          id={ id }
-          name={ name }
-          type="checkbox"
-          className={ `en__field__input en__field__input--checkbox ${field.name == dependent_field ? 'dependency-' + field.name : '' } ${has_error ? 'is-invalid' : ''}` }
-          defaultValue={ field.default_value }
-          data-errormessage={ errorMessage }
-          defaultChecked={ 1 == field.selected }
-          required={ field.required }
-          disabled={ field.name == dependent_field }
-          data-dependency={ field.dependency }
-          onClick={ toggleDependencies }
-          onChange={ (e) => onInputChange(field, e) }
-          onBlur={ (e) => onBlur(field, e) }
-        />
-        <span
-          className="custom-control-description"
-          dangerouslySetInnerHTML={{__html: `${field.label}${field.required ? ' *' : ''}`}}
-        />
-        {has_error &&
+          <input
+            id={ id }
+            name={ name }
+            type="checkbox"
+            className={ `en__field__input en__field__input--checkbox ${field.name == dependent_field ? 'dependency-' + field.name : '' } ${has_error ? 'is-invalid' : ''}` }
+            defaultValue={ field.default_value }
+            data-errormessage={ errorMessage }
+            defaultChecked={ 1 == field.selected }
+            required={ field.required }
+            disabled={ field.name == dependent_field }
+            data-dependency={ field.dependency }
+            onClick={ toggleDependencies }
+            onChange={ (e) => onInputChange(field, e) }
+            onBlur={ (e) => onBlur(field, e) }
+          />
+          <span
+            className="custom-control-description"
+            dangerouslySetInnerHTML={{__html: `${field.label}${field.required ? ' *' : ''}`}}
+          />
+          {has_error &&
           <div className="invalid-feedback">{ errors[field.id] ?? errorMessage }</div>
-        }
+          }
         </label>
       </div>
     </div>

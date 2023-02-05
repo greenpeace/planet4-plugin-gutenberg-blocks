@@ -59,7 +59,7 @@ export const SplittwocolumnsInPlaceEdit = ({attributes, charLimit, setAttributes
             multiline="false"
             withoutInteractiveFormatting
             allowedFormats={[]}
-            />
+          />
           <RichText
             tagName="p"
             className="split-two-column-item-subtitle"
@@ -68,7 +68,7 @@ export const SplittwocolumnsInPlaceEdit = ({attributes, charLimit, setAttributes
             onChange={onTextChange('issue_description')}
             multiline="false"
             allowedFormats={['core/bold', 'core/italic']}
-            />
+          />
           {issue_link_path &&
             <RichText
               tagName="a"
@@ -79,7 +79,7 @@ export const SplittwocolumnsInPlaceEdit = ({attributes, charLimit, setAttributes
               multiline="false"
               withoutInteractiveFormatting
               allowedFormats={[]}
-              />
+            />
           }
         </div>
       </div>
@@ -108,7 +108,7 @@ export const SplittwocolumnsInPlaceEdit = ({attributes, charLimit, setAttributes
             onChange={onTextChange('tag_description')}
             multiline="false"
             allowedFormats={['core/bold', 'core/italic']}
-            />
+          />
           <RichText
             tagName="a"
             className="btn btn-primary btn-block split-two-column-item-button"
@@ -118,7 +118,7 @@ export const SplittwocolumnsInPlaceEdit = ({attributes, charLimit, setAttributes
             multiline="false"
             withoutInteractiveFormatting
             allowedFormats={[]}
-            />
+          />
         </div>
       </div>
     </section>

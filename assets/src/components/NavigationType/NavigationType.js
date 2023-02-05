@@ -10,12 +10,12 @@ const NAVIGATION_TYPE_MINIMAL = 'minimal';
 export const NavigationType = ({value, setValue, defaultValue, options}) => {
   const defaultOptions = [
     {
-      "label": __( 'Main website navigation', 'planet4-blocks-backend' ),
-      "value": NAVIGATION_TYPE_PLANET4,
+      'label': __( 'Main website navigation', 'planet4-blocks-backend' ),
+      'value': NAVIGATION_TYPE_PLANET4,
     },
     {
-      "label": __( 'Minimal Navigation', 'planet4-blocks-backend' ),
-      "value": NAVIGATION_TYPE_MINIMAL,
+      'label': __( 'Minimal Navigation', 'planet4-blocks-backend' ),
+      'value': NAVIGATION_TYPE_MINIMAL,
     },
   ];
 
@@ -27,4 +27,4 @@ export const NavigationType = ({value, setValue, defaultValue, options}) => {
       onChange={ (value) => setValue(value) }
     />
   );
-}
+};

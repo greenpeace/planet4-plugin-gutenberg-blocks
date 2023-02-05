@@ -43,11 +43,11 @@ export const ImageBlockEdit = (BlockEdit) => {
         <BlockEdit { ...props } />
         { block_id && image_credits &&
           <style dangerouslySetInnerHTML={{__html:
-            `#${block_id} figcaption::after { content: " ${image_credits}"; }`
+            `#${block_id} figcaption::after { content: " ${image_credits}"; }`,
           }}>
           </style>
         }
       </>
     );
-  }
-}
+  };
+};
