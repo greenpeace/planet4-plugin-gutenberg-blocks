@@ -1,11 +1,11 @@
-import { SubPages } from './SubPages';
+import {SubPages} from './SubPages';
 
 export class SubPagesBlock {
   constructor() {
-    const { registerBlockType } = wp.blocks;
-    const { withSelect } = wp.data;
+    const {registerBlockType} = wp.blocks;
+    const {withSelect} = wp.data;
 
-    registerBlockType( 'planet4-blocks/sub-pages', {
+    registerBlockType('planet4-blocks/sub-pages', {
       title: 'Sub Pages',
       icon: 'welcome-widgets-menus',
       category: 'planet4-blocks',
@@ -16,16 +16,8 @@ export class SubPagesBlock {
       save() {
         return null;
       },
-      edit: withSelect( ( select ) => {
-
-      } )( ( {
-        isSelected,
-        attributes,
-        setAttributes
-      } ) => {
-        return <SubPages/>;
-      } ),
-    } );
-  };
+      edit: withSelect(() => {})(() => <SubPages />),
+    });
+  }
 }
 

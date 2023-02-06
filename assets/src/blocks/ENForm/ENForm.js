@@ -9,41 +9,37 @@ import {
   TextareaControl,
   ToggleControl,
   SelectControl,
-  ServerSideRender
+  ServerSideRender,
 } from '@wordpress/components';
-import {MediaPlaceholder} from "@wordpress/editor";
-import {ValidationMessage} from "../../components/enform/ValidationMessage/ValidationMessage";
+import {MediaPlaceholder} from '@wordpress/editor';
+import {ValidationMessage} from '../../components/enform/ValidationMessage/ValidationMessage';
 
 const {__} = wp.i18n;
 
 export class ENForm extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  isURLValid( url ) {
+  isURLValid(url) {
     return !!url ? url.substr(0, 8).toLowerCase() === 'https://' : true;
   }
 
   renderEdit() {
-    const {getCurrentPostType} = wp.data.select("core/editor");
-    const currentPostType      = getCurrentPostType();
+    const {getCurrentPostType} = wp.data.select('core/editor');
+    const currentPostType = getCurrentPostType();
 
     let flattenedPages = [];
     let pagesByType;
 
-    for (var i in window.p4en_vars.pages) {
-      pagesByType = window.p4en_vars.pages[i].map(page => {
-        return { label: page.name, value: page.id };
+    for (const i in window.p4en_vars.pages) {
+      pagesByType = window.p4en_vars.pages[ i ].map((page) => {
+        return {label: page.name, value: page.id};
       });
       flattenedPages = flattenedPages.concat(
-        { label: '-- ' + i, value: i }, // Page type label
+        {label: '-- ' + i, value: i}, // Page type label
         ...pagesByType
       );
     }
 
-    const en_forms = window.p4en_vars.forms.map(form => {
-      return { label: form.post_title, value: form.ID };
+    const en_forms = window.p4en_vars.forms.map((form) => {
+      return {label: form.post_title, value: form.ID};
     });
 
     return (
@@ -60,11 +56,11 @@ export class ENForm extends Component {
           )}</FormHelp>
 
           <SelectControl
-            label={__( 'Engaging Network Live Pages', 'planet4-engagingnetworks-backend' )}
+            label={__('Engaging Network Live Pages', 'planet4-engagingnetworks-backend')}
             value={this.props.en_page_id}
             options={[
-              { label: 'No pages', value: 0 },
-              ...flattenedPages
+              {label: 'No pages', value: 0},
+              ...flattenedPages,
             ]}
             disabled={!flattenedPages.length}
             onChange={this.props.onPageChange}
@@ -72,22 +68,22 @@ export class ENForm extends Component {
 
           { flattenedPages.length
             ? <FormHelp>
-              { __( 'Select the Live EN page that this form will be submitted to.', 'planet4-engagingnetworks-backend' ) }
+              { __('Select the Live EN page that this form will be submitted to.', 'planet4-engagingnetworks-backend') }
             </FormHelp>
             : <InlineFormFeedback>
-              { __( 'Check your EngagingNetworks settings!', 'planet4-engagingnetworks-backend' ) }
+              { __('Check your EngagingNetworks settings!', 'planet4-engagingnetworks-backend') }
             </InlineFormFeedback>
           }
           <br />
           <SelectControl
-            label={__( '- Select Goal -', 'planet4-engagingnetworks-backend' )}
+            label={__('- Select Goal -', 'planet4-engagingnetworks-backend')}
             value={this.props.enform_goal}
             options={[
-              { label: __( '--- Select Goal ---', 'planet4-engagingnetworks-backend' ), value: 'not set' },
-              { label: 'Petition Signup', value: 'Petition Signup' },
-              { label: 'Action Alert', value: 'Action Alert' },
-              { label: 'Contact Form', value: 'Contact Form' },
-              { label: 'Other', value: 'Other' },
+              {label: __('--- Select Goal ---', 'planet4-engagingnetworks-backend'), value: 'not set'},
+              {label: 'Petition Signup', value: 'Petition Signup'},
+              {label: 'Action Alert', value: 'Action Alert'},
+              {label: 'Contact Form', value: 'Contact Form'},
+              {label: 'Other', value: 'Other'},
             ]}
             onChange={this.props.onGoalChange}
           />
@@ -98,21 +94,21 @@ export class ENForm extends Component {
               onSelectedLayoutChange={this.props.onSelectedLayoutChange}
               options={[
                 {
-                  label: __( 'Page body / text size width. No background.', 'planet4-engagingnetworks-backend' ),
+                  label: __('Page body / text size width. No background.', 'planet4-engagingnetworks-backend'),
                   image: window.p4en_vars.home + 'images/enfullwidth.png',
                   value: 'full-width',
-                  help: __( 'Use: on long pages (more than 5 screens) when list items are long (+ 10 words)<br>No max items<br>recommended.', 'planet4-engagingnetworks-backend' ),
+                  help: __('Use: on long pages (more than 5 screens) when list items are long (+ 10 words)<br>No max items<br>recommended.', 'planet4-engagingnetworks-backend'),
                 }, {
-                  label: __( 'Full page width. With background image.', 'planet4-engagingnetworks-backend' ),
+                  label: __('Full page width. With background image.', 'planet4-engagingnetworks-backend'),
                   image: window.p4en_vars.home + 'images/enfullwidthbg.png',
                   value: 'full-width-bg',
-                  help: __( 'This form has a background image that expands the full width of the browser (aka "Happy Point").', 'planet4-engagingnetworks-backend' ),
+                  help: __('This form has a background image that expands the full width of the browser (aka "Happy Point").', 'planet4-engagingnetworks-backend'),
                 },
                 {
-                  label: __( 'Form on the side.', 'planet4-engagingnetworks-backend' ),
+                  label: __('Form on the side.', 'planet4-engagingnetworks-backend'),
                   image: window.p4en_vars.home + 'images/submenu-sidebar.jpg',
                   value: 'side-style',
-                  help: __( 'Form will be added to the top of the page, on the right side for most languages and on the left side for Right-to-left(RTL) languages.', 'planet4-engagingnetworks-backend' ),
+                  help: __('Form will be added to the top of the page, on the right side for most languages and on the left side for Right-to-left(RTL) languages.', 'planet4-engagingnetworks-backend'),
                 },
               ]}
             />
@@ -120,8 +116,8 @@ export class ENForm extends Component {
 
           <div>
             <TextControl
-              label={ __( 'Form Title', 'planet4-engagingnetworks-backend' ) }
-              placeholder={ __( 'Enter title', 'planet4-engagingnetworks-backend' ) }
+              label={__('Form Title', 'planet4-engagingnetworks-backend')}
+              placeholder={__('Enter title', 'planet4-engagingnetworks-backend')}
               value={this.props.title}
               onChange={this.props.onTitleChange}
             />
@@ -129,20 +125,20 @@ export class ENForm extends Component {
 
           <div>
             <TextareaControl
-              label={ __( 'Form Description', 'planet4-engagingnetworks-backend' ) }
-              placeholder={ __( 'Enter description', 'planet4-engagingnetworks-backend' ) }
+              label={__('Form Description', 'planet4-engagingnetworks-backend')}
+              placeholder={__('Enter description', 'planet4-engagingnetworks-backend')}
               value={this.props.description}
               onChange={this.props.onDescriptionChange}
             />
           </div>
 
-          { "side-style" === this.props.en_form_style &&
+          { 'side-style' === this.props.en_form_style &&
           (<div>
 
-            { "campaign" === currentPostType && (
+            { 'campaign' === currentPostType && (
               <div>
                 <ToggleControl
-                  label={__( 'Use Campaign Logo?', 'planet4-engagingnetworks-backend' )}
+                  label={__('Use Campaign Logo?', 'planet4-engagingnetworks-backend')}
                   value={this.props.campaign_logo}
                   checked={this.props.campaign_logo}
                   onChange={this.props.onCampaignLogoChange}
@@ -152,8 +148,8 @@ export class ENForm extends Component {
 
             <div>
               <TextControl
-                label={ __( 'Content Title', 'planet4-engagingnetworks-backend' ) }
-                placeholder={ __( 'Enter content title', 'planet4-engagingnetworks-backend' ) }
+                label={__('Content Title', 'planet4-engagingnetworks-backend')}
+                placeholder={__('Enter content title', 'planet4-engagingnetworks-backend')}
                 value={this.props.content_title}
                 onChange={this.props.onContentTitleChange}
               />
@@ -161,22 +157,22 @@ export class ENForm extends Component {
 
             <div>
               <SelectControl
-                label={ __( 'Content Title text size', 'planet4-engagingnetworks-backend' ) }
+                label={__('Content Title text size', 'planet4-engagingnetworks-backend')}
                 value={this.props.content_title_size}
-                options={ [
-                  { label: __( 'Select title size', 'planet4-engagingnetworks-backend' ), value: '' },
-                  { label: 'h1', value: 'h1' },
-                  { label: 'h2', value: 'h2' },
-                  { label: 'h3', value: 'h3' },
-                ] }
+                options={[
+                  {label: __('Select title size', 'planet4-engagingnetworks-backend'), value: ''},
+                  {label: 'h1', value: 'h1'},
+                  {label: 'h2', value: 'h2'},
+                  {label: 'h3', value: 'h3'},
+                ]}
                 onChange={this.props.onContentTitleSizeChange}
               />
             </div>
 
             <div>
               <TextareaControl
-                label={ __( 'Content Description', 'planet4-engagingnetworks-backend' ) }
-                placeholder={ __( 'Enter content description', 'planet4-engagingnetworks-backend' ) }
+                label={__('Content Description', 'planet4-engagingnetworks-backend')}
+                placeholder={__('Enter content description', 'planet4-engagingnetworks-backend')}
                 value={this.props.content_description}
                 onChange={this.props.onContentDescriptionChange}
               />
@@ -186,8 +182,8 @@ export class ENForm extends Component {
 
           <div>
             <TextControl
-              label={ __( 'Call to Action button (e.g. "Sign up now!")', 'planet4-engagingnetworks-backend' ) }
-              placeholder={ __( 'Enter the "Call to Action" button text', 'planet4-engagingnetworks-backend' ) }
+              label={__('Call to Action button (e.g. "Sign up now!")', 'planet4-engagingnetworks-backend')}
+              placeholder={__('Enter the "Call to Action" button text', 'planet4-engagingnetworks-backend')}
               value={this.props.button_text}
               onChange={this.props.onCTAButtonTextChange}
             />
@@ -195,8 +191,8 @@ export class ENForm extends Component {
 
           <div>
             <TextareaControl
-              label={ __( 'Text below Call to Action button', 'planet4-engagingnetworks-backend' ) }
-              placeholder={ __( 'Enter text to go below the button', 'planet4-engagingnetworks-backend' ) }
+              label={__('Text below Call to Action button', 'planet4-engagingnetworks-backend')}
+              placeholder={__('Enter text to go below the button', 'planet4-engagingnetworks-backend')}
               value={this.props.text_below_button}
               onChange={this.props.onCTATextBelowButtonChange}
             />
@@ -209,8 +205,8 @@ export class ENForm extends Component {
 
           <div>
             <TextControl
-              label={ __( 'Main text / Title', 'planet4-engagingnetworks-backend' ) }
-              placeholder={ __( 'e.g. "Thank you for signing!"', 'planet4-engagingnetworks-backend' ) }
+              label={__('Main text / Title', 'planet4-engagingnetworks-backend')}
+              placeholder={__('e.g. "Thank you for signing!"', 'planet4-engagingnetworks-backend')}
               value={this.props.thankyou_title}
               onChange={this.props.onMainThankYouTextChange}
             />
@@ -218,8 +214,8 @@ export class ENForm extends Component {
 
           <div>
             <TextControl
-              label={ __( 'Secondary message / Subtitle', 'planet4-engagingnetworks-backend' ) }
-              placeholder={ __( 'e.g. "Your support means world"', 'planet4-engagingnetworks-backend' ) }
+              label={__('Secondary message / Subtitle', 'planet4-engagingnetworks-backend')}
+              placeholder={__('e.g. "Your support means world"', 'planet4-engagingnetworks-backend')}
               value={this.props.thankyou_subtitle}
               onChange={this.props.onSecondaryThankYouMessageChange}
             />
@@ -227,17 +223,17 @@ export class ENForm extends Component {
 
           <div>
             <TextControl
-              label={ __( 'Social media message', 'planet4-engagingnetworks-backend' ) }
-              placeholder={ __( 'e.g. "Can you share it with your family and friends?"', 'planet4-engagingnetworks-backend' ) }
+              label={__('Social media message', 'planet4-engagingnetworks-backend')}
+              placeholder={__('e.g. "Can you share it with your family and friends?"', 'planet4-engagingnetworks-backend')}
               value={this.props.thankyou_social_media_message}
               onChange={this.props.onThankYouTakeActionMessageChange}
             />
           </div>
 
-          <br/>
+          <br />
 
           <ToggleControl
-            label={__( 'Hide "DONATE" button in Thank You message', 'planet4-engagingnetworks-backend' )}
+            label={__('Hide "DONATE" button in Thank You message', 'planet4-engagingnetworks-backend')}
             value={this.props.donate_button_checkbox}
             checked={this.props.donate_button_checkbox}
             onChange={this.props.onDonateButtonCheckboxChange}
@@ -246,59 +242,59 @@ export class ENForm extends Component {
           { true !== this.props.donate_button_checkbox && (
             <div>
               <TextControl
-                label={ __( 'Donate message', 'planet4-engagingnetworks-backend' ) }
-                placeholder={ __( 'e.g. "or make a donation"', 'planet4-engagingnetworks-backend' ) }
+                label={__('Donate message', 'planet4-engagingnetworks-backend')}
+                placeholder={__('e.g. "or make a donation"', 'planet4-engagingnetworks-backend')}
                 value={this.props.thankyou_donate_message}
                 onChange={this.props.onThankYouDonateMessageChange}
               />
               <TextControl
-                label={ __( 'Custom DONATE url', 'planet4-engagingnetworks-backend' ) }
-                placeholder={ __( 'If empty, the default "DONATE" P4 Button link will be used', 'planet4-engagingnetworks-backend' ) }
+                label={__('Custom DONATE url', 'planet4-engagingnetworks-backend')}
+                placeholder={__('If empty, the default "DONATE" P4 Button link will be used', 'planet4-engagingnetworks-backend')}
                 value={this.props.custom_donate_url}
                 onChange={this.props.onCustomDonateUrlChange}
               />
-              {!this.isURLValid( this.props.custom_donate_url ) &&
-              <span className='input_error'>{ __('The URL must start with "HTTPS://"', 'planet4-engagingnetworks-backend') }</span>}
-            </div> )
+              {!this.isURLValid(this.props.custom_donate_url) &&
+              <span className="input_error">{ __('The URL must start with "HTTPS://"', 'planet4-engagingnetworks-backend') }</span>}
+            </div>)
           }
           <br></br>
           <div>
             <TextControl
-              label={ __( 'Thank you page URL (Title, Subtitle, Social media message / icons and DONATE will not be shown)', 'planet4-engagingnetworks-backend' ) }
-              placeholder={ __( 'Enter "Thank you page" url', 'planet4-engagingnetworks-backend' ) }
+              label={__('Thank you page URL (Title, Subtitle, Social media message / icons and DONATE will not be shown)', 'planet4-engagingnetworks-backend')}
+              placeholder={__('Enter "Thank you page" url', 'planet4-engagingnetworks-backend')}
               value={this.props.thankyou_url}
               onChange={this.props.onThankYouURLChange}
             />
-            {!this.isURLValid( this.props.thankyou_url ) &&
-            <span className='input_error'>{ __('The URL must start with "HTTPS://"', 'planet4-engagingnetworks-backend') }</span>}
+            {!this.isURLValid(this.props.thankyou_url) &&
+            <span className="input_error">{ __('The URL must start with "HTTPS://"', 'planet4-engagingnetworks-backend') }</span>}
           </div>
 
-          { "full-width" !== this.props.en_form_style &&
+          { 'full-width' !== this.props.en_form_style &&
             <div>
               <MediaPlaceholder
-                labels={{ title: __( 'Background', 'planet4-engagingnetworks-backend' ), instructions: __( 'Select an image.', 'planet4-engagingnetworks-backend' )}}
+                labels={{title: __('Background', 'planet4-engagingnetworks-backend'), instructions: __('Select an image.', 'planet4-engagingnetworks-backend')}}
                 icon="format-image"
-                onSelect={ this.props.onSelectImage }
+                onSelect={this.props.onSelectImage}
                 onError={this.props.onUploadError}
                 accept="image/*"
-                allowedTypes={["image"]}
+                allowedTypes={['image']}
               />
             </div>
           }
 
           <div>
             <SelectControl
-              label={__( 'Planet 4 Engaging Networks form', 'planet4-engagingnetworks-backend' )}
+              label={__('Planet 4 Engaging Networks form', 'planet4-engagingnetworks-backend')}
               value={this.props.en_form_id}
               options={[
-                { label: 'No forms', value: 0 },
-                ...en_forms
+                {label: 'No forms', value: 0},
+                ...en_forms,
               ]}
               onChange={this.props.onFormChange}
             />
             <FormHelp>{ this.props.forms
-              ? __( 'Select the P4EN Form that will be displayed.', 'planet4-engagingnetworks-backend' )
-              : __( 'Create an EN Form', 'planet4-engagingnetworks-backend' )
+              ? __('Select the P4EN Form that will be displayed.', 'planet4-engagingnetworks-backend')
+              : __('Create an EN Form', 'planet4-engagingnetworks-backend')
             }</FormHelp>
           </div>
         </div>
@@ -307,20 +303,20 @@ export class ENForm extends Component {
   }
 
   render() {
-    let validationMessage = [];
+    const validationMessage = [];
 
-    if ( false === this.props.isSelected ) {
-      if ( undefined === this.props.en_page_id || 0 === this.props.en_page_id ) {
-        validationMessage.push( __( '"Engaging Network Live Pages" field is required!', 'planet4-engagingnetworks-backend' ));
+    if (false === this.props.isSelected) {
+      if (undefined === this.props.en_page_id || 0 === this.props.en_page_id) {
+        validationMessage.push(__('"Engaging Network Live Pages" field is required!', 'planet4-engagingnetworks-backend'));
       }
-      if ( undefined === this.props.enform_goal || 'not set' === this.props.enform_goal || '' === this.props.enform_goal ) {
-        validationMessage.push( __( '"Select Goal" field is required!', 'planet4-engagingnetworks-backend' ));
+      if (undefined === this.props.enform_goal || 'not set' === this.props.enform_goal || '' === this.props.enform_goal) {
+        validationMessage.push(__('"Select Goal" field is required!', 'planet4-engagingnetworks-backend'));
       }
-      if ( undefined === this.props.button_text || '' === this.props.button_text ) {
-        validationMessage.push( __( '"Call to Action button" field is required!', 'planet4-engagingnetworks-backend' ));
+      if (undefined === this.props.button_text || '' === this.props.button_text) {
+        validationMessage.push(__('"Call to Action button" field is required!', 'planet4-engagingnetworks-backend'));
       }
-      if ( undefined === this.props.en_form_id || 0 === this.props.en_form_id ) {
-        validationMessage.push( __( '"Planet 4 Engaging Networks form" field is required!', 'planet4-engagingnetworks-backend' ));
+      if (undefined === this.props.en_form_id || 0 === this.props.en_form_id) {
+        validationMessage.push(__('"Planet 4 Engaging Networks form" field is required!', 'planet4-engagingnetworks-backend'));
       }
     }
 
@@ -333,12 +329,11 @@ export class ENForm extends Component {
         }
         <Preview showBar={this.props.isSelected} isSelected={this.props.isSelected}>
 
-          { validationMessage.length ?
-            <ValidationMessage
+          { validationMessage.length
+            ? <ValidationMessage
               message={validationMessage}
             />
-            :
-            <ServerSideRender
+            : <ServerSideRender
               block={'planet4-blocks/enform'}
               attributes={{
                 en_page_id: this.props.en_page_id,
@@ -365,5 +360,5 @@ export class ENForm extends Component {
         </Preview>
       </div>
     );
-  };
+  }
 }

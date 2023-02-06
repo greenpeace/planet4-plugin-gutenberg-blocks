@@ -1,4 +1,4 @@
-import { useState, useEffect } from '@wordpress/element';
+import {useState} from '@wordpress/element';
 
 /**
  * Takes an array of refs to the slides
@@ -8,7 +8,9 @@ import { useState, useEffect } from '@wordpress/element';
  * - Adds an *exit* transition class for the `active` element
  * - Adds a listener for `ontransitionend` to the `active` element
  *
- * @param {Array} slidesRef
+ * @param {Array}  slidesRef
+ * @param {*}      lastSlide
+ * @param {*}      containerRef
  * @param {Object} options
  */
 export const useSlides = (slidesRef, lastSlide, containerRef, options = {
@@ -18,12 +20,12 @@ export const useSlides = (slidesRef, lastSlide, containerRef, options = {
   // these could have the same class for both directions.
   enterTransitionClasses: {
     next: 'enter-from-end',
-    prev: 'enter-from-start'
+    prev: 'enter-from-start',
   },
   exitTransitionClasses: {
     next: 'exit-to-start',
-    prev: 'exit-to-end'
-  }
+    prev: 'exit-to-end',
+  },
 }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [autoplayCancelled, setAutoplayCancelled] = useState(false);
@@ -41,6 +43,7 @@ export const useSlides = (slidesRef, lastSlide, containerRef, options = {
     setAutoplayCancelled(true);
   };
 
+  // eslint-disable-next-line no-shadow
   const getOrder = (currentSlide, newSlide, lastSlide) => {
     let order = newSlide < currentSlide ? 'prev' : 'next';
     if (newSlide === lastSlide && currentSlide === 0 && order !== 'prev') {
@@ -51,22 +54,22 @@ export const useSlides = (slidesRef, lastSlide, containerRef, options = {
     return order;
   };
 
-  const getSlideHeight = slideRef => {
+  const getSlideHeight = (slideRef) => {
     return `${slideRef.querySelector('.carousel-item-mask .background-holder').offsetHeight + slideRef.querySelector('.carousel-caption').offsetHeight}px`;
   };
 
-  const setCarouselHeight = slideRef => {
+  const setCarouselHeight = (slideRef) => {
     if (!containerRef || !containerRef.current) {
       return;
     }
 
     const carouselElement = containerRef.current;
     if (window.matchMedia('(max-width: 991px)').matches) {
-      carouselElement.querySelectorAll('.carousel-inner, .carousel-item-mask').forEach(container =>
+      carouselElement.querySelectorAll('.carousel-inner, .carousel-item-mask').forEach((container) =>
         container.style.height = getSlideHeight(slideRef)
       );
     } else {
-      carouselElement.querySelectorAll('.carousel-inner, .carousel-item-mask').forEach(container =>
+      carouselElement.querySelectorAll('.carousel-inner, .carousel-item-mask').forEach((container) =>
         container.style.height = null
       );
     }
@@ -77,15 +80,15 @@ export const useSlides = (slidesRef, lastSlide, containerRef, options = {
       return;
     }
 
-    const nextElement = slidesRef.current[newSlide];
-    const activeElement = slidesRef.current[currentSlide];
+    const nextElement = slidesRef.current[ newSlide ];
+    const activeElement = slidesRef.current[ currentSlide ];
 
     if (newSlide !== currentSlide && nextElement && activeElement && !sliding) {
       setSliding(true);
 
       const order = getOrder(currentSlide, newSlide, lastSlide);
-      const enterTransitionClass = options.enterTransitionClasses[order];
-      const exitTransitionClass = options.exitTransitionClasses[order];
+      const enterTransitionClass = options.enterTransitionClasses[ order ];
+      const exitTransitionClass = options.exitTransitionClasses[ order ];
 
       setCarouselHeight(nextElement);
 

@@ -1,16 +1,16 @@
-import { useState, useEffect, useRef } from '@wordpress/element';
-import { IMAGE_SIZES } from './imageSizes';
-import { getCaptionWithCredits } from './getCaptionWithCredits.js';
+import {useState, useEffect, useRef} from '@wordpress/element';
+import {IMAGE_SIZES} from './imageSizes';
+import {getCaptionWithCredits} from './getCaptionWithCredits.js';
 
-const { __ } = wp.i18n;
+const {__} = wp.i18n;
 
 const isRTL = document.querySelector('html').dir === 'rtl';
 
 // This will trigger the browser to synchronously calculate the style and layout
 // You can find a list of examples here: https://gist.github.com/paulirish/5d52fb081b3570c81e3a
-const reflow = element => element.offsetHeight;
+const reflow = (element) => element.offsetHeight;
 
-export const GalleryCarousel = ({ images, onImageClick, isEditing }) => {
+export const GalleryCarousel = ({images, onImageClick, isEditing}) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [sliding, setSliding] = useState(false);
   const lastSlide = images.length - 1;
@@ -18,7 +18,7 @@ export const GalleryCarousel = ({ images, onImageClick, isEditing }) => {
   const slidesRef = useRef([]);
   const containerRef = useRef(null);
 
-  const getOrder = newSlide => {
+  const getOrder = (newSlide) => {
     let order = newSlide < currentSlide ? 'prev' : 'next';
     if (newSlide === lastSlide && currentSlide === 0 && order !== 'prev') {
       order = 'prev';
@@ -26,11 +26,11 @@ export const GalleryCarousel = ({ images, onImageClick, isEditing }) => {
       order = 'next';
     }
     return order;
-  }
+  };
 
-  const goToSlide = newSlide => {
-    const nextElement = slidesRef.current[newSlide];
-    const activeElement = slidesRef.current[currentSlide];
+  const goToSlide = (newSlide) => {
+    const nextElement = slidesRef.current[ newSlide ];
+    const activeElement = slidesRef.current[ currentSlide ];
     if (newSlide !== currentSlide && nextElement && activeElement && !sliding) {
       setSliding(true);
       const order = getOrder(newSlide);
@@ -52,7 +52,7 @@ export const GalleryCarousel = ({ images, onImageClick, isEditing }) => {
         setCurrentSlide(newSlide);
       }, 600);
     }
-  }
+  };
 
   const goToNextSlide = () => goToSlide(currentSlide === lastSlide ? 0 : currentSlide + 1);
   const goToPrevSlide = () => goToSlide(currentSlide === 0 ? lastSlide : currentSlide - 1);
@@ -75,11 +75,11 @@ export const GalleryCarousel = ({ images, onImageClick, isEditing }) => {
     }
 
     const carouselElement = containerRef.current;
-    const carouselHammer = new Hammer(carouselElement, { recognizers: [] });
-    const hammer = new Hammer.Manager(carouselHammer.element);
-    const swipe = new Hammer.Swipe();
+    const carouselHammer = new Hammer(carouselElement, {recognizers: []}); // eslint-disable-line no-undef
+    const hammer = new Hammer.Manager(carouselHammer.element); // eslint-disable-line no-undef
+    const swipe = new Hammer.Swipe(); // eslint-disable-line no-undef
     // Only allow horizontal swiping (not vertical swiping)
-    swipe.set({ direction: Hammer.DIRECTION_HORIZONTAL });
+    swipe.set({direction: Hammer.DIRECTION_HORIZONTAL}); // eslint-disable-line no-undef
     hammer.add(swipe);
 
     hammer.on('swipeleft', isRTL ? goToPrevSlide : goToNextSlide);
@@ -88,7 +88,7 @@ export const GalleryCarousel = ({ images, onImageClick, isEditing }) => {
     return () => {
       hammer.off('swipeleft', isRTL ? goToPrevSlide : goToNextSlide);
       hammer.off('swiperight', isRTL ? goToNextSlide : goToPrevSlide);
-    }
+    };
   }, [currentSlide]);
 
   return (
@@ -101,12 +101,13 @@ export const GalleryCarousel = ({ images, onImageClick, isEditing }) => {
                 key={`indicator-${index}`}
                 onClick={() => goToSlide(index)}
                 className={index === currentSlide ? 'active' : ''}
+                role="presentation"
               />
             )}
           </ol>
         }
         {images.length > 1 &&
-          <button className="carousel-control-prev" role="button" onClick={goToPrevSlide}>
+          <button className="carousel-control-prev" onClick={goToPrevSlide}>
             <span className="carousel-control-prev-icon" aria-hidden="true"><i></i></span>
             <span className="visually-hidden">{__('Previous', 'planet4-blocks')}</span>
           </button>
@@ -115,18 +116,19 @@ export const GalleryCarousel = ({ images, onImageClick, isEditing }) => {
           <div
             key={image.image_src}
             className={`carousel-item ${index === currentSlide ? 'active' : ''}`}
-            ref={element => slidesRef.current[index] = element}
+            ref={(element) => slidesRef.current[ index ] = element}
           >
             <img
-              loading='lazy'
+              loading="lazy"
               src={image.image_src}
               srcSet={image.image_srcset}
               sizes={IMAGE_SIZES.carousel}
-              style={{ objectPosition: image.focus_image }}
+              style={{objectPosition: image.focus_image}}
               alt={image.alt_text}
               title={image.alt_text}
               data-index={index}
               onClick={onImageClick}
+              role="presentation"
             />
 
             {(image.caption || image.credits) && (
@@ -139,7 +141,7 @@ export const GalleryCarousel = ({ images, onImageClick, isEditing }) => {
           </div>
         ))}
         {images.length > 1 && (
-          <button className="carousel-control-next" role="button" onClick={goToNextSlide}>
+          <button className="carousel-control-next" onClick={goToNextSlide}>
             <span className="carousel-control-next-icon" aria-hidden="true"><i></i></span>
             <span className="visually-hidden">{__('Next', 'planet4-blocks')}</span>
           </button>
@@ -147,4 +149,4 @@ export const GalleryCarousel = ({ images, onImageClick, isEditing }) => {
       </div>
     </div>
   );
-}
+};

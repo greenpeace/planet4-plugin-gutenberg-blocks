@@ -1,4 +1,4 @@
-import { IMAGE_SIZES } from './imageSizes';
+import {IMAGE_SIZES} from './imageSizes';
 
 export const SplittwocolumnsFrontend = ({
   title,
@@ -20,14 +20,13 @@ export const SplittwocolumnsFrontend = ({
   focus_tag_image,
   className,
 }) => {
-
   const analytics = (action) => {
     return {
-      "data-ga-category": 'Split Two Columns',
-      "data-ga-action": action,
-      "data-ga-label": 'n/a'
-    }
-  }
+      'data-ga-category': 'Split Two Columns',
+      'data-ga-action': action,
+      'data-ga-label': 'n/a',
+    };
+  };
 
   return (
     <section className={`alignfull split-two-column ${className ?? ''}`}>
@@ -103,5 +102,5 @@ export const SplittwocolumnsFrontend = ({
         </div>
       </div>
     </section>
-  )
-}
+  );
+};

@@ -10,4 +10,4 @@ const getCredits = (image, caption) => {
   }
 
   return `© ${image.credits.replace(/^©\s*/, '')}`;
-}
+};

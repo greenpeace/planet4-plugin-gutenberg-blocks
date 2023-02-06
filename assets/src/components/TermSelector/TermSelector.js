@@ -4,23 +4,24 @@
 /**
  * External dependencies
  */
-import { find, get, unescape as unescapeString } from 'lodash';
+import {find, get, unescape as unescapeString} from 'lodash';
 
 /**
  * WordPress dependencies
  */
-import { __, _n, _x, sprintf } from '@wordpress/i18n';
-import { useMemo, useState } from '@wordpress/element';
+import {useMemo, useState} from '@wordpress/element';
 import {
   Button,
   CheckboxControl,
   TextControl,
   withFilters,
 } from '@wordpress/components';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { useDebounce } from '@wordpress/compose';
-import { store as coreStore } from '@wordpress/core-data';
-import { speak } from '@wordpress/a11y';
+import {useDispatch, useSelect} from '@wordpress/data';
+import {useDebounce} from '@wordpress/compose';
+import {store as coreStore} from '@wordpress/core-data';
+
+const {__, _n, _x, sprintf} = wp.i18n;
+const {speak} = wp.a11y;
 
 /**
  * Module Constants
@@ -45,31 +46,31 @@ const EMPTY_ARRAY = [];
  *
  * @return {Object[]} Sorted array of terms.
  */
-export function sortBySelected( termsTree, terms ) {
-  const treeHasSelection = ( termTree ) => {
-    return terms.indexOf( termTree.id ) !== -1;
+export function sortBySelected(termsTree, terms) {
+  const treeHasSelection = (termTree) => {
+    return terms.indexOf(termTree.id) !== -1;
   };
 
-  const termIsSelected = ( termA, termB ) => {
-    const termASelected = treeHasSelection( termA );
-    const termBSelected = treeHasSelection( termB );
+  const termIsSelected = (termA, termB) => {
+    const termASelected = treeHasSelection(termA);
+    const termBSelected = treeHasSelection(termB);
 
-    if ( termASelected === termBSelected ) {
+    if (termASelected === termBSelected) {
       return 0;
     }
 
-    if ( termASelected && ! termBSelected ) {
+    if (termASelected && !termBSelected) {
       return -1;
     }
 
-    if ( ! termASelected && termBSelected ) {
+    if (!termASelected && termBSelected) {
       return 1;
     }
 
     return 0;
   };
-  const newTermTree = [ ...termsTree ];
-  newTermTree.sort( termIsSelected );
+  const newTermTree = [...termsTree];
+  newTermTree.sort(termIsSelected);
   return newTermTree;
 }
 
@@ -81,8 +82,8 @@ export function sortBySelected( termsTree, terms ) {
  *
  * @return {Object} Term object.
  */
-export function findTerm( terms, name ) {
-  return find( terms, ( term ) => term.name.toLowerCase() === name.toLowerCase() );
+export function findTerm(terms, name) {
+  return find(terms, (term) => term.name.toLowerCase() === name.toLowerCase());
 }
 
 /**
@@ -91,14 +92,14 @@ export function findTerm( terms, name ) {
  * @param {string} filterValue Filter value.
  * @return {(function(Object): (Object|boolean))} Matcher function.
  */
-export function getFilterMatcher( filterValue ) {
-  const matchTermsForFilter = ( originalTerm ) => {
-    if ( '' === filterValue ) {
+export function getFilterMatcher(filterValue) {
+  const matchTermsForFilter = (originalTerm) => {
+    if ('' === filterValue) {
       return originalTerm;
     }
 
     // If the term's name contains the filterValue then return it.
-    if ( -1 !== originalTerm.name.toLowerCase().indexOf( filterValue.toLowerCase() )) {
+    if (-1 !== originalTerm.name.toLowerCase().indexOf(filterValue.toLowerCase())) {
       return originalTerm;
     }
 
@@ -116,16 +117,16 @@ export function getFilterMatcher( filterValue ) {
  * @param {string} props.slug Taxonomy slug.
  * @return {WPElement}        Term selector component.
  */
-export function TermSelector( { slug } ) {
-  const [ adding, setAdding ] = useState( false );
-  const [ formName, setFormName ] = useState( '' );
+export function TermSelector({slug}) {
+  const [adding, setAdding] = useState(false);
+  const [formName, setFormName] = useState('');
   /**
-   * @type {[number|'', Function]}
+   * @type {*}
    */
-  const [ showForm, setShowForm ] = useState( false );
-  const [ filterValue, setFilterValue ] = useState( '' );
-  const [ filteredTermsTree, setFilteredTermsTree ] = useState( [] );
-  const debouncedSpeak = useDebounce( speak, 500 );
+  const [showForm, setShowForm] = useState(false);
+  const [filterValue, setFilterValue] = useState('');
+  const [filteredTermsTree, setFilteredTermsTree] = useState([]);
+  const debouncedSpeak = useDebounce(speak, 500);
 
   const {
     hasCreateAction,
@@ -136,13 +137,13 @@ export function TermSelector( { slug } ) {
     taxonomy,
     isUserAdmin,
   } = useSelect(
-    ( select ) => {
-      const { getCurrentPost, getEditedPostAttribute } = select( 'core/editor' );
-      const { getTaxonomy, getEntityRecords, isResolving, canUser } = select( coreStore );
-      const _taxonomy = getTaxonomy( slug );
+    (select) => {
+      const {getCurrentPost, getEditedPostAttribute} = select('core/editor');
+      const {getTaxonomy, getEntityRecords, isResolving, canUser} = select(coreStore);
+      const _taxonomy = getTaxonomy(slug);
 
       return {
-        isUserAdmin: canUser( 'create', 'users' ) ?? false,
+        isUserAdmin: canUser('create', 'users') ?? false,
         hasCreateAction: _taxonomy
           ? get(
             getCurrentPost(),
@@ -164,33 +165,33 @@ export function TermSelector( { slug } ) {
           )
           : false,
         terms: _taxonomy
-          ? getEditedPostAttribute( _taxonomy.rest_base )
+          ? getEditedPostAttribute(_taxonomy.rest_base)
           : EMPTY_ARRAY,
-        loading: isResolving( 'getEntityRecords', [
+        loading: isResolving('getEntityRecords', [
           'taxonomy',
           slug,
           DEFAULT_QUERY,
-        ] ),
+        ]),
         availableTerms:
-           getEntityRecords( 'taxonomy', slug, DEFAULT_QUERY ) ||
+           getEntityRecords('taxonomy', slug, DEFAULT_QUERY) ||
            EMPTY_ARRAY,
         taxonomy: _taxonomy,
       };
     },
-    [ slug ]
+    [slug]
   );
 
-  const { saveEntityRecord } = useDispatch( coreStore );
-  const { editPost } = useDispatch('core/editor');
+  const {saveEntityRecord} = useDispatch(coreStore);
+  const {editPost} = useDispatch('core/editor');
 
   const availableTermsTree = useMemo(
-    () => sortBySelected( availableTerms, terms ),
+    () => sortBySelected(availableTerms, terms),
     // Remove `terms` from the dependency list to avoid reordering every time
     // checking or unchecking a term.
-    [ availableTerms ]
+    [availableTerms]
   );
 
-  if ( ! hasAssignAction ) {
+  if (!hasAssignAction) {
     return null;
   }
 
@@ -200,8 +201,8 @@ export function TermSelector( { slug } ) {
    * @param {Object} term Term object.
    * @return {Promise} A promise that resolves to save term object.
    */
-  const addTerm = ( term ) => {
-    return saveEntityRecord( 'taxonomy', slug, term );
+  const addTerm = (term) => {
+    return saveEntityRecord('taxonomy', slug, term);
   };
 
   /**
@@ -209,8 +210,8 @@ export function TermSelector( { slug } ) {
    *
    * @param {number[]} termIds Term ids.
    */
-  const onUpdateTerms = ( termIds ) => {
-    editPost( { [ taxonomy.rest_base ]: termIds } );
+  const onUpdateTerms = (termIds) => {
+    editPost({[ taxonomy.rest_base ]: termIds});
   };
 
   /**
@@ -218,98 +219,98 @@ export function TermSelector( { slug } ) {
    *
    * @param {number} termId
    */
-  const onChange = ( termId ) => {
-    const hasTerm = terms.includes( termId );
+  const onChange = (termId) => {
+    const hasTerm = terms.includes(termId);
     const newTerms = hasTerm
-      ? terms.filter( ( id ) => id !== termId )
-      : [ ...terms, termId ];
-    onUpdateTerms( newTerms );
+      ? terms.filter((id) => id !== termId)
+      : [...terms, termId];
+    onUpdateTerms(newTerms);
   };
 
-  const onChangeFormName = ( value ) => {
-    setFormName( value );
+  const onChangeFormName = (value) => {
+    setFormName(value);
   };
 
   const onToggleForm = () => {
-    setShowForm( ! showForm );
+    setShowForm(!showForm);
   };
 
-  const onAddTerm = async ( event ) => {
+  const onAddTerm = async (event) => {
     event.preventDefault();
-    if ( formName === '' || adding ) {
+    if (formName === '' || adding) {
       return;
     }
 
     // Check if the term we are adding already exists.
-    const existingTerm = findTerm( availableTerms, formName );
-    if ( existingTerm ) {
+    const existingTerm = findTerm(availableTerms, formName);
+    if (existingTerm) {
       // If the term we are adding exists but is not selected select it.
-      if ( ! terms.some( ( term ) => term === existingTerm.id ) ) {
-        onUpdateTerms( [ ...terms, existingTerm.id ] );
+      if (!terms.some((term) => term === existingTerm.id)) {
+        onUpdateTerms([...terms, existingTerm.id]);
       }
 
-      setFormName( '' );
+      setFormName('');
 
       return;
     }
-    setAdding( true );
+    setAdding(true);
 
-    const newTerm = await addTerm( {
+    const newTerm = await addTerm({
       name: formName,
-    } );
+    });
 
     const termAddedMessage = sprintf(
       /* translators: %s: taxonomy name */
-      _x( '%s added', 'term' ),
+      _x('%s added', 'term'),
       get(
         taxonomy,
-        [ 'labels', 'singular_name' ],
-        slug === 'post_tag' ? __( 'Tag' ) : __( 'Term' )
+        ['labels', 'singular_name'],
+        slug === 'post_tag' ? __('Tag') : __('Term')
       )
     );
-    speak( termAddedMessage, 'assertive' );
-    setAdding( false );
-    setFormName( '' );
-    onUpdateTerms( [ ...terms, newTerm.id ] );
+    speak(termAddedMessage, 'assertive');
+    setAdding(false);
+    setFormName('');
+    onUpdateTerms([...terms, newTerm.id]);
   };
 
-  const setFilter = ( value ) => {
+  const setFilter = (value) => {
     const newFilteredTermsTree = availableTermsTree
-      .map( getFilterMatcher( value ) )
-      .filter( ( term ) => term );
+      .map(getFilterMatcher(value))
+      .filter((term) => term);
 
-    setFilterValue( value );
-    setFilteredTermsTree( newFilteredTermsTree );
+    setFilterValue(value);
+    setFilteredTermsTree(newFilteredTermsTree);
 
     const resultCount = newFilteredTermsTree.length;
     const resultsFoundMessage = sprintf(
       /* translators: %d: number of results */
-      _n( '%d result found.', '%d results found.', resultCount ),
+      _n('%d result found.', '%d results found.', resultCount),
       resultCount
     );
 
-    debouncedSpeak( resultsFoundMessage, 'assertive' );
+    debouncedSpeak(resultsFoundMessage, 'assertive');
   };
 
-  const renderTerms = ( renderedTerms ) => {
-    return renderedTerms.map( ( term ) => {
+  const renderTerms = (renderedTerms) => {
+    return renderedTerms.map((term) => {
       return (
         <div
-          key={ term.id }
+          key={term.id}
           className="editor-post-taxonomies__hierarchical-terms-choice"
         >
           <CheckboxControl
             __nextHasNoMarginBottom
-            checked={ terms.indexOf( term.id ) !== -1 }
-            onChange={ () => {
-              const termId = parseInt( term.id, 10 );
-              onChange( termId );
-            } }
-            label={ unescapeString( term.name ) }
+            checked={terms.indexOf(term.id) !== -1}
+            onChange={() => {
+              const termId = parseInt(term.id, 10);
+              onChange(termId);
+            }}
+            label={unescapeString(term.name)}
           />
         </div>
       );
-    } );
+    });
   };
 
   const labelWithFallback = (
@@ -319,26 +320,26 @@ export function TermSelector( { slug } ) {
   ) =>
     get(
       taxonomy,
-      [ 'labels', labelProperty ],
+      ['labels', labelProperty],
       slug === 'post_tag' ? fallbackIsTag : fallbackIsNotTag
     );
   const newTermButtonLabel = labelWithFallback(
     'add_new_item',
-    __( 'Add new tag' ),
-    __( 'Add new term' )
+    __('Add new tag'),
+    __('Add new term')
   );
   const newTermLabel = labelWithFallback(
     'new_item_name',
-    __( 'Add new tag' ),
-    __( 'Add new term' )
+    __('Add new tag'),
+    __('Add new term')
   );
   const newTermSubmitLabel = newTermButtonLabel;
   const filterLabel = get(
     taxonomy,
-    [ 'labels', 'search_items' ],
-    __( 'Search Terms' )
+    ['labels', 'search_items'],
+    __('Search Terms')
   );
-  const groupLabel = get( taxonomy, [ 'name' ], __( 'Terms' ) );
+  const groupLabel = get(taxonomy, ['name'], __('Terms'));
   const showFilter = availableTerms.length >= MIN_TERMS_COUNT_FOR_FILTER;
 
   return (
@@ -346,40 +347,40 @@ export function TermSelector( { slug } ) {
       { showFilter && (
         <TextControl
           className="editor-post-taxonomies__hierarchical-terms-filter"
-          label={ filterLabel }
-          value={ filterValue }
-          onChange={ setFilter }
+          label={filterLabel}
+          value={filterValue}
+          onChange={setFilter}
         />
       ) }
       <div
         className="editor-post-taxonomies__hierarchical-terms-list"
         tabIndex="0"
         role="group"
-        aria-label={ groupLabel }
+        aria-label={groupLabel}
       >
         { renderTerms(
           '' !== filterValue ? filteredTermsTree : availableTermsTree
         ) }
       </div>
       {/* Only admins should be allowed to create new tags */}
-      { ! loading && hasCreateAction && (isUserAdmin || slug !== 'post_tag') && (
+      { !loading && hasCreateAction && (isUserAdmin || slug !== 'post_tag') && (
         <Button
-          onClick={ onToggleForm }
+          onClick={onToggleForm}
           className="editor-post-taxonomies__hierarchical-terms-add"
-          aria-expanded={ showForm }
+          aria-expanded={showForm}
           variant="link"
         >
           { newTermButtonLabel }
         </Button>
       ) }
-      {!isUserAdmin && slug === 'post_tag' && <p>{__( 'New tags can only be created by an administrator', 'planet4-blocks-backend' )}</p>}
+      {!isUserAdmin && slug === 'post_tag' && <p>{__('New tags can only be created by an administrator', 'planet4-blocks-backend')}</p>}
       { showForm && (
-        <form onSubmit={ onAddTerm }>
+        <form onSubmit={onAddTerm}>
           <TextControl
             className="editor-post-taxonomies__hierarchical-terms-input"
-            label={ newTermLabel }
-            value={ formName }
-            onChange={ onChangeFormName }
+            label={newTermLabel}
+            value={formName}
+            onChange={onChangeFormName}
             required
           />
           <Button
@@ -395,4 +396,4 @@ export function TermSelector( { slug } ) {
   );
 }
 
-export default withFilters( 'editor.PostTaxonomyType' )( TermSelector );
+export default withFilters('editor.PostTaxonomyType')(TermSelector);

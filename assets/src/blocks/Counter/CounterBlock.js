@@ -1,45 +1,45 @@
-import { CounterEditor } from './CounterEditor';
-import { frontendRendered } from '../frontendRendered';
+import {CounterEditor} from './CounterEditor';
+import {frontendRendered} from '../frontendRendered';
 
 const BLOCK_NAME = 'planet4-blocks/counter';
 
 export class CounterBlock {
   constructor() {
-    const { registerBlockType, unregisterBlockStyle, registerBlockStyle } = wp.blocks;
-    const { __ } = wp.i18n;
+    const {registerBlockType, unregisterBlockStyle, registerBlockStyle} = wp.blocks;
+    const {__} = wp.i18n;
     const attributes = {
       title: {
         type: 'string',
-        default: ''
+        default: '',
       },
       description: {
         type: 'string',
-        default: ''
+        default: '',
       },
       completed: {
         type: 'integer',
-        default: ''
+        default: '',
       },
       completed_api: {
         type: 'string',
-        default: ''
+        default: '',
       },
       target: {
         type: 'integer',
-        default: ''
+        default: '',
       },
       text: {
         type: 'string',
-        default: ''
+        default: '',
       },
       style: { // Needed to convert existing blocks
         type: 'string',
-        default: ''
-      }
+        default: '',
+      },
     };
 
-    registerBlockType( BLOCK_NAME, {
-      title: __( 'Counter', 'planet4-blocks-backend' ),
+    registerBlockType(BLOCK_NAME, {
+      title: __('Counter', 'planet4-blocks-backend'),
       icon: 'dashboard',
       category: 'planet4-blocks',
       attributes,
@@ -52,16 +52,17 @@ export class CounterBlock {
           save() {
             return null;
           },
-        }
+        },
       ],
-      edit: ( { isSelected, attributes, setAttributes } ) => {
+      // eslint-disable-next-line no-shadow
+      edit: ({isSelected, attributes, setAttributes}) => {
         return <CounterEditor
           attributes={attributes}
           setAttributes={setAttributes}
-          isSelected={ isSelected }
-        />
+          isSelected={isSelected}
+        />;
       },
-      save: frontendRendered( BLOCK_NAME )
+      save: frontendRendered(BLOCK_NAME),
     });
 
     // Remove the default style since it's the same as "text only"
@@ -71,26 +72,26 @@ export class CounterBlock {
       {
         name: 'plain',
         label: 'Text Only',
-        isDefault: true
+        isDefault: true,
       },
       {
         name: 'bar',
-        label: 'Progress Bar'
+        label: 'Progress Bar',
       },
       {
         name: 'arc',
-        label: 'Progress Dial'
+        label: 'Progress Dial',
       },
 
-    ]
+    ];
 
     if (window.p4ge_vars.features.feature_engaging_networks) {
       styles.push({
         name: 'en-forms-bar',
-        label: __('Progress Bar inside EN Form', 'planet4-blocks-backend')
+        label: __('Progress Bar inside EN Form', 'planet4-blocks-backend'),
       });
     }
     // Add our custom styles
-    registerBlockStyle( BLOCK_NAME, styles);
-  };
+    registerBlockStyle(BLOCK_NAME, styles);
+  }
 }

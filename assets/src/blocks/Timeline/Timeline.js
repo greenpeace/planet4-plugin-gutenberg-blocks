@@ -1,11 +1,11 @@
-import { useRef, useEffect } from 'react';
+import {useRef, useEffect} from '@wordpress/element';
 
 export const Timeline = (props) => {
   const {
     google_sheets_url,
     timenav_position,
     start_at_end,
-    language
+    language,
   } = props;
 
   const timelineNode = useRef(null);
@@ -14,17 +14,18 @@ export const Timeline = (props) => {
     const r = Math.floor(Math.random() * 10000);
     const t = Date.now();
     return `${prefix}-${t}-${r}`;
-  }
+  };
 
   const setupTimeline = function() {
     timelineNode.current.id = uniqueId('timeline');
 
+    // eslint-disable-next-line no-undef
     new TL.Timeline(timelineNode.current.id, google_sheets_url, {
-      'timenav_position': timenav_position,
-      'start_at_end': start_at_end,
-      'language': language
+      timenav_position,
+      start_at_end,
+      language,
     });
-  }
+  };
 
   useEffect(
     () => setupTimeline(),
@@ -33,8 +34,8 @@ export const Timeline = (props) => {
       google_sheets_url,
       timenav_position,
       language,
-    ],
+    ]
   );
 
-  return <div ref={ timelineNode }></div>
-}
+  return <div ref={timelineNode}></div>;
+};

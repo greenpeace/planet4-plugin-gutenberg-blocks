@@ -15,18 +15,18 @@ export const carouselHeaderV1 = {
           link_text: '',
           link_url: '',
           link_url_new_tab: false,
-        }
+        },
       ],
     },
   },
-  isEligible({ slides }) {
-    return slides?.some(slide => typeof slide.header_size !== 'undefined');
+  isEligible({slides}) {
+    return slides?.some((slide) => typeof slide.header_size !== 'undefined');
   },
-  migrate( { slides, ...attributes } ) {
+  migrate({slides, ...attributes}) {
     return {
       ...attributes,
-      slides: slides.map(({ header_size, ...otherSlideAttributes }) => otherSlideAttributes),
+      slides: slides.map(({header_size, ...otherSlideAttributes}) => otherSlideAttributes),
     };
   },
-  save: () => null
-}
+  save: () => null,
+};

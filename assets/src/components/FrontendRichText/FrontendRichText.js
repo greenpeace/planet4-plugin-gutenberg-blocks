@@ -1,17 +1,17 @@
-import { Fragment } from '@wordpress/element';
+import {Fragment} from '@wordpress/element';
 
 const RichText = wp.blockEditor ? wp.blockEditor.RichText : null;
 
-export const FrontendRichText = ({ editable, ...richTextProps }) => {
+export const FrontendRichText = ({editable, ...richTextProps}) => {
   const renderAsRichText = RichText && editable;
   const TagName = richTextProps.tagName;
 
   return <Fragment>
-    {renderAsRichText ?
-      <RichText {...richTextProps} /> :
-      <TagName
+    {renderAsRichText
+      ? <RichText {...richTextProps} />
+      : <TagName
         className={richTextProps.className}
-        dangerouslySetInnerHTML={{ __html: richTextProps.value }}
+        dangerouslySetInnerHTML={{__html: richTextProps.value}}
       />
     }
   </Fragment>;

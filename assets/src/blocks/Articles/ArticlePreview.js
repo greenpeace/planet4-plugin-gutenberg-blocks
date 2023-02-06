@@ -1,15 +1,11 @@
-import { Component } from '@wordpress/element';
-import { unescape } from '../../functions/unescape';
-import { IMAGE_SIZES } from './imageSizes';
-const { __ } = wp.i18n;
+import {Component} from '@wordpress/element';
+import {unescape} from '../../functions/unescape';
+import {IMAGE_SIZES} from './imageSizes';
 
+const {__} = wp.i18n;
 export class ArticlePreview extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   getPageTypesTags(pageType, link) {
-    const { isCampaign } = this.props;
+    const {isCampaign} = this.props;
     const className = `tag-item tag-item--main page-type page-type-${pageType.toLowerCase().replace(' ', '_')}`;
     if (isCampaign) {
       return <span className={className}>{unescape(pageType)}</span>;
@@ -21,7 +17,7 @@ export class ArticlePreview extends Component {
       data-ga-action="Post Type Tag"
       data-ga-label="n/a">
       {unescape(pageType)}
-    </a>
+    </a>;
   }
 
   getAuthorLink() {
@@ -30,9 +26,9 @@ export class ArticlePreview extends Component {
         author_name,
         author,
         author_override,
-        author_url
+        author_url,
       },
-      isCampaign
+      isCampaign,
     } = this.props;
 
     const authorName = author_name || (author && author.name) || '';
@@ -43,10 +39,9 @@ export class ArticlePreview extends Component {
     if (authorName) {
       return (
         <span className="article-list-item-author">
-          {!isLink ?
-            authorName
-            :
-            <a href={authorLink}>{authorName}</a>
+          {!isLink
+            ? authorName
+            : <a href={authorLink}>{authorName}</a>
           }
         </span>
       );
@@ -60,8 +55,8 @@ export class ArticlePreview extends Component {
         thumbnail_url,
         thumbnail_srcset,
         link,
-        alt_text
-      }
+        alt_text,
+      },
     } = this.props;
 
     const image = (
@@ -83,12 +78,11 @@ export class ArticlePreview extends Component {
 
     return (
       <div className={`article-list-item-image ${thumbnail_ratio < 1 ? '' : 'article-list-item-image-max-width'}`}>
-        {thumbnail_ratio < 1 ?
-          <div className="article-image-holder">
+        {thumbnail_ratio < 1
+          ? <div className="article-image-holder">
             {image}
           </div>
-          :
-          image
+          : image
         }
       </div>
     );
@@ -105,11 +99,11 @@ export class ArticlePreview extends Component {
         post_excerpt,
         date_formatted,
         reading_time,
-      }
+      },
     } = this.props;
 
     const articleClassName = tags.reduce((classname, tag) => classname + ` tag-${tag.slug}`, 'article-list-item');
-    const authorLink = this.getAuthorLink()
+    const authorLink = this.getAuthorLink();
 
     return (
       <article className={articleClassName} >
@@ -127,7 +121,7 @@ export class ArticlePreview extends Component {
 
               {tags.length > 0 &&
                 <div className="tag-wrap tags">
-                  {tags.map(tag =>
+                  {tags.map((tag) =>
                     <a
                       key={tag.name}
                       className="tag-item tag"
@@ -152,36 +146,37 @@ export class ArticlePreview extends Component {
                   data-ga-category="Articles Block"
                   data-ga-action="Title"
                   data-ga-label="n/a"
-                  dangerouslySetInnerHTML={{ __html: post_title }}
+                  dangerouslySetInnerHTML={{__html: post_title}}
                 />
               </h4>
             }
           </header>
 
           {post_excerpt &&
-            <p className="article-list-item-content" dangerouslySetInnerHTML={{ __html: post_excerpt }} />
+            <p className="article-list-item-content" dangerouslySetInnerHTML={{__html: post_excerpt}} />
           }
 
-          <p className='article-list-item-meta'>
+          <p className="article-list-item-meta">
             {authorLink}
 
             {(authorLink && date_formatted) && (
-              <span className='article-list-item-bullet' aria-hidden='true'>&#8226;</span>
+              <span className="article-list-item-bullet" aria-hidden="true">&#8226;</span>
             )}
 
             {date_formatted &&
-            <time className='article-list-item-date' dateTime=''>
+            <time className="article-list-item-date" dateTime="">
               {date_formatted}
             </time>
             }
 
             {(authorLink || date_formatted) && reading_time &&
-              <span className='article-list-item-bullet' aria-hidden='true'>&#8226;</span>
+              <span className="article-list-item-bullet" aria-hidden="true">&#8226;</span>
             }
 
             {reading_time &&
-              <span className='article-list-item-readtime'>
-                { __( '%d min read', 'planet4-blocks' ).replace('%d', reading_time) }
+              <span className="article-list-item-readtime">
+                {/* eslint-disable-next-line @wordpress/i18n-translator-comments */}
+                { __('%d min read', 'planet4-blocks').replace('%d', reading_time) }
               </span>
             }
           </p>

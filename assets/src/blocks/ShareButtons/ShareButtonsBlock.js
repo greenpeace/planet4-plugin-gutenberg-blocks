@@ -1,8 +1,8 @@
-import { ShareButtonsEditor } from './ShareButtonsEditor';
-import { ShareButtonsFrontend } from './ShareButtonsFrontend';
+import {ShareButtonsEditor} from './ShareButtonsEditor';
+import {ShareButtonsFrontend} from './ShareButtonsFrontend';
 
-const { registerBlockType } = wp.blocks;
-const { __ } = wp.i18n;
+const {registerBlockType} = wp.blocks;
+const {__} = wp.i18n;
 
 const BLOCK_NAME = 'planet4-blocks/share-buttons';
 
@@ -39,12 +39,12 @@ const attributes = {
     default: [{
       type: 'facebook',
       iconName: 'facebook-f',
-      hiddenText: __( 'Share on Facebook', 'planet4-blocks' ),
+      hiddenText: __('Share on Facebook', 'planet4-blocks'),
       showInMenu: true,
     }, {
       type: 'twitter',
       iconName: 'twitter',
-      hiddenText: __( 'Share on Twitter', 'planet4-blocks' ),
+      hiddenText: __('Share on Twitter', 'planet4-blocks'),
       showInMenu: true,
       text: '',
       description: '',
@@ -52,12 +52,12 @@ const attributes = {
     }, {
       type: 'whatsapp',
       iconName: 'whatsapp',
-      hiddenText: __( 'Share on Whatsapp', 'planet4-blocks' ),
+      hiddenText: __('Share on Whatsapp', 'planet4-blocks'),
       showInMenu: true,
     }, {
       type: 'email',
       iconName: 'envelope-outline',
-      hiddenText: __( 'Share via Email', 'planet4-blocks' ),
+      hiddenText: __('Share via Email', 'planet4-blocks'),
       showInMenu: true,
       title: '',
       body: '',
@@ -80,12 +80,13 @@ export const registerBlock = () => {
     },
     attributes,
     edit: ShareButtonsEditor,
-    save: ({ attributes }) => {
-      if(!attributes) {
+    // eslint-disable-next-line no-shadow
+    save: ({attributes}) => {
+      if (!attributes) {
         return null;
       }
 
       return <ShareButtonsFrontend {...attributes} />;
     },
-  })
-}
+  });
+};

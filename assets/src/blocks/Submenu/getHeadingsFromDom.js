@@ -1,6 +1,6 @@
-import { generateAnchor } from './generateAnchor';
+import {generateAnchor} from './generateAnchor';
 
-const getHeadingLevel = heading => Number(heading.tagName.replace('H', ''));
+const getHeadingLevel = (heading) => Number(heading.tagName.replace('H', ''));
 
 export const getHeadingsFromDom = (selectedLevels) => {
   const container = document.querySelector('.page-content');
@@ -9,12 +9,12 @@ export const getHeadingsFromDom = (selectedLevels) => {
   }
 
   // Get all heading tags that we need to query
-  const headingsSelector = selectedLevels.map(level => `:not(.submenu-block) h${level.heading}`);
+  const headingsSelector = selectedLevels.map((level) => `:not(.submenu-block) h${level.heading}`);
 
   const usedAnchors = [];
 
-  return [...container.querySelectorAll(headingsSelector)].map(heading=> {
-    const levelConfig = selectedLevels.find((selected) => selected.heading === getHeadingLevel(heading))
+  return [...container.querySelectorAll(headingsSelector)].map((heading) => {
+    const levelConfig = selectedLevels.find((selected) => selected.heading === getHeadingLevel(heading));
 
     if (!heading.id) {
       heading.id = generateAnchor(heading.textContent, usedAnchors);
@@ -30,5 +30,5 @@ export const getHeadingsFromDom = (selectedLevels) => {
       anchor: heading.id,
     });
   });
-}
+};
 

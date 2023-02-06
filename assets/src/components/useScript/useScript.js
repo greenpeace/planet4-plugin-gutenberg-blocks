@@ -1,6 +1,6 @@
 // useScript implementation from: https://usehooks.com/useScript/
-import { useEffect, useState } from 'react';
-import { addScriptTag } from './addScriptTag';
+import {useEffect, useState} from '@wordpress/element';
+import {addScriptTag} from './addScriptTag';
 
 export const useScript = (src, onScriptLoaded, deps = []) => {
   // Keeping track of script loaded and error state
@@ -11,7 +11,6 @@ export const useScript = (src, onScriptLoaded, deps = []) => {
 
   useEffect(
     () => {
-
       if (!!document.querySelector(`script[src="${src}"]`)) {
         setState({
           loaded: true,
@@ -64,7 +63,7 @@ export const removeScript = (src, deps = []) => {
 
   useEffect(
     () => {
-      [...document.querySelectorAll(`script[src="${src}"]`)].forEach(node => {
+      [...document.querySelectorAll(`script[src="${src}"]`)].forEach((node) => {
         node.remove();
       });
       setState({unloaded: true});

@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import {useState, useEffect} from '@wordpress/element';
 
 export const readCookie = (name) => {
   const declarations = document.cookie.split(';');
   let match = null;
-  declarations.forEach(part => {
+  declarations.forEach((part) => {
     const [key, value] = part.split('=');
     if (key.trim() === name) {
       match = value;
@@ -13,18 +13,18 @@ export const readCookie = (name) => {
 };
 
 export const writeCookie = (name, value, days = 365) => {
-  let date = new Date();
+  const date = new Date();
   date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-  let secureMode = document.location.protocol === 'http:'
+  const secureMode = document.location.protocol === 'http:'
     ? ';SameSite=Lax'
     : ';SameSite=None;Secure';
   document.cookie = encodeURI(name) + '=' + encodeURI(value) + ';domain=.' + document.domain + ';path=/;' + '; expires=' + date.toGMTString() + secureMode;
 };
 
 // Value should not matter as cookie is expired.
-export const removeCookie = name => writeCookie(name, '0', -1);
+export const removeCookie = (name) => writeCookie(name, '0', -1);
 
-export const useCookie = name => {
+export const useCookie = (name) => {
   const [value, setValue] = useState(() => readCookie(name));
 
   const saveCookie = () => {

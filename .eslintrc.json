@@ -46,6 +46,10 @@
         "allowNamedFunctions": true
       }
     ],
+    "jsx-quotes": [
+      "error",
+      "prefer-double"
+    ],
     "camelcase": "off",
     "new-cap": "error",
     "no-var": 1,
@@ -56,12 +60,48 @@
     "react-hooks/rules-of-hooks": "off",
     "react/no-unkown-property": "off",
     "@wordpress/dependency-group": "off",
-    "space-in-parens": "off",
-    "react/jsx-curly-spacing": "off",
-    "prettier/prettier": "off"
+    "space-in-parens": [
+      "error",
+      "never"
+    ],
+    "react/jsx-curly-spacing": [
+      2,
+      {
+        "when": "never",
+        "allowMultiline": false
+      }
+    ],
+    "prettier/prettier": "off",
+    "space-unary-ops": [
+      "error", {
+        "words": true,
+        "nonwords": false
+      }
+    ],
+    "object-curly-spacing": [
+      "error",
+      "never"
+    ],
+    "array-bracket-spacing": [
+      "error",
+      "never"
+    ],
+    "template-curly-spacing": [
+      "error",
+      "never"
+    ],
+    "computed-property-spacing": [
+      "error",
+      "never"
+    ],
+    "arrow-parens": [
+      "error",
+      "as-needed"
+    ]
   },
   "parserOptions": {
     "ecmaVersion": 11,
+    "requireConfigFile": false,
     "ecmaFeatures": {
       "jsx": true,
       "modules": true

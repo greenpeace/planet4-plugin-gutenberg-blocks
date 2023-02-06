@@ -3,19 +3,19 @@ export const addQueryArgs = (path, args) => {
     return path;
   }
 
-  Object.keys(args).forEach(k => {
-    const value = args[k];
+  Object.keys(args).forEach((k) => {
+    const value = args[ k ];
     if (typeof value === 'undefined' || value === '') {
-      delete args[k];
+      delete args[ k ];
       return;
     }
     if (Array.isArray(value)) {
       value.forEach((v, i) => {
-        args[`${ k }[${ i }]`] = v;
+        args[ `${k}[${i}]` ] = v;
       });
-      delete args[k];
+      delete args[ k ];
     }
   });
 
-  return `${ path }?${ new URLSearchParams(args) }`;
+  return `${path}?${new URLSearchParams(args)}`;
 };

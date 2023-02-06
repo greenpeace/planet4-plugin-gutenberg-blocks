@@ -1,5 +1,5 @@
-import { SvgIcon } from './SvgIcon';
-const { __ } = wp.i18n;
+import {SvgIcon} from './SvgIcon';
+const {__} = wp.i18n;
 window.dataLayer = window.dataLayer || [];
 
 export const ShareButtons = ({social_params, social_accounts}) => {
@@ -23,50 +23,58 @@ export const ShareButtons = ({social_params, social_accounts}) => {
 
   return (
     <div className="share-buttons">
-      <a href={ `https://wa.me/?text=${encodeURIComponent(link)}&${utm('whatsapp', utm_medium, utm_content, utm_campaign)}` }
-        onClick={() => {share('Whatsapp', link);}}
+      <a href={`https://wa.me/?text=${encodeURIComponent(link)}&${utm('whatsapp', utm_medium, utm_content, utm_campaign)}`}
+        onClick={() => {
+          share('Whatsapp', link);
+        }}
         target="_blank"
-        className="share-btn whatsapp"
+        className="share-btn whatsapp" rel="noreferrer"
       >
         <SvgIcon {...{name: 'whatsapp'}} />
-        <span className="visually-hidden">{__( 'Share on', 'planet4-blocks' )} Whatsapp</span>
+        <span className="visually-hidden">{__('Share on', 'planet4-blocks')} Whatsapp</span>
       </a>
 
-      <a href={ `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(link)}&${utm('facebook', utm_medium, utm_content, utm_campaign)}` }
-        onClick={() => {share('Facebook', link);}}
+      <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(link)}&${utm('facebook', utm_medium, utm_content, utm_campaign)}`}
+        onClick={() => {
+          share('Facebook', link);
+        }}
         target="_blank"
-        className="share-btn facebook"
+        className="share-btn facebook" rel="noreferrer"
       >
         <SvgIcon {...{name: 'facebook-f'}} />
-        <span className="visually-hidden">{__( 'Share on', 'planet4-blocks' )} Facebook</span>
+        <span className="visually-hidden">{__('Share on', 'planet4-blocks')} Facebook</span>
       </a>
 
-      <a href={ `${twitterUrl(link, title, description, social_accounts.twitter)}&${utm('twitter', utm_medium, utm_content, utm_campaign)}` }
-        onClick={() => {share('Twitter', link);}}
+      <a href={`${twitterUrl(link, title, description, social_accounts.twitter)}&${utm('twitter', utm_medium, utm_content, utm_campaign)}`}
+        onClick={() => {
+          share('Twitter', link);
+        }}
         target="_blank"
-        className="share-btn twitter"
+        className="share-btn twitter" rel="noreferrer"
       >
         <SvgIcon {...{name: 'twitter'}} />
-        <span className="visually-hidden">{__( 'Share on', 'planet4-blocks' )} Twitter</span>
+        <span className="visually-hidden">{__('Share on', 'planet4-blocks')} Twitter</span>
       </a>
 
-      <a href={ `mailto:?subject=${title}&body=${description ? encodeURIComponent(description) : ''}${link}&${utm('email', utm_medium, utm_content, utm_campaign)}` }
-        onClick={() => {share('Email', link);}}
+      <a href={`mailto:?subject=${title}&body=${description ? encodeURIComponent(description) : ''}${link}&${utm('email', utm_medium, utm_content, utm_campaign)}`}
+        onClick={() => {
+          share('Email', link);
+        }}
         target="_blank"
-        className="share-btn email"
+        className="share-btn email" rel="noreferrer"
       >
         <SvgIcon {...{name: 'envelope'}} />
-        <span className="visually-hidden">{__( 'Share via', 'planet4-blocks' )} Email</span>
+        <span className="visually-hidden">{__('Share via', 'planet4-blocks')} Email</span>
       </a>
     </div>
   );
 };
 
 const twitterUrl = (link, title, description, account) => {
-  return `https://twitter.com/share?url=${encodeURIComponent(link)}`
-    + `&text=${encodeURIComponent(title)}`
-    + (description ? ` - ${encodeURIComponent(description)}` : '')
-    + (account ? ` via @${encodeURIComponent(account)}&related=${encodeURIComponent(account)}` : '');
+  return `https://twitter.com/share?url=${encodeURIComponent(link)}` +
+    `&text=${encodeURIComponent(title)}` +
+    (description ? ` - ${encodeURIComponent(description)}` : '') +
+    (account ? ` via @${encodeURIComponent(account)}&related=${encodeURIComponent(account)}` : '');
 };
 
 const utm = (utm_source, utm_medium, utm_content, utm_campaign) => {
@@ -75,5 +83,5 @@ const utm = (utm_source, utm_medium, utm_content, utm_campaign) => {
     utm_medium ? `utm_medium=${encodeURIComponent(utm_medium)}` : null,
     utm_content ? `utm_content=${encodeURIComponent(utm_content)}` : null,
     utm_campaign ? `utm_campaign=${encodeURIComponent(utm_campaign)}` : null,
-  ].filter(x => x).join('&');
+  ].filter((x) => x).join('&');
 };

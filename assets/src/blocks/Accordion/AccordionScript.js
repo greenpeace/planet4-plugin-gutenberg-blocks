@@ -1,6 +1,6 @@
 /* global dataLayer */
 
-document.addEventListener( 'DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
   function getAnalyticsText(item) {
     const headline = item.innerText || item.textContent;
     return headline.length > 50 ? `${headline.substring(0, 50)}...` : headline;
@@ -9,7 +9,7 @@ document.addEventListener( 'DOMContentLoaded', () => {
   function handleReadMoreClick(textToSend) {
     dataLayer.push({
       event: 'Read More FAQ',
-      Question: textToSend
+      Question: textToSend,
     });
   }
 
@@ -34,7 +34,7 @@ document.addEventListener( 'DOMContentLoaded', () => {
       panel.classList.remove('panel-hidden');
 
       // Add button handler to corresponding panel
-      const button = [...panel.children].find(child => child.classList.contains('accordion-btn'));
+      const button = [...panel.children].find((child) => child.classList.contains('accordion-btn'));
 
       if (button && !button.onclick) {
         const textToSend = getAnalyticsText(item);
@@ -51,13 +51,13 @@ document.addEventListener( 'DOMContentLoaded', () => {
 
       dataLayer.push({
         event: 'Close FAQ',
-        Question: textToSend
+        Question: textToSend,
       });
     } else {
       openItem(item);
 
       // Close all other items if necessary
-      siblings.forEach(sibling => {
+      siblings.forEach((sibling) => {
         if (sibling !== item) {
           closeItem(sibling);
         }
@@ -65,7 +65,7 @@ document.addEventListener( 'DOMContentLoaded', () => {
 
       dataLayer.push({
         event: 'Expand FAQ',
-        Question: textToSend
+        Question: textToSend,
       });
     }
   }
@@ -73,9 +73,9 @@ document.addEventListener( 'DOMContentLoaded', () => {
   // Add necessary handlers to accordion blocks
   const accordionBlocks = [...document.querySelectorAll('.accordion-block')];
 
-  accordionBlocks.forEach(accordion => {
-    const accordionItems = [...accordion.children].filter(child => child.classList.contains('accordion-content'));
-    const accordionHeadlines = accordionItems.map(item => [...item.children].find(child => child.classList.contains('accordion-headline')));
-    accordionHeadlines.forEach(headline => headline.onclick = () => toggleAccordionItem(headline, accordionHeadlines));
+  accordionBlocks.forEach((accordion) => {
+    const accordionItems = [...accordion.children].filter((child) => child.classList.contains('accordion-content'));
+    const accordionHeadlines = accordionItems.map((item) => [...item.children].find((child) => child.classList.contains('accordion-headline')));
+    accordionHeadlines.forEach((headline) => headline.onclick = () => toggleAccordionItem(headline, accordionHeadlines));
   });
 });

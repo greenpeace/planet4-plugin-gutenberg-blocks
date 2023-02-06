@@ -1,16 +1,18 @@
 import mainThemeUrl from '../main-theme-url';
 
+const {__} = wp.i18n;
+
 const item = ['core/group', {
   backgroundColor: '',
   style: {
-    border: { radius: '4px' },
+    border: {radius: '4px'},
     spacing: {
       padding: {
         top: '32px',
         right: '16px',
         bottom: '32px',
         left: '16px',
-      }
+      },
     },
   },
   layout: {
@@ -29,18 +31,20 @@ const item = ['core/group', {
     level: 5,
     className: 'w-auto',
     style: {
-      typography: { fontSize: '1rem' },
+      typography: {fontSize: '1rem'},
       spacing: {
-        margin: { top: '0px', bottom: '0px', left: '16px' },
+        margin: {top: '0px', bottom: '0px', left: '16px'},
       },
     },
     textAlign: 'left',
-    placeholder: __('Enter text', 'planet4-blocks-backend')
-  }]
+    placeholder: __('Enter text', 'planet4-blocks-backend'),
+  }],
 ]];
 
-const template = () => ([
-  [ 'core/group', {
+const template = ({
+  backgroundColor = 'grey-05',
+}) => ([
+  ['core/group', {
     align: 'full',
     backgroundColor,
     className: 'block',
@@ -54,12 +58,12 @@ const template = () => ([
     },
   },
   [
-    [ 'core/group', {
+    ['core/group', {
       className: 'container',
     }, [
-      [ 'core/heading', {
+      ['core/heading', {
         level: 2,
-        placeholder: __( 'Enter title', 'planet4-blocks-backend' ),
+        placeholder: __('Enter title', 'planet4-blocks-backend'),
         style: {
           spacing: {
             margin: {
@@ -68,15 +72,15 @@ const template = () => ([
           },
         },
         textAlign: 'center',
-      }
+      },
       ],
-      [ 'core/paragraph', {
+      ['core/paragraph', {
         className: 'my-0',
-        placeholder: __( 'Enter description', 'planet4-blocks-backend' ),
+        placeholder: __('Enter description', 'planet4-blocks-backend'),
         align: 'center',
       },
       ],
-      [ 'core/group', {
+      ['core/group', {
         className: 'is-style-space-evenly',
         layout: {
           type: 'flex',
@@ -91,15 +95,15 @@ const template = () => ([
           },
         },
       },
-      [...Array(4).keys()].map(() => item)
+      [...Array(4).keys()].map(() => item),
       ],
-      [ 'core/buttons', {
+      ['core/buttons', {
         layout: {
           type: 'flex',
           justifyContent: 'center',
         },
       }, [
-        [ 'core/button', { placeholder: __( 'Enter text', 'planet4-blocks-backend' ) } ]]],
+        ['core/button', {placeholder: __('Enter text', 'planet4-blocks-backend')}]]],
     ],
     ],
   ],

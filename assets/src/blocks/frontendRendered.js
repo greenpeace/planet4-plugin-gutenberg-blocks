@@ -1,4 +1,4 @@
-import { FrontendBlockNode } from '../components/FrontendBlockNode/FrontendBlockNode'; // eslint-disable-line no-unused-vars
+import {FrontendBlockNode} from '../components/FrontendBlockNode/FrontendBlockNode'; // eslint-disable-line no-unused-vars
 
 /**
  * @deprecated Save as static HTML and optionally use hydration instead. Rendering from an empty div on the front end
@@ -30,12 +30,12 @@ import { FrontendBlockNode } from '../components/FrontendBlockNode/FrontendBlock
  *
  * @param {string} block
  */
-export const frontendRendered = ( block ) => {
-  return ( attributes, className ) => {
+export const frontendRendered = (block) => {
+  return (attributes, className) => {
     return <FrontendBlockNode
-      attributes={ attributes }
-      className={ className }
-      blockName={ block }
+      attributes={attributes}
+      className={className}
+      blockName={block}
     />;
   };
 };

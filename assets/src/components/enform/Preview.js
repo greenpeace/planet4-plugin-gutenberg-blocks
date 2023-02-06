@@ -9,15 +9,15 @@ export class Preview extends Component {
     this.detach = this.detach.bind(this);
   }
   detach() {
-    this.setState({ detach: !this.state.detach });
+    this.setState({detach: !this.state.detach});
   }
   render() {
-    return <div className={ 'Preview ' + (this.props.isSelected && this.state.detach ? 'FloatingPreview' : '') }>
+    return <div className={'Preview ' + (this.props.isSelected && this.state.detach ? 'FloatingPreview' : '')}>
       {
         this.props.showBar
-          ? <div className='PreviewBar'>
+          ? <div className="PreviewBar">
 						Preview
-            <button className='DetachPreview' onClick={this.detach}>
+            <button className="DetachPreview" onClick={this.detach}>
               {
                 this.state.detach
                   ? 'Reattach'
@@ -27,7 +27,7 @@ export class Preview extends Component {
           </div>
           : null
       }
-      <div className='PreviewContainer' >
+      <div className="PreviewContainer" >
         { this.props.children }
       </div>
     </div>;

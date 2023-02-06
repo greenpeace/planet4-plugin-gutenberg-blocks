@@ -1,4 +1,4 @@
-/* global wp */
+// global wp
 
 const fetchThemes = async () => {
   return wp.apiFetch({
@@ -14,7 +14,7 @@ const uploadTheme = async (name, theme) => {
     data: {
       name,
       theme,
-    }
+    },
   });
 };
 
@@ -24,8 +24,8 @@ const deleteTheme = async (name) => {
     method: 'POST',
     data: {
       name,
-    }
+    },
   });
 };
 
-export const p4ServerThemes = { fetchThemes, uploadTheme, deleteTheme };
+export const p4ServerThemes = {fetchThemes, uploadTheme, deleteTheme};

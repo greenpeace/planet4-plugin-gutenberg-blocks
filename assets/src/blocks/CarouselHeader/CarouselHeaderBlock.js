@@ -1,9 +1,11 @@
-import { CarouselHeaderEditor } from './CarouselHeaderEditor.js';
-import { carouselHeaderV1 } from './deprecated/carouselHeaderV1.js';
-import { CarouselHeaderFrontend } from './CarouselHeaderFrontend';
+import {CarouselHeaderEditor} from './CarouselHeaderEditor.js';
+import {carouselHeaderV1} from './deprecated/carouselHeaderV1.js';
+import {CarouselHeaderFrontend} from './CarouselHeaderFrontend';
 import ReactDOMServer from 'react-dom/server';
 
-const { registerBlockType } = wp.blocks;
+const {registerBlockType} = wp.blocks;
+const {__} = wp.i18n;
+const {RawHTML} = wp.element;
 
 const BLOCK_NAME = 'planet4-blocks/carousel-header';
 
@@ -23,15 +25,15 @@ const attributes = {
       link_url: '',
       link_url_new_tab: false,
     }],
-    validation: slides => {
-      const invalidSlides = slides.filter(slide => slide.image === null);
+    validation: (slides) => {
+      const invalidSlides = slides.filter((slide) => slide.image === null);
 
       const isValid = invalidSlides.length === 0;
-      const messages = invalidSlides.map( invalidSlide => {
-        return `Carousel Header Block: Slide ${ slides.findIndex( slide => slide === invalidSlide ) + 1 } has no image`;
+      const messages = invalidSlides.map((invalidSlide) => {
+        return `Carousel Header Block: Slide ${slides.findIndex((slide) => slide === invalidSlide) + 1} has no image`;
       });
 
-      return { isValid, messages };
+      return {isValid, messages};
     },
   },
 };
@@ -54,16 +56,17 @@ export const registerCarouselHeaderBlock = () =>
       },
     ],
     edit: CarouselHeaderEditor,
-    save: ({ attributes }) => {
+    // eslint-disable-next-line no-shadow
+    save: ({attributes}) => {
       const markup = ReactDOMServer.renderToString(<div
         data-hydrate={'planet4-blocks/carousel-header'}
         data-attributes={JSON.stringify(attributes)}
       >
-        <CarouselHeaderFrontend { ...attributes } />
+        <CarouselHeaderFrontend {...attributes} />
       </div>);
-      return <wp.element.RawHTML>{ markup }</wp.element.RawHTML>;
+      return <RawHTML>{ markup }</RawHTML>;
     },
     deprecated: [
-      carouselHeaderV1
-    ]
+      carouselHeaderV1,
+    ],
   });

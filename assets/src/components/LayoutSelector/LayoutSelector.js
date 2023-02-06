@@ -16,16 +16,17 @@ export class LayoutSelector extends Component {
   }
 
   render() {
-    return <div className='LayoutSelector'>
+    return <div className="LayoutSelector">
       {
         this.props.options.map((layoutOption, i) => {
-
-          if ( 'number' == typeof layoutOption.value ) {
-            this.state.selectedOption = Number( this.state.selectedOption );
+          if ('number' === typeof layoutOption.value) {
+            this.setState({
+              selectedOption: Number(this.state.selectedOption),
+            });
           }
 
           return (
-            <label className='LayoutOption' key={i}>
+            <label className="LayoutOption" key={i} htmlFor>
               <div style={{display: 'flex'}}>
                 <RadioControl
                   name={'layoutOption'}
@@ -39,12 +40,12 @@ export class LayoutSelector extends Component {
               </div>
               {
                 layoutOption.image
-                  ? <img src={layoutOption.image}/>
+                  ? <img src={layoutOption.image} alt="" />
                   : null
               }
               {
                 layoutOption.help
-                  ? <p className='help' dangerouslySetInnerHTML={{__html: layoutOption.help}}/>
+                  ? <p className="help" dangerouslySetInnerHTML={{__html: layoutOption.help}} />
                   : null
               }
             </label>

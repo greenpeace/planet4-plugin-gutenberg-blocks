@@ -1,12 +1,12 @@
-import { ShareButtons } from '../../components/ShareButtons/ShareButtons';
-import { FormGenerator } from './FormGenerator';
-import { useSelect } from '@wordpress/data';
-import { useState } from '@wordpress/element';
-import { unescape } from '../../functions/unescape';
+import {ShareButtons} from '../../components/ShareButtons/ShareButtons';
+import {FormGenerator} from './FormGenerator';
+import {useSelect} from '@wordpress/data';
+import {useState} from '@wordpress/element';
+import {unescape} from '../../functions/unescape';
 
-import { inputId } from './inputId';
+import {inputId} from './inputId';
 
-const { __ } = wp.i18n;
+const {__} = wp.i18n;
 
 export const ENFormFrontend = (attributes) => {
   const {
@@ -59,36 +59,39 @@ export const ENFormFrontend = (attributes) => {
   const [errors, setErrors] = useState({});
   const [error_msg, setErrorMsg] = useState(null);
   const [form_data, setFormData] = useState(
-    fields.reduce((acc, f) => { return {...acc, [inputId(f)['name']]: null} }, {})
+    fields.reduce((acc, f) => {
+      return {...acc, [ inputId(f).name ]: null};
+    }, {})
   );
 
   const onInputChange = (field, e) => {
-    setErrors(errs => {
-      return {...errs, [field.id]: null}
+    setErrors((errs) => {
+      return {...errs, [ field.id ]: null};
     });
 
     const target = e.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
 
-    setFormData({...form_data, [name]: value});
-  }
+    setFormData({...form_data, [ name ]: value});
+  };
 
-  const onBlur = (field, e) => {
+  const onBlur = (field) => {
     validateField(field, form_data, setErrors);
-  }
+  };
 
   const onFormSubmit = (e) => {
     e.preventDefault();
 
     setErrorMsg(null);
     if (!validateForm(form_data, fields, setErrors)) {
+      // eslint-disable-next-line no-console
       console.error('Validation error.', errors);
       return;
     }
 
     submitENForm({form_data, fields, enform_goal, thankyou_url, setErrorMsg, setActiveTplId, en_page_id});
-  }
+  };
 
   return (
     <section
@@ -102,7 +105,8 @@ export const ENFormFrontend = (attributes) => {
             border="0"
             srcSet={background_image_srcset || ''}
             sizes={background_image_sizes || ''}
-            className={ background > 0 ? `wp-image-${background}` : '' }
+            className={background > 0 ? `wp-image-${background}` : ''}
+            alt=""
           />
         </picture>
       }
@@ -116,12 +120,12 @@ export const ENFormFrontend = (attributes) => {
             {is_side_style &&
               <div className="form-caption">
                 {campaign_logo && campaign_logo_path &&
-                  <img src={ campaign_logo_path }
-                    alt={ ccontent_title ?? '' }
+                  <img src={campaign_logo_path}
+                    alt={content_title ?? ''}
                     className="campaign-logo" />
                 }
-                <HeadingTag dangerouslySetInnerHTML={{ __html: content_title ? unescape(content_title) : ''  }} />
-                <div dangerouslySetInnerHTML={{ __html: unescape(content_description) }} />
+                <HeadingTag dangerouslySetInnerHTML={{__html: content_title ? unescape(content_title) : ''}} />
+                <div dangerouslySetInnerHTML={{__html: unescape(content_description)}} />
               </div>
             }
 
@@ -135,8 +139,8 @@ export const ENFormFrontend = (attributes) => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
 const Signup = ({attributes, fields, form_data, onInputChange, onBlur, onFormSubmit, error_msg, errors}) => {
   const {
@@ -157,14 +161,14 @@ const Signup = ({attributes, fields, form_data, onInputChange, onBlur, onFormSub
 
         <div className="title-and-description">
           {title &&
-            <h2 dangerouslySetInnerHTML={{ __html: title ? unescape(title) : '' }} />
+            <h2 dangerouslySetInnerHTML={{__html: title ? unescape(title) : ''}} />
           }
           {is_side_style &&
             <div className="enform-extra-header-placeholder"
-              dangerouslySetInnerHTML={{ __html: extra_content ? unescape(extra_content) : '' }} />
+              dangerouslySetInnerHTML={{__html: extra_content ? unescape(extra_content) : ''}} />
           }
           {description &&
-            <div className="form-description" dangerouslySetInnerHTML={{ __html: unescape(description) }} />
+            <div className="form-description" dangerouslySetInnerHTML={{__html: unescape(description)}} />
           }
         </div>
 
@@ -174,28 +178,28 @@ const Signup = ({attributes, fields, form_data, onInputChange, onBlur, onFormSub
             name="p4en_form"
             method="post"
             noValidate
-            onSubmit={ onFormSubmit }
+            onSubmit={onFormSubmit}
           >
-            <div className={ en_form_style == 'full-width-bg' ? 'row' : '' }>
-              <div className={ en_form_style == 'full-width-bg' ? 'col-md-8' : '' }>
+            <div className={en_form_style === 'full-width-bg' ? 'row' : ''}>
+              <div className={en_form_style === 'full-width-bg' ? 'col-md-8' : ''}>
                 <FormGenerator {...{fields, attributes, onInputChange, onBlur, errors}} />
               </div>
 
-              <div className={ en_form_style == 'full-width-bg' ? 'col-md-4 submit' : 'submit' }>
+              <div className={en_form_style === 'full-width-bg' ? 'col-md-4 submit' : 'submit'}>
                 <button type="submit" form="p4en_form" name="p4en_form_save_button" id="p4en_form_save_button" className="btn btn-primary btn-block" >
-                  { button_text ? unescape(button_text) : __( 'Sign', 'planet4-engagingnetworks' ) }
+                  { button_text ? unescape(button_text) : __('Sign', 'planet4-engagingnetworks') }
                 </button>
                 <div className="enform-notice"></div>
-                {en_form_style == 'full-width-bg' &&
+                {en_form_style === 'full-width-bg' &&
                   <div className="enform-legal">
-                    <p dangerouslySetInnerHTML={{ __html: text_below_button ? unescape(text_below_button) : '' }} />
+                    <p dangerouslySetInnerHTML={{__html: text_below_button ? unescape(text_below_button) : ''}} />
                   </div>
                 }
               </div>
 
               {en_form_style !== 'full-width-bg' &&
                 <div className="enform-legal">
-                  <p dangerouslySetInnerHTML={{ __html: text_below_button ? unescape(text_below_button) : '' }} />
+                  <p dangerouslySetInnerHTML={{__html: text_below_button ? unescape(text_below_button) : ''}} />
                 </div>
               }
             </div>
@@ -203,12 +207,12 @@ const Signup = ({attributes, fields, form_data, onInputChange, onBlur, onFormSub
               <span className="enform-error">{ error_msg }</span>
             }
           </form>
-          <div id="form-data" data-postdata={ JSON.stringify(makePostData(form_data, fields)) } />
+          <div id="form-data" data-postdata={JSON.stringify(makePostData(form_data, fields))} />
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 const submitENForm = (props) => {
   const {
@@ -224,7 +228,7 @@ const submitENForm = (props) => {
   const post_data = makePostData(form_data, fields);
 
   // Send form
-  const post_url = `${p4bk_vars.siteUrl}/wp-json/planet4/v1/enform/${en_page_id}`;
+  const post_url = `${window.p4bk_vars.siteUrl}/wp-json/planet4/v1/enform/${en_page_id}`;
   fetch(post_url, {
     method: 'POST',
     contentType: 'application/json',
@@ -236,25 +240,26 @@ const submitENForm = (props) => {
   })
     .then((response) => {
       if (response.status !== 200) {
-        console.log(response, response.json());
         throw new Error(`Error submitting form: ${response.statusText || 'unknown error'}`);
       }
       return response.json();
     })
-    .then((reponseData) => {
+    .then(() => {
     // Submit Hotjar success
-      if ( typeof hj === 'function' ) {
+      if (typeof hj === 'function') {
         hj('formSubmitSuccessful'); // eslint-disable-line no-undef
       }
 
       // DataLayer push event on successful EN form submission.
-      if ( typeof google_tag_value !== 'undefined' && google_tag_value ) {
-        let dataLayerPayload = {
-          'event' : 'petitionSignup'
+      // eslint-disable-next-line no-undef
+      if (typeof google_tag_value !== 'undefined' && google_tag_value) {
+        const dataLayerPayload = {
+          event: 'petitionSignup',
         };
-        if ( enform_goal ) {
+        if (enform_goal) {
           dataLayerPayload.gGoal = enform_goal;
         }
+        // eslint-disable-next-line no-undef
         dataLayer.push(dataLayerPayload);
       }
 
@@ -266,9 +271,10 @@ const submitENForm = (props) => {
       }
     })
     .catch((error) => {
+      // eslint-disable-next-line no-console
       console.error('Error:', error);
       // Submit Hotjar failure
-      if ( typeof hj === 'function' ) {
+      if (typeof hj === 'function') {
         hj('formSubmitFailed'); // eslint-disable-line no-undef
       }
       setErrorMsg(error.message);
@@ -278,46 +284,46 @@ const submitENForm = (props) => {
 /**
  * Build data to be posted on form submit
  *
- * @param  {Object}  form_data  The form data
- * @param  {Array}   fields     The fields
+ * @param {Object} form_data The form data
+ * @param {Array}  fields    The fields
  * @return {Object}  Formatted data for EN
  */
 const makePostData = (form_data, fields) => {
-  let supporter = {
-    questions: {}
+  const supporter = {
+    questions: {},
   };
 
   for (const key in form_data) {
-    let field = fields.find((f) => inputId(f)['name'] === key);
-    if ( ! field ) {
+    const field = fields.find((f) => inputId(f).name === key);
+    if (!field) {
       continue;
     }
 
     // Questions via checkbox or text question
-    if ( key.startsWith('supporter.questions.' )) {
-      const value = typeof form_data[key] === "string" ? form_data[key] : checkboxValue(form_data[key]);
-      supporter.questions['question.' + field.id] = value;
+    if (key.startsWith('supporter.questions.')) {
+      const value = typeof form_data[ key ] === 'string' ? form_data[ key ] : checkboxValue(form_data[ key ]);
+      supporter.questions[ 'question.' + field.id ] = value;
       continue;
     }
 
     // Remove fields without name
-    if ( ! field.property ) {
+    if (!field.property) {
       continue;
     }
 
     // Basic data & hidden field
-    if ( null !== form_data[key] ) {
-      supporter[field.property] = form_data[key];
-    } else if ( field.input_type === "hidden" ) {
-      supporter[field.property] = field.default_value;
+    if (null !== form_data[ key ]) {
+      supporter[ field.property ] = form_data[ key ];
+    } else if (field.input_type === 'hidden') {
+      supporter[ field.property ] = field.default_value;
     }
   }
 
   return {
     standardFieldNames: true,
-    supporter: supporter
+    supporter,
   };
-}
+};
 
 const checkboxValue = (value) => true === value ? 'Y' : 'N';
 
@@ -332,11 +338,11 @@ const validateForm = (form_data, fields, setErrors) => {
   });
 
   return formIsValid;
-}
+};
 
 const validateField = (field, form_data, setErrors) => {
   const {id, name} = inputId(field);
-  const value = form_data[name];
+  const value = form_data[ name ];
   const element = document.getElementById(id);
 
   if (!element) {
@@ -344,92 +350,93 @@ const validateField = (field, form_data, setErrors) => {
   }
 
   if (field.required && [null, false, ''].includes(value)) {
-    setErrors(errors => {
-      return {...errors, [field.id]: element.dataset["errormessage"]}
+    setErrors((errors) => {
+      return {...errors, [ field.id ]: element.dataset.errormessage};
     });
     return false;
   }
 
-  if (element.type === "email") {
+  if (element.type === 'email') {
     return validateEmail(field, element, setErrors, value);
   }
 
-  if (element.type === "radio") {
-    return validateRadio(field, element, setErrors, name, fields);
+  if (element.type === 'radio') {
+    return validateRadio(field, element, setErrors, name);
   }
 
-  const regexPattern = element.dataset['validate_regex'];
+  const regexPattern = element.dataset.validate_regex;
   if (regexPattern?.length) {
     return validateRegex(field, element, setErrors, value, regexPattern);
   }
 
-  const callbackFunction = element.dataset['validate_callback'];
-  if ('function' === typeof window[callbackFunction]) {
+  const callbackFunction = element.dataset.validate_callback;
+  if ('function' === typeof window[ callbackFunction ]) {
     return validateCallback(field, element, setErrors, callbackFunction);
   }
 
   return true;
-}
+};
 
 const validateEmail = (field, element, setErrors, value) => {
   // Reference: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/email#basic_validation
-  let re = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+  const re = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
   if (!re.test(String(value).toLowerCase())) {
-    setErrors(errors => {
-      return {...errors, [field.id]: element.dataset["errormessage"]}
+    setErrors((errors) => {
+      return {...errors, [ field.id ]: element.dataset.errormessage};
     });
     return false;
   }
   return true;
-}
+};
 
 const validateRadio = (field, element, setErrors, name, fields) => {
-  let sibling_radios_checked = fields.find((f) => {
-    let {id: f_id, name: f_name} = inputId(f);
-    let f_element = document.getElementById(f_id);
+  const sibling_radios_checked = fields.find((f) => {
+    const {id: f_id, name: f_name} = inputId(f);
+    const f_element = document.getElementById(f_id);
     return f_name === name && f_element && f_element.checked === true;
-  })
+  });
   if (!sibling_radios_checked) {
-    setErrors(errors => {
-      return {...errors, [field.id]: element.dataset["errormessage"]}
+    setErrors((errors) => {
+      return {...errors, [ field.id ]: element.dataset.errormessage};
     });
     return false;
   }
   return true;
-}
+};
 
 const validateRegex = (field, element, setErrors, value, regexPattern) => {
   const regex = new RegExp(regexPattern);
   if (!regex.test(value)) {
-    setErrors(errors => {
-      return {...errors, [field.id]: element.dataset["validate_regex_msg"]}
+    setErrors((errors) => {
+      return {...errors, [ field.id ]: element.dataset.validate_regex_msg};
     });
     return false;
   }
   return true;
-}
+};
 
 const validateCallback = (field, element, setErrors, callbackFunction) => {
-  const validate = window[callbackFunction](element.value);
+  const validate = window[ callbackFunction ](element.value);
   if (true !== validate) {
-    setErrors(errors => {
-      return {...errors, [field.id]: validate}
+    setErrors((errors) => {
+      return {...errors, [ field.id ]: validate};
     });
     return false;
   }
   return true;
-}
+};
 
 const urlIsValid = (url_str) => {
   try {
-    let url = new URL(url_str);
+    const url = new URL(url_str);
     return ['http:', 'https:'].includes(url.protocol);
   } catch (e) {
+    // eslint-disable-next-line no-console
     console.log(e);
   }
 
   return false;
-}
+};
 
 const ThankYou = ({attributes, error_msg}) => {
   const {
@@ -445,12 +452,12 @@ const ThankYou = ({attributes, error_msg}) => {
     social_accounts,
   } = attributes;
 
-  let social_params = {...social, utm_medium: 'thank-you'};
+  const social_params = {...social, utm_medium: 'thank-you'};
 
   return (
     <div className="enform" id="enform">
       <div
-        className={'thankyou ' + (en_form_style != 'side-style' ? 'full-width': '')}
+        className={'thankyou ' + (en_form_style !== 'side-style' ? 'full-width' : '')}
       >
         {error_msg &&
         <span className="enform-error">{ error_msg }</span>
@@ -460,7 +467,7 @@ const ThankYou = ({attributes, error_msg}) => {
           <h2 className="page-section-header">{ unescape(thankyou_title) }</h2>
         </header>
         <p className="page-section-description"
-          dangerouslySetInnerHTML={{ __html: thankyou_subtitle }} />
+          dangerouslySetInnerHTML={{__html: thankyou_subtitle}} />
 
         <div className="sub-section formblock-flex">
 
@@ -472,7 +479,7 @@ const ThankYou = ({attributes, error_msg}) => {
             <ShareButtons {...{social_params, social_accounts}} />
           </div>
 
-          {! donate_button_checkbox &&
+          {!donate_button_checkbox &&
           <>
             <div className="form-group">
               <h5>{thankyou_donate_message}</h5>
@@ -487,5 +494,5 @@ const ThankYou = ({attributes, error_msg}) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};

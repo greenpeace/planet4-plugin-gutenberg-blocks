@@ -1,4 +1,4 @@
-import { Component } from '@wordpress/element';
+import {Component} from '@wordpress/element';
 
 export class Preview extends Component {
   render() {
