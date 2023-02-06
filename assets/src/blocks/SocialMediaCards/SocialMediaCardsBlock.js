@@ -70,14 +70,14 @@ export class SocialMediaCardsBlock {
         function onMessageChange(index, value) {
           // eslint-disable-next-line no-shadow
           const cards = [...attributes.cards];
-          cards[ index ].message = value;
+          cards[index].message = value;
           setAttributes({cards});
         }
 
         function onURLChange(index, value) {
           // eslint-disable-next-line no-shadow
           const cards = [...attributes.cards];
-          cards[ index ].social_url = value;
+          cards[index].social_url = value;
           setAttributes({cards});
         }
 

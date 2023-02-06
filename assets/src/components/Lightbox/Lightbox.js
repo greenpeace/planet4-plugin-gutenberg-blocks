@@ -28,7 +28,8 @@ export const Lightbox = ({index, isOpen, items, onClose = () => {}}) => {
 
     const photoSwipe = new PhotoSwipe(photoSwipeElement, PhotoSwipeUI_Default, items, photoSwipeOptions);
 
-    photoSwipe.listen('gettingData', (galleryItem) => {
+    // eslint-disable-next-line no-shadow
+    photoSwipe.listen('gettingData', (index, galleryItem) => {
       if (galleryItem.w < 1 || galleryItem.h < 1) {
         const imageSizeHandler = new Image();
         imageSizeHandler.onload = function() {

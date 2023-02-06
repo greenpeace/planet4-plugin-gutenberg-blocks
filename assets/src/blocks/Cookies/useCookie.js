@@ -15,9 +15,9 @@ export const readCookie = (name) => {
 export const writeCookie = (name, value, days = 365) => {
   const date = new Date();
   date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-  const secureMode = document.location.protocol === 'http:'
-    ? ';SameSite=Lax'
-    : ';SameSite=None;Secure';
+  const secureMode = document.location.protocol === 'http:' ?
+    ';SameSite=Lax' :
+    ';SameSite=None;Secure';
   document.cookie = encodeURI(name) + '=' + encodeURI(value) + ';domain=.' + document.domain + ';path=/;' + '; expires=' + date.toGMTString() + secureMode;
 };
 

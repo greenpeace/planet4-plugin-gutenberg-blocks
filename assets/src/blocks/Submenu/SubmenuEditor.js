@@ -21,19 +21,19 @@ const renderEdit = (attributes, setAttributes) => {
 
   function onHeadingChange(index, value) {
     const levels = deepClone(attributes.levels);
-    levels[ index ].heading = Number(value);
+    levels[index].heading = Number(value);
     setAttributes({levels});
   }
 
   function onLinkChange(index, value) {
     const levels = deepClone(attributes.levels);
-    levels[ index ].link = value;
+    levels[index].link = value;
     setAttributes({levels});
   }
 
   function onStyleChange(index, value) {
     const levels = deepClone(attributes.levels);
-    levels[ index ].style = value; // Possible values: "none", "bullet", "number"
+    levels[index].style = value; // Possible values: "none", "bullet", "number"
     setAttributes({levels});
   }
 
@@ -46,7 +46,7 @@ const renderEdit = (attributes, setAttributes) => {
       return null;
     }
 
-    return attr.levels[ index - 1 ].heading;
+    return attr.levels[index - 1].heading;
   }
 
   return (
@@ -66,7 +66,7 @@ const renderEdit = (attributes, setAttributes) => {
         <Button
           isPrimary
           onClick={addLevel}
-          disabled={attributes.levels.length >= 3 || attributes.levels.slice(-1)[ 0 ].heading === 0}
+          disabled={attributes.levels.length >= 3 || attributes.levels.slice(-1)[0].heading === 0}
           style={{marginRight: 5}}
         >
           {__('Add level', 'planet4-blocks-backend')}
@@ -111,9 +111,9 @@ const renderView = (attributes, setAttributes, className) => {
         multiline="false"
         allowedFormats={[]}
       />
-      {menuItems.length > 0
-        ? <SubmenuItems menuItems={menuItems} />
-        : <div className="EmptyMessage">
+      {menuItems.length > 0 ?
+        <SubmenuItems menuItems={menuItems} /> :
+        <div className="EmptyMessage">
           {__('The submenu block produces no output on the editor.', 'planet4-blocks-backend')}
         </div>
       }

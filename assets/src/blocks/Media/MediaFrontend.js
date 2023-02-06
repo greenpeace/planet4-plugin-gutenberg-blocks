@@ -43,9 +43,9 @@ export const MediaFrontend = (attributes) => {
         <div className="page-section-description" dangerouslySetInnerHTML={{__html: description}} />
       }
       {
-        media_url && media_url.endsWith('.mp4')
-          ? <MediaElementVideo videoURL={media_url} videoPoster={poster_url} />
-          : <div dangerouslySetInnerHTML={{__html: wrapEmbedHTML(embed_html) || null}} />
+        media_url && media_url.endsWith('.mp4') ?
+          <MediaElementVideo videoURL={media_url} videoPoster={poster_url} /> :
+          <div dangerouslySetInnerHTML={{__html: wrapEmbedHTML(embed_html) || null}} />
       }
     </section>
   );

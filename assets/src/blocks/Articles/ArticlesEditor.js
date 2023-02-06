@@ -79,7 +79,7 @@ const renderEdit = (attributes, toAttribute) => {
           {attributes.tags.length === 0 && attributes.post_types.length === 0 &&
             <div>
               <hr />
-              <label htmlFor>{__('Manual override', 'planet4-blocks-backend')}</label>
+              <p>{__('Manual override', 'planet4-blocks-backend')}</p>
               <PostSelector
                 label={__('CAUTION: Adding articles individually will override the automatic functionality of this block. For good user experience, please include at least three articles so that spacing and alignment of the design remains intact.', 'planet4-blocks-backend')}
                 selected={attributes.posts || []}
@@ -157,7 +157,7 @@ export const ArticlesEditor = (props) => {
 
   const {posts, totalPosts} = useArticlesFetch(attributes, postType, postId);
 
-  const toAttribute = (attributeName) => (value) => setAttributes({[ attributeName ]: value});
+  const toAttribute = (attributeName) => (value) => setAttributes({[attributeName]: value});
 
   return (
     <div>

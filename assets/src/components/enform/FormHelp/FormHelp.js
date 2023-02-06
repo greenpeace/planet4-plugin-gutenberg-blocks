@@ -1,1 +1,1 @@
-export const FormHelp = () => (<div className="FormHelp">{this.props.children}</div>);
+export const FormHelp = (props) => (<div className="FormHelp">{props.children}</div>);

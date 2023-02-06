@@ -53,9 +53,9 @@ export const TakeActionCovers = ({
             // eslint-disable-next-line @wordpress/i18n-no-variables
             aria-label={__('Take action cover, link to ' + title, 'planet4-blocks')}
           >
-            {isExample
-              ? <CoversImagePlaceholder height={220} />
-              : <img
+            {isExample ?
+              <CoversImagePlaceholder height={220} /> :
+              <img
                 loading="lazy"
                 alt={alt_text || undefined}
                 src={image || undefined}
@@ -66,7 +66,7 @@ export const TakeActionCovers = ({
           </a>
           <div className="cover-card-content">
             {/* Regardless of how many tags there are, we only show the first one */}
-            {tags && tags.length > 0 && <span className="cover-card-tag">{tags[ 0 ].name}</span>}
+            {tags && tags.length > 0 && <span className="cover-card-tag">{tags[0].name}</span>}
             <a
               className="cover-card-heading"
               data-ga-category="Take Action Covers"

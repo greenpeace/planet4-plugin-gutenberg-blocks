@@ -15,12 +15,12 @@ const {__} = wp.i18n;
 // Renders the editor view
 const renderView = ({title, description, tabs, className}, setAttributes, isSelected, updateTabAttribute) => {
   const toAttribute = (attributeName) => (value) => setAttributes({
-    [ attributeName ]: value,
+    [attributeName]: value,
   });
 
   const addButton = (index) => {
     const newTabs = [...tabs];
-    newTabs[ index ].button = {};
+    newTabs[index].button = {};
     setAttributes({
       tabs: newTabs,
     });
@@ -28,7 +28,7 @@ const renderView = ({title, description, tabs, className}, setAttributes, isSele
 
   const removeButton = (index) => {
     const newTabs = [...tabs];
-    delete newTabs[ index ].button;
+    delete newTabs[index].button;
     setAttributes({
       tabs: newTabs,
     });
@@ -78,8 +78,8 @@ const renderView = ({title, description, tabs, className}, setAttributes, isSele
               onChange={updateTabAttribute('text', index)}
               allowedFormats={['core/bold', 'core/italic']}
             />
-            {tab.button
-              ? <div className="button-container">
+            {tab.button ?
+              <div className="button-container">
                 <RichText
                   tagName="div"
                   className="btn btn-secondary accordion-btn"
@@ -95,8 +95,8 @@ const renderView = ({title, description, tabs, className}, setAttributes, isSele
                   onClick={() => removeButton(index)}
                   icon="trash"
                 />
-              </div>
-              : <div onClick={() => addButton(index)} className="add-button" role="presentation">
+              </div> :
+              <div onClick={() => addButton(index)} className="add-button" role="presentation">
                 <span className="plus">+</span>
                 {__('Add button', 'planet4-blocks-backend')}
               </div>
@@ -126,7 +126,7 @@ const renderEdit = ({tabs}, setAttributes, updateTabAttribute) => {
         {tabs.map((tab, index) => {
           const {button} = tab;
           if (!button) {
-            return null;
+            return; // eslint-disable-line array-callback-return
           }
 
           return (
@@ -134,9 +134,9 @@ const renderEdit = ({tabs}, setAttributes, updateTabAttribute) => {
               <p>{__('Item', 'planet4-blocks-backend')} {index + 1}</p>
               <URLInput
                 label={__('Button link', 'planet4-blocks-backend')}
-                value={buttonUrl[ index ] ? buttonUrl[ index ].value : button.button_url}
+                value={buttonUrl[index] ? buttonUrl[index].value : button.button_url}
                 onChange={(url) => {
-                  setButtonUrl({[ index ]: url, ...buttonUrl});
+                  setButtonUrl({[index]: url, ...buttonUrl});
                   debounceButtonUrl(index, url);
                 }}
               />
@@ -177,9 +177,9 @@ export const AccordionEditor = ({attributes, isSelected, setAttributes, classNam
   const updateTabAttribute = (attributeName, index) => (value) => {
     const newTabs = [...tabs];
     if (attributeName.startsWith('button_')) {
-      newTabs[ index ].button[ attributeName ] = value;
+      newTabs[index].button[attributeName] = value;
     } else {
-      newTabs[ index ][ attributeName ] = value;
+      newTabs[index][attributeName] = value;
     }
     setAttributes({
       tabs: newTabs,

@@ -39,9 +39,9 @@ export const useArticlesFetch = (attributes, postType, postId, baseUrl = null, p
     const path = addQueryArgs('planet4/v1/get-posts', args);
 
     try {
-      const response = baseUrl
-        ? await fetchJson(`${baseUrl}/wp-json/${path}`)
-        : await apiFetch({path});
+      const response = baseUrl ?
+        await fetchJson(`${baseUrl}/wp-json/${path}`) :
+        await apiFetch({path});
 
       const newPosts = [...prevPosts, ...response.recent_posts];
 

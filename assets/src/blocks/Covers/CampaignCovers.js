@@ -38,12 +38,12 @@ export const CampaignCovers = ({
             aria-label={__('Check our campaign about ' + title, 'planet4-blocks')}
           >
             <div className="thumbnail-large">
-              {image && image[ 0 ] && !isExample &&
+              {image && image[0] && !isExample &&
                 <img
                   loading="lazy"
                   sizes={IMAGE_SIZES.campaign}
                   srcSet={srcset}
-                  src={image[ 0 ]}
+                  src={image[0]}
                   alt={alt_text}
                   title={alt_text}
                 />

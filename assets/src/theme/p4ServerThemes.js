@@ -1,5 +1,3 @@
-// global wp
-
 const fetchThemes = async () => {
   return wp.apiFetch({
     path: 'planet4/v1/themes/',

@@ -25,6 +25,7 @@ export const carouselHeaderV1 = {
   migrate({slides, ...attributes}) {
     return {
       ...attributes,
+      // eslint-disable-next-line no-unused-vars
       slides: slides.map(({header_size, ...otherSlideAttributes}) => otherSlideAttributes),
     };
   },

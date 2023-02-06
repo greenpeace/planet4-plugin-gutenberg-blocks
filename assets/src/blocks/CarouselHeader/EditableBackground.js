@@ -28,9 +28,9 @@ export const EditableBackground = ({
       render={(mediaUploadInstance) => (
         <>
           <div className="background-holder">
-            {!image_url
-              ? <ImagePlaceholder />
-              : <img
+            {!image_url ?
+              <ImagePlaceholder /> :
+              <img
                 alt={image_alt}
                 src={image_url}
                 srcSet={image_srcset}
@@ -59,9 +59,9 @@ export const EditableBackground = ({
                     onToggle();
                   }}
                 >
-                  {image_url
-                    ? __('Change image', 'planet4-blocks-backend')
-                    : __('Add image', 'planet4-blocks-backend')
+                  {image_url ?
+                    __('Change image', 'planet4-blocks-backend') :
+                    __('Add image', 'planet4-blocks-backend')
                   }
                 </Button>
                 {image_url && (

@@ -46,9 +46,9 @@ export const ENFormFrontend = (attributes) => {
   let fields = en_form_fields ?? [];
   if (fields.length <= 0) {
     const form_post = useSelect((select) => {
-      return en_form_id
-        ? select('core').getEntityRecord('postType', 'p4en_form', en_form_id)
-        : [];
+      return en_form_id ?
+        select('core').getEntityRecord('postType', 'p4en_form', en_form_id) :
+        [];
     });
     fields = form_post?.p4enform_fields ?? [];
   }
@@ -60,20 +60,20 @@ export const ENFormFrontend = (attributes) => {
   const [error_msg, setErrorMsg] = useState(null);
   const [form_data, setFormData] = useState(
     fields.reduce((acc, f) => {
-      return {...acc, [ inputId(f).name ]: null};
+      return {...acc, [inputId(f).name]: null};
     }, {})
   );
 
   const onInputChange = (field, e) => {
     setErrors((errs) => {
-      return {...errs, [ field.id ]: null};
+      return {...errs, [field.id]: null};
     });
 
     const target = e.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
 
-    setFormData({...form_data, [ name ]: value});
+    setFormData({...form_data, [name]: value});
   };
 
   const onBlur = (field) => {
@@ -301,8 +301,8 @@ const makePostData = (form_data, fields) => {
 
     // Questions via checkbox or text question
     if (key.startsWith('supporter.questions.')) {
-      const value = typeof form_data[ key ] === 'string' ? form_data[ key ] : checkboxValue(form_data[ key ]);
-      supporter.questions[ 'question.' + field.id ] = value;
+      const value = typeof form_data[key] === 'string' ? form_data[key] : checkboxValue(form_data[key]);
+      supporter.questions['question.' + field.id] = value;
       continue;
     }
 
@@ -312,10 +312,10 @@ const makePostData = (form_data, fields) => {
     }
 
     // Basic data & hidden field
-    if (null !== form_data[ key ]) {
-      supporter[ field.property ] = form_data[ key ];
+    if (null !== form_data[key]) {
+      supporter[field.property] = form_data[key];
     } else if (field.input_type === 'hidden') {
-      supporter[ field.property ] = field.default_value;
+      supporter[field.property] = field.default_value;
     }
   }
 
@@ -342,7 +342,7 @@ const validateForm = (form_data, fields, setErrors) => {
 
 const validateField = (field, form_data, setErrors) => {
   const {id, name} = inputId(field);
-  const value = form_data[ name ];
+  const value = form_data[name];
   const element = document.getElementById(id);
 
   if (!element) {
@@ -351,7 +351,7 @@ const validateField = (field, form_data, setErrors) => {
 
   if (field.required && [null, false, ''].includes(value)) {
     setErrors((errors) => {
-      return {...errors, [ field.id ]: element.dataset.errormessage};
+      return {...errors, [field.id]: element.dataset.errormessage};
     });
     return false;
   }
@@ -370,7 +370,7 @@ const validateField = (field, form_data, setErrors) => {
   }
 
   const callbackFunction = element.dataset.validate_callback;
-  if ('function' === typeof window[ callbackFunction ]) {
+  if ('function' === typeof window[callbackFunction]) {
     return validateCallback(field, element, setErrors, callbackFunction);
   }
 
@@ -382,7 +382,7 @@ const validateEmail = (field, element, setErrors, value) => {
   const re = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
   if (!re.test(String(value).toLowerCase())) {
     setErrors((errors) => {
-      return {...errors, [ field.id ]: element.dataset.errormessage};
+      return {...errors, [field.id]: element.dataset.errormessage};
     });
     return false;
   }
@@ -397,7 +397,7 @@ const validateRadio = (field, element, setErrors, name, fields) => {
   });
   if (!sibling_radios_checked) {
     setErrors((errors) => {
-      return {...errors, [ field.id ]: element.dataset.errormessage};
+      return {...errors, [field.id]: element.dataset.errormessage};
     });
     return false;
   }
@@ -408,7 +408,7 @@ const validateRegex = (field, element, setErrors, value, regexPattern) => {
   const regex = new RegExp(regexPattern);
   if (!regex.test(value)) {
     setErrors((errors) => {
-      return {...errors, [ field.id ]: element.dataset.validate_regex_msg};
+      return {...errors, [field.id]: element.dataset.validate_regex_msg};
     });
     return false;
   }
@@ -416,10 +416,10 @@ const validateRegex = (field, element, setErrors, value, regexPattern) => {
 };
 
 const validateCallback = (field, element, setErrors, callbackFunction) => {
-  const validate = window[ callbackFunction ](element.value);
+  const validate = window[callbackFunction](element.value);
   if (true !== validate) {
     setErrors((errors) => {
-      return {...errors, [ field.id ]: validate};
+      return {...errors, [field.id]: validate};
     });
     return false;
   }

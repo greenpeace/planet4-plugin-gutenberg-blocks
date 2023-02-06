@@ -13,16 +13,16 @@ export const HubspotEmbed = ({params}) => {
   const hbsptRegex = new RegExp(/hbspt\.forms\.create\((.*)\);/ims);
   const matches = embed_code ? embed_code.match(hbsptRegex) : null;
 
-  if (!use_embed_code || !embed_code || !matches || !matches[ 1 ]) {
+  if (!use_embed_code || !embed_code || !matches || !matches[1]) {
     removeScript(hbsptScript, [use_embed_code, embed_code]);
     return null;
   }
 
   const hbsptParams = {};
-  const jsonParams = matches[ 1 ].replace(/[\n\r\s+]/g, '');
+  const jsonParams = matches[1].replace(/[\n\r\s+]/g, '');
   const paramsMatches = jsonParams.matchAll(/(?<key>[a-zA-Z]*):"(?<value>[^"]*)"/g);
   [...paramsMatches].forEach((e) => {
-    hbsptParams[ e.groups.key ] = e.groups.value;
+    hbsptParams[e.groups.key] = e.groups.value;
   });
 
   const loadForm = () => {
@@ -31,7 +31,7 @@ export const HubspotEmbed = ({params}) => {
       region: hbsptParams.region ?? '',
       portalId: hbsptParams.portalId ?? null,
       formId: hbsptParams.formId ?? null,
-      locale: document.getElementsByTagName('html')[ 0 ].getAttribute('lang')?.substring(0, 2),
+      locale: document.getElementsByTagName('html')[0].getAttribute('lang')?.substring(0, 2),
       target,
     });
   };

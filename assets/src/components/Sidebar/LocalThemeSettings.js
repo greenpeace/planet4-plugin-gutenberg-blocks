@@ -1,8 +1,9 @@
 import {SelectControl} from '@wordpress/components';
 import {useState, useEffect} from '@wordpress/element';
 import {p4ServerThemes} from '../../theme/p4ServerThemes';
-import {__} from '@wordpress/i18n';
 import {useDispatch} from '@wordpress/data';
+
+const {__} = wp.i18n;
 
 const keysAsLabel = (obj) => Object.keys(obj).map((k) => ({label: k, value: k}));
 
@@ -27,7 +28,7 @@ const useServerThemes = () => {
 const getAllDefinedProps = () => Object.values(document.documentElement.style).filter((k) => {
   return 'string' === typeof k && k.match(/^--/);
 });
-const baseUrl = window.location.href.split('/wp-admin')[ 0 ];
+const baseUrl = window.location.href.split('/wp-admin')[0];
 export const themeJsonUrl = `${baseUrl}/wp-content/themes/planet4-master-theme/themes/`;
 
 const collectTheme = async (a, t) => {
@@ -35,7 +36,7 @@ const collectTheme = async (a, t) => {
 
   return {
     ...await a,
-    [ t ]: await response.json(),
+    [t]: await response.json(),
   };
 };
 
@@ -76,12 +77,12 @@ const useAppliedCssVariables = (serverThemes, currentTheme) => {
   const allThemes = {...serverThemes, ...jsonThemes};
 
   useEffect(() => {
-    applyChangesToDom(allThemes[ currentTheme ] || {}, initialVars);
+    applyChangesToDom(allThemes[currentTheme] || {}, initialVars);
   }, [serverThemes, currentTheme]);
 };
 
 const excludeNewVersions = (themes, [name, theme]) => {
-  return refactoredThemes.includes(name) ? themes : ({...themes, [ name ]: theme});
+  return refactoredThemes.includes(name) ? themes : ({...themes, [name]: theme});
 };
 
 const withoutNewVersionsOfThemes = (themes) => Object.entries(themes).reduce(excludeNewVersions, {});

@@ -1,7 +1,9 @@
 import mainThemeUrl from '../main-theme-url';
 
+const {__} = wp.i18n;
+
 const template = ({
-  titlePlaceholder = 'Enter text',
+  titlePlaceholder = __('Enter text', 'planet4-blocks-backend'),
 }) => [
   [
     'core/columns',

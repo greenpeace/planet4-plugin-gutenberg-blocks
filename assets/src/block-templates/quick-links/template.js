@@ -25,7 +25,6 @@ const template = ({
   ['core/group', {
     className: 'block',
     align: 'full',
-    backgroundColor,
   }, [
     ['core/group', {className: 'container'}, [
       ['core/spacer', {height: '24px'}],

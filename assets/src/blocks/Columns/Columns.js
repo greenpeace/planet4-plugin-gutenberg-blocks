@@ -44,8 +44,8 @@ export const Columns = ({columns, columns_block_style, isCampaign, isExample = f
                   />
                 }
 
-                { (!isExample && cta_link)
-                  ? <a
+                { (!isExample && cta_link) ?
+                  <a
                     href={cta_link}
                     data-ga-category="Columns Block"
                     data-ga-action={columns_block_style === LAYOUT_ICONS ? 'Icon' : 'Image'}
@@ -53,14 +53,14 @@ export const Columns = ({columns, columns_block_style, isCampaign, isExample = f
                     {...link_new_tab && {target: '_blank'}}
                   >
                     <img src={attachment} alt={title} title={title} loading="lazy" />
-                  </a>
-                  : <img src={attachment} alt={title} title={title} loading="lazy" />
+                  </a> :
+                  <img src={attachment} alt={title} title={title} loading="lazy" />
                 }
               </div>
             }
             <h3 {...isCampaign ? titleAnalytics : {}} >
-              {cta_link && !isCampaign
-                ? <a
+              {cta_link && !isCampaign ?
+                <a
                   href={cta_link}
                   data-ga-category="Columns Block"
                   data-ga-action="Title"
@@ -68,8 +68,8 @@ export const Columns = ({columns, columns_block_style, isCampaign, isExample = f
                   {...link_new_tab && {target: '_blank'}}
                 >
                   {title}
-                </a>
-                : title
+                </a> :
+                title
               }
             </h3>
             {description &&
@@ -78,9 +78,9 @@ export const Columns = ({columns, columns_block_style, isCampaign, isExample = f
             {cta_text && cta_link &&
               <a
                 href={cta_link}
-                className={isCampaign || columns_block_style === LAYOUT_NO_IMAGE
-                  ? `btn btn-${isCampaign ? 'primary' : 'secondary'}`
-                  : 'standalone-link'}
+                className={isCampaign || columns_block_style === LAYOUT_NO_IMAGE ?
+                  `btn btn-${isCampaign ? 'primary' : 'secondary'}` :
+                  'standalone-link'}
                 data-ga-category="Columns Block"
                 data-ga-action="Call to Action"
                 data-ga-label={cta_link}

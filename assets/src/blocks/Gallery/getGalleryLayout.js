@@ -9,7 +9,7 @@ export const GALLERY_BLOCK_CLASSES = {
 };
 
 export const getGalleryLayout = (className, style) => {
-  let layout = style > 0 ? GALLERY_LAYOUTS[ style - 1 ] : 'slider';
+  let layout = style > 0 ? GALLERY_LAYOUTS[style - 1] : 'slider';
   const styleClass = getStyleFromClassName(className);
   if (styleClass) {
     layout = styleClass;

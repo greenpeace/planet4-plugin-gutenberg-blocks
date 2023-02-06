@@ -13,31 +13,29 @@ export const blockEditorValidation = () => {
     const blocks = select('core/block-editor').getBlocks();
 
     const currentMessages = [];
-    // eslint-disable-next-line no-shadow
-    const invalidBlocks = blocks.reduce((invalidBlocks, block) => {
+    const invalidBlocks = blocks.reduce((invalidBlocksArray, block) => {
       // Normally `blocks` contains a valid list of blocks, however it can happen that one of them is `null` in rare
       // cases. It happened to me once while running with WordPress 5.8.1 and undoing multiple edits. This made the
       // editor crash while it's trying to access `block.name`.
       if (!block) {
-        return null;
+        return; // eslint-disable-line array-callback-return
       }
-      const validations = blockValidations[ block.name ] || {};
+      const validations = blockValidations[block.name] || {};
 
-      // eslint-disable-next-line no-shadow
-      const results = Object.entries(validations).reduce((results, [attrName, validate]) => {
-        const value = block.attributes[ attrName ];
+      const results = Object.entries(validations).reduce((resultsArray, [attrName, validate]) => {
+        const value = block.attributes[attrName];
         const result = validate(value);
 
         if (!result.isValid) {
-          results.push(result);
+          resultsArray.push(result);
         }
 
-        return results;
+        return resultsArray;
       }, []);
 
-      invalidBlocks.push(...results);
+      invalidBlocksArray.push(...results);
 
-      return invalidBlocks;
+      return invalidBlocksArray;
     }, []);
     invalidBlocks.forEach((block) => currentMessages.push(...block.messages));
 
@@ -75,11 +73,11 @@ const registerAttributeValidations = (settings, blockName) => {
   const {attributes} = settings;
 
   Object.keys(settings.attributes).forEach((attrName) => {
-    const attr = attributes[ attrName ];
+    const attr = attributes[attrName];
 
     if (typeof attr.validation === 'function') {
-      blockValidations[ blockName ] = blockValidations[ blockName ] || {};
-      blockValidations[ blockName ][ attrName ] = attr.validation;
+      blockValidations[blockName] = blockValidations[blockName] || {};
+      blockValidations[blockName][attrName] = attr.validation;
     }
   });
 

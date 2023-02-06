@@ -26,9 +26,10 @@ export class LayoutSelector extends Component {
           }
 
           return (
-            <label className="LayoutOption" key={i} htmlFor>
+            <label className="LayoutOption" key={i} htmlFor="layout-selector__control-1">
               <div style={{display: 'flex'}}>
                 <RadioControl
+                  id="layout-selector__control-1"
                   name={'layoutOption'}
                   selected={this.state.selectedOption}
                   options={[
@@ -39,14 +40,14 @@ export class LayoutSelector extends Component {
                 {layoutOption.label}
               </div>
               {
-                layoutOption.image
-                  ? <img src={layoutOption.image} alt="" />
-                  : null
+                layoutOption.image ?
+                  <img src={layoutOption.image} alt="" /> :
+                  null
               }
               {
-                layoutOption.help
-                  ? <p className="help" dangerouslySetInnerHTML={{__html: layoutOption.help}} />
-                  : null
+                layoutOption.help ?
+                  <p className="help" dangerouslySetInnerHTML={{__html: layoutOption.help}} /> :
+                  null
               }
             </label>
           );

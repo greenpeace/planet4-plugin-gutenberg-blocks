@@ -1,12 +1,13 @@
 import {PluginSidebar, PluginSidebarMoreMenuItem} from '@wordpress/edit-post';
 import {Component} from '@wordpress/element';
-import {__} from '@wordpress/i18n';
 import {resolveField} from '../fromThemeOptions/fromThemeOptions';
 import isShallowEqual from '@wordpress/is-shallow-equal';
 import {savePreviewMeta} from '../../saveMetaToPreview';
 import {PostParentLink} from './PostParentLink';
 import {ThemeSettings} from './ThemeSettings';
 import {applyChangesToDom, LocalThemeSettings, themeJsonUrl} from './LocalThemeSettings';
+
+const {__} = wp.i18n;
 
 const isLegacy = (theme) => [
   'default',
@@ -25,7 +26,7 @@ const loadOptions = async (value) => {
   }
   const withoutNew = value.replace(/-new$/, '');
   const name = isLegacy(withoutNew) ? withoutNew : 'default';
-  const baseUrl = window.location.href.split('/wp-admin')[ 0 ];
+  const baseUrl = window.location.href.split('/wp-admin')[0];
   const optionsJsonUrl = `${baseUrl}/wp-content/themes/planet4-master-theme/theme_options/${name}.json`;
 
   const response = await fetch(optionsJsonUrl);
@@ -39,7 +40,7 @@ const makeDefaultOrNull = (result, field) => {
   }
   return {
     ...result,
-    [ field.id ]: field.default || null,
+    [field.id]: field.default || null,
   };
 };
 
@@ -47,7 +48,7 @@ const makeDefaultOrNull = (result, field) => {
 const gotInvalidated = (field, options, meta) => {
   const resolvedField = resolveField(options, field.id, meta);
 
-  const currentValue = meta[ field.id ];
+  const currentValue = meta[field.id];
 
   // Either the field does not exist on the new theme, or it has no options.
   if (!resolvedField || !resolvedField.options) {
@@ -90,7 +91,7 @@ export class CampaignThemeSidebar extends Component {
     // Set each of the invalidated fields to their default value, or unset them.
     return invalidatedFields
       .map((field) => resolveField(options, field.id, meta))
-      .reduce(makeDefaultOrNull, {[ metaKey ]: newThemeName});
+      .reduce(makeDefaultOrNull, {[metaKey]: newThemeName});
   }
 
   componentDidMount() {
@@ -122,7 +123,8 @@ export class CampaignThemeSidebar extends Component {
             const theme = await response.json();
             applyChangesToDom(theme, []);
           } catch (e) {
-            throw `Failed loading config for ${themeName}`;
+            // eslint-disable-next-line no-console
+            console.error(`Failed loading config for ${themeName}`);
           }
         }
       }

@@ -28,9 +28,7 @@ export const ENFormInPlaceEdit = ({attributes, setAttributes}) => {
     },
   ];
   const [activeTplId, setActiveTplId] = useState('signup');
-  const activeTpl = templates.find((tpl) => {
-    return tpl.id === activeTplId;
-  });
+  const activeTpl = templates.find((tpl) => tpl.id === activeTplId);
 
   // Style specific params
   const is_side_style = en_form_style === 'side-style';
@@ -58,9 +56,7 @@ export const ENFormInPlaceEdit = ({attributes, setAttributes}) => {
               icon: tpl.icon,
               title: tpl.title,
               isActive: activeTplId === tpl.id,
-              onClick: () => {
-                setActiveTplId(tpl.id);
-              },
+              onClick: () => setActiveTplId(tpl.id),
             };
           })}
         />
@@ -142,9 +138,7 @@ const SideContent = ({attributes, setAttributes}) => {
               isActive: title_size === size,
               icon: 'heading',
               title: size.toUpperCase(),
-              onClick: () => {
-                setAttributes({content_title_size: size});
-              },
+              onClick: () => setAttributes({content_title_size: size}),
             };
           })}
         />
@@ -241,7 +235,7 @@ const ThankYou = ({attributes, setAttributes}) => {
 
   const toAttribute = (attributeName) => {
     return (value) => {
-      setAttributes({[ attributeName ]: value});
+      setAttributes({[attributeName]: value});
     };
   };
 
@@ -358,9 +352,7 @@ const FormContent = ({attributes, setAttributes, fields}) => {
             id="p4en_form_save_button"
             className={'btn btn-primary btn-block' + (fwbg ? ' w-auto' : '')}
             value={button_text || __('Sign', 'planet4-engagingnetworks')}
-            onChange={(text) => {
-              setAttributes({button_text: text});
-            }}
+            onChange={(text) => setAttributes({button_text: text})}
             placeholder={__('Sign', 'planet4-blocks-backend')}
           />
           {fwbg &&
@@ -370,9 +362,7 @@ const FormContent = ({attributes, setAttributes, fields}) => {
                 value={text_below_button}
                 placeholder={__('Text below button', 'planet4-blocks-backend')}
                 allowedFormats={[]}
-                onChange={(text) => {
-                  setAttributes({text_below_button: text});
-                }}
+                onChange={(text) => setAttributes({text_below_button: text})}
               />
             </div>
           }
@@ -384,9 +374,7 @@ const FormContent = ({attributes, setAttributes, fields}) => {
               value={text_below_button}
               placeholder={__('Text below button', 'planet4-blocks-backend')}
               allowedFormats={[]}
-              onChange={(text) => {
-                setAttributes({text_below_button: text});
-              }}
+              onChange={(text) => setAttributes({text_below_button: text})}
             />
           </div>
         }

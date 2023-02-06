@@ -29,8 +29,8 @@ export const GalleryCarousel = ({images, onImageClick, isEditing}) => {
   };
 
   const goToSlide = (newSlide) => {
-    const nextElement = slidesRef.current[ newSlide ];
-    const activeElement = slidesRef.current[ currentSlide ];
+    const nextElement = slidesRef.current[newSlide];
+    const activeElement = slidesRef.current[currentSlide];
     if (newSlide !== currentSlide && nextElement && activeElement && !sliding) {
       setSliding(true);
       const order = getOrder(newSlide);
@@ -116,7 +116,7 @@ export const GalleryCarousel = ({images, onImageClick, isEditing}) => {
           <div
             key={image.image_src}
             className={`carousel-item ${index === currentSlide ? 'active' : ''}`}
-            ref={(element) => slidesRef.current[ index ] = element}
+            ref={(element) => slidesRef.current[index] = element}
           >
             <img
               loading="lazy"

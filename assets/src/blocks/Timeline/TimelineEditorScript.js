@@ -13,10 +13,10 @@ import {useStyleSheet} from '../../components/useStyleSheet/useStyleSheet';
 import {Timeline} from './Timeline';
 import {languages} from './TimelineLanguages';
 import {URLDescriptionHelp} from './URLDescriptionHelp';
-import {debounce} from 'lodash';
+import {debounce, noConflict} from 'lodash';
 
 const {RichText} = wp.blockEditor;
-const {__, _} = wp.i18n;
+const {__} = wp.i18n;
 const TIMELINE_JS_VERSION = '3.8.12';
 
 const positions = [
@@ -28,7 +28,7 @@ const loadAssets = () => {
   // Revert TimelineJS global usage of lodash, as it conflicts with Wordpress underscore lib
   // see https://jira.greenpeace.org/browse/PLANET-5960
   const revertLodash = function() {
-    _.noConflict();
+    noConflict();
   };
 
   // eslint-disable-next-line no-unused-vars
@@ -135,7 +135,7 @@ const renderView = (attributes, toAttribute, scriptLoaded, stylesLoaded) => {
 };
 
 export const TimelineEditor = ({isSelected, attributes, setAttributes}) => {
-  const toAttribute = (attributeName) => (value) => setAttributes({[ attributeName ]: value});
+  const toAttribute = (attributeName) => (value) => setAttributes({[attributeName]: value});
   const [scriptLoaded, stylesLoaded] = loadAssets();
   // Using a state to prevent the input losing the cursor position, a React issue reported multiple times
   const [sheetURL, setSheetURL] = useState(attributes.google_sheets_url);

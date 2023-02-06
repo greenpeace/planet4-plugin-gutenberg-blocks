@@ -16,9 +16,9 @@ export const SocialMediaEmbed = ({
 
   return (
     <div className={`social-media-embed ${alignmentClass ?? ''}`}>
-      {(embedType === OEMBED_EMBED_TYPE && embedCode)
-        ? <div dangerouslySetInnerHTML={{__html: embedCode}} />
-        : <>
+      {(embedType === OEMBED_EMBED_TYPE && embedCode) ?
+        <div dangerouslySetInnerHTML={{__html: embedCode}} /> :
+        <>
           <iframe
             className="social-media-embed-facebook social-media-embed-facebook--small"
             src={`https://www.facebook.com/plugins/page.php?href=${encodeURIComponent(facebookPageUrl)}&tabs=${facebookPageTab}&width=240&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true`}

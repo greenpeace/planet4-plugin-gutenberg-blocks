@@ -20,9 +20,7 @@ export class CounterFrontend extends Component {
     counter.calculateRemaining();
     // Add an eventListener to the window to enable instantly updating counters with supported APIs
     if (completed_api && completed_api.startsWith('https://')) {
-      window.addEventListener('updateCounter', () => {
-        counter.calculateRemaining();
-      }, false);
+      window.addEventListener('updateCounter', counter.calculateRemaining, false);
     }
     this.appendENForm();
   }
@@ -31,9 +29,7 @@ export class CounterFrontend extends Component {
     const {completed_api} = this.props;
     const counter = this;
     if (completed_api && completed_api.startsWith('https://')) {
-      window.removeEventListener('updateCounter', () => {
-        counter.calculateRemaining();
-      }, false);
+      window.removeEventListener('updateCounter', counter.calculateRemaining, false);
     }
   }
 
@@ -92,7 +88,7 @@ export class CounterFrontend extends Component {
       '%remaining%': `<span class="counter-target">${remaining}</span>`,
     };
 
-    return text.replace(/%completed%|%target%|%remaining%/gi, (match) => COUNTER_TEXT[ match ]);
+    return text.replace(/%completed%|%target%|%remaining%/gi, (match) => COUNTER_TEXT[match]);
   }
 
   render() {
@@ -143,7 +139,7 @@ export class CounterFrontend extends Component {
                 <path className="background" d="M 2 12 A 1 1 0 1 1 22 12" />
                 <path className="foreground" d="M 2 12 A 1 1 0 1 1 22 12"
                   strokeDasharray={arcLength}
-                  strokeDashoffset={`${((1 - percent) / 100) * arcLength}`} />
+                  strokeDashoffset={`${(1 - (percent / 100)) * arcLength}`} />
               </svg>
             }
             {text &&

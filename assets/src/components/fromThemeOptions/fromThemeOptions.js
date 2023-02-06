@@ -38,7 +38,7 @@ const resolveDependency = (theme, field, meta) => {
     return null;
   }
 
-  let dependencyValue = meta[ field.dependsOn ];
+  let dependencyValue = meta[field.dependsOn];
 
   const dependencyValueIsAllowed = dependencyConfiguration.options?.find((option) => option.value === dependencyValue);
 
@@ -47,13 +47,13 @@ const resolveDependency = (theme, field, meta) => {
     dependencyValue = dependencyConfiguration.default;
   }
 
-  if (!dependencyValue || !field.configurations[ dependencyValue ]) {
+  if (!dependencyValue || !field.configurations[dependencyValue]) {
     return null;
   }
 
   return {
     id: field.id,
-    ...field.configurations[ dependencyValue ],
+    ...field.configurations[dependencyValue],
   };
 };
 
@@ -61,28 +61,28 @@ export const getDependencyUpdates = (theme, fieldName, value, meta) => {
   const allChildren = theme.fields.filter((field) => field.dependsOn === fieldName);
   const needUpdate = allChildren.filter(
     (field) => {
-      const configuration = field.configurations[ value ];
+      const configuration = field.configurations[value];
 
       if (!configuration) {
-        return typeof meta[ field.id ] !== 'undefined';
+        return typeof meta[field.id] !== 'undefined';
       }
 
       if (!configuration.options) {
         return true;
       }
 
-      return !(configuration.options.some((option) => option.value === meta[ field.id ]));
+      return !(configuration.options.some((option) => option.value === meta[field.id]));
     }
   );
 
   // Return object with meta keys to be updated. Unset if there is no configuration for the new value or no default for
   // that configuration.
   return needUpdate.reduce((updates, field) => {
-    const configuration = field.configurations[ value ];
+    const configuration = field.configurations[value];
 
     return {
       ...updates,
-      [ field.id ]: configuration?.default || null,
+      [field.id]: configuration?.default || null,
     };
   }, {});
 };

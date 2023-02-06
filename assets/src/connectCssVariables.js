@@ -38,7 +38,7 @@ const metaToVariableMapping = [
         plastic: '"Montserrat", sans-serif',
       };
 
-      return campaignDefaults[ getMeta().theme || 'default' ];
+      return campaignDefaults[getMeta().theme || 'default'];
     },
   },
 ];
@@ -62,7 +62,7 @@ export const setUpCssVariables = () => {
 
         const transform = mapping.transform || ((value) => value);
 
-        const metaValue = transform(postMeta[ mapping.metaKey ]);
+        const metaValue = transform(postMeta[mapping.metaKey]);
 
         const currentValue = readCssVariable(mapping.cssVariable);
 

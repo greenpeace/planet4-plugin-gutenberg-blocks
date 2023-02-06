@@ -26,12 +26,12 @@ const renderEdit = (attributes, setAttributes, isSelected) => {
     const image_ids = [];
     const imageData = [];
     for (const key in value) {
-      image_ids.push(value[ key ].id);
-      const img_id = value[ key ].id;
-      imageData.push({url: value[ key ].url, focalPoint: {x: 0.5, y: 0.5}, id: img_id});
+      image_ids.push(value[key].id);
+      const img_id = value[key].id;
+      imageData.push({url: value[key].url, focalPoint: {x: 0.5, y: 0.5}, id: img_id});
     }
     setAttributes({multiple_image: image_ids.join(',')});
-    setAttributes({imageData});
+    setAttributes({image_data: imageData});
   };
 
   const onFocalPointChange = (image_id, value) => {
@@ -44,11 +44,11 @@ const renderEdit = (attributes, setAttributes, isSelected) => {
         const y = parseFloat(value.y).toFixed(2);
 
         updated_image_data.push({url: object.url, focalPoint: {x, y}, id: image_id});
-        gallery_block_focus_points[ image_id ] = `${x * 100}% ${y * 100}%`;
+        gallery_block_focus_points[image_id] = `${x * 100}% ${y * 100}%`;
       } else {
         updated_image_data.push(object);
         const img_id = object.id;
-        gallery_block_focus_points[ img_id ] = `${parseInt(object.focalPoint.x * 100)}% ${parseInt(object.focalPoint.y * 100)}%`;
+        gallery_block_focus_points[img_id] = `${parseInt(object.focalPoint.x * 100)}% ${parseInt(object.focalPoint.y * 100)}%`;
       }
     });
 
@@ -114,7 +114,7 @@ const renderView = (attributes, setAttributes) => {
 
   const layout = getGalleryLayout(className, gallery_block_style);
 
-  const toAttribute = (attributeName) => (value) => setAttributes({[ attributeName ]: value});
+  const toAttribute = (attributeName) => (value) => setAttributes({[attributeName]: value});
 
   const {postType} = useSelect((select) => ({
     postType: select('core/editor').getCurrentPostType(),
@@ -123,7 +123,7 @@ const renderView = (attributes, setAttributes) => {
   const {images} = useGalleryImages({multiple_image, gallery_block_focus_points}, layout);
 
   return (
-    <section className={`block ${GALLERY_BLOCK_CLASSES[ layout ]} ${className ?? ''}`}>
+    <section className={`block ${GALLERY_BLOCK_CLASSES[layout]} ${className ?? ''}`}>
       <header className="articles-title-container">
         <RichText
           tagName="h2"
@@ -162,11 +162,11 @@ export const GalleryEditor = ({isSelected, attributes, setAttributes}) => {
       image_id_array.forEach((img_id) => {
         const img_details = select('core').getMedia(img_id);
         if (img_details) {
-          imageUrlsArray[ img_id ] = img_details.source_url;
+          imageUrlsArray[img_id] = img_details.source_url;
         }
       });
     }
-    return {imageUrlsArray};
+    return {image_urls_array: imageUrlsArray};
   }, []);
 
   const {image_data, gallery_block_focus_points} = attributes;
@@ -179,14 +179,14 @@ export const GalleryEditor = ({isSelected, attributes, setAttributes}) => {
     image_urls_array.forEach((img_id) => {
       let x,
         y;
-      if (!focal_points_json[ img_id ]) {
+      if (!focal_points_json[img_id]) {
         [x, y] = [50, 50];
       } else {
-        [x, y] = focal_points_json[ img_id ].replace(/\%/g, '').split(' ');
+        [x, y] = focal_points_json[img_id].replace(/\%/g, '').split(' ');
       }
 
       new_image_data.push({
-        url: image_urls_array[ img_id ],
+        url: image_urls_array[img_id],
         focalPoint: {
           x: parseInt(x) / 100,
           y: parseInt(y) / 100,

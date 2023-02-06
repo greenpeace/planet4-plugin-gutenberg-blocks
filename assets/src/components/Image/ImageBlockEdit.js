@@ -6,6 +6,7 @@ const {useSelect} = wp.data;
  * - display image credits in caption during edition
  *
  * @param {Object} BlockEdit
+ * @return {Object} interface to edit images on the Editor
  */
 export const ImageBlockEdit = (BlockEdit) => {
   return (props) => {
@@ -21,9 +22,9 @@ export const ImageBlockEdit = (BlockEdit) => {
     const credits = image?.meta?._credit_text;
     // Compile data for insertion
     // eslint-disable-next-line no-nested-ternary
-    const image_credits = credits && credits.length > 0 && !caption.includes(credits)
-      ? (credits.includes('©') ? credits : `© ${credits}`)
-      : null;
+    const image_credits = credits && credits.length > 0 && !caption.includes(credits) ?
+      (credits.includes('©') ? credits : `© ${credits}`) :
+      null;
     const block_id = clientId ? `block-${clientId}` : null;
 
     // Update width and height when sized rounded styles are selected
@@ -36,7 +37,7 @@ export const ImageBlockEdit = (BlockEdit) => {
 
     // Force to use square images when the class `square-*` is added
     if (className.includes('square-')) {
-      const size = className.slice(className.search('square-') + 'square-'.length).split(' ')[ 0 ] || 180;
+      const size = className.slice(className.search('square-') + 'square-'.length).split(' ')[0] || 180;
       attributes.width = parseInt(size);
       attributes.height = parseInt(size);
     }

@@ -42,7 +42,7 @@ export const coversV1 = {
     attributes.initialRowsLimit = covers_view === '3' ? 0 : Number(covers_view);
 
     if (!isNaN(cover_type)) {
-      attributes.cover_type = OLD_COVER_TYPES[ cover_type ];
+      attributes.cover_type = OLD_COVER_TYPES[cover_type];
     } else {
       attributes.cover_type = cover_type;
     }

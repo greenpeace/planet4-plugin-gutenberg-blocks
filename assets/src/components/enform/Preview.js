@@ -14,18 +14,18 @@ export class Preview extends Component {
   render() {
     return <div className={'Preview ' + (this.props.isSelected && this.state.detach ? 'FloatingPreview' : '')}>
       {
-        this.props.showBar
-          ? <div className="PreviewBar">
+        this.props.showBar ?
+          <div className="PreviewBar">
 						Preview
             <button className="DetachPreview" onClick={this.detach}>
               {
-                this.state.detach
-                  ? 'Reattach'
-                  : 'Detach'
+                this.state.detach ?
+                  'Reattach' :
+                  'Detach'
               }
             </button>
-          </div>
-          : null
+          </div> :
+          null
       }
       <div className="PreviewContainer" >
         { this.props.children }

@@ -80,13 +80,12 @@ export const registerBlock = () => {
     },
     attributes,
     edit: ShareButtonsEditor,
-    // eslint-disable-next-line no-shadow
-    save: ({attributes}) => {
-      if (!attributes) {
+    save: ({attributes: saveAttributes}) => {
+      if (!saveAttributes) {
         return null;
       }
 
-      return <ShareButtonsFrontend {...attributes} />;
+      return <ShareButtonsFrontend {...saveAttributes} />;
     },
   });
 };

@@ -144,29 +144,29 @@ export function TermSelector({slug}) {
 
       return {
         isUserAdmin: canUser('create', 'users') ?? false,
-        hasCreateAction: _taxonomy
-          ? get(
+        hasCreateAction: _taxonomy ?
+          get(
             getCurrentPost(),
             [
               '_links',
               'wp:action-create-' + _taxonomy.rest_base,
             ],
             false
-          )
-          : false,
-        hasAssignAction: _taxonomy
-          ? get(
+          ) :
+          false,
+        hasAssignAction: _taxonomy ?
+          get(
             getCurrentPost(),
             [
               '_links',
               'wp:action-assign-' + _taxonomy.rest_base,
             ],
             false
-          )
-          : false,
-        terms: _taxonomy
-          ? getEditedPostAttribute(_taxonomy.rest_base)
-          : EMPTY_ARRAY,
+          ) :
+          false,
+        terms: _taxonomy ?
+          getEditedPostAttribute(_taxonomy.rest_base) :
+          EMPTY_ARRAY,
         loading: isResolving('getEntityRecords', [
           'taxonomy',
           slug,
@@ -211,7 +211,7 @@ export function TermSelector({slug}) {
    * @param {number[]} termIds Term ids.
    */
   const onUpdateTerms = (termIds) => {
-    editPost({[ taxonomy.rest_base ]: termIds});
+    editPost({[taxonomy.rest_base]: termIds});
   };
 
   /**
@@ -221,9 +221,9 @@ export function TermSelector({slug}) {
    */
   const onChange = (termId) => {
     const hasTerm = terms.includes(termId);
-    const newTerms = hasTerm
-      ? terms.filter((id) => id !== termId)
-      : [...terms, termId];
+    const newTerms = hasTerm ?
+      terms.filter((id) => id !== termId) :
+      [...terms, termId];
     onUpdateTerms(newTerms);
   };
 

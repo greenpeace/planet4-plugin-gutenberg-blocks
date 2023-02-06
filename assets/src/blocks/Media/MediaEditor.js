@@ -55,7 +55,7 @@ const MediaInspectorOptions = ({attributes, setAttributes}) => {
         icon="format-image"
         onSelect={onSelectImage}
         // eslint-disable-next-line no-console
-        onError={console.log('Error Selecting Image')}
+        onError={() => console.log('Error Selecting Image')}
         accept="image/*"
         allowedTypes={['image']}
       />
@@ -67,9 +67,9 @@ const MediaInspectorOptions = ({attributes, setAttributes}) => {
 const renderView = (attributes, toAttribute) => {
   const {video_title, description, embed_html, media_url, poster_url} = attributes;
 
-  const VideoComponent = media_url?.endsWith('.mp4')
-    ? <MediaElementVideo videoURL={media_url} videoPoster={poster_url} />
-    : <div dangerouslySetInnerHTML={{__html: embed_html || null}} />;
+  const VideoComponent = media_url?.endsWith('.mp4') ?
+    <MediaElementVideo videoURL={media_url} videoPoster={poster_url} /> :
+    <div dangerouslySetInnerHTML={{__html: embed_html || null}} />;
 
   const ErrorMessage = <div className="block-edit-mode-warning components-notice is-error">
     { __('The video URL could not be parsed.', 'planet4-blocks-backend') }
@@ -99,9 +99,9 @@ const renderView = (attributes, toAttribute) => {
         allowedFormats={['core/bold', 'core/italic']}
       />
       {
-        media_url && !media_url?.endsWith('.mp4') && !embed_html
-          ? ErrorMessage
-          : VideoComponent
+        media_url && !media_url?.endsWith('.mp4') && !embed_html ?
+          ErrorMessage :
+          VideoComponent
       }
     </Fragment>
   );
@@ -110,9 +110,9 @@ const renderView = (attributes, toAttribute) => {
 const resolveURL = (url) => {
   // If it's a Youtube ID, turn it into a Youtube URL
   // Youtube IDs are 11 chars long strings with the given set of chars
-  return /^[a-z0-9_-]{11}$/i.test(url)
-    ? `https://www.youtube.com/watch?v=${url}`
-    : url;
+  return /^[a-z0-9_-]{11}$/i.test(url) ?
+    `https://www.youtube.com/watch?v=${url}` :
+    url;
 };
 
 const patchLegacyAttributes = (attributes) => {
@@ -139,7 +139,7 @@ export const MediaEditor = (props) => {
   const attributes = patchLegacyAttributes(props.attributes);
   const {setAttributes, isSelected} = props;
 
-  const toAttribute = (attributeName) => (value) => setAttributes({[ attributeName ]: value});
+  const toAttribute = (attributeName) => (value) => setAttributes({[attributeName]: value});
 
   return (
     <div>

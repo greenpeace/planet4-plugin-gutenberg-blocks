@@ -3,7 +3,6 @@ import {SubPages} from './SubPages';
 export class SubPagesBlock {
   constructor() {
     const {registerBlockType} = wp.blocks;
-    const {withSelect} = wp.data;
 
     registerBlockType('planet4-blocks/sub-pages', {
       title: 'Sub Pages',
@@ -16,7 +15,7 @@ export class SubPagesBlock {
       save() {
         return null;
       },
-      edit: withSelect(() => {})(() => <SubPages />),
+      edit: SubPages,
     });
   }
 }

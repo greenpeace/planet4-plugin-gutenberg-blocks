@@ -28,6 +28,7 @@ export const socialMediaV1 = {
   isEligible({facebook_page_url}) {
     return !!facebook_page_url;
   },
+  // eslint-disable-next-line no-unused-vars
   migrate({facebook_page_url, ...attributes}) {
     return attributes;
   },

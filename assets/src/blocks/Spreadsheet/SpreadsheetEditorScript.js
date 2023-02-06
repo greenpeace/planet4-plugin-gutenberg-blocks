@@ -66,7 +66,7 @@ export class SpreadsheetEditor extends Component {
 
     const toCssVariables = (value) => {
       setAttributes({
-        css_variables: colors_variables_map[ value ] ?? {},
+        css_variables: colors_variables_map[value] ?? {},
       });
     };
 
@@ -76,7 +76,7 @@ export class SpreadsheetEditor extends Component {
           <PanelBody title={__('Settings', 'planet4-blocks-backend')}>
             <ColorPaletteControl
               label={__('Table Color', 'planet4-blocks-backend')}
-              value={attributes.css_variables[ 'block-spreadsheet--odd-row--background' ]}
+              value={attributes.css_variables['block-spreadsheet--odd-row--background']}
               onChange={toCssVariables}
               disableCustomColors
               clearable={false}
@@ -94,20 +94,20 @@ export class SpreadsheetEditor extends Component {
             <div className="sidebar-blocks-help">
               <ul>
                 <li>
-                  {/* eslint-disable-next-line @wordpress/i18n-no-collapsible-whitespace */}
+                  {/* eslint-disable-next-line @wordpress/i18n-no-collapsible-whitespace, no-restricted-syntax */}
                   { __(`From Your Google Spreadsheet Table choose File -> Publish on web.
                   No need to choose the output format, any of them will work.
                   A pop-up window will show up, click on the Publish button and then OK when the confirmation message is displayed.
                   Copy the URL that is highlighted and paste it in this block.`, 'planet4-blocks-backend') }
                 </li>
                 <li>
-                  {/* eslint-disable-next-line @wordpress/i18n-no-collapsible-whitespace */}
+                  {/* eslint-disable-next-line @wordpress/i18n-no-collapsible-whitespace, no-restricted-syntax */}
                   { __(`If you make changes to the sheet after publishing
                     then these changes do not always immediately get reflected,
                     even when "Automatically republish when changes are made" is checked.`, 'planet4-blocks-backend') }
                 </li>
                 <li>
-                  {/* eslint-disable-next-line @wordpress/i18n-no-collapsible-whitespace */}
+                  {/* eslint-disable-next-line @wordpress/i18n-no-collapsible-whitespace, no-restricted-syntax */}
                   { __(`You can force an update by unpublishing and republishing the sheet.
                     This will not change the sheet's public url.`, 'planet4-blocks-backend') }
                 </li>
@@ -125,19 +125,19 @@ export class SpreadsheetEditor extends Component {
 
     return <Fragment>
       {
-        !attributes.url
-          ? <div className="block-edit-mode-warning components-notice is-warning">
+        !attributes.url ?
+          <div className="block-edit-mode-warning components-notice is-warning">
             { __('No URL has been specified. Please edit the block and provide a Spreadsheet URL using the sidebar.', 'planet4-blocks-backend') }
-          </div>
-          : null
+          </div> :
+          null
       }
 
       {
-        attributes.url && this.state.invalidSheetId
-          ? <div className="block-edit-mode-warning components-notice is-error">
+        attributes.url && this.state.invalidSheetId ?
+          <div className="block-edit-mode-warning components-notice is-error">
             { __('The Spreadsheet URL appears to be invalid.', 'planet4-blocks-backend') }
-          </div>
-          : null
+          </div> :
+          null
       }
 
       <SpreadsheetFrontend {...attributes} handleErrors={this.handleErrors} />
@@ -148,9 +148,9 @@ export class SpreadsheetEditor extends Component {
     return (
       <Fragment>
         {
-          this.props.isSelected
-            ? this.renderEdit()
-            : null
+          this.props.isSelected ?
+            this.renderEdit() :
+            null
         }
         { this.renderView() }
       </Fragment>

@@ -31,7 +31,7 @@ const loadScriptAsync = (uri) => {
     tag.onload = () => {
       resolve();
     };
-    const body = document.getElementsByTagName('body')[ 0 ];
+    const body = document.getElementsByTagName('body')[0];
     body.appendChild(tag);
   });
 };
@@ -92,7 +92,7 @@ export const SocialMediaEditor = ({
   } = attributes;
 
   const toAttribute = (attributeName) => (value) => setAttributes({
-    [ attributeName ]: value,
+    [attributeName]: value,
   });
 
   /**
@@ -102,7 +102,7 @@ export const SocialMediaEditor = ({
    * @param {Object} provider
    */
   const checkProviderScript = async (provider) => {
-    const providerData = PROVIDER_SCRIPT_DATA[ provider ];
+    const providerData = PROVIDER_SCRIPT_DATA[provider];
     const script = document.querySelector(`body > script[src="${providerData.script}"]`);
     if (script === null) {
       await loadScriptAsync(providerData.script);
@@ -197,10 +197,11 @@ export const SocialMediaEditor = ({
         <HTMLSidebarHelp>{embed_type_help}</HTMLSidebarHelp>
         {embed_type === FACEBOOK_EMBED_TYPE &&
           <>
-            <label htmlFor>
+            <label htmlFor="render-siderbar__control">
               {__('What Facebook page content would you like to display?', 'planet4-blocks-backend')}
             </label>
             <SelectControl
+              id="render-siderbar__control"
               value={facebook_page_tab}
               options={[
                 {label: __('Timeline', 'planet4-blocks-backend'), value: FACEBOOK_PAGE_TAB_TIMELINE},

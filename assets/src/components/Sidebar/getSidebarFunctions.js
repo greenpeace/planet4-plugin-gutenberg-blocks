@@ -5,17 +5,17 @@ export const getSidebarFunctions = () => {
 
   const {editPost} = useDispatch('core/editor');
 
-  const updateValueAndDependencies = (fieldId) => (value) => editPost({meta: {[ fieldId ]: value}});
+  const updateValueAndDependencies = (fieldId) => (value) => editPost({meta: {[fieldId]: value}});
 
   const getParams = (name) => ({
-    value: meta[ name ] || '',
+    value: meta[name] || '',
     setValue: updateValueAndDependencies(name),
   });
 
   const getImageParams = (idField, urlField) => ({
     value: {
-      id: meta[ idField ] || '',
-      url: meta[ urlField ] || '',
+      id: meta[idField] || '',
+      url: meta[urlField] || '',
     },
     setValue: (id, url) => {
       updateValueAndDependencies(idField)(id);

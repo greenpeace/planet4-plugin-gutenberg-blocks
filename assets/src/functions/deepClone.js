@@ -22,7 +22,7 @@ const _deepClone = (value, ancestors = [], clones = []) => {
     return value;
   }
   if (ancestors.includes(value)) {
-    return clones[ ancestors.indexOf(value) ];
+    return clones[ancestors.indexOf(value)];
   }
   if (Array.isArray(value)) {
     const cloned = value.map((v) => _deepClone(v, ancestors, clones));
@@ -47,13 +47,13 @@ const _deepClone = (value, ancestors = [], clones = []) => {
   // the same value. Needed for Date, also makes Boolean objects work (even though you shouldn't use them).
   const param = typeof valueOf === 'object' ? null : valueOf;
   // Don't try to construct custom objects, use Object instead, which behaves the same as the JSON approach.
-  const constructor = global[ value.constructor.name ] || Object;
+  const constructor = global[value.constructor.name] || Object;
   const newObject = new constructor(param);
 
   ancestors.push(value);
   clones.push(newObject);
 
-  Object.keys(value).forEach((k) => newObject[ k ] = _deepClone(value[ k ], ancestors, clones));
+  Object.keys(value).forEach((k) => newObject[k] = _deepClone(value[k], ancestors, clones));
 
   return newObject;
 };

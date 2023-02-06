@@ -12,13 +12,14 @@ import {
 /**
  * WordPress dependencies
  */
-import {__, _x, sprintf} from '@wordpress/i18n';
 import {Component} from '@wordpress/element';
 import {FormTokenField} from '@wordpress/components';
 import {withSelect, withDispatch} from '@wordpress/data';
 import {compose} from '@wordpress/compose';
-import apiFetch from '@wordpress/api-fetch';
 import {addQueryArgs} from '@wordpress/url';
+
+const {__, _x, sprintf} = wp.i18n;
+const {apiFetch} = wp;
 
 /**
  * Module constants
@@ -227,7 +228,7 @@ export default compose(
   withDispatch((dispatch) => {
     return {
       onUpdateTerms(terms, restBase) {
-        dispatch('core/editor').editPost({[ restBase ]: terms});
+        dispatch('core/editor').editPost({[restBase]: terms});
       },
     };
   })

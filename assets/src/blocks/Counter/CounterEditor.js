@@ -23,7 +23,7 @@ export class CounterEditor extends Component {
   toAttribute(attributeName) {
     const {setAttributes} = this.props;
     return (value) => {
-      setAttributes({[ attributeName ]: value});
+      setAttributes({[attributeName]: value});
     };
   }
 
@@ -117,9 +117,9 @@ export class CounterEditor extends Component {
     return (
       <Fragment>
         {
-          this.props.isSelected
-            ? this.renderEdit()
-            : null
+          this.props.isSelected ?
+            this.renderEdit() :
+            null
         }
         {this.renderView()}
       </Fragment>

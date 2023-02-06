@@ -15,7 +15,7 @@ export const ArticlesFrontend = (props) => {
 
   const postIdClass = [...document.body.classList].find((classNameFound) => /^postid-\d+$/.test(classNameFound));
 
-  const postId = !postIdClass ? null : postIdClass.split('-')[ 1 ];
+  const postId = !postIdClass ? null : postIdClass.split('-')[1];
 
   const postCategories = props.post_categories || [];
 
@@ -36,17 +36,18 @@ export const ArticlesFrontend = (props) => {
       <ArticlesList posts={posts} postType={postType} />
       { hasMorePages &&
       <div className="row">
-        { read_more_link
-          ? <div className="col-md-12 col-lg-5 col-xl-5">
+        { read_more_link ?
+          <div className="col-md-12 col-lg-5 col-xl-5">
             <a
               className="btn btn-secondary btn-block article-load-more"
               href={read_more_link}
-              target={button_link_new_tab ? '_blank' : ''} rel="noreferrer"
+              target={button_link_new_tab ? '_blank' : ''}
+              rel="noreferrer"
             >
               { read_more_text }
             </a>
-          </div>
-          : <div className="col-md-12 col-lg-5 col-xl-5">
+          </div> :
+          <div className="col-md-12 col-lg-5 col-xl-5">
             <button
               className="btn btn-secondary btn-block article-load-more"
               onClick={loadNextPage}

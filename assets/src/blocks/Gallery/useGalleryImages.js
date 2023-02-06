@@ -15,7 +15,7 @@ export const useGalleryImages = ({multiple_image, gallery_block_focus_points}, l
   const [images, setImages] = useState([]);
   const [controller, setController] = useState();
 
-  const imageSize = GALLERY_IMAGE_SIZES[ layout ];
+  const imageSize = GALLERY_IMAGE_SIZES[layout];
 
   const loadPage = async () => {
     const args = {
@@ -26,9 +26,9 @@ export const useGalleryImages = ({multiple_image, gallery_block_focus_points}, l
 
     try {
       // eslint-disable-next-line no-shadow
-      const images = baseUrl
-        ? await fetchJson(`${baseUrl}/wp-json/${addQueryArgs('planet4/v1/get-gallery-images', args)}`)
-        : await apiFetch({path: addQueryArgs('planet4/v1/get-gallery-images', args)});
+      const images = baseUrl ?
+        await fetchJson(`${baseUrl}/wp-json/${addQueryArgs('planet4/v1/get-gallery-images', args)}`) :
+        await apiFetch({path: addQueryArgs('planet4/v1/get-gallery-images', args)});
       setImages(images);
     } catch (e) {
       // eslint-disable-next-line no-console

@@ -78,11 +78,11 @@ export const CookiesFrontend = (props) => {
     }
 
     gtag('consent', 'update', {
-      [ key ]: granted ? 'granted' : 'denied',
+      [key]: granted ? 'granted' : 'denied',
     });
     dataLayer.push({
       event: 'updateConsent',
-      [ key ]: granted ? 'granted' : 'denied',
+      [key]: granted ? 'granted' : 'denied',
     });
   };
 
@@ -103,10 +103,10 @@ export const CookiesFrontend = (props) => {
   useEffect(updateActiveConsentChoice, [marketingCookiesChecked, analyticalCookiesChecked]);
 
   const getFieldValue = (fieldName) => {
-    if (props[ fieldName ] === undefined) {
-      return COOKIES_DEFAULT_COPY[ fieldName ] || '';
+    if (props[fieldName] === undefined) {
+      return COOKIES_DEFAULT_COPY[fieldName] || '';
     }
-    return props[ fieldName ] || '';
+    return props[fieldName] || '';
   };
 
   const isFieldValid = (fieldName) => getFieldValue(fieldName).trim().length > 0;
@@ -188,8 +188,9 @@ export const CookiesFrontend = (props) => {
         {(ENABLE_ANALYTICAL_COOKIES && (isEditing || (isFieldValid('analytical_cookies_name') && isFieldValid('analytical_cookies_description')))) &&
           <>
             <div className="d-flex align-items-center">
-              <label className="custom-control" style={isSelected ? {pointerEvents: 'none'} : null} htmlFor>
+              <label className="custom-control" style={isSelected ? {pointerEvents: 'none'} : null} htmlFor="analytical-cookies__control">
                 <input
+                  id="analytical-cookies__control"
                   type="checkbox"
                   tabIndex={isSelected ? '-1' : null}
                   name="analytical_cookies"
@@ -255,8 +256,9 @@ export const CookiesFrontend = (props) => {
         {(isEditing || (isFieldValid('all_cookies_name') && isFieldValid('all_cookies_description'))) &&
           <>
             <div className="d-flex align-items-center">
-              <label className="custom-control" style={isSelected ? {pointerEvents: 'none'} : null} htmlFor>
+              <label className="custom-control" style={isSelected ? {pointerEvents: 'none'} : null} htmlFor="all-cookies__control">
                 <input
+                  id="all-cookies__control"
                   type="checkbox"
                   tabIndex={isSelected ? '-1' : null}
                   onChange={() => {

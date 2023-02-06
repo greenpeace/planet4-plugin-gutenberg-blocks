@@ -23,16 +23,16 @@ export const CarouselHeaderEditor = ({setAttributes, attributes}) => {
 
   const changeSlideAttribute = (slideAttributeName, index) => (value) => {
     const newSlides = JSON.parse(JSON.stringify(slides));
-    newSlides[ index ][ slideAttributeName ] = value;
+    newSlides[index][slideAttributeName] = value;
     setAttributes({slides: newSlides});
   };
 
   const changeSlideImage = (index, imageId, imageUrl, imageAlt, srcSet) => {
     const newSlides = [...slides];
-    newSlides[ index ].image = imageId;
-    newSlides[ index ].image_url = imageUrl;
-    newSlides[ index ].image_alt = imageAlt;
-    newSlides[ index ].image_srcset = srcSet;
+    newSlides[index].image = imageId;
+    newSlides[index].image_url = imageUrl;
+    newSlides[index].image_alt = imageAlt;
+    newSlides[index].image_srcset = srcSet;
     setAttributes({slides: newSlides});
   };
 
@@ -102,7 +102,7 @@ export const CarouselHeaderEditor = ({setAttributes, attributes}) => {
           {slides?.map((slide, index) => (
             <Slide
               key={index}
-              ref={(element) => slidesRef.current[ index ] = element}
+              ref={(element) => slidesRef.current[index] = element}
               active={currentSlide === index}
             >
               <EditableBackground

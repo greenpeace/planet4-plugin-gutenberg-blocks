@@ -29,7 +29,7 @@ export class ENForm extends Component {
     let pagesByType;
 
     for (const i in window.p4en_vars.pages) {
-      pagesByType = window.p4en_vars.pages[ i ].map((page) => {
+      pagesByType = window.p4en_vars.pages[i].map((page) => {
         return {label: page.name, value: page.id};
       });
       flattenedPages = flattenedPages.concat(
@@ -66,11 +66,11 @@ export class ENForm extends Component {
             onChange={this.props.onPageChange}
           />
 
-          { flattenedPages.length
-            ? <FormHelp>
+          { flattenedPages.length ?
+            <FormHelp>
               { __('Select the Live EN page that this form will be submitted to.', 'planet4-engagingnetworks-backend') }
-            </FormHelp>
-            : <InlineFormFeedback>
+            </FormHelp> :
+            <InlineFormFeedback>
               { __('Check your EngagingNetworks settings!', 'planet4-engagingnetworks-backend') }
             </InlineFormFeedback>
           }
@@ -292,9 +292,9 @@ export class ENForm extends Component {
               ]}
               onChange={this.props.onFormChange}
             />
-            <FormHelp>{ this.props.forms
-              ? __('Select the P4EN Form that will be displayed.', 'planet4-engagingnetworks-backend')
-              : __('Create an EN Form', 'planet4-engagingnetworks-backend')
+            <FormHelp>{ this.props.forms ?
+              __('Select the P4EN Form that will be displayed.', 'planet4-engagingnetworks-backend') :
+              __('Create an EN Form', 'planet4-engagingnetworks-backend')
             }</FormHelp>
           </div>
         </div>
@@ -323,17 +323,17 @@ export class ENForm extends Component {
     return (
       <div>
         {
-          this.props.isSelected
-            ? this.renderEdit()
-            : null
+          this.props.isSelected ?
+            this.renderEdit() :
+            null
         }
         <Preview showBar={this.props.isSelected} isSelected={this.props.isSelected}>
 
-          { validationMessage.length
-            ? <ValidationMessage
+          { validationMessage.length ?
+            <ValidationMessage
               message={validationMessage}
-            />
-            : <ServerSideRender
+            /> :
+            <ServerSideRender
               block={'planet4-blocks/enform'}
               attributes={{
                 en_page_id: this.props.en_page_id,

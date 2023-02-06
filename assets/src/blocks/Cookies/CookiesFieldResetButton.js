@@ -5,7 +5,7 @@ import {Tooltip} from '@wordpress/components';
 const COOKIES_DEFAULT_COPY = window.p4bk_vars.cookies_default_copy || {};
 
 export const CookiesFieldResetButton = ({fieldName, toAttribute, currentValue}) => {
-  const defaultValue = COOKIES_DEFAULT_COPY[ fieldName ] || '';
+  const defaultValue = COOKIES_DEFAULT_COPY[fieldName] || '';
 
   if (!currentValue || !defaultValue || currentValue === defaultValue) {
     return null;

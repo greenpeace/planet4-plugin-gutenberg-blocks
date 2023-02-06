@@ -29,6 +29,7 @@ import {FrontendBlockNode} from '../components/FrontendBlockNode/FrontendBlockNo
  * component could potentially cause block validation errors in Gutenberg.
  *
  * @param {string} block
+ * @return {Object} to render React blocks
  */
 export const frontendRendered = (block) => {
   return (attributes, className) => {

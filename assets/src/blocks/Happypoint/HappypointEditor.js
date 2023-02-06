@@ -80,7 +80,7 @@ export const HappypointEditor = ({attributes, setAttributes, isSelected}) => {
   };
 
   const toAttribute = (attributeName) => (value) => setAttributes({
-    [ attributeName ]: value,
+    [attributeName]: value,
   });
 
   const onFocalPointChange = ({x, y}) => {

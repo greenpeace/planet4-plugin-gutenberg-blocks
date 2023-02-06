@@ -3,7 +3,6 @@ import mainThemeUrl from '../main-theme-url';
 const {__} = wp.i18n;
 
 const item = ['core/group', {
-  backgroundColor: '',
   style: {
     border: {radius: '4px'},
     spacing: {
@@ -41,12 +40,9 @@ const item = ['core/group', {
   }],
 ]];
 
-const template = ({
-  backgroundColor = 'grey-05',
-}) => ([
+const template = () => ([
   ['core/group', {
     align: 'full',
-    backgroundColor,
     className: 'block',
     style: {
       spacing: {

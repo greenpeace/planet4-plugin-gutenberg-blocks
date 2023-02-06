@@ -74,10 +74,10 @@ const HiddenInput = ({field}) => {
 
 const TextInput = ({field, onInputChange, onBlur, errors, is_side_style}) => {
   const {id, name} = inputId(field);
-  const has_error = errors && errors[ field.id ];
-  const errorMessage = field.input_type === 'email'
-    ? __('Please enter a valid e-mail address.', 'planet4-engagingnetworks')
-    : __('This field is required', 'planet4-engagingnetworks');
+  const has_error = errors && errors[field.id];
+  const errorMessage = field.input_type === 'email' ?
+    __('Please enter a valid e-mail address.', 'planet4-engagingnetworks') :
+    __('This field is required', 'planet4-engagingnetworks');
 
   const label = `${field.label}${field.required ? ' *' : ''}`;
 
@@ -87,7 +87,7 @@ const TextInput = ({field, onInputChange, onBlur, errors, is_side_style}) => {
     >
       <div
         className="en__field__element en__field__element--text form-group animated-label"
-        style={field.en_type === 'GEN' ? {display: 'flex', 'flex-direction': 'row'} : {display: 'block'}}
+        style={field.en_type === 'GEN' ? {display: 'flex', flexDirection: 'row'} : {display: 'block'}}
       >
         <input
           id={id}
@@ -114,7 +114,7 @@ const TextInput = ({field, onInputChange, onBlur, errors, is_side_style}) => {
           </label>
         }
         {has_error &&
-          <div className="invalid-feedback">{ errors[ field.id ] ?? errorMessage }</div>
+          <div className="invalid-feedback">{ errors[field.id] ?? errorMessage }</div>
         }
       </div>
     </div>
@@ -122,14 +122,14 @@ const TextInput = ({field, onInputChange, onBlur, errors, is_side_style}) => {
 };
 
 const CheckboxInput = ({field, onInputChange, onBlur, index, dependent_field, errors}) => {
-  return field.en_type === 'GEN'
-    ? <CheckboxGen {...{field, onInputChange, onBlur, index, dependent_field, errors}} />
-    : <CheckboxOpt {...{field, onInputChange, onBlur, dependent_field, errors}} />;
+  return field.en_type === 'GEN' ?
+    <CheckboxGen {...{field, onInputChange, onBlur, index, dependent_field, errors}} /> :
+    <CheckboxOpt {...{field, onInputChange, onBlur, dependent_field, errors}} />;
 };
 
 const CheckboxOpt = ({field, onInputChange, onBlur, dependent_field, errors}) => {
   const {id, name} = inputId(field);
-  const has_error = errors && errors[ field.id ];
+  const has_error = errors && errors[field.id];
   const errorMessage = __('This field is required', 'planet4-engagingnetworks');
 
   return (
@@ -137,7 +137,7 @@ const CheckboxOpt = ({field, onInputChange, onBlur, dependent_field, errors}) =>
       <div
         className="en__field__element en__field__element--check form-group form-check-label-block custom-control p4-custom-control-input"
       >
-        <label className={`custom-checkbox ${field.name === dependent_field ? 'disable-checkbox' : ''}`} htmlFor>
+        <label className={`custom-checkbox ${field.name === dependent_field ? 'disable-checkbox' : ''}`} htmlFor={id}>
           <input
             id={id}
             name={name}
@@ -158,7 +158,7 @@ const CheckboxOpt = ({field, onInputChange, onBlur, dependent_field, errors}) =>
             dangerouslySetInnerHTML={{__html: `${field.label}${field.required ? ' *' : ''}`}}
           />
           {has_error &&
-          <div className="invalid-feedback">{ errors[ field.id ] ?? errorMessage }</div>
+          <div className="invalid-feedback">{ errors[field.id] ?? errorMessage }</div>
           }
         </label>
       </div>
@@ -169,13 +169,13 @@ const CheckboxOpt = ({field, onInputChange, onBlur, dependent_field, errors}) =>
 const CheckboxGen = ({field, onInputChange, onBlur, dependent_field, errors}) => {
   const {id, name} = inputId(field);
   const question_option = {};
-  const has_error = errors && errors[ field.id ];
+  const has_error = errors && errors[field.id];
   const errorMessage = __('This field is required', 'planet4-engagingnetworks');
 
   return (
     <div className={`en__field en__field--check en__field--${field.id}`}>
       <div className="en__field__element en__field__element--check form-group form-check-label-block custom-control p4-custom-control-input">
-        <label className="custom-checkbox" htmlFor>
+        <label className="custom-checkbox" htmlFor={id}>
           <input
             id={id}
             name={name}
@@ -196,7 +196,7 @@ const CheckboxGen = ({field, onInputChange, onBlur, dependent_field, errors}) =>
             dangerouslySetInnerHTML={{__html: `${question_option.option_label}${field.required ? ' *' : ''}`}}
           />
           {errors && errors.includes(field.id) &&
-            <div className="invalid-feedback">{ errors[ field.id ] ?? errorMessage }</div>
+            <div className="invalid-feedback">{errors[field.id] ?? errorMessage}</div>
           }
           <br />
         </label>
@@ -207,14 +207,14 @@ const CheckboxGen = ({field, onInputChange, onBlur, dependent_field, errors}) =>
 
 const RadioInput = ({field, onInputChange, onBlur, errors}) => {
   const {id, name} = inputId(field);
-  const options = field.radio_options[ field.locale ] || [];
-  const has_error = errors && errors[ field.id ];
+  const options = field.radio_options[field.locale] || [];
+  const has_error = errors && errors[field.id];
 
   const inputs = options.map((opt, index) => {
     return (
       <div key={index} className={`en__field en__field--check en__field--${field.id}`}>
         <div className="en__field__element en__field__element--check form-group form-check-label-block custom-control p4-custom-control-input">
-          <label className="custom-radio" htmlFor>
+          <label className="custom-radio" htmlFor={id}>
             <input
               id={id}
               name={name}
@@ -240,6 +240,8 @@ const RadioInput = ({field, onInputChange, onBlur, errors}) => {
     return null;
   }
 
+  const errorMessage = __('This field is required', 'planet4-engagingnetworks');
+
   return (
     <div className="en__field">
       <span className="custom-control-description">
@@ -247,7 +249,7 @@ const RadioInput = ({field, onInputChange, onBlur, errors}) => {
       </span><br />
       { inputs }
       {has_error &&
-        <div className="invalid-feedback">{ errors[ field.id ] ?? errors.errorMessage }</div>
+        <div className="invalid-feedback">{errors[field.id] ?? errorMessage}</div>
       }
     </div>
   );
@@ -255,7 +257,7 @@ const RadioInput = ({field, onInputChange, onBlur, errors}) => {
 
 const CountryInput = ({field, onInputChange, onBlur, errors}) => {
   const {id, name} = inputId(field);
-  const has_error = errors && errors[ field.id ];
+  const has_error = errors && errors[field.id];
   const error_message = __('Please select a country.', 'planet4-engagingnetworks');
   const props = {
     id,
@@ -276,7 +278,7 @@ const CountryInput = ({field, onInputChange, onBlur, errors}) => {
       <div className="en__field__element en__field__element--select form-group animated-label">
         <CountrySelector {...props} />
         {has_error &&
-          <div className="invalid-feedback">{ errors[ field.id ] ?? error_message }</div>
+          <div className="invalid-feedback">{ errors[field.id] ?? error_message }</div>
         }
       </div>
     </div>
@@ -285,7 +287,7 @@ const CountryInput = ({field, onInputChange, onBlur, errors}) => {
 
 const PositionInput = ({field, onInputChange, onBlur, errors, is_side_style}) => {
   const {id, name} = inputId(field);
-  const has_error = errors && errors[ field.id ];
+  const has_error = errors && errors[field.id];
   const error_message = __('Please select a position.', 'planet4-engagingnetworks');
   const props = {
     id,
@@ -310,7 +312,7 @@ const PositionInput = ({field, onInputChange, onBlur, errors, is_side_style}) =>
         }
         <PositionSelector {...props} />
         {has_error &&
-          <div className="invalid-feedback">{ errors[ field.id ] ?? error_message }</div>
+          <div className="invalid-feedback">{ errors[field.id] ?? error_message }</div>
         }
       </div>
     </div>

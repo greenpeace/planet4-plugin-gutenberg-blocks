@@ -57,8 +57,8 @@ export const SplittwocolumnsSettings = ({attributes, charLimit, setAttributes}) 
         issue?.cmb2?.p4_metabox.p4_description ?? issue_description,
         charLimit.description
       ),
-      issue_link_text: edited.issue_link_text ? issue_link_text
-        : issue_link_text || __('Learn more about this issue', 'planet4-blocks'),
+      issue_link_text: edited.issue_link_text ? issue_link_text :
+        issue_link_text || __('Learn more about this issue', 'planet4-blocks'),
       issue_link_path: issue?.link || '',
       issue_image_id: edited.issue_image_id ? issue_image_id : (issue?.featured_media ?? 0),
     });
@@ -74,8 +74,8 @@ export const SplittwocolumnsSettings = ({attributes, charLimit, setAttributes}) 
         tag?.description || tag_description,
         charLimit.description
       ),
-      button_text: edited.button_text ? button_text
-        : button_text || __('Get involved', 'planet4-blocks'),
+      button_text: edited.button_text ? button_text :
+        button_text || __('Get involved', 'planet4-blocks'),
       tag_link: tag?.link || '',
       button_link: button_link || tag?.link || '',
       tag_image_id: edited.tag_image_id ? tag_image_id : (tag?.meta?.tag_attachment_id ?? 0),
@@ -84,18 +84,18 @@ export const SplittwocolumnsSettings = ({attributes, charLimit, setAttributes}) 
 
   const onImageChange = (image_type, image) => {
     setAttributes({
-      [ `${image_type}_id` ]: parseInt(image?.id) ?? 0,
-      [ `${image_type}_src` ]: image?.url ?? image?.source_url ?? '',
-      [ `${image_type}_title` ]: image?.title?.raw ?? image?.title ?? '',
+      [`${image_type}_id`]: parseInt(image?.id) ?? 0,
+      [`${image_type}_src`]: image?.url ?? image?.source_url ?? '',
+      [`${image_type}_title`]: image?.title?.raw ?? image?.title ?? '',
       edited: {
         ...edited,
-        [ `${image_type}_id` ]: true,
+        [`${image_type}_id`]: true,
       },
     });
   };
 
   const onFocalChange = (focal_name, {x, y}) => {
-    setAttributes({[ focal_name ]: `${x * 100}% ${y * 100}%`});
+    setAttributes({[focal_name]: `${x * 100}% ${y * 100}%`});
   };
 
   const issueOptions = [
@@ -220,6 +220,7 @@ export const SplittwocolumnsSettings = ({attributes, charLimit, setAttributes}) 
  * Convert focal point values from : 10% 80% => {x:0.1, y:0.8}
  *
  * @param {string} focal_str
+ * @return {Object} vector points
  */
 const convertFocalStringToObj = (focal_str) => {
   if (!focal_str) {
@@ -235,6 +236,7 @@ const convertFocalStringToObj = (focal_str) => {
  *
  * @param {string} str
  * @param {number} limit
+ * @return {string} cleanString
  */
 const cleanString = (str, limit) => {
   return str.replace(/<[^>]+>/g, '')

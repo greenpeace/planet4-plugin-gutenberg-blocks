@@ -15,6 +15,7 @@ dispatch('core').addEntities([{
  * Based on post type
  *
  * @param {Object} attributes
+ * @return {Object} Selector Interface
  */
 export const PostSelector = (attributes) => {
   const {
@@ -54,9 +55,9 @@ export const PostSelector = (attributes) => {
         ...select('core').getEntityRecords('postType', 'p4_action', {include: selected}) || [],
       ];
       const actions = select('core').getEntityRecords('postType', 'p4_action', args) || [];
-      const pages = act_parent
-        ? (select('core').getEntityRecords('postType', 'page', {post_parent: act_parent, ...args}) || [])
-        : [];
+      const pages = act_parent ?
+        (select('core').getEntityRecords('postType', 'page', {post_parent: act_parent, ...args}) || []) :
+        [];
       return [].concat(selectedPosts, actions, pages);
     }
 
@@ -77,9 +78,9 @@ export const PostSelector = (attributes) => {
    * @param {Array} titles
    */
   const setPostsIdsFromTitles = (titles) => {
-    const postIds = titles?.length
-      ? titles.map((token) => options.find((option) => option.title === token)?.id)
-      : [];
+    const postIds = titles?.length ?
+      titles.map((token) => options.find((option) => option.title === token)?.id) :
+      [];
     onChange(postIds);
   };
 
@@ -87,16 +88,15 @@ export const PostSelector = (attributes) => {
    * Resolve IDs to Titles
    *
    * @param {Array} ids
+   * @return {Array} new array of ids
    */
   const getPostsTitlesFromIds = (ids) => {
-    return options?.length && ids?.length
-      ? ids.map((postId) => options.find((option) => option.id === parseInt(postId))?.title).filter((t) => t)
-      : [];
+    return options?.length && ids?.length ?
+      ids.map((postId) => options.find((option) => option.id === parseInt(postId))?.title).filter((t) => t) :
+      [];
   };
 
-  /**
-   * Get field initial value
-   */
+  // Get field initial value
   const getValue = () => getPostsTitlesFromIds(selected);
 
   return (

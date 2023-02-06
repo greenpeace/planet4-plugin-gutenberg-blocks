@@ -15,14 +15,14 @@ export const EditableColumns = ({
   columnImages,
 }) => {
   const getImageOrButton = (openMediaModal, index) => {
-    if ((0 < columns[ index ].attachment)) {
+    if ((0 < columns[index].attachment)) {
       return <div className="columns-image-container">
         <ImageHoverControls
           onEdit={openMediaModal}
           onRemove={() => toAttribute('attachment', index)(0)}
           isCompact={columns_block_style === LAYOUT_ICONS}
         />
-        <img src={columnImages[ columns[ index ].attachment ]} alt="Attachment" />
+        <img src={columnImages[columns[index].attachment]} alt="Attachment" />
       </div>;
     }
 
@@ -75,7 +75,7 @@ export const EditableColumns = ({
                     render={({open}) => getImageOrButton(open, index)}
                   />
                 </MediaUploadCheck>
-                {columns_block_style === LAYOUT_ICONS && column.attachment > 0 && typeof columnImages[ column.attachment ] !== 'undefined' && !columnImages[ column.attachment ].endsWith('.png') &&
+                {columns_block_style === LAYOUT_ICONS && column.attachment > 0 && typeof columnImages[column.attachment] !== 'undefined' && !columnImages[column.attachment].endsWith('.png') &&
                   <div className="column-image-error">
                     {__('Please select another image for this column, as the current image is not an icon and you have chosen columns style icons. ', 'planet4-blocks-backend')}
                   </div>
@@ -112,12 +112,12 @@ export const EditableColumns = ({
             )}
             <RichText
               tagName="div"
-              className={isCampaign || [LAYOUT_NO_IMAGE, LAYOUT_TASKS].includes(columns_block_style)
-                ? `btn btn-${isCampaign ? 'primary' : 'secondary'}`
-                : ''}
-              placeholder={[LAYOUT_NO_IMAGE, LAYOUT_TASKS].includes(columns_block_style)
-                ? __('Enter column button text', 'planet4-blocks-backend')
-                : __('Enter column link text', 'planet4-blocks-backend')}
+              className={isCampaign || [LAYOUT_NO_IMAGE, LAYOUT_TASKS].includes(columns_block_style) ?
+                `btn btn-${isCampaign ? 'primary' : 'secondary'}` :
+                ''}
+              placeholder={[LAYOUT_NO_IMAGE, LAYOUT_TASKS].includes(columns_block_style) ?
+                __('Enter column button text', 'planet4-blocks-backend') :
+                __('Enter column link text', 'planet4-blocks-backend')}
               value={column.cta_text}
               onChange={toAttribute('cta_text', index)}
               withoutInteractiveFormatting

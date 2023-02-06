@@ -13,5 +13,5 @@ export const getSubmenuStyle = (className, submenu_style) => {
     return styleClass;
   }
 
-  return submenu_style ? SUBMENU_STYLES[ submenu_style ] : 'long';
+  return submenu_style ? SUBMENU_STYLES[submenu_style] : 'long';
 };

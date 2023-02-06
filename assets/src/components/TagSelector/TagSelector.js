@@ -39,6 +39,7 @@ class TagSelector extends Component {
   }
 
   render() {
+    // eslint-disable-next-line no-unused-vars
     const {tagSuggestions, onChange, label, placeholder, value, ...ownProps} = this.props;
 
     if (!tagSuggestions || tagSuggestions.length === 0) {

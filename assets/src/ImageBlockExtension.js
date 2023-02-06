@@ -48,11 +48,11 @@ const addExtraAttributes = function() {
     settings.attributes = assign(settings.attributes, {
       captionStyle: {
         type: 'string',
-        default: captionStyleOptions[ 0 ].value,
+        default: captionStyleOptions[0].value,
       },
       captionAlignment: {
         type: 'string',
-        default: captionAlignmentOptions[ 1 ].value,
+        default: captionAlignmentOptions[1].value,
       },
     });
 
@@ -79,7 +79,7 @@ const addExtraControls = function() {
 
       const updateCaptionAlignment = (value) => {
         const className = props.attributes.className || '';
-        const classNameBase = className.split('caption-alignment-')[ 0 ];
+        const classNameBase = className.split('caption-alignment-')[0];
         const newClassName = classNameBase + ` caption-alignment-${value}`;
         props.setAttributes({className: newClassName});
       };
@@ -92,7 +92,8 @@ const addExtraControls = function() {
               title={__('Planet4 Image Options')}
               initialOpen={true}
             >
-              <label htmlFor>Caption alignment</label>
+              {/* eslint-disable-next-line jsx-a11y/label-has-for, jsx-a11y/label-has-associated-control */}
+              <label>Caption alignment</label>
               <ButtonGroup>
                 {
                   captionAlignmentOptions.map((option, key) => {

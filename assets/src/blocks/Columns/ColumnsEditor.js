@@ -125,7 +125,7 @@ export const ColumnsEditor = ({isSelected, attributes, setAttributes}) => {
       if (column.attachment && column.attachment > 0) {
         const media_details = select('core').getMedia(column.attachment);
         if (media_details) {
-          columnImages[ column.attachment ] = select('core').getMedia(column.attachment).source_url;
+          columnImages[column.attachment] = select('core').getMedia(column.attachment).source_url;
         }
       }
     });
@@ -135,12 +135,12 @@ export const ColumnsEditor = ({isSelected, attributes, setAttributes}) => {
   const toAttribute = (attributeName, index) => (value) => {
     if (['columns_title', 'columns_description'].includes(attributeName)) {
       setAttributes({
-        [ attributeName ]: value,
+        [attributeName]: value,
       });
     } else {
       // eslint-disable-next-line no-shadow
       const columns = JSON.parse(JSON.stringify(attributes.columns));
-      columns[ index ][ attributeName ] = value;
+      columns[index][attributeName] = value;
       setAttributes({columns});
     }
   };
@@ -173,14 +173,14 @@ export const ColumnsEditor = ({isSelected, attributes, setAttributes}) => {
           allowedFormats={['core/bold', 'core/italic']}
         />
       }
-      {isExample
-        ? <Columns
+      {isExample ?
+        <Columns
           columns={exampleColumns}
           isCampaign={postType === 'campaign'}
           columns_block_style={columns_block_style}
           isExample
-        />
-        : <EditableColumns
+        /> :
+        <EditableColumns
           isCampaign={postType === 'campaign'}
           columns={columns}
           columns_block_style={columns_block_style}

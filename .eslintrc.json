@@ -53,25 +53,29 @@
     "camelcase": "off",
     "new-cap": "error",
     "no-var": 1,
-    "react/jsx-uses-react": "error",
-    "react/jsx-uses-vars": "error",
     "react/jsx-indent": "off",
     "react/jsx-indent-props": "off",
     "react-hooks/rules-of-hooks": "off",
-    "react/no-unkown-property": "off",
     "@wordpress/dependency-group": "off",
+    "operator-linebreak": [
+      "error",
+      "after"
+    ],
+    "computed-property-spacing": [
+      "error",
+      "never"
+    ],
     "space-in-parens": [
       "error",
       "never"
     ],
     "react/jsx-curly-spacing": [
-      2,
+      "error",
       {
         "when": "never",
         "allowMultiline": false
       }
     ],
-    "prettier/prettier": "off",
     "space-unary-ops": [
       "error", {
         "words": true,

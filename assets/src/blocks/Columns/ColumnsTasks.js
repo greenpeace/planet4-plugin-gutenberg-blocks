@@ -28,8 +28,8 @@ export const ColumnsTasks = ({isCampaign, columns, no_of_columns}) => (
               </span>
               {title &&
                 <h5>
-                  {cta_link
-                    ? <a
+                  {cta_link ?
+                    <a
                       href={cta_link}
                       target={link_new_tab ? '_blank' : ''}
                       data-ga-category="Columns Block"
@@ -37,8 +37,8 @@ export const ColumnsTasks = ({isCampaign, columns, no_of_columns}) => (
                       data-ga-label={cta_link} rel="noreferrer"
                     >
                       {title}
-                    </a>
-                    : title
+                    </a> :
+                    title
                   }
                 </h5>
               }
@@ -77,7 +77,7 @@ export const ColumnsTasks = ({isCampaign, columns, no_of_columns}) => (
             link_new_tab,
           } = column;
 
-          const taskNumber = ['one', 'two', 'three', 'four'][ index ] || 'one';
+          const taskNumber = ['one', 'two', 'three', 'four'][index] || 'one';
           const hasImage = attachment !== 0 && attachment !== undefined;
 
           return (

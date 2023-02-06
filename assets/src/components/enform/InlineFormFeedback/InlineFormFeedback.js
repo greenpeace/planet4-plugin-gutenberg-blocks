@@ -1,1 +1,1 @@
-export const InlineFormFeedback = () => (<div className="InlineFormFeedback">{this.props.children}</div>);
+export const InlineFormFeedback = (props) => (<div className="InlineFormFeedback">{props.children}</div>);

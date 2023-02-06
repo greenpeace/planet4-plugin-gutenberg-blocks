@@ -34,9 +34,9 @@ export const registerPageHeaderBlock = () => {
   ['left', 'right'].forEach((variation) => {
     registerBlockVariation('core/media-text', {
       name: `page-header-img-${variation}`,
-      // eslint-disable-next-line @wordpress/i18n-no-variables
+      // eslint-disable-next-line @wordpress/i18n-no-variables, no-restricted-syntax
       title: __(`Page header with image on the ${variation}`, 'planet4-blocks-backend'),
-      // eslint-disable-next-line @wordpress/i18n-no-variables
+      // eslint-disable-next-line @wordpress/i18n-no-variables, no-restricted-syntax
       description: __(`Page header with image on the ${variation}`, 'planet4-blocks-backend'),
       scope,
       attributes: {mediaPosition: variation, ...attributes},

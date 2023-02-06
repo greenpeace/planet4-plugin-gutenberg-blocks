@@ -39,9 +39,9 @@ export class ArticlePreview extends Component {
     if (authorName) {
       return (
         <span className="article-list-item-author">
-          {!isLink
-            ? authorName
-            : <a href={authorLink}>{authorName}</a>
+          {!isLink ?
+            authorName :
+            <a href={authorLink}>{authorName}</a>
           }
         </span>
       );
@@ -78,11 +78,11 @@ export class ArticlePreview extends Component {
 
     return (
       <div className={`article-list-item-image ${thumbnail_ratio < 1 ? '' : 'article-list-item-image-max-width'}`}>
-        {thumbnail_ratio < 1
-          ? <div className="article-image-holder">
+        {thumbnail_ratio < 1 ?
+          <div className="article-image-holder">
             {image}
-          </div>
-          : image
+          </div> :
+          image
         }
       </div>
     );

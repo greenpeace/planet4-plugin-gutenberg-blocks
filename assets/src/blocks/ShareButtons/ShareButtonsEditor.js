@@ -8,8 +8,8 @@ const {__} = wp.i18n;
 const PanelRowWrapper = ({labelText, helpText, children}) => {
   return (
     <div className="panel-row-wrapper">
-      {labelText && <label className="panel-row-label-text" htmlFor>{labelText}</label>}
-      {helpText && <span className="panel-row-help-text">{helpText}</span>}
+      {labelText && <label className="panel-row-label-text" htmlFor="panel-row__control">{labelText}</label>}
+      {helpText && <span id="panel-row__control" className="panel-row-help-text">{helpText}</span>}
       {children}
     </div>
   );
@@ -30,9 +30,9 @@ const ShowInMenuCheckbox = ({show, setAttributes, updateButtons}) => {
 
 const ButtonPanelRow = ({buttonProps, buttons, setAttributes}) => {
   const updateButtons = (key, value) => {
-    return buttons.map((button) => (button.type === buttonProps.type)
-      ? {...buttonProps, [ `${key}` ]: value}
-      : button
+    return buttons.map((button) => (button.type === buttonProps.type) ?
+      {...buttonProps, [`${key}`]: value} :
+      button
     );
   };
 
@@ -91,7 +91,7 @@ const ButtonPanelRow = ({buttonProps, buttons, setAttributes}) => {
                 }}
               />
             </PanelRowWrapper>,
-        }[ buttonProps.type ]
+        }[buttonProps.type]
       }
     </>
   );

@@ -34,9 +34,9 @@ export const SplittwocolumnsEditor = ({attributes, setAttributes, isSelected}) =
   });
 
   return (
-    isSelected
-      ? renderEdit({attributes}, setAttributes)
-      : renderView({attributes})
+    isSelected ?
+      renderEdit({attributes}, setAttributes) :
+      renderView({attributes})
   );
 };
 

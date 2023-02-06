@@ -59,12 +59,12 @@ export const ThemeSettings = (props) => {
   }, [meta.theme]);
 
   // resolveField is a cheap function so it's not a problem to call it twice.
-  const getValue = (fieldId) => meta[ fieldId ] || resolveField(theme, fieldId, meta)?.default;
+  const getValue = (fieldId) => meta[fieldId] || resolveField(theme, fieldId, meta)?.default;
   const getOptions = (fieldId) => resolveField(theme, fieldId, meta)?.options || [];
 
   const updateValueAndDependencies = (fieldId) => (value) => {
     const updatedDeps = getDependencyUpdates(theme, fieldId, value, meta);
-    editPost({meta: {[ fieldId ]: value, ...updatedDeps}});
+    editPost({meta: {[fieldId]: value, ...updatedDeps}});
   };
 
   const navParams = {

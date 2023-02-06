@@ -23,6 +23,7 @@ export const registerBlockTemplates = (blockTemplates) => {
   const postType = getCurrentPostType();
 
   templates.forEach((blockTemplate) => {
+    // eslint-disable-next-line prefer-const
     let {metadata, template, templateLock = false} = blockTemplate;
 
     if (metadata.postTypes && !metadata.postTypes.includes(postType)) {

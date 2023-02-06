@@ -4,7 +4,6 @@ export const TimelineFrontend = (props) => {
   const {
     timeline_title,
     description,
-    isSelected,
     className,
     ...nodeProps
   } = props;

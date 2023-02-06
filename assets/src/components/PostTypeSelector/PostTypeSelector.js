@@ -1,9 +1,7 @@
 import {Component} from '@wordpress/element';
 import {compose} from '@wordpress/compose';
 import {withSelect} from '@wordpress/data';
-import {
-  FormTokenField,
-} from '@wordpress/components';
+import {FormTokenField} from '@wordpress/components';
 
 class PostTypeSelector extends Component {
   constructor(props) {
@@ -20,6 +18,7 @@ class PostTypeSelector extends Component {
   }
 
   render() {
+    // eslint-disable-next-line no-unused-vars
     const {postTypes, onChange, label, placeholder, value, ...ownProps} = this.props;
 
     if (!postTypes || postTypes.length === 0) {

@@ -3,6 +3,7 @@
  * for example, to use in a cssText property.
  *
  * @param {Object} CSSVariables
+ * @return {Object} new CSS  variables
  */
 export const toDeclarations = (CSSVariables) => {
   if (!CSSVariables) {

@@ -74,7 +74,7 @@ export const getHeadingsFromBlocks = (blocks, selectedLevels) => {
       }
       headings.push({
         level,
-        content: block.attributes[ fieldName ],
+        content: block.attributes[fieldName],
       });
     }
   });

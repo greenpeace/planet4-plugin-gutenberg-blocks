@@ -35,14 +35,13 @@ const innerBlocks = ({
 ]);
 
 const template = ({
-  title = ''
+  title = '',
 }) => ([
   [
     'core/group',
     {
       className: 'block',
       align: 'full',
-      backgroundColor,
     },
     innerBlocks({title}),
   ],

@@ -41,8 +41,8 @@ export const HappypointFrontend = ({
   }
 
   // eslint-disable-next-line no-nested-ternary
-  const legacy_provider = typeof mailing_list_iframe === 'undefined'
-    ? null : (mailing_list_iframe ? USE_IFRAME_URL : USE_NONE);
+  const legacy_provider = typeof mailing_list_iframe === 'undefined' ?
+    null : (mailing_list_iframe ? USE_IFRAME_URL : USE_NONE);
 
   const content_provider = legacy_provider || (override_default_content ? local_content_provider : default_content_provider);
   const url = iframe_url || engaging_network_id;
@@ -87,6 +87,7 @@ export const HappypointFrontend = ({
  * cf. https://github.com/WordPress/gutenberg/blob/wp/5.9/packages/dom/src/dom/safe-html.js
  *
  * @param {Object} html
+ * @return {Object} text in html
  */
 const safeHTML = (html) => {
   const {body} = document.implementation.createHTMLDocument('');
@@ -95,7 +96,7 @@ const safeHTML = (html) => {
   let elementIndex = elements.length;
 
   while (elementIndex--) {
-    const element = elements[ elementIndex ];
+    const element = elements[elementIndex];
 
     if (element.tagName === 'SCRIPT') {
       element.parentNode.removeChild(element);
@@ -104,7 +105,7 @@ const safeHTML = (html) => {
 
     let attributeIndex = element.attributes.length;
     while (attributeIndex--) {
-      const {name: key} = element.attributes[ attributeIndex ];
+      const {name: key} = element.attributes[attributeIndex];
 
       if (key.startsWith('on')) {
         element.removeAttribute(key);

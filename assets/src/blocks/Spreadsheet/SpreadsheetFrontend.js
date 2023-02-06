@@ -60,9 +60,9 @@ export class SpreadsheetFrontend extends Component {
 
       const baseUrl = document.body.dataset.nro;
 
-      const spreadSheetData = baseUrl
-        ? await fetchJson(`${baseUrl}/wp-json/${addQueryArgs('planet4/v1/get-spreadsheet-data', args)}`)
-        : await apiFetch({path: addQueryArgs('planet4/v1/get-spreadsheet-data', args)});
+      const spreadSheetData = baseUrl ?
+        await fetchJson(`${baseUrl}/wp-json/${addQueryArgs('planet4/v1/get-spreadsheet-data', args)}`) :
+        await apiFetch({path: addQueryArgs('planet4/v1/get-spreadsheet-data', args)});
 
       this.setState({loading: false, spreadSheetData});
     } else {
@@ -90,7 +90,7 @@ export class SpreadsheetFrontend extends Component {
     const googleSheetsPattern = /https:\/\/docs\.google\.com\/spreadsheets\/d\/e\/([\w-]+)/;
     const matches = url.match(googleSheetsPattern);
     if (matches !== null) {
-      return matches[ 1 ];
+      return matches[1];
     }
     return false;
   }
@@ -102,7 +102,7 @@ export class SpreadsheetFrontend extends Component {
 
     // eslint-disable-next-line array-callback-return
     const sortedRows = rows.sort((rowA, rowB) => {
-      const textCompare = rowA[ columnIndex ].localeCompare(rowB[ columnIndex ], undefined, {numeric: true});
+      const textCompare = rowA[columnIndex].localeCompare(rowB[columnIndex], undefined, {numeric: true});
       if (textCompare !== 0) {
         return textCompare;
       }
@@ -132,24 +132,24 @@ export class SpreadsheetFrontend extends Component {
   renderRows() {
     const rows = this.sortRows(this.filterMatchingRows(this.getRows()), this.state.sortColumnIndex);
 
-    return this.state.searchText.length >= 1 && rows.length === 0
-      ? <tr>
+    return this.state.searchText.length >= 1 && rows.length === 0 ?
+      <tr>
         <td colSpan="99999">
           <div className="spreadsheet-empty-message">
             { __('No data matching your search.', 'planet4-blocks') }
           </div>
         </td>
-      </tr>
-      : rows.map((row, rowNumber) => (
+      </tr> :
+      rows.map((row, rowNumber) => (
         <tr key={rowNumber} data-order={rowNumber}>
           {
             row.map((cell, cellIndex) => (
               <td key={cellIndex}>
                 {
-                  this.state.searchText.length > 0
+                  this.state.searchText.length > 0 ?
                     // eslint-disable-next-line new-cap
-                    ? HighlightMatches(cell, this.state.searchText)
-                    : cell
+                    HighlightMatches(cell, this.state.searchText) :
+                    cell
                 }
               </td>
             ))
@@ -159,9 +159,9 @@ export class SpreadsheetFrontend extends Component {
   }
 
   render() {
-    const headers = this.state.spreadSheetData
-      ? this.state.spreadSheetData.header
-      : placeholderData.header;
+    const headers = this.state.spreadSheetData ?
+      this.state.spreadSheetData.header :
+      placeholderData.header;
 
     return (
       <Fragment>
@@ -180,9 +180,9 @@ export class SpreadsheetFrontend extends Component {
                     headers.map((cell, index) => (
                       <th
                         className={(
-                          index === this.state.sortColumnIndex
-                            ? `spreadsheet-sorted-by sort-${this.state.sortDirection}`
-                            : ''
+                          index === this.state.sortColumnIndex ?
+                            `spreadsheet-sorted-by sort-${this.state.sortDirection}` :
+                            ''
                         )}
                         onClick={() => {
                           this.onHeaderClick(index);
@@ -201,13 +201,13 @@ export class SpreadsheetFrontend extends Component {
               </thead>
               <tbody>
                 {
-                  this.state.loading === true
-                    ? <tr>
+                  this.state.loading === true ?
+                    <tr>
                       <td colSpan="99999">
                         <div className="spreadsheet-loading">{ __('Loading spreadsheet data…', 'planet4-blocks') }</div>
                       </td>
-                    </tr>
-                    : this.renderRows()
+                    </tr> :
+                    this.renderRows()
                 }
               </tbody>
             </table>

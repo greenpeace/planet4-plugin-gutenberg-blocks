@@ -30,11 +30,11 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('[data-render]').forEach(
     (blockNode) => {
       const blockName = blockNode.dataset.render;
-      if (!COMPONENTS[ blockName ]) {
+      if (!COMPONENTS[blockName]) {
         return;
       }
 
-      const BlockFrontend = COMPONENTS[ blockName ];
+      const BlockFrontend = COMPONENTS[blockName];
       if (!BlockFrontend) {
         return;
       }

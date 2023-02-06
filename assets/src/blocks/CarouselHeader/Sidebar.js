@@ -78,10 +78,10 @@ export const Sidebar = ({
             }
           } else {
             if (idx === currentIndex) {
-              return prev.concat(slides[ siblingIndex ]);
+              return prev.concat(slides[siblingIndex]);
             }
             if (idx === siblingIndex) {
-              return prev.concat(slides[ currentIndex ]);
+              return prev.concat(slides[currentIndex]);
             }
             return prev;
           }
@@ -121,7 +121,7 @@ export const Sidebar = ({
 
     if (slidesRef.current) {
       setAttributes({
-        slides: Object.values(slidesRef.current.children).map((node) => slides[ parseInt(node.dataset.index) ]),
+        slides: Object.values(slidesRef.current.children).map((node) => slides[parseInt(node.dataset.index)]),
       });
     }
   };
@@ -141,7 +141,7 @@ export const Sidebar = ({
   useEffect(() => {
     if (slidesRef.current && draggedSlide && dragTarget) {
       // Check if it's the last node into the list
-      const lastNode = slidesRef.current.children[ slidesRef.current.children.length - 1 ];
+      const lastNode = slidesRef.current.children[slidesRef.current.children.length - 1];
       if (dragTarget.dataset.index === lastNode.dataset.index) {
         lastNode.insertAdjacentElement('afterend', draggedSlide);
       } else {

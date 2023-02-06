@@ -45,13 +45,12 @@ registerBlockType(BLOCK_NAME, {
   },
   attributes,
   edit: AccordionEditor,
-  // eslint-disable-next-line no-shadow
-  save: ({attributes}) => {
-    if (!attributes) {
+  save: ({attributes: saveAttributes}) => {
+    if (!saveAttributes) {
       return null;
     }
 
-    return <AccordionFrontend {...attributes} />;
+    return <AccordionFrontend {...saveAttributes} />;
   },
 });
 

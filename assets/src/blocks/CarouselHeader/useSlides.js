@@ -12,6 +12,7 @@ import {useState} from '@wordpress/element';
  * @param {*}      lastSlide
  * @param {*}      containerRef
  * @param {Object} options
+ * @return {*} functions for the carousel header slides
  */
 export const useSlides = (slidesRef, lastSlide, containerRef, options = {
   // Following Bootstrap's approach for RTL:
@@ -80,15 +81,15 @@ export const useSlides = (slidesRef, lastSlide, containerRef, options = {
       return;
     }
 
-    const nextElement = slidesRef.current[ newSlide ];
-    const activeElement = slidesRef.current[ currentSlide ];
+    const nextElement = slidesRef.current[newSlide];
+    const activeElement = slidesRef.current[currentSlide];
 
     if (newSlide !== currentSlide && nextElement && activeElement && !sliding) {
       setSliding(true);
 
       const order = getOrder(currentSlide, newSlide, lastSlide);
-      const enterTransitionClass = options.enterTransitionClasses[ order ];
-      const exitTransitionClass = options.exitTransitionClasses[ order ];
+      const enterTransitionClass = options.enterTransitionClasses[order];
+      const exitTransitionClass = options.exitTransitionClasses[order];
 
       setCarouselHeight(nextElement);
 

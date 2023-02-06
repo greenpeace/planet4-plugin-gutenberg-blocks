@@ -117,11 +117,12 @@ export const TakeActionBoxoutEditor = ({
   const takeActionPageSelected = take_action_page && parseInt(take_action_page) > 0;
 
   if (loading || !actPageList.length) {
-    return __('Populating block\'s fields…', 'planet4-blocks-backend');
+    // eslint-disable-next-line quotes,@wordpress/i18n-ellipsis
+    return __("Populating block's fields...", 'planet4-blocks-backend');
   }
 
   const toAttribute = (attributeName) => (value) => setAttributes({
-    [ attributeName ]: value,
+    [attributeName]: value,
   });
 
   const removeImage = () => setAttributes({imageId: null});
@@ -132,9 +133,9 @@ export const TakeActionBoxoutEditor = ({
 
   const postHasStickyBoxoutAlready = document.querySelector('#action-card');
 
-  const renderEditInPlace = () => (takeActionPageSelected
-    ? <TakeActionBoxoutFrontend {...attributes} {...{title, excerpt, link, linkText, imageUrl, imageAlt}} />
-    : <section
+  const renderEditInPlace = () => (takeActionPageSelected ?
+    <TakeActionBoxoutFrontend {...attributes} {...{title, excerpt, link, linkText, imageUrl, imageAlt}} /> :
+    <section
       className={`boxout ${className || ''}`}
       {...stickyOnMobile && {id: 'action-card'}}
     >
