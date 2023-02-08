@@ -18,6 +18,7 @@ const sidebarsForPostType = postType => {
       },
       OpenGraphSidebar,
       SearchEngineOptimizationsSidebar,
+      AnalyticsTrackingSidebar,
     ];
   case 'p4_action':
     return [
