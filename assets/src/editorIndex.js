@@ -66,4 +66,50 @@ registerBlockVariation('core/group', {
   icon: 'admin-links',
 });
 
+const MY_VARIATION_NAME = 'planet4-blocks/test-block';
+
+registerBlockVariation( 'core/query', {
+    name: MY_VARIATION_NAME,
+    title: 'Test Block',
+    description: 'Displays Query Article',
+    isActive: ( { namespace, query } ) => {
+        return (
+            namespace === MY_VARIATION_NAME
+            && query.postType === 'post'
+        );
+    },
+    attributes: {
+        namespace: MY_VARIATION_NAME,
+        query: {
+            perPage: 3,
+            pages: 0,
+            offset: 0,
+            postType: 'post',
+            order: 'desc',
+            orderBy: 'date',
+            author: '',
+            search: '',
+            exclude: [],
+            sticky: '',
+            inherit: false,
+        },
+    },
+    innerBlocks: [
+      ['core/post-template', {className: 'test-code'}, [
+        ['core/columns', {className: 'open-width'}, [
+          ['core/post-featured-image', {}],
+          ['core/group', {}, [
+            ['core/post-title', {}],
+            ['core/post-excerpt', {}],
+            ['core/group', {}, [
+              ['core/post-author', {}],
+              ['core/post-date', {}]
+            ]]
+          ]],
+        ]],
+      ]]
+    ],
+  }
+);
+
 registerBlockTemplates();
