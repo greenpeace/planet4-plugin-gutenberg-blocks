@@ -1,0 +1,128 @@
+.query-loop-cover {
+  margin-bottom: 32px;
+
+  // This refers to the cover's title
+  & > h2 {
+    color: var(--page-section-header--color, inherit);
+    font-weight: bold;
+    font-size: 2.5rem;
+    margin-bottom: 16px;
+  }
+
+  // This refers to the cover's description
+  & > p {
+    display: block;
+    margin-bottom: 48px;
+    font-size: 16px;
+  }
+
+  .wp-block-post {
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.16);
+    transition: box-shadow 0.2s;
+    min-height: 440px;
+    border-radius: 4px;
+    background: white;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+  }
+
+  .wp-block-post-title {
+    font-size: 20px;
+  }
+
+  .wp-block-post-excerpt p {
+    font-size: 1rem;
+    line-height: 1.75rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    margin: 0;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .wp-block-post-featured-image {
+    height: 220px;
+    max-height: 220px;
+    min-height: 220px;
+    overflow: hidden;
+
+    img {
+      max-width: 100%;
+      width: 100%;
+      height: 100%;
+      vertical-align: middle;
+      box-sizing: border-box;
+      object-fit: cover;
+    }
+
+    & + .wp-block-group {
+      padding: 32px 24px 24px;
+    }
+  }
+
+  .wp-block-post-terms {
+    color: #6f7376;
+    font-size: 14px;
+    font-weight: bold;
+    font-family: var(--headings--font-family);
+  }
+
+  .wp-block-post-date {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    font-style: italic;
+    font-weight: 300;
+    color: #45494c;
+    margin: 8px 0;
+  }
+
+  .wp-block-buttons .wp-block-button a {
+    font-size: 14px;
+    padding: 0 20px;
+  }
+
+  &.is-style-carousel {
+    position: relative;
+    overflow: hidden;
+
+    .wp-block-post-template {
+      flex-wrap: nowrap;
+      transition: transform 250ms ease;
+    }
+
+    .wp-block-post {
+      margin-bottom: 0 !important;  // Overriden from _listing-page.scss line 166
+      flex-shrink: 0;
+    }
+
+    .wp-block-buttons.carousel-query-controls {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between !important;
+      z-index: 99999;
+    }
+
+    .btn-view-more-query-loop {
+      display: none;
+    }
+  }
+
+  &.is-style-grid {
+    .wp-block-post-template {
+      margin-bottom: 24px;
+    }
+
+    .wp-block-buttons.carousel-query-controls {
+      display: none;
+    }
+
+    .btn-view-more-query-loop {
+      margin: auto;
+      display: inherit;
+    }
+  }
+}

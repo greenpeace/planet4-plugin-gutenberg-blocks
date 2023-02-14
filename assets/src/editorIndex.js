@@ -23,6 +23,7 @@ import { registerGuestBookBlock } from './blocks/GuestBook/GuestBookBlock';
 import { registerBlock as registerShareButtonsBlock } from './blocks/ShareButtons/ShareButtonsBlock';
 import { registerPageHeaderBlock } from './blocks/PageHeader/PageHeaderBlock';
 import { registerBlockTemplates } from './block-templates/register';
+import { registerCoversQueryLoop } from './blocks/CoversQueryLoop';
 
 blockEditorValidation();
 new ArticlesBlock();
@@ -42,6 +43,7 @@ registerTimelineBlock();
 registerGuestBookBlock();
 registerShareButtonsBlock();
 registerPageHeaderBlock();
+registerCoversQueryLoop();
 
 addBlockFilters();
 setupImageBlockExtension();
