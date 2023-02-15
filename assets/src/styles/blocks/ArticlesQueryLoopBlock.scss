@@ -1,0 +1,46 @@
+.articles-query {
+  .wp-block-columns.wp-container-3 {
+    width: 1200px;
+    margin-top: 50px;
+  }
+
+  .wp-block-post-featured-image, .test-image {
+    width: 70%;
+  }
+
+  .wp-block-group, .test-group {
+    padding: 10px;
+  }
+
+  .wp-block-post-title, .test-heading {
+    font-size: 1.375rem;
+  }
+
+  .wp-block-post-excerpt {
+    margin-top: -20px;
+  }
+
+  .wp-block-post-author__name {
+    font-size: 0.9rem;
+  }
+
+  .wp-block-post-author__avatar {
+    display: none;
+  }
+
+  .wp-block-post-date {
+    margin-left: 20px;
+    font-size: 0.9rem;
+  }
+
+  .wp-block-post-excerpt__excerpt {
+    font-size: 1rem;
+    line-height: 25px;
+  }
+}
+
+.flex-elts {
+  display: flex;
+  font-size: 0.5rem;
+  margin-top: -10px;
+}
