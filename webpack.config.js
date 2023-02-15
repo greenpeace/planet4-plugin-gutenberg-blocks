@@ -38,7 +38,6 @@ const publicJsConfig = {
   entry: {
     frontendIndex: './assets/src/frontendIndex.js',
     AccordionScript: './assets/src/blocks/Accordion/AccordionScript.js',
-    CoversScript: './assets/src/blocks/Covers/CoversScript.js',
     CarouselHeaderScript: './assets/src/blocks/CarouselHeader/CarouselHeaderScript.js',
     ENFormScript: './assets/src/blocks/ENForm/ENFormScript.js',
     SpreadsheetScript: './assets/src/blocks/Spreadsheet/SpreadsheetScript.js',
@@ -58,7 +57,6 @@ const adminJsConfig = {
   entry: {
     editorIndex: './assets/src/editorIndex.js',
     AccordionEditorScript: './assets/src/blocks/Accordion/AccordionEditorScript.js',
-    CoversEditorScript: './assets/src/blocks/Covers/CoversEditorScript.js',
     CarouselHeaderEditorScript: './assets/src/blocks/CarouselHeader/CarouselHeaderEditorScript.js',
     ENFormEditorScript: './assets/src/blocks/ENForm/ENFormEditorScript.js',
     SpreadsheetEditorScript: './assets/src/blocks/Spreadsheet/SpreadsheetEditorScript.js',
@@ -84,8 +82,6 @@ const cssConfig = {
     TimelineEditorStyle: './assets/src/styles/blocks/Timeline/TimelineEditorStyle.scss',
     SocialMediaStyle: './assets/src/styles/blocks/SocialMedia/SocialMediaStyle.scss',
     SocialMediaEditorStyle: './assets/src/styles/blocks/SocialMedia/SocialMediaEditorStyle.scss',
-    CoversStyle: './assets/src/styles/blocks/Covers/CoversStyle.scss',
-    CoversEditorStyle: './assets/src/styles/blocks/Covers/CoversEditorStyle.scss',
     GalleryStyle: './assets/src/styles/blocks/Gallery/GalleryStyle.scss',
     GalleryEditorStyle: './assets/src/styles/blocks/Gallery/GalleryEditorStyle.scss',
   },
