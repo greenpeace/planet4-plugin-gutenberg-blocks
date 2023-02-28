@@ -30,14 +30,12 @@
   margin-top: $sp-1;
   margin-bottom: $sp-2;
 
-  &.is-style-rounded {
-    &-180 {
-      @include rounded-image-size(180px);
-    }
+  &.is-style-rounded-180 {
+    @include rounded-image-size(180px);
+  }
 
-    &-90 {
-      @include rounded-image-size(90px);
-    }
+  &.is-style-rounded-90 {
+    @include rounded-image-size(90px);
   }
 
   &:not(.force-no-lightbox) img {
@@ -48,14 +46,12 @@
     display: none !important;
   }
 
-  &.square {
-    &-40 {
-      @include square-image-size(40px);
-    }
+  &.square-40 {
+    @include square-image-size(40px);
+  }
 
-    &-80 {
-      @include square-image-size(80px);
-    }
+  &.square-80 {
+    @include square-image-size(80px);
   }
 
   @include large-and-up {
