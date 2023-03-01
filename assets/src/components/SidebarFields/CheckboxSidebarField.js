@@ -5,6 +5,6 @@ export const CheckboxSidebarField = ({value, setValue, label}) => (
     label={label}
     checked={value === 'on'}
     value={value === 'on'}
-    onChange={(checked) => setValue(checked ? 'on' : '')}
+    onChange={checked => setValue(checked ? 'on' : '')}
   />
 );

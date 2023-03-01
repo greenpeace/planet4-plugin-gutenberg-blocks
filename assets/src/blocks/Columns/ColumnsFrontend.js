@@ -11,17 +11,17 @@ export const ColumnsFrontend = ({columns_block_style, columns_title, columns_des
     // For Tasks style, we have an "accordion" for screens up to 992px
     if (window.innerWidth < 768 || (columns_block_style === LAYOUT_TASKS && window.innerWidth < 992)) {
       const headings = [...document.querySelectorAll('.columns-block .column-wrap h3, .columns-block .column-wrap h5')];
-      headings.forEach((heading) => heading.style.minHeight = 'auto');
+      headings.forEach(heading => heading.style.minHeight = 'auto');
       return;
     }
 
     const columnBlocks = [...document.querySelectorAll('.columns-block')];
-    columnBlocks.forEach((columnBlock) => {
+    columnBlocks.forEach(columnBlock => {
       // The Tasks style uses h5 tags for its headers, other styles use h3
       const headings = [...columnBlock.querySelectorAll('.column-wrap h3, .column-wrap h5')];
-      const highestHeadingHeight = Math.max(...headings.map((heading) => heading.offsetHeight));
+      const highestHeadingHeight = Math.max(...headings.map(heading => heading.offsetHeight));
 
-      headings.forEach((heading) => heading.style.minHeight = `${highestHeadingHeight}px`);
+      headings.forEach(heading => heading.style.minHeight = `${highestHeadingHeight}px`);
     });
   };
 

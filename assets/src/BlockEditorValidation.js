@@ -37,7 +37,7 @@ export const blockEditorValidation = () => {
 
       return invalidBlocksArray;
     }, []);
-    invalidBlocks.forEach((block) => currentMessages.push(...block.messages));
+    invalidBlocks.forEach(block => currentMessages.push(...block.messages));
 
     const currentlyValid = (0 === invalidBlocks.length);
     messages = currentMessages;
@@ -62,7 +62,7 @@ export const blockEditorValidation = () => {
   );
 };
 
-document.addEventListener('change', (e) => {
+document.addEventListener('change', e => {
   if (!e.target.matches('select[name="p4_campaign_name"]')) {
     return;
   }
@@ -72,7 +72,7 @@ document.addEventListener('change', (e) => {
 const registerAttributeValidations = (settings, blockName) => {
   const {attributes} = settings;
 
-  Object.keys(settings.attributes).forEach((attrName) => {
+  Object.keys(settings.attributes).forEach(attrName => {
     const attr = attributes[attrName];
 
     if (typeof attr.validation === 'function') {
@@ -88,7 +88,7 @@ const PrePublishCheckList = () => {
   // This doesn't assign anything from useSelect, which is intended. We want to update the component whenever anything
   // that can affect validity changes. This could probably be done more properly by adding a store with `canPublish`.
   // eslint-disable-next-line no-shadow
-  useSelect((select) => [select('core/editor').getEditedPostAttribute('meta'), select('core/block-editor').getBlocks()]);
+  useSelect(select => [select('core/editor').getEditedPostAttribute('meta'), select('core/block-editor').getBlocks()]);
   return (
     <PluginPrePublishPanel
       title={__('Publish Checklist', 'planet4-blocks-backend')}
@@ -97,7 +97,7 @@ const PrePublishCheckList = () => {
       icon="none">
       { !!canPublish && <p>{ __('All good.', 'planet4-blocks-backend') }</p> }
       { !canPublish && <ul>
-        { messages.map((msg) =>
+        { messages.map(msg =>
           <li key={msg}><p>{ msg }</p></li>
         ) }
       </ul> }

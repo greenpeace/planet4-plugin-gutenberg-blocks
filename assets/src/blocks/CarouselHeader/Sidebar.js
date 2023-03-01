@@ -8,7 +8,7 @@ import {SidebarSlide} from './SidebarSlide';
 
 const {__} = wp.i18n;
 
-const getNode = (index) => (
+const getNode = index => (
   document.querySelector(`.sidebar-slide[data-index="${index}"]`)
 );
 
@@ -23,7 +23,7 @@ export const Sidebar = ({
   const [draggedSlide, setDraggedSlide] = useState(null);
   const slidesRef = useRef(null);
 
-  const upOrDownHandler = (evt) => {
+  const upOrDownHandler = evt => {
     evt.stopPropagation();
 
     if (!slidesRef.current) {
@@ -103,13 +103,13 @@ export const Sidebar = ({
     };
   };
 
-  const onDragStartHandler = (evt) => {
+  const onDragStartHandler = evt => {
     // This is a workaround that avoids to show the `not-allowed` icon on Chrome/Windows
     evt.dataTransfer.effectAllowed = 'move';
     setDraggedSlide(getNode(parseInt(evt.currentTarget.dataset.index)));
   };
 
-  const onDragEndHandler = (evt) => {
+  const onDragEndHandler = evt => {
     evt.preventDefault();
 
     if (draggedSlide) {
@@ -121,12 +121,12 @@ export const Sidebar = ({
 
     if (slidesRef.current) {
       setAttributes({
-        slides: Object.values(slidesRef.current.children).map((node) => slides[parseInt(node.dataset.index)]),
+        slides: Object.values(slidesRef.current.children).map(node => slides[parseInt(node.dataset.index)]),
       });
     }
   };
 
-  const onDragOverHandler = (evt) => {
+  const onDragOverHandler = evt => {
     evt.preventDefault();
     evt.dataTransfer.dropEffect = 'move';
     setDragTarget(getNode(parseInt(evt.currentTarget.dataset.index)));
@@ -157,7 +157,7 @@ export const Sidebar = ({
         help={__('Select to trigger images autoslide', 'planet4-blocks-backend')}
         value={carouselAutoplay}
         checked={carouselAutoplay === true}
-        onChange={(value) => setAttributes({carousel_autoplay: value})}
+        onChange={value => setAttributes({carousel_autoplay: value})}
       />
     </PanelBody>
     <div ref={slidesRef} className="sidebar-slides">

@@ -40,7 +40,7 @@ export class SocialMediaCardsBlock {
       edit: withSelect((select, props) => {
         const {attributes} = props;
 
-        const cards = attributes.cards.map((card) => {
+        const cards = attributes.cards.map(card => {
           const {image_id} = card;
           const imgDetails = select('core').getMedia(image_id);
 
@@ -82,13 +82,13 @@ export class SocialMediaCardsBlock {
         }
 
         function onSelectImages(images) {
-          const imageIds = images.map((image) => image.id);
-          const newImageIds = imageIds.filter((id) => !cards.some((card) => card.image_id === id));
-          const stillSelectedCards = cards.filter((card) => imageIds.includes(card.image_id));
+          const imageIds = images.map(image => image.id);
+          const newImageIds = imageIds.filter(id => !cards.some(card => card.image_id === id));
+          const stillSelectedCards = cards.filter(card => imageIds.includes(card.image_id));
 
           const newCards = [
             ...stillSelectedCards,
-            ...newImageIds.map((id) => ({
+            ...newImageIds.map(id => ({
               image_id: id,
               message: '',
               social_url: '',
@@ -102,7 +102,7 @@ export class SocialMediaCardsBlock {
 
         function onDeleteImage(imageId) {
           setAttributes({
-            cards: cards.filter((card) => card.image_id !== imageId),
+            cards: cards.filter(card => card.image_id !== imageId),
           });
         }
 

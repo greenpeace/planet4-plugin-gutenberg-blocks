@@ -22,7 +22,7 @@ export const AnalyticsTrackingSidebar = {
   getId: () => 'planet4-analytics-sidebar',
   render: () => {
     const {getParams} = getSidebarFunctions();
-    const options = useSelect((select) => {
+    const options = useSelect(select => {
       return select('core').getEntityRecords('planet4/v1', 'analytics-values');
     });
 

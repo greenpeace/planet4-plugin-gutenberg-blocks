@@ -1,6 +1,6 @@
 import {ShareButton} from './ShareButton';
 
-const parseUrl = (attrs) => {
+const parseUrl = attrs => {
   switch (attrs.type) {
   case 'whatsapp':
     return `https://wa.me?text=${encodeURIComponent(attrs.url)}`;
@@ -25,7 +25,7 @@ const parseUtmParams = ({utmSource, utmMedium, utmContent, utmCampaign}) => (
     utmMedium ? `utm_medium=${encodeURIComponent(utmMedium)}` : null,
     utmContent ? `utm_content=${encodeURIComponent(utmContent)}` : null,
     utmCampaign ? `utm_campaign=${encodeURIComponent(utmCampaign)}` : null,
-  ].filter((x) => x).join('&')
+  ].filter(x => x).join('&')
 );
 
 export const ShareButtonsFrontend = ({
@@ -40,7 +40,7 @@ export const ShareButtonsFrontend = ({
   buttons,
 }) => (
   <nav className="share-buttons">
-    {buttons.map((button) => button.showInMenu ? <ShareButton key={button.type} {...{
+    {buttons.map(button => button.showInMenu ? <ShareButton key={button.type} {...{
       href: `
         ${parseUrl({...button, url})}
         &${parseUtmParams({utmSource: button.type, utmMedium, utmContent, utmCampaign})}`,

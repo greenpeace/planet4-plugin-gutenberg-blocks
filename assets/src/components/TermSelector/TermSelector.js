@@ -47,7 +47,7 @@ const EMPTY_ARRAY = [];
  * @return {Object[]} Sorted array of terms.
  */
 export function sortBySelected(termsTree, terms) {
-  const treeHasSelection = (termTree) => {
+  const treeHasSelection = termTree => {
     return terms.indexOf(termTree.id) !== -1;
   };
 
@@ -83,7 +83,7 @@ export function sortBySelected(termsTree, terms) {
  * @return {Object} Term object.
  */
 export function findTerm(terms, name) {
-  return find(terms, (term) => term.name.toLowerCase() === name.toLowerCase());
+  return find(terms, term => term.name.toLowerCase() === name.toLowerCase());
 }
 
 /**
@@ -93,7 +93,7 @@ export function findTerm(terms, name) {
  * @return {(function(Object): (Object|boolean))} Matcher function.
  */
 export function getFilterMatcher(filterValue) {
-  const matchTermsForFilter = (originalTerm) => {
+  const matchTermsForFilter = originalTerm => {
     if ('' === filterValue) {
       return originalTerm;
     }
@@ -137,7 +137,7 @@ export function TermSelector({slug}) {
     taxonomy,
     isUserAdmin,
   } = useSelect(
-    (select) => {
+    select => {
       const {getCurrentPost, getEditedPostAttribute} = select('core/editor');
       const {getTaxonomy, getEntityRecords, isResolving, canUser} = select(coreStore);
       const _taxonomy = getTaxonomy(slug);
@@ -201,7 +201,7 @@ export function TermSelector({slug}) {
    * @param {Object} term Term object.
    * @return {Promise} A promise that resolves to save term object.
    */
-  const addTerm = (term) => {
+  const addTerm = term => {
     return saveEntityRecord('taxonomy', slug, term);
   };
 
@@ -210,7 +210,7 @@ export function TermSelector({slug}) {
    *
    * @param {number[]} termIds Term ids.
    */
-  const onUpdateTerms = (termIds) => {
+  const onUpdateTerms = termIds => {
     editPost({[taxonomy.rest_base]: termIds});
   };
 
@@ -219,15 +219,15 @@ export function TermSelector({slug}) {
    *
    * @param {number} termId
    */
-  const onChange = (termId) => {
+  const onChange = termId => {
     const hasTerm = terms.includes(termId);
     const newTerms = hasTerm ?
-      terms.filter((id) => id !== termId) :
+      terms.filter(id => id !== termId) :
       [...terms, termId];
     onUpdateTerms(newTerms);
   };
 
-  const onChangeFormName = (value) => {
+  const onChangeFormName = value => {
     setFormName(value);
   };
 
@@ -235,7 +235,7 @@ export function TermSelector({slug}) {
     setShowForm(!showForm);
   };
 
-  const onAddTerm = async (event) => {
+  const onAddTerm = async event => {
     event.preventDefault();
     if (formName === '' || adding) {
       return;
@@ -245,7 +245,7 @@ export function TermSelector({slug}) {
     const existingTerm = findTerm(availableTerms, formName);
     if (existingTerm) {
       // If the term we are adding exists but is not selected select it.
-      if (!terms.some((term) => term === existingTerm.id)) {
+      if (!terms.some(term => term === existingTerm.id)) {
         onUpdateTerms([...terms, existingTerm.id]);
       }
 
@@ -274,10 +274,10 @@ export function TermSelector({slug}) {
     onUpdateTerms([...terms, newTerm.id]);
   };
 
-  const setFilter = (value) => {
+  const setFilter = value => {
     const newFilteredTermsTree = availableTermsTree
       .map(getFilterMatcher(value))
-      .filter((term) => term);
+      .filter(term => term);
 
     setFilterValue(value);
     setFilteredTermsTree(newFilteredTermsTree);
@@ -292,8 +292,8 @@ export function TermSelector({slug}) {
     debouncedSpeak(resultsFoundMessage, 'assertive');
   };
 
-  const renderTerms = (renderedTerms) => {
-    return renderedTerms.map((term) => {
+  const renderTerms = renderedTerms => {
+    return renderedTerms.map(term => {
       return (
         <div
           key={term.id}

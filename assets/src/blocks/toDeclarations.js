@@ -5,7 +5,7 @@
  * @param {Object} CSSVariables
  * @return {Object} new CSS  variables
  */
-export const toDeclarations = (CSSVariables) => {
+export const toDeclarations = CSSVariables => {
   if (!CSSVariables) {
     return '';
   }

@@ -10,7 +10,7 @@ export const addLinkTag = ({
   link.media = media;
 
   link.addEventListener('load', onLoad);
-  link.addEventListener('error', (event) => {
+  link.addEventListener('error', event => {
     onError(event);
   });
 

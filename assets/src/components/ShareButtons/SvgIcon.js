@@ -1,4 +1,4 @@
-export const SvgIcon = (props) => {
+export const SvgIcon = props => {
   const theme_dir = window.p4bk_vars.themeUrl;
   const {
     name,

@@ -7,7 +7,7 @@ export const resolveField = (theme, fieldId, meta) => {
     return null;
   }
 
-  const field = theme.fields.find((fieldFound) => fieldFound.id === fieldId);
+  const field = theme.fields.find(fieldFound => fieldFound.id === fieldId);
 
   if (!field) {
     return null;
@@ -21,7 +21,7 @@ export const resolveField = (theme, fieldId, meta) => {
 };
 
 const resolveDependency = (theme, field, meta) => {
-  const dependencyField = theme.fields.find((field2) => field2.id === field.dependsOn);
+  const dependencyField = theme.fields.find(field2 => field2.id === field.dependsOn);
 
   // Sanity check, the dependent field should be there if the config file is valid.
   if (!dependencyField) {
@@ -40,7 +40,7 @@ const resolveDependency = (theme, field, meta) => {
 
   let dependencyValue = meta[field.dependsOn];
 
-  const dependencyValueIsAllowed = dependencyConfiguration.options?.find((option) => option.value === dependencyValue);
+  const dependencyValueIsAllowed = dependencyConfiguration.options?.find(option => option.value === dependencyValue);
 
   if (!dependencyValueIsAllowed) {
     // The field has a dependency and the current value of the post is not in the list of options, so use default value of the dependency.
@@ -58,9 +58,9 @@ const resolveDependency = (theme, field, meta) => {
 };
 
 export const getDependencyUpdates = (theme, fieldName, value, meta) => {
-  const allChildren = theme.fields.filter((field) => field.dependsOn === fieldName);
+  const allChildren = theme.fields.filter(field => field.dependsOn === fieldName);
   const needUpdate = allChildren.filter(
-    (field) => {
+    field => {
       const configuration = field.configurations[value];
 
       if (!configuration) {
@@ -71,7 +71,7 @@ export const getDependencyUpdates = (theme, fieldName, value, meta) => {
         return true;
       }
 
-      return !(configuration.options.some((option) => option.value === meta[field.id]));
+      return !(configuration.options.some(option => option.value === meta[field.id]));
     }
   );
 

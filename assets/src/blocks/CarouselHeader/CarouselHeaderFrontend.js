@@ -100,7 +100,7 @@ export const CarouselHeaderFrontend = ({slides, carousel_autoplay, className}) =
             <Slide
               key={index}
               active={currentSlide === index}
-              ref={(element) => slidesRef ? slidesRef.current[index] = element : null}
+              ref={element => slidesRef ? slidesRef.current[index] = element : null}
             >
               <SlideBackground slide={pageLoaded ? slide : slides[0]} />
               <StaticCaption slide={slide} />

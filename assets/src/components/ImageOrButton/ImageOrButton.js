@@ -1,7 +1,7 @@
 import {Button} from '@wordpress/components';
 import {MediaUpload, MediaUploadCheck} from '@wordpress/block-editor';
 
-export const ImageOrButton = (props) => {
+export const ImageOrButton = props => {
   const {
     disabled = false,
     imageId,
@@ -13,7 +13,7 @@ export const ImageOrButton = (props) => {
     onSelectImage,
   } = props;
 
-  const getImageOrButton = (openEvent) => {
+  const getImageOrButton = openEvent => {
     if (imageId) {
       return (
         <img

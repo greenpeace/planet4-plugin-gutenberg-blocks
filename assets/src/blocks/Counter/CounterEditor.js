@@ -22,7 +22,7 @@ export class CounterEditor extends Component {
 
   toAttribute(attributeName) {
     const {setAttributes} = this.props;
-    return (value) => {
+    return value => {
       setAttributes({[attributeName]: value});
     };
   }
@@ -40,7 +40,7 @@ export class CounterEditor extends Component {
                 placeholder={__('e.g. number of signatures', 'planet4-blocks-backend')}
                 type="number"
                 value={attributes.completed}
-                onChange={(value) => this.toAttribute('completed')(Number(value))}
+                onChange={value => this.toAttribute('completed')(Number(value))}
                 min={0}
               />
             </div>
@@ -60,7 +60,7 @@ export class CounterEditor extends Component {
                 placeholder={__('e.g. target no. of signatures', 'planet4-blocks-backend')}
                 type="number"
                 value={attributes.target}
-                onChange={(value) => this.toAttribute('target')(Number(value))}
+                onChange={value => this.toAttribute('target')(Number(value))}
                 min={0}
               />
             </div>

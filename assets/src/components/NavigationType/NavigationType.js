@@ -23,7 +23,7 @@ export const NavigationType = ({value, setValue, defaultValue, options}) => {
       label={__('Navigation type', 'planet4-blocks-backend')}
       selected={value || defaultValue || NAVIGATION_TYPE_PLANET4}
       options={options || defaultOptions}
-      onChange={(val) => setValue(val)}
+      onChange={val => setValue(val)}
     />
   );
 };

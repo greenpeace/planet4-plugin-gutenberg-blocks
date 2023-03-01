@@ -27,7 +27,7 @@ export const SplittwocolumnsSettings = ({attributes, charLimit, setAttributes}) 
     edited,
   } = attributes;
 
-  const issuesList = useSelect((select) => {
+  const issuesList = useSelect(select => {
     const parent_page = window.p4ge_vars.planet4_options.explore_page;
     const issue_page_args = {
       per_page: -1,
@@ -39,13 +39,13 @@ export const SplittwocolumnsSettings = ({attributes, charLimit, setAttributes}) 
     return select('core').getEntityRecords('postType', 'page', issue_page_args) || [];
   }, []);
 
-  const tagsList = useSelect((select) => {
+  const tagsList = useSelect(select => {
     const taxonomy_args = {hide_empty: false, per_page: 50};
     return select('core').getEntityRecords('taxonomy', 'post_tag', taxonomy_args) || [];
   }, []);
 
-  const onIssueChange = (issue_id) => {
-    const issue = issuesList.find((issueFound) => issueFound.id === parseInt(issue_id)) || null;
+  const onIssueChange = issue_id => {
+    const issue = issuesList.find(issueFound => issueFound.id === parseInt(issue_id)) || null;
 
     setAttributes({
       select_issue: parseInt(issue_id),
@@ -64,8 +64,8 @@ export const SplittwocolumnsSettings = ({attributes, charLimit, setAttributes}) 
     });
   };
 
-  const onTagChange = (tag_id) => {
-    const tag = tagsList.find((tagFound) => tagFound.id === parseInt(tag_id));
+  const onTagChange = tag_id => {
+    const tag = tagsList.find(tagFound => tagFound.id === parseInt(tag_id));
 
     setAttributes({
       select_tag: parseInt(tag_id),
@@ -100,11 +100,11 @@ export const SplittwocolumnsSettings = ({attributes, charLimit, setAttributes}) 
 
   const issueOptions = [
     {label: '--Select Issue--', value: 0},
-    ...issuesList.map((issue) => ({label: issue.title.raw, value: issue.id})),
+    ...issuesList.map(issue => ({label: issue.title.raw, value: issue.id})),
   ];
   const tagOptions = [
     {label: '--Select Tag--', value: 0},
-    ...tagsList.map((tag) => ({label: tag.name, value: tag.id})),
+    ...tagsList.map(tag => ({label: tag.name, value: tag.id})),
   ];
 
   const focus_issue_image_obj = convertFocalStringToObj(focus_issue_image);
@@ -129,7 +129,7 @@ export const SplittwocolumnsSettings = ({attributes, charLimit, setAttributes}) 
             label={__('Issue link path', 'planet4-blocks-backend')}
             placeholder={__('Enter link path', 'planet4-blocks-backend')}
             value={issue_link_path}
-            onChange={(value) => setAttributes({issue_link_path: value})}
+            onChange={value => setAttributes({issue_link_path: value})}
             help={__('(Optional)', 'planet4-blocks-backend')}
           />
         </div>
@@ -137,7 +137,7 @@ export const SplittwocolumnsSettings = ({attributes, charLimit, setAttributes}) 
           {__('Issue Image', 'planet4-blocks-backend')}
           <ImageOrButton
             title={__('Select Image for Issue', 'planet4-blocks-backend')}
-            onSelectImage={(image) => {
+            onSelectImage={image => {
               onImageChange('issue_image', image);
             }}
             imageId={issue_image_id}
@@ -155,7 +155,7 @@ export const SplittwocolumnsSettings = ({attributes, charLimit, setAttributes}) 
             url={issue_image_src}
             dimensions={focal_picker_dimensions}
             value={focus_issue_image_obj}
-            onChange={(focus) => {
+            onChange={focus => {
               onFocalChange('focus_issue_image', focus);
             }}
           />
@@ -178,7 +178,7 @@ export const SplittwocolumnsSettings = ({attributes, charLimit, setAttributes}) 
             label={__('Campaign button link', 'planet4-blocks-backend')}
             placeholder={__('Enter button link', 'planet4-blocks-backend')}
             value={button_link}
-            onChange={(value) => setAttributes({button_link: value})}
+            onChange={value => setAttributes({button_link: value})}
             help={__('(Optional)', 'planet4-blocks-backend')}
           />
         </div>
@@ -186,7 +186,7 @@ export const SplittwocolumnsSettings = ({attributes, charLimit, setAttributes}) 
           {__('Campaign Image', 'planet4-blocks-backend')}
           <ImageOrButton
             title={__('Select Image for Campaign', 'planet4-blocks-backend')}
-            onSelectImage={(image) => {
+            onSelectImage={image => {
               onImageChange('tag_image', image);
             }}
             imageId={tag_image_id}
@@ -203,7 +203,7 @@ export const SplittwocolumnsSettings = ({attributes, charLimit, setAttributes}) 
               url={tag_image_src}
               dimensions={focal_picker_dimensions}
               value={focus_tag_image_obj}
-              onChange={(focus) => {
+              onChange={focus => {
                 onFocalChange('focus_tag_image', focus);
               }}
             />
@@ -222,7 +222,7 @@ export const SplittwocolumnsSettings = ({attributes, charLimit, setAttributes}) 
  * @param {string} focal_str
  * @return {Object} vector points
  */
-const convertFocalStringToObj = (focal_str) => {
+const convertFocalStringToObj = focal_str => {
   if (!focal_str) {
     return {x: 0.5, y: 0.5};
   }

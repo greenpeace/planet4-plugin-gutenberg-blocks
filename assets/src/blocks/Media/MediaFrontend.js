@@ -1,6 +1,6 @@
 import {MediaElementVideo} from './MediaElementVideo';
 
-const wrapEmbedHTML = (embed_html) => {
+const wrapEmbedHTML = embed_html => {
   const wrapperDiv = document.createElement('div');
   wrapperDiv.innerHTML = embed_html;
   if (wrapperDiv.firstChild?.src?.includes('youtube')) {
@@ -16,7 +16,7 @@ const wrapEmbedHTML = (embed_html) => {
   return wrapperDiv.outerHTML;
 };
 
-export const MediaFrontend = (attributes) => {
+export const MediaFrontend = attributes => {
   const {
     video_title,
     description,

@@ -48,7 +48,7 @@ export class SpreadsheetEditor extends Component {
       url: props.attributes.url,
     };
 
-    this.debounceSearch = debounce((url) => {
+    this.debounceSearch = debounce(url => {
       this.props.setAttributes({url});
     }, 300);
 
@@ -64,7 +64,7 @@ export class SpreadsheetEditor extends Component {
 
     const {attributes, setAttributes} = this.props;
 
-    const toCssVariables = (value) => {
+    const toCssVariables = value => {
       setAttributes({
         css_variables: colors_variables_map[value] ?? {},
       });
@@ -86,7 +86,7 @@ export class SpreadsheetEditor extends Component {
               label={__('Spreadsheet URL', 'planet4-blocks-backend')}
               placeholder={__('Enter Google Spreadsheet URL', 'planet4-blocks-backend')}
               value={this.state.url}
-              onChange={(url) => {
+              onChange={url => {
                 this.setState({url});
                 this.debounceSearch(url);
               }}

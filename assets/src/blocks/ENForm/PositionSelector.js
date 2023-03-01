@@ -1,4 +1,4 @@
-export const PositionSelector = (attributes) => {
+export const PositionSelector = attributes => {
   const {
     name = 'position-selector',
     id = null,
@@ -12,7 +12,7 @@ export const PositionSelector = (attributes) => {
 
   const options = [
     <option key="default" value="" disabled={true}>{ default_text }</option>,
-    ...positions.map((p) => {
+    ...positions.map(p => {
       return <option key={p.code} value={p.code}>{ p.name }</option>;
     }),
   ];

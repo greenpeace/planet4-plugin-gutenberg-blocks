@@ -25,7 +25,7 @@ export const SplittwocolumnsInPlaceEdit = ({attributes, setAttributes}) => {
     className,
   } = attributes;
 
-  const onTextChange = (field_name) => debounce((content) => {
+  const onTextChange = field_name => debounce(content => {
     setAttributes({
       [field_name]: content,
       edited: {

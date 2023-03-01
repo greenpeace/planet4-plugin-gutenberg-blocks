@@ -92,7 +92,7 @@ const renderView = (attributes, setAttributes, className) => {
     exampleMenuItems,
   } = attributes;
 
-  const blocks = useSelect((select) => select('core/block-editor').getBlocks(), null);
+  const blocks = useSelect(select => select('core/block-editor').getBlocks(), null);
 
   const flatHeadings = getHeadingsFromBlocks(blocks, levels);
 
@@ -106,7 +106,7 @@ const renderView = (attributes, setAttributes, className) => {
         tagName="h2"
         placeholder={__('Enter title', 'planet4-blocks-backend')}
         value={title}
-        onChange={(titl) => setAttributes({title: titl})}
+        onChange={titl => setAttributes({title: titl})}
         withoutInteractiveFormatting
         multiline="false"
         allowedFormats={[]}

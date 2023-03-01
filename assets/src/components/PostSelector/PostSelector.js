@@ -17,7 +17,7 @@ dispatch('core').addEntities([{
  * @param {Object} attributes
  * @return {Object} Selector Interface
  */
-export const PostSelector = (attributes) => {
+export const PostSelector = attributes => {
   const {
     label,
     selected,
@@ -33,7 +33,7 @@ export const PostSelector = (attributes) => {
    */
   const act_parent = window.p4ge_vars.planet4_options.act_page || null;
   const args = {per_page: -1, orderby: 'title', post_status: 'publish'};
-  const posts = useSelect((select) => {
+  const posts = useSelect(select => {
     if ('post' === postType) {
       return [
         ...select('core').getEntityRecords('postType', 'post', {include: selected}) || [],
@@ -67,7 +67,7 @@ export const PostSelector = (attributes) => {
   /**
    * Convert posts to {id, title}
    */
-  const options = posts.map((post) => ({
+  const options = posts.map(post => ({
     id: parseInt(post.id),
     title: post.title?.raw || post.post_title,
   }));
@@ -77,9 +77,9 @@ export const PostSelector = (attributes) => {
    *
    * @param {Array} titles
    */
-  const setPostsIdsFromTitles = (titles) => {
+  const setPostsIdsFromTitles = titles => {
     const postIds = titles?.length ?
-      titles.map((token) => options.find((option) => option.title === token)?.id) :
+      titles.map(token => options.find(option => option.title === token)?.id) :
       [];
     onChange(postIds);
   };
@@ -90,9 +90,9 @@ export const PostSelector = (attributes) => {
    * @param {Array} ids
    * @return {Array} new array of ids
    */
-  const getPostsTitlesFromIds = (ids) => {
+  const getPostsTitlesFromIds = ids => {
     return options?.length && ids?.length ?
-      ids.map((postId) => options.find((option) => option.id === parseInt(postId))?.title).filter((t) => t) :
+      ids.map(postId => options.find(option => option.id === parseInt(postId))?.title).filter(t => t) :
       [];
   };
 
@@ -103,8 +103,8 @@ export const PostSelector = (attributes) => {
     <FormTokenField
       label={label || __('Select posts', 'planet4-blocks-backend')}
       value={getValue() || null}
-      suggestions={options.map((post) => post.title)}
-      onChange={(value) => {
+      suggestions={options.map(post => post.title)}
+      onChange={value => {
         setPostsIdsFromTitles(value);
       }}
       placeholder={placeholder || __('Select posts', 'planet4-blocks-backend')}

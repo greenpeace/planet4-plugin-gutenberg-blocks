@@ -9,7 +9,7 @@ import {applyChangesToDom, LocalThemeSettings, themeJsonUrl} from './LocalThemeS
 
 const {__} = wp.i18n;
 
-const isLegacy = (theme) => [
+const isLegacy = theme => [
   'default',
   'antarctic',
   'arctic',
@@ -20,7 +20,7 @@ const isLegacy = (theme) => [
   'forest',
 ].includes(theme) || !theme;
 
-const loadOptions = async (value) => {
+const loadOptions = async value => {
   if (value === '' || !value) {
     value = 'default';
   }
@@ -55,7 +55,7 @@ const gotInvalidated = (field, options, meta) => {
     return !!currentValue;
   }
 
-  return !(resolvedField.options.some((option) => option.value === currentValue));
+  return !(resolvedField.options.some(option => option.value === currentValue));
 };
 
 export class CampaignThemeSidebar extends Component {
@@ -86,11 +86,11 @@ export class CampaignThemeSidebar extends Component {
 
     // Loop through the new theme's fields, and check whether any of the already chosen options has a value that is not
     // available anymore.
-    const invalidatedFields = prevOptions?.fields.filter((field) => gotInvalidated(field, options, meta)) || [];
+    const invalidatedFields = prevOptions?.fields.filter(field => gotInvalidated(field, options, meta)) || [];
 
     // Set each of the invalidated fields to their default value, or unset them.
     return invalidatedFields
-      .map((field) => resolveField(options, field.id, meta))
+      .map(field => resolveField(options, field.id, meta))
       .reduce(makeDefaultOrNull, {[metaKey]: newThemeName});
   }
 
@@ -158,7 +158,7 @@ export class CampaignThemeSidebar extends Component {
           title={__('Theme Options', 'planet4-blocks-backend')}
         >
           { !!parent && <PostParentLink parent={parent} /> }
-          { !parent && meta && <LocalThemeSettings currentTheme={meta.theme} onChange={async (value) => {
+          { !parent && meta && <LocalThemeSettings currentTheme={meta.theme} onChange={async value => {
             this.handleThemeSwitch('theme', value, meta);
           }} /> }
           { !parent && <ThemeSettings

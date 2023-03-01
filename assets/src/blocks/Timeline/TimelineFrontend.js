@@ -1,6 +1,6 @@
 import {Timeline} from './Timeline';
 
-export const TimelineFrontend = (props) => {
+export const TimelineFrontend = props => {
   const {
     timeline_title,
     description,

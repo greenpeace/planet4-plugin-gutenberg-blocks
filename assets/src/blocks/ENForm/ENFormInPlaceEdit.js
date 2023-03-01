@@ -28,12 +28,12 @@ export const ENFormInPlaceEdit = ({attributes, setAttributes}) => {
     },
   ];
   const [activeTplId, setActiveTplId] = useState('signup');
-  const activeTpl = templates.find((tpl) => tpl.id === activeTplId);
+  const activeTpl = templates.find(tpl => tpl.id === activeTplId);
 
   // Style specific params
   const is_side_style = en_form_style === 'side-style';
   const style_has_image = en_form_style === 'full-width-bg' || en_form_style === 'side-style';
-  const section_style = ((style) => {
+  const section_style = (style => {
     switch (style) {
     case 'side-style':
       return 'block-header alignfull';
@@ -51,7 +51,7 @@ export const ENFormInPlaceEdit = ({attributes, setAttributes}) => {
           isCollapsed={true}
           icon={activeTpl.icon}
           label={activeTpl.title}
-          controls={templates.map((tpl) => {
+          controls={templates.map(tpl => {
             return {
               icon: tpl.icon,
               title: tpl.title,
@@ -133,7 +133,7 @@ const SideContent = ({attributes, setAttributes}) => {
           isCollapsed={true}
           icon="heading"
           label={title_size.toUpperCase()}
-          controls={['h1', 'h2'].map((size) => {
+          controls={['h1', 'h2'].map(size => {
             return {
               isActive: title_size === size,
               icon: 'heading',
@@ -152,7 +152,7 @@ const SideContent = ({attributes, setAttributes}) => {
         <RichText
           tagName={title_size}
           value={content_title}
-          onChange={(title) => setAttributes({content_title: title})}
+          onChange={title => setAttributes({content_title: title})}
           placeholder={__('Enter title', 'planet4-blocks-backend')}
           withoutInteractiveFormatting
           allowedFormats={[]}
@@ -161,7 +161,7 @@ const SideContent = ({attributes, setAttributes}) => {
         <RichText
           tagName="div"
           value={autop(content_description ?? '')}
-          onChange={(desc) => setAttributes({content_description: desc})}
+          onChange={desc => setAttributes({content_description: desc})}
           placeholder={__('Enter description', 'planet4-blocks-backend')}
           allowedFormats={['core/bold', 'core/italic']}
           multiline
@@ -178,7 +178,7 @@ const Signup = ({attributes, setAttributes}) => {
     en_form_id,
   } = attributes;
 
-  const fields = useSelect((select) => {
+  const fields = useSelect(select => {
     const enform_post = en_form_id ? select('core').getEntityRecord('postType', 'p4en_form', en_form_id) : {};
     return enform_post?.p4enform_fields || [];
   }, [en_form_id]);
@@ -191,7 +191,7 @@ const Signup = ({attributes, setAttributes}) => {
           <RichText
             tagName="h2"
             value={title}
-            onChange={(titl) => setAttributes({title: titl})}
+            onChange={titl => setAttributes({title: titl})}
             placeholder={__('Enter form title', 'planet4-blocks-backend')}
             withoutInteractiveFormatting
             allowedFormats={[]}
@@ -201,7 +201,7 @@ const Signup = ({attributes, setAttributes}) => {
             tagName="div"
             value={description}
             className="form-description"
-            onChange={(des) => setAttributes({description: des})}
+            onChange={des => setAttributes({description: des})}
             placeholder={__('Enter form description', 'planet4-blocks-backend')}
             allowedFormats={['core/bold', 'core/italic']}
             multiline
@@ -233,8 +233,8 @@ const ThankYou = ({attributes, setAttributes}) => {
 
   const social_params = {...social, utm_medium: 'thank-you'};
 
-  const toAttribute = (attributeName) => {
-    return (value) => {
+  const toAttribute = attributeName => {
+    return value => {
       setAttributes({[attributeName]: value});
     };
   };
@@ -352,7 +352,7 @@ const FormContent = ({attributes, setAttributes, fields}) => {
             id="p4en_form_save_button"
             className={'btn btn-primary btn-block' + (fwbg ? ' w-auto' : '')}
             value={button_text || __('Sign', 'planet4-engagingnetworks')}
-            onChange={(text) => setAttributes({button_text: text})}
+            onChange={text => setAttributes({button_text: text})}
             placeholder={__('Sign', 'planet4-blocks-backend')}
           />
           {fwbg &&
@@ -362,7 +362,7 @@ const FormContent = ({attributes, setAttributes, fields}) => {
                 value={text_below_button}
                 placeholder={__('Text below button', 'planet4-blocks-backend')}
                 allowedFormats={[]}
-                onChange={(text) => setAttributes({text_below_button: text})}
+                onChange={text => setAttributes({text_below_button: text})}
               />
             </div>
           }
@@ -374,7 +374,7 @@ const FormContent = ({attributes, setAttributes, fields}) => {
               value={text_below_button}
               placeholder={__('Text below button', 'planet4-blocks-backend')}
               allowedFormats={[]}
-              onChange={(text) => setAttributes({text_below_button: text})}
+              onChange={text => setAttributes({text_below_button: text})}
             />
           </div>
         }

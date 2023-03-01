@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
       panel.classList.remove('panel-hidden');
 
       // Add button handler to corresponding panel
-      const button = [...panel.children].find((child) => child.classList.contains('accordion-btn'));
+      const button = [...panel.children].find(child => child.classList.contains('accordion-btn'));
 
       if (button && !button.onclick) {
         const textToSend = getAnalyticsText(item);
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
       openItem(item);
 
       // Close all other items if necessary
-      siblings.forEach((sibling) => {
+      siblings.forEach(sibling => {
         if (sibling !== item) {
           closeItem(sibling);
         }
@@ -73,9 +73,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Add necessary handlers to accordion blocks
   const accordionBlocks = [...document.querySelectorAll('.accordion-block')];
 
-  accordionBlocks.forEach((accordion) => {
-    const accordionItems = [...accordion.children].filter((child) => child.classList.contains('accordion-content'));
-    const accordionHeadlines = accordionItems.map((item) => [...item.children].find((child) => child.classList.contains('accordion-headline')));
-    accordionHeadlines.forEach((headline) => headline.onclick = () => toggleAccordionItem(headline, accordionHeadlines));
+  accordionBlocks.forEach(accordion => {
+    const accordionItems = [...accordion.children].filter(child => child.classList.contains('accordion-content'));
+    const accordionHeadlines = accordionItems.map(item => [...item.children].find(child => child.classList.contains('accordion-headline')));
+    accordionHeadlines.forEach(headline => headline.onclick = () => toggleAccordionItem(headline, accordionHeadlines));
   });
 });

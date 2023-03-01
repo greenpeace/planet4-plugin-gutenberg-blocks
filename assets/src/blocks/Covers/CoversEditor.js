@@ -38,7 +38,7 @@ const renderEdit = (attributes, toAttribute, setAttributes) => {
             {label: __('Grid', 'planet4-blocks-backend'), value: COVERS_LAYOUTS.grid},
           ]}
           selected={layout}
-          onChange={(value) => {
+          onChange={value => {
             setAttributes({
               layout: value,
               initialRowsLimit: value === COVERS_LAYOUTS.carousel ? 1 : initialRowsLimit,
@@ -52,7 +52,7 @@ const renderEdit = (attributes, toAttribute, setAttributes) => {
             label="Rows to display"
             value={initialRowsLimit}
             options={rowLimitOptions}
-            onChange={(value) => toAttribute('initialRowsLimit')(Number(value))}
+            onChange={value => toAttribute('initialRowsLimit')(Number(value))}
           />
         }
 
@@ -204,7 +204,7 @@ export const CoversEditor = ({attributes, setAttributes, isSelected}) => {
     }
   }, [className]);
 
-  const toAttribute = (attributeName) => (value) => setAttributes({[attributeName]: value});
+  const toAttribute = attributeName => value => setAttributes({[attributeName]: value});
 
   return (
     <>

@@ -11,8 +11,8 @@ import {Sidebar} from './Sidebar';
 import {EditableBackground} from './EditableBackground';
 import {useSelect} from '@wordpress/data';
 
-export const toSrcSet = (sizes) => {
-  return sizes.map((size) => `${size.url || size.source_url} ${size.width}w`).join();
+export const toSrcSet = sizes => {
+  return sizes.map(size => `${size.url || size.source_url} ${size.width}w`).join();
 };
 
 export const CarouselHeaderEditor = ({setAttributes, attributes}) => {
@@ -21,7 +21,7 @@ export const CarouselHeaderEditor = ({setAttributes, attributes}) => {
 
   const {currentSlide, goToSlide, goToNextSlide, goToPrevSlide} = useSlides(slidesRef, slides.length - 1);
 
-  const changeSlideAttribute = (slideAttributeName, index) => (value) => {
+  const changeSlideAttribute = (slideAttributeName, index) => value => {
     const newSlides = JSON.parse(JSON.stringify(slides));
     newSlides[index][slideAttributeName] = value;
     setAttributes({slides: newSlides});
@@ -62,8 +62,8 @@ export const CarouselHeaderEditor = ({setAttributes, attributes}) => {
     goToSlide(currentSlide > lastSlide ? 0 : currentSlide, true);
   };
 
-  const needsMigration = slides.some((slide) => !!slide.image && !slide.image_srcset);
-  const migratedSlides = useSelect((select) => slides && slides.map((slide) => {
+  const needsMigration = slides.some(slide => !!slide.image && !slide.image_srcset);
+  const migratedSlides = useSelect(select => slides && slides.map(slide => {
     if (!needsMigration) {
       return null;
     }
@@ -102,7 +102,7 @@ export const CarouselHeaderEditor = ({setAttributes, attributes}) => {
           {slides?.map((slide, index) => (
             <Slide
               key={index}
-              ref={(element) => slidesRef.current[index] = element}
+              ref={element => slidesRef.current[index] = element}
               active={currentSlide === index}
             >
               <EditableBackground

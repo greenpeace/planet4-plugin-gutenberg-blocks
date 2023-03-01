@@ -1,7 +1,7 @@
 import {TextControl} from '@wordpress/components';
 import {URLValidationMessage} from '../../components/URLValidationMessage/URLValidationMessage';
 
-export const URLInput = (props) => {
+export const URLInput = props => {
   const {label, placeholder, value, onChange, disabled, help} = props;
 
   return (

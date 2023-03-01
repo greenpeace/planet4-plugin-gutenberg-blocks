@@ -16,7 +16,7 @@ const uploadTheme = async (name, theme) => {
   });
 };
 
-const deleteTheme = async (name) => {
+const deleteTheme = async name => {
   return wp.apiFetch({
     path: 'planet4/v1/delete-theme/',
     method: 'POST',

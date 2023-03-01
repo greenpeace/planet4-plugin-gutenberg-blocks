@@ -4,7 +4,7 @@
 // Be careful! Making changes in this component or in the `frontendRendered`
 // function could potentially cause block validation errors in Gutenberg.
 
-export const FrontendBlockNode = (props) => {
+export const FrontendBlockNode = props => {
   return (
     <div className={props.className}
       data-render={props.blockName}

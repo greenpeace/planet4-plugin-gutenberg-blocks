@@ -2,7 +2,7 @@
 import {useEffect, useState} from '@wordpress/element';
 import {addLinkTag} from './addLinkTag';
 
-export const useStyleSheet = (href) => {
+export const useStyleSheet = href => {
   // Keeping track of script loaded and error state
   const [state, setState] = useState({
     loaded: false,

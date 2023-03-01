@@ -1,7 +1,7 @@
 import {useBlockProps} from '@wordpress/block-editor';
 
 export default function(template, templateLock = false) {
-  return (props) => {
+  return props => {
     return (
       <div {...useBlockProps()}>
         {

@@ -1,7 +1,7 @@
 import {Button} from '@wordpress/components';
 const {__} = wp.i18n;
 
-export const ImageHoverControls = (props) => {
+export const ImageHoverControls = props => {
   const {
     onEdit,
     onRemove,

@@ -1,6 +1,6 @@
 const root = document.documentElement;
 
-const readCssVariable = (name) => root.style.getPropertyValue(name);
+const readCssVariable = name => root.style.getPropertyValue(name);
 
 const setCssVariable = (name, value) => {
   root.style.setProperty(name, value);
@@ -51,7 +51,7 @@ export const setUpCssVariables = () => {
       return;
     }
 
-    metaToVariableMapping.forEach((mapping) => {
+    metaToVariableMapping.forEach(mapping => {
       wp.data.subscribe(() => {
         const postMeta = getMeta();
 
@@ -60,7 +60,7 @@ export const setUpCssVariables = () => {
           return;
         }
 
-        const transform = mapping.transform || ((value) => value);
+        const transform = mapping.transform || (value => value);
 
         const metaValue = transform(postMeta[mapping.metaKey]);
 

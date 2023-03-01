@@ -1,5 +1,5 @@
 export const SubmenuItems = ({menuItems}) => {
-  const renderMenuItems = (items) => {
+  const renderMenuItems = items => {
     return items.map(({anchor, text, style, shouldLink, children}) => (
       <li key={anchor} className={`list-style-${style || 'none'} ${shouldLink ? 'list-link' : 'list-heading'}`}>
         {shouldLink ?

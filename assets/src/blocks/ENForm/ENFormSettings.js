@@ -33,14 +33,14 @@ export const ENFormSettings = ({attributes, setAttributes}) => {
     setAttributes({[focal_name]: `${parseInt(x * 100)}% ${parseInt(y * 100)}%`});
   };
 
-  const onBackgroundChange = (image) => {
+  const onBackgroundChange = image => {
     setAttributes({
       background: image.id,
       background_image_src: image.url,
     });
   };
 
-  const onCampaignLogoChange = (use_logo) => {
+  const onCampaignLogoChange = use_logo => {
     setAttributes({
       campaign_logo: use_logo,
       campaign_logo_path: '',
@@ -48,7 +48,7 @@ export const ENFormSettings = ({attributes, setAttributes}) => {
     });
   };
 
-  const toAttribute = (attributeName) => (value) => {
+  const toAttribute = attributeName => value => {
     setAttributes({[attributeName]: value});
   };
 
@@ -61,7 +61,7 @@ export const ENFormSettings = ({attributes, setAttributes}) => {
               label={__('Use campaign logo', 'planet4-engagingnetworks-backend')}
               value={campaign_logo}
               checked={campaign_logo}
-              onChange={(campaignLogo) => onCampaignLogoChange(campaignLogo)}
+              onChange={campaignLogo => onCampaignLogoChange(campaignLogo)}
             />
           }
           <SelectControl
@@ -72,7 +72,7 @@ export const ENFormSettings = ({attributes, setAttributes}) => {
               ...page_list,
             ]}
             disabled={page_list.length <= 0}
-            onChange={(id) => setAttributes({en_page_id: parseInt(id)})}
+            onChange={id => setAttributes({en_page_id: parseInt(id)})}
             required={true}
           />
 
@@ -96,7 +96,7 @@ export const ENFormSettings = ({attributes, setAttributes}) => {
               {label: 'No forms', value: 0},
               ...en_forms,
             ]}
-            onChange={(id) => setAttributes({en_form_id: parseInt(id)})}
+            onChange={id => setAttributes({en_form_id: parseInt(id)})}
             help={en_forms.length > 0 ?
               __('Select the P4EN Form that will be displayed.', 'planet4-engagingnetworks-backend') :
               __('Create an EN Form', 'planet4-engagingnetworks-backend')}
@@ -110,7 +110,7 @@ export const ENFormSettings = ({attributes, setAttributes}) => {
             >
               <ImageOrButton
                 title={__('Select background image', 'planet4-blocks-backend')}
-                onSelectImage={(image) => onBackgroundChange(image)}
+                onSelectImage={image => onBackgroundChange(image)}
                 imageId={background}
                 imageUrl={background_image_src}
                 buttonLabel={__('+ Select background image', 'planet4-blocks-backend')}
@@ -123,7 +123,7 @@ export const ENFormSettings = ({attributes, setAttributes}) => {
                     url={background_image_src}
                     dimensions={focal_picker_dimensions}
                     value={focus_bg_image_obj}
-                    onChange={(focus) => onFocalChange('background_image_focus', focus)}
+                    onChange={focus => onFocalChange('background_image_focus', focus)}
                   />
                 </div>
               }
@@ -168,7 +168,7 @@ export const ENFormSettings = ({attributes, setAttributes}) => {
  * @param {string} focal_str
  * @return {Object} vector points
  */
-const convertFocalStringToObj = (focal_str) => {
+const convertFocalStringToObj = focal_str => {
   if (!focal_str || focal_str.length <= 0) {
     return {x: 0.5, y: 0.5};
   }
@@ -184,7 +184,7 @@ const getPageListByType = () => {
 
   let flattenedPages = [];
   for (const i in pages) {
-    const pagesByType = pages[i].map((page) => {
+    const pagesByType = pages[i].map(page => {
       return {label: page.name, value: page.id};
     });
     flattenedPages = flattenedPages.concat(
@@ -202,7 +202,7 @@ const getFormList = () => {
     return [];
   }
 
-  return forms.map((form) => {
+  return forms.map(form => {
     return {label: form.post_title, value: form.ID};
   });
 };

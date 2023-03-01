@@ -47,7 +47,7 @@ const renderEdit = (attributes, toAttribute, setAttributes, isSelected) => {
           <RangeControl
             label={__('Columns', 'planet4-blocks-backend')}
             value={columns.length}
-            onChange={(value) => {
+            onChange={value => {
               if (value > columns.length && value <= 4) {
                 addColumn();
               } else if (value < columns.length && value >= 2) {
@@ -114,14 +114,14 @@ export const ColumnsEditor = ({isSelected, attributes, setAttributes}) => {
     }
   }, [className]);
 
-  const {postType} = useSelect((select) => ({
+  const {postType} = useSelect(select => ({
     postType: select('core/editor').getCurrentPostType(),
   }), []);
 
-  const {columnImages} = useSelect((select) => {
+  const {columnImages} = useSelect(select => {
     // eslint-disable-next-line no-shadow
     const columnImages = [];
-    columns.forEach((column) => {
+    columns.forEach(column => {
       if (column.attachment && column.attachment > 0) {
         const media_details = select('core').getMedia(column.attachment);
         if (media_details) {
@@ -132,7 +132,7 @@ export const ColumnsEditor = ({isSelected, attributes, setAttributes}) => {
     return {columnImages};
   }, [columns]);
 
-  const toAttribute = (attributeName, index) => (value) => {
+  const toAttribute = (attributeName, index) => value => {
     if (['columns_title', 'columns_description'].includes(attributeName)) {
       setAttributes({
         [attributeName]: value,

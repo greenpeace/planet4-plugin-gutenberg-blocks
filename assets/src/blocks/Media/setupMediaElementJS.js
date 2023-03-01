@@ -11,7 +11,7 @@ export const setupMediaElementJS = function() {
   addLinkTag({href: 'https://cdn.jsdelivr.net/npm/mediaelement@4.2.16/build/mediaelementplayer-legacy.min.css'});
 
   const onLoad = () => {
-    meJSNodes.forEach((node) => {
+    meJSNodes.forEach(node => {
       // eslint-disable-next-line no-undef, no-unused-vars
       const player = new MediaElementPlayer(node, {
         classPrefix: 'mejs-',

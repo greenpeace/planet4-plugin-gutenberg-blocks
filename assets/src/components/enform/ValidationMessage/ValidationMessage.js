@@ -1,4 +1,4 @@
-export const ValidationMessage = (props) => {
+export const ValidationMessage = props => {
   return (
     <div className="ValidationMessage">
       <ul>

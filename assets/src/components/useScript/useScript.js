@@ -63,7 +63,7 @@ export const removeScript = (src, deps = []) => {
 
   useEffect(
     () => {
-      [...document.querySelectorAll(`script[src="${src}"]`)].forEach((node) => {
+      [...document.querySelectorAll(`script[src="${src}"]`)].forEach(node => {
         node.remove();
       });
       setState({unloaded: true});

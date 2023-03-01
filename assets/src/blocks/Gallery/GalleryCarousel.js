@@ -8,7 +8,7 @@ const isRTL = document.querySelector('html').dir === 'rtl';
 
 // This will trigger the browser to synchronously calculate the style and layout
 // You can find a list of examples here: https://gist.github.com/paulirish/5d52fb081b3570c81e3a
-const reflow = (element) => element.offsetHeight;
+const reflow = element => element.offsetHeight;
 
 export const GalleryCarousel = ({images, onImageClick, isEditing}) => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -18,7 +18,7 @@ export const GalleryCarousel = ({images, onImageClick, isEditing}) => {
   const slidesRef = useRef([]);
   const containerRef = useRef(null);
 
-  const getOrder = (newSlide) => {
+  const getOrder = newSlide => {
     let order = newSlide < currentSlide ? 'prev' : 'next';
     if (newSlide === lastSlide && currentSlide === 0 && order !== 'prev') {
       order = 'prev';
@@ -28,7 +28,7 @@ export const GalleryCarousel = ({images, onImageClick, isEditing}) => {
     return order;
   };
 
-  const goToSlide = (newSlide) => {
+  const goToSlide = newSlide => {
     const nextElement = slidesRef.current[newSlide];
     const activeElement = slidesRef.current[currentSlide];
     if (newSlide !== currentSlide && nextElement && activeElement && !sliding) {
@@ -116,7 +116,7 @@ export const GalleryCarousel = ({images, onImageClick, isEditing}) => {
           <div
             key={image.image_src}
             className={`carousel-item ${index === currentSlide ? 'active' : ''}`}
-            ref={(element) => slidesRef.current[index] = element}
+            ref={element => slidesRef.current[index] = element}
           >
             <img
               loading="lazy"

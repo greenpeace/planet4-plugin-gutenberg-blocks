@@ -28,7 +28,7 @@ const COMPONENTS = {
 
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('[data-render]').forEach(
-    (blockNode) => {
+    blockNode => {
       const blockName = blockNode.dataset.render;
       if (!COMPONENTS[blockName]) {
         return;

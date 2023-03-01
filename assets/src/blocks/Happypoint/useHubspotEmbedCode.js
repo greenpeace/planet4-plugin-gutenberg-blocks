@@ -21,7 +21,7 @@ export const HubspotEmbed = ({params}) => {
   const hbsptParams = {};
   const jsonParams = matches[1].replace(/[\n\r\s+]/g, '');
   const paramsMatches = jsonParams.matchAll(/(?<key>[a-zA-Z]*):"(?<value>[^"]*)"/g);
-  [...paramsMatches].forEach((e) => {
+  [...paramsMatches].forEach(e => {
     hbsptParams[e.groups.key] = e.groups.value;
   });
 

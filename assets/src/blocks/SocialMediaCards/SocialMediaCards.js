@@ -19,12 +19,12 @@ export class SocialMediaCards extends Component {
 
     const {cards, onDeleteImage} = this.props;
 
-    const getImageOrButton = (openEvent) => {
+    const getImageOrButton = openEvent => {
       if (cards.length > 0) {
         return cards.map((card, index) => (
           <span className="img-wrap" key={index + 1}>
             <Tooltip text={__('Remove Image', 'planet4-blocks-backend')}>
-              <span className="close" role="presentation" onClick={(ev) => {
+              <span className="close" role="presentation" onClick={ev => {
                 onDeleteImage(card.image_id);
                 ev.stopPropagation();
               }}>&times;</span>
@@ -81,7 +81,7 @@ export class SocialMediaCards extends Component {
               title={__('Select Images', 'planet4-blocks-backend')}
               type="image"
               onSelect={this.props.onSelectImages}
-              value={cards.map((card) => card.image_id)}
+              value={cards.map(card => card.image_id)}
               allowedTypes={['image']}
               multiple="true"
               render={({open}) => getImageOrButton(open)}

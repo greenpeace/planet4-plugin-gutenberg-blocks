@@ -20,7 +20,7 @@ export const SplittwocolumnsFrontend = ({
   focus_tag_image,
   className,
 }) => {
-  const analytics = (action) => {
+  const analytics = action => {
     return {
       'data-ga-category': 'Split Two Columns',
       'data-ga-action': action,

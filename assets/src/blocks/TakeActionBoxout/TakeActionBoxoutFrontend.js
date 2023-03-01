@@ -20,8 +20,7 @@ export const TakeActionBoxoutFrontend = ({
       data-ga-label="n/a"
       className="cover-card-overlay"
       href={link}
-      target={(newTab && link) ? '_blank' : ''}
-      rel="noreferrer"
+      {...newTab && {rel: 'noreferrer', target: '_blank'}}
     />
     <img src={imageUrl} alt={imageAlt} />
     <div className="boxout-content">
@@ -33,8 +32,7 @@ export const TakeActionBoxoutFrontend = ({
           data-ga-label="n/a"
           dangerouslySetInnerHTML={{__html: title}}
           href={link}
-          target={(newTab && link) ? '_blank' : ''}
-          rel="noreferrer"
+          {...newTab && {rel: 'noreferrer', target: '_blank'}}
         />
       }
       {excerpt &&
@@ -48,8 +46,7 @@ export const TakeActionBoxoutFrontend = ({
         data-ga-action="Call to Action"
         data-ga-label="n/a"
         href={link}
-        target={(newTab && link) ? '_blank' : ''}
-        rel="noreferrer"
+        {...newTab && {rel: 'noreferrer', target: '_blank'}}
       >
         {linkText}
       </a>

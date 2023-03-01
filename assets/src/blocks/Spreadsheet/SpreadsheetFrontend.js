@@ -114,8 +114,8 @@ export class SpreadsheetFrontend extends Component {
   }
 
   filterMatchingRows(rows) {
-    const filteredRows = rows.filter((row) => {
-      return row.some((cell) => cell.toLowerCase().includes(this.state.searchText.toLowerCase()));
+    const filteredRows = rows.filter(row => {
+      return row.some(cell => cell.toLowerCase().includes(this.state.searchText.toLowerCase()));
     });
     return filteredRows;
   }
@@ -169,7 +169,7 @@ export class SpreadsheetFrontend extends Component {
           <input className="spreadsheet-search form-control"
             type="text"
             value={this.state.searchText}
-            onChange={(event) => this.setState({searchText: event.target.value})}
+            onChange={event => this.setState({searchText: event.target.value})}
             placeholder={__('Search data', 'planet4-blocks')}
           />
           <div className="table-wrapper">

@@ -41,7 +41,7 @@ const isSameTermName = (termA, termB) => termA.toLowerCase() === termB.toLowerCa
  *
  * @return {Object} Term object with name property unescaped.
  */
-const unescapeTerm = (term) => {
+const unescapeTerm = term => {
   return {
     ...term,
     name: unescapeString(term.name),
@@ -56,7 +56,7 @@ const unescapeTerm = (term) => {
  *
  * @return {Object[]} Array of term objects unescaped.
  */
-const unescapeTerms = (terms) => {
+const unescapeTerms = terms => {
   return map(terms, unescapeTerm);
 };
 
@@ -92,7 +92,7 @@ class AssignOnlyFlatTermSelector extends Component {
       () => {
         this.setState({loading: false});
       },
-      (xhr) => {
+      xhr => {
         if (xhr.statusText === 'abort') {
           return;
         }
@@ -121,10 +121,10 @@ class AssignOnlyFlatTermSelector extends Component {
     const request = apiFetch({
       path: addQueryArgs(`/wp/v2/${taxonomy.rest_base}`, query),
     });
-    request.then(unescapeTerms).then((terms) => {
-      this.setState((state) => ({
+    request.then(unescapeTerms).then(terms => {
+      this.setState(state => ({
         availableTerms: state.availableTerms.concat(
-          terms.filter((term) => !find(state.availableTerms, (availableTerm) => availableTerm.id === term.id))
+          terms.filter(term => !find(state.availableTerms, availableTerm => availableTerm.id === term.id))
         ),
       }));
       this.updateSelectedTerms(this.props.terms);
@@ -135,7 +135,7 @@ class AssignOnlyFlatTermSelector extends Component {
 
   updateSelectedTerms(terms = []) {
     const selectedTerms = terms.reduce((accumulator, termId) => {
-      const termObject = find(this.state.availableTerms, (term) => term.id === termId);
+      const termObject = find(this.state.availableTerms, term => term.id === termId);
       if (termObject) {
         accumulator.push(termObject.name);
       }
@@ -148,15 +148,15 @@ class AssignOnlyFlatTermSelector extends Component {
   }
 
   onChange(termNames) {
-    const uniqueTerms = uniqBy(termNames, (term) => term.toLowerCase());
-    const allowedTerms = uniqueTerms.filter((termName) =>
-      find(this.state.availableTerms, (term) => isSameTermName(term.name, termName))
+    const uniqueTerms = uniqBy(termNames, term => term.toLowerCase());
+    const allowedTerms = uniqueTerms.filter(termName =>
+      find(this.state.availableTerms, term => isSameTermName(term.name, termName))
     );
     this.setState({selectedTerms: allowedTerms});
     const termNamesToIds = (names, availableTerms) => {
       return names
-        .map((termName) =>
-          find(availableTerms, (term) => isSameTermName(term.name, termName)).id
+        .map(termName =>
+          find(availableTerms, term => isSameTermName(term.name, termName)).id
         );
     };
 
@@ -179,7 +179,7 @@ class AssignOnlyFlatTermSelector extends Component {
     }
 
     const {loading, availableTerms, selectedTerms} = this.state;
-    const termNames = availableTerms.map((term) => term.name);
+    const termNames = availableTerms.map(term => term.name);
     const newTermLabel = get(
       taxonomy,
       ['labels', 'add_new_item'],
@@ -225,7 +225,7 @@ export default compose(
       taxonomy,
     };
   }),
-  withDispatch((dispatch) => {
+  withDispatch(dispatch => {
     return {
       onUpdateTerms(terms, restBase) {
         dispatch('core/editor').editPost({[restBase]: terms});

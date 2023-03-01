@@ -25,7 +25,7 @@ export const FormGenerator = ({fields, attributes, onInputChange, onBlur, errors
   );
 };
 
-const Input = (props) => {
+const Input = props => {
   const {
     field,
     index,
@@ -40,7 +40,7 @@ const Input = (props) => {
     is_side_style,
   } = props;
 
-  return ((returnField) => {
+  return (returnField => {
     switch (returnField?.input_type) {
     case 'text':
     case 'email':
@@ -102,8 +102,8 @@ const TextInput = ({field, onInputChange, onBlur, errors, is_side_style}) => {
           placeholder={label}
           required={field.required || field.input_type === 'email'}
           size="40"
-          onChange={(e) => onInputChange(field, e)}
-          onBlur={(e) => onBlur(field, e)}
+          onChange={e => onInputChange(field, e)}
+          onBlur={e => onBlur(field, e)}
         />
         {is_side_style &&
           <label
@@ -150,8 +150,8 @@ const CheckboxOpt = ({field, onInputChange, onBlur, dependent_field, errors}) =>
             disabled={field.name === dependent_field}
             data-dependency={field.dependency}
             onClick={toggleDependencies}
-            onChange={(e) => onInputChange(field, e)}
-            onBlur={(e) => onBlur(field, e)}
+            onChange={e => onInputChange(field, e)}
+            onBlur={e => onBlur(field, e)}
           />
           <span
             className="custom-control-description"
@@ -188,8 +188,8 @@ const CheckboxGen = ({field, onInputChange, onBlur, dependent_field, errors}) =>
             disabled={field.name === dependent_field}
             data-dependency={field.dependency}
             onClick={toggleDependencies}
-            onChange={(e) => onInputChange(field, e)}
-            onBlur={(e) => onBlur(field, e)}
+            onChange={e => onInputChange(field, e)}
+            onBlur={e => onBlur(field, e)}
           />
           <span
             className="custom-control-description"
@@ -224,8 +224,8 @@ const RadioInput = ({field, onInputChange, onBlur, errors}) => {
               data-errormessage={__('This field is required', 'planet4-engagingnetworks')}
               checked={opt.option_selected}
               required={field.required}
-              onChange={(e) => onInputChange(field, e)}
-              onBlur={(e) => onBlur(field, e)}
+              onChange={e => onInputChange(field, e)}
+              onBlur={e => onBlur(field, e)}
             />
             <span className="custom-control-description">
               { opt.option_label }
@@ -267,8 +267,8 @@ const CountryInput = ({field, onInputChange, onBlur, errors}) => {
     error_message,
     required: field?.required || false,
     label: `${field.label}${field.required ? ' *' : ''}`,
-    onInputChange: (e) => onInputChange(field, e),
-    onBlur: (e) => onBlur(field, e),
+    onInputChange: e => onInputChange(field, e),
+    onBlur: e => onBlur(field, e),
   };
 
   return (
@@ -296,8 +296,8 @@ const PositionInput = ({field, onInputChange, onBlur, errors, is_side_style}) =>
     default_text: `${__('Select Affiliation, Position or Profession', 'planet4-engagingnetworks')}${field.required ? ' *' : ''}`,
     error_message,
     required: field?.required || false,
-    onInputChange: (e) => onInputChange(field, e),
-    onBlur: (e) => onBlur(field, e),
+    onInputChange: e => onInputChange(field, e),
+    onBlur: e => onBlur(field, e),
   };
 
   return (
@@ -324,7 +324,7 @@ const PositionInput = ({field, onInputChange, onBlur, errors, is_side_style}) =>
  *
  * @param {Object} e
  */
-const toggleDependencies = (e) => {
+const toggleDependencies = e => {
   const target = e.target;
   const dependency = target?.dataset?.dependency;
   if (!target || !dependency) {

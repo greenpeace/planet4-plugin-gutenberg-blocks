@@ -12,12 +12,11 @@ export const StaticCaption = ({slide}) => (
         <div className="col-xs-12 col-sm-8 col-md-4 action-button">
           <a
             href={slide.link_url}
-            target={slide.link_url_new_tab ? '_blank' : '_self'}
             className="btn btn-primary btn-block"
             data-ga-category="Carousel Header"
             data-ga-action="Call to Action"
-            rel="noopener noreferrer"
             data-ga-label={slide.index}
+            {...slide.link_url_new_tab && {rel: 'noreferrer', target: '_blank'}}
           >
             <span>
               {slide.link_text}

@@ -1,9 +1,9 @@
 import {useState, useEffect} from '@wordpress/element';
 
-export const readCookie = (name) => {
+export const readCookie = name => {
   const declarations = document.cookie.split(';');
   let match = null;
-  declarations.forEach((part) => {
+  declarations.forEach(part => {
     const [key, value] = part.split('=');
     if (key.trim() === name) {
       match = value;
@@ -22,9 +22,9 @@ export const writeCookie = (name, value, days = 365) => {
 };
 
 // Value should not matter as cookie is expired.
-export const removeCookie = (name) => writeCookie(name, '0', -1);
+export const removeCookie = name => writeCookie(name, '0', -1);
 
-export const useCookie = (name) => {
+export const useCookie = name => {
   const [value, setValue] = useState(() => readCookie(name));
 
   const saveCookie = () => {

@@ -8,7 +8,7 @@ const {apiFetch} = wp;
 const {useSelect} = wp.data;
 
 const useImage = (image_id, url) => {
-  return useSelect((select) => !image_id ? {url} : select('core').getMedia(image_id));
+  return useSelect(select => !image_id ? {url} : select('core').getMedia(image_id));
 };
 
 export const SplittwocolumnsEditor = ({attributes, setAttributes, isSelected}) => {
@@ -63,5 +63,5 @@ const updateDeprecatedData = (attributes, setAttributes, blockName, version) => 
     path: 'planet4/v1/update_block/' + blockName,
     method: 'POST',
     data: attributes,
-  }).then((data) => setAttributes(data));
+  }).then(data => setAttributes(data));
 };

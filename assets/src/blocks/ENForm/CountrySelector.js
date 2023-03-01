@@ -1,4 +1,4 @@
-export const CountrySelector = (attributes) => {
+export const CountrySelector = attributes => {
   const {
     name = 'country-selector',
     id = null,
@@ -12,7 +12,7 @@ export const CountrySelector = (attributes) => {
 
   const options = [
     <option key="default" value="" disabled={true}>{ default_text }</option>,
-    ...countries.map((c) => {
+    ...countries.map(c => {
       return <option key={c.code} value={c.code}>{ c.name }</option>;
     }),
   ];

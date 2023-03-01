@@ -1,7 +1,7 @@
 import {ArticlesList} from './ArticlesList';
 import {useArticlesFetch} from './useArticlesFetch';
 
-export const ArticlesFrontend = (props) => {
+export const ArticlesFrontend = props => {
   const {
     article_heading,
     articles_description,
@@ -13,7 +13,7 @@ export const ArticlesFrontend = (props) => {
 
   const postType = document.body.getAttribute('data-post-type');
 
-  const postIdClass = [...document.body.classList].find((classNameFound) => /^postid-\d+$/.test(classNameFound));
+  const postIdClass = [...document.body.classList].find(classNameFound => /^postid-\d+$/.test(classNameFound));
 
   const postId = !postIdClass ? null : postIdClass.split('-')[1];
 
@@ -41,8 +41,7 @@ export const ArticlesFrontend = (props) => {
             <a
               className="btn btn-secondary btn-block article-load-more"
               href={read_more_link}
-              target={button_link_new_tab ? '_blank' : ''}
-              rel="noreferrer"
+              {...button_link_new_tab && {rel: 'noreferrer', target: '_blank'}}
             >
               { read_more_text }
             </a>

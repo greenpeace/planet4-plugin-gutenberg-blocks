@@ -1,7 +1,7 @@
 import {CookiesFrontend} from './CookiesFrontend';
 
 export const CookiesEditor = ({attributes, isSelected, setAttributes}) => {
-  const toAttribute = (attributeName) => (value) => {
+  const toAttribute = attributeName => value => {
     if (isSelected) {
       setAttributes({[attributeName]: value});
     }

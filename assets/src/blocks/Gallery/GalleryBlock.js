@@ -53,7 +53,7 @@ export const registerGalleryBlock = () => {
       html: false, // Disable "Edit as HTMl" block option.
     },
     edit: GalleryEditor,
-    save: (props) => {
+    save: props => {
       const {attributes: saveAttributes} = props;
       const markup = ReactDOMServer.renderToString(
         <div

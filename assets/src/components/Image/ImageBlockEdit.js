@@ -8,8 +8,8 @@ const {useSelect} = wp.data;
  * @param {Object} BlockEdit
  * @return {Object} interface to edit images on the Editor
  */
-export const ImageBlockEdit = (BlockEdit) => {
-  return (props) => {
+export const ImageBlockEdit = BlockEdit => {
+  return props => {
     if ('core/image' !== props.name) {
       return <BlockEdit {...props} />;
     }
@@ -18,7 +18,7 @@ export const ImageBlockEdit = (BlockEdit) => {
     const {id, caption, className = ''} = attributes;
 
     // Get image data
-    const image = useSelect((select) => id ? select('core').getMedia(id) : null);
+    const image = useSelect(select => id ? select('core').getMedia(id) : null);
     const credits = image?.meta?._credit_text;
     // Compile data for insertion
     // eslint-disable-next-line no-nested-ternary
@@ -30,7 +30,7 @@ export const ImageBlockEdit = (BlockEdit) => {
     // Update width and height when sized rounded styles are selected
     if (className.includes('is-style-rounded-')) {
       const classes = className.split(' ');
-      const size = classes.find((c) => c.includes('is-style-rounded-')).replace('is-style-rounded-', '') || 180;
+      const size = classes.find(c => c.includes('is-style-rounded-')).replace('is-style-rounded-', '') || 180;
       attributes.width = parseInt(size);
       attributes.height = parseInt(size);
     }

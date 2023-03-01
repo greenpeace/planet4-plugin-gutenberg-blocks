@@ -9,21 +9,21 @@ const blockTypesWithHeadings = [
 
 // Naive regex to remove html tags. Don't use anywhere else as it's too limited, but for the expected HTML in heading
 // blocks this should be sufficient.
-const stripTags = (str) => str.replace(/(<([^>]+)>)/ig, '');
+const stripTags = str => str.replace(/(<([^>]+)>)/ig, '');
 
 export const getHeadingsFromBlocks = (blocks, selectedLevels) => {
   const headings = [];
-  blocks.forEach((block) => {
+  blocks.forEach(block => {
     if (block.name === 'core/heading') {
       const blockLevel = block.attributes.level;
 
-      const levelConfig = selectedLevels.find((selected) => selected.heading === blockLevel);
+      const levelConfig = selectedLevels.find(selected => selected.heading === blockLevel);
 
       if (!levelConfig) {
         return;
       }
 
-      const anchor = block.attributes.anchor || generateAnchor(block.attributes.content, headings.map((h) => h.anchor));
+      const anchor = block.attributes.anchor || generateAnchor(block.attributes.content, headings.map(h => h.anchor));
 
       headings.push({
         level: blockLevel,
@@ -45,11 +45,11 @@ export const getHeadingsFromBlocks = (blocks, selectedLevels) => {
 
       const classicHeadings = doc.querySelectorAll(selector);
 
-      headings.push(...[...classicHeadings].map((h) => {
+      headings.push(...[...classicHeadings].map(h => {
         const blockLevel = parseInt(h.tagName.replace('H', ''));
-        const levelConfig = selectedLevels.find((selected) => selected.heading === blockLevel);
+        const levelConfig = selectedLevels.find(selected => selected.heading === blockLevel);
 
-        const anchor = h.id || generateAnchor(h.innerText, headings.map((hh) => hh.anchor));
+        const anchor = h.id || generateAnchor(h.innerText, headings.map(hh => hh.anchor));
 
         return ({
           level: blockLevel,
@@ -67,7 +67,7 @@ export const getHeadingsFromBlocks = (blocks, selectedLevels) => {
 
     if (blockType) {
       const {fieldName, level} = blockType;
-      const levelConfig = selectedLevels.find((selected) => selected.heading === level);
+      const levelConfig = selectedLevels.find(selected => selected.heading === level);
 
       if (!levelConfig) {
         return;

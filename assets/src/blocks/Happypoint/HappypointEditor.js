@@ -42,7 +42,7 @@ export const HappypointEditor = ({attributes, setAttributes, isSelected}) => {
   const [embedCode, setEmbedCode] = useState(embed_code || '');
   const dimensions = {width: 400, height: 100};
 
-  const {imageUrl} = useSelect((select) => {
+  const {imageUrl} = useSelect(select => {
     // eslint-disable-next-line no-shadow
     let imageUrl = '';
     if (id && id > 0) {
@@ -62,7 +62,7 @@ export const HappypointEditor = ({attributes, setAttributes, isSelected}) => {
     focal_point_params = {x: 0.5, y: 0.5};
   }
 
-  const getImageOrButton = (openEvent) => {
+  const getImageOrButton = openEvent => {
     if (id && 0 < id) {
       return <HappypointFrontend {...attributes} />;
     } else if (isSelected) {
@@ -79,7 +79,7 @@ export const HappypointEditor = ({attributes, setAttributes, isSelected}) => {
     return null;
   };
 
-  const toAttribute = (attributeName) => (value) => setAttributes({
+  const toAttribute = attributeName => value => setAttributes({
     [attributeName]: value,
   });
 
@@ -94,11 +94,11 @@ export const HappypointEditor = ({attributes, setAttributes, isSelected}) => {
   // eslint-disable-next-line no-shadow
   const selectImage = ({id}) => setAttributes({id});
 
-  const debounceIframeUrl = debounce((url) => {
+  const debounceIframeUrl = debounce(url => {
     setAttributes({iframe_url: url});
   }, 300);
 
-  const debounceEmbedCode = debounce((code) => {
+  const debounceEmbedCode = debounce(code => {
     setAttributes({embed_code: code});
   }, 300);
 
@@ -123,7 +123,7 @@ export const HappypointEditor = ({attributes, setAttributes, isSelected}) => {
                 label={__('Override default form', 'planet4-blocks-backend')}
                 value={override_default_content}
                 checked={override_default_content}
-                onChange={(checked) => {
+                onChange={checked => {
                   setAttributes({
                     override_default_content: checked,
                     embed_code: checked ? embedCode : null,
@@ -151,7 +151,7 @@ export const HappypointEditor = ({attributes, setAttributes, isSelected}) => {
                         label={__('Iframe URL', 'planet4-blocks-backend')}
                         placeholder={__('Enter iframe URL', 'planet4-blocks-backend')}
                         value={iframeUrl}
-                        onChange={(url) => {
+                        onChange={url => {
                           setIframeUrl(url);
                           debounceIframeUrl(url);
                         }}
@@ -168,7 +168,7 @@ export const HappypointEditor = ({attributes, setAttributes, isSelected}) => {
                       <TextareaControl
                         label={__('HubSpot embed code', 'planet4-blocks-backend')}
                         value={embedCode}
-                        onChange={(code) => {
+                        onChange={code => {
                           setEmbedCode(code);
                           debounceEmbedCode(code);
                         }}

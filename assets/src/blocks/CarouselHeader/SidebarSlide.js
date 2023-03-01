@@ -35,7 +35,7 @@ export const SidebarSlide = ({
     changeSlideAttribute('focal_points', idx)(focalPoints);
   };
 
-  const onToggleHandler = (opened) => {
+  const onToggleHandler = opened => {
     setIsOpened(opened);
   };
 
@@ -61,7 +61,7 @@ export const SidebarSlide = ({
         title={<div className="slide-item-wrapper">
           <div
             className="slide-item-draggable-button"
-            onClick={(evt) => {
+            onClick={evt => {
               // This method avoids to propagate the toggle event
               evt.stopPropagation();
             }}
@@ -123,7 +123,7 @@ export const SidebarSlide = ({
                       url={image_url}
                       dimensions={{width: 300, height: 100}}
                       value={focal_points?.x && focal_points?.y ? focal_points : {x: .5, y: .5}}
-                      onChange={(value) => onFocalPointsChange(index, value)}
+                      onChange={value => onFocalPointsChange(index, value)}
                       key={index}
                     />
                   </div>

@@ -89,7 +89,7 @@ export const HappypointFrontend = ({
  * @param {Object} html
  * @return {Object} text in html
  */
-const safeHTML = (html) => {
+const safeHTML = html => {
   const {body} = document.implementation.createHTMLDocument('');
   body.innerHTML = html;
   const elements = body.getElementsByTagName('*');

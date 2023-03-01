@@ -5,7 +5,7 @@ import templateList from './template-list';
 const {registerBlockType} = wp.blocks;
 const {getCurrentPostType} = wp.data.select('core/editor');
 
-const setSupport = (metadata) => {
+const setSupport = metadata => {
   if (!metadata.supports) {
     metadata.supports = {};
   }
@@ -18,11 +18,11 @@ const setSupport = (metadata) => {
   return metadata;
 };
 
-export const registerBlockTemplates = (blockTemplates) => {
+export const registerBlockTemplates = blockTemplates => {
   const templates = blockTemplates || templateList;
   const postType = getCurrentPostType();
 
-  templates.forEach((blockTemplate) => {
+  templates.forEach(blockTemplate => {
     // eslint-disable-next-line prefer-const
     let {metadata, template, templateLock = false} = blockTemplate;
 

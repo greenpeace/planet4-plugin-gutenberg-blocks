@@ -18,14 +18,14 @@ export const EditableBackground = ({
 }) => (
   <MediaUploadCheck>
     <MediaUpload
-      onSelect={(image) => {
+      onSelect={image => {
         const {id, alt_text, url, sizes} = image;
         changeSlideImage(index, id, url, alt_text, toSrcSet(Object.values(sizes)));
       }}
       allowedTypes={['image/jpg', 'image/jpeg']}
       value={image_id}
       title={'Select or Upload Photo (only jpg/jpeg)'}
-      render={(mediaUploadInstance) => (
+      render={mediaUploadInstance => (
         <>
           <div className="background-holder">
             {!image_url ?

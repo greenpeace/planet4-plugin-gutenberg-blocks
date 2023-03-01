@@ -50,7 +50,7 @@ const renderEdit = (attributes, toAttribute) => {
             type="number"
             min={1}
             value={attributes.article_count}
-            onChange={(value) =>
+            onChange={value =>
               toAttribute('article_count')(Number(value))}
           />
           {attributes.posts !== 'undefined' && attributes.posts.length === 0 &&
@@ -146,10 +146,10 @@ const renderView = ({attributes, postType, posts, totalPosts}, toAttribute) => {
   );
 };
 
-export const ArticlesEditor = (props) => {
+export const ArticlesEditor = props => {
   const {isSelected, attributes, setAttributes} = props;
 
-  const {postType, postId} = useSelect((select) => ({
+  const {postType, postId} = useSelect(select => ({
     postType: select('core/editor').getCurrentPostType(),
     postId: select('core/editor').getCurrentPostId(),
   })
@@ -157,7 +157,7 @@ export const ArticlesEditor = (props) => {
 
   const {posts, totalPosts} = useArticlesFetch(attributes, postType, postId);
 
-  const toAttribute = (attributeName) => (value) => setAttributes({[attributeName]: value});
+  const toAttribute = attributeName => value => setAttributes({[attributeName]: value});
 
   return (
     <div>

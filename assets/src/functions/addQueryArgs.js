@@ -3,7 +3,7 @@ export const addQueryArgs = (path, args) => {
     return path;
   }
 
-  Object.keys(args).forEach((k) => {
+  Object.keys(args).forEach(k => {
     const value = args[k];
     if (typeof value === 'undefined' || value === '') {
       delete args[k];

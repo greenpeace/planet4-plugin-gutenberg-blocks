@@ -1,6 +1,6 @@
 export const addButtonLinkPasteWarning = () => {
   document.addEventListener('DOMContentLoaded', () => {
-    document.onpaste = (event) => {
+    document.onpaste = event => {
       const {target} = event;
       if (!target.matches('.wp-block-button__link, .wp-block-button__link *')) {
         return;

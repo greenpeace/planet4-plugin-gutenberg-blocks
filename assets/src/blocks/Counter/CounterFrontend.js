@@ -60,7 +60,7 @@ export class CounterFrontend extends Component {
     let remaining = 0;
     if (completed_api && completed_api.startsWith('https://')) {
       fetch(completed_api)
-        .then((response) => response.json())
+        .then(response => response.json())
         .then(({unique_count}) => {
           if (unique_count) {
             completed = Math.max(unique_count, 0);
@@ -88,7 +88,7 @@ export class CounterFrontend extends Component {
       '%remaining%': `<span class="counter-target">${remaining}</span>`,
     };
 
-    return text.replace(/%completed%|%target%|%remaining%/gi, (match) => COUNTER_TEXT[match]);
+    return text.replace(/%completed%|%target%|%remaining%/gi, match => COUNTER_TEXT[match]);
   }
 
   render() {

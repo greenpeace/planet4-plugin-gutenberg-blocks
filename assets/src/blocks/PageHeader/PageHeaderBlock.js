@@ -31,7 +31,7 @@ export const registerPageHeaderBlock = () => {
     ]],
   ];
 
-  ['left', 'right'].forEach((variation) => {
+  ['left', 'right'].forEach(variation => {
     registerBlockVariation('core/media-text', {
       name: `page-header-img-${variation}`,
       // eslint-disable-next-line @wordpress/i18n-no-variables, no-restricted-syntax
@@ -41,7 +41,7 @@ export const registerPageHeaderBlock = () => {
       scope,
       attributes: {mediaPosition: variation, ...attributes},
       innerBlocks: innerBlocks(),
-      isActive: (blockAttributes) => (
+      isActive: blockAttributes => (
         blockAttributes.className === classname &&
         blockAttributes.mediaPosition === variation
       ),

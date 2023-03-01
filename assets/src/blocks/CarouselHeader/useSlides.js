@@ -55,22 +55,22 @@ export const useSlides = (slidesRef, lastSlide, containerRef, options = {
     return order;
   };
 
-  const getSlideHeight = (slideRef) => {
+  const getSlideHeight = slideRef => {
     return `${slideRef.querySelector('.carousel-item-mask .background-holder').offsetHeight + slideRef.querySelector('.carousel-caption').offsetHeight}px`;
   };
 
-  const setCarouselHeight = (slideRef) => {
+  const setCarouselHeight = slideRef => {
     if (!containerRef || !containerRef.current) {
       return;
     }
 
     const carouselElement = containerRef.current;
     if (window.matchMedia('(max-width: 991px)').matches) {
-      carouselElement.querySelectorAll('.carousel-inner, .carousel-item-mask').forEach((container) =>
+      carouselElement.querySelectorAll('.carousel-inner, .carousel-item-mask').forEach(container =>
         container.style.height = getSlideHeight(slideRef)
       );
     } else {
-      carouselElement.querySelectorAll('.carousel-inner, .carousel-item-mask').forEach((container) =>
+      carouselElement.querySelectorAll('.carousel-inner, .carousel-item-mask').forEach(container =>
         container.style.height = null
       );
     }

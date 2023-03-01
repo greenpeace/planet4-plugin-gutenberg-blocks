@@ -62,7 +62,7 @@ export const Lightbox = ({index, isOpen, items, onClose = () => {}}) => {
       tabIndex="-1"
       role="dialog"
       aria-hidden="true"
-      ref={(node) => {
+      ref={node => {
         photoSwipeElement = node;
       }}
     >

@@ -29,7 +29,7 @@ export class ENForm extends Component {
     let pagesByType;
 
     for (const i in window.p4en_vars.pages) {
-      pagesByType = window.p4en_vars.pages[i].map((page) => {
+      pagesByType = window.p4en_vars.pages[i].map(page => {
         return {label: page.name, value: page.id};
       });
       flattenedPages = flattenedPages.concat(
@@ -38,7 +38,7 @@ export class ENForm extends Component {
       );
     }
 
-    const en_forms = window.p4en_vars.forms.map((form) => {
+    const en_forms = window.p4en_vars.forms.map(form => {
       return {label: form.post_title, value: form.ID};
     });
 

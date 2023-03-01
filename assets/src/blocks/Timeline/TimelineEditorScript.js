@@ -59,7 +59,7 @@ const renderEdit = (
           label={__('Google Sheets URL', 'planet4-blocks-backend')}
           placeholder={__('Enter URL', 'planet4-blocks-backend')}
           value={sheetURL}
-          onChange={(value) => {
+          onChange={value => {
             setSheetURL(value);
             debounceSheetURLUpdate(value);
           }}
@@ -135,7 +135,7 @@ const renderView = (attributes, toAttribute, scriptLoaded, stylesLoaded) => {
 };
 
 export const TimelineEditor = ({isSelected, attributes, setAttributes}) => {
-  const toAttribute = (attributeName) => (value) => setAttributes({[attributeName]: value});
+  const toAttribute = attributeName => value => setAttributes({[attributeName]: value});
   const [scriptLoaded, stylesLoaded] = loadAssets();
   // Using a state to prevent the input losing the cursor position, a React issue reported multiple times
   const [sheetURL, setSheetURL] = useState(attributes.google_sheets_url);

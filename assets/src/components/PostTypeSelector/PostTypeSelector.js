@@ -11,8 +11,8 @@ class PostTypeSelector extends Component {
   }
 
   handleChange(value) {
-    const postTypeIds = value.map((postTypeName) => {
-      return this.props.postTypes.find((postType) => postType.name === postTypeName).id;
+    const postTypeIds = value.map(postTypeName => {
+      return this.props.postTypes.find(postType => postType.name === postTypeName).id;
     });
     this.props.onChange(postTypeIds);
   }
@@ -26,18 +26,18 @@ class PostTypeSelector extends Component {
     }
 
     return <FormTokenField
-      suggestions={postTypes.map((postType) => postType.name)}
+      suggestions={postTypes.map(postType => postType.name)}
       label={label || 'Select Post Types'}
       onChange={this.handleChange}
       placeholder={placeholder || 'Select Post Types'}
-      value={value ? value.map((postTypeId) => postTypes.find((postType) => Number(postType.id) === Number(postTypeId)).name) : []}
+      value={value ? value.map(postTypeId => postTypes.find(postType => Number(postType.id) === Number(postTypeId)).name) : []}
       {...ownProps}
     />;
   }
 }
 
 export default compose(
-  withSelect((select) => ({
+  withSelect(select => ({
     postTypes: select('core').getEntityRecords('taxonomy', 'p4-page-type'),
   }))
 )(PostTypeSelector);

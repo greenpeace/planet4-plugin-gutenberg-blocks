@@ -60,7 +60,7 @@ registerBlockVariation('core/group', {
   description: __('Make the entire block contents clickable, using the first link inside.', 'planet4-blocks-backend'),
   attributes: {className: 'group-stretched-link'},
   scope: ['inserter', 'transform'],
-  isActive: (blockAttributes) => {
+  isActive: blockAttributes => {
     return blockAttributes.className === 'group-stretched-link';
   },
   icon: 'admin-links',

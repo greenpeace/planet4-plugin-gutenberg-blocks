@@ -25,7 +25,7 @@ const {__} = wp.i18n;
 export const PageHeaderSidebar = {
   getId: () => 'planet4-page-header-sidebar',
   render: () => {
-    const postType = useSelect((select) => select('core/editor').getCurrentPostType());
+    const postType = useSelect(select => select('core/editor').getCurrentPostType());
     const isCampaign = postType === 'campaign';
 
     const {getParams, getImageParams} = getSidebarFunctions();

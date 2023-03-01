@@ -6,7 +6,7 @@ import {OpenGraphSidebar} from './components/Sidebar/OpenGraphSidebar';
 import {SearchEngineOptimizationsSidebar} from './components/Sidebar/SearchEngineOptimizationsSidebar';
 import {AnalyticsTrackingSidebar} from './components/Sidebar/AnalyticsTrackingSidebar';
 
-const sidebarsForPostType = (postType) => {
+const sidebarsForPostType = postType => {
   switch (postType) {
   case 'campaign':
     return [
@@ -61,7 +61,7 @@ export const setupCustomSidebar = () => {
         return;
       }
 
-      sidebars.forEach((sidebar) => registerPlugin(sidebar.getId(), {
+      sidebars.forEach(sidebar => registerPlugin(sidebar.getId(), {
         icon: sidebar.getIcon ? sidebar.getIcon() : '',
         render: sidebar.render,
       }));

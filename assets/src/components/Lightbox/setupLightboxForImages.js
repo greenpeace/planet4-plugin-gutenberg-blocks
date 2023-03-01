@@ -39,7 +39,7 @@ export const setupLightboxForImages = function() {
 
   const imageBlocks = [...document.querySelectorAll('.wp-block-image:not(.force-no-lightbox)')];
   // Images that are links should not have the lightbox
-  const imageBlocksWithoutLinks = imageBlocks.filter((imageBlock) => {
+  const imageBlocksWithoutLinks = imageBlocks.filter(imageBlock => {
     const image = imageBlock.querySelector('img');
     return image.parentElement.tagName !== 'A';
   });

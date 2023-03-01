@@ -31,10 +31,10 @@ export const ColumnsTasks = ({isCampaign, columns, no_of_columns}) => (
                   {cta_link ?
                     <a
                       href={cta_link}
-                      target={link_new_tab ? '_blank' : ''}
                       data-ga-category="Columns Block"
                       data-ga-action="Title"
-                      data-ga-label={cta_link} rel="noreferrer"
+                      data-ga-label={cta_link}
+                      {...link_new_tab && {rel: 'noreferrer', target: '_blank'}}
                     >
                       {title}
                     </a> :
@@ -52,10 +52,10 @@ export const ColumnsTasks = ({isCampaign, columns, no_of_columns}) => (
                 <a
                   className={`btn btn-small btn-${isCampaign ? 'primary' : 'secondary'}`}
                   href={cta_link}
-                  target={link_new_tab ? '_blank' : ''}
                   data-ga-category="Columns Block"
                   data-ga-action="Call to Action"
-                  data-ga-label={cta_link} rel="noreferrer"
+                  data-ga-label={cta_link}
+                  {...link_new_tab && {rel: 'noreferrer', target: '_blank'}}
                 >
                   {cta_text}
                 </a>
@@ -128,7 +128,7 @@ export const ColumnsTasks = ({isCampaign, columns, no_of_columns}) => (
                       data-ga-category="Columns Block"
                       data-ga-action="Call to Action"
                       data-ga-label={cta_link}
-                      target={link_new_tab ? '_blank' : ''} rel="noreferrer"
+                      {...link_new_tab && {rel: 'noreferrer', target: '_blank'}}
                     >
                       {cta_text}
                     </a>

@@ -8,7 +8,7 @@ import {inputId} from './inputId';
 
 const {__} = wp.i18n;
 
-export const ENFormFrontend = (attributes) => {
+export const ENFormFrontend = attributes => {
   const {
     en_page_id,
     en_form_id,
@@ -29,7 +29,7 @@ export const ENFormFrontend = (attributes) => {
     className,
   } = attributes;
 
-  const section_style = ((style) => {
+  const section_style = (style => {
     switch (style) {
     case 'side-style':
       return 'block-header alignfull';
@@ -45,7 +45,7 @@ export const ENFormFrontend = (attributes) => {
 
   let fields = en_form_fields ?? [];
   if (fields.length <= 0) {
-    const form_post = useSelect((select) => {
+    const form_post = useSelect(select => {
       return en_form_id ?
         select('core').getEntityRecord('postType', 'p4en_form', en_form_id) :
         [];
@@ -65,7 +65,7 @@ export const ENFormFrontend = (attributes) => {
   );
 
   const onInputChange = (field, e) => {
-    setErrors((errs) => {
+    setErrors(errs => {
       return {...errs, [field.id]: null};
     });
 
@@ -76,11 +76,11 @@ export const ENFormFrontend = (attributes) => {
     setFormData({...form_data, [name]: value});
   };
 
-  const onBlur = (field) => {
+  const onBlur = field => {
     validateField(field, form_data, setErrors);
   };
 
-  const onFormSubmit = (e) => {
+  const onFormSubmit = e => {
     e.preventDefault();
 
     setErrorMsg(null);
@@ -214,7 +214,7 @@ const Signup = ({attributes, fields, form_data, onInputChange, onBlur, onFormSub
   );
 };
 
-const submitENForm = (props) => {
+const submitENForm = props => {
   const {
     form_data,
     fields,
@@ -238,7 +238,7 @@ const submitENForm = (props) => {
     },
     body: JSON.stringify(post_data),
   })
-    .then((response) => {
+    .then(response => {
       if (response.status !== 200) {
         throw new Error(`Error submitting form: ${response.statusText || 'unknown error'}`);
       }
@@ -270,7 +270,7 @@ const submitENForm = (props) => {
         setActiveTplId('thankyou');
       }
     })
-    .catch((error) => {
+    .catch(error => {
       // eslint-disable-next-line no-console
       console.error('Error:', error);
       // Submit Hotjar failure
@@ -294,7 +294,7 @@ const makePostData = (form_data, fields) => {
   };
 
   for (const key in form_data) {
-    const field = fields.find((f) => inputId(f).name === key);
+    const field = fields.find(f => inputId(f).name === key);
     if (!field) {
       continue;
     }
@@ -325,13 +325,13 @@ const makePostData = (form_data, fields) => {
   };
 };
 
-const checkboxValue = (value) => true === value ? 'Y' : 'N';
+const checkboxValue = value => true === value ? 'Y' : 'N';
 
 const validateForm = (form_data, fields, setErrors) => {
   setErrors({});
 
   let formIsValid = true;
-  fields.forEach((field) => {
+  fields.forEach(field => {
     if (!validateField(field, form_data, setErrors)) {
       formIsValid = false;
     }
@@ -350,7 +350,7 @@ const validateField = (field, form_data, setErrors) => {
   }
 
   if (field.required && [null, false, ''].includes(value)) {
-    setErrors((errors) => {
+    setErrors(errors => {
       return {...errors, [field.id]: element.dataset.errormessage};
     });
     return false;
@@ -381,7 +381,7 @@ const validateEmail = (field, element, setErrors, value) => {
   // Reference: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/email#basic_validation
   const re = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
   if (!re.test(String(value).toLowerCase())) {
-    setErrors((errors) => {
+    setErrors(errors => {
       return {...errors, [field.id]: element.dataset.errormessage};
     });
     return false;
@@ -390,13 +390,13 @@ const validateEmail = (field, element, setErrors, value) => {
 };
 
 const validateRadio = (field, element, setErrors, name, fields) => {
-  const sibling_radios_checked = fields.find((f) => {
+  const sibling_radios_checked = fields.find(f => {
     const {id: f_id, name: f_name} = inputId(f);
     const f_element = document.getElementById(f_id);
     return f_name === name && f_element && f_element.checked === true;
   });
   if (!sibling_radios_checked) {
-    setErrors((errors) => {
+    setErrors(errors => {
       return {...errors, [field.id]: element.dataset.errormessage};
     });
     return false;
@@ -407,7 +407,7 @@ const validateRadio = (field, element, setErrors, name, fields) => {
 const validateRegex = (field, element, setErrors, value, regexPattern) => {
   const regex = new RegExp(regexPattern);
   if (!regex.test(value)) {
-    setErrors((errors) => {
+    setErrors(errors => {
       return {...errors, [field.id]: element.dataset.validate_regex_msg};
     });
     return false;
@@ -418,7 +418,7 @@ const validateRegex = (field, element, setErrors, value, regexPattern) => {
 const validateCallback = (field, element, setErrors, callbackFunction) => {
   const validate = window[callbackFunction](element.value);
   if (true !== validate) {
-    setErrors((errors) => {
+    setErrors(errors => {
       return {...errors, [field.id]: validate};
     });
     return false;
@@ -426,7 +426,7 @@ const validateCallback = (field, element, setErrors, callbackFunction) => {
   return true;
 };
 
-const urlIsValid = (url_str) => {
+const urlIsValid = url_str => {
   try {
     const url = new URL(url_str);
     return ['http:', 'https:'].includes(url.protocol);

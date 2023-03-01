@@ -22,7 +22,7 @@ const renderEdit = (attributes, setAttributes, isSelected) => {
 
   const hasImages = !!image_data.length;
 
-  const onSelectImage = (value) => {
+  const onSelectImage = value => {
     const image_ids = [];
     const imageData = [];
     for (const key in value) {
@@ -38,7 +38,7 @@ const renderEdit = (attributes, setAttributes, isSelected) => {
     const updated_image_data = [];
     const gallery_block_focus_points = {};
 
-    image_data.forEach((object) => {
+    image_data.forEach(object => {
       if (object.id === image_id) {
         const x = parseFloat(value.x).toFixed(2);
         const y = parseFloat(value.y).toFixed(2);
@@ -114,9 +114,9 @@ const renderView = (attributes, setAttributes) => {
 
   const layout = getGalleryLayout(className, gallery_block_style);
 
-  const toAttribute = (attributeName) => (value) => setAttributes({[attributeName]: value});
+  const toAttribute = attributeName => value => setAttributes({[attributeName]: value});
 
-  const {postType} = useSelect((select) => ({
+  const {postType} = useSelect(select => ({
     postType: select('core/editor').getCurrentPostType(),
   }), []);
 
@@ -155,11 +155,11 @@ const renderView = (attributes, setAttributes) => {
 export const GalleryEditor = ({isSelected, attributes, setAttributes}) => {
   const {multiple_image} = attributes;
 
-  const {image_urls_array} = useSelect((select) => {
+  const {image_urls_array} = useSelect(select => {
     const imageUrlsArray = [];
     if (multiple_image) {
       const image_id_array = multiple_image.split(',');
-      image_id_array.forEach((img_id) => {
+      image_id_array.forEach(img_id => {
         const img_details = select('core').getMedia(img_id);
         if (img_details) {
           imageUrlsArray[img_id] = img_details.source_url;
@@ -176,7 +176,7 @@ export const GalleryEditor = ({isSelected, attributes, setAttributes}) => {
     const new_image_data = [];
     const focal_points_json = gallery_block_focus_points ? JSON.parse(gallery_block_focus_points) : {};
 
-    image_urls_array.forEach((img_id) => {
+    image_urls_array.forEach(img_id => {
       let x,
         y;
       if (!focal_points_json[img_id]) {

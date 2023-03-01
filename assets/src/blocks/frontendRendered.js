@@ -31,7 +31,7 @@ import {FrontendBlockNode} from '../components/FrontendBlockNode/FrontendBlockNo
  * @param {string} block
  * @return {Object} to render React blocks
  */
-export const frontendRendered = (block) => {
+export const frontendRendered = block => {
   return (attributes, className) => {
     return <FrontendBlockNode
       attributes={attributes}

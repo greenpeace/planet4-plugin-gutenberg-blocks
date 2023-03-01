@@ -7,8 +7,8 @@ import {getCaptionWithCredits} from './getCaptionWithCredits.js';
 import {Lightbox} from '../../components/Lightbox/Lightbox';
 import {useLightbox} from '../../components/Lightbox/useLightbox';
 
-const imagesToItems = (images) => images.map(
-  (image) => ({
+const imagesToItems = images => images.map(
+  image => ({
     src: image.image_src,
     w: 0,
     h: 0,
@@ -56,9 +56,9 @@ export const GalleryFrontend = ({
       {layout === 'three-columns' && <GalleryThreeColumns onImageClick={openLightbox} images={images} postType={postType} />}
       {layout === 'grid' && <GalleryGrid onImageClick={openLightbox} images={images} />}
 
-      {(renderLightbox && items.length)
-        ? <Lightbox isOpen={isOpen} index={index} items={items} onClose={closeLightbox} />
-        : null
+      {(renderLightbox && items.length) ?
+        <Lightbox isOpen={isOpen} index={index} items={items} onClose={closeLightbox} /> :
+        null
       }
     </section>
   );

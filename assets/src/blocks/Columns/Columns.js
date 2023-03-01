@@ -50,7 +50,7 @@ export const Columns = ({columns, columns_block_style, isCampaign, isExample = f
                     data-ga-category="Columns Block"
                     data-ga-action={columns_block_style === LAYOUT_ICONS ? 'Icon' : 'Image'}
                     data-ga-label={cta_link}
-                    {...link_new_tab && {target: '_blank'}}
+                    {...link_new_tab && {target: '_blank', rel: 'noreferrer'}}
                   >
                     <img src={attachment} alt={title} title={title} loading="lazy" />
                   </a> :
@@ -65,7 +65,7 @@ export const Columns = ({columns, columns_block_style, isCampaign, isExample = f
                   data-ga-category="Columns Block"
                   data-ga-action="Title"
                   data-ga-label={cta_link}
-                  {...link_new_tab && {target: '_blank'}}
+                  {...link_new_tab && {target: '_blank', rel: 'noreferrer'}}
                 >
                   {title}
                 </a> :
@@ -84,7 +84,7 @@ export const Columns = ({columns, columns_block_style, isCampaign, isExample = f
                 data-ga-category="Columns Block"
                 data-ga-action="Call to Action"
                 data-ga-label={cta_link}
-                {...link_new_tab && {target: '_blank'}}
+                {...link_new_tab && {target: '_blank', rel: 'noreferrer'}}
               >
                 {cta_text}
               </a>

@@ -35,7 +35,7 @@ const hideCookiesBox = () => {
   }
 };
 
-export const CookiesFrontend = (props) => {
+export const CookiesFrontend = props => {
   const {
     isSelected,
     title,
@@ -102,14 +102,14 @@ export const CookiesFrontend = (props) => {
   };
   useEffect(updateActiveConsentChoice, [marketingCookiesChecked, analyticalCookiesChecked]);
 
-  const getFieldValue = (fieldName) => {
+  const getFieldValue = fieldName => {
     if (props[fieldName] === undefined) {
       return COOKIES_DEFAULT_COPY[fieldName] || '';
     }
     return props[fieldName] || '';
   };
 
-  const isFieldValid = (fieldName) => getFieldValue(fieldName).trim().length > 0;
+  const isFieldValid = fieldName => getFieldValue(fieldName).trim().length > 0;
 
   return (
     <>

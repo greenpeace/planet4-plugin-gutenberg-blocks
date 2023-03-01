@@ -1,4 +1,4 @@
-export const makeHierarchical = (headings) => {
+export const makeHierarchical = headings => {
   let previousMenuItem;
 
   return headings.reduce((menuItems, heading) => {

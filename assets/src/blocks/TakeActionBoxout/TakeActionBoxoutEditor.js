@@ -54,7 +54,7 @@ export const TakeActionBoxoutEditor = ({
     imageId,
     imageUrl,
     imageAlt,
-  } = useSelect((select) => {
+  } = useSelect(select => {
     const args = {
       per_page: -1,
       sort_order: 'asc',
@@ -80,7 +80,7 @@ export const TakeActionBoxoutEditor = ({
       }
       return a.title.raw > b.title.raw ? 1 : -1;
     });
-    const actPage = actPageList.find((actPageFound) => take_action_page === actPageFound.id);
+    const actPage = actPageList.find(actPageFound => take_action_page === actPageFound.id);
 
     // Because `useSelect` does an API call to fetch data, the actPageList will be empty the first time it's called.
     // Or first few times.
@@ -121,7 +121,7 @@ export const TakeActionBoxoutEditor = ({
     return __("Populating block's fields...", 'planet4-blocks-backend');
   }
 
-  const toAttribute = (attributeName) => (value) => setAttributes({
+  const toAttribute = attributeName => value => setAttributes({
     [attributeName]: value,
   });
 
@@ -129,7 +129,7 @@ export const TakeActionBoxoutEditor = ({
 
   const selectImage = ({id}) => setAttributes({imageId: id});
 
-  const actPageOptions = actPageList.map((actPage) => ({label: actPage.title.raw, value: actPage.id}));
+  const actPageOptions = actPageList.map(actPage => ({label: actPage.title.raw, value: actPage.id}));
 
   const postHasStickyBoxoutAlready = document.querySelector('#action-card');
 
@@ -215,13 +215,13 @@ export const TakeActionBoxoutEditor = ({
               {label: __('None (custom)', 'planet4-blocks-backend'), value: 0},
               ...actPageOptions,
             ]}
-            onChange={(page) => setAttributes({take_action_page: parseInt(page)})}
+            onChange={page => setAttributes({take_action_page: parseInt(page)})}
           />
           {!takeActionPageSelected && <URLInput
             label={__('Custom link', 'planet4-blocks-backend')}
             placeholder={__('Enter custom link', 'planet4-blocks-backend')}
             value={link}
-            onChange={(value) => {
+            onChange={value => {
               if (!take_action_page) {
                 setAttributes({link: value});
               }

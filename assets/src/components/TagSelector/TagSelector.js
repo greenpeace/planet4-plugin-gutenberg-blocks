@@ -14,8 +14,8 @@ class TagSelector extends Component {
   }
 
   handleChange(value) {
-    const tagIds = value.map((token) => {
-      return this.props.tagSuggestions.find((tag) => tag.name === token).id;
+    const tagIds = value.map(token => {
+      return this.props.tagSuggestions.find(tag => tag.name === token).id;
     });
     this.props.onChange(tagIds);
   }
@@ -28,14 +28,14 @@ class TagSelector extends Component {
     }
 
     const tags = value.reduce((accumulator, tagId) => {
-      const tag = tagSuggestions.find((tagFound) => Number(tagFound.id) === Number(tagId));
+      const tag = tagSuggestions.find(tagFound => Number(tagFound.id) === Number(tagId));
       if (tag) {
         accumulator.push(tag);
       }
       return accumulator;
     }, []);
 
-    return tags.map((tag) => tag.name);
+    return tags.map(tag => tag.name);
   }
 
   render() {
@@ -47,7 +47,7 @@ class TagSelector extends Component {
     }
 
     return <FormTokenField
-      suggestions={tagSuggestions.map((tagSuggestion) => tagSuggestion.name)}
+      suggestions={tagSuggestions.map(tagSuggestion => tagSuggestion.name)}
       label={label || 'Select Tags'}
       onChange={this.handleChange}
       placeholder={placeholder || 'Select Tags'}
@@ -58,7 +58,7 @@ class TagSelector extends Component {
 }
 
 export default compose(
-  withSelect((select) => ({
+  withSelect(select => ({
     tagSuggestions: select('core').getEntityRecords('taxonomy', 'post_tag', {hide_empty: false, per_page: -1}),
   }))
 )(TagSelector);

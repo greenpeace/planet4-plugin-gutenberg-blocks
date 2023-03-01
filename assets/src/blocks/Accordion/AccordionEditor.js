@@ -14,11 +14,11 @@ const {__} = wp.i18n;
 
 // Renders the editor view
 const renderView = ({title, description, tabs, className}, setAttributes, isSelected, updateTabAttribute) => {
-  const toAttribute = (attributeName) => (value) => setAttributes({
+  const toAttribute = attributeName => value => setAttributes({
     [attributeName]: value,
   });
 
-  const addButton = (index) => {
+  const addButton = index => {
     const newTabs = [...tabs];
     newTabs[index].button = {};
     setAttributes({
@@ -26,7 +26,7 @@ const renderView = ({title, description, tabs, className}, setAttributes, isSele
     });
   };
 
-  const removeButton = (index) => {
+  const removeButton = index => {
     const newTabs = [...tabs];
     delete newTabs[index].button;
     setAttributes({
@@ -135,7 +135,7 @@ const renderEdit = ({tabs}, setAttributes, updateTabAttribute) => {
               <URLInput
                 label={__('Button link', 'planet4-blocks-backend')}
                 value={buttonUrl[index] ? buttonUrl[index].value : button.button_url}
-                onChange={(url) => {
+                onChange={url => {
                   setButtonUrl({[index]: url, ...buttonUrl});
                   debounceButtonUrl(index, url);
                 }}
@@ -174,7 +174,7 @@ export const AccordionEditor = ({attributes, isSelected, setAttributes, classNam
   // If there are no tabs yet, we add an empty one as placeholder
   const tabs = attributes.tabs.length > 0 ? attributes.tabs : [{}];
 
-  const updateTabAttribute = (attributeName, index) => (value) => {
+  const updateTabAttribute = (attributeName, index) => value => {
     const newTabs = [...tabs];
     if (attributeName.startsWith('button_')) {
       newTabs[index].button[attributeName] = value;

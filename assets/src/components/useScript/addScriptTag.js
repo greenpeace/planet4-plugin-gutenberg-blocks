@@ -8,7 +8,7 @@ export const addScriptTag = ({
   script.src = src;
   script.async = async;
   script.addEventListener('load', onLoad);
-  script.addEventListener('error', (event) => {
+  script.addEventListener('error', event => {
     onError(event);
   });
 

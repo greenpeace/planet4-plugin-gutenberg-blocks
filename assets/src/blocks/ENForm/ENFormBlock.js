@@ -53,7 +53,7 @@ export const registerENForm = () => {
     ],
     attributes,
     edit: ENFormEditor,
-    save: (props) => {
+    save: props => {
       // Sort attributes in a predictable order
       const ordered_attrs = Object.fromEntries(Object.entries(props.attributes).sort());
 

@@ -28,7 +28,8 @@ export const ShareButtons = ({social_params, social_accounts}) => {
           share('Whatsapp', link);
         }}
         target="_blank"
-        className="share-btn whatsapp" rel="noreferrer"
+        className="share-btn whatsapp"
+        rel="noreferrer"
       >
         <SvgIcon {...{name: 'whatsapp'}} />
         <span className="visually-hidden">{__('Share on', 'planet4-blocks')} Whatsapp</span>
@@ -39,7 +40,8 @@ export const ShareButtons = ({social_params, social_accounts}) => {
           share('Facebook', link);
         }}
         target="_blank"
-        className="share-btn facebook" rel="noreferrer"
+        className="share-btn facebook"
+        rel="noreferrer"
       >
         <SvgIcon {...{name: 'facebook-f'}} />
         <span className="visually-hidden">{__('Share on', 'planet4-blocks')} Facebook</span>
@@ -50,7 +52,8 @@ export const ShareButtons = ({social_params, social_accounts}) => {
           share('Twitter', link);
         }}
         target="_blank"
-        className="share-btn twitter" rel="noreferrer"
+        className="share-btn twitter"
+        rel="noreferrer"
       >
         <SvgIcon {...{name: 'twitter'}} />
         <span className="visually-hidden">{__('Share on', 'planet4-blocks')} Twitter</span>
@@ -61,7 +64,8 @@ export const ShareButtons = ({social_params, social_accounts}) => {
           share('Email', link);
         }}
         target="_blank"
-        className="share-btn email" rel="noreferrer"
+        className="share-btn email"
+        rel="noreferrer"
       >
         <SvgIcon {...{name: 'envelope'}} />
         <span className="visually-hidden">{__('Share via', 'planet4-blocks')} Email</span>
@@ -83,5 +87,5 @@ const utm = (utm_source, utm_medium, utm_content, utm_campaign) => {
     utm_medium ? `utm_medium=${encodeURIComponent(utm_medium)}` : null,
     utm_content ? `utm_content=${encodeURIComponent(utm_content)}` : null,
     utm_campaign ? `utm_campaign=${encodeURIComponent(utm_campaign)}` : null,
-  ].filter((x) => x).join('&');
+  ].filter(x => x).join('&');
 };

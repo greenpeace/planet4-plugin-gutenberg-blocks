@@ -26,7 +26,7 @@ const renderEdit = (attributes, setAttributes) => {
   // Retrieve background for legacy blocks
   if (background > 0 && background_image_src.length <= 0) {
     setAttributes({
-      background_image_src: useSelect((select) => {
+      background_image_src: useSelect(select => {
         const img = select('core').getMedia(background);
         return img?.source_url || '';
       }),

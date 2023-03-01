@@ -1,13 +1,13 @@
 import {useDispatch, useSelect} from '@wordpress/data';
 
 export const getSidebarFunctions = () => {
-  const meta = useSelect((select) => select('core/editor').getEditedPostAttribute('meta'), []);
+  const meta = useSelect(select => select('core/editor').getEditedPostAttribute('meta'), []);
 
   const {editPost} = useDispatch('core/editor');
 
-  const updateValueAndDependencies = (fieldId) => (value) => editPost({meta: {[fieldId]: value}});
+  const updateValueAndDependencies = fieldId => value => editPost({meta: {[fieldId]: value}});
 
-  const getParams = (name) => ({
+  const getParams = name => ({
     value: meta[name] || '',
     setValue: updateValueAndDependencies(name),
   });

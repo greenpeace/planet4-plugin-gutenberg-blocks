@@ -4,7 +4,7 @@ import {
 } from '@wordpress/components';
 import {Preview} from '../../components/Preview';
 
-export const SubPages = (props) => {
+export const SubPages = props => {
   return (
     <Fragment>
       <Preview showBar={props.isSelected}>

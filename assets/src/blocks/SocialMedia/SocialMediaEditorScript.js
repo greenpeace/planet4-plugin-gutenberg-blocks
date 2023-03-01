@@ -22,7 +22,7 @@ const {__} = wp.i18n;
 const {apiFetch} = wp;
 const {addQueryArgs} = wp.url;
 
-const loadScriptAsync = (uri) => {
+const loadScriptAsync = uri => {
   // eslint-disable-next-line no-unused-vars
   return new Promise((resolve, reject) => {
     const tag = document.createElement('script');
@@ -91,7 +91,7 @@ export const SocialMediaEditor = ({
     className,
   } = attributes;
 
-  const toAttribute = (attributeName) => (value) => setAttributes({
+  const toAttribute = attributeName => value => setAttributes({
     [attributeName]: value,
   });
 
@@ -101,7 +101,7 @@ export const SocialMediaEditor = ({
    *
    * @param {Object} provider
    */
-  const checkProviderScript = async (provider) => {
+  const checkProviderScript = async provider => {
     const providerData = PROVIDER_SCRIPT_DATA[provider];
     const script = document.querySelector(`body > script[src="${providerData.script}"]`);
     if (script === null) {
@@ -137,7 +137,7 @@ export const SocialMediaEditor = ({
   };
 
   useEffect(() => {
-    const provider = ALLOWED_OEMBED_PROVIDERS.find((allowedProvider) => social_media_url.includes(allowedProvider));
+    const provider = ALLOWED_OEMBED_PROVIDERS.find(allowedProvider => social_media_url.includes(allowedProvider));
 
     if (!provider) {
       setAttributes({embed_code: ''});

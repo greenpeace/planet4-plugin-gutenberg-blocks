@@ -66,8 +66,8 @@ const addExtraControls = function() {
   const {createHigherOrderComponent} = wp.compose;
   const {Fragment} = wp.element;
 
-  const withCaptionStyle = createHigherOrderComponent((BlockEdit) => {
-    return (props) => {
+  const withCaptionStyle = createHigherOrderComponent(BlockEdit => {
+    return props => {
       // Do nothing if it's another block than our defined ones.
       if (!targetBlocks.includes(props.name)) {
         return (
@@ -77,7 +77,7 @@ const addExtraControls = function() {
 
       const {captionAlignment} = props.attributes;
 
-      const updateCaptionAlignment = (value) => {
+      const updateCaptionAlignment = value => {
         const className = props.attributes.className || '';
         const classNameBase = className.split('caption-alignment-')[0];
         const newClassName = classNameBase + ` caption-alignment-${value}`;

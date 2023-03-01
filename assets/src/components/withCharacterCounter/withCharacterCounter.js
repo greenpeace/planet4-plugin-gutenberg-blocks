@@ -1,7 +1,7 @@
 import {Component} from '@wordpress/element';
 import classNames from 'classnames';
 
-const withCharacterCounter = (WrappedComponent) => {
+const withCharacterCounter = WrappedComponent => {
   class WrappingComponent extends Component {
     constructor(props) {
       super(props);
@@ -52,7 +52,7 @@ const withCharacterCounter = (WrappedComponent) => {
     }
 
     render() {
-      const {characterLimit, ...passThroughProps} = this.props;
+      const {characterLimit, warningThreshold, onChange, ...passThroughProps} = this.props;
 
       const getClassnames = () => classNames(
         'character-counter',

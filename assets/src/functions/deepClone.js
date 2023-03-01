@@ -25,7 +25,7 @@ const _deepClone = (value, ancestors = [], clones = []) => {
     return clones[ancestors.indexOf(value)];
   }
   if (Array.isArray(value)) {
-    const cloned = value.map((v) => _deepClone(v, ancestors, clones));
+    const cloned = value.map(v => _deepClone(v, ancestors, clones));
     ancestors.push(value);
     clones.push(cloned);
     // We actually do want to check the builtins here.
@@ -53,9 +53,9 @@ const _deepClone = (value, ancestors = [], clones = []) => {
   ancestors.push(value);
   clones.push(newObject);
 
-  Object.keys(value).forEach((k) => newObject[k] = _deepClone(value[k], ancestors, clones));
+  Object.keys(value).forEach(k => newObject[k] = _deepClone(value[k], ancestors, clones));
 
   return newObject;
 };
 
-export const deepClone = (value) => _deepClone(value);
+export const deepClone = value => _deepClone(value);

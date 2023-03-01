@@ -1,5 +1,5 @@
 
-export const inputId = (field) => {
+export const inputId = field => {
   switch (field.en_type) {
   case 'GEN':
   case 'OPT':

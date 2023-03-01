@@ -15,7 +15,7 @@ const {RichText} = wp.blockEditor;
 const MediaInspectorOptions = ({attributes, setAttributes}) => {
   const {media_url} = attributes;
 
-  const updateEmbed = async (mediaUrl) => {
+  const updateEmbed = async mediaUrl => {
     let embed_html;
     try {
       const embedPreview = await apiFetch({
@@ -31,7 +31,7 @@ const MediaInspectorOptions = ({attributes, setAttributes}) => {
 
   const debouncedMediaURLUpdate = useCallback(debounce(updateEmbed, 300), []);
 
-  const onSelectImage = (image) => {
+  const onSelectImage = image => {
     const poster_url = image ? image.sizes.large.url : null;
 
     setAttributes({
@@ -107,7 +107,7 @@ const renderView = (attributes, toAttribute) => {
   );
 };
 
-const resolveURL = (url) => {
+const resolveURL = url => {
   // If it's a Youtube ID, turn it into a Youtube URL
   // Youtube IDs are 11 chars long strings with the given set of chars
   return /^[a-z0-9_-]{11}$/i.test(url) ?
@@ -115,8 +115,8 @@ const resolveURL = (url) => {
     url;
 };
 
-const patchLegacyAttributes = (attributes) => {
-  return useSelect((select) => {
+const patchLegacyAttributes = attributes => {
+  return useSelect(select => {
     if (!lacksAttributes(attributes)) {
       return attributes;
     }
@@ -135,11 +135,11 @@ const patchLegacyAttributes = (attributes) => {
   });
 };
 
-export const MediaEditor = (props) => {
+export const MediaEditor = props => {
   const attributes = patchLegacyAttributes(props.attributes);
   const {setAttributes, isSelected} = props;
 
-  const toAttribute = (attributeName) => (value) => setAttributes({[attributeName]: value});
+  const toAttribute = attributeName => value => setAttributes({[attributeName]: value});
 
   return (
     <div>

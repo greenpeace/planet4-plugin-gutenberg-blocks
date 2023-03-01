@@ -121,7 +121,7 @@ export class ArticlePreview extends Component {
 
               {tags.length > 0 &&
                 <div className="tag-wrap tags">
-                  {tags.map((tag) =>
+                  {tags.map(tag =>
                     <a
                       key={tag.name}
                       className="tag-item tag"
