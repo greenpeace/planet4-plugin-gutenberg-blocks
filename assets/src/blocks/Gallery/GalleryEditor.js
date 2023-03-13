@@ -124,6 +124,11 @@ const renderView = (attributes, setAttributes) => {
 
   const { images } = useGalleryImages({ multiple_image, gallery_block_focus_points }, layout);
 
+  const galleryProps = {
+    images: images || [],
+    onImageClick: () => {},
+  };
+
   return (
     <section className={`block ${GALLERY_BLOCK_CLASSES[layout]} ${className ?? ''}`}>
       <header className="articles-title-container">
@@ -147,9 +152,9 @@ const renderView = (attributes, setAttributes) => {
         withoutInteractiveFormatting
         allowedFormats={['core/bold', 'core/italic']}
       />
-      {layout === 'slider' && <GalleryCarousel images={images || []} isEditing />}
-      {layout === 'three-columns' && <GalleryThreeColumns images={images || []} postType={postType} />}
-      {layout === 'grid' && <GalleryGrid images={images || []} />}
+      {layout === 'slider' && <GalleryCarousel isEditing {...galleryProps} />}
+      {layout === 'three-columns' && <GalleryThreeColumns postType={postType} {...galleryProps} />}
+      {layout === 'grid' && <GalleryGrid {...galleryProps} />}
     </section>
   );
 }
