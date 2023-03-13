@@ -29,6 +29,11 @@ export const GalleryFrontend = ({
 
   const items = imagesToItems(images);
 
+  const galleryProps = {
+    images: images || [],
+    onImageClick: openLightbox
+  };
+
   return (
     <section className={`block ${GALLERY_BLOCK_CLASSES[layout]} ${className ?? ''}`}>
       {gallery_block_title &&
@@ -40,9 +45,9 @@ export const GalleryFrontend = ({
       {gallery_block_description &&
         <div className="page-section-description" dangerouslySetInnerHTML={{ __html: gallery_block_description }} />
       }
-      {layout === 'slider' && <GalleryCarousel onImageClick={openLightbox} images={images || []} />}
-      {layout === 'three-columns' && <GalleryThreeColumns onImageClick={openLightbox} images={images || []} postType={postType} />}
-      {layout === 'grid' && <GalleryGrid onImageClick={openLightbox} images={images || []} />}
+      {layout === 'slider' && <GalleryCarousel {...galleryProps} />}
+      {layout === 'three-columns' && <GalleryThreeColumns postType={postType} {...galleryProps} />}
+      {layout === 'grid' && <GalleryGrid {...galleryProps} />}
 
       <Lightbox isOpen={isOpen} index={index} items={items} onClose={closeLightbox} />
     </section>
