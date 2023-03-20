@@ -77,11 +77,8 @@ class SplitTwoColumns extends Base_Block {
 		\register_block_type(
 			self::get_full_block_name(),
 			[
-				'editor_script'   => 'planet4-blocks',
-				'attributes'      => self::ATTRIBUTES,
-				'render_callback' => function ( $attributes ) {
-					return self::render_frontend( self::update_data( $attributes ) );
-				},
+				'editor_script' => 'planet4-blocks',
+				'attributes'    => self::ATTRIBUTES,
 			]
 		);
 	}
