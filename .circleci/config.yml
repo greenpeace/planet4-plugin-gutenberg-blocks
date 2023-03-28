@@ -346,7 +346,7 @@ jobs:
 
   create-zip:
     docker:
-      - image: mhart/alpine-node:16
+      - image: cimg/node:16.19
         auth:
           <<: *docker_auth
     steps:
@@ -395,7 +395,7 @@ jobs:
 
   publish-zip:
     docker:
-      - image: mhart/alpine-node:16
+      - image: cimg/node:16.19
         auth:
           <<: *docker_auth
     steps:
