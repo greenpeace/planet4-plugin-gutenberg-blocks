@@ -32,7 +32,9 @@ class HighLevelTopic extends Block_Pattern {
 	 * @param array $params Optional array of parameters for the config.
 	 */
 	public static function get_config( $params = [] ): array {
-		$classname = self::get_classname();
+		$classname        = self::get_classname();
+		$is_new_identity  = get_theme_mod( 'new_identity_styles' );
+		$background_color = $is_new_identity ? 'beige-100' : 'grey-05';
 
 		return [
 			'title'      => 'High-Level Topic',
@@ -49,7 +51,7 @@ class HighLevelTopic extends Block_Pattern {
 						' . SideImageWithTextAndCta::get_config(
 							[
 								'title'           => __( 'The problem', 'planet4-blocks' ),
-								'backgroundColor' => 'grey-05',
+								'backgroundColor' => $background_color,
 								'alignFull'       => true,
 							]
 						)['content'] . '
@@ -62,7 +64,7 @@ class HighLevelTopic extends Block_Pattern {
 						' . SideImageWithTextAndCta::get_config(
 							[
 								'title'           => __( 'What we do', 'planet4-blocks' ),
-								'backgroundColor' => 'grey-05',
+								'backgroundColor' => $background_color,
 								'alignFull'       => true,
 								'mediaPosition'   => 'right',
 							]
