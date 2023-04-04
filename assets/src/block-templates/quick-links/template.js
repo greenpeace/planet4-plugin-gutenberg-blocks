@@ -21,10 +21,12 @@ const category = ['core/column', {}, [
 
 const template = ({
   title = '',
+  backgroundColor = 'grey-05',
 }) => ([
   ['core/group', {
     className: 'block',
     align: 'full',
+    backgroundColor,
   }, [
     ['core/group', {className: 'container'}, [
       ['core/spacer', {height: '24px'}],

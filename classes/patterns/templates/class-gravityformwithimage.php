@@ -23,11 +23,14 @@ class GravityFormWithImage extends TemplatePattern {
 	 * @param array $params Optional array of parameters for the content.
 	 */
 	public static function get_content( $params = [] ): string {
-		$media_link = esc_url( get_template_directory_uri() ) . '/images/placeholders/placeholder-546x415.jpg';
+		$media_link           = esc_url( get_template_directory_uri() ) . '/images/placeholders/placeholder-546x415.jpg';
+		$background_color     = $params['background_color'] ?? null;
+		$background_attribute = $background_color ? ',"backgroundColor":"' . $background_color . '"' : '';
+		$background_classes   = $background_color ? 'has-' . $background_color . '-background-color has-background' : '';
 
 		return '
-			<!-- wp:media-text {"mediaLink":"' . $media_link . '","mediaType":"image","align":"full"} -->
-				<div class="wp-block-media-text is-stacked-on-mobile alignfull">
+			<!-- wp:media-text {"mediaLink":"' . $media_link . '","mediaType":"image","align":"full"' . $background_attribute . '} -->
+				<div class="wp-block-media-text is-stacked-on-mobile alignfull ' . $background_classes . '">
 					<figure class="wp-block-media-text__media">
 						<img src="' . $media_link . '" alt="' . __( 'Default image', 'planet4-blocks-backend' ) . '"/>
 					</figure>

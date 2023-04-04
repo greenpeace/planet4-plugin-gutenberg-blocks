@@ -42,8 +42,8 @@ class Action extends Block_Pattern {
 				<!-- wp:group {"className":"block ' . $classname . '"} -->
 					<div class="wp-block-group block ' . $classname . '">
 						' . GravityFormWithImage::get_content() . '
-						<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"80px","bottom":"80px"}}}} -->
-							<div class="wp-block-group alignfull" style="padding-top:80px;padding-bottom:80px;">
+						<!-- wp:group {"backgroundColor":"grey-05","align":"full","style":{"spacing":{"padding":{"top":"80px","bottom":"80px"}}}} -->
+							<div class="wp-block-group alignfull has-grey-05-background-color has-background" style="padding-top:80px;padding-bottom:80px;">
 								<!-- wp:group {"className":"container"} -->
 									<div class="wp-block-group container">
 						' . SideImageWithTextAndCta::get_config(
@@ -62,7 +62,8 @@ class Action extends Block_Pattern {
 						<!-- /wp:separator -->
 						' . QuickLinks::get_config(
 							[
-								'title' => __( 'Explore by topics', 'planet4-blocks' ),
+								'background_color' => 'white',
+								'title'            => __( 'Explore by topics', 'planet4-blocks' ),
 							]
 						)['content'] . '
 					</div>

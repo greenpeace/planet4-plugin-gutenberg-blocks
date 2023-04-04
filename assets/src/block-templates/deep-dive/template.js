@@ -36,12 +36,14 @@ const innerBlocks = ({
 
 const template = ({
   title = '',
+  backgroundColor = 'grey-05',
 }) => ([
   [
     'core/group',
     {
       className: 'block',
       align: 'full',
+      backgroundColor,
     },
     innerBlocks({title}),
   ],

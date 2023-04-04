@@ -3,12 +3,14 @@ import mainThemeUrl from '../main-theme-url';
 const {__} = wp.i18n;
 
 const template = ({
+  backgroundColor = 'grey-05',
   mediaPosition = '',
   imageFill = false,
 }) => ([
   ['core/group',
     {
       align: 'full',
+      backgroundColor,
       style: {
         spacing: {
           padding: {
@@ -32,6 +34,7 @@ const template = ({
           ['core/group', {}, [
             ['core/heading', {
               level: 1,
+              backgroundColor,
               placeholder: __('Enter title', 'planet4-blocks-backend'),
             }],
           ]],

@@ -48,20 +48,23 @@ class HighLevelTopic extends Block_Pattern {
 						' . RealityCheck::get_config()['content'] . '
 						' . SideImageWithTextAndCta::get_config(
 							[
-								'title'     => __( 'The problem', 'planet4-blocks' ),
-								'alignFull' => true,
+								'title'           => __( 'The problem', 'planet4-blocks' ),
+								'backgroundColor' => 'grey-05',
+								'alignFull'       => true,
 							]
 						)['content'] . '
 						' . DeepDive::get_config(
 							[
-								'title' => __( 'Better understand the issues [deep dive topics]', 'planet4-blocks' ),
+								'title'            => __( 'Better understand the issues [deep dive topics]', 'planet4-blocks' ),
+								'background_color' => 'white',
 							]
 						)['content'] . '
 						' . SideImageWithTextAndCta::get_config(
 							[
-								'title'         => __( 'What we do', 'planet4-blocks' ),
-								'alignFull'     => true,
-								'mediaPosition' => 'right',
+								'title'           => __( 'What we do', 'planet4-blocks' ),
+								'backgroundColor' => 'grey-05',
+								'alignFull'       => true,
+								'mediaPosition'   => 'right',
 							]
 						)['content'] . '
 						' . HighlightedCta::get_config( [ 'titlePlaceholder' => __( 'Featured action title', 'planet4-blocks' ) ] )['content'] . '
@@ -81,7 +84,8 @@ class HighLevelTopic extends Block_Pattern {
 						' . GravityFormWithText::get_content() . '
 						' . QuickLinks::get_config(
 							[
-								'title' => __( 'Explore by topics', 'planet4-blocks' ),
+								'title'            => __( 'Explore by topics', 'planet4-blocks' ),
+								'background_color' => 'white',
 							]
 						)['content'] . '
 					</div>
