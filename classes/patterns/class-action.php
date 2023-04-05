@@ -9,7 +9,7 @@
 namespace P4GBKS\Patterns;
 
 use P4GBKS\Patterns\Templates\Covers;
-use P4GBKS\Patterns\Templates\GravityFormWithImage;
+use P4GBKS\Patterns\Templates\GravityFormWithText;
 
 /**
  * Class Action.
@@ -43,7 +43,7 @@ class Action extends Block_Pattern {
 			'content'    => '
 				<!-- wp:group {"className":"block ' . $classname . '"} -->
 					<div class="wp-block-group block ' . $classname . '">
-						' . GravityFormWithImage::get_content() . '
+						' . GravityFormWithText::get_content( [ 'backgroundColor' => 'white' ] ) . '
 						<!-- wp:group {"backgroundColor":"' . $background_color . '","align":"full","style":{"spacing":{"padding":{"top":"80px","bottom":"80px"}}}} -->
 							<div class="wp-block-group alignfull has-' . $background_color . '-background-color has-background" style="padding-top:80px;padding-bottom:80px;">
 								<!-- wp:group {"className":"container"} -->
@@ -64,8 +64,8 @@ class Action extends Block_Pattern {
 						<!-- /wp:separator -->
 						' . QuickLinks::get_config(
 							[
-								'background_color' => 'white',
-								'title'            => __( 'Explore by topics', 'planet4-blocks' ),
+								'backgroundColor' => 'white',
+								'title'           => __( 'Explore by topics', 'planet4-blocks' ),
 							]
 						)['content'] . '
 					</div>

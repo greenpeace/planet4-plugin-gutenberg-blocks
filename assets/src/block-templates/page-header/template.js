@@ -2,17 +2,13 @@ import mainThemeUrl from '../main-theme-url';
 
 const {__} = wp.i18n;
 
-const isNewIdentity = window.p4ge_vars.planet4_options.new_identity_styles ?? false;
-
 const template = ({
-  backgroundColor = isNewIdentity ? 'beige-100' : 'grey-05',
   mediaPosition = '',
   imageFill = false,
 }) => ([
   ['core/group',
     {
       align: 'full',
-      backgroundColor,
       style: {
         spacing: {
           padding: {
@@ -36,7 +32,7 @@ const template = ({
           ['core/group', {}, [
             ['core/heading', {
               level: 1,
-              backgroundColor,
+              backgroundColor: 'white',
               placeholder: __('Enter title', 'planet4-blocks-backend'),
             }],
           ]],

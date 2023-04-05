@@ -32,9 +32,7 @@ class HighLevelTopic extends Block_Pattern {
 	 * @param array $params Optional array of parameters for the config.
 	 */
 	public static function get_config( $params = [] ): array {
-		$classname        = self::get_classname();
-		$is_new_identity  = get_theme_mod( 'new_identity_styles' );
-		$background_color = $is_new_identity ? 'beige-100' : 'grey-05';
+		$classname = self::get_classname();
 
 		return [
 			'title'      => 'High-Level Topic',
@@ -50,23 +48,21 @@ class HighLevelTopic extends Block_Pattern {
 						' . RealityCheck::get_config()['content'] . '
 						' . SideImageWithTextAndCta::get_config(
 							[
-								'title'           => __( 'The problem', 'planet4-blocks' ),
-								'backgroundColor' => $background_color,
-								'alignFull'       => true,
+								'title'     => __( 'The problem', 'planet4-blocks' ),
+								'alignFull' => true,
 							]
 						)['content'] . '
 						' . DeepDive::get_config(
 							[
-								'title'            => __( 'Better understand the issues [deep dive topics]', 'planet4-blocks' ),
-								'background_color' => 'white',
+								'title'           => __( 'Better understand the issues [deep dive topics]', 'planet4-blocks' ),
+								'backgroundColor' => 'white',
 							]
 						)['content'] . '
 						' . SideImageWithTextAndCta::get_config(
 							[
-								'title'           => __( 'What we do', 'planet4-blocks' ),
-								'backgroundColor' => $background_color,
-								'alignFull'       => true,
-								'mediaPosition'   => 'right',
+								'title'         => __( 'What we do', 'planet4-blocks' ),
+								'alignFull'     => true,
+								'mediaPosition' => 'right',
 							]
 						)['content'] . '
 						' . HighlightedCta::get_config( [ 'titlePlaceholder' => __( 'Featured action title', 'planet4-blocks' ) ] )['content'] . '
@@ -86,8 +82,8 @@ class HighLevelTopic extends Block_Pattern {
 						' . GravityFormWithText::get_content() . '
 						' . QuickLinks::get_config(
 							[
-								'title'            => __( 'Explore by topics', 'planet4-blocks' ),
-								'background_color' => 'white',
+								'title'           => __( 'Explore by topics', 'planet4-blocks' ),
+								'backgroundColor' => 'white',
 							]
 						)['content'] . '
 					</div>

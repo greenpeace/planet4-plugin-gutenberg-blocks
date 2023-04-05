@@ -9,7 +9,7 @@
 namespace P4GBKS\Patterns;
 
 use P4GBKS\Patterns\Templates\Covers;
-use P4GBKS\Patterns\Templates\GravityFormWithImage;
+use P4GBKS\Patterns\Templates\GravityFormWithText;
 
 /**
  * Class Campaign.
@@ -64,7 +64,7 @@ class Campaign extends Block_Pattern {
 						<!-- wp:spacer {"height":"48px"} -->
 							<div style="height:48px" aria-hidden="true" class="wp-block-spacer"></div>
 						<!-- /wp:spacer -->
-						' . GravityFormWithImage::get_content( [ 'background_color' => $is_new_identity ? 'beige-100' : 'grey-05' ] ) . '
+						' . GravityFormWithText::get_content() . '
 					</div>
 				<!-- /wp:group -->
 			',
