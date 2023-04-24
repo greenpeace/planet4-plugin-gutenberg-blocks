@@ -39,7 +39,7 @@ export const EditableBackground = ({
             }
           </div>
           <Dropdown
-            position="bottom left"
+            placement="bottom left"
             className="carousel-header-editor-controls"
             renderToggle={({onToggle}) => (
               <Button
