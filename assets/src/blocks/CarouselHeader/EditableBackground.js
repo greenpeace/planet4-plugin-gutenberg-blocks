@@ -43,7 +43,7 @@ export const EditableBackground = ({
             className="carousel-header-editor-controls"
             renderToggle={({onToggle}) => (
               <Button
-                isPrimary
+                variant="primary"
                 icon="edit"
                 onClick={onToggle}
               >
