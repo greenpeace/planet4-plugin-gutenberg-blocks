@@ -63,7 +63,6 @@
 
   a {
     color: $white;
-    text-shadow: 1px 1px 3px $grey-80;
   }
 
   @include small-and-up {
@@ -97,7 +96,6 @@
 
   &:hover {
     color: $yellow;
-    text-shadow: 1px 1px 3px $grey-80;
   }
 
   &:visited {
@@ -131,7 +129,6 @@
   @include medium-and-up {
     font-size: $font-size-xs;
     font-weight: 400;
-    text-shadow: 1px 1px 1px $grey-80;
     line-height: 1.6;
     margin-bottom: 18px;
   }
