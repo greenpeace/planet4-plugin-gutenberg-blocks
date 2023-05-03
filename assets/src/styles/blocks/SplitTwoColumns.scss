@@ -155,7 +155,7 @@
   text-decoration: none;
 
   &:hover {
-    text-decoration: underline;
+    text-decoration: var(--link--hover--text-decoration, underline);
   }
 
   &:visited {
