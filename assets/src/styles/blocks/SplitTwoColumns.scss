@@ -84,10 +84,12 @@
 }
 
 .split-two-column-item-tag {
+  _-- {
+    color: $yellow;
+  }
   font-family: var(--headings--font-family);
   font-size: $font-size-xl;
   font-weight: 700;
-  color: $yellow;
   display: block;
   margin-bottom: .75em;
   white-space: nowrap;
@@ -99,7 +101,9 @@
   }
 
   &:visited {
-    color: $yellow;
+    _-- {
+      color: $yellow;
+    }
   }
 
   @include medium-and-up {

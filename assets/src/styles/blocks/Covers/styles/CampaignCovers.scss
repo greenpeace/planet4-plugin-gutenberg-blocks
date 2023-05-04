@@ -94,10 +94,12 @@
       }
 
       .yellow-cta {
+        _-- {
+          color: $yellow;
+        }
         text-align: center;
         font-size: $font-size-md;
         font-family: var(--headings--font-family);
-        color: var(--p4-action-yellow-500, $yellow);
         font-weight: 500;
         position: absolute;
         left: 0;
