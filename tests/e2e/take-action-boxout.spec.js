@@ -1,24 +1,10 @@
 const {test, expect} = require('@playwright/test');
-import {login} from './tools/lib/login';
+import {newPost} from './tools/lib/new-post';
 
 test.describe('Test Take Action Boxout block', () => {
   test.beforeEach(async ({page, context}) => {
-    // Login.
-    await page.goto('./');
-    await login(page, context);
-
-    // Create and navigate to new post.
-    await page.goto('./wp-admin/post-new.php');
-
-    // On dev instance, need to close modal so test can continue
-    const closeButton = page.locator('.components-modal__header button');
-    if (await closeButton.isVisible()) {
-      await closeButton.click();
-    }
-
-    // Fill in post title.
-    await page.locator('.editor-post-title__input').click();
-    await page.locator('h1.editor-post-title').fill('Test Post');
+    // Login and create new post.
+    await newPost(page, context);
 
     // Add Take Action Boxout block.
     await page.locator('.block-editor-block-list__layout').click();
