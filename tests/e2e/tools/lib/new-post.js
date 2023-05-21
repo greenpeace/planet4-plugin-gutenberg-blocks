@@ -1,4 +1,4 @@
-import { login } from './login';
+import {login} from './login';
 
 async function newPost(page, context) {
   // Login.
@@ -19,4 +19,4 @@ async function newPost(page, context) {
   await page.locator('h1.editor-post-title').fill('Test Post');
 }
 
-export { newPost };
+export {newPost};
