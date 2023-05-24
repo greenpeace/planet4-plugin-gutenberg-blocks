@@ -19,4 +19,10 @@ async function newPage(page, context) {
   await page.locator('h1.editor-post-title').fill('Test Page');
 }
 
-export {newPage};
+async function publishPage(page) {
+  await page.getByRole('button', { name: 'Publish', exact: true }).click();
+  await page.getByRole('region', { name: 'Editor publish' }).getByRole('button', { name: 'Publish', exact: true }).click();
+  await page.getByRole('link', { name: 'View Page', exact: true }).first().click();
+}
+
+export {newPage, publishPage};
