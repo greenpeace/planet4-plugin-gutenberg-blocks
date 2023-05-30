@@ -24,7 +24,9 @@ async function addColumnsBlock(page, style) {
   for (const [index, column] of backendColumns.entries()) {
     await column.locator(style === 'Tasks' ? 'h5' : 'h3').fill(`Column ${index + 1}`);
     await column.locator('p').fill(`Description ${index + 1}`);
-    await column.locator('div[aria-label="Enter column button text"]').fill(`Button ${index + 1}`);
+    if (style !== 'Icons') {
+      await column.locator('div[aria-label="Enter column button text"]').fill(`Button ${index + 1}`);
+    }
   }
 };
 
