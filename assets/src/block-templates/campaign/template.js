@@ -1,3 +1,5 @@
+import gravityFormWithText from '../templates/gravity-form-with-text';
+
 const {__} = wp.i18n;
 
 const template = () => ([
@@ -19,7 +21,7 @@ const template = () => ([
       title: __('How you can help', 'planet4-blocks'),
     }],
     ['core/spacer', {height: '48px'}],
-    ['gravityforms/form'],
+    gravityFormWithText(),
   ]],
 ]);
 
