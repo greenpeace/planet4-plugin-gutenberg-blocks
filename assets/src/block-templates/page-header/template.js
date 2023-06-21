@@ -4,7 +4,7 @@ const {__} = wp.i18n;
 
 const template = ({
   titlePlaceholder = __('Enter title', 'planet4-blocks-backend'),
-  backgroundColor = 'grey-05',
+  backgroundColor = 'white',
   mediaPosition = '',
   imageFill = false,
 }) => ([
