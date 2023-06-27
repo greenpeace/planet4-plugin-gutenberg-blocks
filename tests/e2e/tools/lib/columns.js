@@ -28,7 +28,7 @@ async function addColumnsBlock(page, style) {
       `div[aria-label="Enter column ${['Images','Icons'].includes(style) ? 'link' : 'button'} text"]`
     ).fill(`${['Images','Icons'].includes(style) ? 'Link' : 'Button'} ${index + 1}`);
 
-    if (style === 'Icons') {
+    if (style === 'Icons' || style === 'Images') {
       await column.locator('.columns-image-placeholder').hover({noWaitAfter: true});
       await column.locator('.dashicons-plus-alt2').click();
       // Select image from media library modal.
@@ -38,7 +38,7 @@ async function addColumnsBlock(page, style) {
       await mediaModal.locator('button.media-button-select').click();
     }
   }
-};
+}
 
 async function checkColumnsBlock(page, style) {
   await expect(page.locator('.columns-block')).toBeVisible();
@@ -57,7 +57,7 @@ async function checkColumnsBlock(page, style) {
     } else {
       const button = column.locator('a.btn-secondary');
       expect(button).toHaveText(`Button ${index + 1}`);
-      expect(button.getAttribute('href')).toBe(TEST_LINKS[index]);
+      expect(await button.getAttribute('href')).toBe(TEST_LINKS[index]);
     }
   }
 }

@@ -18,12 +18,12 @@ async function addCoversBlock(page, style = '') {
   }
 
   if (style === 'Take Action') {
-    // Fill in the Posts.
-    await page.locator('input[placeholder="Select pages"]').type(PAGE_NAMES[0]);
+    // Fill in the Pages.
+    await page.locator('input[placeholder="Select pages"]').fill(PAGE_NAMES[0]);
+    await page.locator('li.components-form-token-field__suggestion').click({timeout: 300*1000});
+    await page.locator('input.components-form-token-field__input').fill(PAGE_NAMES[1]);
     await page.locator('li.components-form-token-field__suggestion').click();
-    await page.locator('input.components-form-token-field__input').type(PAGE_NAMES[1]);
-    await page.locator('li.components-form-token-field__suggestion').click();
-    await page.locator('input.components-form-token-field__input').type(PAGE_NAMES[2]);
+    await page.locator('input.components-form-token-field__input').fill(PAGE_NAMES[2]);
     await page.locator('li.components-form-token-field__suggestion').click();
   } else {
     // Fill in the tags.
