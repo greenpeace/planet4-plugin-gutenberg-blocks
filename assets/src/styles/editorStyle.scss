@@ -31,6 +31,8 @@
 @import "components/ImageHoverButtons";
 @import "editorFonts";
 
+@import "../styles/master-theme/admin/css/picker.css";
+
 .block-edit-mode-warning {
   padding: $sp-2;
   margin: 0;
@@ -43,5 +45,49 @@
   @include large-and-up {
     margin-top: $sp-2;
     margin-bottom: $sp-4;
+  }
+}
+
+.media-archive-btn {
+  position: absolute;
+  top: 111px;
+  right: 380px;
+}
+
+.media-archive-modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw !important;
+  height: 100vh;
+  z-index: 999;
+  background-color: rgba(0,0,0,.5);
+  // display: flex;
+  // align-items: center;
+  // justify-content: center;
+  // margin: auto;
+  padding: 20px;
+
+
+  .header {
+    background-color: white;
+    padding: 20px;
+    position: relative;
+
+    span {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+    }
+  }
+
+  .archive-image-container {
+    background-color: white;
+    width: 90%;
+    height: 90%;
+    margin: auto;
   }
 }

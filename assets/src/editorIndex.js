@@ -24,6 +24,8 @@ import {registerBlock as registerShareButtonsBlock} from './blocks/ShareButtons/
 import {registerPageHeaderBlock} from './blocks/PageHeader/PageHeaderBlock';
 import {registerBlockTemplates} from './block-templates/register';
 
+// import {defaults} from 'lodash';
+
 blockEditorValidation();
 new ArticlesBlock();
 registerColumnsBlock();
@@ -67,3 +69,60 @@ registerBlockVariation('core/group', {
 });
 
 registerBlockTemplates();
+
+
+var frame = wp.media.view.MediaFrame.Post;
+
+wp.media.view.MediaFrame.Post = frame.extend({
+  initialize: function() {
+    frame.prototype.initialize.apply(this, arguments);
+
+    var State = wp.media.controller.State.extend({
+      insert: function() {
+        this.frame.close();
+      }
+    });
+
+    this.states.add([
+      new State({
+        id: 'mediaArchive1',
+        search: false,
+        title: 'Media Archive',
+      })
+    ]);
+
+    this.on('content:render:mediaArchive1', this.renderMediaArchive, this);
+  },
+
+  browseRouter: function(routerView) {
+    routerView.set({
+      upload: {
+        text: wp.media.view.l10n.uploadFilesTitle,
+        priority: 20
+      },
+      mediaArchive1: {
+        text: 'Media Archive',
+        priority: 30
+      },
+      browse: {
+        text: wp.media.view.l10n.mediaLibraryTitle,
+        priority: 40
+      }
+    });
+  },
+
+  renderMediaArchive : function() {
+    var MediaArchiveContent = wp.Backbone.View.extend({
+      tagName: 'div',
+      className: 'media-archive-content',
+      template: wp.template('mediaarcivecontent'),
+      active: false,
+      toolbar: null,
+      frame: null,
+    });
+
+    var view = new MediaArchiveContent();
+
+    this.content.set(view);
+  }
+});

@@ -1,8 +1,11 @@
 import {Button, ButtonGroup, PanelBody} from '@wordpress/components';
-import {InspectorControls} from '@wordpress/block-editor';
+import {InspectorControls, MediaUpload, useBlockProps} from '@wordpress/block-editor';
+import {createPortal} from 'react-dom';
+import ArchivePicker from './styles/master-theme/assets/src/js/Components/ArchivePicker';
 import assign from 'lodash.assign';
 
 const {addFilter} = wp.hooks;
+const {Fragment, useState} = wp.element;
 const {__} = wp.i18n;
 
 // Enable spacing control on the following blocks
@@ -35,7 +38,63 @@ const captionAlignmentOptions = [
 export const setupImageBlockExtension = function() {
   addExtraAttributes();
   addExtraControls();
+  addMediaArchiveOption();
 };
+
+
+
+export const addMediaArchiveOption = function() {
+  const {createHigherOrderComponent} = wp.compose;
+
+  const withUploadButton = createHigherOrderComponent(BlockEdit => {
+    return props => {
+      if (props.name !== 'core/image') {
+        return <BlockEdit {...props} />;
+      }
+
+      const {attributes, setAttributes} = props;
+      const {url, alt} = attributes;
+      const [showElt, setShowElt] = useState(false);
+      const blockProps = useBlockProps();
+      const MediaArchivePopUp = () => {
+        return (
+          <div className="media-archive-modal">
+            <div className="header">
+              <h4>Media Archive</h4>
+              <span onClick={() => setShowElt(false)} role="presentation">X</span>
+              <ArchivePicker />
+            </div>
+          </div>
+        );
+      };
+
+      return (
+        <Fragment>
+          <div {...blockProps}>
+            <BlockEdit {...props} />
+            <div className="media-archive-btn">
+              <MediaUpload
+                onSelect={media =>
+                  setAttributes({url: media.url, alt: media.alt})}
+                type="image"
+                value={{url, alt}}
+                render={() => (
+                  <Button onClick={() => setShowElt(true)} isTertiary>
+                    Media Archive
+                  </Button>
+                )}
+              />
+            </div>
+          </div>
+          {showElt && createPortal(<MediaArchivePopUp />, document.body)}
+        </Fragment>
+      );
+    };
+  }, 'withUploadButton');
+
+  addFilter('editor.BlockEdit', 'planet4-blocks/overrides/image-block-layout', withUploadButton);
+};
+
 
 const addExtraAttributes = function() {
   const addCaptionStyleAttributes = (settings, name) => {
@@ -64,7 +123,6 @@ const addExtraAttributes = function() {
 
 const addExtraControls = function() {
   const {createHigherOrderComponent} = wp.compose;
-  const {Fragment} = wp.element;
 
   const withCaptionStyle = createHigherOrderComponent(BlockEdit => {
     return props => {
