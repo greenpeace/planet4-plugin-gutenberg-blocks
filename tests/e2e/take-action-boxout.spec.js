@@ -8,11 +8,12 @@ test.describe('Test Take Action Boxout block', () => {
     await admin.createNewPost({postType: 'post', title: 'Test Take action boxout', legacyCanvas: true});
 
     // Add Take Action Boxout block.
-    const actionRequest = page.waitForRequest(/.*\/wp-json\/wp\/v2\/p4_action.*/);//NOSONAR
+    const actionResponse = page.waitForResponse(/.*\/wp-json\/wp\/v2\/p4_action.*/);//NOSONAR
     await editor.canvas.getByRole('button', {name: 'Add default block'}).click();
     await page.keyboard.type('/take-action-boxout');
     await page.getByRole('option', {name: 'Take Action Boxout'}).click();
-    await actionRequest;
+    const response = await actionResponse;
+    expect(response.status()).toEqual(200);
 
     await editor.canvas
       .getByRole('document', {name: 'Block: Take Action Boxout'})
