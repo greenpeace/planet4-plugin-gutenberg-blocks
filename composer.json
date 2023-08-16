@@ -16,7 +16,9 @@
     "phpunit/phpunit": "^7.5||^9.5",
     "yoast/phpunit-polyfills": "^1.0"
   },
-  "require": {},
+  "require": {
+    "timber/timber": "2.0.0-rc.1"
+  },
   "scripts": {
     "fixes": "vendor/bin/phpcbf",
     "sniffs": "vendor/bin/phpcs"

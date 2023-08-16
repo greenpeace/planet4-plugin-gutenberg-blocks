@@ -15,6 +15,10 @@
  * @package P4GBKS
  */
 
+if (file_exists(__DIR__ . '/vendor/autoload.php')) {
+    require_once __DIR__ . '/vendor/autoload.php';
+}
+
 // Exit if accessed directly.
 use P4\MasterTheme\Features;
 use P4\MasterTheme\MigrationLog;
@@ -34,12 +38,7 @@ if ( ! defined( 'P4GBKS_REQUIRED_PHP' ) ) {
 if ( ! defined( 'P4GBKS_REQUIRED_PLUGINS' ) ) {
 	define(
 		'P4GBKS_REQUIRED_PLUGINS',
-		[
-			'timber' => [
-				'min_version' => '1.9.0',
-				'rel_path'    => 'timber-library/timber.php',
-			],
-		]
+		[]
 	);
 }
 if ( ! defined( 'P4GBKS_PLUGIN_BASENAME' ) ) {
@@ -396,7 +395,7 @@ add_filter( 'timber/twig', 'p4_blocks_en_forms_twig_filters' );
 function p4_blocks_en_forms_twig_filters( $twig ) {
 	// Adding functions as filters.
 	$twig->addFilter(
-		new Twig_SimpleFilter(
+		new Twig\TwigFilter(
 			'object_to_array',
 			function ( $std_class_object ) {
 				$response = [];
