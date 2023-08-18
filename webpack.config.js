@@ -46,6 +46,7 @@ const publicJsConfig = {
     GalleryScript: './assets/src/blocks/Gallery/GalleryScript.js',
     GuestBookScript: './assets/src/blocks/GuestBook/GuestBookScript.js',
     CounterScript: './assets/src/blocks/Counter/CounterScript.js',
+    ArticlesScript: './assets/src/blocks/Articles/ArticlesScript.js',
   },
 };
 const adminJsConfig = {
@@ -69,6 +70,7 @@ const adminJsConfig = {
     GalleryEditorScript: './assets/src/blocks/Gallery/GalleryEditorScript.js',
     GuestBookEditorScript: './assets/src/blocks/GuestBook/GuestBookEditorScript.js',
     CounterEditorScript: './assets/src/blocks/Counter/CounterEditorScript.js',
+    ArticlesEditorScript: './assets/src/blocks/Articles/ArticlesEditorScript.js',
   },
 };
 const cssConfig = {
@@ -93,6 +95,8 @@ const cssConfig = {
     GalleryStyle: './assets/src/styles/blocks/Gallery/GalleryStyle.scss',
     GalleryEditorStyle: './assets/src/styles/blocks/Gallery/GalleryEditorStyle.scss',
     CounterStyle: './assets/src/styles/blocks/Counter/CounterStyle.scss',
+    ArticlesStyle: './assets/src/styles/blocks/Articles/ArticlesStyle.scss',
+    ArticlesEditorStyle: './assets/src/styles/blocks/Articles/ArticlesEditorStyle.scss',
   },
   output: {
     filename: '[name].js',

@@ -58,7 +58,7 @@ export const registerCarouselHeaderBlock = () =>
     edit: CarouselHeaderEditor,
     save: ({attributes: saveAttributes}) => {
       const markup = renderToString(<div
-        data-hydrate={'planet4-blocks/carousel-header'}
+        data-hydrate={BLOCK_NAME}
         data-attributes={JSON.stringify(saveAttributes)}
       >
         <CarouselHeaderFrontend {...saveAttributes} />

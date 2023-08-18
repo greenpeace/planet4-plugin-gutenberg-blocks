@@ -7,9 +7,6 @@
 
 namespace P4GBKS\Blocks;
 
-use P4_Post;
-use Timber\Timber;
-
 /**
  * Class Articles
  *
@@ -106,6 +103,9 @@ class Articles extends Base_Block {
 				],
 			]
 		);
+
+		add_action( 'enqueue_block_editor_assets', [ self::class, 'enqueue_editor_assets' ] );
+		add_action( 'wp_enqueue_scripts', [ self::class, 'enqueue_frontend_assets' ] );
 	}
 
 	/**

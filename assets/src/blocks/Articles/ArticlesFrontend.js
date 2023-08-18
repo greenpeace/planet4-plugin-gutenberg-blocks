@@ -9,17 +9,15 @@ export const ArticlesFrontend = props => {
     read_more_link,
     button_link_new_tab,
     className,
+    post_categories = [],
   } = props;
-
   const postType = document.body.getAttribute('data-post-type');
 
   const postIdClass = [...document.body.classList].find(classNameFound => /^postid-\d+$/.test(classNameFound));
 
   const postId = !postIdClass ? null : postIdClass.split('-')[1];
 
-  const postCategories = props.post_categories || [];
-
-  const {posts, loadNextPage, hasMorePages, loading} = useArticlesFetch(props, postType, postId, document.body.dataset.nro, postCategories);
+  const {posts, loadNextPage, hasMorePages, loading} = useArticlesFetch(props, postType, postId, document.body.dataset.nro, post_categories);
 
   if (!posts.length) {
     return null;
