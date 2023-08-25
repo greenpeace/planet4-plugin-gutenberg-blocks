@@ -46,6 +46,7 @@ const publicJsConfig = {
     GalleryScript: './assets/src/blocks/Gallery/GalleryScript.js',
     GuestBookScript: './assets/src/blocks/GuestBook/GuestBookScript.js',
     CounterScript: './assets/src/blocks/Counter/CounterScript.js',
+    SplittwocolumnsScript: './assets/src/blocks/Splittwocolumns/SplittwocolumnsScript.js',
   },
 };
 const adminJsConfig = {
@@ -69,6 +70,7 @@ const adminJsConfig = {
     GalleryEditorScript: './assets/src/blocks/Gallery/GalleryEditorScript.js',
     GuestBookEditorScript: './assets/src/blocks/GuestBook/GuestBookEditorScript.js',
     CounterEditorScript: './assets/src/blocks/Counter/CounterEditorScript.js',
+    SplittwocolumnsEditorScript: './assets/src/blocks/Splittwocolumns/SplittwocolumnsEditorScript.js',
   },
 };
 const cssConfig = {
@@ -93,6 +95,8 @@ const cssConfig = {
     GalleryStyle: './assets/src/styles/blocks/Gallery/GalleryStyle.scss',
     GalleryEditorStyle: './assets/src/styles/blocks/Gallery/GalleryEditorStyle.scss',
     CounterStyle: './assets/src/styles/blocks/Counter/CounterStyle.scss',
+    SplittwocolumnsStyle: './assets/src/styles/blocks/Splittwocolumns/SplitTwoColumnsStyle.scss',
+    SplittwocolumnsEditorStyle: './assets/src/styles/blocks/Splittwocolumns/SplitTwoColumnsEditorStyle.scss',
   },
   output: {
     filename: '[name].js',

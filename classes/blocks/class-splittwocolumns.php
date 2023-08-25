@@ -79,11 +79,14 @@ class SplitTwoColumns extends Base_Block {
 			[
 				'editor_script'   => 'planet4-blocks',
 				'attributes'      => self::ATTRIBUTES,
-				'render_callback' => function ( $attributes ) {
-					return self::render_frontend( self::update_data( $attributes ) );
+				'render_callback' => function ( $attributes, $content ) {
+					return self::hydrate_frontend( self::update_data( $attributes ), $content );
 				},
 			]
 		);
+
+		add_action( 'enqueue_block_editor_assets', [ self::class, 'enqueue_editor_assets' ] );
+		add_action( 'wp_enqueue_scripts', [ self::class, 'enqueue_frontend_assets' ] );
 	}
 
 	/**
