@@ -28,10 +28,6 @@ $text-column-padding-in: 24px;
     img {
       max-height: 270px;
       object-fit: cover;
-
-      @include medium-and-less {
-        transform: translate3d(0, 0, 0) !important;
-      }
     }
   }
 
