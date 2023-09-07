@@ -19,7 +19,13 @@ const setSupport = metadata => {
 };
 
 export const registerBlockTemplates = blockTemplates => {
-  const templates = blockTemplates || templateList;
+  const templates = blockTemplates || Object.keys(templateList).map(type => templateList[type].map(template => ({
+    ...template,
+    metadata: {
+      ...template.metadata,
+      type,
+    },
+  }))).flat();
   const postType = getCurrentPostType();
 
   templates.forEach(blockTemplate => {
@@ -34,7 +40,29 @@ export const registerBlockTemplates = blockTemplates => {
 
     registerBlockType(metadata, {
       edit: edit(template, templateLock),
-      save,
+      save: props => {
+        if(props.innerBlocks.length) {
+          const className = `${props.innerBlocks[0].attributes.className || ''}`;
+          let patternClassName = '';
+
+          switch (metadata.type) {
+          case 'planet4':
+            patternClassName = 'planet4-pattern';
+            break;
+          case 'pageHeaders':
+            patternClassName = 'page-headers-pattern';
+            break;
+          case 'layouts':
+            patternClassName = 'planet4-layout-pattern';
+            break;
+          }
+
+          if(!className.includes(patternClassName)) {
+            props.innerBlocks[0].attributes.className = `${className} ${patternClassName}`;
+          }
+        }
+        return save();
+      },
     });
   });
 };

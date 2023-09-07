@@ -13,21 +13,29 @@ import * as action from './action';
 import * as getInformed from './get-informed';
 import * as highLevelTopic from './high-level-topic';
 
-export default [
-  sideImgTextCta,
-  quickLinks,
-  deepDive,
-  realityCheck,
-  issues,
-  pageHeader,
-  highlightedCta,
-
-  // layouts.
-  deepDiveTopic,
-  homepage,
-  campaign,
-  takeAction,
-  action,
-  getInformed,
-  highLevelTopic,
-];
+export default {
+  // This section should be match against the 'Categories' Array for each block pattern
+  // Planet 4 patterns
+  planet4: [
+    sideImgTextCta,
+    quickLinks,
+    deepDive,
+    realityCheck,
+    issues,
+    highlightedCta,
+  ],
+  // Page Headers patterns
+  pageHeaders: [
+    pageHeader,
+  ],
+  // Layouts patterns
+  layouts: [
+    deepDiveTopic,
+    homepage,
+    campaign,
+    takeAction,
+    action,
+    getInformed,
+    highLevelTopic,
+  ],
+};
