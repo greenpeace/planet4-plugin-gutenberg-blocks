@@ -25,36 +25,40 @@ class Spacer extends Base_Block {
 	 * Spacer constructor.
 	 */
 	public function __construct() {
-		add_action( 'init', [ $this, 'register_gallery_block' ] );
+		add_action( 'init', [ $this, 'register_block' ] );
 	}
 
 	/**
-	 * Register Gallery block.
+	 * Register Spacer block.
 	 */
-	public function register_gallery_block() {
+	public function register_block() {
 		register_block_type(
 			self::get_full_block_name(),
 			[  // - Register the block for the editor
-				'editor_script' => 'planet4-blocks',  // in the PHP side.
+				'editor_script'   => 'planet4-blocks',  // in the PHP side.
 				'render_callback' => static function ( $attributes, $content ) {
 					return self::hydrate_frontend( $attributes, $content );
 				},
-				'attributes'    => [
-					'small' => [
-						'type'    => 'number',
-						'default' => 10,
+				'attributes'      => [
+					'small'   => [
+						'type'    => 'string',
+						'default' => '16px',
 					],
-					'medium' => [
-						'type'    => 'number',
-						'default' => 10,
+					'medium'  => [
+						'type'    => 'string',
+						'default' => '16px',
 					],
-					'large' => [
-						'type'    => 'number',
-						'default' => 10,
+					'large'   => [
+						'type'    => 'string',
+						'default' => '16px',
 					],
-					'xlarge' => [
-						'type'    => 'number',
-						'default' => 10,
+					'xlarge'  => [
+						'type'    => 'string',
+						'default' => '16px',
+					],
+					'xxlarge' => [
+						'type'    => 'string',
+						'default' => '16px',
 					],
 				],
 			]

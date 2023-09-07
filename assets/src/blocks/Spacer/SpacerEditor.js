@@ -1,61 +1,68 @@
-import {
-  TextControl,
-  PanelBody,
-} from '@wordpress/components';
+import {useCallback, useMemo} from '@wordpress/element';
 import {InspectorControls} from '@wordpress/block-editor';
-import { SpacerFrontend } from './SpacerFrontend';
+import {SpacerFrontend} from './SpacerFrontend';
+
+const {__} = wp.i18n;
+const {
+  PanelBody,
+  __experimentalUnitControl: UnitControl,
+} = wp.components;
+
 
 export const SpacerEditor = ({attributes, isSelected, setAttributes}) => {
-  const toAttribute = attributeName => value => {
+
+  const toAttribute = useCallback(attributeName => value => {
     if (isSelected) {
       setAttributes({[attributeName]: value});
     }
-  };
+  }, [isSelected, setAttributes]);
 
-  const renderEdit = () => (
+  const renderEdit = useCallback(() => (
     <InspectorControls>
       <PanelBody title={__('Settings', 'planet4-blocks-backend')}>
-        <TextControl
+        <UnitControl
           label={__('Small', 'planet4-blocks-backend')}
-          help={__('Viewport width up to 768px', 'planet4-blocks-backend')}
-          type="number"
+          help={__('Apply to screens up to 768px', 'planet4-blocks-backend')}
           value={attributes.small}
-          onChange={value => toAttribute('small')(Number(value))}
+          onChange={value => toAttribute('small')(value)}
         />
-        <TextControl
+        <UnitControl
           label={__('Medium', 'planet4-blocks-backend')}
-          help={__('Viewport width higher than 768px', 'planet4-blocks-backend')}
-          type="number"
+          help={__('Apply to screens that are more than 768px', 'planet4-blocks-backend')}
           value={attributes.medium}
-          onChange={value => toAttribute('medium')(Number(value))}
+          onChange={value => toAttribute('medium')(value)}
         />
-        <TextControl
+        <UnitControl
           label={__('Large', 'planet4-blocks-backend')}
-          help={__('Viewport width higher than 992px', 'planet4-blocks-backend')}
-          type="number"
+          help={__('Apply to screens that are more than 992px', 'planet4-blocks-backend')}
           value={attributes.large}
-          onChange={value => toAttribute('large')(Number(value))}
+          onChange={value => toAttribute('large')(value)}
         />
-        <TextControl
+        <UnitControl
           label={__('XLarge', 'planet4-blocks-backend')}
-          help={__('Viewport width higher than 1200px', 'planet4-blocks-backend')}
-          type="number"
+          help={__('Apply to screens that are more than 1200px', 'planet4-blocks-backend')}
           value={attributes.xlarge}
-          onChange={value => toAttribute('xlarge')(Number(value))}
+          onChange={value => toAttribute('xlarge')(value)}
+        />
+        <UnitControl
+          label={__('XXLarge', 'planet4-blocks-backend')}
+          help={__('Apply to screens that are more than 1600px', 'planet4-blocks-backend')}
+          value={attributes.xxlarge}
+          onChange={value => toAttribute('xxlarge')(value)}
         />
       </PanelBody>
     </InspectorControls>
-  );
+  ), [attributes, toAttribute]);
 
-  const renderView = () => (
-    <SpacerFrontend attributes={attributes} />
-  )
+  const renderView = useCallback(() => {
+    return <SpacerFrontend attributes={attributes} />;
+  }, [attributes]);
 
-  return (
+  return useMemo(() => (
     <>
       {isSelected && renderEdit()}
       {renderView()}
     </>
-  );
+  ), [isSelected, renderEdit, renderView]);
 };
 

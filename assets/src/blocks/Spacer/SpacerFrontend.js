@@ -4,7 +4,9 @@ export const SpacerFrontend = ({attributes}) => {
   const [size, setSize] = useState();
 
   const updateSize = useCallback(() => {
-    if(window.innerWidth > 1200) {
+    if(window.innerWidth > 1600) {
+      setSize(attributes.xxlarge);
+    } else if(window.innerWidth > 1200) {
       setSize(attributes.xlarge);
     } else if(window.innerWidth > 992) {
       setSize(attributes.large);
@@ -13,17 +15,23 @@ export const SpacerFrontend = ({attributes}) => {
     } else {
       setSize(attributes.small);
     }
-  }, [size]);
+  }, [attributes]);
 
   useEffect(() => {
-    window.addEventListener('resize', function(evt) {
+    updateSize();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [attributes]);
+
+  useEffect(() => {
+    window.addEventListener('resize', () => {
       updateSize();
-    })
+    });
 
     updateSize();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return useMemo(() => (
-    <div style={{height: `${size}px`, backgroundColor: 'lightgrey'}} />
-  ), [attributes, size]);
-}
+    <div style={{height: size}} />
+  ), [size]);
+};
