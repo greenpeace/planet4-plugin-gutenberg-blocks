@@ -45,6 +45,7 @@ const publicJsConfig = {
     TimelineScript: './assets/src/blocks/Timeline/TimelineScript.js',
     GalleryScript: './assets/src/blocks/Gallery/GalleryScript.js',
     GuestBookScript: './assets/src/blocks/GuestBook/GuestBookScript.js',
+    SpacerScript: './assets/src/blocks/Spacer/SpacerScript.js',
   },
 };
 const adminJsConfig = {
@@ -67,8 +68,10 @@ const adminJsConfig = {
     SocialMediaEditorScript: './assets/src/blocks/SocialMedia/SocialMediaEditorScript.js',
     GalleryEditorScript: './assets/src/blocks/Gallery/GalleryEditorScript.js',
     GuestBookEditorScript: './assets/src/blocks/GuestBook/GuestBookEditorScript.js',
+    SpacerEditorScript: './assets/src/blocks/Spacer/SpacerEditorScript.js',
   },
 };
+
 const cssConfig = {
   ...defaultConfig,
   entry: {
