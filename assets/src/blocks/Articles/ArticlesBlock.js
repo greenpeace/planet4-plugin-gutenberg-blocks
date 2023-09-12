@@ -63,13 +63,13 @@ export const registerArticlesBlock = () => {
     },
     attributes,
     edit: ArticlesEditor,
-    save: ({attributes: saveAttributes}) => {
+    save: props => {
       const markup = renderToString(
         <div
           data-hydrate={BLOCK_NAME}
-          data-attributes={JSON.stringify(saveAttributes)}
+          data-attributes={JSON.stringify(props.attributes)}
         >
-          <ArticlesFrontend {...saveAttributes} />
+          <ArticlesFrontend {...props.attributes} />
         </div>
       );
       return <RawHTML>{markup}</RawHTML>;
