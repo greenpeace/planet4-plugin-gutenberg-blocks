@@ -5,7 +5,7 @@ import {ArticlesFrontend} from './ArticlesFrontend';
 
 const {__} = wp.i18n;
 
-export const BLOCK_NAME = 'planet4-blocks/articles';
+const BLOCK_NAME = 'planet4-blocks/articles';
 
 const attributes = {
   article_heading: {
