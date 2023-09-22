@@ -20,6 +20,7 @@ import {blockEditorValidation} from './BlockEditorValidation';
 import {registerBlock as registerShareButtonsBlock} from './blocks/ShareButtons/ShareButtonsBlock';
 import {registerPageHeaderBlock} from './blocks/PageHeader/PageHeaderBlock';
 import {registerBlockTemplates} from './block-templates/register';
+import {addNewCommands} from './addNewCommands';
 
 blockEditorValidation();
 new ArticlesBlock();
@@ -44,6 +45,7 @@ replaceTaxonomyTermSelectors();
 setupCustomSidebar();
 setUpCssVariables();
 blockEditorValidation();
+addNewCommands();
 
 const {registerBlockVariation} = wp.blocks;
 const {__} = wp.i18n;
