@@ -20,7 +20,7 @@ if (isNewIdentity) {
     {name: 'blue', color: '#167f82'},
     {name: 'green', color: '#1f4912'},
     {name: 'grey', color: '#45494c'},
-    {name: 'gp-green',color: '#198700'},
+    {name: 'gp-green', color: '#198700'},
   ];
 }
 

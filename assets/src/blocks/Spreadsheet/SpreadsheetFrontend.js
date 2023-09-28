@@ -30,8 +30,7 @@ export const SpreadsheetFrontend = ({
 
   const onHeaderClick = index => {
     if (index === sortColumnIndex) {
-      const newDirection = sortDirection === 'asc' ? 'desc' : 'asc';
-      setSortDirection(newDirection);
+      setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
     } else {
       setSortColumnIndex(index);
       setSortDirection('asc');
@@ -132,7 +131,7 @@ export const SpreadsheetFrontend = ({
             row.map((cell, cellIndex) => (
               <td key={cellIndex}>
                 {
-                  searchText.length > 0 ?
+                  searchText.length ?
                     // eslint-disable-next-line new-cap
                     HighlightMatches(cell, searchText) :
                     cell
@@ -147,54 +146,51 @@ export const SpreadsheetFrontend = ({
   const headers = spreadsheetData ? spreadsheetData.header : placeholderData.header;
 
   return (
-    <>
-      <section className={`block block-spreadsheet ${className ?? ''}`}>
-        <input className="spreadsheet-search form-control"
-          type="text"
-          value={searchText}
-          onChange={event => setSearchText(event.target.value)}
-          placeholder={__('Search data', 'planet4-blocks')}
-        />
-        <div className="table-wrapper">
-          <table className={`spreadsheet-table is-color-${color ?? 'grey'}`}>
-            <thead>
-              <tr>
-                {
-                  headers.map((cell, index) => (
-                    <th
-                      className={(
-                        index === sortColumnIndex ?
-                          `spreadsheet-sorted-by sort-${sortDirection}` :
-                          ''
-                      )}
-                      onClick={() => onHeaderClick(index)}
-                      key={index}
-                      scope="col"
-                      title={cell}>
-                      <button>
-                        {cell}
-                        <ArrowIcon />
-                      </button>
-                    </th>
-                  ))
-                }
-              </tr>
-            </thead>
-            <tbody>
+    <section className={`block block-spreadsheet ${className ?? ''}`}>
+      <input className="spreadsheet-search form-control"
+        type="text"
+        value={searchText}
+        onChange={event => setSearchText(event.target.value)}
+        placeholder={__('Search data', 'planet4-blocks')}
+      />
+      <div className="table-wrapper">
+        <table className={`spreadsheet-table is-color-${color ?? 'grey'}`}>
+          <thead>
+            <tr>
               {
-                loading === true ?
-                  <tr>
-                    <td colSpan="99999">
-                      <div className="spreadsheet-loading">{__('Loading spreadsheet data…', 'planet4-blocks')}</div>
-                    </td>
-                  </tr> :
-                  renderRows()
+                headers.map((cell, index) => (
+                  <th
+                    className={(
+                      index === sortColumnIndex ?
+                        `spreadsheet-sorted-by sort-${sortDirection}` :
+                        ''
+                    )}
+                    onClick={() => onHeaderClick(index)}
+                    key={index}
+                    scope="col"
+                    title={cell}>
+                    <button>
+                      {cell}
+                      <ArrowIcon />
+                    </button>
+                  </th>
+                ))
               }
-            </tbody>
-          </table>
-        </div>
-      </section>
-    </>
+            </tr>
+          </thead>
+          <tbody>
+            {loading ?
+              <tr>
+                <td colSpan="99999">
+                  <div className="spreadsheet-loading">{__('Loading spreadsheet data…', 'planet4-blocks')}</div>
+                </td>
+              </tr> :
+              renderRows()
+            }
+          </tbody>
+        </table>
+      </div>
+    </section>
   );
 };
 
