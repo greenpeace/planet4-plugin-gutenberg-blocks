@@ -47,7 +47,7 @@ export const SpreadsheetFrontend = ({
   };
 
   useEffect(() => {
-    const fetchSheetData = async () => {
+    (async () => {
       const sheetID = extractSheetID(url);
 
       if (sheetID !== false) {
@@ -75,10 +75,8 @@ export const SpreadsheetFrontend = ({
         setLoading(false);
         setSpreadsheetData(null);
       }
-    };
-
-    fetchSheetData();
-  }, [url]);
+    })();
+  }, [url, setInvalidSheetId]);
 
   const sortRows = (rows, columnIndex) => {
     if (columnIndex === null) {
