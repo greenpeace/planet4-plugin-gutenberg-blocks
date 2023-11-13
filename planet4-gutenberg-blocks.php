@@ -143,6 +143,7 @@ const PAGE_BLOCK_TYPES = [
 
 const BETA_PAGE_BLOCK_TYPES = [
 	'planet4-blocks/share-buttons',
+	'planet4-blocks/actions-list',
 ];
 
 // campaigns allow all block types.
@@ -198,6 +199,7 @@ const ACTION_BLOCK_TYPES = [
 const BETA_ACTION_BLOCK_TYPES = [
 	'planet4-blocks/social-media-cards',
 	'planet4-blocks/share-buttons',
+	'planet4-blocks/actions-list',
 ];
 
 const BLOCK_TEMPLATES = [
@@ -279,6 +281,11 @@ function set_allowed_block_types( $allowed_block_types, $context ) {
 		'core-embed/ted',
 		'core-embed/videopress',
 	];
+
+	// To allow the beta block "Actions List" we need to allow the Query Loop core block.
+	if ( Features::is_active( 'beta_blocks' ) ) {
+		array_push( $wordpress_blocks, 'core/query' );
+	}
 
 	$migration_ran = MigrationLog::from_wp_options()->already_ran( M001EnableEnFormFeature::get_id() );
 
