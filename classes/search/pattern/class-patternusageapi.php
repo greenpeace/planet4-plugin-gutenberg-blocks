@@ -69,7 +69,7 @@ class PatternUsageApi {
 	private function fetch_items(): void {
 		$this->items = $this->usage->get_patterns(
 			$this->params,
-			[ 'use_struct' => false, 'use_class' => false ]
+			[ 'use_struct' => false ]
 		);
 	}
 
