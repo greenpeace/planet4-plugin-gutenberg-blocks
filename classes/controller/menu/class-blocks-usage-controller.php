@@ -66,6 +66,9 @@ if ( ! class_exists( 'Blocks_Usage_Controller' ) ) {
 		public function plugin_blocks_report_rest_api() {
 			global $wpdb;
 
+
+			do_action( 'qm/start', 'postTypesApi' );
+
 			$types = \get_post_types(
 				[
 					'public'              => true,
@@ -91,6 +94,9 @@ if ( ! class_exists( 'Blocks_Usage_Controller' ) ) {
 				array_map( 'intval', array_column( $results, 'post_count' ) )
 			);
 
+			do_action( 'qm/stop', 'postTypesApi' );
+			do_action( 'qm/start', 'usageApi' );
+
 			// Group results.
 			$block_api   = new BlockUsageApi();
 			$pattern_api = new PatternUsageApi();
@@ -100,6 +106,7 @@ if ( ! class_exists( 'Blocks_Usage_Controller' ) ) {
 				'post_types'     => $post_types,
 			];
 
+			do_action( 'qm/stop', 'usageApi' );
 			return $report;
 		}
 

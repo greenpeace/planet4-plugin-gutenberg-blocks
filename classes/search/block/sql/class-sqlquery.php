@@ -53,11 +53,13 @@ class SqlQuery implements Block\Query {
 	private function get_sql_query( Block\Query\Parameters ...$params_list ): string {
 		// Prepare query parameters.
 		$regex  = [];
+		$like   = [];
 		$status = [];
 		$type   = [];
 		$order  = [];
 		foreach ( $params_list as $params ) {
-			$regex[] = ( new Regex( $params ) )->__toString();
+			//$regex[] = ( new Regex( $params ) )->__toString();
+			$like[]  = ( new Like( $params ) )->__toString();
 			$status  = array_merge( $status, $params->post_status() ?? [] );
 			$type    = array_merge( $type, $params->post_type() ?? [] );
 			$order   = array_merge( $order, $params->order() ?? [] );
@@ -76,6 +78,9 @@ class SqlQuery implements Block\Query {
 		}
 		foreach ( $regex as $r ) {
 			$sql .= ' AND post_content REGEXP ' . $sql_params->string( $r ) . ' ';
+		}
+		foreach ( $like as $l ) {
+			$sql .= ' AND post_content LIKE ' . $sql_params->string( $l ) . ' ';
 		}
 		if ( ! empty( $order ) ) {
 			$sql .= ' ORDER BY ' . implode( ',', $order );
