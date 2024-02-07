@@ -151,8 +151,12 @@ class Articles extends Base_Block {
 		// These should not be applied if there is a manual override of posts.
 		if ( empty( $fields['posts'] ) ) {
 			// Take categories into account if needed.
-			if ( true !== $fields['ignore_categories'] && isset( $fields['categories'] ) ) {
-				$args['category__in'] = $fields['categories'] ?? [];
+			if (
+				true !== $fields['ignore_categories'] &&
+				isset( $fields['categories'] ) &&
+				! empty( $fields['categories'] )
+			) {
+				$args['category__in'] = $fields['categories'];
 			}
 
 			// For posts we need to exclude the current post.

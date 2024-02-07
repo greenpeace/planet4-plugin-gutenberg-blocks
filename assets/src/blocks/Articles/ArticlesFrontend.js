@@ -12,7 +12,8 @@ export const ArticlesFrontend = ({attributes}) => {
   } = attributes;
 
   const postType = document.body.getAttribute('data-post-type');
-  const postCategories = document.body.getAttribute('data-post-categories')?.split(',') || [];
+  const postCategories = document.body.getAttribute('data-post-categories') ?
+    document.body.getAttribute('data-post-categories').split(',') : [];
 
   const postIdClass = [...document.body.classList].find(classNameFound => /^postid-\d+$/.test(classNameFound));
 
