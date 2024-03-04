@@ -11,12 +11,17 @@ let canPublish = true;
 export const blockEditorValidation = () => {
   subscribe(() => {
     const title = select('core/editor').getEditedPostAttribute('title');
+    const featuredImage = select('core/editor').getEditedPostAttribute('featured_media');
     const blocks = select('core/block-editor').getBlocks();
     const currentMessages = [];
 
     const invalidTitle = !title || title.trim().length <= 0;
     if (invalidTitle) {
       currentMessages.push('Title is required.');
+    }
+
+    if (!featuredImage) {
+      currentMessages.push('Featured image is required.');
     }
 
     const invalidBlocks = blocks.reduce((invalidBlocksArray, block) => {
@@ -45,7 +50,7 @@ export const blockEditorValidation = () => {
     }, []);
     invalidBlocks.forEach(block => currentMessages.push(...block.messages));
 
-    const currentlyValid = (0 === invalidBlocks.length) && !invalidTitle;
+    const currentlyValid = (0 === invalidBlocks.length) && !invalidTitle && !!featuredImage;
     messages = currentMessages;
 
     if (canPublish === currentlyValid) {
