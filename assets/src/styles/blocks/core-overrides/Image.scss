@@ -63,16 +63,14 @@
     position: relative;
   }
 
-  @include small-and-up {
-    &.alignleft {
-      float: left;
-      margin-inline-end: $sp-1;
-    }
+  &.alignleft {
+    float: left;
+    margin-inline-end: $sp-1;
+  }
 
-    &.alignright {
-      float: right;
-      margin-inline-start: $sp-1;
-    }
+  &.alignright {
+    float: right;
+    margin-inline-start: $sp-1;
   }
 
   &.aligncenter {
