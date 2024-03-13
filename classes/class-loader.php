@@ -9,8 +9,6 @@
 namespace P4GBKS;
 
 use P4\MasterTheme\Features;
-use P4\MasterTheme\Features\Dev\ThemeEditor;
-use P4\MasterTheme\Features\EngagingNetworks;
 use P4\MasterTheme\MigrationLog;
 use P4\MasterTheme\Migrations\M001EnableEnFormFeature;
 use P4GBKS\Controllers;
@@ -158,6 +156,7 @@ final class Loader {
 		new Blocks\SocialMediaCards();
 		new Blocks\ENForm();
 		new Blocks\GuestBook();
+		new Blocks\TableOfContents();
 
 		/**
 		 * Create Planet 4 block patterns categories.

@@ -14,6 +14,7 @@ import {setUpCssVariables} from './connectCssVariables';
 import {SubPagesBlock} from './blocks/SubPages/SubPagesBlock';
 import {blockEditorValidation} from './BlockEditorValidation';
 import {registerBlock as registerShareButtonsBlock} from './blocks/ShareButtons/ShareButtonsBlock';
+import {registerTableOfContentsBlock} from './blocks/TableOfContents';
 import {registerBlockTemplates} from './block-templates/register';
 
 registerColumnsBlock();
@@ -26,6 +27,7 @@ new SubPagesBlock();
 registerTakeActionBoxoutBlock();
 registerTimelineBlock();
 registerShareButtonsBlock();
+registerTableOfContentsBlock();
 
 addBlockFilters();
 setupImageBlockExtension();
