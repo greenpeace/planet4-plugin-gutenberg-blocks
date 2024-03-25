@@ -23,6 +23,139 @@ use P4\MasterTheme\Migrations\M001EnableEnFormFeature;
 defined( 'ABSPATH' ) || die( 'Direct access is forbidden !' );
 
 
+$qmlog = function($hook_name) {
+    return function() use ($hook_name) {
+        $now = DateTime::createFromFormat('U.u', microtime(true));
+        do_action('qm/debug', sprintf('%s :: %s', $now->format('H:i:s:u'), $hook_name));
+    };
+};
+$qmlog('loading_p4_plugin')();
+add_action('admin_bar_menu', $qmlog('admin_bar_menu'));
+add_action('wp_head', $qmlog('wp_head'));
+add_action('wp_footer', $qmlog('wp_footer'));
+add_action('shutdown', $qmlog('shutdown'));
+add_action('plugins_loaded', $qmlog('plugins_loaded start'), -PHP_INT_MAX);
+add_action('plugins_loaded', $qmlog('plugins_loaded end'), PHP_INT_MAX);
+add_action('setup_theme', $qmlog('setup_theme start'), -PHP_INT_MAX);
+add_action('setup_theme', $qmlog('setup_theme end'), PHP_INT_MAX);
+add_action('after_setup_theme', $qmlog('after_setup_theme start'), -PHP_INT_MAX);
+add_action('after_setup_theme', $qmlog('after_setup_theme end'), PHP_INT_MAX);
+add_action('init', $qmlog('init start'), -PHP_INT_MAX);
+add_action('init', $qmlog('init -1000'), -1000);
+add_action('init', $qmlog('init -100'), -100);
+add_action('init', $qmlog('init -10'), -10);
+add_action('init', $qmlog('init -1'), -1);
+add_action('init', $qmlog('init 2'), 2);
+add_action('init', $qmlog('init 5'), 5);
+add_action('init', $qmlog('init 9'), 9);
+add_action('init', $qmlog('init 10'), 10);
+add_action('init', $qmlog('init 11'), 11);
+add_action('init', $qmlog('init 12'), 12);
+add_action('init', $qmlog('init 16'), 16);
+add_action('init', $qmlog('init 25'), 25);
+add_action('init', $qmlog('init 35'), 35);
+add_action('init', $qmlog('init 100'), 100);
+add_action('init', $qmlog('init 1001'), 1001);
+add_action('init', $qmlog('init 1600'), 1600);
+add_action('init', $qmlog('init 10000'), 10000);
+add_action('init', $qmlog('init end'), PHP_INT_MAX);
+add_action('wp_loaded', $qmlog('wp_loaded start'), -PHP_INT_MAX);
+add_action('wp_loaded', $qmlog('wp_loaded end'), PHP_INT_MAX);
+add_action('wp', $qmlog('wp'));
+
+
+add_action('wpml_multilingual_options', $qmlog('wpml_multilingual_options start'), -PHP_INT_MAX);
+add_action('wpml_multilingual_options', $qmlog('wpml_multilingual_options end'), PHP_INT_MAX);
+
+add_action('wpml_element_type', $qmlog('wpml_element_type'));
+add_action('wpml_setting', $qmlog('wpml_setting'));
+add_action('wpml_sub_setting', $qmlog('wpml_sub_setting'));
+add_action('wpml_editor_cf_to_display', $qmlog('wpml_editor_cf_to_display'));
+add_action('wpml_tm_save_translation_cf', $qmlog('wpml_tm_save_translation_cf'));
+add_action('wpml_tm_xliff_export_translated_cf', $qmlog('wpml_tm_xliff_export_translated_cf'));
+add_action('wpml_tm_xliff_export_original_cf', $qmlog('wpml_tm_xliff_export_original_cf'));
+add_action('wpml_duplicate_generic_string', $qmlog('wpml_duplicate_generic_string'));
+// add_action('wpml_translatable_user_meta_fields', $qmlog('wpml_translatable_user_meta_fields'), -1);
+add_action('wpml_cross_domain_language_data', $qmlog('wpml_cross_domain_language_data'));
+add_action('wpml_get_cross_domain_language_data', $qmlog('wpml_get_cross_domain_language_data'));
+add_action('wpml_loaded', $qmlog('wpml_loaded'));
+add_action('wpml_st_loaded', $qmlog('wpml_st_loaded'));
+add_action('wpml_tm_loaded', $qmlog('wpml_tm_loaded'));
+add_action('wpml_hide_management_column', $qmlog('wpml_hide_management_column'));
+//add_action('wpml_ls_directories_to_scan', $qmlog('wpml_ls_directories_to_scan'));
+//add_action('wpml_ls_model_css_classes', $qmlog('wpml_ls_model_css_classes'));
+//add_action('wpml_ls_model_language_css_classes', $qmlog('wpml_ls_model_language_css_classes'));
+add_action('wpml_tf_feedback_open_link', $qmlog('wpml_tf_feedback_open_link'));
+add_action('wpml_sync_custom_field', $qmlog('wpml_sync_custom_field'));
+add_action('wpml_sync_all_custom_fields', $qmlog('wpml_sync_all_custom_fields'));
+add_action('wpml_is_redirected', $qmlog('wpml_is_redirected'));
+add_action('wpml_post_edit_meta_box_context', $qmlog('wpml_post_edit_meta_box_context'));
+add_action('wpml_sync_custom_field_copied_value', $qmlog('wpml_sync_custom_field_copied_value'));
+//add_action('wpml_ls_enable_ajax_navigation', $qmlog('wpml_ls_enable_ajax_navigation'));
+//add_action('icl_ls_languages', $qmlog('icl_ls_languages'));
+
+add_action('wpml_get_element_translations', $qmlog('wpml_get_element_translations'));
+add_action('wpml_update_active_languages', $qmlog('wpml_update_active_languages'));
+//add_action('wpml_ls_exclude_in_menu', $qmlog('wpml_ls_exclude_in_menu'));
+add_action('wpml_must_translate_canonical_url', $qmlog('wpml_must_translate_canonical_url'));
+add_action('wpml_alternate_hreflang', $qmlog('wpml_alternate_hreflang'));
+add_action('wpml_head_langs', $qmlog('wpml_head_langs'));
+add_action('wpml_decode_custom_field', $qmlog('wpml_decode_custom_field'));
+add_action('wpml_encode_custom_field', $qmlog('wpml_encode_custom_field'));
+add_action('wpml_enqueued_browser_redirect_language', $qmlog('wpml_enqueued_browser_redirect_language'));
+add_action('wpml_enqueue_browser_redirect_language', $qmlog('wpml_enqueue_browser_redirect_language'));
+add_action('wpml_browser_redirect_language_params', $qmlog('wpml_browser_redirect_language_params'));
+add_action('wpml_language_switcher', $qmlog('wpml_language_switcher'));
+//add_action('wpml_active_languages', $qmlog('wpml_active_languages'));
+add_action('wpml_element_trid', $qmlog('wpml_element_trid'));
+add_action('wpml_language_has_switched', $qmlog('wpml_language_has_switched'), -1);
+add_action('wpml_is_rtl', $qmlog('wpml_is_rtl'));
+add_action('wpml_language_is_active', $qmlog('wpml_language_is_active'));
+add_action('wpml_add_language_form_field', $qmlog('wpml_add_language_form_field'));
+add_action('wpml_footer_language_selector', $qmlog('wpml_footer_language_selector'));
+add_action('wpml_add_language_selector', $qmlog('wpml_add_language_selector'));
+add_action('wpml_default_language', $qmlog('wpml_default_language'));
+add_action('wpml_current_language', $qmlog('wpml_current_language'));
+add_action('wpml_translated_language_name', $qmlog('wpml_translated_language_name'));
+add_action('wpml_display_language_names', $qmlog('wpml_display_language_names'));
+add_action('wpml_post_language_details', $qmlog('wpml_post_language_details'));
+add_action('wpml_switch_language', $qmlog('wpml_switch_language'));
+add_action('wpml_element_language_code', $qmlog('wpml_element_language_code'));
+add_action('wpml_element_language_details', $qmlog('wpml_element_language_details'));
+add_action('wpml_switch_language_for_email', $qmlog('wpml_switch_language_for_email'));
+add_action('wpml_restore_language_from_email', $qmlog('wpml_restore_language_from_email'));
+add_action('wpml_home_url', $qmlog('wpml_home_url'));
+add_action('wpml_element_link', $qmlog('wpml_element_link'));
+add_action('wpml_object_id', $qmlog('wpml_object_id'));
+add_action('wpml_translate_single_string', $qmlog('wpml_translate_single_string'));
+add_action('wpml_translate_string', $qmlog('wpml_translate_string'));
+add_action('wpml_unfiltered_admin_string', $qmlog('wpml_unfiltered_admin_string'));
+add_action('wpml_permalink', $qmlog('wpml_permalink'));
+add_action('wpml_elements_without_translations', $qmlog('wpml_elements_without_translations'));
+add_action('wpml_get_translated_slug', $qmlog('wpml_get_translated_slug'));
+add_action('wpml_element_translation_type', $qmlog('wpml_element_translation_type'));
+add_action('wpml_element_has_translations', $qmlog('wpml_element_has_translations'));
+add_action('wpml_master_post_from_duplicate', $qmlog('wpml_master_post_from_duplicate'));
+add_action('wpml_post_duplicates', $qmlog('wpml_post_duplicates'));
+add_action('wpml_is_translated_post_type', $qmlog('wpml_is_translated_post_type'));
+add_action('wpml_is_translated_taxonomy', $qmlog('wpml_is_translated_taxonomy'));
+add_action('wpml_admin_make_post_duplicates', $qmlog('wpml_admin_make_post_duplicates'));
+add_action('wpml_make_post_duplicates', $qmlog('wpml_make_post_duplicates'));
+add_action('wpml_register_single_string', $qmlog('wpml_register_single_string'));
+add_action('wpml_register_string', $qmlog('wpml_register_string'));
+add_action('wpml_delete_package_action', $qmlog('wpml_delete_package_action'));
+add_action('wpml_show_package_language_ui', $qmlog('wpml_show_package_language_ui'));
+add_action('wpml_set_element_language_details', $qmlog('wpml_set_element_language_details'));
+add_action('wpml_delete_package', $qmlog('wpml_delete_package'));
+add_action('wpml_copy_post_to_language', $qmlog('wpml_copy_post_to_language'));
+
+add_action('icl_after_set_default_language', $qmlog('icl_after_set_default_language'), -1);
+add_action('wpml_before_init', $qmlog('wpml_before_init'), -1);
+add_action('wpml_after_init', $qmlog('wpml_after_init'), -1);
+add_action('wpml_load_dependencies', $qmlog('wpml_load_dependencies'), -1);
+
+
+
 /*
 ========================
 	C O N S T A N T S
