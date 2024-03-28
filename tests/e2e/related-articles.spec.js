@@ -10,6 +10,7 @@ test.useAdminLoggedIn();
 
 test('Test Related Articles block', async ({page, admin, editor}) => {
   await admin.createNewPost({postType: 'post', title: 'Test post for Related articles', legacyCanvas: true});
+  await addFeaturedImage({editor});
 
   await editor.canvas.getByRole('button', {name: 'Add default block'}).click();
   await page.keyboard.type('Test paragraph.');

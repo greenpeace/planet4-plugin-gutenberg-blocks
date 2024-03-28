@@ -1,5 +1,6 @@
 import {test, expect} from './tools/lib/test-utils.js';
 import {publishPostAndVisit} from './tools/lib/post.js';
+import {addFeaturedImage} from './tools/lib/editor.js';
 
 const TEST_TITLE = 'All Articles';
 const TEST_DESCRIPTION = 'All articles in date order';
@@ -8,7 +9,9 @@ const TEST_BUTTON_TEXT = 'Load';
 test.useAdminLoggedIn();
 
 test('Test Articles block', async ({page, admin, editor}) => {
+  // Create post and add featured image.
   await admin.createNewPost({postType: 'page', title:'Test Articles', legacyCanvas: true});
+  await addFeaturedImage({editor});
 
   // Add Articles block.
   await editor.canvas.getByRole('button', {name: 'Add default block'}).click();

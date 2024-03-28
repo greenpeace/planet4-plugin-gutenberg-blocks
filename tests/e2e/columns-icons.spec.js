@@ -1,11 +1,13 @@
 import {test} from './tools/lib/test-utils.js';
 import {publishPostAndVisit} from './tools/lib/post.js';
 import {addColumnsBlock, checkColumnsBlock} from './tools/lib/columns.js';
+import {addFeaturedImage} from './tools/lib/editor.js';
 
 test.useAdminLoggedIn();
 
 test('Test Columns block with Icons style', async ({page, admin, editor}) => {
   await admin.createNewPost({postType: 'page', title: 'Test Columns block', legacyCanvas: true});
+  await addFeaturedImage({editor});
 
   // Add Columns block.
   await addColumnsBlock(page, editor, 'Icons');
