@@ -96,7 +96,7 @@ async function removeAllPostTypes({editor}) {
  * @param {{Editor}} editor
  * @param {number}   imageId - The image ID from the Image Library
  */
-async function addFeaturedImage({editor}, imageId) {
+async function addFeaturedImage({editor}, imageId = 354) {
   const editorSettings = await openComponentPanel({editor}, 'Featured image');
 
   await editorSettings.getByRole('button', {name: 'Set featured image'}).click();

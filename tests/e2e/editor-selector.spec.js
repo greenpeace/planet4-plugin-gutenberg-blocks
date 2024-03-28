@@ -1,10 +1,12 @@
 import {test, expect} from './tools/lib/test-utils.js';
 import {publishPostAndVisit} from './tools/lib/post.js';
+import {addFeaturedImage} from './tools/lib/editor.js';
 
 test.useAdminLoggedIn();
 
 test('Test Editor basic functionalities', async ({page, admin, editor}) => {
   await admin.createNewPost({postType: 'post', title: 'Test Post', legacyCanvas: true});
+  await addFeaturedImage({editor});
 
   await editor.canvas.getByRole('button', {name: 'Add default block'}).click();
   await page.keyboard.type('This is a test Post.');

@@ -1,5 +1,6 @@
 import {test, expect} from './tools/lib/test-utils.js';
 import {publishPostAndVisit} from './tools/lib/post.js';
+import {addFeaturedImage} from './tools/lib/editor.js';
 
 const SHEET_ID = '2PACX-1vR2LTvb__ifqY0ayZzqWyzkJGPyMUyUvili9YotHs_1YymJqjSeECFImhzlJfN3k9xw0CVBwR4HuTOg';
 const TEST_URL = `https://docs.google.com/spreadsheets/d/e/${SHEET_ID}/pubhtml`;
@@ -8,6 +9,7 @@ test.useAdminLoggedIn();
 
 test('Test Spreadsheet block', async ({page, admin, editor}) => {
   await admin.createNewPost({postType: 'page', title: 'Test Spreadsheet', legacyCanvas: true});
+  await addFeaturedImage({editor});
 
   // Add Spreadsheet block.
   await editor.canvas.getByRole('button', {name: 'Add default block'}).click();

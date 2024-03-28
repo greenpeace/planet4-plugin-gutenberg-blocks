@@ -1,5 +1,6 @@
 import {test, expect} from './tools/lib/test-utils.js';
 import {publishPostAndVisit} from './tools/lib/post.js';
+import {addFeaturedImage} from './tools/lib/editor.js';
 
 test.useAdminLoggedIn();
 
@@ -12,6 +13,7 @@ test('Create and check check split two column block', async ({page, admin, edito
   }
 
   await admin.createNewPost({postType: 'page', title: 'Test S2C block', legacyCanvas: true});
+  await addFeaturedImage({editor});
 
   // Adding Split Two Column Block
   await editor.canvas.getByRole('button', {name: 'Add default block'}).click();

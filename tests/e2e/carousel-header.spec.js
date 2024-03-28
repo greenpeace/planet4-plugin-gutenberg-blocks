@@ -1,10 +1,12 @@
 import {test, expect} from './tools/lib/test-utils.js';
 import {publishPostAndVisit} from './tools/lib/post.js';
+import {addFeaturedImage} from './tools/lib/editor.js';
 
 test.useAdminLoggedIn();
 
 test('Create and check carousel header block', async ({page, admin, editor}) => {
   await admin.createNewPost({postType: 'page', title:'Test Carousel', legacyCanvas: true});
+  await addFeaturedImage({editor});
 
   await editor.canvas.getByRole('button', {name: 'Add default block'}).click();
   await page.keyboard.type('/carousel');
