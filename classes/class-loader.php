@@ -121,12 +121,12 @@ final class Loader {
 			Controllers\Menu\Reusable_Blocks_Controller::class,
 			Controllers\Menu\Archive_Import::class,
 			Controllers\Menu\Postmeta_Check_Controller::class,
-			Controllers\Menu\En_Settings_Controller::class,
-			Controllers\Api\Rest_Controller::class,
 		];
 
 		if ( ! $this->planet4_blocks_is_active() ) {
 			$services[] = Controllers\Menu\Enform_Post_Controller::class;
+			$services[] = Controllers\Menu\En_Settings_Controller::class;
+			$services[] = Controllers\Api\Rest_Controller::class;
 		}
 
 		$view = new View();
