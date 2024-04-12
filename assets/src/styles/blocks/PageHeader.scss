@@ -28,12 +28,19 @@ $text-column-padding-in: 24px;
   .wp-block-media-text__content {
     grid-column: 1;
     grid-row: 2;
-
     width: fit-content;
     margin: -$sp-5x $sp-3 $sp-3;
     padding-inline-start: 0;
-    padding-inline-end: 0;
     z-index: 1;
+
+    @include medium-and-less {
+      padding-inline-end: 0;
+
+      html[dir="rtl"] & {
+        direction: rtl;
+        padding-inline-end: $sp-1;
+      }
+    }
 
     .wp-block-button {
       width: auto;
@@ -58,10 +65,10 @@ $text-column-padding-in: 24px;
     font-size: $font-size-xxl;
     font-weight: 700;
     line-height: initial;
-    margin-inline-start: -$sp-1;
 
     @include medium-and-less {
       padding: 0 $sp-1;
+      margin: 0 (-$sp-1);
     }
   }
 
