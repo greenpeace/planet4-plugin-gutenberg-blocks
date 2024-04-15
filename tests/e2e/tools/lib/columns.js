@@ -32,9 +32,9 @@ async function addColumnsBlock(page, editor, style) {
       await column.locator('.columns-image-placeholder').hover({noWaitAfter: true});
       await column.locator('.dashicons-plus-alt2').click();
       // Select image from media library modal.
-      const imageModal = await editor.canvas.getByRole('dialog', {name: 'Select or Upload Media'});
-      await imageModal.getByRole('tabpanel', {name: 'Media Library'});
-      await imageModal.locator(`[data-id="${style === 'Images' ? 357 : 318}"]`).click();
+      const imageModal = await editor.canvas.getByLabel(/Select or Upload Media/);
+      await imageModal.getByRole('tab', {name: 'Media Library'}).click();
+      await imageModal.getByRole('tabpanel', {name: 'Media Library'}).locator(`[data-id="${style === 'Images' ? 357 : 318}"]`).click();
       await imageModal.getByRole('button', {name: 'Select', exact: true}).click();
     }
   }
