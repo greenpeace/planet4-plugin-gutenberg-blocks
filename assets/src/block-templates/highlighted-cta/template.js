@@ -36,7 +36,7 @@ const template = ({
       }],
       ['core/spacer', {height: '24px'}],
       ['core/buttons', {layout: {type: 'flex', justifyContent: 'center'}}, [
-        ['core/button', {className: 'is-style-cta is-hover-transparent'}],
+        ['core/button', {className: 'is-style-cta'}],
       ]],
       ['core/spacer', {height: '40px'}],
     ],
