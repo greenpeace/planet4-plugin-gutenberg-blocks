@@ -39,8 +39,6 @@ class View {
 	 * @return bool|string The returned output
 	 */
 	public function get_template( $template_name, $data, $relevant_dir = 'blocks/' ) {
-		Timber::$locations = $this->get_template_dir( $template_name, $relevant_dir );
-
 		return Timber::compile( [ $relevant_dir . $template_name . '.twig' ], $data );
 	}
 
@@ -53,8 +51,6 @@ class View {
 	 * @param boolean      $compile A boolean to compile the template.
 	 */
 	public function view_template( $template_name, $data, $relevant_dir = '', $compile = false ) {
-		Timber::$locations = $this->get_template_dir( $template_name, $relevant_dir );
-
 		if ( ! $compile ) {
 			Timber::render( [ $relevant_dir . $template_name . '.twig' ], $data );
 		} else {
@@ -106,7 +102,6 @@ class View {
 
 		$template_dir = $this->get_template_dir( $template_name, $relevant_dir, $template_ext );
 		if ( 'twig' === $template_ext ) {
-			Timber::$locations = $template_dir;
 			Timber::render( [ $relevant_dir . $template_name . '.' . $template_ext ], $data );
 		} else {
 			include_once $template_dir . $relevant_dir . $template_name . '.' . $template_ext;

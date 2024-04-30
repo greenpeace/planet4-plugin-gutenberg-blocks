@@ -39,8 +39,6 @@ abstract class Base_Block {
 
 		$data = $this->prepare_data( $attributes );
 
-		\Timber::$locations = P4GBKS_PLUGIN_DIR . '/templates/blocks';
-
 		$block_output = \Timber::compile( static::BLOCK_NAME . '.twig', $data );
 
 		// phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText

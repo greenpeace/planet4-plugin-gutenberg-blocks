@@ -385,6 +385,16 @@ if ( class_exists( Elasticpress\Indexables::class ) ) {
 	);
 }
 
+add_filter(
+	'timber/locations',
+	static function( array $locations ): array {
+		$locations['p4_plugin'] = [
+			P4GBKS_PLUGIN_DIR . '/templates/',
+			P4GBKS_PLUGIN_DIR . '/templates/blocks',
+		];
+		return $locations;
+	}
+);
 add_filter( 'timber/twig', 'p4_blocks_en_forms_twig_filters' );
 
 /**
@@ -396,7 +406,7 @@ add_filter( 'timber/twig', 'p4_blocks_en_forms_twig_filters' );
 function p4_blocks_en_forms_twig_filters( $twig ) {
 	// Adding functions as filters.
 	$twig->addFilter(
-		new Twig_SimpleFilter(
+		new \Twig\TwigFilter(
 			'object_to_array_plugin',
 			function ( $std_class_object ) {
 				$response = [];

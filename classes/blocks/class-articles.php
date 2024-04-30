@@ -7,7 +7,6 @@
 
 namespace P4GBKS\Blocks;
 
-use P4_Post;
 use Timber\Timber;
 
 /**
@@ -258,7 +257,7 @@ class Articles extends Base_Block {
 				$recent['page_type_link'] = get_term_link( $page_type_id );
 				$recent['link']           = get_permalink( $recent['ID'] );
 				$recent['date_formatted'] = get_the_date( '', $recent['ID'] );
-				$recent['reading_time']   = ( new \P4\MasterTheme\Post( $recent['ID'] ) )->reading_time_for_display();
+				$recent['reading_time']   = Timber::get_post( $recent['ID'] )->reading_time_for_display();
 
 				$recent_posts[] = $recent;
 			}
