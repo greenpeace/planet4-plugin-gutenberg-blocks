@@ -28,6 +28,7 @@ const template = ({
           },
         },
       }],
+      ['core/spacer', {height: '32px'}],
       ['core/heading', {
         textAlign: 'center',
         level: 3,
