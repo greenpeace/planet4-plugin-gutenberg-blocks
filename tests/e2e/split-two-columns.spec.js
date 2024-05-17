@@ -32,7 +32,7 @@ test('Create and check check split two column block', async ({page, admin, edito
   await btn.fill('Read more');
 
   // Check if sidebar is not visible
-  const sideBarPanel = page.locator('.edit-post-sidebar__panel-tabs');
+  const sideBarPanel = page.locator('.edit-post-sidebar__panel-tabs button');
   if (await sideBarPanel.isHidden()) {
     await page.locator('.interface-pinned-items button ').click();
   }
