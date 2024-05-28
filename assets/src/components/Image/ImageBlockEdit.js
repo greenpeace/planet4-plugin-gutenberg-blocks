@@ -22,7 +22,7 @@ export const ImageBlockEdit = BlockEdit => {
     const credits = image?.meta?._credit_text;
     // Compile data for insertion
     // eslint-disable-next-line no-nested-ternary
-    const image_credits = credits && credits.length > 0 && !caption.includes(credits) ?
+    const image_credits = credits && credits.length > 0 && (!caption || !caption.includes(credits)) ?
       (credits.includes('©') ? credits : `© ${credits}`) :
       null;
     const block_id = clientId ? `block-${clientId}` : null;
