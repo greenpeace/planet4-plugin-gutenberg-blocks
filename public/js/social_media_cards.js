@@ -16,7 +16,7 @@ document.addEventListener( 'DOMContentLoaded', () => {
     link.addEventListener( 'click', ( event ) => {
       event.preventDefault();
       openPopup(
-        `https://twitter.com/intent/tweet?text=${ encodeURIComponent( link.dataset.text ) }&url=${ encodeURIComponent( link.dataset.socialUrl ) }`
+        `https://twitter.com/intent/post?text=${ encodeURIComponent( link.dataset.text ) }&url=${ encodeURIComponent( link.dataset.socialUrl ) }`
       );
 
       return false;
