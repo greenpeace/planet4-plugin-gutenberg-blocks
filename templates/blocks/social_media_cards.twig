@@ -30,7 +30,7 @@
 									target="_blank" class="facebook-share">
 									{{ "facebook"|svgicon }}
 								</a>
-								<a href="https://twitter.com/intent/tweet?url={{ card.social_url|default(post_url)|url_encode }}&text={{ card.message|url_encode }}"
+								<a href="https://x.com/intent/post?url={{ card.social_url|default(post_url)|url_encode }}&text={{ card.message|url_encode }}"
 								   data-text="{{ card.message }}"
 								   data-social-url="{{ card.social_url|default(post_url) }}"
 								   title="{{ __('Share on Twitter', 'planet4-blocks') }}"
