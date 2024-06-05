@@ -7,7 +7,7 @@ const parseUrl = attrs => {
   case 'facebook':
     return `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(attrs.url)}`;
   case 'twitter':
-    return `https://twitter.com/share
+    return `https://x.com/share
         ?url=${encodeURIComponent(attrs.url)}
         &text=${encodeURIComponent(attrs.text)}
         ${(attrs.description ? ' - ' + encodeURIComponent(attrs.description) : '')}
