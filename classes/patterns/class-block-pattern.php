@@ -47,8 +47,6 @@ abstract class Block_Pattern {
 			Homepage::class,
 			HighlightedCta::class,
 			Issues::class,
-			PageHeader::class,
-			PageHeaderImgLeft::class,
 			QuickLinks::class,
 			RealityCheck::class,
 			SideImageWithTextAndCta::class,
