@@ -171,10 +171,6 @@ final class Loader {
 			'planet4',
 			[ 'label' => 'Planet 4' ],
 		);
-		register_block_pattern_category(
-			'page-headers',
-			[ 'label' => 'Page Headers' ],
-		);
 
 		register_block_pattern_category(
 			'layouts',
