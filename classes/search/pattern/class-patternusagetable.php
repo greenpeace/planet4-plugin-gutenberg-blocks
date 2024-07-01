@@ -10,7 +10,6 @@ namespace P4GBKS\Search\Pattern;
 use InvalidArgumentException;
 use WP_List_Table;
 use WP_Block_Patterns_Registry;
-use P4GBKS\Patterns\BlankPage;
 use P4GBKS\Search\RowActions;
 use P4GBKS\Search\Pattern\Query\Parameters;
 
@@ -95,12 +94,9 @@ class PatternUsageTable extends WP_List_Table {
 			);
 		}
 
-		$this->pattern_names = array_filter(
-			array_column(
-				$this->pattern_registry->get_all_registered(),
-				'name'
-			),
-			fn ( $name ) => BlankPage::get_name() !== $name
+		$this->pattern_names = array_column(
+			$this->pattern_registry->get_all_registered(),
+			'name'
 		);
 	}
 
