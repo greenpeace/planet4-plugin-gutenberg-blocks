@@ -8,7 +8,6 @@
 namespace P4GBKS\Search\Pattern;
 
 use WP_Block_Patterns_Registry;
-use P4GBKS\Patterns\BlankPage;
 use P4GBKS\Search\Pattern\Query\Parameters;
 
 /**
@@ -77,12 +76,9 @@ class PatternUsageApi {
 	 * Get all patterns names
 	 */
 	private function pattern_names(): array {
-		return array_filter(
-			array_column(
-				( WP_Block_Patterns_Registry::get_instance() )->get_all_registered(),
-				'name'
-			),
-			fn ( $name ) => BlankPage::get_name() !== $name
+		return array_column(
+			( WP_Block_Patterns_Registry::get_instance() )->get_all_registered(),
+			'name'
 		);
 	}
 
