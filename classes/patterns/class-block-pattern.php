@@ -55,7 +55,6 @@ abstract class Block_Pattern {
 			Action::class,
 			HighLevelTopic::class,
 			Campaign::class,
-			TakeAction::class,
 		];
 	}
 
