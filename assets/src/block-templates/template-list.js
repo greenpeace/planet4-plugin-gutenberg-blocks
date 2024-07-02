@@ -3,7 +3,6 @@ import * as quickLinks from './quick-links';
 import * as deepDive from './deep-dive';
 import * as realityCheck from './reality-check';
 import * as issues from './issues';
-import * as pageHeader from './page-header';
 import * as highlightedCta from './highlighted-cta';
 import * as deepDiveTopic from './deep-dive-topic';
 import * as homepage from './homepage';
@@ -18,7 +17,6 @@ export default [
   deepDive,
   realityCheck,
   issues,
-  pageHeader,
   highlightedCta,
 
   // layouts.
