@@ -62,32 +62,49 @@ class Ensapi_Controller {
 	 * @param string $ens_private_token The private api token to be used in order to authenticate for ENS API.
 	 * @param string $token_name        Defines the token name.
 	 */
-	private function authenticate( $ens_private_token, $token_name ) {
+	private function authenticate( $ens_private_token, $token_name ): void {
 
 		// Get cached auth token.
 		$ens_auth_token = get_transient( $token_name );
 
 		if ( ! $ens_auth_token ) {
-			$url = self::ENS_AUTH_URL;
-			// With the safe version of wp_remote_{VERB) functions, the URL is validated to avoid redirection and request forgery attacks.
-			$response = wp_safe_remote_post(
-				$url,
-				[
+			$request  = [
+				'url'  => self::ENS_AUTH_URL,
+				'args' => [
 					'headers' => [
 						'Content-Type' => 'application/json; charset=UTF-8',
 					],
 					'body'    => $ens_private_token,
 					'timeout' => self::ENS_CALL_TIMEOUT,
-				]
-			);
+				],
+			];
+			$response = wp_safe_remote_post( $request['url'], $request['args'] );
 
-			if ( is_array( $response ) && \WP_Http::OK === $response['response']['code'] && $response['body'] ) {                   // Communication with ENS API is authenticated.
-				$body           = json_decode( $response['body'], true );
-				$expiration     = (int) ( $body['expires'] / 1000 );                      // Time period in seconds to keep the ens_auth_token before refreshing. Typically 1 hour.
-				$ens_auth_token = $body['ens-auth-token'];
-				set_transient( $token_name, $ens_auth_token, $expiration );
+			if ( ! is_array( $response )
+				|| empty( $response['response']['code'] )
+				|| \WP_Http::OK !== $response['response']['code']
+				|| empty( $response['body'] )
+			) {
+				self::log_message(
+					'Error authenticating to EN',
+					[
+						'en_api_request'  => $request,
+						'en_api_response' => $response ?? [],
+					]
+				);
+
+				$this->$token_name = null;
+				return;
 			}
+
+			$body = json_decode( $response['body'], true );
+			// Time period in seconds to keep the ens_auth_token before refreshing.
+			// Typically 1 hour.
+			$expiration     = (int) ( $body['expires'] / 1000 );
+			$ens_auth_token = $body['ens-auth-token'];
+			set_transient( $token_name, $ens_auth_token, $expiration );
 		}
+
 		$this->$token_name = $ens_auth_token;
 	}
 
@@ -394,5 +411,26 @@ class Ensapi_Controller {
 		}
 
 		return $this->ens_auth_public_token;
+	}
+
+	/**
+	 * Log API response to Sentry.
+	 *
+	 * @param string $message Message.
+	 * @param array  $data    Data to log.
+	 */
+	private static function log_message( string $message, array $data = [] ): void {
+		if ( ! function_exists( '\\Sentry\\withScope' ) ) {
+			return;
+		}
+
+		\Sentry\withScope(
+			function ( \Sentry\State\Scope $scope ) use ( $message, $data ): void {
+				foreach ( $data as $key => $val ) {
+					$scope->setContext( $key, $val );
+				}
+				\Sentry\captureMessage( $message );
+			}
+		);
 	}
 }
