@@ -1,10 +1,10 @@
 import {Lightbox} from './Lightbox';
 import {createRoot} from 'react-dom/client';
 
-const setupImageAndCaption = (lightBoxNode, imageSelector = 'img', captionSelector = null) => {
+const setupImageAndCaption = (lightBoxNode, captionSelector = null) => {
   // Returns the callback for `forEach`
   return (imageBlock, index) => {
-    const image = imageBlock.querySelector(imageSelector);
+    const image = imageBlock.querySelector('img');
 
     if (!image) {
       return;
@@ -22,7 +22,10 @@ const setupImageAndCaption = (lightBoxNode, imageSelector = 'img', captionSelect
     }
     const rootElement = createRoot(lightBoxNode);
 
-    imageBlock.querySelector('img').addEventListener('click', () => rootElement.render(<Lightbox isOpen={true} index={index} items={[item]} />));
+    imageBlock.querySelector('img').addEventListener(
+      'click',
+      () => rootElement.render(<Lightbox isOpen={true} index={index} items={[item]} />)
+    );
   };
 };
 
@@ -35,19 +38,11 @@ export const setupLightboxForImages = function() {
 
   document.body.appendChild(lightBoxNode);
 
-  const imageBlocks = [...document.querySelectorAll('.wp-block-image:not(.force-no-lightbox)')];
-  // Images that are links should not have the lightbox
-  const imageBlocksWithoutLinks = imageBlocks.filter(imageBlock => {
-    const image = imageBlock.querySelector('img');
-    return image.parentElement.tagName !== 'A';
-  });
-  imageBlocksWithoutLinks.forEach(setupImageAndCaption(lightBoxNode, 'img', 'figcaption'));
-
   const imagesWithCaptions = document.querySelectorAll('.post-content .wp-caption, .page-content .wp-caption');
-  imagesWithCaptions.forEach(setupImageAndCaption(lightBoxNode, 'img', '.wp-caption-text'));
+  imagesWithCaptions.forEach(setupImageAndCaption(lightBoxNode, '.wp-caption-text'));
 
   const imagesInParagraphs = document.querySelectorAll('.post-content p:not(.wp-caption), .page-content p:not(.wp-caption)');
-  imagesInParagraphs.forEach(setupImageAndCaption(lightBoxNode, 'img'));
+  imagesInParagraphs.forEach(setupImageAndCaption(lightBoxNode));
 
   const mediaAndTextImages = document.querySelectorAll('.wp-block-media-text:not(.force-no-lightbox)');
   mediaAndTextImages.forEach(setupImageAndCaption(lightBoxNode));
