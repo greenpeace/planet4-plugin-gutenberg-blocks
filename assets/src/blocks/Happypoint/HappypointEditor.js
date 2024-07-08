@@ -189,6 +189,10 @@ export const HappypointEditor = ({attributes, setAttributes, isSelected}) => {
                     value={focal_point_params}
                     onChange={onFocalPointChange}
                     label={__('Select focus point for background image', 'planet4-blocks-backend')}
+                    help={__(
+                      'Drag "left" to move across the horizontal axis and slide "top" upwards to move through the vertical axis.',
+                      'planet4-blocks-backend'
+                    )}
                   />
                 </div>
               }
