@@ -1168,16 +1168,8 @@ msgstr ""
 msgid "Select focal point for issue image"
 msgstr ""
 
-#: assets/src/blocks/Happypoint/HappypointEditor.js:187
-msgid "Select image focal point"
-msgstr ""
-
-#: assets/src/blocks/Happypoint/HappypointEditor.js:190
-msgid "Drag the mouse to the focal area or input the position with numbers for more precision."
-msgstr ""
-
-#: assets/src/blocks/Happypoint/HappypointEditor.js:198
-msgid "Drag "left" to move across the horizontal axis and slide "top" upwards to move through the vertical axis."
+#: assets/src/blocks/Happypoint/HappypointEditor.js:191
+msgid "Select focus point for background image"
 msgstr ""
 
 #: assets/src/blocks/Gallery/GalleryEditor.js:85
