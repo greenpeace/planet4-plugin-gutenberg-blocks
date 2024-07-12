@@ -43,7 +43,6 @@ abstract class Block_Pattern {
 			DeepDive::class,
 			DeepDiveTopic::class,
 			GetInformed::class,
-			Homepage::class,
 			HighlightedCta::class,
 			Issues::class,
 			QuickLinks::class,
