@@ -115,7 +115,7 @@ const renderView = (attributes, setAttributes, className) => {
       {menuItems.length > 0 ?
         <SubmenuItems menuItems={menuItems} /> :
         <div className="EmptyMessage">
-          {__('There are not any pre-established headings that this block can display in the form of a table of content. Please add headings to your post or choose another heading size.', 'planet4-blocks-backend')}
+          {__('There are not any pre-established headings that this block can display in the form of a table of content. Please add headings to your page or choose another heading size.', 'planet4-blocks-backend')}
         </div>
       }
     </section>
