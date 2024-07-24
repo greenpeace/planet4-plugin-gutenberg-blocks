@@ -9,7 +9,6 @@ import * as homepage from './homepage';
 import * as campaign from './campaign';
 import * as action from './action';
 import * as getInformed from './get-informed';
-import * as highLevelTopic from './high-level-topic';
 
 export default [
   sideImgTextCta,
@@ -25,5 +24,4 @@ export default [
   campaign,
   action,
   getInformed,
-  highLevelTopic,
 ];
