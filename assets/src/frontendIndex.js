@@ -1,3 +1,5 @@
+import 'regenerator-runtime/runtime';
+
 import {HappypointFrontend} from './blocks/Happypoint/HappypointFrontend';
 import {SubmenuFrontend} from './blocks/Submenu/SubmenuFrontend';
 import {MediaFrontend} from './blocks/Media/MediaFrontend';
