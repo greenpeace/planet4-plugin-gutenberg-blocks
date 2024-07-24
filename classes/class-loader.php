@@ -115,12 +115,7 @@ final class Loader {
 	 */
 	public function load_services(): void {
 		$services = [
-			Controllers\Menu\Settings_Controller::class,
-			Controllers\Menu\Blocks_Usage_Controller::class,
-			Controllers\Menu\Classic_Blocks_Usage::class,
-			Controllers\Menu\Reusable_Blocks_Controller::class,
 			Controllers\Menu\Archive_Import::class,
-			Controllers\Menu\Postmeta_Check_Controller::class,
 		];
 
 		if ( ! $this->planet4_blocks_is_active() ) {
