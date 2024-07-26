@@ -50,7 +50,6 @@ abstract class Block_Pattern {
 			RealityCheck::class,
 			SideImageWithTextAndCta::class,
 			Action::class,
-			HighLevelTopic::class,
 			Campaign::class,
 		];
 	}
