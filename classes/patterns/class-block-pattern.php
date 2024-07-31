@@ -42,7 +42,6 @@ abstract class Block_Pattern {
 		return [
 			DeepDive::class,
 			DeepDiveTopic::class,
-			GetInformed::class,
 			HighlightedCta::class,
 			Issues::class,
 			QuickLinks::class,
