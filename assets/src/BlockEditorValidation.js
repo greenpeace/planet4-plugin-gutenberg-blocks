@@ -1,5 +1,5 @@
 const {registerPlugin} = wp.plugins;
-const {PluginPrePublishPanel} = wp.editPost;
+const {PluginPrePublishPanel} = wp.editor;
 const {select, dispatch, subscribe, useSelect} = wp.data;
 const {__} = wp.i18n;
 
