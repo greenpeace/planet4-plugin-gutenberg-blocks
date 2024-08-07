@@ -24,8 +24,6 @@ async function updatePost({page}) {
 
 async function createPostWithFeaturedImage({admin, editor}, params) {
   await admin.createNewPost({...params, legacyCanvas: true});
-  // const editorSettings = await openComponentPanel({editor}, 'Featured image');
-
   const editorSettings = await editor.canvas.getByRole('region', {name: 'Editor settings'});
   await editorSettings.getByRole('button', {name: 'Set featured image'}).click();
   const imageModal = await editor.canvas.getByRole('dialog', {name: 'Featured image'});
