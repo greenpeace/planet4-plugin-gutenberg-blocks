@@ -16,7 +16,7 @@ async function publishPostAndVisit({page, editor}) {
 }
 
 async function updatePost({page}) {
-  const updateButton = await page.locator('.edit-post-header__settings').getByRole('button', {name: 'Update'});
+  const updateButton = await page.locator('.editor-header__settings').getByRole('button', {name: 'Save'});
   await updateButton.click();
 
   return page.waitForSelector('.components-snackbar');
