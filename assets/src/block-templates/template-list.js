@@ -4,7 +4,6 @@ import * as deepDive from './deep-dive';
 import * as realityCheck from './reality-check';
 import * as issues from './issues';
 import * as highlightedCta from './highlighted-cta';
-import * as campaign from './campaign';
 import * as action from './action';
 
 export default [
@@ -16,6 +15,5 @@ export default [
   highlightedCta,
 
   // layouts.
-  campaign,
   action,
 ];
