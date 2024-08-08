@@ -5,7 +5,6 @@ import * as realityCheck from './reality-check';
 import * as issues from './issues';
 import * as highlightedCta from './highlighted-cta';
 import * as campaign from './campaign';
-import * as action from './action';
 
 export default [
   sideImgTextCta,
@@ -17,5 +16,4 @@ export default [
 
   // layouts.
   campaign,
-  action,
 ];
