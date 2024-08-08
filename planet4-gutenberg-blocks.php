@@ -140,6 +140,7 @@ const PAGE_BLOCK_TYPES = [
 	'planet4-blocks/guestbook',
 	'leadin/hubspot-form-block',
 	'gravityforms/form',
+	'planet4-blocks/table-of-contents',
 ];
 
 const BETA_PAGE_BLOCK_TYPES = [
