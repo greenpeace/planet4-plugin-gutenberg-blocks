@@ -1,5 +1,3 @@
-import {openComponentPanel} from './editor.js';
-
 async function publishPost({page, editor}) {
   await editor.publishPost();
 
@@ -18,7 +16,7 @@ async function publishPostAndVisit({page, editor}) {
 }
 
 async function updatePost({page}) {
-  const updateButton = await page.locator('.edit-post-header__settings').getByRole('button', {name: 'Update'});
+  const updateButton = await page.locator('.editor-header__settings').getByRole('button', {name: 'Save'});
   await updateButton.click();
 
   return page.waitForSelector('.components-snackbar');
@@ -26,7 +24,7 @@ async function updatePost({page}) {
 
 async function createPostWithFeaturedImage({admin, editor}, params) {
   await admin.createNewPost({...params, legacyCanvas: true});
-  const editorSettings = await openComponentPanel({editor}, 'Featured image');
+  const editorSettings = await editor.canvas.getByRole('region', {name: 'Editor settings'});
   await editorSettings.getByRole('button', {name: 'Set featured image'}).click();
   const imageModal = await editor.canvas.getByRole('dialog', {name: 'Featured image'});
   const mediaLibTab = await imageModal.getByRole('tab', {name: 'Media Library'});
