@@ -4,7 +4,6 @@ import * as deepDive from './deep-dive';
 import * as realityCheck from './reality-check';
 import * as issues from './issues';
 import * as highlightedCta from './highlighted-cta';
-import * as action from './action';
 
 export default [
   sideImgTextCta,
@@ -13,7 +12,4 @@ export default [
   realityCheck,
   issues,
   highlightedCta,
-
-  // layouts.
-  action,
 ];
