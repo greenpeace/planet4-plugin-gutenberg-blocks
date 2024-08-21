@@ -46,6 +46,7 @@ abstract class Block_Pattern {
 			QuickLinks::class,
 			RealityCheck::class,
 			SideImageWithTextAndCta::class,
+			Action::class,
 		];
 	}
 
