@@ -1,3 +1,8 @@
+// This ESLint error is disabled since 'regenerator-runtime/runtime' has already been added by another package.
+// There is no need to explicitly include it in the list of dependencies in the package.json file.
+// eslint-disable-next-line import/no-extraneous-dependencies
+import 'regenerator-runtime/runtime';
+
 /**
  * Function with a similar signature as WordPress's apiFetch, but doesn't do a bunch of things we don't need and cause
  * issues. You could as well use what is inside this function directly, but having this in a single function makes it
