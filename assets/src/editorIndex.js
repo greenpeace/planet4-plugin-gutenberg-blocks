@@ -4,7 +4,6 @@ import {registerMediaBlock} from './blocks/Media/MediaBlock';
 import {registerSocialMediaBlock} from './blocks/SocialMedia/SocialMediaBlock';
 import {SocialMediaCardsBlock} from './blocks/SocialMediaCards/SocialMediaCardsBlock';
 import {registerSubmenuBlock} from './blocks/Submenu/SubmenuBlock';
-import {registerTakeActionBoxoutBlock} from './blocks/TakeActionBoxout/TakeActionBoxoutBlock';
 import {registerTimelineBlock} from './blocks/Timeline/TimelineBlock';
 import {addBlockFilters} from './BlockFilters';
 import {setupImageBlockExtension} from './ImageBlockExtension';
@@ -23,7 +22,6 @@ registerSocialMediaBlock();
 new SocialMediaCardsBlock();
 registerSubmenuBlock();
 new SubPagesBlock();
-registerTakeActionBoxoutBlock();
 registerTimelineBlock();
 registerShareButtonsBlock();
 

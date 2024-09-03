@@ -149,7 +149,6 @@ final class Loader {
 		new Blocks\Spreadsheet();
 		new Blocks\SubMenu();
 		new Blocks\SubPages();
-		new Blocks\TakeActionBoxout();
 		new Blocks\Timeline();
 		new Blocks\SocialMediaCards();
 		new Blocks\ENForm();
