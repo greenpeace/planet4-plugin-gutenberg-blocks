@@ -9,6 +9,7 @@ const BLOCK_NAME = 'planet4-blocks/social-media';
 
 export const registerSocialMediaBlock = () => registerBlockType(BLOCK_NAME, {
   title: 'Social Media',
+  description: 'An embed-style block, customized to display and align content from Facebook and Instagram by inputting the URL.',
   icon: 'share',
   category: 'planet4-blocks',
   attributes: {
