@@ -4,7 +4,7 @@ msgstr ""
 "n%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "Project-Id-Version: Planet4 - Blocks\n"
 "POT-Creation-Date: 2022-09-27 12:00+0000\n"
-"PO-Revision-Date: 2024-09-05 07:11+0000\n"
+"PO-Revision-Date: 2024-09-05 07:12+0000\n"
 "Last-Translator: Marton Torok\n"
 "Language-Team: Ukrainian\n"
 "MIME-Version: 1.0\n"
@@ -189,7 +189,7 @@ msgstr ""
 #: assets/src/blocks/Articles/ArticlesBlock.js:21
 #: assets/src/blocks/Articles/ArticlesBlock.js:67
 msgid "Related Articles"
-msgstr ""
+msgstr "Статті по темі"
 
 #: assets/src/blocks/Spreadsheet/SpreadsheetFrontend.js:173
 msgid "Search data"
