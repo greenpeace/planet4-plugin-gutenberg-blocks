@@ -1,6 +1,5 @@
 import {registerColumnsBlock} from './blocks/Columns/ColumnsBlock';
 import {HappypointBlock} from './blocks/Happypoint/HappypointBlock';
-import {registerMediaBlock} from './blocks/Media/MediaBlock';
 import {registerSocialMediaBlock} from './blocks/SocialMedia/SocialMediaBlock';
 import {SocialMediaCardsBlock} from './blocks/SocialMediaCards/SocialMediaCardsBlock';
 import {registerSubmenuBlock} from './blocks/Submenu/SubmenuBlock';
@@ -17,7 +16,6 @@ import {registerBlockTemplates} from './block-templates/register';
 
 registerColumnsBlock();
 new HappypointBlock();
-registerMediaBlock();
 registerSocialMediaBlock();
 new SocialMediaCardsBlock();
 registerSubmenuBlock();
