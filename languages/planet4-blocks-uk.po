@@ -4,7 +4,7 @@ msgstr ""
 "n%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "Project-Id-Version: Planet4 - Blocks\n"
 "POT-Creation-Date: 2022-09-27 12:00+0000\n"
-"PO-Revision-Date: 2024-09-04 15:02+0000\n"
+"PO-Revision-Date: 2024-09-05 07:11+0000\n"
 "Last-Translator: Marton Torok\n"
 "Language-Team: Ukrainian\n"
 "MIME-Version: 1.0\n"
@@ -27,7 +27,7 @@ msgstr ""
 #: assets/src/blocks/Articles/ArticlePreview.js:184
 #, javascript-format
 msgid "%d min read"
-msgstr ""
+msgstr "%d хвилин для читання"
 
 #: assets/src/blocks/Cookies/CookiesFrontend.js:158
 msgid "Always enabled"
@@ -35,11 +35,11 @@ msgstr "Постійно активні"
 
 #: classes/blocks/class-happypoint.php:99
 msgid "Background image"
-msgstr ""
+msgstr "Фонове зображення"
 
 #: classes/patterns/class-highleveltopic.php:58
 msgid "Better understand the issues [deep dive topics]"
-msgstr ""
+msgstr "Краще розуміти тему"
 
 #. Description of the plugin
 msgid "Contains the Gutenberg blocks that are used by Planet4 project."
@@ -51,24 +51,24 @@ msgstr ""
 
 #: classes/patterns/class-takeaction.php:47
 msgid "Daily actions"
-msgstr ""
+msgstr "Щоденна активність"
 
 #: classes/patterns/class-takeaction.php:71
 msgid "Donate"
-msgstr ""
+msgstr "Донатити"
 
 #: classes/blocks/class-base-block.php:67
 msgid "Error"
-msgstr ""
+msgstr "Помилка"
 
 #: classes/patterns/class-getinformed.php:41
 msgid "Explore by topic"
-msgstr ""
+msgstr "Досліджувати за темою"
 
 #: classes/patterns/class-action.php:64
 #: classes/patterns/class-highleveltopic.php:87
 msgid "Explore by topics"
-msgstr ""
+msgstr "Дослідити інші теми"
 
 #: classes/patterns/class-deepdivetopic.php:69
 msgid "Explore other topics"
@@ -240,28 +240,28 @@ msgstr ""
 #: classes/patterns/class-deepdivetopic.php:49
 #: classes/patterns/class-campaign.php:47
 msgid "The problem"
-msgstr ""
+msgstr "Проблема"
 
 #: classes/patterns/class-campaign.php:53
 msgid "The solution"
-msgstr ""
+msgstr "Рішення"
 
 #: classes/patterns/class-getinformed.php:42
 msgid "Topic 1"
-msgstr ""
+msgstr "Тема 1"
 
 #: classes/patterns/class-getinformed.php:46
 msgid "Topic 2"
-msgstr ""
+msgstr "Тема 2"
 
 #: classes/patterns/class-getinformed.php:49
 msgid "Topic 3"
-msgstr ""
+msgstr "Тема 3"
 
 #: classes/patterns/class-deepdivetopic.php:54
 msgid "What can be done"
-msgstr ""
+msgstr "Що можна зробити"
 
 #: classes/patterns/class-highleveltopic.php:65
 msgid "What we do"
-msgstr ""
+msgstr "Що ми робимо"
