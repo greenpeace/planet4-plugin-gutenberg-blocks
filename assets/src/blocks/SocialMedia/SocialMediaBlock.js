@@ -3,13 +3,14 @@ import {socialMediaV1} from './deprecated/socialMediaV1';
 import {OEMBED_EMBED_TYPE, FACEBOOK_PAGE_TAB_TIMELINE} from './SocialMediaConstants.js';
 import {SocialMediaFrontend} from './SocialMediaFrontend.js';
 
+const {__} = wp.i18n;
 const {registerBlockType} = wp.blocks;
 
 const BLOCK_NAME = 'planet4-blocks/social-media';
 
 export const registerSocialMediaBlock = () => registerBlockType(BLOCK_NAME, {
   title: 'Social Media',
-  description: 'An embed-style block, customized to display and align content from Facebook and Instagram by inputting the URL.',
+  description: __('An embed-style block, customized to display and align content from Facebook and Instagram by inputting the URL.', 'planet4-blocks-backend'),
   icon: 'share',
   category: 'planet4-blocks',
   attributes: {

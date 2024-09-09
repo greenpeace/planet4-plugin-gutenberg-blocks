@@ -35,10 +35,11 @@ const attributes = {
 export const registerTimelineBlock = () => {
   const {registerBlockType} = wp.blocks;
   const {RawHTML} = wp.element;
+  const {__} = wp.i18n;
 
   registerBlockType(BLOCK_NAME, {
     title: 'Timeline',
-    description: 'A type of graphic that arranges a chain of events, activities, and milestones in chronological order.',
+    description: __('A type of graphic that arranges a chain of events, activities, and milestones in chronological order.', 'planet4-blocks-backend'),
     icon: 'clock',
     category: 'planet4-blocks',
     supports: {
