@@ -1,6 +1,6 @@
 <?php
 /**
- * Submenu block class
+ * TableOfContents block class
  *
  * @package P4GBKS
  * @since 0.1
@@ -11,18 +11,18 @@ namespace P4GBKS\Blocks;
 use WP_Block_Type_Registry;
 
 /**
- * Class SubMenu
+ * Class TableOfContents
  *
  * @package P4GBKS\Blocks
  * @since 0.1
  */
-class Submenu extends Base_Block {
+class TableOfContents extends Base_Block {
 
 	/** @const string BLOCK_NAME */
-	const BLOCK_NAME = 'submenu';
+	const BLOCK_NAME = 'table-of-contents';
 
 	/**
-	 * Submenu constructor.
+	 * TableOfContents constructor.
 	 */
 	public function __construct() {
 		if ( WP_Block_Type_Registry::get_instance()->is_registered( self::get_full_block_name() ) ) {
@@ -36,11 +36,11 @@ class Submenu extends Base_Block {
 				// todo: Remove when all content is migrated.
 				'render_callback' => [ self::class, 'render_frontend' ],
 				'attributes'      => [
-					'title'         => [
+					'title'                   => [
 						'type'    => 'string',
 						'default' => '',
 					],
-					'submenu_style' => [ // Needed for old blocks conversion.
+					'table_of_contents_style' => [ // Needed for old blocks conversion.
 						'type'    => 'integer',
 						'default' => 0,
 					],
@@ -53,7 +53,7 @@ class Submenu extends Base_Block {
 					 *   style: 'string'
 					 * }
 					 */
-					'levels'        => [
+					'levels'                  => [
 						'type'    => 'array',
 						'items'   => [
 							'type'       => 'object',

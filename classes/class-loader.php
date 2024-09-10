@@ -146,7 +146,7 @@ final class Loader {
 		new Blocks\SocialMedia();
 		new Blocks\SplitTwoColumns();
 		new Blocks\Spreadsheet();
-		new Blocks\SubMenu();
+		new Blocks\TableOfContents();
 		new Blocks\SubPages();
 		new Blocks\Timeline();
 		new Blocks\SocialMediaCards();
