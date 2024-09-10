@@ -95,7 +95,7 @@ msgstr ""
 msgid "Add item"
 msgstr ""
 
-#: assets/src/blocks/Submenu/SubmenuEditor.js:72
+#: assets/src/blocks/TableOfContents/TableOfContentsEditor.js:72
 msgid "Add level"
 msgstr ""
 
@@ -593,7 +593,7 @@ msgstr ""
 #: assets/src/blocks/SocialMediaCards/SocialMediaCards.js:67
 #: assets/src/blocks/Gallery/GalleryEditor.js:133
 #: assets/src/blocks/Cookies/CookiesFrontend.js:122
-#: assets/src/blocks/Submenu/SubmenuEditor.js:107
+#: assets/src/blocks/TableOfContents/TableOfContentsEditor.js:107
 #: assets/src/blocks/TakeActionBoxout/TakeActionBoxoutEditor.js:159
 #: assets/src/blocks/Columns/ColumnsEditor.js:153
 #: assets/src/blocks/Accordion/AccordionEditor.js:44
@@ -819,7 +819,7 @@ msgstr ""
 msgid "Logo Color"
 msgstr ""
 
-#: assets/src/blocks/Submenu/SubmenuBlock.js:45
+#: assets/src/blocks/TableOfContents/TableOfContentsBlock.js:45
 msgid "Long full-width"
 msgstr ""
 
@@ -1079,7 +1079,7 @@ msgstr ""
 msgid "Remove item"
 msgstr ""
 
-#: assets/src/blocks/Submenu/SubmenuEditor.js:79
+#: assets/src/blocks/TableOfContents/TableOfContentsEditor.js:79
 msgid "Remove level"
 msgstr ""
 
@@ -1238,7 +1238,7 @@ msgstr ""
 #: assets/src/blocks/Happypoint/HappypointEditor.js:108
 #: assets/src/blocks/CarouselHeader/Sidebar.js:153
 #: assets/src/blocks/Gallery/GalleryEditor.js:83
-#: assets/src/blocks/Submenu/SubmenuEditor.js:54
+#: assets/src/blocks/TableOfContents/TableOfContentsEditor.js:54
 #: assets/src/blocks/TakeActionBoxout/TakeActionBoxoutEditor.js:207
 #: assets/src/blocks/Columns/ColumnsEditor.js:47
 #: assets/src/blocks/Accordion/AccordionEditor.js:126
@@ -1254,11 +1254,11 @@ msgstr ""
 msgid "Shared URL"
 msgstr ""
 
-#: assets/src/blocks/Submenu/SubmenuBlock.js:53
+#: assets/src/blocks/TableOfContents/TableOfContentsBlock.js:53
 msgid "Short full-width"
 msgstr ""
 
-#: assets/src/blocks/Submenu/SubmenuBlock.js:60
+#: assets/src/blocks/TableOfContents/TableOfContentsBlock.js:60
 msgid "Short sidebar"
 msgstr ""
 
@@ -1400,7 +1400,7 @@ msgid ""
 "grid."
 msgstr ""
 
-#: assets/src/blocks/Submenu/SubmenuEditor.js:117
+#: assets/src/blocks/TableOfContents/TableOfContentsEditor.js:117
 msgid "The submenu block produces no output on the editor."
 msgstr ""
 
@@ -1493,19 +1493,19 @@ msgstr ""
 msgid "Use default value"
 msgstr ""
 
-#: assets/src/blocks/Submenu/SubmenuBlock.js:46
+#: assets/src/blocks/TableOfContents/TableOfContentsBlock.js:46
 msgid ""
 "Use: on long pages (more than 5 screens) when list items are long (+ 10 "
 "words). No max items recommended."
 msgstr ""
 
-#: assets/src/blocks/Submenu/SubmenuBlock.js:61
+#: assets/src/blocks/TableOfContents/TableOfContentsBlock.js:61
 msgid ""
 "Use: on long pages (more than 5 screens) when list items are short (up to 10 "
 "words). Max items recommended: 9"
 msgstr ""
 
-#: assets/src/blocks/Submenu/SubmenuBlock.js:54
+#: assets/src/blocks/TableOfContents/TableOfContentsBlock.js:54
 msgid ""
 "Use: on long pages (more than 5 screens) when list items are short (up to 5 "
 "words). No max items recommended."

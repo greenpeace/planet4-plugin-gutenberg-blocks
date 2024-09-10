@@ -27,7 +27,7 @@ msgstr ""
 msgid "Background image"
 msgstr "Bakgrundsbild"
 
-#: assets/src/blocks/Submenu/SubmenuLevel.js:53
+#: assets/src/blocks/TableOfContents/TableOfContentsLevel.js:53
 msgid "Bullet"
 msgstr ""
 
@@ -48,23 +48,23 @@ msgstr "Engagera dig"
 msgid "Greenpeace International"
 msgstr "Greenpeace International"
 
-#: assets/src/blocks/Submenu/SubmenuLevel.js:10
+#: assets/src/blocks/TableOfContents/TableOfContentsLevel.js:10
 msgid "Heading 2"
 msgstr ""
 
-#: assets/src/blocks/Submenu/SubmenuLevel.js:11
+#: assets/src/blocks/TableOfContents/TableOfContentsLevel.js:11
 msgid "Heading 3"
 msgstr ""
 
-#: assets/src/blocks/Submenu/SubmenuLevel.js:12
+#: assets/src/blocks/TableOfContents/TableOfContentsLevel.js:12
 msgid "Heading 4"
 msgstr ""
 
-#: assets/src/blocks/Submenu/SubmenuLevel.js:13
+#: assets/src/blocks/TableOfContents/TableOfContentsLevel.js:13
 msgid "Heading 5"
 msgstr ""
 
-#: assets/src/blocks/Submenu/SubmenuLevel.js:14
+#: assets/src/blocks/TableOfContents/TableOfContentsLevel.js:14
 msgid "Heading 6"
 msgstr ""
 
@@ -81,15 +81,15 @@ msgstr "http://www.greenpeace.org/"
 msgid "Learn more about this issue"
 msgstr "Läs mer om fokusområdet"
 
-#: assets/src/blocks/Submenu/SubmenuLevel.js:32
+#: assets/src/blocks/TableOfContents/TableOfContentsLevel.js:32
 msgid "Level"
 msgstr ""
 
-#: assets/src/blocks/Submenu/SubmenuLevel.js:41
+#: assets/src/blocks/TableOfContents/TableOfContentsLevel.js:41
 msgid "Link"
 msgstr ""
 
-#: assets/src/blocks/Submenu/SubmenuLevel.js:49
+#: assets/src/blocks/TableOfContents/TableOfContentsLevel.js:49
 msgid "List style"
 msgstr ""
 
@@ -119,11 +119,11 @@ msgid ""
 "URL using the sidebar."
 msgstr ""
 
-#: assets/src/blocks/Submenu/SubmenuLevel.js:52
+#: assets/src/blocks/TableOfContents/TableOfContentsLevel.js:52
 msgid "None"
 msgstr ""
 
-#: assets/src/blocks/Submenu/SubmenuLevel.js:54
+#: assets/src/blocks/TableOfContents/TableOfContentsLevel.js:54
 msgid "Number"
 msgstr ""
 
@@ -172,7 +172,7 @@ msgstr ""
 msgid "Sort by"
 msgstr "Sortera efter"
 
-#: assets/src/blocks/Submenu/SubmenuLevel.js:34
+#: assets/src/blocks/TableOfContents/TableOfContentsLevel.js:34
 msgid "Submenu item"
 msgstr ""
 

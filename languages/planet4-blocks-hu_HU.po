@@ -27,7 +27,7 @@ msgstr ""
 msgid "Background image"
 msgstr "Háttérkép"
 
-#: assets/src/blocks/Submenu/SubmenuLevel.js:53
+#: assets/src/blocks/TableOfContents/TableOfContentsLevel.js:53
 msgid "Bullet"
 msgstr "Gömb"
 
@@ -48,23 +48,23 @@ msgstr "Csatlakozz"
 msgid "Greenpeace International"
 msgstr "Greenpeace International"
 
-#: assets/src/blocks/Submenu/SubmenuLevel.js:10
+#: assets/src/blocks/TableOfContents/TableOfContentsLevel.js:10
 msgid "Heading 2"
 msgstr "Címsor 2"
 
-#: assets/src/blocks/Submenu/SubmenuLevel.js:11
+#: assets/src/blocks/TableOfContents/TableOfContentsLevel.js:11
 msgid "Heading 3"
 msgstr "Címsor 3"
 
-#: assets/src/blocks/Submenu/SubmenuLevel.js:12
+#: assets/src/blocks/TableOfContents/TableOfContentsLevel.js:12
 msgid "Heading 4"
 msgstr "Címsor 4"
 
-#: assets/src/blocks/Submenu/SubmenuLevel.js:13
+#: assets/src/blocks/TableOfContents/TableOfContentsLevel.js:13
 msgid "Heading 5"
 msgstr "Címsor 5"
 
-#: assets/src/blocks/Submenu/SubmenuLevel.js:14
+#: assets/src/blocks/TableOfContents/TableOfContentsLevel.js:14
 msgid "Heading 6"
 msgstr "Címsor 6"
 
@@ -81,15 +81,15 @@ msgstr "http://www.greenpeace.org/"
 msgid "Learn more about this issue"
 msgstr "Tudj meg többet erről az ügyről"
 
-#: assets/src/blocks/Submenu/SubmenuLevel.js:32
+#: assets/src/blocks/TableOfContents/TableOfContentsLevel.js:32
 msgid "Level"
 msgstr "Szint"
 
-#: assets/src/blocks/Submenu/SubmenuLevel.js:41
+#: assets/src/blocks/TableOfContents/TableOfContentsLevel.js:41
 msgid "Link"
 msgstr "Link"
 
-#: assets/src/blocks/Submenu/SubmenuLevel.js:49
+#: assets/src/blocks/TableOfContents/TableOfContentsLevel.js:49
 msgid "List style"
 msgstr "Lista stílusa"
 
@@ -120,11 +120,11 @@ msgstr ""
 "Nincs link megadva. Kérjük, szerkeszd a blokkot, és add meg a táblázat "
 "linkjét az oldalsávban."
 
-#: assets/src/blocks/Submenu/SubmenuLevel.js:52
+#: assets/src/blocks/TableOfContents/TableOfContentsLevel.js:52
 msgid "None"
 msgstr "Nincs"
 
-#: assets/src/blocks/Submenu/SubmenuLevel.js:54
+#: assets/src/blocks/TableOfContents/TableOfContentsLevel.js:54
 msgid "Number"
 msgstr "Szám"
 
@@ -174,7 +174,7 @@ msgstr "Kapcsolódó cikkek"
 msgid "Search data"
 msgstr "Keresési adatok"
 
-#: assets/src/blocks/Submenu/SubmenuLevel.js:34
+#: assets/src/blocks/TableOfContents/TableOfContentsLevel.js:34
 msgid "Submenu item"
 msgstr "Almenü elem"
 
