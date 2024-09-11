@@ -19,7 +19,7 @@ use WP_Block_Type_Registry;
 class TableOfContents extends Base_Block {
 
 	/** @const string BLOCK_NAME */
-	const BLOCK_NAME = 'submenu';  //TO DO: Change the name of this block to 'table-of-contents' when migrating it.
+	const BLOCK_NAME = 'submenu';  // TO DO: Change the name of this block to 'table-of-contents' when migrating it.
 
 	/**
 	 * TableOfContents constructor.
