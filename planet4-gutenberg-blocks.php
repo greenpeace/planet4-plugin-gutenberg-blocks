@@ -134,7 +134,7 @@ const PAGE_BLOCK_TYPES = [
 	'planet4-blocks/media-video',
 	'planet4-blocks/social-media',
 	'planet4-blocks/spreadsheet',
-	'planet4-blocks/table-of-contents',
+	'planet4-blocks/submenu', //TO DO: Change the name of this block to 'planet4-blocks/table-of-contents' when migrating it.
 	'planet4-blocks/take-action-boxout',
 	'planet4-blocks/timeline',
 	'planet4-blocks/enform',
@@ -188,7 +188,7 @@ const ACTION_BLOCK_TYPES = [
 	'planet4-blocks/media-video',
 	'planet4-blocks/social-media',
 	'planet4-blocks/spreadsheet',
-	'planet4-blocks/table-of-contents',
+	'planet4-blocks/submenu',  //TO DO: Change the name of this block to 'planet4-blocks/table-of-contents' when migrating it.
 	'planet4-blocks/take-action-boxout',
 	'planet4-blocks/timeline',
 	'planet4-blocks/enform',

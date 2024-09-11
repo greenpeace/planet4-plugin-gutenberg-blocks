@@ -19,7 +19,7 @@ class SubPages extends Base_Block {
 	const EMPTY_MESSAGE = 'The current page has no sub pages.';
 
 	/**
-	 * TableOfContents constructor.
+	 * SubPages constructor.
 	 */
 	public function __construct() {
 		register_block_type(
