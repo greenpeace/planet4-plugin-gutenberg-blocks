@@ -208,9 +208,6 @@ final class Loader {
 		// Setup image sizes.
 		add_action( 'admin_init', [ $this, 'setup_image_sizes' ] );
 
-		// Register a block category.
-		add_filter( 'block_categories_all', [ $this, 'register_block_category' ], 10, 2 );
-
 		// Reset block list cache on post modification.
 		add_action( 'save_post', [ Blocks\BlockList::class, 'cache_delete' ], 10, 1 );
 
@@ -467,29 +464,6 @@ DEFERREDCSS;
 		// Load EN translations.
 		load_plugin_textdomain( 'planet4-engagingnetworks', false, P4GBKS_PLUGIN_DIRNAME . '/languages/enform/' );
 		load_plugin_textdomain( 'planet4-engagingnetworks-backend', false, P4GBKS_PLUGIN_DIRNAME . '/languages/enform/' );
-	}
-
-	/**
-	 * Registers new categories for our blocks.
-	 *
-	 * @param array $core_categories Default blocks categories.
-	 *
-	 * @return array
-	 */
-	public function register_block_category( $core_categories ) {
-		// planet4-blocks is registered in planet4-master-theme.
-		$our_categories = [
-			[
-				'slug'  => 'planet4-blocks-beta',
-				'title' => 'Planet 4 Blocks - BETA',
-			],
-			[
-				'slug'  => 'planet4-block-templates',
-				'title' => 'Planet 4 Block Templates',
-			],
-		];
-
-		return array_merge( $our_categories, $core_categories );
 	}
 
 	/**
