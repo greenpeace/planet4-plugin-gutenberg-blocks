@@ -155,7 +155,7 @@ export const HappypointEditor = ({attributes, setAttributes, isSelected}) => {
                           debounceIframeUrl(url);
                         }}
                         help={__(
-                          'By default this block uses the "Happy point Subscribe Form URL" in Planet 4 Settings - Default content. ' +
+                          'By default this block uses the "Happy Point Subscribe Form URL" in Planet 4 Settings - Default content. ' +
                           'If a URL is set here, it will override this setting.',
                           'planet4-blocks-backend'
                         )}

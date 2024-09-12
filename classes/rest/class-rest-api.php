@@ -215,7 +215,7 @@ class Rest_Api {
 		);
 
 		/**
-		 * Endpoint to retrieve the data for the Happypoint block
+		 * Endpoint to retrieve the data for the Happy Point block
 		 */
 		register_rest_route(
 			self::REST_NAMESPACE,
