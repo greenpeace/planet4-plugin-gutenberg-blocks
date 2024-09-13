@@ -12,6 +12,7 @@ export const blockEditorValidation = () => {
   subscribe(() => {
     const title = select('core/editor').getEditedPostAttribute('title');
     const featuredImage = select('core/editor').getEditedPostAttribute('featured_media');
+    const postType = select('core/editor').getCurrentPostType();
     const postContent = select('core/editor').getEditedPostContent();
     const blocks = select('core/block-editor').getBlocks();
     const currentMessages = [];
@@ -22,7 +23,9 @@ export const blockEditorValidation = () => {
     }
 
     const hasImageInContent = /<img.+wp-image-(\d+).*>/i.test(postContent);
-    if (!featuredImage && !hasImageInContent) {
+    // If postType === 'wp_block' it's a pattern creation, and these don't have featured images.
+    const needsFeaturedImage = postType !== 'wp_block' && !featuredImage && !hasImageInContent;
+    if (needsFeaturedImage) {
       currentMessages.push('Featured image is required.');
     }
 
@@ -52,7 +55,7 @@ export const blockEditorValidation = () => {
     }, []);
     invalidBlocks.forEach(block => currentMessages.push(...block.messages));
 
-    const currentlyValid = (0 === invalidBlocks.length) && !invalidTitle && (featuredImage || hasImageInContent);
+    const currentlyValid = (0 === invalidBlocks.length) && !invalidTitle && !needsFeaturedImage;
     messages = currentMessages;
 
     if (canPublish === currentlyValid) {
