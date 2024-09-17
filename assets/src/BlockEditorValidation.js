@@ -10,11 +10,14 @@ let canPublish = true;
 
 export const blockEditorValidation = () => {
   subscribe(() => {
-    const title = select('core/editor').getEditedPostAttribute('title');
-    const featuredImage = select('core/editor').getEditedPostAttribute('featured_media');
-    const postType = select('core/editor').getCurrentPostType();
-    const postContent = select('core/editor').getEditedPostContent();
-    const blocks = select('core/block-editor').getBlocks();
+    const {getEditedPostAttribute, getCurrentPostType, getEditedPostContent} = select('core/editor');
+    const {getBlocks} = select('core/block-editor');
+
+    const title = getEditedPostAttribute('title');
+    const featuredImage = getEditedPostAttribute('featured_media');
+    const postType = getCurrentPostType();
+    const postContent = getEditedPostContent();
+    const blocks = getBlocks();
     const currentMessages = [];
 
     const invalidTitle = !title || title.trim().length <= 0;
