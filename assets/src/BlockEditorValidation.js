@@ -8,6 +8,8 @@ const blockValidations = {};
 let messages = [];
 let canPublish = true;
 
+const POST_TYPES_WITH_REQUIRED_FEATURED_IMAGE = ['p4_action', 'post', 'page', 'campaign'];
+
 export const blockEditorValidation = () => {
   subscribe(() => {
     const {getEditedPostAttribute, getCurrentPostType, getEditedPostContent} = select('core/editor');
@@ -26,8 +28,10 @@ export const blockEditorValidation = () => {
     }
 
     const hasImageInContent = /<img.+wp-image-(\d+).*>/i.test(postContent);
-    // If postType === 'wp_block' it's a pattern creation, and these don't have featured images.
-    const needsFeaturedImage = postType !== 'wp_block' && !featuredImage && !hasImageInContent;
+    const needsFeaturedImage = POST_TYPES_WITH_REQUIRED_FEATURED_IMAGE.includes(postType) &&
+      !featuredImage &&
+      !hasImageInContent;
+
     if (needsFeaturedImage) {
       currentMessages.push('Featured image is required.');
     }
