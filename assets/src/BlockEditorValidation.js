@@ -8,12 +8,18 @@ const blockValidations = {};
 let messages = [];
 let canPublish = true;
 
+const POST_TYPES_WITH_REQUIRED_FEATURED_IMAGE = ['p4_action', 'post', 'page', 'campaign'];
+
 export const blockEditorValidation = () => {
   subscribe(() => {
-    const title = select('core/editor').getEditedPostAttribute('title');
-    const featuredImage = select('core/editor').getEditedPostAttribute('featured_media');
-    const postContent = select('core/editor').getEditedPostContent();
-    const blocks = select('core/block-editor').getBlocks();
+    const {getEditedPostAttribute, getCurrentPostType, getEditedPostContent} = select('core/editor');
+    const {getBlocks} = select('core/block-editor');
+
+    const title = getEditedPostAttribute('title');
+    const featuredImage = getEditedPostAttribute('featured_media');
+    const postType = getCurrentPostType();
+    const postContent = getEditedPostContent();
+    const blocks = getBlocks();
     const currentMessages = [];
 
     const invalidTitle = !title || title.trim().length <= 0;
@@ -22,7 +28,11 @@ export const blockEditorValidation = () => {
     }
 
     const hasImageInContent = /<img.+wp-image-(\d+).*>/i.test(postContent);
-    if (!featuredImage && !hasImageInContent) {
+    const needsFeaturedImage = POST_TYPES_WITH_REQUIRED_FEATURED_IMAGE.includes(postType) &&
+      !featuredImage &&
+      !hasImageInContent;
+
+    if (needsFeaturedImage) {
       currentMessages.push('Featured image is required.');
     }
 
@@ -52,7 +62,7 @@ export const blockEditorValidation = () => {
     }, []);
     invalidBlocks.forEach(block => currentMessages.push(...block.messages));
 
-    const currentlyValid = (0 === invalidBlocks.length) && !invalidTitle && (featuredImage || hasImageInContent);
+    const currentlyValid = (0 === invalidBlocks.length) && !invalidTitle && !needsFeaturedImage;
     messages = currentMessages;
 
     if (canPublish === currentlyValid) {
