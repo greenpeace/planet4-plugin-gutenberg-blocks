@@ -14,6 +14,7 @@ use P4GBKS\Blocks\Spreadsheet;
 use P4GBKS\Blocks\Articles;
 use P4GBKS\Blocks\ENForm;
 use P4GBKS\Blocks\SplitTwoColumns;
+use P4GBKS\Blocks\Happypoint;
 use P4GBKS\Blocks\Gallery;
 use P4GBKS\Blocks\Covers;
 use P4GBKS\Blocks\SocialMedia;
@@ -208,6 +209,26 @@ class Rest_Api {
 						}
 
 						return rest_ensure_response( $response );
+					},
+				],
+			]
+		);
+
+		/**
+		 * Endpoint to retrieve the data for the Happypoint block
+		 */
+		register_rest_route(
+			self::REST_NAMESPACE,
+			'/get-happypoint-data',
+			[
+				[
+					'permission_callback' => static function () {
+						return true;
+					},
+					'methods'             => WP_REST_Server::READABLE,
+					'callback'            => static function ( $fields ) {
+						$to_return = Happypoint::get_data( $fields['id'] );
+						return rest_ensure_response( $to_return );
 					},
 				],
 			]
