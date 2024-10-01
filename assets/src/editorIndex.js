@@ -12,6 +12,7 @@ import {SubPagesBlock} from './blocks/SubPages/SubPagesBlock';
 import {blockEditorValidation} from './BlockEditorValidation';
 import {registerBlock as registerShareButtonsBlock} from './blocks/ShareButtons/ShareButtonsBlock';
 import {registerBlockTemplates} from './block-templates/register';
+import {addNewCommands} from './addNewCommands';
 
 registerColumnsBlock();
 new HappypointBlock();
@@ -27,6 +28,7 @@ addButtonLinkPasteWarning();
 replaceTaxonomyTermSelectors();
 setUpCssVariables();
 blockEditorValidation();
+addNewCommands();
 
 const {registerBlockVariation} = wp.blocks;
 const {__} = wp.i18n;
