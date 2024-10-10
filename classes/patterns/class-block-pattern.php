@@ -44,7 +44,6 @@ abstract class Block_Pattern {
 			Issues::class,
 			RealityCheck::class,
 			SideImageWithTextAndCta::class,
-			Action::class,
 		];
 	}
 
