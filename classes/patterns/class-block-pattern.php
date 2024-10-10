@@ -40,10 +40,8 @@ abstract class Block_Pattern {
 	 */
 	public static function get_list(): array {
 		return [
-			DeepDive::class,
 			HighlightedCta::class,
 			Issues::class,
-			QuickLinks::class,
 			RealityCheck::class,
 			SideImageWithTextAndCta::class,
 			Action::class,
