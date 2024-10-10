@@ -11,7 +11,6 @@ use WP_Error;
 use WP_REST_Request;
 use WP_REST_Server;
 use P4GBKS\Blocks\Spreadsheet;
-use P4GBKS\Blocks\Articles;
 use P4GBKS\Blocks\ENForm;
 use P4GBKS\Blocks\SplitTwoColumns;
 use P4GBKS\Blocks\Happypoint;
@@ -154,26 +153,6 @@ class Rest_Api {
 						$sheet_data = Spreadsheet::get_sheet( $sheet_id, false );
 
 						return rest_ensure_response( $sheet_data );
-					},
-				],
-			]
-		);
-
-		/**
-		 * Endpoint to retrieve the posts for the Articles block
-		 */
-		register_rest_route(
-			self::REST_NAMESPACE,
-			'/get-posts',
-			[
-				[
-					'permission_callback' => static function () {
-						return true;
-					},
-					'methods'             => WP_REST_Server::READABLE,
-					'callback'            => static function ( $fields ) {
-						$to_return = Articles::get_posts( $fields );
-						return rest_ensure_response( $to_return );
 					},
 				],
 			]

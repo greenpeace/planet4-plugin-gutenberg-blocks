@@ -135,7 +135,6 @@ final class Loader {
 	 */
 	public static function add_blocks(): void {
 		new Blocks\Accordion();
-		new Blocks\Articles();
 		new Blocks\CarouselHeader();
 		new Blocks\Columns();
 		new Blocks\Cookies();
