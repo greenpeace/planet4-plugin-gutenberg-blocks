@@ -140,7 +140,6 @@ final class Loader {
 		new Blocks\Columns();
 		new Blocks\Cookies();
 		new Blocks\Counter();
-		new Blocks\Covers();
 		new Blocks\Gallery();
 		new Blocks\Happypoint();
 		new Blocks\SocialMedia();

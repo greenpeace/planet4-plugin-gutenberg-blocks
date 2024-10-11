@@ -2,13 +2,6 @@ const {unregisterBlockStyle, registerBlockStyle} = wp.blocks;
 const {__} = wp.i18n;
 
 wp.domReady(() => {
-  // Remove Take Action and Campaign covers styles for Covers block in campaigns
-  const postType = wp.data.select('core/editor').getCurrentPostType();
-  if (postType === 'campaign') {
-    unregisterBlockStyle('planet4-blocks/covers', 'take-action');
-    unregisterBlockStyle('planet4-blocks/covers', 'campaign');
-  }
-
   // Remove Button block native styles
   unregisterBlockStyle('core/button', 'fill');
   unregisterBlockStyle('core/button', 'outline');
