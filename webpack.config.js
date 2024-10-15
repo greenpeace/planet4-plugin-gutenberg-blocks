@@ -46,7 +46,6 @@ const publicJsConfig = {
     GuestBookScript: './assets/src/blocks/GuestBook/GuestBookScript.js',
     CounterScript: './assets/src/blocks/Counter/CounterScript.js',
     SplitTwoColumnsScript: './assets/src/blocks/SplitTwoColumns/SplitTwoColumnsScript.js',
-    ArticlesScript: './assets/src/blocks/Articles/ArticlesScript.js',
     CookiesScript: './assets/src/blocks/Cookies/CookiesScript.js',
   },
 };
@@ -71,7 +70,6 @@ const adminJsConfig = {
     GuestBookEditorScript: './assets/src/blocks/GuestBook/GuestBookEditorScript.js',
     CounterEditorScript: './assets/src/blocks/Counter/CounterEditorScript.js',
     SplitTwoColumnsEditorScript: './assets/src/blocks/SplitTwoColumns/SplitTwoColumnsEditorScript.js',
-    ArticlesEditorScript: './assets/src/blocks/Articles/ArticlesEditorScript.js',
     CookiesEditorScript: './assets/src/blocks/Cookies/CookiesEditorScript.js',
   },
 };
@@ -97,8 +95,6 @@ const cssConfig = {
     CounterStyle: './assets/src/styles/blocks/Counter/CounterStyle.scss',
     SplitTwoColumnsStyle: './assets/src/styles/blocks/SplitTwoColumns/SplitTwoColumnsStyle.scss',
     SplitTwoColumnsEditorStyle: './assets/src/styles/blocks/SplitTwoColumns/SplitTwoColumnsEditorStyle.scss',
-    ArticlesStyle: './assets/src/styles/blocks/Articles/ArticlesStyle.scss',
-    ArticlesEditorStyle: './assets/src/styles/blocks/Articles/ArticlesEditorStyle.scss',
     CookiesStyle: './assets/src/styles/blocks/Cookies/Cookies.scss',
     CookiesEditorStyle: './assets/src/styles/blocks/Cookies/CookiesEditor.scss',
   },
