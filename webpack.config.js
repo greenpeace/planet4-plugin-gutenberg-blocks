@@ -78,7 +78,6 @@ const cssConfig = {
   entry: {
     style: './assets/src/styles/style.scss',
     editorStyle: './assets/src/styles/editorStyle.scss',
-    lightbox: './assets/src/styles/lightbox.scss',
     AccordionStyle: './assets/src/styles/blocks/Accordion/AccordionStyle.scss',
     AccordionEditorStyle: './assets/src/styles/blocks/Accordion/AccordionEditorStyle.scss',
     CarouselHeaderStyle: './assets/src/styles/blocks/CarouselHeader/CarouselHeaderStyle.scss',
