@@ -139,7 +139,6 @@ final class Loader {
 		new Blocks\Columns();
 		new Blocks\Cookies();
 		new Blocks\Counter();
-		new Blocks\Gallery();
 		new Blocks\Happypoint();
 		new Blocks\SocialMedia();
 		new Blocks\SplitTwoColumns();
@@ -351,13 +350,6 @@ final class Loader {
 				'parent-style',
 			],
 			self::file_ver( P4GBKS_PLUGIN_DIR . '/assets/build/style.min.css' )
-		);
-
-		wp_enqueue_style(
-			'photoswipe',
-			P4GBKS_PLUGIN_URL . 'assets/build/lightbox.min.css',
-			[],
-			self::file_ver( P4GBKS_PLUGIN_DIR . '/assets/build/lightbox.min.css' )
 		);
 
 		// Include React in the Frontend.

@@ -14,7 +14,6 @@ use P4GBKS\Blocks\Spreadsheet;
 use P4GBKS\Blocks\ENForm;
 use P4GBKS\Blocks\SplitTwoColumns;
 use P4GBKS\Blocks\Happypoint;
-use P4GBKS\Blocks\Gallery;
 use P4GBKS\Blocks\SocialMedia;
 use P4\MasterTheme\AnalyticsValues;
 
@@ -189,26 +188,6 @@ class Rest_Api {
 					'callback'            => static function ( $fields ) {
 						$to_return = Happypoint::get_data( $fields['id'] );
 						return rest_ensure_response( $to_return );
-					},
-				],
-			]
-		);
-
-		/**
-		 * Endpoint to retrieve the images for the Gallery block
-		 */
-		register_rest_route(
-			self::REST_NAMESPACE,
-			'/get-gallery-images',
-			[
-				[
-					'permission_callback' => static function () {
-						return true;
-					},
-					'methods'             => WP_REST_Server::READABLE,
-					'callback'            => static function ( $fields ) {
-						$images = Gallery::get_images( $fields );
-						return rest_ensure_response( $images );
 					},
 				],
 			]

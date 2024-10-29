@@ -5,7 +5,6 @@ import 'regenerator-runtime/runtime';
 
 import {HappypointFrontend} from './blocks/Happypoint/HappypointFrontend';
 import {ColumnsFrontend} from './blocks/Columns/ColumnsFrontend';
-import {setupLightboxForImages} from './components/Lightbox/setupLightboxForImages';
 import {setupParallax} from './components/Parallax/setupParallax';
 
 import {createRoot} from 'react-dom/client';
@@ -33,7 +32,5 @@ document.addEventListener('DOMContentLoaded', () => {
       rootElement.render(<BlockFrontend {...attributes.attributes} />);
     }
   );
-
-  setupLightboxForImages();
   setupParallax();
 });
