@@ -353,13 +353,6 @@ final class Loader {
 			self::file_ver( P4GBKS_PLUGIN_DIR . '/assets/build/style.min.css' )
 		);
 
-		wp_enqueue_style(
-			'photoswipe',
-			P4GBKS_PLUGIN_URL . 'assets/build/lightbox.min.css',
-			[],
-			self::file_ver( P4GBKS_PLUGIN_DIR . '/assets/build/lightbox.min.css' )
-		);
-
 		// Include React in the Frontend.
 		self::enqueue_local_script(
 			'planet4-blocks-script',
