@@ -12,7 +12,6 @@ use WP_REST_Request;
 use WP_REST_Server;
 use P4GBKS\Blocks\Spreadsheet;
 use P4GBKS\Blocks\ENForm;
-use P4GBKS\Blocks\SplitTwoColumns;
 use P4GBKS\Blocks\Happypoint;
 use P4GBKS\Blocks\Gallery;
 use P4\MasterTheme\AnalyticsValues;
@@ -133,41 +132,6 @@ class Rest_Api {
 						$sheet_data = Spreadsheet::get_sheet( $sheet_id, false );
 
 						return rest_ensure_response( $sheet_data );
-					},
-				],
-			]
-		);
-
-		register_rest_route(
-			self::REST_NAMESPACE,
-			'/update_block/(?P<blockname>[a-z0-9-/]*)',
-			[
-				[
-					'permission_callback' => static function () {
-						return current_user_can( 'edit_pages' );
-					},
-					'methods'             => WP_REST_Server::CREATABLE,
-					'callback'            => static function ( WP_REST_Request $request ) {
-						$blocks     = [
-							Base_Block::NAMESPACE . '/' . SplitTwoColumns::BLOCK_NAME => SplitTwoColumns::class,
-						];
-						$block_name = $request->get_param( 'blockname' );
-						/**
-						 * @var Base_Block $block_class
-						 */
-						$block_class = $blocks[ $block_name ] ?? null;
-
-						if ( null === $block_class ) {
-							return new WP_Error( 'error', 'Unknown block ' . ( $block_name ?? 'unspecified' ) );
-						}
-
-						try {
-							$response = $block_class::update_data( $request->get_params() );
-						} catch ( NotImplemented $exception ) {
-							return new WP_Error( 'error', $exception->getMessage() );
-						}
-
-						return rest_ensure_response( $response );
 					},
 				],
 			]
