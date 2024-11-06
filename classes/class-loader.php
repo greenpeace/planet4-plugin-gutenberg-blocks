@@ -141,7 +141,6 @@ final class Loader {
 		new Blocks\Counter();
 		new Blocks\Gallery();
 		new Blocks\Happypoint();
-		new Blocks\SocialMedia();
 		new Blocks\SplitTwoColumns();
 		new Blocks\Spreadsheet();
 		new Blocks\SubPages();
