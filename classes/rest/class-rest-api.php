@@ -15,7 +15,6 @@ use P4GBKS\Blocks\ENForm;
 use P4GBKS\Blocks\SplitTwoColumns;
 use P4GBKS\Blocks\Happypoint;
 use P4GBKS\Blocks\Gallery;
-use P4GBKS\Blocks\SocialMedia;
 use P4\MasterTheme\AnalyticsValues;
 
 /**
