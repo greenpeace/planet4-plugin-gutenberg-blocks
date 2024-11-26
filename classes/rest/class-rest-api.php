@@ -177,27 +177,6 @@ class Rest_Api {
 			]
 		);
 
-		/**
-		 * Endpoint to get the code for Instagram embeds in the Social Media block.
-		 */
-		register_rest_route(
-			self::REST_NAMESPACE,
-			'/get-instagram-embed',
-			[
-				[
-					'permission_callback' => static function () {
-						return true;
-					},
-					'methods'             => WP_REST_Server::READABLE,
-					'callback'            => static function ( $fields ) {
-						$url        = $fields['url'] ?? '';
-						$embed_code = SocialMedia::get_fb_oembed_html( $url, 'instagram' );
-						return rest_ensure_response( $embed_code );
-					},
-				],
-			]
-		);
-
 		register_rest_route(
 			self::REST_NAMESPACE,
 			'/get-en-session-token',
