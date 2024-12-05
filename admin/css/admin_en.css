@@ -1,7 +1,3 @@
-.enform-required-field {
-  border-color: #f75848 !important;
-}
-
 #fields_list_box, #questions_list_box, #optins_list_box {
   max-height: 400px;
   overflow: auto;
