@@ -112,22 +112,4 @@ class View {
 			include_once $template_dir . $relevant_dir . $template_name . '.' . $template_ext;
 		}
 	}
-
-	/**
-	 * Render EN Form Post.
-	 *
-	 * @param array $data All the data needed to render the template.
-	 */
-	public function enform_post( $data ) {
-		$this->view_template( __FUNCTION__, $data, '/blocks/enform/' );
-	}
-
-	/**
-	 * Render the Selected Components meta box for EN Forms.
-	 *
-	 * @param array $data All the data needed to render the template.
-	 */
-	public function en_selected_meta_box( $data ) {
-		$this->view_template( __FUNCTION__, $data );
-	}
 }
