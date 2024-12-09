@@ -86,14 +86,6 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	define( 'WP_UNINSTALL_PLUGIN', P4GBKS_PLUGIN_BASENAME );
 }
 
-if ( ! defined( 'P4GBKS_EN_SLUG_NAME' ) ) {
-	define( 'P4GBKS_EN_SLUG_NAME', 'engagingnetworks' );
-}
-
-if ( ! defined( 'P4_REST_SLUG' ) ) {
-	define( 'P4_REST_SLUG', 'planet4-engaging-networks' );
-}
-
 require_once __DIR__ . '/classes/class-loader.php';
 require_once ABSPATH . 'wp-admin/includes/plugin.php';
 
