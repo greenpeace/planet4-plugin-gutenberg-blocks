@@ -10,7 +10,6 @@ namespace P4GBKS;
 
 use P4\MasterTheme\Features;
 use P4\MasterTheme\MigrationLog;
-use P4\MasterTheme\Migrations\M001EnableEnFormFeature;
 use P4GBKS\Controllers;
 use P4GBKS\Patterns\Block_Pattern;
 use P4GBKS\Views\View;
@@ -118,12 +117,6 @@ final class Loader {
 			Controllers\Menu\Archive_Import::class,
 		];
 
-		if ( ! $this->planet4_blocks_is_active() ) {
-			$services[] = Controllers\Menu\Enform_Post_Controller::class;
-			$services[] = Controllers\Menu\En_Settings_Controller::class;
-			$services[] = Controllers\Api\Rest_Controller::class;
-		}
-
 		$view = new View();
 		foreach ( $services as $service ) {
 			( new $service( $view ) )->load();
@@ -138,14 +131,12 @@ final class Loader {
 		new Blocks\CarouselHeader();
 		new Blocks\Columns();
 		new Blocks\Cookies();
-		new Blocks\Counter();
 		new Blocks\Gallery();
 		new Blocks\Happypoint();
 		new Blocks\Spreadsheet();
 		new Blocks\SubPages();
 		new Blocks\Timeline();
 		new Blocks\SocialMediaCards();
-		new Blocks\ENForm();
 		new Blocks\GuestBook();
 
 		/**
@@ -302,25 +293,6 @@ final class Loader {
 		// Variables reflected from PHP to JS.
 		$option_values = get_option( 'planet4_options' );
 
-		$en_active = ! MigrationLog::from_wp_options()->already_ran( M001EnableEnFormFeature::get_id() )
-					|| Features::is_active( 'feature_engaging_networks' );
-
-		$reflection_vars = [
-			'home'            => P4GBKS_PLUGIN_URL . '/public/',
-			'planet4_options' => $option_values,
-			'features'        => [
-				'feature_engaging_networks' => $en_active,
-			],
-		];
-		wp_localize_script( 'planet4-blocks-editor-script', 'p4ge_vars', $reflection_vars );
-
-		$reflection_vars = [
-			'home'  => P4GBKS_PLUGIN_URL . '/public/',
-			'pages' => $this->get_en_pages(),
-			'forms' => $this->get_en_forms(),
-		];
-		wp_localize_script( 'planet4-blocks-editor-script', 'p4en_vars', $reflection_vars );
-
 		// Variables reflected from PHP to JS.
 		$reflection_vars = [
 			'dateFormat'                     => get_option( 'date_format' ),
@@ -448,10 +420,6 @@ DEFERREDCSS;
 	public function load_i18n() {
 		load_plugin_textdomain( 'planet4-blocks', false, P4GBKS_PLUGIN_DIRNAME . '/languages/' );
 		load_plugin_textdomain( 'planet4-blocks-backend', false, P4GBKS_PLUGIN_DIRNAME . '/languages/' );
-
-		// Load EN translations.
-		load_plugin_textdomain( 'planet4-engagingnetworks', false, P4GBKS_PLUGIN_DIRNAME . '/languages/enform/' );
-		load_plugin_textdomain( 'planet4-engagingnetworks-backend', false, P4GBKS_PLUGIN_DIRNAME . '/languages/enform/' );
 	}
 
 	/**
@@ -491,52 +459,6 @@ DEFERREDCSS;
 			self::file_ver( trailingslashit( P4GBKS_PLUGIN_DIR ) . $rel_path ),
 			$in_footer
 		);
-	}
-
-	/**
-	 * Get all available EN pages.
-	 */
-	public function get_en_pages() {
-		// Get EN pages only on admin panel.
-		if ( ! is_admin() ) {
-			return [];
-		}
-
-		$pages         = [];
-		$main_settings = get_option( 'p4en_main_settings' );
-
-		if ( isset( $main_settings['p4en_private_api'] ) ) {
-			$pages[]           = $main_settings['p4en_private_api'];
-			$ens_private_token = $main_settings['p4en_private_api'];
-			$ens_api           = new Controllers\Ensapi_Controller( $ens_private_token );
-			$pages             = $ens_api->get_pages_by_types_status( Blocks\ENForm::ENFORM_PAGE_TYPES, 'live' );
-			uasort(
-				$pages,
-				function ( $a, $b ) {
-					return ( $a['name'] ?? '' ) <=> ( $b['name'] ?? '' );
-				}
-			);
-		}
-
-		return $pages;
-	}
-
-	/**
-	 * Get all available EN forms.
-	 */
-	public function get_en_forms() {
-		// Get EN Forms.
-		$query = new \WP_Query(
-			[
-				'post_status'      => 'publish',
-				'post_type'        => Controllers\Menu\Enform_Post_Controller::POST_TYPE,
-				'orderby'          => 'post_title',
-				'order'            => 'asc',
-				'suppress_filters' => false,
-				'posts_per_page'   => -1,
-			]
-		);
-		return $query->posts;
 	}
 }
 
