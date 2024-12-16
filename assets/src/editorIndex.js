@@ -8,7 +8,6 @@ import {replaceTaxonomyTermSelectors} from './replaceTaxonomyTermSelectors';
 import {addButtonLinkPasteWarning} from './addButtonLinkPasteWarning';
 import {setUpCssVariables} from './connectCssVariables';
 import {SubPagesBlock} from './blocks/SubPages/SubPagesBlock';
-import {blockEditorValidation} from './BlockEditorValidation';
 import {registerBlock as registerShareButtonsBlock} from './blocks/ShareButtons/ShareButtonsBlock';
 import {registerBlockTemplates} from './block-templates/register';
 
@@ -24,5 +23,4 @@ setupImageBlockExtension();
 addButtonLinkPasteWarning();
 replaceTaxonomyTermSelectors();
 setUpCssVariables();
-blockEditorValidation();
 registerBlockTemplates();
